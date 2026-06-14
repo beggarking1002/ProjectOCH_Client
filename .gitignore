@@ -1,0 +1,74 @@
+# Unity generated folders
+.utmp/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Logs
+*.log
+
+# Blender backup files
+*.blend1
+*.blend1.meta
+
+# Large/sensitive captures
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Asset Store tools, optional
+# /[Aa]ssets/AssetStoreTools*
+
+# JetBrains Rider
+/[Aa]ssets/Plugins/Editor/JetBrains*
+*.DotSettings.user
+
+# Visual Studio
+.vs/
+
+# Gradle
+.gradle/
+
+# Generated solution/project files
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Generated meta/debug files
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+mono_crash.*
+
+# Builds/packages
+*.apk
+*.aab
+*.unitypackage
+*.unitypackage.meta
+*.app
+
+# Crashlytics
+crashlytics-build.properties
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
