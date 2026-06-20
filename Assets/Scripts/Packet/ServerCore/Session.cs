@@ -10,7 +10,7 @@ namespace ServerCore
 {
 	public abstract class PacketSession : Session
 	{
-		public static readonly int HeaderSize = 2;
+		public const int HeaderSize = 4;
 
 		// [size(2)][packetId(2)][ ... ][size(2)][packetId(2)][ ... ]
 		public sealed override int OnRecv(ArraySegment<byte> buffer)
@@ -127,9 +127,9 @@ namespace ServerCore
 		}
 
 		public bool IsConnected()
-        {
-			return _disconnected == 0;
-        }
+		{
+			return _disconnected == 0 && _socket != null && _socket.Connected;
+		}
 
 		#region 네트워크 통신
 

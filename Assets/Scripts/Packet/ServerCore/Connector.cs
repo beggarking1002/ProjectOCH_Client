@@ -43,6 +43,8 @@ namespace ServerCore
 			catch (Exception ex)
 			{
 				Debug.Log($"ConnectAsync Failed {ex}");
+				socket.Close();
+				OnFailedCallback?.Invoke();
 			}
 		}
 
@@ -51,7 +53,8 @@ namespace ServerCore
 			if (args.SocketError == SocketError.Success)
 			{
 				Session session = _sessionFactory.Invoke();
-				session.Start(args.ConnectSocket);
+				Socket socket = args.ConnectSocket ?? args.UserToken as Socket;
+				session.Start(socket);
 				session.OnConnected(args.RemoteEndPoint);
 
 				Debug.Log($"OnConnectCompleted");
@@ -60,6 +63,7 @@ namespace ServerCore
 			else
 			{
 				Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
+				(args.UserToken as Socket)?.Close();
 				OnFailedCallback?.Invoke();
 			}
 		}
