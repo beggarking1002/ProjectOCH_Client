@@ -8,81 +8,40 @@ Last updated: 2026-06-20
 
 파일: `Assets/Scripts/Packet/ServerCore/Session.cs`
 
-`OnRecvCompleted`에서 예외가 나면 로그만 찍고 `Disconnect()`도 하지 않고 `RegisterRecv()`도 다시 호출하지 않는다.
+2026-06-20 리팩터링에서 예외 시 `Disconnect()`하도록 수정했다.
 
-결과:
+남은 확인:
 
-- 소켓은 살아 있는 것처럼 보일 수 있음.
-- 실제 수신 루프는 멈출 수 있음.
-- 잘못된 패킷/Protobuf 파싱 오류 한 번으로 네트워크가 멈춘 상태가 될 수 있음.
-
-개선:
-
-- 예외 발생 시 연결을 명확히 끊거나, 복구 가능한 예외만 판단해서 recv를 재등록.
+- 실제 서버 연결 상태에서 비정상 패킷/서버 종료/재접속 시나리오 테스트 필요.
 
 ### 잘못된 패킷 크기 처리
 
 파일: `Assets/Scripts/Packet/ServerCore/Session.cs`
 
-`PacketSession.OnRecv`에서 `dataSize < HeaderSize`이면 `break`만 한다.
-
-결과:
-
-- 잘못된 바이트가 버퍼에 남음.
-- 이후 수신이 계속 막힐 수 있음.
-
-개선:
-
-- `dataSize < HeaderSize`이면 비정상 패킷으로 보고 연결 종료.
+2026-06-20 리팩터링에서 `dataSize < HeaderSize`이면 `-1`을 반환하고 연결 종료되도록 수정했다.
 
 ### 자동 접속 정책
 
 파일: `Assets/Scripts/Network/GameServerConnection.cs`
 
-현재 씬에 컴포넌트가 없어도 자동 생성되고 `connectOnStart = true`라서 모든 씬에서 `127.0.0.1:7777` 접속을 시도한다.
+2026-06-20 리팩터링 이후 `GameServerConnection`의 자동 생성은 제거했고, `GameRoot`가 앱 진입점으로 자동 생성된다.
 
-결과:
+남은 결정:
 
-- 메뉴/테스트 씬에서도 접속 실패 로그 발생.
-- 빌드 환경에서 localhost 접속을 시도할 수 있음.
-
-개선:
-
-- 자동 생성 여부를 설정으로 분리.
-- 로그인 씬 또는 부트스트랩 씬에서 명시적으로 생성.
-- 개발/운영 서버 주소를 ScriptableObject 또는 config로 분리.
+- `GameRoot.connectToGameServerOnStart` 기본값을 계속 true로 둘지 결정 필요.
+- 로그인 씬에서 명시적으로 연결하게 바꾸면 기본값 false가 더 적합하다.
 
 ### 이전 세션 callback이 새 세션 상태를 덮을 수 있음
 
 파일: `Assets/Scripts/Network/GameServerConnection.cs`
 
-`CreateSession()`에서 disconnect callback이 `_session = null`을 직접 수행한다. 이전 세션의 늦은 callback이 새 세션을 null로 덮을 수 있다.
-
-개선:
-
-```csharp
-GameServerSession createdSession = new GameServerSession();
-_session = createdSession;
-createdSession.Disconnected += _ => EnqueueMainThread(() =>
-{
-    if (ReferenceEquals(_session, createdSession) == false)
-        return;
-
-    _session = null;
-    SetState(GameServerConnectionState.Disconnected);
-});
-```
+2026-06-20 리팩터링에서 `NetworkService.CreateSession()`에 `ReferenceEquals(_session, createdSession)` 검사를 추가했다.
 
 ### `SendLogin()` 상태 처리
 
 파일: `Assets/Scripts/Network/GameServerConnection.cs`
 
-`SendLogin()`은 먼저 `Verifying`으로 상태를 바꾸고 `Send(...)` 실패 여부를 무시한다.
-
-개선:
-
-- `Send(...)` 성공 시에만 `Verifying`으로 변경.
-- 실패 시 `LastError`와 상태를 명확히 처리.
+2026-06-20 리팩터링에서 `Send(...)` 성공 시에만 `Verifying`으로 변경하도록 수정했다.
 
 ## 중간 우선순위
 
@@ -121,4 +80,3 @@ createdSession.Disconnected += _ => EnqueueMainThread(() =>
 - `Remote.LoadPath`를 `localhost`에서 실제 URL로 변경.
 - content build 실행 절차 문서화.
 - 런타임 로드 코드 작성.
-

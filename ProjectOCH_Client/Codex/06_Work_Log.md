@@ -2,6 +2,35 @@
 
 ## 2026-06-20
 
+### GameRoot / NetworkService 리팩터링
+
+수행 내용:
+
+- `GameRoot` 추가.
+  - 앱 전체 진입점.
+  - `@GameRoot` 자동 생성.
+  - `AppServices` 생성 및 `Services.Tick()` 호출.
+- `AppServices` 추가.
+  - 현재는 `NetworkService`만 소유.
+- `NetworkService` 추가.
+  - 기존 `GameServerConnection`의 연결/상태/송신/로그인 검증 책임 이동.
+  - `Connector`, `GameServerSession`, `ClientPacketHandler` 재사용.
+  - 이전 session callback이 현재 session을 덮지 않도록 `ReferenceEquals` 검사 추가.
+  - `SendLogin()`은 전송 성공 시에만 `Verifying` 상태로 전환.
+- `GameServerConnection` 축소.
+  - 자동 생성 제거.
+  - 기존 코드 호환을 위한 wrapper로 유지.
+- `Session.cs` 보강.
+  - `dataSize < HeaderSize`이면 비정상 패킷으로 처리.
+  - send/recv 예외 시 disconnect.
+  - disconnect 시 null socket, 이미 닫힌 socket 방어.
+
+검증:
+
+- Unity가 새 파일을 csproj에 포함함.
+- `dotnet build`는 Unity가 `obj/Debug/Assembly-CSharp.dll`을 점유 중이라 file lock으로 실패. 코드 오류 검증용 결과로는 사용하지 않음.
+- Unity Editor log에서 새 파일 import 확인. 명시적 `error CS`는 확인되지 않음.
+
 ### 프로젝트 코드 구성 리뷰
 
 확인한 내용:
@@ -65,4 +94,3 @@ for (int32 i = 0; i < 3; i++)
 - 실제 Addressable 에셋 지정.
 - 배포 URL 결정.
 - content build 실행.
-

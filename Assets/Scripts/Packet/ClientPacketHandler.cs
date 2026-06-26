@@ -4,7 +4,7 @@ using Google.Protobuf;
 using ServerCore;
 using UnityEngine;
 
-namespace OCH.Networking
+namespace Networking
 {
 	public enum PacketId : ushort
 	{

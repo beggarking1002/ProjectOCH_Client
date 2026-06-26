@@ -17,7 +17,11 @@ Last updated: 2026-06-20
 - `Assets/AddressableAssetsData`
   - Addressables 설정, 그룹, 데이터 빌더.
 - `Assets/Scripts/Network`
-  - 게임 서버 연결 매니저.
+  - 기존 코드 호환용 `GameServerConnection` wrapper.
+- `Assets/Scripts/App`
+  - `GameRoot`, `AppServices`.
+- `Assets/Scripts/Services/Network`
+  - 실제 게임 서버 연결을 담당하는 `NetworkService`.
 - `Assets/Scripts/Packet`
   - 클라이언트 패킷 핸들러, 게임 서버 세션, generated proto.
 - `Assets/Scripts/Packet/ServerCore`
@@ -27,18 +31,31 @@ Last updated: 2026-06-20
 
 ## 현재 주요 코드 역할
 
+### `GameRoot`
+
+경로: `Assets/Scripts/App/GameRoot.cs`
+
+- 유일한 앱 진입점 역할.
+- `[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]`로 `@GameRoot` 자동 생성.
+- `AppServices`를 생성하고 `Update()`에서 `Services.Tick()` 호출.
+- 현재는 `NetworkService`만 소유한다.
+
+### `NetworkService`
+
+경로: `Assets/Scripts/Services/Network/NetworkService.cs`
+
+- 기존 `GameServerConnection`의 실제 네트워크 책임을 이동한 순수 C# 서비스.
+- 연결 상태, `Connect`, `Disconnect`, `Send`, `SendLogin`, `EnterGame`, `SendChat` 담당.
+- `GameServerSession`과 `ClientPacketHandler`를 사용한다.
+- 메인 스레드 job queue를 flush한다.
+
 ### `GameServerConnection`
 
 경로: `Assets/Scripts/Network/GameServerConnection.cs`
 
-- `MonoBehaviour` 싱글톤.
-- `[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]`로 씬에 없으면 자동 생성.
-- 기본 접속 정보:
-  - host: `127.0.0.1`
-  - port: `7777`
-  - `connectOnStart = true`
-  - `verifyWithLoginPacket = true`
-- 연결 성공 시 `C_LOGIN`을 보내고, `S_LOGIN`을 받으면 `Verified` 또는 `Failed`로 상태 변경.
+- 기존 참조 호환용 wrapper.
+- 직접 소켓/패킷 큐를 소유하지 않는다.
+- 내부 호출은 `GameRoot.Instance.Network`로 위임한다.
 
 ### `ClientPacketHandler`
 
@@ -69,4 +86,3 @@ Last updated: 2026-06-20
 ## Git 상태 메모
 
 2026-06-20 확인 시 `ProjectOCH_Client/` 옵시디언 볼트가 untracked로 보였다. 이 폴더를 Git에 포함할지 여부는 별도 결정 필요.
-

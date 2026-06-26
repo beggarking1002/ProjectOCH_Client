@@ -3,7 +3,7 @@ using System.Net;
 using ServerCore;
 using UnityEngine;
 
-namespace OCH.Networking
+namespace Networking
 {
 	public sealed class GameServerSession : PacketSession
 	{
