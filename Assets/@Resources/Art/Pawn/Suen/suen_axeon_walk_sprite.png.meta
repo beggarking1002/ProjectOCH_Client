@@ -148,12 +148,12 @@ TextureImporter:
       name: suen_axeon_walk_sprite_0
       rect:
         serializedVersion: 2
-        x: 51
+        x: 52
         y: 1754
-        width: 365
-        height: 551
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 364
+        height: 552
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -174,8 +174,8 @@ TextureImporter:
         y: 1754
         width: 363
         height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: suen_axeon_walk_sprite_2
       rect:
         serializedVersion: 2
-        x: 993
+        x: 994
         y: 1756
-        width: 354
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 352
+        height: 553
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,11 +215,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1474
-        y: 1760
+        y: 1761
         width: 341
-        height: 557
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 555
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -237,11 +237,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 78
-        y: 1181
-        width: 350
-        height: 559
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 1182
+        width: 349
+        height: 557
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -261,9 +261,9 @@ TextureImporter:
         x: 558
         y: 1184
         width: 360
-        height: 555
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 554
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -281,11 +281,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1013
-        y: 1186
+        y: 1187
         width: 386
-        height: 549
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 548
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -303,11 +303,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1466
-        y: 1188
-        width: 406
-        height: 543
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 1189
+        width: 405
+        height: 541
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -328,8 +328,8 @@ TextureImporter:
         y: 603
         width: 414
         height: 544
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: suen_axeon_walk_sprite_9
       rect:
         serializedVersion: 2
-        x: 521
-        y: 601
-        width: 398
-        height: 549
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 522
+        y: 602
+        width: 397
+        height: 548
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -369,11 +369,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1013
-        y: 602
-        width: 359
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 603
+        width: 358
+        height: 552
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -393,9 +393,9 @@ TextureImporter:
         x: 1473
         y: 605
         width: 341
-        height: 555
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 554
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -414,10 +414,10 @@ TextureImporter:
         serializedVersion: 2
         x: 63
         y: 22
-        width: 353
+        width: 352
         height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: suen_axeon_walk_sprite_13
       rect:
         serializedVersion: 2
-        x: 525
+        x: 526
         y: 22
-        width: 362
+        width: 360
         height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -459,9 +459,9 @@ TextureImporter:
         x: 990
         y: 16
         width: 365
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 553
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -480,10 +480,10 @@ TextureImporter:
         serializedVersion: 2
         x: 1455
         y: 14
-        width: 366
+        width: 365
         height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1e27245ec0a65604d9231c596e7213c2
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.20000000298023225},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       suen_axeon_walk_sprite_0: 5074184896941187926
       suen_axeon_walk_sprite_1: 1898563443340466536

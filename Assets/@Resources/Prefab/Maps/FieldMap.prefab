@@ -1791,6 +1791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2761683115971358886}
   - component: {fileID: 5043708084617295636}
+  - component: {fileID: 8867542815428924311}
   m_Layer: 0
   m_Name: FieldMap
   m_TagString: Untagged
@@ -1827,6 +1828,21 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 1
   m_CellSwizzle: 0
+--- !u!114 &8867542815428924311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701260309174149758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfcbdfe2504e94d4e95c3ba585abddc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 5043708084617295636}
+  groundTilemap: {fileID: 5765578280032016438}
+  propTilemap: {fileID: 6714884411884067674}
 --- !u!1 &8400566937784663059
 GameObject:
   m_ObjectHideFlags: 0
