@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Tile
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Tile
+  m_GUID: 2ed5ec1624d64854ea48b2db29e04837
+  m_SerializeEntries:
+  - m_GUID: 0d8a038347a49504ebe7de5b96fda684
+    m_Address: Tile/stone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22ccfb874cc4b1046a266e370436e6f0
+    m_Address: Tile/fire
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f6a3ab3ee406364386f6d1146edaf6c
+    m_Address: Tile/grass
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57fe26fbe3fd1cc4c90b4514ed3cdc5a
+    m_Address: Tile/swamp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7054d3fd4552e524dbe2ff3bdafb44d3
+    m_Address: Tile/water
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 854fc3d10e7b87e4f870bed18f8b7a79
+    m_Address: Tile/dirt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f348b4232f946d4fa5b4d62887c41fe
+    m_Address: Tile/ice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c456ec0699dfcce42b4c72454a81ace0
+    m_Address: Tile/ash
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8f6831368f6667547865c1932899d13d, type: 2}
+    - {fileID: 11400000, guid: 4984f82c24b8e844c88b64360519a3e5, type: 2}

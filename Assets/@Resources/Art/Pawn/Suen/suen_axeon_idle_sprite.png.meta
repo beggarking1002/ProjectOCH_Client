@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: f14a697e84efbb84da7367f3982db1c5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5086859755500279617
+    second: suen_axeon_idle_sprite_0
+  - first:
+      213: 5359074458363965343
+    second: suen_axeon_idle_sprite_1
+  - first:
+      213: 7546238422792534515
+    second: suen_axeon_idle_sprite_2
+  - first:
+      213: 5145146617909301805
+    second: suen_axeon_idle_sprite_3
+  - first:
+      213: 4742202184986359567
+    second: suen_axeon_idle_sprite_4
+  - first:
+      213: 400373980570396522
+    second: suen_axeon_idle_sprite_5
+  - first:
+      213: -605096470639579510
+    second: suen_axeon_idle_sprite_6
+  - first:
+      213: -715524213356872551
+    second: suen_axeon_idle_sprite_7
+  - first:
+      213: 8645580484004882322
+    second: suen_axeon_idle_sprite_8
+  - first:
+      213: -36673846732496657
+    second: suen_axeon_idle_sprite_9
+  - first:
+      213: -420340277298741634
+    second: suen_axeon_idle_sprite_10
+  - first:
+      213: -8207880324322964058
+    second: suen_axeon_idle_sprite_11
+  - first:
+      213: 3097746545854464786
+    second: suen_axeon_idle_sprite_12
+  - first:
+      213: -1392539924799877167
+    second: suen_axeon_idle_sprite_13
+  - first:
+      213: -5271391026608723522
+    second: suen_axeon_idle_sprite_14
+  - first:
+      213: -932061567087903461
+    second: suen_axeon_idle_sprite_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1567
+        width: 323
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb8ec23f008d769b0800000000000000
+      internalID: -5086859755500279617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_1
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 1567
+        width: 322
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9f27a783d14f5a40800000000000000
+      internalID: 5359074458363965343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_2
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 1567
+        width: 321
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f9f3f42ddf99b860800000000000000
+      internalID: 7546238422792534515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 1567
+        width: 320
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2259cdb69b376740800000000000000
+      internalID: 5145146617909301805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_4
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 1045
+        width: 318
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07713113cfafc140800000000000000
+      internalID: 4742202184986359567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_5
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 1045
+        width: 319
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a672539930a6e8500800000000000000
+      internalID: 400373980570396522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_6
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 1045
+        width: 318
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8e6fa447f34a97f0800000000000000
+      internalID: -605096470639579510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_7
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 1045
+        width: 318
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99c3caad482f116f0800000000000000
+      internalID: -715524213356872551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_8
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 524
+        width: 319
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 297292ad4a54bf770800000000000000
+      internalID: 8645580484004882322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_9
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 524
+        width: 318
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe066f8a455bd7ff0800000000000000
+      internalID: -36673846732496657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_10
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 524
+        width: 320
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7eb1deaeb6aa2af0800000000000000
+      internalID: -420340277298741634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_11
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 524
+        width: 319
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6adcfcd0550c71e80800000000000000
+      internalID: -8207880324322964058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 2
+        width: 319
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21349d522186dfa20800000000000000
+      internalID: 3097746545854464786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_13
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 2
+        width: 321
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df01cef054bcace0800000000000000
+      internalID: -1392539924799877167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_14
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 2
+        width: 322
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb92ec25ac148d6b0800000000000000
+      internalID: -5271391026608723522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suen_axeon_idle_sprite_15
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 1
+        width: 322
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1d7ee861f6a013f0800000000000000
+      internalID: -932061567087903461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      suen_axeon_idle_sprite_0: -5086859755500279617
+      suen_axeon_idle_sprite_1: 5359074458363965343
+      suen_axeon_idle_sprite_10: -420340277298741634
+      suen_axeon_idle_sprite_11: -8207880324322964058
+      suen_axeon_idle_sprite_12: 3097746545854464786
+      suen_axeon_idle_sprite_13: -1392539924799877167
+      suen_axeon_idle_sprite_14: -5271391026608723522
+      suen_axeon_idle_sprite_15: -932061567087903461
+      suen_axeon_idle_sprite_2: 7546238422792534515
+      suen_axeon_idle_sprite_3: 5145146617909301805
+      suen_axeon_idle_sprite_4: 4742202184986359567
+      suen_axeon_idle_sprite_5: 400373980570396522
+      suen_axeon_idle_sprite_6: -605096470639579510
+      suen_axeon_idle_sprite_7: -715524213356872551
+      suen_axeon_idle_sprite_8: 8645580484004882322
+      suen_axeon_idle_sprite_9: -36673846732496657
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

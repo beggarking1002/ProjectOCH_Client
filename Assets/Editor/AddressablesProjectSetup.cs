@@ -48,6 +48,7 @@ internal static class AddressablesProjectSetup
         }
 
         ConfigureDefaultRemoteLoadPath(settings);
+        ConfigureRemoteCatalogPaths(settings);
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -94,6 +95,23 @@ internal static class AddressablesProjectSetup
                 settings.activeProfileId,
                 AddressableAssetSettings.kRemoteLoadPath,
                 DefaultRemoteLoadPath);
+        }
+    }
+
+    private static void ConfigureRemoteCatalogPaths(AddressableAssetSettings settings)
+    {
+        if (string.IsNullOrWhiteSpace(settings.RemoteCatalogBuildPath.Id))
+        {
+            settings.RemoteCatalogBuildPath.SetVariableByName(
+                settings,
+                AddressableAssetSettings.kRemoteBuildPath);
+        }
+
+        if (string.IsNullOrWhiteSpace(settings.RemoteCatalogLoadPath.Id))
+        {
+            settings.RemoteCatalogLoadPath.SetVariableByName(
+                settings,
+                AddressableAssetSettings.kRemoteLoadPath);
         }
     }
 }

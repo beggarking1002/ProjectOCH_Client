@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 6c759d934672be44aac0cb2ecd95c984
   m_currentHash:
     serializedVersion: 2
-    Hash: d142cdc3f52c066a89046e2d7992ed7d
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -52,17 +52,19 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: e49c5121478777f43a0b1fa1f0a4966a
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: 9c26430f9b48a5842a81d9099a10081a
   m_ContentStateBuildPathProfileVariableName: 
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: 6927dd11460a0ab48956fae0ede9470d, type: 2}
   - {fileID: 11400000, guid: 9c6169b55bcd9334bb2b0baf61cbc966, type: 2}
   - {fileID: 11400000, guid: feb2b33658a7a4f4c8b366259311c54a, type: 2}
+  - {fileID: 11400000, guid: 8e74e7fffb6cfd24d997ce4401a24a97, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
@@ -102,6 +104,8 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - tiles
+    - Map
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 16e128f07c5e5ac49a61967c5342ad25, type: 2}
