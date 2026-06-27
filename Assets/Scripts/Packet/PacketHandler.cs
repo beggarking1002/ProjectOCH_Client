@@ -4,8 +4,6 @@ using Google.Protobuf;
 using ServerCore;
 using UnityEngine;
 
-namespace Networking
-{
 	public enum PacketId : ushort
 	{
 		C_LOGIN = 1000,
@@ -22,9 +20,9 @@ namespace Networking
 		S_CHAT = 1011,
 	}
 
-	public sealed class ClientPacketHandler
+	public sealed class PacketHandler
 	{
-		public static ClientPacketHandler Instance { get; } = new ClientPacketHandler();
+		public static PacketHandler Instance { get; } = new PacketHandler();
 
 		readonly Dictionary<ushort, Action<PacketSession, ArraySegment<byte>>> _handlers =
 			new Dictionary<ushort, Action<PacketSession, ArraySegment<byte>>>();
@@ -40,6 +38,41 @@ namespace Networking
 		public event Action<Protocol.S_DESPAWN> DespawnReceived;
 		public event Action<Protocol.S_MOVE> MoveReceived;
 		public event Action<Protocol.S_CHAT> ChatReceived;
+
+		public static void S_LOGINHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_LOGIN, Instance.LoginReceived);
+		}
+
+		public static void S_ENTER_GAMEHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_ENTER_GAME, Instance.EnterGameReceived);
+		}
+
+		public static void S_LEAVE_GAMEHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_LEAVE_GAME, Instance.LeaveGameReceived);
+		}
+
+		public static void S_SPAWNHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_SPAWN, Instance.SpawnReceived);
+		}
+
+		public static void S_DESPAWNHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_DESPAWN, Instance.DespawnReceived);
+		}
+
+		public static void S_MOVEHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_MOVE, Instance.MoveReceived);
+		}
+
+		public static void S_CHATHandler(PacketSession session, IMessage packet)
+		{
+			Instance.EnqueueParsedPacket(session, packet as Protocol.S_CHAT, Instance.ChatReceived);
+		}
 
 		public void Init()
 		{
@@ -98,7 +131,7 @@ namespace Networking
 		public ArraySegment<byte> MakeSendBuffer(Protocol.C_CHAT pkt) => MakeSendBuffer(pkt, PacketId.C_CHAT);
 
 		void Register<T>(PacketId packetId, MessageParser<T> parser, Action<PacketSession, T> handler)
-			where T : IMessage<T>
+			where T : class, IMessage<T>
 		{
 			_handlers[(ushort)packetId] = (session, buffer) =>
 			{
@@ -106,11 +139,38 @@ namespace Networking
 				int payloadSize = buffer.Count - PacketSession.HeaderSize;
 				T packet = parser.ParseFrom(buffer.Array, payloadOffset, payloadSize);
 
-				lock (_lock)
-				{
-					_mainThreadJobs.Enqueue(() => handler.Invoke(session, packet));
-				}
+				EnqueueParsedPacket(session, packet, handler);
 			};
+		}
+
+		void EnqueueParsedPacket<T>(PacketSession session, T packet, Action<T> handler)
+			where T : class, IMessage
+		{
+			if (packet == null)
+			{
+				Debug.LogWarning($"Received unexpected packet type for {typeof(T).Name}.");
+				return;
+			}
+
+			lock (_lock)
+			{
+				_mainThreadJobs.Enqueue(() => handler?.Invoke(packet));
+			}
+		}
+
+		void EnqueueParsedPacket<T>(PacketSession session, T packet, Action<PacketSession, T> handler)
+			where T : class, IMessage
+		{
+			if (packet == null)
+			{
+				Debug.LogWarning($"Received unexpected packet type for {typeof(T).Name}.");
+				return;
+			}
+
+			lock (_lock)
+			{
+				_mainThreadJobs.Enqueue(() => handler?.Invoke(session, packet));
+			}
 		}
 
 		ArraySegment<byte> MakeSendBuffer(IMessage pkt, PacketId packetId)
@@ -126,4 +186,3 @@ namespace Networking
 			return new ArraySegment<byte>(sendBuffer);
 		}
 	}
-}

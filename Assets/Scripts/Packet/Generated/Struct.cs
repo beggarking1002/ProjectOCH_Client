@@ -24,33 +24,33 @@ namespace Protocol {
     static StructReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxTdHJ1Y3QucHJvdG8SCFByb3RvY29sGgpFbnVtLnByb3RvIm4KB1Bvc0lu",
-            "Zm8SEQoJb2JqZWN0X2lkGAEgASgEEgkKAXgYAiABKAISCQoBeRgDIAEoAhIJ",
-            "CgF6GAQgASgCEgsKA3lhdxgFIAEoAhIiCgVzdGF0ZRgGIAEoDjITLlByb3Rv",
-            "Y29sLk1vdmVTdGF0ZSJvCgpPYmplY3RJbmZvEhEKCW9iamVjdF9pZBgBIAEo",
-            "BBIpCgtvYmplY3RfdHlwZRgCIAEoDjIULlByb3RvY29sLk9iamVjdFR5cGUS",
-            "IwoIcG9zX2luZm8YAyABKAsyES5Qcm90b2NvbC5Qb3NJbmZvYgZwcm90bzM="));
+            "CgxTdHJ1Y3QucHJvdG8SCFByb3RvY29sGgpFbnVtLnByb3RvIiIKCkF4aWFs",
+            "Q29vcmQSCQoBcRgBIAEoBRIJCgFyGAIgASgFIp4BCgpPYmplY3RJbmZvEhEK",
+            "CW9iamVjdF9pZBgBIAEoBBIpCgtvYmplY3RfdHlwZRgCIAEoDjIULlByb3Rv",
+            "Y29sLk9iamVjdFR5cGUSLQoNY3JlYXR1cmVfdHlwZRgDIAEoDjIWLlByb3Rv",
+            "Y29sLkNyZWF0dXJlVHlwZRIjCgVheGlhbBgEIAEoCzIULlByb3RvY29sLkF4",
+            "aWFsQ29vcmRiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PosInfo), global::Protocol.PosInfo.Parser, new[]{ "ObjectId", "X", "Y", "Z", "Yaw", "State" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "PosInfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AxialCoord), global::Protocol.AxialCoord.Parser, new[]{ "Q", "R" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Axial" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class PosInfo : pb::IMessage<PosInfo>
+  public sealed partial class AxialCoord : pb::IMessage<AxialCoord>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<PosInfo> _parser = new pb::MessageParser<PosInfo>(() => new PosInfo());
+    private static readonly pb::MessageParser<AxialCoord> _parser = new pb::MessageParser<AxialCoord>(() => new AxialCoord());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<PosInfo> Parser { get { return _parser; } }
+    public static pb::MessageParser<AxialCoord> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -66,7 +66,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public PosInfo() {
+    public AxialCoord() {
       OnConstruction();
     }
 
@@ -74,115 +74,59 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public PosInfo(PosInfo other) : this() {
-      objectId_ = other.objectId_;
-      x_ = other.x_;
-      y_ = other.y_;
-      z_ = other.z_;
-      yaw_ = other.yaw_;
-      state_ = other.state_;
+    public AxialCoord(AxialCoord other) : this() {
+      q_ = other.q_;
+      r_ = other.r_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public PosInfo Clone() {
-      return new PosInfo(this);
+    public AxialCoord Clone() {
+      return new AxialCoord(this);
     }
 
-    /// <summary>Field number for the "object_id" field.</summary>
-    public const int ObjectIdFieldNumber = 1;
-    private ulong objectId_;
+    /// <summary>Field number for the "q" field.</summary>
+    public const int QFieldNumber = 1;
+    private int q_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ulong ObjectId {
-      get { return objectId_; }
+    public int Q {
+      get { return q_; }
       set {
-        objectId_ = value;
+        q_ = value;
       }
     }
 
-    /// <summary>Field number for the "x" field.</summary>
-    public const int XFieldNumber = 2;
-    private float x_;
+    /// <summary>Field number for the "r" field.</summary>
+    public const int RFieldNumber = 2;
+    private int r_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public float X {
-      get { return x_; }
+    public int R {
+      get { return r_; }
       set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int YFieldNumber = 3;
-    private float y_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public float Y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "z" field.</summary>
-    public const int ZFieldNumber = 4;
-    private float z_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public float Z {
-      get { return z_; }
-      set {
-        z_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "yaw" field.</summary>
-    public const int YawFieldNumber = 5;
-    private float yaw_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public float Yaw {
-      get { return yaw_; }
-      set {
-        yaw_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "state" field.</summary>
-    public const int StateFieldNumber = 6;
-    private global::Protocol.MoveState state_ = global::Protocol.MoveState.None;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Protocol.MoveState State {
-      get { return state_; }
-      set {
-        state_ = value;
+        r_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as PosInfo);
+      return Equals(other as AxialCoord);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(PosInfo other) {
+    public bool Equals(AxialCoord other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ObjectId != other.ObjectId) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Yaw, other.Yaw)) return false;
-      if (State != other.State) return false;
+      if (Q != other.Q) return false;
+      if (R != other.R) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -190,12 +134,8 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (ObjectId != 0UL) hash ^= ObjectId.GetHashCode();
-      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
-      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
-      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
-      if (Yaw != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Yaw);
-      if (State != global::Protocol.MoveState.None) hash ^= State.GetHashCode();
+      if (Q != 0) hash ^= Q.GetHashCode();
+      if (R != 0) hash ^= R.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -214,29 +154,13 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (ObjectId != 0UL) {
+      if (Q != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt64(ObjectId);
+        output.WriteInt32(Q);
       }
-      if (X != 0F) {
-        output.WriteRawTag(21);
-        output.WriteFloat(X);
-      }
-      if (Y != 0F) {
-        output.WriteRawTag(29);
-        output.WriteFloat(Y);
-      }
-      if (Z != 0F) {
-        output.WriteRawTag(37);
-        output.WriteFloat(Z);
-      }
-      if (Yaw != 0F) {
-        output.WriteRawTag(45);
-        output.WriteFloat(Yaw);
-      }
-      if (State != global::Protocol.MoveState.None) {
-        output.WriteRawTag(48);
-        output.WriteEnum((int) State);
+      if (R != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(R);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -248,29 +172,13 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (ObjectId != 0UL) {
+      if (Q != 0) {
         output.WriteRawTag(8);
-        output.WriteUInt64(ObjectId);
+        output.WriteInt32(Q);
       }
-      if (X != 0F) {
-        output.WriteRawTag(21);
-        output.WriteFloat(X);
-      }
-      if (Y != 0F) {
-        output.WriteRawTag(29);
-        output.WriteFloat(Y);
-      }
-      if (Z != 0F) {
-        output.WriteRawTag(37);
-        output.WriteFloat(Z);
-      }
-      if (Yaw != 0F) {
-        output.WriteRawTag(45);
-        output.WriteFloat(Yaw);
-      }
-      if (State != global::Protocol.MoveState.None) {
-        output.WriteRawTag(48);
-        output.WriteEnum((int) State);
+      if (R != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(R);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -282,23 +190,11 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (ObjectId != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ObjectId);
+      if (Q != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Q);
       }
-      if (X != 0F) {
-        size += 1 + 4;
-      }
-      if (Y != 0F) {
-        size += 1 + 4;
-      }
-      if (Z != 0F) {
-        size += 1 + 4;
-      }
-      if (Yaw != 0F) {
-        size += 1 + 4;
-      }
-      if (State != global::Protocol.MoveState.None) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
+      if (R != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(R);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -308,27 +204,15 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(PosInfo other) {
+    public void MergeFrom(AxialCoord other) {
       if (other == null) {
         return;
       }
-      if (other.ObjectId != 0UL) {
-        ObjectId = other.ObjectId;
+      if (other.Q != 0) {
+        Q = other.Q;
       }
-      if (other.X != 0F) {
-        X = other.X;
-      }
-      if (other.Y != 0F) {
-        Y = other.Y;
-      }
-      if (other.Z != 0F) {
-        Z = other.Z;
-      }
-      if (other.Yaw != 0F) {
-        Yaw = other.Yaw;
-      }
-      if (other.State != global::Protocol.MoveState.None) {
-        State = other.State;
+      if (other.R != 0) {
+        R = other.R;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -346,27 +230,11 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            ObjectId = input.ReadUInt64();
+            Q = input.ReadInt32();
             break;
           }
-          case 21: {
-            X = input.ReadFloat();
-            break;
-          }
-          case 29: {
-            Y = input.ReadFloat();
-            break;
-          }
-          case 37: {
-            Z = input.ReadFloat();
-            break;
-          }
-          case 45: {
-            Yaw = input.ReadFloat();
-            break;
-          }
-          case 48: {
-            State = (global::Protocol.MoveState) input.ReadEnum();
+          case 16: {
+            R = input.ReadInt32();
             break;
           }
         }
@@ -385,27 +253,11 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            ObjectId = input.ReadUInt64();
+            Q = input.ReadInt32();
             break;
           }
-          case 21: {
-            X = input.ReadFloat();
-            break;
-          }
-          case 29: {
-            Y = input.ReadFloat();
-            break;
-          }
-          case 37: {
-            Z = input.ReadFloat();
-            break;
-          }
-          case 45: {
-            Yaw = input.ReadFloat();
-            break;
-          }
-          case 48: {
-            State = (global::Protocol.MoveState) input.ReadEnum();
+          case 16: {
+            R = input.ReadInt32();
             break;
           }
         }
@@ -451,7 +303,8 @@ namespace Protocol {
     public ObjectInfo(ObjectInfo other) : this() {
       objectId_ = other.objectId_;
       objectType_ = other.objectType_;
-      posInfo_ = other.posInfo_ != null ? other.posInfo_.Clone() : null;
+      creatureType_ = other.creatureType_;
+      axial_ = other.axial_ != null ? other.axial_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -485,18 +338,27 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "pos_info" field.</summary>
-    public const int PosInfoFieldNumber = 3;
-    private global::Protocol.PosInfo posInfo_;
-    /// <summary>
-    /// ...
-    /// </summary>
+    /// <summary>Field number for the "creature_type" field.</summary>
+    public const int CreatureTypeFieldNumber = 3;
+    private global::Protocol.CreatureType creatureType_ = global::Protocol.CreatureType.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Protocol.PosInfo PosInfo {
-      get { return posInfo_; }
+    public global::Protocol.CreatureType CreatureType {
+      get { return creatureType_; }
       set {
-        posInfo_ = value;
+        creatureType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "axial" field.</summary>
+    public const int AxialFieldNumber = 4;
+    private global::Protocol.AxialCoord axial_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.AxialCoord Axial {
+      get { return axial_; }
+      set {
+        axial_ = value;
       }
     }
 
@@ -517,7 +379,8 @@ namespace Protocol {
       }
       if (ObjectId != other.ObjectId) return false;
       if (ObjectType != other.ObjectType) return false;
-      if (!object.Equals(PosInfo, other.PosInfo)) return false;
+      if (CreatureType != other.CreatureType) return false;
+      if (!object.Equals(Axial, other.Axial)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -527,7 +390,8 @@ namespace Protocol {
       int hash = 1;
       if (ObjectId != 0UL) hash ^= ObjectId.GetHashCode();
       if (ObjectType != global::Protocol.ObjectType.None) hash ^= ObjectType.GetHashCode();
-      if (posInfo_ != null) hash ^= PosInfo.GetHashCode();
+      if (CreatureType != global::Protocol.CreatureType.None) hash ^= CreatureType.GetHashCode();
+      if (axial_ != null) hash ^= Axial.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -554,9 +418,13 @@ namespace Protocol {
         output.WriteRawTag(16);
         output.WriteEnum((int) ObjectType);
       }
-      if (posInfo_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(PosInfo);
+      if (CreatureType != global::Protocol.CreatureType.None) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) CreatureType);
+      }
+      if (axial_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Axial);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -576,9 +444,13 @@ namespace Protocol {
         output.WriteRawTag(16);
         output.WriteEnum((int) ObjectType);
       }
-      if (posInfo_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(PosInfo);
+      if (CreatureType != global::Protocol.CreatureType.None) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) CreatureType);
+      }
+      if (axial_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Axial);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -596,8 +468,11 @@ namespace Protocol {
       if (ObjectType != global::Protocol.ObjectType.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ObjectType);
       }
-      if (posInfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PosInfo);
+      if (CreatureType != global::Protocol.CreatureType.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) CreatureType);
+      }
+      if (axial_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Axial);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -617,11 +492,14 @@ namespace Protocol {
       if (other.ObjectType != global::Protocol.ObjectType.None) {
         ObjectType = other.ObjectType;
       }
-      if (other.posInfo_ != null) {
-        if (posInfo_ == null) {
-          PosInfo = new global::Protocol.PosInfo();
+      if (other.CreatureType != global::Protocol.CreatureType.None) {
+        CreatureType = other.CreatureType;
+      }
+      if (other.axial_ != null) {
+        if (axial_ == null) {
+          Axial = new global::Protocol.AxialCoord();
         }
-        PosInfo.MergeFrom(other.PosInfo);
+        Axial.MergeFrom(other.Axial);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -646,11 +524,15 @@ namespace Protocol {
             ObjectType = (global::Protocol.ObjectType) input.ReadEnum();
             break;
           }
-          case 26: {
-            if (posInfo_ == null) {
-              PosInfo = new global::Protocol.PosInfo();
+          case 24: {
+            CreatureType = (global::Protocol.CreatureType) input.ReadEnum();
+            break;
+          }
+          case 34: {
+            if (axial_ == null) {
+              Axial = new global::Protocol.AxialCoord();
             }
-            input.ReadMessage(PosInfo);
+            input.ReadMessage(Axial);
             break;
           }
         }
@@ -676,11 +558,15 @@ namespace Protocol {
             ObjectType = (global::Protocol.ObjectType) input.ReadEnum();
             break;
           }
-          case 26: {
-            if (posInfo_ == null) {
-              PosInfo = new global::Protocol.PosInfo();
+          case 24: {
+            CreatureType = (global::Protocol.CreatureType) input.ReadEnum();
+            break;
+          }
+          case 34: {
+            if (axial_ == null) {
+              Axial = new global::Protocol.AxialCoord();
             }
-            input.ReadMessage(PosInfo);
+            input.ReadMessage(Axial);
             break;
           }
         }

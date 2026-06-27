@@ -43,8 +43,8 @@ namespace Networking
 			if (_initialized)
 				return;
 
-			ClientPacketHandler.Instance.Init();
-			ClientPacketHandler.Instance.LoginReceived += OnLoginReceived;
+			PacketHandler.Instance.Init();
+			PacketHandler.Instance.LoginReceived += OnLoginReceived;
 			_initialized = true;
 		}
 
@@ -58,13 +58,13 @@ namespace Networking
 		public void Tick()
 		{
 			FlushMainThreadJobs();
-			ClientPacketHandler.Instance.Flush();
+			PacketHandler.Instance.Flush();
 		}
 
 		public void Dispose()
 		{
 			if (_initialized)
-				ClientPacketHandler.Instance.LoginReceived -= OnLoginReceived;
+				PacketHandler.Instance.LoginReceived -= OnLoginReceived;
 
 			Disconnect();
 			_initialized = false;
@@ -149,19 +149,19 @@ namespace Networking
 			switch (packet)
 			{
 				case Protocol.C_LOGIN pkt:
-					sendBuffer = ClientPacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
 					break;
 				case Protocol.C_ENTER_GAME pkt:
-					sendBuffer = ClientPacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
 					break;
 				case Protocol.C_LEAVE_GAME pkt:
-					sendBuffer = ClientPacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
 					break;
 				case Protocol.C_MOVE pkt:
-					sendBuffer = ClientPacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
 					break;
 				case Protocol.C_CHAT pkt:
-					sendBuffer = ClientPacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";

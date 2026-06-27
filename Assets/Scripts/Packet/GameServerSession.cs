@@ -19,7 +19,7 @@ namespace Networking
 
 		public override void OnRecvPacket(ArraySegment<byte> buffer)
 		{
-			ClientPacketHandler.Instance.HandlePacket(this, buffer);
+			PacketManager.Instance.OnRecvPacket(this, buffer);
 		}
 
 		public override void OnSend(int numOfBytes)
