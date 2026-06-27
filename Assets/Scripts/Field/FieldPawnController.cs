@@ -1,3 +1,4 @@
+using App;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -128,6 +129,7 @@ namespace Field
 			UpdateSpriteDirection(_targetWorldPosition);
 			SetMoving(true);
 			Debug.Log($"Move pawn to axial {_targetAxial}");
+			SendMovePacket(_targetAxial);
 		}
 
 		void UpdateMovement()
@@ -175,6 +177,21 @@ namespace Field
 				return;
 
 			_spriteRenderer.flipX = deltaX < 0f;
+		}
+
+		void SendMovePacket(AxialCoord targetAxial)
+		{
+			Protocol.C_MOVE packet = new Protocol.C_MOVE
+			{
+				Target = new Protocol.AxialCoord
+				{
+					Q = targetAxial.Q,
+					R = targetAxial.R,
+				},
+			};
+
+			if (GameRoot.Instance == null || GameRoot.Instance.Network.Send(packet) == false)
+				Debug.LogWarning($"Failed to send C_MOVE target={targetAxial}");
 		}
 	}
 }

@@ -43,7 +43,6 @@ namespace Networking
 			if (_initialized)
 				return;
 
-			PacketHandler.Instance.Init();
 			PacketHandler.Instance.LoginReceived += OnLoginReceived;
 			_initialized = true;
 		}
