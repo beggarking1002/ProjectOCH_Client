@@ -182,6 +182,7 @@ namespace Scenes
 
 			Vector3 spawnPosition = walkArea.GetDefaultSpawnPosition(fieldPawn.transform.position.z);
 			pawnController.Initialize(walkArea, spawnPosition);
+			BindCameraToPawn(fieldPawn.transform);
 			SceneManager.MoveGameObjectToScene(fieldPawn, SceneManager.GetActiveScene());
 			Debug.Log($"Loaded addressable pawn: {FieldPawnAddress} at world {spawnPosition}");
 		}
@@ -249,6 +250,19 @@ namespace Scenes
 			SpriteRenderer[] renderers = worldMap.GetComponentsInChildren<SpriteRenderer>(true);
 			for (int i = 0; i < renderers.Length; i++)
 				renderers[i].sortingOrder += WorldMapSortingOrderOffset;
+		}
+
+		static void BindCameraToPawn(Transform pawnTransform)
+		{
+			Camera camera = Camera.main;
+			if (camera == null)
+				return;
+
+			CameraController controller = camera.GetComponent<CameraController>();
+			if (controller == null)
+				controller = camera.gameObject.AddComponent<CameraController>();
+
+			controller.SetTarget(pawnTransform);
 		}
 	}
 }
