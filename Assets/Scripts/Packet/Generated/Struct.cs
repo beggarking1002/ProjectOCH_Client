@@ -24,33 +24,33 @@ namespace Protocol {
     static StructReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxTdHJ1Y3QucHJvdG8SCFByb3RvY29sGgpFbnVtLnByb3RvIiIKCkF4aWFs",
-            "Q29vcmQSCQoBcRgBIAEoBRIJCgFyGAIgASgFIp4BCgpPYmplY3RJbmZvEhEK",
-            "CW9iamVjdF9pZBgBIAEoBBIpCgtvYmplY3RfdHlwZRgCIAEoDjIULlByb3Rv",
-            "Y29sLk9iamVjdFR5cGUSLQoNY3JlYXR1cmVfdHlwZRgDIAEoDjIWLlByb3Rv",
-            "Y29sLkNyZWF0dXJlVHlwZRIjCgVheGlhbBgEIAEoCzIULlByb3RvY29sLkF4",
-            "aWFsQ29vcmRiBnByb3RvMw=="));
+            "CgxTdHJ1Y3QucHJvdG8SCFByb3RvY29sGgpFbnVtLnByb3RvIiEKCVZlYzJG",
+            "aXhlZBIJCgF4GAEgASgREgkKAXkYAiABKBEioAEKCk9iamVjdEluZm8SEQoJ",
+            "b2JqZWN0X2lkGAEgASgEEikKC29iamVjdF90eXBlGAIgASgOMhQuUHJvdG9j",
+            "b2wuT2JqZWN0VHlwZRItCg1jcmVhdHVyZV90eXBlGAMgASgOMhYuUHJvdG9j",
+            "b2wuQ3JlYXR1cmVUeXBlEiUKCHBvc2l0aW9uGAQgASgLMhMuUHJvdG9jb2wu",
+            "VmVjMkZpeGVkYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AxialCoord), global::Protocol.AxialCoord.Parser, new[]{ "Q", "R" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Axial" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.Vec2Fixed), global::Protocol.Vec2Fixed.Parser, new[]{ "X", "Y" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Position" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class AxialCoord : pb::IMessage<AxialCoord>
+  public sealed partial class Vec2Fixed : pb::IMessage<Vec2Fixed>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<AxialCoord> _parser = new pb::MessageParser<AxialCoord>(() => new AxialCoord());
+    private static readonly pb::MessageParser<Vec2Fixed> _parser = new pb::MessageParser<Vec2Fixed>(() => new Vec2Fixed());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<AxialCoord> Parser { get { return _parser; } }
+    public static pb::MessageParser<Vec2Fixed> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -66,7 +66,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AxialCoord() {
+    public Vec2Fixed() {
       OnConstruction();
     }
 
@@ -74,59 +74,59 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AxialCoord(AxialCoord other) : this() {
-      q_ = other.q_;
-      r_ = other.r_;
+    public Vec2Fixed(Vec2Fixed other) : this() {
+      x_ = other.x_;
+      y_ = other.y_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AxialCoord Clone() {
-      return new AxialCoord(this);
+    public Vec2Fixed Clone() {
+      return new Vec2Fixed(this);
     }
 
-    /// <summary>Field number for the "q" field.</summary>
-    public const int QFieldNumber = 1;
-    private int q_;
+    /// <summary>Field number for the "x" field.</summary>
+    public const int XFieldNumber = 1;
+    private int x_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Q {
-      get { return q_; }
+    public int X {
+      get { return x_; }
       set {
-        q_ = value;
+        x_ = value;
       }
     }
 
-    /// <summary>Field number for the "r" field.</summary>
-    public const int RFieldNumber = 2;
-    private int r_;
+    /// <summary>Field number for the "y" field.</summary>
+    public const int YFieldNumber = 2;
+    private int y_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int R {
-      get { return r_; }
+    public int Y {
+      get { return y_; }
       set {
-        r_ = value;
+        y_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as AxialCoord);
+      return Equals(other as Vec2Fixed);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(AxialCoord other) {
+    public bool Equals(Vec2Fixed other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Q != other.Q) return false;
-      if (R != other.R) return false;
+      if (X != other.X) return false;
+      if (Y != other.Y) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -134,8 +134,8 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Q != 0) hash ^= Q.GetHashCode();
-      if (R != 0) hash ^= R.GetHashCode();
+      if (X != 0) hash ^= X.GetHashCode();
+      if (Y != 0) hash ^= Y.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -154,13 +154,13 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Q != 0) {
+      if (X != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Q);
+        output.WriteSInt32(X);
       }
-      if (R != 0) {
+      if (Y != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(R);
+        output.WriteSInt32(Y);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -172,13 +172,13 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Q != 0) {
+      if (X != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Q);
+        output.WriteSInt32(X);
       }
-      if (R != 0) {
+      if (Y != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(R);
+        output.WriteSInt32(Y);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -190,11 +190,11 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Q != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Q);
+      if (X != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt32Size(X);
       }
-      if (R != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(R);
+      if (Y != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt32Size(Y);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -204,15 +204,15 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(AxialCoord other) {
+    public void MergeFrom(Vec2Fixed other) {
       if (other == null) {
         return;
       }
-      if (other.Q != 0) {
-        Q = other.Q;
+      if (other.X != 0) {
+        X = other.X;
       }
-      if (other.R != 0) {
-        R = other.R;
+      if (other.Y != 0) {
+        Y = other.Y;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -230,11 +230,11 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Q = input.ReadInt32();
+            X = input.ReadSInt32();
             break;
           }
           case 16: {
-            R = input.ReadInt32();
+            Y = input.ReadSInt32();
             break;
           }
         }
@@ -253,11 +253,11 @@ namespace Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Q = input.ReadInt32();
+            X = input.ReadSInt32();
             break;
           }
           case 16: {
-            R = input.ReadInt32();
+            Y = input.ReadSInt32();
             break;
           }
         }
@@ -304,7 +304,7 @@ namespace Protocol {
       objectId_ = other.objectId_;
       objectType_ = other.objectType_;
       creatureType_ = other.creatureType_;
-      axial_ = other.axial_ != null ? other.axial_.Clone() : null;
+      position_ = other.position_ != null ? other.position_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -350,15 +350,15 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "axial" field.</summary>
-    public const int AxialFieldNumber = 4;
-    private global::Protocol.AxialCoord axial_;
+    /// <summary>Field number for the "position" field.</summary>
+    public const int PositionFieldNumber = 4;
+    private global::Protocol.Vec2Fixed position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Protocol.AxialCoord Axial {
-      get { return axial_; }
+    public global::Protocol.Vec2Fixed Position {
+      get { return position_; }
       set {
-        axial_ = value;
+        position_ = value;
       }
     }
 
@@ -380,7 +380,7 @@ namespace Protocol {
       if (ObjectId != other.ObjectId) return false;
       if (ObjectType != other.ObjectType) return false;
       if (CreatureType != other.CreatureType) return false;
-      if (!object.Equals(Axial, other.Axial)) return false;
+      if (!object.Equals(Position, other.Position)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -391,7 +391,7 @@ namespace Protocol {
       if (ObjectId != 0UL) hash ^= ObjectId.GetHashCode();
       if (ObjectType != global::Protocol.ObjectType.None) hash ^= ObjectType.GetHashCode();
       if (CreatureType != global::Protocol.CreatureType.None) hash ^= CreatureType.GetHashCode();
-      if (axial_ != null) hash ^= Axial.GetHashCode();
+      if (position_ != null) hash ^= Position.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -422,9 +422,9 @@ namespace Protocol {
         output.WriteRawTag(24);
         output.WriteEnum((int) CreatureType);
       }
-      if (axial_ != null) {
+      if (position_ != null) {
         output.WriteRawTag(34);
-        output.WriteMessage(Axial);
+        output.WriteMessage(Position);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -448,9 +448,9 @@ namespace Protocol {
         output.WriteRawTag(24);
         output.WriteEnum((int) CreatureType);
       }
-      if (axial_ != null) {
+      if (position_ != null) {
         output.WriteRawTag(34);
-        output.WriteMessage(Axial);
+        output.WriteMessage(Position);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -471,8 +471,8 @@ namespace Protocol {
       if (CreatureType != global::Protocol.CreatureType.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) CreatureType);
       }
-      if (axial_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Axial);
+      if (position_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -495,11 +495,11 @@ namespace Protocol {
       if (other.CreatureType != global::Protocol.CreatureType.None) {
         CreatureType = other.CreatureType;
       }
-      if (other.axial_ != null) {
-        if (axial_ == null) {
-          Axial = new global::Protocol.AxialCoord();
+      if (other.position_ != null) {
+        if (position_ == null) {
+          Position = new global::Protocol.Vec2Fixed();
         }
-        Axial.MergeFrom(other.Axial);
+        Position.MergeFrom(other.Position);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -529,10 +529,10 @@ namespace Protocol {
             break;
           }
           case 34: {
-            if (axial_ == null) {
-              Axial = new global::Protocol.AxialCoord();
+            if (position_ == null) {
+              Position = new global::Protocol.Vec2Fixed();
             }
-            input.ReadMessage(Axial);
+            input.ReadMessage(Position);
             break;
           }
         }
@@ -563,10 +563,10 @@ namespace Protocol {
             break;
           }
           case 34: {
-            if (axial_ == null) {
-              Axial = new global::Protocol.AxialCoord();
+            if (position_ == null) {
+              Position = new global::Protocol.Vec2Fixed();
             }
-            input.ReadMessage(Axial);
+            input.ReadMessage(Position);
             break;
           }
         }

@@ -30,11 +30,13 @@ namespace Protocol {
             "B3N1Y2Nlc3MYASABKAgSJAoGcGxheWVyGAIgASgLMhQuUHJvdG9jb2wuT2Jq",
             "ZWN0SW5mbyIOCgxDX0xFQVZFX0dBTUUiDgoMU19MRUFWRV9HQU1FIjAKB1Nf",
             "U1BBV04SJQoHcGxheWVycxgBIAMoCzIULlByb3RvY29sLk9iamVjdEluZm8i",
-            "HwoJU19ERVNQQVdOEhIKCm9iamVjdF9pZHMYASADKAQiLgoGQ19NT1ZFEiQK",
-            "BnRhcmdldBgBIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQiQAoGU19NT1ZF",
-            "EhEKCW9iamVjdF9pZBgBIAEoBBIjCgVheGlhbBgCIAEoCzIULlByb3RvY29s",
-            "LkF4aWFsQ29vcmQiFQoGQ19DSEFUEgsKA21zZxgBIAEoCSInCgZTX0NIQVQS",
-            "EAoIcGxheWVySWQYASABKAQSCwoDbXNnGAIgASgJYgZwcm90bzM="));
+            "HwoJU19ERVNQQVdOEhIKCm9iamVjdF9pZHMYASADKAQiLQoGQ19NT1ZFEiMK",
+            "BnRhcmdldBgBIAEoCzITLlByb3RvY29sLlZlYzJGaXhlZCJ5CgZTX01PVkUS",
+            "EQoJb2JqZWN0X2lkGAEgASgEEiIKBXN0YXJ0GAIgASgLMhMuUHJvdG9jb2wu",
+            "VmVjMkZpeGVkEiMKBnRhcmdldBgDIAEoCzITLlByb3RvY29sLlZlYzJGaXhl",
+            "ZBITCgtkdXJhdGlvbl9tcxgEIAEoDSIVCgZDX0NIQVQSCwoDbXNnGAEgASgJ",
+            "IicKBlNfQ0hBVBIQCghwbGF5ZXJJZBgBIAEoBBILCgNtc2cYAiABKAliBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -47,7 +49,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_SPAWN), global::Protocol.S_SPAWN.Parser, new[]{ "Players" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_DESPAWN), global::Protocol.S_DESPAWN.Parser, new[]{ "ObjectIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_MOVE), global::Protocol.C_MOVE.Parser, new[]{ "Target" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MOVE), global::Protocol.S_MOVE.Parser, new[]{ "ObjectId", "Axial" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_MOVE), global::Protocol.S_MOVE.Parser, new[]{ "ObjectId", "Start", "Target", "DurationMs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CHAT), global::Protocol.C_CHAT.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CHAT), global::Protocol.S_CHAT.Parser, new[]{ "PlayerId", "Msg" }, null, null, null, null)
           }));
@@ -1529,10 +1531,10 @@ namespace Protocol {
 
     /// <summary>Field number for the "target" field.</summary>
     public const int TargetFieldNumber = 1;
-    private global::Protocol.AxialCoord target_;
+    private global::Protocol.Vec2Fixed target_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Protocol.AxialCoord Target {
+    public global::Protocol.Vec2Fixed Target {
       get { return target_; }
       set {
         target_ = value;
@@ -1626,7 +1628,7 @@ namespace Protocol {
       }
       if (other.target_ != null) {
         if (target_ == null) {
-          Target = new global::Protocol.AxialCoord();
+          Target = new global::Protocol.Vec2Fixed();
         }
         Target.MergeFrom(other.Target);
       }
@@ -1647,7 +1649,7 @@ namespace Protocol {
             break;
           case 10: {
             if (target_ == null) {
-              Target = new global::Protocol.AxialCoord();
+              Target = new global::Protocol.Vec2Fixed();
             }
             input.ReadMessage(Target);
             break;
@@ -1669,7 +1671,7 @@ namespace Protocol {
             break;
           case 10: {
             if (target_ == null) {
-              Target = new global::Protocol.AxialCoord();
+              Target = new global::Protocol.Vec2Fixed();
             }
             input.ReadMessage(Target);
             break;
@@ -1716,7 +1718,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_MOVE(S_MOVE other) : this() {
       objectId_ = other.objectId_;
-      axial_ = other.axial_ != null ? other.axial_.Clone() : null;
+      start_ = other.start_ != null ? other.start_.Clone() : null;
+      target_ = other.target_ != null ? other.target_.Clone() : null;
+      durationMs_ = other.durationMs_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1738,15 +1742,39 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "axial" field.</summary>
-    public const int AxialFieldNumber = 2;
-    private global::Protocol.AxialCoord axial_;
+    /// <summary>Field number for the "start" field.</summary>
+    public const int StartFieldNumber = 2;
+    private global::Protocol.Vec2Fixed start_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Protocol.AxialCoord Axial {
-      get { return axial_; }
+    public global::Protocol.Vec2Fixed Start {
+      get { return start_; }
       set {
-        axial_ = value;
+        start_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target" field.</summary>
+    public const int TargetFieldNumber = 3;
+    private global::Protocol.Vec2Fixed target_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.Vec2Fixed Target {
+      get { return target_; }
+      set {
+        target_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "duration_ms" field.</summary>
+    public const int DurationMsFieldNumber = 4;
+    private uint durationMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint DurationMs {
+      get { return durationMs_; }
+      set {
+        durationMs_ = value;
       }
     }
 
@@ -1766,7 +1794,9 @@ namespace Protocol {
         return true;
       }
       if (ObjectId != other.ObjectId) return false;
-      if (!object.Equals(Axial, other.Axial)) return false;
+      if (!object.Equals(Start, other.Start)) return false;
+      if (!object.Equals(Target, other.Target)) return false;
+      if (DurationMs != other.DurationMs) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1775,7 +1805,9 @@ namespace Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (ObjectId != 0UL) hash ^= ObjectId.GetHashCode();
-      if (axial_ != null) hash ^= Axial.GetHashCode();
+      if (start_ != null) hash ^= Start.GetHashCode();
+      if (target_ != null) hash ^= Target.GetHashCode();
+      if (DurationMs != 0) hash ^= DurationMs.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1798,9 +1830,17 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteUInt64(ObjectId);
       }
-      if (axial_ != null) {
+      if (start_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(Axial);
+        output.WriteMessage(Start);
+      }
+      if (target_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Target);
+      }
+      if (DurationMs != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(DurationMs);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1816,9 +1856,17 @@ namespace Protocol {
         output.WriteRawTag(8);
         output.WriteUInt64(ObjectId);
       }
-      if (axial_ != null) {
+      if (start_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(Axial);
+        output.WriteMessage(Start);
+      }
+      if (target_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Target);
+      }
+      if (DurationMs != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(DurationMs);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1833,8 +1881,14 @@ namespace Protocol {
       if (ObjectId != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ObjectId);
       }
-      if (axial_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Axial);
+      if (start_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Start);
+      }
+      if (target_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Target);
+      }
+      if (DurationMs != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(DurationMs);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1851,11 +1905,20 @@ namespace Protocol {
       if (other.ObjectId != 0UL) {
         ObjectId = other.ObjectId;
       }
-      if (other.axial_ != null) {
-        if (axial_ == null) {
-          Axial = new global::Protocol.AxialCoord();
+      if (other.start_ != null) {
+        if (start_ == null) {
+          Start = new global::Protocol.Vec2Fixed();
         }
-        Axial.MergeFrom(other.Axial);
+        Start.MergeFrom(other.Start);
+      }
+      if (other.target_ != null) {
+        if (target_ == null) {
+          Target = new global::Protocol.Vec2Fixed();
+        }
+        Target.MergeFrom(other.Target);
+      }
+      if (other.DurationMs != 0) {
+        DurationMs = other.DurationMs;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1877,10 +1940,21 @@ namespace Protocol {
             break;
           }
           case 18: {
-            if (axial_ == null) {
-              Axial = new global::Protocol.AxialCoord();
+            if (start_ == null) {
+              Start = new global::Protocol.Vec2Fixed();
             }
-            input.ReadMessage(Axial);
+            input.ReadMessage(Start);
+            break;
+          }
+          case 26: {
+            if (target_ == null) {
+              Target = new global::Protocol.Vec2Fixed();
+            }
+            input.ReadMessage(Target);
+            break;
+          }
+          case 32: {
+            DurationMs = input.ReadUInt32();
             break;
           }
         }
@@ -1903,10 +1977,21 @@ namespace Protocol {
             break;
           }
           case 18: {
-            if (axial_ == null) {
-              Axial = new global::Protocol.AxialCoord();
+            if (start_ == null) {
+              Start = new global::Protocol.Vec2Fixed();
             }
-            input.ReadMessage(Axial);
+            input.ReadMessage(Start);
+            break;
+          }
+          case 26: {
+            if (target_ == null) {
+              Target = new global::Protocol.Vec2Fixed();
+            }
+            input.ReadMessage(Target);
+            break;
+          }
+          case 32: {
+            DurationMs = input.ReadUInt32();
             break;
           }
         }

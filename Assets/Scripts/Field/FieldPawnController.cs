@@ -10,20 +10,18 @@ namespace Field
 	public sealed class FieldPawnController : MonoBehaviour
 	{
 		static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+		const int FixedPointScale = 100;
 
 		[SerializeField] float moveSpeed = 4f;
 		[SerializeField] float arriveDistance = 0.01f;
 
-		FieldMapAxialCoordinates _coordinates;
+		FieldMapWalkArea _walkArea;
 		Animator _animator;
 		SpriteRenderer _spriteRenderer;
-		AxialCoord _currentAxial;
-		AxialCoord _targetAxial;
 		Vector3 _targetWorldPosition;
 		bool _isMoving;
 		bool _missingCameraLogged;
 
-		public AxialCoord CurrentAxial => _currentAxial;
 		public bool IsMoving => _isMoving;
 
 		void Awake()
@@ -39,19 +37,17 @@ namespace Field
 			UpdateMovement();
 		}
 
-		public void Initialize(FieldMapAxialCoordinates coordinates, AxialCoord startAxial)
+		public void Initialize(FieldMapWalkArea walkArea, Vector3 startWorldPosition)
 		{
-			_coordinates = coordinates;
-			_currentAxial = startAxial;
-			_targetAxial = startAxial;
-			_targetWorldPosition = GetWorldPosition(startAxial);
+			_walkArea = walkArea;
+			_targetWorldPosition = startWorldPosition;
 			transform.position = _targetWorldPosition;
 			SetMoving(false);
 		}
 
 		void HandleMouseInput()
 		{
-			if (_coordinates == null || TryGetPointerDown(out Vector2 screenPosition) == false)
+			if (_walkArea == null || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
 			Camera camera = Camera.main;
@@ -70,16 +66,16 @@ namespace Field
 				return;
 
 			Ray ray = camera.ScreenPointToRay(screenPosition);
-			Plane mapPlane = new Plane(Vector3.forward, _coordinates.transform.position);
+			Plane mapPlane = new Plane(Vector3.forward, _walkArea.PlaneTransform.position);
 			if (mapPlane.Raycast(ray, out float enter) == false)
 				return;
 
 			Vector3 worldPosition = ray.GetPoint(enter);
-			AxialCoord clickedAxial = _coordinates.WorldToAxial(worldPosition);
-			if (_coordinates.IsWalkable(clickedAxial) == false)
+			if (_walkArea.IsWalkable(worldPosition) == false)
 				return;
 
-			MoveTo(clickedAxial);
+			worldPosition.z = transform.position.z;
+			MoveTo(worldPosition);
 		}
 
 		bool TryGetPointerDown(out Vector2 screenPosition)
@@ -116,20 +112,19 @@ namespace Field
 				&& screenPosition.y <= camera.pixelHeight;
 		}
 
-		void MoveTo(AxialCoord targetAxial)
+		void MoveTo(Vector3 targetWorldPosition)
 		{
-			if (targetAxial == _currentAxial)
+			if (Vector3.Distance(transform.position, targetWorldPosition) <= arriveDistance)
 			{
 				SetMoving(false);
 				return;
 			}
 
-			_targetAxial = targetAxial;
-			_targetWorldPosition = GetWorldPosition(targetAxial);
+			_targetWorldPosition = targetWorldPosition;
 			UpdateSpriteDirection(_targetWorldPosition);
 			SetMoving(true);
-			Debug.Log($"Move pawn to axial {_targetAxial}");
-			SendMovePacket(_targetAxial);
+			Debug.Log($"Move pawn to world {_targetWorldPosition}");
+			SendMovePacket(_targetWorldPosition);
 		}
 
 		void UpdateMovement()
@@ -146,18 +141,7 @@ namespace Field
 				return;
 
 			transform.position = _targetWorldPosition;
-			_currentAxial = _targetAxial;
 			SetMoving(false);
-		}
-
-		Vector3 GetWorldPosition(AxialCoord axial)
-		{
-			if (_coordinates == null)
-				return transform.position;
-
-			Vector3 position = _coordinates.AxialToWorld(axial);
-			position.z = transform.position.z;
-			return position;
 		}
 
 		void SetMoving(bool isMoving)
@@ -179,19 +163,24 @@ namespace Field
 			_spriteRenderer.flipX = deltaX < 0f;
 		}
 
-		void SendMovePacket(AxialCoord targetAxial)
+		void SendMovePacket(Vector3 targetWorldPosition)
 		{
 			Protocol.C_MOVE packet = new Protocol.C_MOVE
 			{
-				Target = new Protocol.AxialCoord
+				Target = new Protocol.Vec2Fixed
 				{
-					Q = targetAxial.Q,
-					R = targetAxial.R,
+					X = ToFixed(targetWorldPosition.x),
+					Y = ToFixed(targetWorldPosition.y),
 				},
 			};
 
 			if (GameRoot.Instance == null || GameRoot.Instance.Network.Send(packet) == false)
-				Debug.LogWarning($"Failed to send C_MOVE target={targetAxial}");
+				Debug.LogWarning($"Failed to send C_MOVE target={targetWorldPosition}");
+		}
+
+		static int ToFixed(float value)
+		{
+			return Mathf.RoundToInt(value * FixedPointScale);
 		}
 	}
 }

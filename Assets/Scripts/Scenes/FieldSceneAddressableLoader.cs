@@ -11,7 +11,6 @@ namespace Scenes
 		const string FieldSceneName = "FieldScene";
 		const string FieldMapAddress = "FieldMap";
 		const string FieldPawnAddress = "Field_Pawn";
-		static readonly AxialCoord FieldPawnSpawnAxial = new AxialCoord(0, 0);
 
 		static FieldSceneAddressableLoader _instance;
 
@@ -99,23 +98,23 @@ namespace Scenes
 
 			GameObject fieldMap = handle.Result;
 			fieldMap.name = FieldMapAddress;
-			FieldMapAxialCoordinates coordinates = fieldMap.GetComponent<FieldMapAxialCoordinates>();
-			if (coordinates == null)
-				coordinates = fieldMap.AddComponent<FieldMapAxialCoordinates>();
+			FieldMapWalkArea walkArea = fieldMap.GetComponent<FieldMapWalkArea>();
+			if (walkArea == null)
+				walkArea = fieldMap.AddComponent<FieldMapWalkArea>();
 
-			coordinates.InitializeIfNeeded();
+			walkArea.InitializeIfNeeded();
 			SceneManager.MoveGameObjectToScene(fieldMap, SceneManager.GetActiveScene());
 			Debug.Log($"Loaded addressable map: {FieldMapAddress}");
 
-			LoadFieldPawn(coordinates, version);
+			LoadFieldPawn(walkArea, version);
 		}
 
-		async void LoadFieldPawn(FieldMapAxialCoordinates coordinates, int version)
+		async void LoadFieldPawn(FieldMapWalkArea walkArea, int version)
 		{
 			if (_hasFieldPawnHandle)
 				return;
 
-			Debug.Log($"Loading addressable pawn: {FieldPawnAddress} at axial {FieldPawnSpawnAxial}");
+			Debug.Log($"Loading addressable pawn: {FieldPawnAddress}");
 			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldPawnAddress);
 			_fieldPawnHandle = handle;
 			_hasFieldPawnHandle = true;
@@ -141,9 +140,10 @@ namespace Scenes
 			if (pawnController == null)
 				pawnController = fieldPawn.AddComponent<FieldPawnController>();
 
-			pawnController.Initialize(coordinates, FieldPawnSpawnAxial);
+			Vector3 spawnPosition = walkArea.GetDefaultSpawnPosition(fieldPawn.transform.position.z);
+			pawnController.Initialize(walkArea, spawnPosition);
 			SceneManager.MoveGameObjectToScene(fieldPawn, SceneManager.GetActiveScene());
-			Debug.Log($"Loaded addressable pawn: {FieldPawnAddress} at axial {FieldPawnSpawnAxial}");
+			Debug.Log($"Loaded addressable pawn: {FieldPawnAddress} at world {spawnPosition}");
 		}
 
 		void ReleaseFieldSceneAddressables()
