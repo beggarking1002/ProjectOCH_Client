@@ -45,6 +45,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - tiles
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 787eaa5bfb33e514f9af950a000ef539
+    m_Address: Tile/check
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tiles
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 854fc3d10e7b87e4f870bed18f8b7a79
     m_Address: Tile/dirt
     m_ReadOnly: 0

@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: Maps
   m_GUID: 989f5a29f26eca04fb6c7516de27e498
   m_SerializeEntries:
+  - m_GUID: 25374443c616c1d40bbddb4766f9ffda
+    m_Address: WorldMapRoot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b11cf7208d06ef48b4d45a70eee6b59
     m_Address: FieldMap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc547e4414b819b47998d883e059500c
+    m_Address: Field
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map
