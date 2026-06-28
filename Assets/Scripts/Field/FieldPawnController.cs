@@ -183,10 +183,11 @@ namespace Field
 		{
 			Protocol.C_MOVE packet = new Protocol.C_MOVE
 			{
-				Target = new Protocol.AxialCoord
+				Info = new Protocol.PosInfo
 				{
-					Q = targetAxial.Q,
-					R = targetAxial.R,
+					X = targetAxial.Q,
+					Y = targetAxial.R,
+					State = Protocol.MoveState.Run,
 				},
 			};
 

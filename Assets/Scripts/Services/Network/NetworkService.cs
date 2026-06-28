@@ -148,19 +148,19 @@ namespace Networking
 			switch (packet)
 			{
 				case Protocol.C_LOGIN pkt:
-					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_LOGIN);
 					break;
 				case Protocol.C_ENTER_GAME pkt:
-					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_ENTER_GAME);
 					break;
 				case Protocol.C_LEAVE_GAME pkt:
-					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_LEAVE_GAME);
 					break;
 				case Protocol.C_MOVE pkt:
-					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_MOVE);
 					break;
 				case Protocol.C_CHAT pkt:
-					sendBuffer = PacketHandler.Instance.MakeSendBuffer(pkt);
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_CHAT);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";
@@ -169,6 +169,19 @@ namespace Networking
 
 			_session.Send(sendBuffer);
 			return true;
+		}
+
+		ArraySegment<byte> MakeSendBuffer(IMessage packet, MsgId msgId)
+		{
+			byte[] payload = packet.ToByteArray();
+			ushort packetSize = checked((ushort)(payload.Length + PacketSession.HeaderSize));
+			byte[] sendBuffer = new byte[packetSize];
+
+			Array.Copy(BitConverter.GetBytes(packetSize), 0, sendBuffer, 0, sizeof(ushort));
+			Array.Copy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, sizeof(ushort), sizeof(ushort));
+			Array.Copy(payload, 0, sendBuffer, PacketSession.HeaderSize, payload.Length);
+
+			return new ArraySegment<byte>(sendBuffer);
 		}
 
 		GameServerSession CreateSession()

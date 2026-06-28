@@ -79,12 +79,6 @@ public sealed class PacketHandler
 		}
 	}
 
-	public ArraySegment<byte> MakeSendBuffer(C_LOGIN pkt) => MakeSendBuffer(pkt, MsgId.C_LOGIN);
-	public ArraySegment<byte> MakeSendBuffer(C_ENTER_GAME pkt) => MakeSendBuffer(pkt, MsgId.C_ENTER_GAME);
-	public ArraySegment<byte> MakeSendBuffer(C_LEAVE_GAME pkt) => MakeSendBuffer(pkt, MsgId.C_LEAVE_GAME);
-	public ArraySegment<byte> MakeSendBuffer(C_MOVE pkt) => MakeSendBuffer(pkt, MsgId.C_MOVE);
-	public ArraySegment<byte> MakeSendBuffer(C_CHAT pkt) => MakeSendBuffer(pkt, MsgId.C_CHAT);
-
 	void EnqueuePacket<T>(T packet, Action<T> handler)
 		where T : class, IMessage
 	{
@@ -98,18 +92,5 @@ public sealed class PacketHandler
 		{
 			_mainThreadJobs.Enqueue(() => handler?.Invoke(packet));
 		}
-	}
-
-	ArraySegment<byte> MakeSendBuffer(IMessage pkt, MsgId msgId)
-	{
-		byte[] payload = pkt.ToByteArray();
-		ushort packetSize = checked((ushort)(payload.Length + PacketSession.HeaderSize));
-		byte[] sendBuffer = new byte[packetSize];
-
-		Array.Copy(BitConverter.GetBytes(packetSize), 0, sendBuffer, 0, sizeof(ushort));
-		Array.Copy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, sizeof(ushort), sizeof(ushort));
-		Array.Copy(payload, 0, sendBuffer, PacketSession.HeaderSize, payload.Length);
-
-		return new ArraySegment<byte>(sendBuffer);
 	}
 }
