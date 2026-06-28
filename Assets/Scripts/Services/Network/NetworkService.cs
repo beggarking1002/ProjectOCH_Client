@@ -218,7 +218,7 @@ namespace Networking
 			if (pkt.Success == false)
 				LastError = "Server login verification failed.";
 
-			Debug.Log($"Game server verification: success={pkt.Success}, players={pkt.Players.Count}");
+			Debug.Log($"Game server verification: success={pkt.Success}");
 			LoginReceived?.Invoke(pkt);
 		}
 

@@ -29,15 +29,10 @@ namespace Protocol {
             "SkVDVF9UWVBFX1BST0pFQ1RJTEUQAhITCg9PQkpFQ1RfVFlQRV9FTlYQAypy",
             "CgxDcmVhdHVyZVR5cGUSFgoSQ1JFQVRVUkVfVFlQRV9OT05FEAASGAoUQ1JF",
             "QVRVUkVfVFlQRV9QTEFZRVIQARIZChVDUkVBVFVSRV9UWVBFX01PTlNURVIQ",
-            "AhIVChFDUkVBVFVSRV9UWVBFX05QQxADKmgKClBsYXllclR5cGUSFAoQUExB",
-            "WUVSX1RZUEVfTk9ORRAAEhYKElBMQVlFUl9UWVBFX0tOSUdIVBABEhQKEFBM",
-            "QVlFUl9UWVBFX01BR0UQAhIWChJQTEFZRVJfVFlQRV9BUkNIRVIQAyp0CglN",
-            "b3ZlU3RhdGUSEwoPTU9WRV9TVEFURV9OT05FEAASEwoPTU9WRV9TVEFURV9J",
-            "RExFEAESEgoOTU9WRV9TVEFURV9SVU4QAhITCg9NT1ZFX1NUQVRFX0pVTVAQ",
-            "AxIUChBNT1ZFX1NUQVRFX1NLSUxMEARiBnByb3RvMw=="));
+            "AhIVChFDUkVBVFVSRV9UWVBFX05QQxADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PlayerType), typeof(global::Protocol.MoveState), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), }, null, null));
     }
     #endregion
 
@@ -55,21 +50,6 @@ namespace Protocol {
     [pbr::OriginalName("CREATURE_TYPE_PLAYER")] Player = 1,
     [pbr::OriginalName("CREATURE_TYPE_MONSTER")] Monster = 2,
     [pbr::OriginalName("CREATURE_TYPE_NPC")] Npc = 3,
-  }
-
-  public enum PlayerType {
-    [pbr::OriginalName("PLAYER_TYPE_NONE")] None = 0,
-    [pbr::OriginalName("PLAYER_TYPE_KNIGHT")] Knight = 1,
-    [pbr::OriginalName("PLAYER_TYPE_MAGE")] Mage = 2,
-    [pbr::OriginalName("PLAYER_TYPE_ARCHER")] Archer = 3,
-  }
-
-  public enum MoveState {
-    [pbr::OriginalName("MOVE_STATE_NONE")] None = 0,
-    [pbr::OriginalName("MOVE_STATE_IDLE")] Idle = 1,
-    [pbr::OriginalName("MOVE_STATE_RUN")] Run = 2,
-    [pbr::OriginalName("MOVE_STATE_JUMP")] Jump = 3,
-    [pbr::OriginalName("MOVE_STATE_SKILL")] Skill = 4,
   }
 
   #endregion
