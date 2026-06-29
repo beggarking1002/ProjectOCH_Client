@@ -10,6 +10,7 @@ namespace Networking
 	public sealed class NetworkService : IDisposable
 	{
 		readonly Queue<Action> _mainThreadJobs = new Queue<Action>();
+		readonly Dictionary<ulong, Protocol.ObjectInfo> _knownPlayers = new Dictionary<ulong, Protocol.ObjectInfo>();
 		readonly object _lock = new object();
 
 		string _host = "127.0.0.1";
@@ -95,6 +96,7 @@ namespace Networking
 			LastError = null;
 			LastLogin = null;
 			LastEnterGame = null;
+			_knownPlayers.Clear();
 			SetState(GameServerConnectionState.Connecting);
 
 			_connector = new Connector
@@ -187,6 +189,15 @@ namespace Networking
 			return true;
 		}
 
+		public List<Protocol.ObjectInfo> GetKnownPlayersSnapshot()
+		{
+			List<Protocol.ObjectInfo> snapshot = new List<Protocol.ObjectInfo>(_knownPlayers.Count);
+			foreach (Protocol.ObjectInfo player in _knownPlayers.Values)
+				snapshot.Add(player.Clone());
+
+			return snapshot;
+		}
+
 		ArraySegment<byte> MakeSendBuffer(IMessage packet, MsgId msgId)
 		{
 			byte[] payload = packet.ToByteArray();
@@ -241,21 +252,50 @@ namespace Networking
 		void OnEnterGameReceived(Protocol.S_ENTER_GAME pkt)
 		{
 			LastEnterGame = pkt;
+			if (pkt.Success && pkt.Player != null && pkt.Player.ObjectId != 0)
+				_knownPlayers[pkt.Player.ObjectId] = pkt.Player.Clone();
+
 			EnterGameReceived?.Invoke(pkt);
 		}
 
 		void OnSpawnReceived(Protocol.S_SPAWN pkt)
 		{
+			if (pkt != null)
+			{
+				foreach (Protocol.ObjectInfo player in pkt.Players)
+				{
+					if (player != null && player.ObjectId != 0)
+						_knownPlayers[player.ObjectId] = player.Clone();
+				}
+			}
+
 			SpawnReceived?.Invoke(pkt);
 		}
 
 		void OnDespawnReceived(Protocol.S_DESPAWN pkt)
 		{
+			if (pkt != null)
+			{
+				foreach (ulong objectId in pkt.ObjectIds)
+					_knownPlayers.Remove(objectId);
+			}
+
 			DespawnReceived?.Invoke(pkt);
 		}
 
 		void OnMoveReceived(Protocol.S_MOVE pkt)
 		{
+			if (pkt != null && pkt.ObjectId != 0 && pkt.Target != null)
+			{
+				if (_knownPlayers.TryGetValue(pkt.ObjectId, out Protocol.ObjectInfo player) == false)
+				{
+					player = new Protocol.ObjectInfo { ObjectId = pkt.ObjectId };
+					_knownPlayers[pkt.ObjectId] = player;
+				}
+
+				player.Position = pkt.Target.Clone();
+			}
+
 			MoveReceived?.Invoke(pkt);
 		}
 

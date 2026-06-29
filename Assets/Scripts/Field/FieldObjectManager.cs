@@ -39,6 +39,8 @@ namespace Field
 				HandleEnterGame(lastEnterGame);
 			else
 				SpawnFallbackLocalPawn();
+
+			SpawnKnownPlayers();
 		}
 
 		void OnDestroy()
@@ -98,6 +100,22 @@ namespace Field
 			foreach (ObjectInfo player in packet.Players)
 			{
 				if (player.ObjectId != 0 && player.ObjectId == _myObjectId)
+					continue;
+
+				SpawnOrUpdatePawn(player, false);
+			}
+		}
+
+		void SpawnKnownPlayers()
+		{
+			if (GameRoot.Instance == null)
+				return;
+
+			List<ObjectInfo> players = GameRoot.Instance.Network.GetKnownPlayersSnapshot();
+			for (int i = 0; i < players.Count; i++)
+			{
+				ObjectInfo player = players[i];
+				if (player == null || player.ObjectId == 0 || player.ObjectId == _myObjectId)
 					continue;
 
 				SpawnOrUpdatePawn(player, false);
