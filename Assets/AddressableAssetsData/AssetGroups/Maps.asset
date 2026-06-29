@@ -28,7 +28,7 @@ MonoBehaviour:
     - Map
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dc547e4414b819b47998d883e059500c
-    m_Address: Field
+    m_Address: Field_001
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map

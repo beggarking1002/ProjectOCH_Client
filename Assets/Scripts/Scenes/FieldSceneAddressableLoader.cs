@@ -9,7 +9,7 @@ namespace Scenes
 	public sealed class FieldSceneAddressableLoader : MonoBehaviour
 	{
 		const string FieldSceneName = "FieldScene";
-		const string FieldMapAddress = "Field";
+		const string FieldMapAddress = "Field_001";
 		const string WorldMapAddress = "WorldMapRoot";
 		const string FieldPawnAddress = "Field_Pawn";
 		const int WorldMapSortingOrderOffset = 1;
