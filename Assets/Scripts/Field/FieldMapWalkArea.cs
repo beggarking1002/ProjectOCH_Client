@@ -8,7 +8,8 @@ namespace Field
 	{
 		[SerializeField] Grid grid;
 		[SerializeField] Tilemap groundTilemap;
-		[SerializeField] Tilemap propTilemap;
+		[SerializeField] Tilemap blockTilemap;
+		[SerializeField] bool useBlockTilemap;
 
 		public Transform PlaneTransform => transform;
 
@@ -34,12 +35,8 @@ namespace Field
 					groundTilemap = ground.GetComponent<Tilemap>();
 			}
 
-			if (propTilemap == null)
-			{
-				Transform prop = transform.Find("Prop_Tilemap");
-				if (prop != null)
-					propTilemap = prop.GetComponent<Tilemap>();
-			}
+			if (blockTilemap == null)
+				blockTilemap = FindChildTilemap("Block_Tilemap", "Prop_Tilemap");
 		}
 
 		public Vector3 GetDefaultSpawnPosition(float z)
@@ -56,7 +53,7 @@ namespace Field
 			EnsureGrid();
 			Vector3Int cell = grid.WorldToCell(worldPosition);
 
-			return HasGroundTile(cell) && HasPropTile(cell) == false;
+			return HasGroundTile(cell) && (useBlockTilemap == false || HasBlockTile(cell) == false);
 		}
 
 		bool HasGroundTile(Vector3Int cell)
@@ -64,9 +61,25 @@ namespace Field
 			return groundTilemap != null && groundTilemap.HasTile(cell);
 		}
 
-		bool HasPropTile(Vector3Int cell)
+		bool HasBlockTile(Vector3Int cell)
 		{
-			return propTilemap != null && propTilemap.HasTile(cell);
+			return blockTilemap != null && blockTilemap.HasTile(cell);
+		}
+
+		Tilemap FindChildTilemap(params string[] names)
+		{
+			for (int i = 0; i < names.Length; i++)
+			{
+				Transform child = transform.Find(names[i]);
+				if (child == null)
+					continue;
+
+				Tilemap tilemap = child.GetComponent<Tilemap>();
+				if (tilemap != null)
+					return tilemap;
+			}
+
+			return null;
 		}
 
 		void EnsureGrid()

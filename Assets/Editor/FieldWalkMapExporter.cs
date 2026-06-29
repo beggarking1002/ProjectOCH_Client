@@ -14,7 +14,8 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 	[SerializeField] string mapId;
 	[SerializeField] GameObject mapPrefab;
 	[SerializeField] Tilemap groundTilemap;
-	[SerializeField] Tilemap propTilemap;
+	[SerializeField] Tilemap blockTilemap;
+	[SerializeField] bool subtractBlockTilemap;
 	[SerializeField] string clientOutputDirectory = DefaultClientOutputDirectory;
 	[SerializeField] bool copyToServerDataDirectory;
 	[SerializeField] string serverOutputDirectory = DefaultServerOutputDirectory;
@@ -41,11 +42,12 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		{
 			mapId = mapPrefab.name;
 			groundTilemap = null;
-			propTilemap = null;
+			blockTilemap = null;
 		}
 
 		groundTilemap = (Tilemap)EditorGUILayout.ObjectField("Ground Tilemap", groundTilemap, typeof(Tilemap), true);
-		propTilemap = (Tilemap)EditorGUILayout.ObjectField("Blocked/Prop Tilemap", propTilemap, typeof(Tilemap), true);
+		blockTilemap = (Tilemap)EditorGUILayout.ObjectField("Block Tilemap", blockTilemap, typeof(Tilemap), true);
+		subtractBlockTilemap = EditorGUILayout.Toggle("Subtract Block Tilemap", subtractBlockTilemap);
 
 		using (new EditorGUILayout.HorizontalScope())
 		{
@@ -73,7 +75,7 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		}
 
 		EditorGUILayout.HelpBox(
-			"Export rule: cells with a tile in Ground Tilemap are walkable, unless Blocked/Prop Tilemap has a tile at the same cell. Output is compressed by row ranges.",
+			"Export rule: Ground Tilemap cells are walkable. If Subtract Block Tilemap is enabled, cells that also exist in Block/Prop Tilemap are excluded. Output is compressed by row ranges.",
 			MessageType.Info);
 	}
 
@@ -103,7 +105,7 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 			mapPrefab = selected;
 			mapId = selected.name;
 			groundTilemap = null;
-			propTilemap = null;
+			blockTilemap = null;
 			return;
 		}
 
@@ -140,8 +142,8 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 			Tilemap tilemap = tilemaps[i];
 			if (tilemap.name == "Ground_Tilemap")
 				groundTilemap = tilemap;
-			else if (tilemap.name == "Prop_Tilemap")
-				propTilemap = tilemap;
+			else if (IsBlockTilemapName(tilemap.name))
+				blockTilemap = tilemap;
 		}
 	}
 
@@ -167,7 +169,7 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 			if (groundTilemap == null)
 				throw new MissingReferenceException("Ground Tilemap is required.");
 
-			return BuildData(groundTilemap, propTilemap);
+			return BuildData(groundTilemap, subtractBlockTilemap ? blockTilemap : null);
 		}
 
 		string prefabPath = AssetDatabase.GetAssetPath(mapPrefab);
@@ -178,13 +180,13 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		try
 		{
 			Tilemap prefabGround = null;
-			Tilemap prefabProp = null;
-			FindTilemaps(prefabRoot, ref prefabGround, ref prefabProp);
+			Tilemap prefabBlock = null;
+			FindTilemaps(prefabRoot, ref prefabGround, ref prefabBlock);
 
 			if (prefabGround == null)
 				throw new MissingReferenceException($"Ground_Tilemap not found in prefab: {prefabPath}");
 
-			return BuildData(prefabGround, prefabProp);
+			return BuildData(prefabGround, subtractBlockTilemap ? prefabBlock : null);
 		}
 		finally
 		{
@@ -192,7 +194,7 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		}
 	}
 
-	ExportWalkMapData BuildData(Tilemap sourceGroundTilemap, Tilemap sourcePropTilemap)
+	ExportWalkMapData BuildData(Tilemap sourceGroundTilemap, Tilemap sourceBlockTilemap)
 	{
 		BoundsInt bounds = sourceGroundTilemap.cellBounds;
 		ExportWalkMapData data = new ExportWalkMapData
@@ -222,7 +224,7 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 			for (int x = bounds.xMin; x < bounds.xMax; x++)
 			{
 				Vector3Int cell = new Vector3Int(x, y, 0);
-				bool walkable = IsWalkable(sourceGroundTilemap, sourcePropTilemap, cell);
+				bool walkable = IsWalkable(sourceGroundTilemap, sourceBlockTilemap, cell);
 				if (walkable)
 				{
 					if (rangeStart == int.MinValue)
@@ -249,12 +251,12 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		return data;
 	}
 
-	static bool IsWalkable(Tilemap sourceGroundTilemap, Tilemap sourcePropTilemap, Vector3Int cell)
+	static bool IsWalkable(Tilemap sourceGroundTilemap, Tilemap sourceBlockTilemap, Vector3Int cell)
 	{
 		if (sourceGroundTilemap == null || sourceGroundTilemap.HasTile(cell) == false)
 			return false;
 
-		return sourcePropTilemap == null || sourcePropTilemap.HasTile(cell) == false;
+		return sourceBlockTilemap == null || sourceBlockTilemap.HasTile(cell) == false;
 	}
 
 	static void FindTilemaps(GameObject root, ref Tilemap foundGround, ref Tilemap foundProp)
@@ -268,9 +270,14 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 			Tilemap tilemap = tilemaps[i];
 			if (tilemap.name == "Ground_Tilemap")
 				foundGround = tilemap;
-			else if (tilemap.name == "Prop_Tilemap")
+			else if (IsBlockTilemapName(tilemap.name))
 				foundProp = tilemap;
 		}
+	}
+
+	static bool IsBlockTilemapName(string tilemapName)
+	{
+		return tilemapName == "Block_Tilemap" || tilemapName == "Prop_Tilemap";
 	}
 
 	static void FlushRange(ExportWalkMapData data, int y, ref int rangeStart, ref int rangeEnd)

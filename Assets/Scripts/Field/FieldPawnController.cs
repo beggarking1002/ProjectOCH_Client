@@ -13,6 +13,8 @@ namespace Field
 
 		[SerializeField] float moveSpeed = 4f;
 		[SerializeField] float arriveDistance = 0.01f;
+		[SerializeField] bool validateLocallyBeforeSend = true;
+		[SerializeField] bool sendBlockedMoveForDebug;
 
 		FieldMapWalkArea _walkArea;
 		Animator _animator;
@@ -78,11 +80,20 @@ namespace Field
 				return;
 
 			Vector3 worldPosition = ray.GetPoint(enter);
-			if (_walkArea.IsWalkable(worldPosition) == false)
-				return;
-
 			worldPosition.z = transform.position.z;
-			MoveTo(worldPosition);
+			bool walkable = _walkArea.IsWalkable(worldPosition);
+			if (validateLocallyBeforeSend && walkable == false)
+			{
+				if (sendBlockedMoveForDebug)
+				{
+					Debug.Log($"Request blocked pawn move for server validation. world={worldPosition}");
+					SendMovePacket(worldPosition);
+				}
+
+				return;
+			}
+
+			RequestMove(worldPosition);
 		}
 
 		bool TryGetPointerDown(out Vector2 screenPosition)
@@ -119,7 +130,7 @@ namespace Field
 				&& screenPosition.y <= camera.pixelHeight;
 		}
 
-		void MoveTo(Vector3 targetWorldPosition)
+		void RequestMove(Vector3 targetWorldPosition)
 		{
 			if (Vector3.Distance(transform.position, targetWorldPosition) <= arriveDistance)
 			{
@@ -127,12 +138,8 @@ namespace Field
 				return;
 			}
 
-			_targetWorldPosition = targetWorldPosition;
-			_useServerMoveDuration = false;
-			UpdateSpriteDirection(_targetWorldPosition);
-			SetMoving(true);
-			Debug.Log($"Move pawn to world {_targetWorldPosition}");
-			SendMovePacket(_targetWorldPosition);
+			Debug.Log($"Request pawn move to world {targetWorldPosition}");
+			SendMovePacket(targetWorldPosition);
 		}
 
 		public void SetWorldPosition(Vector3 worldPosition)
