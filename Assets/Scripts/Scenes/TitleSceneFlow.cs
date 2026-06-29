@@ -1,5 +1,6 @@
 using App;
 using Protocol;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -86,7 +87,8 @@ namespace Scenes
 				return;
 			}
 
-			if (GameRoot.Instance.Network.EnterGame() == false)
+			ulong playerIndex = GetCommandLinePlayerIndex();
+			if (GameRoot.Instance.Network.EnterGame(playerIndex) == false)
 			{
 				Debug.LogWarning($"Failed to send C_ENTER_GAME. {GameRoot.Instance.Network.LastError}");
 				return;
@@ -95,7 +97,7 @@ namespace Scenes
 			if (_gameStartButton != null)
 				_gameStartButton.interactable = false;
 
-			Debug.Log("Sent C_ENTER_GAME.");
+			Debug.Log($"Sent C_ENTER_GAME. playerIndex={playerIndex}");
 		}
 
 		void OnEnterGameReceived(S_ENTER_GAME packet)
@@ -127,6 +129,18 @@ namespace Scenes
 			}
 
 			return null;
+		}
+
+		static ulong GetCommandLinePlayerIndex()
+		{
+			string[] args = Environment.GetCommandLineArgs();
+			for (int i = 0; i < args.Length - 1; i++)
+			{
+				if (args[i] == "-playerIndex" && ulong.TryParse(args[i + 1], out ulong playerIndex))
+					return playerIndex;
+			}
+
+			return 0;
 		}
 	}
 }

@@ -10,7 +10,6 @@ namespace Field
 	public sealed class FieldPawnController : MonoBehaviour
 	{
 		static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
-		const int FixedPointScale = 100;
 
 		[SerializeField] float moveSpeed = 4f;
 		[SerializeField] float arriveDistance = 0.01f;
@@ -19,9 +18,15 @@ namespace Field
 		Animator _animator;
 		SpriteRenderer _spriteRenderer;
 		Vector3 _targetWorldPosition;
+		Vector3 _serverMoveStartPosition;
 		bool _isMoving;
 		bool _missingCameraLogged;
+		bool _useServerMoveDuration;
+		float _serverMoveElapsed;
+		float _serverMoveDuration;
 
+		public ulong ObjectId { get; private set; }
+		public bool IsMine { get; private set; } = true;
 		public bool IsMoving => _isMoving;
 
 		void Awake()
@@ -37,9 +42,11 @@ namespace Field
 			UpdateMovement();
 		}
 
-		public void Initialize(FieldMapWalkArea walkArea, Vector3 startWorldPosition)
+		public void Initialize(FieldMapWalkArea walkArea, Vector3 startWorldPosition, ulong objectId = 0, bool isMine = true)
 		{
 			_walkArea = walkArea;
+			ObjectId = objectId;
+			IsMine = isMine;
 			_targetWorldPosition = startWorldPosition;
 			transform.position = _targetWorldPosition;
 			SetMoving(false);
@@ -47,7 +54,7 @@ namespace Field
 
 		void HandleMouseInput()
 		{
-			if (_walkArea == null || TryGetPointerDown(out Vector2 screenPosition) == false)
+			if (IsMine == false || _walkArea == null || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
 			Camera camera = Camera.main;
@@ -121,10 +128,34 @@ namespace Field
 			}
 
 			_targetWorldPosition = targetWorldPosition;
+			_useServerMoveDuration = false;
 			UpdateSpriteDirection(_targetWorldPosition);
 			SetMoving(true);
 			Debug.Log($"Move pawn to world {_targetWorldPosition}");
 			SendMovePacket(_targetWorldPosition);
+		}
+
+		public void SetWorldPosition(Vector3 worldPosition)
+		{
+			_targetWorldPosition = worldPosition;
+			transform.position = worldPosition;
+			_useServerMoveDuration = false;
+			SetMoving(false);
+		}
+
+		public void ApplyServerMove(Vector3 startWorldPosition, Vector3 targetWorldPosition, uint durationMs, bool snapToStart)
+		{
+			if (snapToStart)
+				transform.position = startWorldPosition;
+
+			_serverMoveStartPosition = transform.position;
+			_targetWorldPosition = targetWorldPosition;
+			_serverMoveElapsed = 0f;
+			_serverMoveDuration = durationMs / 1000f;
+			_useServerMoveDuration = _serverMoveDuration > 0f;
+
+			UpdateSpriteDirection(_targetWorldPosition);
+			SetMoving(Vector3.Distance(transform.position, _targetWorldPosition) > arriveDistance);
 		}
 
 		void UpdateMovement()
@@ -132,15 +163,25 @@ namespace Field
 			if (_isMoving == false)
 				return;
 
-			transform.position = Vector3.MoveTowards(
-				transform.position,
-				_targetWorldPosition,
-				moveSpeed * Time.deltaTime);
+			if (_useServerMoveDuration)
+			{
+				_serverMoveElapsed += Time.deltaTime;
+				float t = Mathf.Clamp01(_serverMoveElapsed / _serverMoveDuration);
+				transform.position = Vector3.Lerp(_serverMoveStartPosition, _targetWorldPosition, t);
+			}
+			else
+			{
+				transform.position = Vector3.MoveTowards(
+					transform.position,
+					_targetWorldPosition,
+					moveSpeed * Time.deltaTime);
+			}
 
 			if (Vector3.Distance(transform.position, _targetWorldPosition) > arriveDistance)
 				return;
 
 			transform.position = _targetWorldPosition;
+			_useServerMoveDuration = false;
 			SetMoving(false);
 		}
 
@@ -167,20 +208,11 @@ namespace Field
 		{
 			Protocol.C_MOVE packet = new Protocol.C_MOVE
 			{
-				Target = new Protocol.Vec2Fixed
-				{
-					X = ToFixed(targetWorldPosition.x),
-					Y = ToFixed(targetWorldPosition.y),
-				},
+				Target = FieldPositionCodec.ToFixed(targetWorldPosition),
 			};
 
 			if (GameRoot.Instance == null || GameRoot.Instance.Network.Send(packet) == false)
 				Debug.LogWarning($"Failed to send C_MOVE target={targetWorldPosition}");
-		}
-
-		static int ToFixed(float value)
-		{
-			return Mathf.RoundToInt(value * FixedPointScale);
 		}
 	}
 }

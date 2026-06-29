@@ -18,10 +18,8 @@ namespace Scenes
 
 		AsyncOperationHandle<GameObject> _fieldMapHandle;
 		AsyncOperationHandle<GameObject> _worldMapHandle;
-		AsyncOperationHandle<GameObject> _fieldPawnHandle;
 		bool _hasFieldMapHandle;
 		bool _hasWorldMapHandle;
-		bool _hasFieldPawnHandle;
 		bool _isLoading;
 		int _loadVersion;
 
@@ -110,8 +108,12 @@ namespace Scenes
 			SceneManager.MoveGameObjectToScene(fieldMap, SceneManager.GetActiveScene());
 			Debug.Log($"Loaded addressable map: {FieldMapAddress}");
 
+			FieldObjectManager objectManager = fieldMap.GetComponent<FieldObjectManager>();
+			if (objectManager == null)
+				objectManager = fieldMap.AddComponent<FieldObjectManager>();
+
+			objectManager.Initialize(walkArea, FieldPawnAddress);
 			LoadWorldMap(fieldMap, version);
-			LoadFieldPawn(walkArea, version);
 		}
 
 		async void LoadWorldMap(GameObject fieldMap, int version)
@@ -149,44 +151,6 @@ namespace Scenes
 			Debug.Log($"Loaded addressable world map: {WorldMapAddress}");
 		}
 
-		async void LoadFieldPawn(FieldMapWalkArea walkArea, int version)
-		{
-			if (_hasFieldPawnHandle)
-				return;
-
-			Debug.Log($"Loading addressable pawn: {FieldPawnAddress}");
-			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldPawnAddress);
-			_fieldPawnHandle = handle;
-			_hasFieldPawnHandle = true;
-
-			await handle.Task;
-
-			if (version != _loadVersion || SceneManager.GetActiveScene().name != FieldSceneName)
-			{
-				ReleasePawnHandle(handle);
-				return;
-			}
-
-			if (handle.Status != AsyncOperationStatus.Succeeded)
-			{
-				Debug.LogError($"Failed to load addressable pawn: {FieldPawnAddress}");
-				ReleasePawnHandle(handle);
-				return;
-			}
-
-			GameObject fieldPawn = handle.Result;
-			fieldPawn.name = FieldPawnAddress;
-			FieldPawnController pawnController = fieldPawn.GetComponent<FieldPawnController>();
-			if (pawnController == null)
-				pawnController = fieldPawn.AddComponent<FieldPawnController>();
-
-			Vector3 spawnPosition = walkArea.GetDefaultSpawnPosition(fieldPawn.transform.position.z);
-			pawnController.Initialize(walkArea, spawnPosition);
-			BindCameraToPawn(fieldPawn.transform);
-			SceneManager.MoveGameObjectToScene(fieldPawn, SceneManager.GetActiveScene());
-			Debug.Log($"Loaded addressable pawn: {FieldPawnAddress} at world {spawnPosition}");
-		}
-
 		void ReleaseFieldSceneAddressables()
 		{
 			_loadVersion++;
@@ -198,15 +162,10 @@ namespace Scenes
 			if (_hasWorldMapHandle && _worldMapHandle.IsValid())
 				Addressables.ReleaseInstance(_worldMapHandle);
 
-			if (_hasFieldPawnHandle && _fieldPawnHandle.IsValid())
-				Addressables.ReleaseInstance(_fieldPawnHandle);
-
 			_hasFieldMapHandle = false;
 			_hasWorldMapHandle = false;
-			_hasFieldPawnHandle = false;
 			_fieldMapHandle = default;
 			_worldMapHandle = default;
-			_fieldPawnHandle = default;
 		}
 
 		void ReleaseHandle(AsyncOperationHandle<GameObject> handle)
@@ -233,36 +192,11 @@ namespace Scenes
 			}
 		}
 
-		void ReleasePawnHandle(AsyncOperationHandle<GameObject> handle)
-		{
-			if (handle.IsValid())
-				Addressables.ReleaseInstance(handle);
-
-			if (_hasFieldPawnHandle && _fieldPawnHandle.Equals(handle))
-			{
-				_hasFieldPawnHandle = false;
-				_fieldPawnHandle = default;
-			}
-		}
-
 		static void ApplyWorldMapSorting(GameObject worldMap)
 		{
 			SpriteRenderer[] renderers = worldMap.GetComponentsInChildren<SpriteRenderer>(true);
 			for (int i = 0; i < renderers.Length; i++)
 				renderers[i].sortingOrder += WorldMapSortingOrderOffset;
-		}
-
-		static void BindCameraToPawn(Transform pawnTransform)
-		{
-			Camera camera = Camera.main;
-			if (camera == null)
-				return;
-
-			CameraController controller = camera.GetComponent<CameraController>();
-			if (controller == null)
-				controller = camera.gameObject.AddComponent<CameraController>();
-
-			controller.SetTarget(pawnTransform);
 		}
 	}
 }

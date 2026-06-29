@@ -40,6 +40,7 @@ namespace App
 
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+			Application.runInBackground = true;
 
 			Services = new AppServices();
 			Services.Initialize(gameServerHost, gameServerPort, verifyWithLoginPacket);

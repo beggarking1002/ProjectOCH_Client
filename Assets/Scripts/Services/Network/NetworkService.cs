@@ -23,6 +23,7 @@ namespace Networking
 		public GameServerConnectionState State { get; private set; } = GameServerConnectionState.Disconnected;
 		public string LastError { get; private set; }
 		public Protocol.S_LOGIN LastLogin { get; private set; }
+		public Protocol.S_ENTER_GAME LastEnterGame { get; private set; }
 
 		public bool IsConnected =>
 			_session != null &&
@@ -35,6 +36,10 @@ namespace Networking
 
 		public event Action<GameServerConnectionState> StateChanged;
 		public event Action<Protocol.S_LOGIN> LoginReceived;
+		public event Action<Protocol.S_ENTER_GAME> EnterGameReceived;
+		public event Action<Protocol.S_SPAWN> SpawnReceived;
+		public event Action<Protocol.S_DESPAWN> DespawnReceived;
+		public event Action<Protocol.S_MOVE> MoveReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -44,6 +49,10 @@ namespace Networking
 				return;
 
 			PacketHandler.Instance.LoginReceived += OnLoginReceived;
+			PacketHandler.Instance.EnterGameReceived += OnEnterGameReceived;
+			PacketHandler.Instance.SpawnReceived += OnSpawnReceived;
+			PacketHandler.Instance.DespawnReceived += OnDespawnReceived;
+			PacketHandler.Instance.MoveReceived += OnMoveReceived;
 			_initialized = true;
 		}
 
@@ -63,7 +72,13 @@ namespace Networking
 		public void Dispose()
 		{
 			if (_initialized)
+			{
 				PacketHandler.Instance.LoginReceived -= OnLoginReceived;
+				PacketHandler.Instance.EnterGameReceived -= OnEnterGameReceived;
+				PacketHandler.Instance.SpawnReceived -= OnSpawnReceived;
+				PacketHandler.Instance.DespawnReceived -= OnDespawnReceived;
+				PacketHandler.Instance.MoveReceived -= OnMoveReceived;
+			}
 
 			Disconnect();
 			_initialized = false;
@@ -79,6 +94,7 @@ namespace Networking
 
 			LastError = null;
 			LastLogin = null;
+			LastEnterGame = null;
 			SetState(GameServerConnectionState.Connecting);
 
 			_connector = new Connector
@@ -220,6 +236,27 @@ namespace Networking
 
 			Debug.Log($"Game server verification: success={pkt.Success}");
 			LoginReceived?.Invoke(pkt);
+		}
+
+		void OnEnterGameReceived(Protocol.S_ENTER_GAME pkt)
+		{
+			LastEnterGame = pkt;
+			EnterGameReceived?.Invoke(pkt);
+		}
+
+		void OnSpawnReceived(Protocol.S_SPAWN pkt)
+		{
+			SpawnReceived?.Invoke(pkt);
+		}
+
+		void OnDespawnReceived(Protocol.S_DESPAWN pkt)
+		{
+			DespawnReceived?.Invoke(pkt);
+		}
+
+		void OnMoveReceived(Protocol.S_MOVE pkt)
+		{
+			MoveReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)
