@@ -1,78 +1,139 @@
 # Architecture Refactor
 
-Last updated: 2026-06-20
+Last updated: 2026-06-30
 
 ## 목표
 
-서버가 붙은 2D SRPG 클라이언트로 확장하기 위해 전역 싱글톤을 줄이고, Unity 진입점과 실제 서비스 책임을 분리한다.
+서버가 붙은 2D SRPG 클라이언트로 확장하기 위해 전역 싱글톤 의존을 줄이고, Unity 진입점과 실제 서비스 책임을 분리한다.
 
-## 현재 적용한 구조
+## 현재 적용 구조
 
 ```text
 GameRoot
- └─ AppServices
-     └─ NetworkService
-         ├─ Connector
-         ├─ GameServerSession
-         └─ ClientPacketHandler
+ -> AppServices
+     -> NetworkService
 ```
 
-## 새 파일
+`GameRoot`는 허용된 앱 루트 싱글톤이다. 세부 매니저를 전부 static singleton으로 흩뿌리지 않고, `AppServices` 아래에 서비스 객체를 둔다.
 
-- `Assets/Scripts/App/GameRoot.cs`
-- `Assets/Scripts/App/AppServices.cs`
-- `Assets/Scripts/Services/Network/NetworkService.cs`
-- `Assets/Scripts/Services/Network/GameServerConnectionState.cs`
+## 현재 주요 책임
 
-## 변경된 파일
+### GameRoot
 
-- `Assets/Scripts/Network/GameServerConnection.cs`
-  - 직접 네트워크 처리 제거.
-  - `GameRoot.Instance.Network`로 위임하는 wrapper로 축소.
-- `Assets/Scripts/Packet/ServerCore/Session.cs`
-  - 비정상 packet size 처리 보강.
-  - send/recv 예외 시 disconnect 처리.
-  - disconnect 시 null/이미 닫힌 socket 방어.
+파일:
 
-## 설계 방향
+```text
+Assets/Scripts/App/GameRoot.cs
+```
 
-- 허용하는 싱글톤:
-  - `GameRoot.Instance`
-- 피할 것:
-  - `NetworkService.Instance`
-  - `BattleSession.Instance`
-  - `UnitManager.Instance`
-  - 모든 곳에서 `Managers.X`를 호출하는 구조
-- 앞으로 붙일 구조:
+책임:
+
+- 런타임 시작 전 `@GameRoot` 자동 생성.
+- `DontDestroyOnLoad`.
+- `Application.runInBackground = true`.
+- `AppServices.Initialize`.
+- `Update`에서 `Services.Tick`.
+
+### AppServices
+
+파일:
+
+```text
+Assets/Scripts/App/AppServices.cs
+```
+
+책임:
+
+- 현재는 `NetworkService`만 소유.
+- 앞으로 Addressable, Scene, UI 등 앱 단위 서비스를 붙일 수 있는 자리.
+
+### NetworkService
+
+파일:
+
+```text
+Assets/Scripts/Services/Network/NetworkService.cs
+```
+
+책임:
+
+- 서버 연결 상태.
+- 송신 buffer 생성.
+- `PacketHandler` event 구독.
+- main thread job flush.
+- `LastLogin`, `LastEnterGame`, `_knownPlayers` 캐시.
+
+## Field 쪽 구조
+
+```text
+FieldSceneAddressableLoader
+ -> Field prefab 로드
+ -> FieldMapWalkArea
+ -> FieldObjectManager
+     -> FieldPawnController instances
+     -> CameraController target binding
+```
+
+`FieldObjectManager`는 필드 씬 단위 오브젝트 관리자다. 전역 singleton으로 두지 않고 Field prefab/scene 생명주기에 묶는다.
+
+## 네트워크 이벤트 흐름
+
+```text
+PacketManager
+ -> PacketHandler
+ -> NetworkService
+ -> FieldObjectManager / TitleSceneFlow
+```
+
+주의:
+
+- `PacketManager`는 generated parser/dispatcher.
+- `PacketHandler`는 사람이 작성하는 packet별 handler.
+- `NetworkService`는 packet을 앱 상태로 정리하고 event를 노출한다.
+
+## 싱글톤 판단
+
+허용:
+
+- `GameRoot.Instance`
+- generated `PacketManager.Instance`
+- `PacketHandler.Instance`
+
+주의:
+
+- scene-specific manager를 global singleton으로 만들지 않는다.
+- `FieldObjectManager`는 FieldScene/Field prefab 생명주기에 묶는다.
+- Battle 쪽은 나중에 `BattleSession` 단위로 별도 상태를 둔다.
+
+## 향후 구조 제안
 
 ```text
 GameRoot
- └─ AppServices
-     ├─ NetworkService
-     ├─ AddressableService
-     ├─ SceneService
-     └─ UIService
+ -> AppServices
+     -> NetworkService
+     -> AddressableService
+     -> SceneService
+     -> UIService
 
 GameSession
- ├─ AccountState
- ├─ LobbyService
- └─ BattleSession
+ -> AccountState
+ -> LobbyService
+ -> FieldSession
+ -> BattleSession
+
+FieldSession
+ -> FieldState
+ -> FieldObjectRegistry
+ -> FieldNetworkSync
 
 BattleSession
- ├─ BattleState
- ├─ TurnManager
- ├─ UnitManager
- ├─ GridMap
- ├─ CommandSystem
- ├─ BattleNetworkSync
- └─ BattleViewBinder
+ -> BattleState
+ -> TurnManager
+ -> UnitManager
+ -> GridMap
+ -> CommandSystem
+ -> BattleNetworkSync
+ -> BattleViewBinder
 ```
 
-## 다음 리팩터링 후보
-
-1. `GameRoot.connectToGameServerOnStart` 기본값 검토.
-2. `ClientPacketHandler` singleton을 `NetworkService` 소유 객체로 변경.
-3. `NetworkService`에 재접속/서버 변경 흐름 추가.
-4. `AddressableService` 추가.
-5. 로그인/로비/전투를 `GameSession` 단위로 분리.
-
+현재 단계에서는 과하게 쪼개지 않고, Field 이동/서버 검증/맵 데이터 파이프라인이 안정된 뒤 다음 리팩터링을 진행하는 것이 좋다.

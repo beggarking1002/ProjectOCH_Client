@@ -1,57 +1,81 @@
 # Addressables Setup
 
-Last updated: 2026-06-20
+Last updated: 2026-06-30
 
-## 완료된 작업
+## 패키지와 기본 설정
 
-- `Packages/manifest.json`에 `com.unity.addressables`: `2.9.1` 추가.
-- Unity가 `Packages/packages-lock.json`에 Addressables와 의존성 `com.unity.scriptablebuildpipeline`을 해석.
-- Addressables 데이터 생성:
-  - `Assets/AddressableAssetsData/AddressableAssetSettings.asset`
-  - `Assets/AddressableAssetsData/DefaultObject.asset`
-  - `Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset`
-  - `Assets/AddressableAssetsData/AssetGroups/Remote Content.asset`
-  - Data builders: Fast Mode, Packed Mode, Packed Play Mode
-- `ProjectSettings/EditorBuildSettings.asset`에 Addressables settings config object 등록.
-- `.gitignore`에 `ServerData` 제외 추가.
+- `Packages/manifest.json`
+  - `com.unity.addressables`: `2.9.1`
+- Addressables 설정 위치:
+  - `Assets/AddressableAssetsData`
+- Build Settings config object:
+  - `ProjectSettings/EditorBuildSettings.asset`
 
-## 자동 초기화 코드
+자동 초기화 도구:
 
-경로: `Assets/Editor/AddressablesProjectSetup.cs`
+```text
+Assets/Editor/AddressablesProjectSetup.cs
+Tools/Project OCH/Addressables/Initialize
+```
+
+## 현재 Addressable 사용
+
+`FieldSceneAddressableLoader`가 FieldScene 진입 시 Addressables로 프리팹을 로드한다.
+
+현재 코드 기준 주소:
+
+```text
+Field
+WorldMapRoot
+Field_Pawn
+```
 
 역할:
 
-- Unity 에디터 로드 후 Addressables settings가 없거나 원격 그룹/경로가 비어 있으면 초기화.
-- 메뉴 제공:
-  - `Tools/Project OCH/Addressables/Initialize`
-- `Remote Content` 그룹 생성.
-- `Remote Content` 그룹 schema:
-  - Build path: `Remote.BuildPath`
-  - Load path: `Remote.LoadPath`
-  - Bundle mode: `PackTogether`
-  - Include in build: true
-  - Content update static content: false
+- `Field`
+  - 필드 맵 루트. `FieldMapWalkArea`, `FieldObjectManager`가 붙거나 런타임에 추가된다.
+- `WorldMapRoot`
+  - Field 위에 올라가는 시각용 월드맵 이미지/오브젝트.
+- `Field_Pawn`
+  - 플레이어 pawn 프리팹. `FieldObjectManager`가 Addressables로 생성한다.
 
-## 현재 프로필 경로
+## FieldScene 로딩 흐름
 
-- `Local.BuildPath`: `[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]`
-- `Local.LoadPath`: `{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]`
-- `Remote.BuildPath`: `ServerData/[BuildTarget]`
-- `Remote.LoadPath`: `http://localhost/[BuildTarget]`
+```text
+FieldScene 로드
+ -> FieldSceneAddressableLoader.LoadFieldMap()
+ -> Addressables.InstantiateAsync("Field")
+ -> FieldMapWalkArea 초기화
+ -> FieldObjectManager 초기화
+ -> Addressables.InstantiateAsync("WorldMapRoot")
+```
 
-## 주의점
+`WorldMapRoot`의 `SpriteRenderer.sortingOrder`는 로드 후 offset을 더해 Field 타일맵 위에 보이게 한다.
 
-- `Remote.LoadPath`의 `localhost`는 개발용이다.
-- 실제 배포 빌드에서는 각 클라이언트 자기 PC/기기의 localhost를 보게 되므로 에셋을 못 찾는다.
-- 배포 전 `Remote.LoadPath`를 CDN 또는 파일 서버 URL로 바꿔야 한다.
-- 아직 Addressable로 지정된 실제 에셋은 없다.
-- 콘텐츠 빌드는 아직 하지 않았다.
+## Addressables 빌드
 
-## 다음 작업 후보
+멀티 클라 빌드 스크립트가 클라이언트 빌드 전에 Addressables content build를 실행한다.
 
-- Addressable로 관리할 에셋 기준 정하기.
-- 로컬/원격 그룹 분리 규칙 정하기.
-- 실제 CDN/파일 서버 URL 결정.
-- Addressables content build 파이프라인 정리.
-- 런타임 로딩 코드 작성.
+```text
+Assets/Editor/MultiplayerBuildAndRun.cs
+AddressableAssetSettings.BuildPlayerContent(...)
+```
 
+## 현재 프로필 값
+
+개발용 기본값:
+
+```text
+Remote.BuildPath = ServerData/[BuildTarget]
+Remote.LoadPath = http://localhost/[BuildTarget]
+```
+
+주의:
+
+- `localhost`는 개발용이다.
+- 다른 PC/기기 배포 시 클라이언트 자신의 localhost를 보기 때문에 remote asset을 찾지 못한다.
+- 배포 전 CDN, 파일 서버, 또는 내장 로컬 번들 전략을 결정해야 한다.
+
+## 관련 경고
+
+`ProfileValueReference: GetValue called with empty id` 경고는 Addressables profile path id가 비어 있을 때 발생할 수 있다. 현재 초기화 스크립트는 Remote build/load path id가 비어 있으면 변수 참조를 다시 설정한다.

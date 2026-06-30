@@ -1,60 +1,143 @@
 # Server Protocol Notes
 
-Last updated: 2026-06-20
+Last updated: 2026-06-30
 
 ## 관련 서버 경로
 
 - 서버 루트: `C:\ProjectOCH\Server`
 - C++ 게임 서버: `C:\ProjectOCH\Server\GameServer`
-- 서버 packet handler:
+- packet handler:
   - `C:\ProjectOCH\Server\GameServer\ServerPacketHandler.cpp`
   - `C:\ProjectOCH\Server\GameServer\ServerPacketHandler.h`
-- 서버 proto:
-  - `C:\ProjectOCH\Server\GameServer\Protocol.proto`
-  - `C:\ProjectOCH\Server\GameServer\Struct.proto`
-  - `C:\ProjectOCH\Server\GameServer\Enum.proto`
-- 서버 generated protobuf:
-  - `Protocol.pb.cc/.h`
-  - `Struct.pb.cc/.h`
-  - `Enum.pb.cc/.h`
+- room:
+  - `C:\ProjectOCH\Server\GameServer\Room.cpp`
+  - `C:\ProjectOCH\Server\GameServer\Room.h`
+- walkmap:
+  - `C:\ProjectOCH\Server\GameServer\FieldWalkMapData.cpp`
+  - `C:\ProjectOCH\Server\GameServer\FieldWalkMapData.h`
+- proto:
+  - `Protocol.proto`
+  - `Struct.proto`
+  - `Enum.proto`
 
-## 현재 확인된 불일치 가능성
+## 현재 서버 동작 요약
 
-`C:\ProjectOCH\Server\GameServer\Protocol.proto`에서 본 내용은 `S_LOGIN`이 아래처럼 보였다.
+### C_LOGIN
 
-```proto
-message S_LOGIN
+`Handle_C_LOGIN`은 현재 DB 없이 `S_LOGIN.success = true`를 보낸다.
+
+### C_ENTER_GAME
+
+```text
+Handle_C_ENTER_GAME
+ -> ObjectUtils::CreatePlayer
+ -> GRoom->DoAsync(Room::HandleEnterPlayer)
+ -> Room::EnterRoom
+ -> SendEnterGame(player, true)
+ -> SendExistingPlayers(player)
+ -> SendSpawn(object, exceptId = new player's id)
+```
+
+신규 클라:
+
+```text
+S_ENTER_GAME
+S_SPAWN { existing players }
+```
+
+기존 클라:
+
+```text
+S_SPAWN { new player }
+```
+
+### C_MOVE
+
+서버는 `C_MOVE.target`을 `Vec2Fixed` 월드 좌표로 받는다.
+
+현재 목표 구조:
+
+```text
+C_MOVE.target
+ -> FieldWalkMapData.FixedToCell
+ -> walkable_ranges 검사
+ -> 성공이면 player->position 갱신 후 S_MOVE broadcast
+ -> 실패이면 position 갱신 없이 duration_ms=0 보정
+```
+
+## Walkmap JSON
+
+Unity exporter가 생성한다.
+
+클라이언트 기본 출력:
+
+```text
+Assets/GameData/Maps/Field_001.walkmap.json
+```
+
+서버 복사 위치:
+
+```text
+C:\ProjectOCH\Server\Data\Maps\Field_001.walkmap.json
+```
+
+현재 JSON 핵심 필드:
+
+```json
 {
-    bool success = 1;
-    repeated Player players = 2;
+  "map_id": "Field_001",
+  "fixed_point_scale": 100,
+  "cell_size": { "x": 0.95, "y": 1.0 },
+  "origin_world": { "x": 0.0, "y": 0.0 },
+  "bounds": {},
+  "walkable_ranges": [
+    { "y": -20, "x_min": 4, "x_max": 6 }
+  ],
+  "debug_walkable_cells": []
 }
 ```
 
-하지만 실제 서버 C++ handler와 generated code, 클라이언트 generated C#은 `ObjectInfo` 기반으로 동작한다.
+`walkable_ranges`는 inclusive range다.
+
+```text
+x_min <= cellX <= x_max
+```
+
+## 중요한 좌표계 이슈
+
+`Field_001` 프리팹의 Grid는 Hexagon layout이다.
+
+프리팹 설정:
+
+```text
+Grid.m_CellSize = { x: 0.95, y: 1.0, z: 1 }
+Grid.m_CellLayout = 1
+Grid.m_CellSwizzle = 0
+Tilemap.m_TileAnchor = { x: 0, y: 0, z: 0 }
+```
+
+따라서 서버에서 단순 rectangle 공식으로 변환하면 클라 `Grid.WorldToCell()`과 어긋난다.
+
+문제 공식:
 
 ```cpp
-Protocol::ObjectInfo* player = loginPkt.add_players();
+cellX = floor((worldX - originX) / cellSizeX);
+cellY = floor((worldY - originY) / cellSizeY);
 ```
 
-클라이언트 generated C#도 다음 구조다.
+Hex Grid에서는 y row stride와 row offset을 반영해야 한다. 현재 서버 좌표 동기화 문제를 볼 때 `FieldWalkMapData::FixedToCell`과 `CellToFixed`가 가장 우선 확인 대상이다.
 
-```csharp
-public pbc::RepeatedField<global::Protocol.ObjectInfo> Players
+## 서버 빌드 팁
+
+GameServer만 확인할 때:
+
+```powershell
+cd C:\ProjectOCH\Server
+& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
+  .\Server.sln `
+  /t:GameServer `
+  /p:Configuration=Debug `
+  /p:Platform=x64
 ```
 
-즉 proto 원본과 generated 코드가 같은 시점의 산출물인지 의심해야 한다.
-
-## 패킷 변경 시 원칙
-
-- proto 원본 하나를 기준으로 삼는다.
-- 서버 C++ generated 파일과 클라이언트 C# generated 파일을 같은 proto에서 다시 생성한다.
-- 패킷 ID enum도 서버/클라이언트가 같은 값을 쓰는지 확인한다.
-- `S_LOGIN.players` 타입을 바꾸면 서버 handler, 클라이언트 UI/로직, generated 파일 모두 함께 맞춘다.
-
-## 서버 로그인 처리 현재 의미
-
-- `C_LOGIN`을 받으면 DB 조회 없이 테스트 데이터 생성.
-- `S_LOGIN.success = true`.
-- `players`에 랜덤 위치를 가진 `ObjectInfo` 3개 추가.
-- 이 응답은 캐릭터 선택 목록 또는 테스트 플레이어 목록처럼 쓰일 수 있지만, 현재는 하드코딩 더미다.
-
+`GameServer.vcxproj`를 직접 빌드하면 PreBuild 상대 경로가 틀어질 수 있다. 솔루션 타겟으로 빌드하는 편이 안전하다.

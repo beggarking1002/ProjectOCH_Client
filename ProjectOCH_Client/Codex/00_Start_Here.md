@@ -1,27 +1,20 @@
 # ProjectOCH Client - Codex Start Here
 
-Last updated: 2026-06-20
+Last updated: 2026-06-30
 
-이 문서는 Codex 새 대화를 시작할 때 먼저 읽기 위한 인덱스다.
+이 폴더는 새 Codex 대화를 시작할 때 빠르게 현재 프로젝트 상태를 파악하기 위한 Obsidian 문서 묶음이다.
 
 ## 빠른 요약
 
-- Unity 클라이언트 프로젝트 경로: `C:\ProjectOCH\Client`
-- Obsidian 정리 볼트: `C:\ProjectOCH\Client\ProjectOCH_Client`
+- Unity 클라이언트 루트: `C:\ProjectOCH\Client`
+- Obsidian vault: `C:\ProjectOCH\Client\ProjectOCH_Client`
 - Unity 버전: `6000.3.9f1`
-- 주요 런타임 코드:
-  - `Assets/Scripts/Network/GameServerConnection.cs`
-  - `Assets/Scripts/Packet/ClientPacketHandler.cs`
-  - `Assets/Scripts/Packet/GameServerSession.cs`
-  - `Assets/Scripts/Packet/ServerCore/*.cs`
-- Protobuf 생성 코드:
-  - `Assets/Scripts/Packet/Generated/Enum.cs`
-  - `Assets/Scripts/Packet/Generated/Struct.cs`
-  - `Assets/Scripts/Packet/Generated/Protocol.cs`
-- 서버 참고 경로:
-  - `C:\ProjectOCH\Server\GameServer`
+- 서버 참고 경로: `C:\ProjectOCH\Server\GameServer`
+- 현재 클라이언트는 서버 접속형 2D SRPG를 목표로 한다.
+- 필드 이동은 `Vec2Fixed` 월드 좌표 기반이다.
+- 필드 이동 가능 영역은 Unity Tilemap에서 exporter로 JSON을 추출하고, 서버도 같은 JSON을 읽어 검증하는 방향이다.
 
-## 읽는 순서
+## 먼저 읽을 문서
 
 1. [[01_Project_Snapshot]]
 2. [[02_Addressables_Setup]]
@@ -31,10 +24,35 @@ Last updated: 2026-06-20
 6. [[06_Work_Log]]
 7. [[07_Architecture_Refactor]]
 
-## 현재 가장 중요한 주의점
+## 현재 핵심 코드
 
-- `GameServerConnection`은 런타임에 자동 생성되고 기본값으로 `127.0.0.1:7777`에 자동 접속한다.
-- 2026-06-20 리팩터링 이후 앱 진입점은 `GameRoot`, 실제 네트워크 처리는 `NetworkService`가 담당한다. `GameServerConnection`은 기존 코드 호환용 wrapper로 축소했다.
-- 로그인 응답의 `players=3`은 클라이언트 계산값이 아니라 서버 `Handle_C_LOGIN`에서 `for (int32 i = 0; i < 3; i++)`로 더미 플레이어 3개를 넣기 때문에 나온다.
-- Addressables 기본 세팅은 되어 있지만 `Remote.LoadPath`가 개발용 `http://localhost/[BuildTarget]`다. 배포 전 실제 CDN/서버 URL로 변경해야 한다.
-- 클라이언트 generated proto와 서버 proto 원본/생성물이 어긋날 가능성이 있다. 패킷 구조 변경 시 반드시 서버/클라를 같은 proto에서 재생성해야 한다.
+- 앱 진입점:
+  - `Assets/Scripts/App/GameRoot.cs`
+  - `Assets/Scripts/App/AppServices.cs`
+- 네트워크:
+  - `Assets/Scripts/Services/Network/NetworkService.cs`
+  - `Assets/Scripts/Packet/PacketHandler.cs`
+  - `Assets/Scripts/Packet/Generated/PacketManager.cs`
+  - `Assets/Scripts/Packet/GameServerSession.cs`
+  - `Assets/Scripts/Packet/ServerCore/*.cs`
+- 씬 흐름:
+  - `Assets/Scripts/Scenes/TitleSceneFlow.cs`
+  - `Assets/Scripts/Scenes/FieldSceneAddressableLoader.cs`
+- 필드:
+  - `Assets/Scripts/Field/FieldObjectManager.cs`
+  - `Assets/Scripts/Field/FieldPawnController.cs`
+  - `Assets/Scripts/Field/FieldMapWalkArea.cs`
+  - `Assets/Scripts/Field/FieldPositionCodec.cs`
+  - `Assets/Scripts/Field/CameraController.cs`
+- 에디터 도구:
+  - `Assets/Editor/MultiplayerBuildAndRun.cs`
+  - `Assets/Editor/FieldWalkMapExporter.cs`
+  - `Assets/Editor/AddressablesProjectSetup.cs`
+
+## 현재 주의점
+
+- `Field_001`은 Hexagon Grid다. 서버가 단순 rectangle 공식으로 `world -> cell` 변환하면 클라이언트 `Grid.WorldToCell()`과 어긋난다.
+- 프로토콜은 아직 `C_MOVE { Vec2Fixed target }` 형태다. 서버는 `Field_001.walkmap.json` 기반으로 이동 가능 여부를 검증한다.
+- 클라이언트는 기본적으로 이동 불가 타일 클릭을 먼저 막는다. 서버 검증 로그를 보고 싶으면 `FieldPawnController.sendBlockedMoveForDebug`를 켠다.
+- Addressables의 `Remote.LoadPath`는 개발용 `localhost` 기반이다. 배포 전에 실제 URL 전략이 필요하다.
+- 멀티 클라 테스트는 Unity 메뉴 `Tools/Project OCH/Multiplayer`에서 빌드/실행한다.

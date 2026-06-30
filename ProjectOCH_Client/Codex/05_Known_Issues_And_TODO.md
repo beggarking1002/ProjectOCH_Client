@@ -1,82 +1,106 @@
 # Known Issues And TODO
 
-Last updated: 2026-06-20
+Last updated: 2026-06-30
 
 ## 높은 우선순위
 
-### 수신 처리 예외 시 recv loop 중단 가능
+### 서버와 클라의 Hex Grid 좌표 동기화
 
-파일: `Assets/Scripts/Packet/ServerCore/Session.cs`
+`Field_001`은 Unity Hexagon Grid다. 서버가 rectangle 공식으로 `FixedToCell`을 계산하면 경계나 row offset에서 클라와 다르게 판정한다.
 
-2026-06-20 리팩터링에서 예외 시 `Disconnect()`하도록 수정했다.
+확인 대상:
 
-남은 확인:
+- 서버 `FieldWalkMapData::FixedToCell`
+- 서버 `FieldWalkMapData::CellToFixed`
+- 클라 `FieldMapWalkArea.IsWalkable`
+- exporter `FieldWalkMapExporter`
 
-- 실제 서버 연결 상태에서 비정상 패킷/서버 종료/재접속 시나리오 테스트 필요.
+가능한 해결:
 
-### 잘못된 패킷 크기 처리
+- 서버가 Unity Hex Grid 변환을 정확히 구현한다.
+- 또는 프로토콜에 클라가 계산한 target cell을 추가한다.
 
-파일: `Assets/Scripts/Packet/ServerCore/Session.cs`
+현재는 프로토콜 변경 없이 서버 변환을 맞추려는 방향이다.
 
-2026-06-20 리팩터링에서 `dataSize < HeaderSize`이면 `-1`을 반환하고 연결 종료되도록 수정했다.
+### Walkmap JSON 재생성 규칙
 
-### 자동 접속 정책
+현재 `FieldWalkMapExporter`는 기본적으로 `Ground_Tilemap` 타일을 이동 가능 영역으로 본다.
 
-파일: `Assets/Scripts/Network/GameServerConnection.cs`
+옵션:
 
-2026-06-20 리팩터링 이후 `GameServerConnection`의 자동 생성은 제거했고, `GameRoot`가 앱 진입점으로 자동 생성된다.
+- `Block Tilemap`
+  - `Block_Tilemap` 또는 `Prop_Tilemap` 자동 감지.
+- `Subtract Block Tilemap`
+  - 켜면 `Ground - Block`으로 추출.
+  - 꺼두면 Ground 기준만 사용.
 
-남은 결정:
+주의:
 
-- `GameRoot.connectToGameServerOnStart` 기본값을 계속 true로 둘지 결정 필요.
-- 로그인 씬에서 명시적으로 연결하게 바꾸면 기본값 false가 더 적합하다.
+- `Block_Tilemap`이 배경/표시용으로 넓게 깔린 경우 이 옵션을 켜면 walkable이 0개가 될 수 있다.
+- 서버 검증용 JSON을 갱신하면 서버 `Data\Maps` 쪽도 같은 파일로 맞춰야 한다.
 
-### 이전 세션 callback이 새 세션 상태를 덮을 수 있음
+### 서버 검증 로그 확인
 
-파일: `Assets/Scripts/Network/GameServerConnection.cs`
+기본 클라 동작은 이동 불가 타일 클릭을 먼저 막는다.
 
-2026-06-20 리팩터링에서 `NetworkService.CreateSession()`에 `ReferenceEquals(_session, createdSession)` 검사를 추가했다.
+서버에서 `walkable=0` 로그를 보고 싶으면 `FieldPawnController`에서:
 
-### `SendLogin()` 상태 처리
+```text
+validateLocallyBeforeSend = true
+sendBlockedMoveForDebug = true
+```
 
-파일: `Assets/Scripts/Network/GameServerConnection.cs`
+또는 모든 클릭을 서버로 보내려면:
 
-2026-06-20 리팩터링에서 `Send(...)` 성공 시에만 `Verifying`으로 변경하도록 수정했다.
+```text
+validateLocallyBeforeSend = false
+```
+
+### S_ENTER_GAME / S_SPAWN 스냅샷 구조
+
+현재 서버는 `S_ENTER_GAME`과 기존 플레이어 목록용 `S_SPAWN`을 별도 패킷으로 보낸다.
+
+클라에서 씬 전환 중 `S_SPAWN`을 놓치지 않도록 `NetworkService._knownPlayers` 캐시를 사용한다.
+
+장기적으로는 아래처럼 정리하는 편이 더 명확하다.
+
+```proto
+message S_ENTER_GAME
+{
+    bool success = 1;
+    ObjectInfo player = 2;
+    repeated ObjectInfo players = 3;
+}
+```
 
 ## 중간 우선순위
 
-### Protobuf 원본 관리
+### FieldMapWalkArea 런타임 설정
 
-클라이언트에는 generated C#만 있고 `.proto` 원본은 없다.
+`useBlockTilemap`은 현재 기본 false다. 실제 gameplay에서 Block 레이어를 클라 사전 검증에도 쓸지 결정해야 한다.
 
-개선:
+### 이동 보정과 예측
 
-- proto 원본을 공통 repo 또는 명확한 shared 위치에서 관리.
-- 클라/서버 generated 산출물 재생성 절차 문서화.
+현재 클라는 기본적으로 서버 `S_MOVE` 승인 후 이동한다. 즉 강한 서버 권위 구조에 가깝다.
 
-### Google.Protobuf.dll 직접 관리
+나중에 조작감을 개선하려면:
 
-`Assets/Libs/Google.Protobuf.dll`로 직접 포함되어 있다.
+- 클라 예측 이동
+- 서버 거부 시 rollback/reconciliation
+- 이동 중 새 명령 처리
 
-개선:
+을 설계해야 한다.
 
-- DLL 버전 기록.
-- 서버/툴링 protoc 버전과 호환성 확인.
-- 가능하면 Unity package 방식 또는 명확한 외부 의존성 문서화.
+### 스폰 위치 중복
 
-### 주석 인코딩 깨짐
+서버는 walkable cell에서 랜덤 스폰한다. 현재 같은 cell에 여러 플레이어가 겹치는지 여부는 별도 점유 검증이 필요하다.
 
-`Assets/Scripts/Packet/ServerCore/Session.cs`, `Connector.cs` 일부 주석이 깨져 있다.
+### Addressables 배포 경로
 
-개선:
+`Remote.LoadPath = http://localhost/[BuildTarget]`는 개발용이다. 배포 전 실제 remote path 전략이 필요하다.
 
-- 파일 인코딩을 UTF-8로 통일.
-- 깨진 주석은 의미 확인 후 복구 또는 제거.
+## 낮은 우선순위
 
-## Addressables TODO
-
-- 실제 Addressable 에셋 등록.
-- CDN/파일 서버 URL 결정.
-- `Remote.LoadPath`를 `localhost`에서 실제 URL로 변경.
-- content build 실행 절차 문서화.
-- 런타임 로드 코드 작성.
+- `System.Net.Http` 버전 충돌 warning 정리.
+- `Google.Protobuf.dll` 버전 관리 문서화.
+- 기존 axial 관련 스크립트는 field에서 분리되었지만 battle용으로 남아 있다. battle 구현 시 재검토.
