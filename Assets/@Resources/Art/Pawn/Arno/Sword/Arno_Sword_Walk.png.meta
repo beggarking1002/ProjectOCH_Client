@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 64aa6f6e601d2d54aa6ccd1034706ceb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1246202212968268977
+    second: Arno_Sword_Walk_0
+  - first:
+      213: 1932757398044009328
+    second: Arno_Sword_Walk_1
+  - first:
+      213: 7817732920940835118
+    second: Arno_Sword_Walk_2
+  - first:
+      213: 6501965596136102287
+    second: Arno_Sword_Walk_3
+  - first:
+      213: -6828818898081494230
+    second: Arno_Sword_Walk_4
+  - first:
+      213: -3538783107114672246
+    second: Arno_Sword_Walk_5
+  - first:
+      213: 5425468545193049251
+    second: Arno_Sword_Walk_6
+  - first:
+      213: -6672368083512204411
+    second: Arno_Sword_Walk_7
+  - first:
+      213: -7778891766269688443
+    second: Arno_Sword_Walk_8
+  - first:
+      213: -3999602258468850922
+    second: Arno_Sword_Walk_9
+  - first:
+      213: -8656284505498692719
+    second: Arno_Sword_Walk_10
+  - first:
+      213: -3241116815816674476
+    second: Arno_Sword_Walk_11
+  - first:
+      213: -2349448058342131705
+    second: Arno_Sword_Walk_12
+  - first:
+      213: 1704149142488614126
+    second: Arno_Sword_Walk_13
+  - first:
+      213: 7463549799414691218
+    second: Arno_Sword_Walk_14
+  - first:
+      213: -5185671307013004402
+    second: Arno_Sword_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1741
+        width: 389
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b4874e5f466b4110800000000000000
+      internalID: 1246202212968268977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1738
+        width: 392
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 073eb630d9882da10800000000000000
+      internalID: 1932757398044009328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 1738
+        width: 387
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e213e85ebaa2e7c60800000000000000
+      internalID: 7817732920940835118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1738
+        width: 365
+        height: 557
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f89d083c24f9b3a50800000000000000
+      internalID: 6501965596136102287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1161
+        width: 347
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2bc06094692b31a0800000000000000
+      internalID: -6828818898081494230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1156
+        width: 321
+        height: 570
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8fd64b6387b3eec0800000000000000
+      internalID: -3538783107114672246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1159
+        width: 315
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ac794085e22b4b40800000000000000
+      internalID: 5425468545193049251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1241
+        y: 1156
+        width: 334
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 583e99b649cf663a0800000000000000
+      internalID: -6672368083512204411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 577
+        width: 340
+        height: 560
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 585c8452723db0490800000000000000
+      internalID: -7778891766269688443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 576
+        width: 327
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6133d1dcfee8e78c0800000000000000
+      internalID: -3999602258468850922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 576
+        width: 317
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 193580fea13bed780800000000000000
+      internalID: -8656284505498692719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 577
+        width: 321
+        height: 571
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 453b3bd9d6d3503d0800000000000000
+      internalID: -3241116815816674476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 3
+        width: 333
+        height: 572
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70839485075156fd0800000000000000
+      internalID: -2349448058342131705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 6
+        width: 352
+        height: 566
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee4025abd9a56a710800000000000000
+      internalID: 1704149142488614126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 10
+        width: 369
+        height: 558
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 295fc8dbffad39760800000000000000
+      internalID: 7463549799414691218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 13
+        width: 389
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83ed8fcb6bc808b0800000000000000
+      internalID: -5185671307013004402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Arno_Sword_Walk_0: 1246202212968268977
+      Arno_Sword_Walk_1: 1932757398044009328
+      Arno_Sword_Walk_10: -8656284505498692719
+      Arno_Sword_Walk_11: -3241116815816674476
+      Arno_Sword_Walk_12: -2349448058342131705
+      Arno_Sword_Walk_13: 1704149142488614126
+      Arno_Sword_Walk_14: 7463549799414691218
+      Arno_Sword_Walk_15: -5185671307013004402
+      Arno_Sword_Walk_2: 7817732920940835118
+      Arno_Sword_Walk_3: 6501965596136102287
+      Arno_Sword_Walk_4: -6828818898081494230
+      Arno_Sword_Walk_5: -3538783107114672246
+      Arno_Sword_Walk_6: 5425468545193049251
+      Arno_Sword_Walk_7: -6672368083512204411
+      Arno_Sword_Walk_8: -7778891766269688443
+      Arno_Sword_Walk_9: -3999602258468850922
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

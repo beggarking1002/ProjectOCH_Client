@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: a71012b2553d96c459c5a3350c3cb01e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8393834793162845553
+    second: Suen_ParvisOff_Idle_0
+  - first:
+      213: -6091111005058291868
+    second: Suen_ParvisOff_Idle_1
+  - first:
+      213: 3357871997596238401
+    second: Suen_ParvisOff_Idle_2
+  - first:
+      213: -6526795785018725281
+    second: Suen_ParvisOff_Idle_3
+  - first:
+      213: 2492229966852221584
+    second: Suen_ParvisOff_Idle_4
+  - first:
+      213: 4769121438726641917
+    second: Suen_ParvisOff_Idle_5
+  - first:
+      213: -7526825378040583775
+    second: Suen_ParvisOff_Idle_6
+  - first:
+      213: -2451402046162150055
+    second: Suen_ParvisOff_Idle_7
+  - first:
+      213: 5903983120662453656
+    second: Suen_ParvisOff_Idle_8
+  - first:
+      213: -3352695479152567613
+    second: Suen_ParvisOff_Idle_9
+  - first:
+      213: -8133343070143965033
+    second: Suen_ParvisOff_Idle_10
+  - first:
+      213: -2211042387979713421
+    second: Suen_ParvisOff_Idle_11
+  - first:
+      213: -7099035210647951584
+    second: Suen_ParvisOff_Idle_12
+  - first:
+      213: 7438171077099872076
+    second: Suen_ParvisOff_Idle_13
+  - first:
+      213: -8132542322373144713
+    second: Suen_ParvisOff_Idle_14
+  - first:
+      213: -2973712874565032271
+    second: Suen_ParvisOff_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1578
+        width: 263
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d29cd9544ec7470800000000000000
+      internalID: 8393834793162845553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 1578
+        width: 264
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 467270020d6087ba0800000000000000
+      internalID: -6091111005058291868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 1578
+        width: 273
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14284f18ace899e20800000000000000
+      internalID: 3357871997596238401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 1578
+        width: 292
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c217060d92c65a0800000000000000
+      internalID: -6526795785018725281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 1052
+        width: 292
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09a6fc053fd269220800000000000000
+      internalID: 2492229966852221584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 1053
+        width: 296
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df8500e3ea25f2240800000000000000
+      internalID: 4769121438726641917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 1053
+        width: 296
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a9ee7f82385b8790800000000000000
+      internalID: -7526825378040583775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 1053
+        width: 296
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95dd6dcb3dedafdd0800000000000000
+      internalID: -2451402046162150055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1
+        width: 265
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ddcfa1e592fe150800000000000000
+      internalID: 5903983120662453656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 527
+        width: 288
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ca9d0d9935d871d0800000000000000
+      internalID: -3352695479152567613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 527
+        width: 283
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7981fabe19f802f80800000000000000
+      internalID: -8133343070143965033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 527
+        width: 277
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3744329a9acc051e0800000000000000
+      internalID: -2211042387979713421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 1242
+        y: 527
+        width: 266
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 027a65596192b7d90800000000000000
+      internalID: -7099035210647951584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 0
+        width: 264
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f5f1d7f21b93760800000000000000
+      internalID: 7438171077099872076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 0
+        width: 264
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77f4e1a88d7632f80800000000000000
+      internalID: -8132542322373144713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 0
+        width: 264
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b6ab8f55ef3bb6d0800000000000000
+      internalID: -2973712874565032271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Suen_ParvisOff_Idle_0: 8393834793162845553
+      Suen_ParvisOff_Idle_1: -6091111005058291868
+      Suen_ParvisOff_Idle_10: -8133343070143965033
+      Suen_ParvisOff_Idle_11: -2211042387979713421
+      Suen_ParvisOff_Idle_12: -7099035210647951584
+      Suen_ParvisOff_Idle_13: 7438171077099872076
+      Suen_ParvisOff_Idle_14: -8132542322373144713
+      Suen_ParvisOff_Idle_15: -2973712874565032271
+      Suen_ParvisOff_Idle_2: 3357871997596238401
+      Suen_ParvisOff_Idle_3: -6526795785018725281
+      Suen_ParvisOff_Idle_4: 2492229966852221584
+      Suen_ParvisOff_Idle_5: 4769121438726641917
+      Suen_ParvisOff_Idle_6: -7526825378040583775
+      Suen_ParvisOff_Idle_7: -2451402046162150055
+      Suen_ParvisOff_Idle_8: 5903983120662453656
+      Suen_ParvisOff_Idle_9: -3352695479152567613
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

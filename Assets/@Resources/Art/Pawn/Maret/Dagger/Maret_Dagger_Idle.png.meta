@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 949349c399ed9cf4bb6ba0a5e97cff65
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6329214573937493222
+    second: Maret_Dagger_Idle_0
+  - first:
+      213: 9081270060434207040
+    second: Maret_Dagger_Idle_1
+  - first:
+      213: 7112255553742370862
+    second: Maret_Dagger_Idle_2
+  - first:
+      213: 5371631106225635080
+    second: Maret_Dagger_Idle_3
+  - first:
+      213: 496797534111730723
+    second: Maret_Dagger_Idle_4
+  - first:
+      213: -4963047841541438954
+    second: Maret_Dagger_Idle_5
+  - first:
+      213: -2430187631246366723
+    second: Maret_Dagger_Idle_6
+  - first:
+      213: -8470450735445131527
+    second: Maret_Dagger_Idle_7
+  - first:
+      213: 8203655192968945425
+    second: Maret_Dagger_Idle_8
+  - first:
+      213: 2638781498868179241
+    second: Maret_Dagger_Idle_9
+  - first:
+      213: 1352431376267707183
+    second: Maret_Dagger_Idle_10
+  - first:
+      213: 5196331332842368017
+    second: Maret_Dagger_Idle_11
+  - first:
+      213: -8505869952600188070
+    second: Maret_Dagger_Idle_12
+  - first:
+      213: -811606526345106338
+    second: Maret_Dagger_Idle_13
+  - first:
+      213: 1800014732054790787
+    second: Maret_Dagger_Idle_14
+  - first:
+      213: 171614362487135910
+    second: Maret_Dagger_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1548
+        width: 342
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1bfa3de0ec1a28a0800000000000000
+      internalID: -6329214573937493222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 1548
+        width: 343
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 041329d5107270e70800000000000000
+      internalID: 9081270060434207040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 1548
+        width: 343
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e28fc986ebec3b260800000000000000
+      internalID: 7112255553742370862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 1548
+        width: 345
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f740fe70edb8a40800000000000000
+      internalID: 5371631106225635080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1032
+        width: 345
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32c0502a9baf4e600800000000000000
+      internalID: 496797534111730723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 1032
+        width: 346
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61247a19846bf1bb0800000000000000
+      internalID: -4963047841541438954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1032
+        width: 347
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df7230e993d364ed0800000000000000
+      internalID: -2430187631246366723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 1032
+        width: 348
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9feb85a3fe9e27a80800000000000000
+      internalID: -8470450735445131527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 516
+        width: 348
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11fd3b4eeec39d170800000000000000
+      internalID: 8203655192968945425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 516
+        width: 348
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92129e7dac5de9420800000000000000
+      internalID: 2638781498868179241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 516
+        width: 348
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f238785db2dc4c210800000000000000
+      internalID: 1352431376267707183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 517
+        width: 348
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11c2d4dd0d31d1840800000000000000
+      internalID: 5196331332842368017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1
+        width: 346
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5bd899185415f980800000000000000
+      internalID: -8505869952600188070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 1
+        width: 345
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5cafc31a289cb4f0800000000000000
+      internalID: -811606526345106338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1
+        width: 345
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3828896acdfeaf810800000000000000
+      internalID: 1800014732054790787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_Dagger_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 0
+        width: 342
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ae966a7a52b16200800000000000000
+      internalID: 171614362487135910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Maret_Dagger_Idle_0: -6329214573937493222
+      Maret_Dagger_Idle_1: 9081270060434207040
+      Maret_Dagger_Idle_10: 1352431376267707183
+      Maret_Dagger_Idle_11: 5196331332842368017
+      Maret_Dagger_Idle_12: -8505869952600188070
+      Maret_Dagger_Idle_13: -811606526345106338
+      Maret_Dagger_Idle_14: 1800014732054790787
+      Maret_Dagger_Idle_15: 171614362487135910
+      Maret_Dagger_Idle_2: 7112255553742370862
+      Maret_Dagger_Idle_3: 5371631106225635080
+      Maret_Dagger_Idle_4: 496797534111730723
+      Maret_Dagger_Idle_5: -4963047841541438954
+      Maret_Dagger_Idle_6: -2430187631246366723
+      Maret_Dagger_Idle_7: -8470450735445131527
+      Maret_Dagger_Idle_8: 8203655192968945425
+      Maret_Dagger_Idle_9: 2638781498868179241
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

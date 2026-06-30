@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 0638d192c0332684486f68b9131881cc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6595678289374534459
+    second: Sera_Necro_Idle_0
+  - first:
+      213: -3926882312826135441
+    second: Sera_Necro_Idle_1
+  - first:
+      213: -5981770979861142398
+    second: Sera_Necro_Idle_2
+  - first:
+      213: -5501267012122554552
+    second: Sera_Necro_Idle_3
+  - first:
+      213: -8152266739705330270
+    second: Sera_Necro_Idle_4
+  - first:
+      213: -4768169846773670002
+    second: Sera_Necro_Idle_5
+  - first:
+      213: 7600360741164378836
+    second: Sera_Necro_Idle_6
+  - first:
+      213: -115669183220341613
+    second: Sera_Necro_Idle_7
+  - first:
+      213: 5797816260674861975
+    second: Sera_Necro_Idle_8
+  - first:
+      213: 7323831342513901365
+    second: Sera_Necro_Idle_9
+  - first:
+      213: -2809277651745490219
+    second: Sera_Necro_Idle_10
+  - first:
+      213: 4538116098850340468
+    second: Sera_Necro_Idle_11
+  - first:
+      213: -395569132431043623
+    second: Sera_Necro_Idle_12
+  - first:
+      213: -8758332477274240820
+    second: Sera_Necro_Idle_13
+  - first:
+      213: 4193597267062322376
+    second: Sera_Necro_Idle_14
+  - first:
+      213: -5108058497434135691
+    second: Sera_Necro_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1579
+        width: 266
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4231d8a817774a0800000000000000
+      internalID: -6595678289374534459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 1578
+        width: 259
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6cdb3d8759e089c0800000000000000
+      internalID: -3926882312826135441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 1578
+        width: 255
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 284e2a19cfa7cfca0800000000000000
+      internalID: -5981770979861142398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 1578
+        width: 253
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84f4cd7acc297a3b0800000000000000
+      internalID: -5501267012122554552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1052
+        width: 253
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a5c1a1c7945dde80800000000000000
+      internalID: -8152266739705330270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1052
+        width: 251
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f935689ce04ddb0800000000000000
+      internalID: -4768169846773670002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 527
+        width: 258
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4da6ded53d7e97960800000000000000
+      internalID: 7600360741164378836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 1052
+        width: 251
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39421be9d7f056ef0800000000000000
+      internalID: -115669183220341613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 527
+        width: 261
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79b3282cb2bf57050800000000000000
+      internalID: 5797816260674861975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 1052
+        width: 252
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fc96d7dc973a560800000000000000
+      internalID: 7323831342513901365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 527
+        width: 254
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5da34442cd07309d0800000000000000
+      internalID: -2809277651745490219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 527
+        width: 256
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47eb4754c80aafe30800000000000000
+      internalID: 4538116098850340468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1
+        width: 263
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d3965948f7a28af0800000000000000
+      internalID: -395569132431043623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1
+        width: 265
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc84d4bf307247680800000000000000
+      internalID: -8758332477274240820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 1
+        width: 266
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c47c4aee76a23a30800000000000000
+      internalID: 4193597267062322376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 1
+        width: 266
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 573d5883cd78c19b0800000000000000
+      internalID: -5108058497434135691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sera_Necro_Idle_0: -6595678289374534459
+      Sera_Necro_Idle_1: -3926882312826135441
+      Sera_Necro_Idle_10: -2809277651745490219
+      Sera_Necro_Idle_11: 4538116098850340468
+      Sera_Necro_Idle_12: -395569132431043623
+      Sera_Necro_Idle_13: -8758332477274240820
+      Sera_Necro_Idle_14: 4193597267062322376
+      Sera_Necro_Idle_15: -5108058497434135691
+      Sera_Necro_Idle_2: -5981770979861142398
+      Sera_Necro_Idle_3: -5501267012122554552
+      Sera_Necro_Idle_4: -8152266739705330270
+      Sera_Necro_Idle_5: -4768169846773670002
+      Sera_Necro_Idle_6: 7600360741164378836
+      Sera_Necro_Idle_7: -115669183220341613
+      Sera_Necro_Idle_8: 5797816260674861975
+      Sera_Necro_Idle_9: 7323831342513901365
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

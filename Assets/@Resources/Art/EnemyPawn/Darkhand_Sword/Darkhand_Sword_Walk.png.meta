@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 9554dc2b819e797478faa1cc0589582a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8886712348687297608
+    second: Darkhand_Sword_Walk_0
+  - first:
+      213: 7010742025296360097
+    second: Darkhand_Sword_Walk_1
+  - first:
+      213: 4520862273547284955
+    second: Darkhand_Sword_Walk_2
+  - first:
+      213: 8560847473996071823
+    second: Darkhand_Sword_Walk_3
+  - first:
+      213: 9031303714493308563
+    second: Darkhand_Sword_Walk_4
+  - first:
+      213: 3880883051769269842
+    second: Darkhand_Sword_Walk_5
+  - first:
+      213: 2980831762997158737
+    second: Darkhand_Sword_Walk_6
+  - first:
+      213: -880786982183698047
+    second: Darkhand_Sword_Walk_7
+  - first:
+      213: 8594046698296734475
+    second: Darkhand_Sword_Walk_8
+  - first:
+      213: -5680595515750464212
+    second: Darkhand_Sword_Walk_9
+  - first:
+      213: 91263467994164195
+    second: Darkhand_Sword_Walk_10
+  - first:
+      213: -7998152072816799950
+    second: Darkhand_Sword_Walk_11
+  - first:
+      213: -238726622652586173
+    second: Darkhand_Sword_Walk_12
+  - first:
+      213: 271095223225036041
+    second: Darkhand_Sword_Walk_13
+  - first:
+      213: -2704807775349043334
+    second: Darkhand_Sword_Walk_14
+  - first:
+      213: -8082755525510713104
+    second: Darkhand_Sword_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 2369
+        width: 405
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84c659c1cc1f35b70800000000000000
+      internalID: 8886712348687297608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 2364
+        width: 393
+        height: 756
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a231bd3ab82b4160800000000000000
+      internalID: 7010742025296360097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 2366
+        width: 389
+        height: 757
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd1304509445dbe30800000000000000
+      internalID: 4520862273547284955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 2371
+        width: 379
+        height: 759
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8306d79b6d3ec670800000000000000
+      internalID: 8560847473996071823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1591
+        width: 374
+        height: 760
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39e1a01e0e2a55d70800000000000000
+      internalID: 9031303714493308563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 1590
+        width: 369
+        height: 762
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25e8a83e29aabd530800000000000000
+      internalID: 3880883051769269842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 1592
+        width: 365
+        height: 757
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 153a5a002ba0e5920800000000000000
+      internalID: 2980831762997158737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 1587
+        width: 405
+        height: 751
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 181072408e0d6c3f0800000000000000
+      internalID: -880786982183698047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 800
+        width: 411
+        height: 751
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b03781b50ff244770800000000000000
+      internalID: 8594046698296734475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 797
+        width: 410
+        height: 756
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c25440bb9787a21b0800000000000000
+      internalID: -5680595515750464212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 803
+        width: 387
+        height: 757
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eb23cef3ab344100800000000000000
+      internalID: 91263467994164195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 808
+        width: 381
+        height: 757
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23f4338d01bd00190800000000000000
+      internalID: -7998152072816799950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 26
+        width: 388
+        height: 756
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3472d5ac66fdfacf0800000000000000
+      internalID: -238726622652586173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 19
+        width: 398
+        height: 763
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90d22a05baf13c300800000000000000
+      internalID: 271095223225036041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 21
+        width: 402
+        height: 758
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f0b94b8a7967ad0800000000000000
+      internalID: -2704807775349043334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 17
+        width: 405
+        height: 751
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f0bb9f7ca844df80800000000000000
+      internalID: -8082755525510713104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Darkhand_Sword_Walk_0: 8886712348687297608
+      Darkhand_Sword_Walk_1: 7010742025296360097
+      Darkhand_Sword_Walk_10: 91263467994164195
+      Darkhand_Sword_Walk_11: -7998152072816799950
+      Darkhand_Sword_Walk_12: -238726622652586173
+      Darkhand_Sword_Walk_13: 271095223225036041
+      Darkhand_Sword_Walk_14: -2704807775349043334
+      Darkhand_Sword_Walk_15: -8082755525510713104
+      Darkhand_Sword_Walk_2: 4520862273547284955
+      Darkhand_Sword_Walk_3: 8560847473996071823
+      Darkhand_Sword_Walk_4: 9031303714493308563
+      Darkhand_Sword_Walk_5: 3880883051769269842
+      Darkhand_Sword_Walk_6: 2980831762997158737
+      Darkhand_Sword_Walk_7: -880786982183698047
+      Darkhand_Sword_Walk_8: 8594046698296734475
+      Darkhand_Sword_Walk_9: -5680595515750464212
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

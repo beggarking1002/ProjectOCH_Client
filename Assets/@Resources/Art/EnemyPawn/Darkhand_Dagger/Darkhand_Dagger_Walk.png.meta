@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 7be7b5a8d979df840b003fd49c09ab57
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8527966585086236305
+    second: Darkhand_Dagger_Walk_0
+  - first:
+      213: 8973790780447375432
+    second: Darkhand_Dagger_Walk_1
+  - first:
+      213: -6575932461305776
+    second: Darkhand_Dagger_Walk_2
+  - first:
+      213: -8125181415802271370
+    second: Darkhand_Dagger_Walk_3
+  - first:
+      213: 7605487195168737624
+    second: Darkhand_Dagger_Walk_4
+  - first:
+      213: -803498455913691499
+    second: Darkhand_Dagger_Walk_5
+  - first:
+      213: -4396180972451674018
+    second: Darkhand_Dagger_Walk_6
+  - first:
+      213: 741263396249745854
+    second: Darkhand_Dagger_Walk_7
+  - first:
+      213: -8042806114353797767
+    second: Darkhand_Dagger_Walk_8
+  - first:
+      213: 7294555212899787316
+    second: Darkhand_Dagger_Walk_9
+  - first:
+      213: 8610570513589376354
+    second: Darkhand_Dagger_Walk_10
+  - first:
+      213: -6418621412176984303
+    second: Darkhand_Dagger_Walk_11
+  - first:
+      213: 9034012409150741236
+    second: Darkhand_Dagger_Walk_12
+  - first:
+      213: 9122651243917639738
+    second: Darkhand_Dagger_Walk_13
+  - first:
+      213: -2839451023975912493
+    second: Darkhand_Dagger_Walk_14
+  - first:
+      213: -5081890427319130545
+    second: Darkhand_Dagger_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 2157
+        width: 436
+        height: 685
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f69a88fe29396a980800000000000000
+      internalID: -8527966585086236305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 2156
+        width: 417
+        height: 685
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 840cd3d6b2f498c70800000000000000
+      internalID: 8973790780447375432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 2155
+        width: 397
+        height: 687
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 050b3996933a8eff0800000000000000
+      internalID: -6575932461305776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1468
+        y: 2155
+        width: 368
+        height: 696
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67900872d8e8d3f80800000000000000
+      internalID: -8125181415802271370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 1441
+        width: 344
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85980d3fe4e1c8960800000000000000
+      internalID: 7605487195168737624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 1441
+        width: 335
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59680b5596669d4f0800000000000000
+      internalID: -803498455913691499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 1444
+        width: 375
+        height: 691
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e58cfa092b0adf2c0800000000000000
+      internalID: -4396180972451674018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 1449
+        width: 405
+        height: 680
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb9377aa12f794a00800000000000000
+      internalID: 741263396249745854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 731
+        width: 385
+        height: 681
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9752a9c9376326090800000000000000
+      internalID: -8042806114353797767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 729
+        width: 369
+        height: 683
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 432ad5361577b3560800000000000000
+      internalID: 7294555212899787316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 729
+        width: 332
+        height: 686
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26592f7e244ee7770800000000000000
+      internalID: 8610570513589376354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 730
+        width: 285
+        height: 694
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 117897b35d97ce6a0800000000000000
+      internalID: -6418621412176984303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 5
+        width: 331
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fa96effb624f5d70800000000000000
+      internalID: 9034012409150741236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 5
+        width: 366
+        height: 705
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a308c73f8fa2a9e70800000000000000
+      internalID: 9122651243917639738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 14
+        width: 394
+        height: 693
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dbebc6765e3898d0800000000000000
+      internalID: -2839451023975912493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 16
+        width: 435
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f466f24d49f7979b0800000000000000
+      internalID: -5081890427319130545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Darkhand_Dagger_Walk_0: -8527966585086236305
+      Darkhand_Dagger_Walk_1: 8973790780447375432
+      Darkhand_Dagger_Walk_10: 8610570513589376354
+      Darkhand_Dagger_Walk_11: -6418621412176984303
+      Darkhand_Dagger_Walk_12: 9034012409150741236
+      Darkhand_Dagger_Walk_13: 9122651243917639738
+      Darkhand_Dagger_Walk_14: -2839451023975912493
+      Darkhand_Dagger_Walk_15: -5081890427319130545
+      Darkhand_Dagger_Walk_2: -6575932461305776
+      Darkhand_Dagger_Walk_3: -8125181415802271370
+      Darkhand_Dagger_Walk_4: 7605487195168737624
+      Darkhand_Dagger_Walk_5: -803498455913691499
+      Darkhand_Dagger_Walk_6: -4396180972451674018
+      Darkhand_Dagger_Walk_7: 741263396249745854
+      Darkhand_Dagger_Walk_8: -8042806114353797767
+      Darkhand_Dagger_Walk_9: 7294555212899787316
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

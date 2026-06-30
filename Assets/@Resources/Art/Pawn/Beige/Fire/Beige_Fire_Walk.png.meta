@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: 74ddf84ac17686247be6621330c4e374
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6490905492344183370
+    second: Beige_Fire_Walk_0
+  - first:
+      213: 2353351594649822199
+    second: Beige_Fire_Walk_1
+  - first:
+      213: -510881062540656301
+    second: Beige_Fire_Walk_2
+  - first:
+      213: -1354011629681618517
+    second: Beige_Fire_Walk_3
+  - first:
+      213: -4688232255944789371
+    second: Beige_Fire_Walk_4
+  - first:
+      213: 1543473177101074830
+    second: Beige_Fire_Walk_5
+  - first:
+      213: -931433184912213798
+    second: Beige_Fire_Walk_6
+  - first:
+      213: 5601676739106650031
+    second: Beige_Fire_Walk_7
+  - first:
+      213: -6298493503122910731
+    second: Beige_Fire_Walk_8
+  - first:
+      213: 7280238061651434262
+    second: Beige_Fire_Walk_9
+  - first:
+      213: 1821126166919044455
+    second: Beige_Fire_Walk_10
+  - first:
+      213: 465391318214054983
+    second: Beige_Fire_Walk_11
+  - first:
+      213: 5016667075872769256
+    second: Beige_Fire_Walk_12
+  - first:
+      213: -7787603826349129074
+    second: Beige_Fire_Walk_13
+  - first:
+      213: -883820078809479160
+    second: Beige_Fire_Walk_14
+  - first:
+      213: -5231327857064199374
+    second: Beige_Fire_Walk_15
+  - first:
+      213: -3734259472759439278
+    second: Beige_Fire_Walk_16
+  - first:
+      213: -6444759574744307626
+    second: Beige_Fire_Walk_17
+  - first:
+      213: -4367957867188004032
+    second: Beige_Fire_Walk_18
+  - first:
+      213: -6952894645251384162
+    second: Beige_Fire_Walk_19
+  - first:
+      213: 7707723849409453956
+    second: Beige_Fire_Walk_20
+  - first:
+      213: -2949882321687611703
+    second: Beige_Fire_Walk_21
+  - first:
+      213: 3954008285608561471
+    second: Beige_Fire_Walk_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 2472
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b5613258dbabe5a0800000000000000
+      internalID: -6490905492344183370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 1926
+        width: 323
+        height: 546
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f3a3b68ec8c8a020800000000000000
+      internalID: 2353351594649822199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1924
+        width: 303
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3514ac0616cf8e8f0800000000000000
+      internalID: -510881062540656301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1927
+        width: 313
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba1541fb895953de0800000000000000
+      internalID: -1354011629681618517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 1927
+        width: 322
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 582f1ef3a9d00feb0800000000000000
+      internalID: -4688232255944789371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1294
+        width: 284
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8104794da48b6510800000000000000
+      internalID: 1543473177101074830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 1877
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad8fb490472e213f0800000000000000
+      internalID: -931433184912213798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1293
+        width: 288
+        height: 567
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa73505b0572dbd40800000000000000
+      internalID: 5601676739106650031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 1295
+        width: 286
+        height: 574
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f1d04e97814798a0800000000000000
+      internalID: -6298493503122910731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 1295
+        width: 285
+        height: 568
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61b1309d1f9980560800000000000000
+      internalID: 7280238061651434262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 1247
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76dd06e9990f54910800000000000000
+      internalID: 1821126166919044455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 1250
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74413bb20f6657600800000000000000
+      internalID: 465391318214054983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 665
+        width: 285
+        height: 568
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e44bc54028ce9540800000000000000
+      internalID: 5016667075872769256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 667
+        width: 292
+        height: 572
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e82ccf6949fdce390800000000000000
+      internalID: -7787603826349129074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 667
+        width: 286
+        height: 579
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 808043d225a0cb3f0800000000000000
+      internalID: -883820078809479160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 664
+        width: 288
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b3510e7079667b0800000000000000
+      internalID: -5231327857064199374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_16
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 36
+        width: 289
+        height: 578
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25049036bce3d2cc0800000000000000
+      internalID: -3734259472759439278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_17
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 607
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6586194005d9f86a0800000000000000
+      internalID: -6444759574744307626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_18
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 607
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04bd2645675e163c0800000000000000
+      internalID: -4367957867188004032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_19
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 37
+        width: 291
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c531d782b528f90800000000000000
+      internalID: -6952894645251384162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_20
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 36
+        width: 294
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48f5bd6f00657fa60800000000000000
+      internalID: 7707723849409453956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_21
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 580
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c6fa9658a9ef07d0800000000000000
+      internalID: -2949882321687611703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Walk_22
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 38
+        width: 312
+        height: 539
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b46a626957fd630800000000000000
+      internalID: 3954008285608561471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Beige_Fire_Walk_0: -6490905492344183370
+      Beige_Fire_Walk_1: 2353351594649822199
+      Beige_Fire_Walk_10: 1821126166919044455
+      Beige_Fire_Walk_11: 465391318214054983
+      Beige_Fire_Walk_12: 5016667075872769256
+      Beige_Fire_Walk_13: -7787603826349129074
+      Beige_Fire_Walk_14: -883820078809479160
+      Beige_Fire_Walk_15: -5231327857064199374
+      Beige_Fire_Walk_16: -3734259472759439278
+      Beige_Fire_Walk_17: -6444759574744307626
+      Beige_Fire_Walk_18: -4367957867188004032
+      Beige_Fire_Walk_19: -6952894645251384162
+      Beige_Fire_Walk_2: -510881062540656301
+      Beige_Fire_Walk_20: 7707723849409453956
+      Beige_Fire_Walk_21: -2949882321687611703
+      Beige_Fire_Walk_22: 3954008285608561471
+      Beige_Fire_Walk_3: -1354011629681618517
+      Beige_Fire_Walk_4: -4688232255944789371
+      Beige_Fire_Walk_5: 1543473177101074830
+      Beige_Fire_Walk_6: -931433184912213798
+      Beige_Fire_Walk_7: 5601676739106650031
+      Beige_Fire_Walk_8: -6298493503122910731
+      Beige_Fire_Walk_9: 7280238061651434262
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

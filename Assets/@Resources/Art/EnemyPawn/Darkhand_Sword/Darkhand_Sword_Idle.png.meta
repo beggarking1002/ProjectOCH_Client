@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: dc9b4b6a7d67e4d4ebc1065664ac4496
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6501155222346049861
+    second: Darkhand_Sword_Idle_0
+  - first:
+      213: -2688841057469243620
+    second: Darkhand_Sword_Idle_1
+  - first:
+      213: 2527021421171750906
+    second: Darkhand_Sword_Idle_2
+  - first:
+      213: -7987641087915930827
+    second: Darkhand_Sword_Idle_3
+  - first:
+      213: 1242032690941706589
+    second: Darkhand_Sword_Idle_4
+  - first:
+      213: -1358256283094413076
+    second: Darkhand_Sword_Idle_5
+  - first:
+      213: 4519609429935222667
+    second: Darkhand_Sword_Idle_6
+  - first:
+      213: -4009411242206499448
+    second: Darkhand_Sword_Idle_7
+  - first:
+      213: 7214192827626889734
+    second: Darkhand_Sword_Idle_8
+  - first:
+      213: -7364990366234883646
+    second: Darkhand_Sword_Idle_9
+  - first:
+      213: -3202612383446985513
+    second: Darkhand_Sword_Idle_10
+  - first:
+      213: -7830984447806201724
+    second: Darkhand_Sword_Idle_11
+  - first:
+      213: -3484910115740631257
+    second: Darkhand_Sword_Idle_12
+  - first:
+      213: -257472876754552806
+    second: Darkhand_Sword_Idle_13
+  - first:
+      213: 72791903370878325
+    second: Darkhand_Sword_Idle_14
+  - first:
+      213: 7168146644146451033
+    second: Darkhand_Sword_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 2160
+        width: 372
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6536615c147c5a0800000000000000
+      internalID: -6501155222346049861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 2160
+        width: 373
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1f5f08ed415faad0800000000000000
+      internalID: -2688841057469243620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 2161
+        width: 377
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af7beb40898c11320800000000000000
+      internalID: 2527021421171750906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 2161
+        width: 380
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53bc47930c2362190800000000000000
+      internalID: -7987641087915930827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1443
+        width: 384
+        height: 712
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d51c00fd6269c3110800000000000000
+      internalID: 1242032690941706589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 1443
+        width: 386
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce0173c5b11862de0800000000000000
+      internalID: -1358256283094413076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 1443
+        width: 391
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8f6bc2a4d0e8be30800000000000000
+      internalID: 4519609429935222667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 1443
+        width: 392
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88de2ddc7b5bb58c0800000000000000
+      internalID: -4009411242206499448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 725
+        width: 392
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6022fdf7726fd1460800000000000000
+      internalID: 7214192827626889734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 725
+        width: 392
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c94566884c4ac990800000000000000
+      internalID: -7364990366234883646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 725
+        width: 390
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d4106361090e83d0800000000000000
+      internalID: -3202612383446985513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 725
+        width: 387
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48027e29221c25390800000000000000
+      internalID: -7830984447806201724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 7
+        width: 384
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f3d1da6bc13afc0800000000000000
+      internalID: -3484910115740631257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 7
+        width: 383
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a183fb168c54d6cf0800000000000000
+      internalID: -257472876754552806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 7
+        width: 378
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57d12f6b9db920100800000000000000
+      internalID: 72791903370878325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Sword_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1213
+        y: 7
+        width: 372
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 952f146f46f5a7360800000000000000
+      internalID: 7168146644146451033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Darkhand_Sword_Idle_0: -6501155222346049861
+      Darkhand_Sword_Idle_1: -2688841057469243620
+      Darkhand_Sword_Idle_10: -3202612383446985513
+      Darkhand_Sword_Idle_11: -7830984447806201724
+      Darkhand_Sword_Idle_12: -3484910115740631257
+      Darkhand_Sword_Idle_13: -257472876754552806
+      Darkhand_Sword_Idle_14: 72791903370878325
+      Darkhand_Sword_Idle_15: 7168146644146451033
+      Darkhand_Sword_Idle_2: 2527021421171750906
+      Darkhand_Sword_Idle_3: -7987641087915930827
+      Darkhand_Sword_Idle_4: 1242032690941706589
+      Darkhand_Sword_Idle_5: -1358256283094413076
+      Darkhand_Sword_Idle_6: 4519609429935222667
+      Darkhand_Sword_Idle_7: -4009411242206499448
+      Darkhand_Sword_Idle_8: 7214192827626889734
+      Darkhand_Sword_Idle_9: -7364990366234883646
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

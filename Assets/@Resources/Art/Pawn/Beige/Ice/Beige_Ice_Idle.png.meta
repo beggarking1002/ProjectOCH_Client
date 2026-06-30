@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: 26f85551c0509b841a91c20e113f17e6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3433976319310114689
+    second: Beige_Ice_Idle_0
+  - first:
+      213: 3689757582447305547
+    second: Beige_Ice_Idle_1
+  - first:
+      213: 1151801207658467124
+    second: Beige_Ice_Idle_2
+  - first:
+      213: 3191692994153790006
+    second: Beige_Ice_Idle_3
+  - first:
+      213: -7781637400211339923
+    second: Beige_Ice_Idle_4
+  - first:
+      213: -3149618079236374437
+    second: Beige_Ice_Idle_5
+  - first:
+      213: 2071447215527406055
+    second: Beige_Ice_Idle_6
+  - first:
+      213: -988142104329772276
+    second: Beige_Ice_Idle_7
+  - first:
+      213: -7906140415243861644
+    second: Beige_Ice_Idle_8
+  - first:
+      213: -6489402520586277833
+    second: Beige_Ice_Idle_9
+  - first:
+      213: 578133552387648534
+    second: Beige_Ice_Idle_10
+  - first:
+      213: 6030881817060363627
+    second: Beige_Ice_Idle_11
+  - first:
+      213: 1361312944248852700
+    second: Beige_Ice_Idle_12
+  - first:
+      213: -1044990133128810795
+    second: Beige_Ice_Idle_13
+  - first:
+      213: -1120153074617225388
+    second: Beige_Ice_Idle_14
+  - first:
+      213: 9035105662516382316
+    second: Beige_Ice_Idle_15
+  - first:
+      213: 8638989708074572323
+    second: Beige_Ice_Idle_16
+  - first:
+      213: -1743298488585736510
+    second: Beige_Ice_Idle_17
+  - first:
+      213: -6505441262091071052
+    second: Beige_Ice_Idle_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 2136
+        width: 337
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70da684bb01850d0800000000000000
+      internalID: -3433976319310114689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 2136
+        width: 338
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b436319d8f6a43330800000000000000
+      internalID: 3689757582447305547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 2136
+        width: 339
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43f495a88150cff00800000000000000
+      internalID: 1151801207658467124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 2136
+        width: 343
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63ab3ac2edb2b4c20800000000000000
+      internalID: 3191692994153790006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1424
+        width: 344
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d65428d6302120490800000000000000
+      internalID: -7781637400211339923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1424
+        width: 344
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b50c7f85b0f4a44d0800000000000000
+      internalID: -3149618079236374437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 713
+        width: 340
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e9ab7c74424fbc10800000000000000
+      internalID: 2071447215527406055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1424
+        width: 345
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0321d3ddf96942f0800000000000000
+      internalID: -988142104329772276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 713
+        width: 339
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 471c70d4e2fb74290800000000000000
+      internalID: -7906140415243861644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 1424
+        width: 345
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73c2ee33ac201f5a0800000000000000
+      internalID: -6489402520586277833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 713
+        width: 345
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61cecce1761f50800800000000000000
+      internalID: 578133552387648534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 713
+        width: 342
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6dce344f0ff1b350800000000000000
+      internalID: 6030881817060363627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1
+        width: 333
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd0181609ea54e210800000000000000
+      internalID: 1361312944248852700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 627
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dea111b2037f71f0800000000000000
+      internalID: -1044990133128810795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 1
+        width: 333
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45fe065a6ba6470f0800000000000000
+      internalID: -1120153074617225388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 627
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ac862eab4236d70800000000000000
+      internalID: 9035105662516382316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_16
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 1
+        width: 332
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32a5a004e5bd3e770800000000000000
+      internalID: 8638989708074572323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_17
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 627
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ce2f52d24f8ec7e0800000000000000
+      internalID: -1743298488585736510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Idle_18
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 1
+        width: 336
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b194e1b3a708b5a0800000000000000
+      internalID: -6505441262091071052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Beige_Ice_Idle_0: -3433976319310114689
+      Beige_Ice_Idle_1: 3689757582447305547
+      Beige_Ice_Idle_10: 578133552387648534
+      Beige_Ice_Idle_11: 6030881817060363627
+      Beige_Ice_Idle_12: 1361312944248852700
+      Beige_Ice_Idle_13: -1044990133128810795
+      Beige_Ice_Idle_14: -1120153074617225388
+      Beige_Ice_Idle_15: 9035105662516382316
+      Beige_Ice_Idle_16: 8638989708074572323
+      Beige_Ice_Idle_17: -1743298488585736510
+      Beige_Ice_Idle_18: -6505441262091071052
+      Beige_Ice_Idle_2: 1151801207658467124
+      Beige_Ice_Idle_3: 3191692994153790006
+      Beige_Ice_Idle_4: -7781637400211339923
+      Beige_Ice_Idle_5: -3149618079236374437
+      Beige_Ice_Idle_6: 2071447215527406055
+      Beige_Ice_Idle_7: -988142104329772276
+      Beige_Ice_Idle_8: -7906140415243861644
+      Beige_Ice_Idle_9: -6489402520586277833
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

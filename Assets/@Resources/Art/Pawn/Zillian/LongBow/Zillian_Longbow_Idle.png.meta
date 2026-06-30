@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: d96bfdede398a424c9bcb2bb5fdd7c61
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5979893866266074800
+    second: Zillian_Longbow_Idle_0
+  - first:
+      213: -2816433922543426250
+    second: Zillian_Longbow_Idle_1
+  - first:
+      213: 7765057325768396594
+    second: Zillian_Longbow_Idle_2
+  - first:
+      213: -4684885223893222420
+    second: Zillian_Longbow_Idle_3
+  - first:
+      213: 3746397773393225420
+    second: Zillian_Longbow_Idle_4
+  - first:
+      213: 599780926735712739
+    second: Zillian_Longbow_Idle_5
+  - first:
+      213: 7851130029805829550
+    second: Zillian_Longbow_Idle_6
+  - first:
+      213: -4688143498699972349
+    second: Zillian_Longbow_Idle_7
+  - first:
+      213: 4544232235271807891
+    second: Zillian_Longbow_Idle_8
+  - first:
+      213: -8407148660790956411
+    second: Zillian_Longbow_Idle_9
+  - first:
+      213: 4204360664044440714
+    second: Zillian_Longbow_Idle_10
+  - first:
+      213: 5622213399554674157
+    second: Zillian_Longbow_Idle_11
+  - first:
+      213: -158308492219407621
+    second: Zillian_Longbow_Idle_12
+  - first:
+      213: 1535114625139048711
+    second: Zillian_Longbow_Idle_13
+  - first:
+      213: 3192434921392682525
+    second: Zillian_Longbow_Idle_14
+  - first:
+      213: 8070039687426918015
+    second: Zillian_Longbow_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1560
+        width: 320
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0516ca22636230da0800000000000000
+      internalID: -5979893866266074800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1560
+        width: 322
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 635607105440ae8d0800000000000000
+      internalID: -2816433922543426250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 1560
+        width: 322
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23f48fa2f7603cb60800000000000000
+      internalID: 7765057325768396594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 1560
+        width: 322
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceb3e50e5b1fbfeb0800000000000000
+      internalID: -4684885223893222420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1040
+        width: 323
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc6ea66fce0edf330800000000000000
+      internalID: 3746397773393225420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1040
+        width: 324
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e103293399d25800800000000000000
+      internalID: 599780926735712739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 1040
+        width: 325
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead7aff3a21d4fc60800000000000000
+      internalID: 7851130029805829550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 1040
+        width: 325
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3016ee7a35e50feb0800000000000000
+      internalID: -4688143498699972349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 520
+        width: 324
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3936140442b501f30800000000000000
+      internalID: 4544232235271807891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 521
+        width: 322
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58e67a306dec35b80800000000000000
+      internalID: -8407148660790956411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 521
+        width: 321
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8c8eff8fb3e85a30800000000000000
+      internalID: 4204360664044440714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 521
+        width: 320
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dedc5e39c4d160e40800000000000000
+      internalID: 5622213399554674157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1
+        width: 320
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2a55cd3439dcdf0800000000000000
+      internalID: -158308492219407621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 1
+        width: 320
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7018be04e92dd4510800000000000000
+      internalID: 1535114625139048711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 1
+        width: 320
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d16b92295aecd4c20800000000000000
+      internalID: 3192434921392682525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Longbow_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 1
+        width: 320
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f76c26cb65a8eff60800000000000000
+      internalID: 8070039687426918015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Zillian_Longbow_Idle_0: -5979893866266074800
+      Zillian_Longbow_Idle_1: -2816433922543426250
+      Zillian_Longbow_Idle_10: 4204360664044440714
+      Zillian_Longbow_Idle_11: 5622213399554674157
+      Zillian_Longbow_Idle_12: -158308492219407621
+      Zillian_Longbow_Idle_13: 1535114625139048711
+      Zillian_Longbow_Idle_14: 3192434921392682525
+      Zillian_Longbow_Idle_15: 8070039687426918015
+      Zillian_Longbow_Idle_2: 7765057325768396594
+      Zillian_Longbow_Idle_3: -4684885223893222420
+      Zillian_Longbow_Idle_4: 3746397773393225420
+      Zillian_Longbow_Idle_5: 599780926735712739
+      Zillian_Longbow_Idle_6: 7851130029805829550
+      Zillian_Longbow_Idle_7: -4688143498699972349
+      Zillian_Longbow_Idle_8: 4544232235271807891
+      Zillian_Longbow_Idle_9: -8407148660790956411
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

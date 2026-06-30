@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 16aa23897e94f9740af231f5c7c1536c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5783742813440384663
+    second: Shaman_Walk_0
+  - first:
+      213: -7176687325887550324
+    second: Shaman_Walk_1
+  - first:
+      213: -461178378827370606
+    second: Shaman_Walk_2
+  - first:
+      213: -8480195322735951263
+    second: Shaman_Walk_3
+  - first:
+      213: -9106938612582376725
+    second: Shaman_Walk_4
+  - first:
+      213: 8671190858056728974
+    second: Shaman_Walk_5
+  - first:
+      213: 5162671266677798917
+    second: Shaman_Walk_6
+  - first:
+      213: 4107109672408335077
+    second: Shaman_Walk_7
+  - first:
+      213: -5404499957742439109
+    second: Shaman_Walk_8
+  - first:
+      213: -5525687391732246946
+    second: Shaman_Walk_9
+  - first:
+      213: -5936967135532988131
+    second: Shaman_Walk_10
+  - first:
+      213: -7714638136106573574
+    second: Shaman_Walk_11
+  - first:
+      213: -8903879237764930026
+    second: Shaman_Walk_12
+  - first:
+      213: 2883914374621855573
+    second: Shaman_Walk_13
+  - first:
+      213: 8575681013441901671
+    second: Shaman_Walk_14
+  - first:
+      213: -1868456141759201313
+    second: Shaman_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shaman_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1941
+        width: 499
+        height: 626
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79e155bf17bf34050800000000000000
+      internalID: 5783742813440384663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 1936
+        width: 496
+        height: 630
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8cac6c96e8476c90800000000000000
+      internalID: -7176687325887550324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 1932
+        width: 485
+        height: 634
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29f67e735b09999f0800000000000000
+      internalID: -461178378827370606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 1934
+        width: 452
+        height: 634
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1620562b84b405a80800000000000000
+      internalID: -8480195322735951263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 1292
+        width: 425
+        height: 634
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bea1dbd1597ad9180800000000000000
+      internalID: -9106938612582376725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1294
+        width: 406
+        height: 635
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e81061ab422465870800000000000000
+      internalID: 8671190858056728974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 1293
+        width: 400
+        height: 635
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 508327ef92e75a740800000000000000
+      internalID: 5162671266677798917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 1292
+        width: 397
+        height: 634
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e248759c726ff830800000000000000
+      internalID: 4107109672408335077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 648
+        width: 406
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b35f5263ceb5ff4b0800000000000000
+      internalID: -5404499957742439109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 649
+        width: 407
+        height: 631
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e56d1f3f790d053b0800000000000000
+      internalID: -5525687391732246946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 651
+        width: 407
+        height: 628
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d19436b78d7ab9da0800000000000000
+      internalID: -5936967135532988131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 652
+        width: 412
+        height: 627
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af0afa63d7910f490800000000000000
+      internalID: -7714638136106573574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 15
+        width: 447
+        height: 623
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 616ab0e02011f6480800000000000000
+      internalID: -8903879237764930026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 16
+        width: 467
+        height: 623
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55f7af518d8b50820800000000000000
+      internalID: 2883914374621855573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 15
+        width: 479
+        height: 623
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76434412270f20770800000000000000
+      internalID: 8575681013441901671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shaman_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1501
+        y: 10
+        width: 498
+        height: 625
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdfbb00e909e116e0800000000000000
+      internalID: -1868456141759201313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Shaman_Walk_0: 5783742813440384663
+      Shaman_Walk_1: -7176687325887550324
+      Shaman_Walk_10: -5936967135532988131
+      Shaman_Walk_11: -7714638136106573574
+      Shaman_Walk_12: -8903879237764930026
+      Shaman_Walk_13: 2883914374621855573
+      Shaman_Walk_14: 8575681013441901671
+      Shaman_Walk_15: -1868456141759201313
+      Shaman_Walk_2: -461178378827370606
+      Shaman_Walk_3: -8480195322735951263
+      Shaman_Walk_4: -9106938612582376725
+      Shaman_Walk_5: 8671190858056728974
+      Shaman_Walk_6: 5162671266677798917
+      Shaman_Walk_7: 4107109672408335077
+      Shaman_Walk_8: -5404499957742439109
+      Shaman_Walk_9: -5525687391732246946
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 031d8780a406b4b4bac3e13fe184fb63
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2623357882253849136
+    second: Arno_Sword_Idle_0
+  - first:
+      213: 8674062292445463334
+    second: Arno_Sword_Idle_1
+  - first:
+      213: -337125746499941589
+    second: Arno_Sword_Idle_2
+  - first:
+      213: -1632319643786606788
+    second: Arno_Sword_Idle_3
+  - first:
+      213: 7146764089799579874
+    second: Arno_Sword_Idle_4
+  - first:
+      213: -7684850612546399324
+    second: Arno_Sword_Idle_5
+  - first:
+      213: 9084619359428561065
+    second: Arno_Sword_Idle_6
+  - first:
+      213: -4099934678594448178
+    second: Arno_Sword_Idle_7
+  - first:
+      213: 4060791451424856229
+    second: Arno_Sword_Idle_8
+  - first:
+      213: 8909599707049033739
+    second: Arno_Sword_Idle_9
+  - first:
+      213: 3390539300080698406
+    second: Arno_Sword_Idle_10
+  - first:
+      213: -335591277575117090
+    second: Arno_Sword_Idle_11
+  - first:
+      213: 8499381868903951388
+    second: Arno_Sword_Idle_12
+  - first:
+      213: -2144619108201994661
+    second: Arno_Sword_Idle_13
+  - first:
+      213: -5298602277482895117
+    second: Arno_Sword_Idle_14
+  - first:
+      213: 3714607742480657558
+    second: Arno_Sword_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1566
+        width: 312
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0323672481a086420800000000000000
+      internalID: 2623357882253849136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 1566
+        width: 310
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62382d4a2b5706870800000000000000
+      internalID: 8674062292445463334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 1566
+        width: 307
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2b8b337be9425bf0800000000000000
+      internalID: -337125746499941589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 1566
+        width: 305
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c370530bee5d859e0800000000000000
+      internalID: -1632319643786606788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1044
+        width: 299
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e8950213186e2360800000000000000
+      internalID: 7146764089799579874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 1044
+        width: 297
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a39a3f751de95590800000000000000
+      internalID: -7684850612546399324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1044
+        width: 295
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a8406ecc2d031e70800000000000000
+      internalID: 9084619359428561065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1044
+        width: 293
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec49218d12b1a17c0800000000000000
+      internalID: -4099934678594448178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 522
+        width: 292
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a81f116f44da5830800000000000000
+      internalID: 4060791451424856229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 522
+        width: 294
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b00059d7ab145ab70800000000000000
+      internalID: 8909599707049033739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 522
+        width: 296
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 624cf42978d9d0f20800000000000000
+      internalID: 3390539300080698406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 522
+        width: 299
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed66a66d28db75bf0800000000000000
+      internalID: -335591277575117090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1
+        width: 301
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1c6a6237ced3f570800000000000000
+      internalID: 8499381868903951388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 1
+        width: 303
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b56ea15a848cc32e0800000000000000
+      internalID: -2144619108201994661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 1
+        width: 306
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f86e844d459776b0800000000000000
+      internalID: -5298602277482895117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Sword_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 1
+        width: 312
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69ca97a9f00fc8330800000000000000
+      internalID: 3714607742480657558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Arno_Sword_Idle_0: 2623357882253849136
+      Arno_Sword_Idle_1: 8674062292445463334
+      Arno_Sword_Idle_10: 3390539300080698406
+      Arno_Sword_Idle_11: -335591277575117090
+      Arno_Sword_Idle_12: 8499381868903951388
+      Arno_Sword_Idle_13: -2144619108201994661
+      Arno_Sword_Idle_14: -5298602277482895117
+      Arno_Sword_Idle_15: 3714607742480657558
+      Arno_Sword_Idle_2: -337125746499941589
+      Arno_Sword_Idle_3: -1632319643786606788
+      Arno_Sword_Idle_4: 7146764089799579874
+      Arno_Sword_Idle_5: -7684850612546399324
+      Arno_Sword_Idle_6: 9084619359428561065
+      Arno_Sword_Idle_7: -4099934678594448178
+      Arno_Sword_Idle_8: 4060791451424856229
+      Arno_Sword_Idle_9: 8909599707049033739
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

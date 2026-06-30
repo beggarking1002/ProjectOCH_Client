@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 37c922b5a95849f41b2ad6ab25c761a5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4890807199604157724
+    second: Darkhand_Bow_Walk_0
+  - first:
+      213: -2029354369240662176
+    second: Darkhand_Bow_Walk_1
+  - first:
+      213: 8663149326984412675
+    second: Darkhand_Bow_Walk_2
+  - first:
+      213: -3584664885114459341
+    second: Darkhand_Bow_Walk_3
+  - first:
+      213: 1226492706085400247
+    second: Darkhand_Bow_Walk_4
+  - first:
+      213: 4125097358995973247
+    second: Darkhand_Bow_Walk_5
+  - first:
+      213: -6013516304569447709
+    second: Darkhand_Bow_Walk_6
+  - first:
+      213: 300330637367894075
+    second: Darkhand_Bow_Walk_7
+  - first:
+      213: -7966147484149511500
+    second: Darkhand_Bow_Walk_8
+  - first:
+      213: 3096050833043782011
+    second: Darkhand_Bow_Walk_9
+  - first:
+      213: -8119337166506909839
+    second: Darkhand_Bow_Walk_10
+  - first:
+      213: 7453497272823306090
+    second: Darkhand_Bow_Walk_11
+  - first:
+      213: 6677913905470902657
+    second: Darkhand_Bow_Walk_12
+  - first:
+      213: -318677186700237191
+    second: Darkhand_Bow_Walk_13
+  - first:
+      213: 3447369219006191700
+    second: Darkhand_Bow_Walk_14
+  - first:
+      213: -7659369017653137887
+    second: Darkhand_Bow_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 1940
+        width: 492
+        height: 629
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e2dbaab3cc502cb0800000000000000
+      internalID: -4890807199604157724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 1941
+        width: 487
+        height: 629
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06ff50204f846d3e0800000000000000
+      internalID: -2029354369240662176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1936
+        width: 480
+        height: 636
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30ef11fd960b93870800000000000000
+      internalID: 8663149326984412675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 1935
+        width: 464
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33bafe38746b04ec0800000000000000
+      internalID: -3584664885114459341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1291
+        width: 453
+        height: 641
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bee3d13e90650110800000000000000
+      internalID: 1226492706085400247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 1291
+        width: 448
+        height: 639
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f746bda313a4f3930800000000000000
+      internalID: 4125097358995973247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 1294
+        width: 437
+        height: 630
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ea4e1f28c2bb8ca0800000000000000
+      internalID: -6013516304569447709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 1295
+        width: 435
+        height: 628
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b30ea7b9f1dfa2400800000000000000
+      internalID: 300330637367894075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 652
+        width: 443
+        height: 627
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ba85e2d11f827190800000000000000
+      internalID: -7966147484149511500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 653
+        width: 465
+        height: 628
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b79702e34d167fa20800000000000000
+      internalID: 3096050833043782011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 649
+        width: 498
+        height: 638
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17f9aba7dd1525f80800000000000000
+      internalID: -8119337166506909839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1616
+        y: 648
+        width: 505
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a67d9f08744207760800000000000000
+      internalID: 7453497272823306090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 511
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1811c30e057bcac50800000000000000
+      internalID: 6677913905470902657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 4
+        width: 511
+        height: 636
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97626b089c4d39bf0800000000000000
+      internalID: -318677186700237191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 6
+        width: 505
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 458da7c2a0487df20800000000000000
+      internalID: 3447369219006191700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 9
+        width: 493
+        height: 627
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12ee623a57474b590800000000000000
+      internalID: -7659369017653137887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Darkhand_Bow_Walk_0: -4890807199604157724
+      Darkhand_Bow_Walk_1: -2029354369240662176
+      Darkhand_Bow_Walk_10: -8119337166506909839
+      Darkhand_Bow_Walk_11: 7453497272823306090
+      Darkhand_Bow_Walk_12: 6677913905470902657
+      Darkhand_Bow_Walk_13: -318677186700237191
+      Darkhand_Bow_Walk_14: 3447369219006191700
+      Darkhand_Bow_Walk_15: -7659369017653137887
+      Darkhand_Bow_Walk_2: 8663149326984412675
+      Darkhand_Bow_Walk_3: -3584664885114459341
+      Darkhand_Bow_Walk_4: 1226492706085400247
+      Darkhand_Bow_Walk_5: 4125097358995973247
+      Darkhand_Bow_Walk_6: -6013516304569447709
+      Darkhand_Bow_Walk_7: 300330637367894075
+      Darkhand_Bow_Walk_8: -7966147484149511500
+      Darkhand_Bow_Walk_9: 3096050833043782011
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 252f0d21eea9aa347a8fec95339051e9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 636238451410140588
+    second: Zillian_Mace_idle_0
+  - first:
+      213: -4335573228246439976
+    second: Zillian_Mace_idle_1
+  - first:
+      213: -7690186503354971036
+    second: Zillian_Mace_idle_2
+  - first:
+      213: 1176418135801262436
+    second: Zillian_Mace_idle_3
+  - first:
+      213: -3050606041863689967
+    second: Zillian_Mace_idle_4
+  - first:
+      213: -7645840576285246754
+    second: Zillian_Mace_idle_5
+  - first:
+      213: -410642841392704113
+    second: Zillian_Mace_idle_6
+  - first:
+      213: -5216280510711081622
+    second: Zillian_Mace_idle_7
+  - first:
+      213: 1251922301996089035
+    second: Zillian_Mace_idle_8
+  - first:
+      213: 8460524972279194011
+    second: Zillian_Mace_idle_9
+  - first:
+      213: -1566332191240320058
+    second: Zillian_Mace_idle_10
+  - first:
+      213: -9177820487432058371
+    second: Zillian_Mace_idle_11
+  - first:
+      213: -4880663670878778696
+    second: Zillian_Mace_idle_12
+  - first:
+      213: -270384274277479431
+    second: Zillian_Mace_idle_13
+  - first:
+      213: 6418176004496766771
+    second: Zillian_Mace_idle_14
+  - first:
+      213: -5475313109705390612
+    second: Zillian_Mace_idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1582
+        width: 321
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cadfeb8208f54d800800000000000000
+      internalID: 636238451410140588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_1
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 1582
+        width: 322
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d76da8ae13f4d3c0800000000000000
+      internalID: -4335573228246439976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_2
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 1582
+        width: 324
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46c060b9e18f64590800000000000000
+      internalID: -7690186503354971036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_3
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1582
+        width: 324
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 461f2c3cf0a735010800000000000000
+      internalID: 1176418135801262436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1056
+        width: 324
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 119ed0db7f11aa5d0800000000000000
+      internalID: -3050606041863689967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_5
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 1056
+        width: 324
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edaff39518484e590800000000000000
+      internalID: -7645840576285246754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_6
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1055
+        width: 324
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f851b3de28a1d4af0800000000000000
+      internalID: -410642841392704113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_7
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1055
+        width: 324
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a65d546338c0c97b0800000000000000
+      internalID: -5216280510711081622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_8
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 529
+        width: 325
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcebdd063b8bf5110800000000000000
+      internalID: 1251922301996089035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_9
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 529
+        width: 324
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b91e502f2a2d96570800000000000000
+      internalID: 8460524972279194011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_10
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 529
+        width: 325
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cb8cdcbb25434ae0800000000000000
+      internalID: -1566332191240320058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_11
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 529
+        width: 324
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df94f4294e4d1a080800000000000000
+      internalID: -9177820487432058371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 3
+        width: 323
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bacd1d0046644cb0800000000000000
+      internalID: -4880663670878778696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_13
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 3
+        width: 323
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fbc6d26fe66f3cf0800000000000000
+      internalID: -270384274277479431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_14
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 3
+        width: 322
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33737f53211f11950800000000000000
+      internalID: 6418176004496766771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zillian_Mace_idle_15
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 3
+        width: 320
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce588f57cb7c304b0800000000000000
+      internalID: -5475313109705390612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Zillian_Mace_idle_0: 636238451410140588
+      Zillian_Mace_idle_1: -4335573228246439976
+      Zillian_Mace_idle_10: -1566332191240320058
+      Zillian_Mace_idle_11: -9177820487432058371
+      Zillian_Mace_idle_12: -4880663670878778696
+      Zillian_Mace_idle_13: -270384274277479431
+      Zillian_Mace_idle_14: 6418176004496766771
+      Zillian_Mace_idle_15: -5475313109705390612
+      Zillian_Mace_idle_2: -7690186503354971036
+      Zillian_Mace_idle_3: 1176418135801262436
+      Zillian_Mace_idle_4: -3050606041863689967
+      Zillian_Mace_idle_5: -7645840576285246754
+      Zillian_Mace_idle_6: -410642841392704113
+      Zillian_Mace_idle_7: -5216280510711081622
+      Zillian_Mace_idle_8: 1251922301996089035
+      Zillian_Mace_idle_9: 8460524972279194011
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

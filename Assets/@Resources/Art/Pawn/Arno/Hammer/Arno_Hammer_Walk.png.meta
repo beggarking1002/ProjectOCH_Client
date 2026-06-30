@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: ca4a912a2af50604da548139f706dd70
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2384160342839641138
+    second: Arno_Hammer_Walk_0
+  - first:
+      213: -6638118854589767029
+    second: Arno_Hammer_Walk_1
+  - first:
+      213: -4646443585532352595
+    second: Arno_Hammer_Walk_2
+  - first:
+      213: 1411547160874328569
+    second: Arno_Hammer_Walk_3
+  - first:
+      213: 6803602816291833447
+    second: Arno_Hammer_Walk_4
+  - first:
+      213: -1145122264272756825
+    second: Arno_Hammer_Walk_5
+  - first:
+      213: 3081902870892262829
+    second: Arno_Hammer_Walk_6
+  - first:
+      213: 746382399197856381
+    second: Arno_Hammer_Walk_7
+  - first:
+      213: 2763438616116265017
+    second: Arno_Hammer_Walk_8
+  - first:
+      213: 4258985144446764667
+    second: Arno_Hammer_Walk_9
+  - first:
+      213: -3808893616540134280
+    second: Arno_Hammer_Walk_10
+  - first:
+      213: -6149196945856414215
+    second: Arno_Hammer_Walk_11
+  - first:
+      213: -3679230823498432547
+    second: Arno_Hammer_Walk_12
+  - first:
+      213: -9095898785968508430
+    second: Arno_Hammer_Walk_13
+  - first:
+      213: 4132623175032809432
+    second: Arno_Hammer_Walk_14
+  - first:
+      213: -6863947826683383213
+    second: Arno_Hammer_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1734
+        width: 381
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecb387dccc2c9eed0800000000000000
+      internalID: -2384160342839641138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 1733
+        width: 381
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b82aa5f621aa0e3a0800000000000000
+      internalID: -6638118854589767029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 1731
+        width: 381
+        height: 556
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7a3774d24848fb0800000000000000
+      internalID: -4646443585532352595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 1734
+        width: 378
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f120a30aa2d69310800000000000000
+      internalID: 1411547160874328569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1161
+        width: 376
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7660ce1e6b04b6e50800000000000000
+      internalID: 6803602816291833447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 1162
+        width: 374
+        height: 560
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7af91a52e55bb10f0800000000000000
+      internalID: -1145122264272756825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 1164
+        width: 372
+        height: 556
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da53acb155e15ca20800000000000000
+      internalID: 3081902870892262829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 1167
+        width: 371
+        height: 549
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d72caca66deab5a00800000000000000
+      internalID: 746382399197856381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 589
+        width: 368
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9300530b7c4b95620800000000000000
+      internalID: 2763438616116265017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 587
+        width: 368
+        height: 548
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b764a6e7c64fa1b30800000000000000
+      internalID: 4258985144446764667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 587
+        width: 374
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8745fd6af67142bc0800000000000000
+      internalID: -3808893616540134280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 589
+        width: 377
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fdbf4425f9a9aaa0800000000000000
+      internalID: -6149196945856414215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 17
+        width: 378
+        height: 557
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddf35b63f0fb0fcc0800000000000000
+      internalID: -3679230823498432547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 18
+        width: 380
+        height: 555
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f1b07d0f30e4c180800000000000000
+      internalID: -9095898785968508430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 17
+        width: 382
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d7a062d1e60a5930800000000000000
+      internalID: 4132623175032809432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arno_Hammer_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 12
+        width: 381
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352f8b181db5eb0a0800000000000000
+      internalID: -6863947826683383213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Arno_Hammer_Walk_0: -2384160342839641138
+      Arno_Hammer_Walk_1: -6638118854589767029
+      Arno_Hammer_Walk_10: -3808893616540134280
+      Arno_Hammer_Walk_11: -6149196945856414215
+      Arno_Hammer_Walk_12: -3679230823498432547
+      Arno_Hammer_Walk_13: -9095898785968508430
+      Arno_Hammer_Walk_14: 4132623175032809432
+      Arno_Hammer_Walk_15: -6863947826683383213
+      Arno_Hammer_Walk_2: -4646443585532352595
+      Arno_Hammer_Walk_3: 1411547160874328569
+      Arno_Hammer_Walk_4: 6803602816291833447
+      Arno_Hammer_Walk_5: -1145122264272756825
+      Arno_Hammer_Walk_6: 3081902870892262829
+      Arno_Hammer_Walk_7: 746382399197856381
+      Arno_Hammer_Walk_8: 2763438616116265017
+      Arno_Hammer_Walk_9: 4258985144446764667
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

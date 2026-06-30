@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 4bdc8b5677defd943a625012fab94582
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2195556122416101613
+    second: Maret_CrossBow_Walk_0
+  - first:
+      213: -8228918507666588242
+    second: Maret_CrossBow_Walk_1
+  - first:
+      213: -2640565323667361394
+    second: Maret_CrossBow_Walk_2
+  - first:
+      213: 4831665785250328912
+    second: Maret_CrossBow_Walk_3
+  - first:
+      213: 1632626539535643676
+    second: Maret_CrossBow_Walk_4
+  - first:
+      213: 6382967060624831354
+    second: Maret_CrossBow_Walk_5
+  - first:
+      213: 3974597309085289089
+    second: Maret_CrossBow_Walk_6
+  - first:
+      213: 3990796921304972595
+    second: Maret_CrossBow_Walk_7
+  - first:
+      213: 6891896563681433842
+    second: Maret_CrossBow_Walk_8
+  - first:
+      213: 3733387251852625086
+    second: Maret_CrossBow_Walk_9
+  - first:
+      213: 6822780048501799273
+    second: Maret_CrossBow_Walk_10
+  - first:
+      213: -6212006652713092484
+    second: Maret_CrossBow_Walk_11
+  - first:
+      213: 3054425006499141737
+    second: Maret_CrossBow_Walk_12
+  - first:
+      213: -6274970844187745129
+    second: Maret_CrossBow_Walk_13
+  - first:
+      213: 7384581639390043667
+    second: Maret_CrossBow_Walk_14
+  - first:
+      213: -3973880249882732385
+    second: Maret_CrossBow_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1769
+        width: 356
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31744f6d651d781e0800000000000000
+      internalID: -2195556122416101613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 1766
+        width: 327
+        height: 558
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead35e847320dcd80800000000000000
+      internalID: -8228918507666588242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 1769
+        width: 298
+        height: 560
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e81b79414d3da5bd0800000000000000
+      internalID: -2640565323667361394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 1773
+        width: 249
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0513143be668d0340800000000000000
+      internalID: 4831665785250328912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 1186
+        width: 235
+        height: 565
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c14b5eb003148a610800000000000000
+      internalID: 1632626539535643676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 1192
+        width: 271
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a73ff8529bad49850800000000000000
+      internalID: 6382967060624831354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 1189
+        width: 275
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18a804db13b982730800000000000000
+      internalID: 3974597309085289089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 1182
+        width: 256
+        height: 557
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33dfa11e7a8226730800000000000000
+      internalID: 3990796921304972595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 597
+        width: 232
+        height: 558
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f897fae86fe4af50800000000000000
+      internalID: 6891896563681433842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 599
+        width: 227
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb4c5abdce7afc330800000000000000
+      internalID: 3733387251852625086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 601
+        width: 244
+        height: 565
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96972933e426fae50800000000000000
+      internalID: 6822780048501799273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 603
+        width: 305
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7a3caaacd48ac9a0800000000000000
+      internalID: -6212006652713092484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 19
+        width: 336
+        height: 560
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96893714c5f736a20800000000000000
+      internalID: 3054425006499141737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 22
+        width: 361
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794a1407343dae8a0800000000000000
+      internalID: -6274970844187745129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 23
+        width: 369
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31e17b630ed4b7660800000000000000
+      internalID: 7384581639390043667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Maret_CrossBow_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 15
+        width: 357
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f989ccd97f0f9d8c0800000000000000
+      internalID: -3973880249882732385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Maret_CrossBow_Walk_0: -2195556122416101613
+      Maret_CrossBow_Walk_1: -8228918507666588242
+      Maret_CrossBow_Walk_10: 6822780048501799273
+      Maret_CrossBow_Walk_11: -6212006652713092484
+      Maret_CrossBow_Walk_12: 3054425006499141737
+      Maret_CrossBow_Walk_13: -6274970844187745129
+      Maret_CrossBow_Walk_14: 7384581639390043667
+      Maret_CrossBow_Walk_15: -3973880249882732385
+      Maret_CrossBow_Walk_2: -2640565323667361394
+      Maret_CrossBow_Walk_3: 4831665785250328912
+      Maret_CrossBow_Walk_4: 1632626539535643676
+      Maret_CrossBow_Walk_5: 6382967060624831354
+      Maret_CrossBow_Walk_6: 3974597309085289089
+      Maret_CrossBow_Walk_7: 3990796921304972595
+      Maret_CrossBow_Walk_8: 6891896563681433842
+      Maret_CrossBow_Walk_9: 3733387251852625086
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

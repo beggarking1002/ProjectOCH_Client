@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: fd5c9b722ff07554883c35592e9727dc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3238809491296314160
+    second: Odo_Axe_Walk_0
+  - first:
+      213: -6531616118340564786
+    second: Odo_Axe_Walk_1
+  - first:
+      213: -8251181590576523771
+    second: Odo_Axe_Walk_2
+  - first:
+      213: 4156593143168288681
+    second: Odo_Axe_Walk_3
+  - first:
+      213: -1347813983705662202
+    second: Odo_Axe_Walk_4
+  - first:
+      213: 1509233625634362401
+    second: Odo_Axe_Walk_5
+  - first:
+      213: -1548562434237089047
+    second: Odo_Axe_Walk_6
+  - first:
+      213: -4249635854681054556
+    second: Odo_Axe_Walk_7
+  - first:
+      213: 279957377031464416
+    second: Odo_Axe_Walk_8
+  - first:
+      213: -9176731611859098839
+    second: Odo_Axe_Walk_9
+  - first:
+      213: 7003614840718354245
+    second: Odo_Axe_Walk_10
+  - first:
+      213: 1910375028146998511
+    second: Odo_Axe_Walk_11
+  - first:
+      213: 4608551437454717057
+    second: Odo_Axe_Walk_12
+  - first:
+      213: -2388184584493397396
+    second: Odo_Axe_Walk_13
+  - first:
+      213: 7046607112097705440
+    second: Odo_Axe_Walk_14
+  - first:
+      213: 5238983763786460356
+    second: Odo_Axe_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1703
+        width: 483
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dc9e187def6d03d0800000000000000
+      internalID: -3238809491296314160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 1703
+        width: 493
+        height: 537
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec848111fb90b55a0800000000000000
+      internalID: -6531616118340564786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 1702
+        width: 497
+        height: 537
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 506917c5f0aed7d80800000000000000
+      internalID: -8251181590576523771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1514
+        y: 1702
+        width: 494
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a7ce5ee07f2fa930800000000000000
+      internalID: 4156593143168288681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1138
+        width: 484
+        height: 545
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60d7be5a25a9b4de0800000000000000
+      internalID: -1347813983705662202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 1138
+        width: 473
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 124d20b7cffd1f410800000000000000
+      internalID: 1509233625634362401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 1140
+        width: 461
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eab8c2bba6628ae0800000000000000
+      internalID: -1548562434237089047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 1141
+        width: 450
+        height: 549
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a2e8f8a4b24605c0800000000000000
+      internalID: -4249635854681054556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 579
+        width: 447
+        height: 536
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e5e53a40cb92e300800000000000000
+      internalID: 279957377031464416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 580
+        width: 449
+        height: 529
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9236a0c2833b5a080800000000000000
+      internalID: -9176731611859098839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 576
+        width: 452
+        height: 533
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 547eba44796d13160800000000000000
+      internalID: 7003614840718354245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 575
+        width: 451
+        height: 536
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fec8a7c67f3038a10800000000000000
+      internalID: 1910375028146998511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 10
+        width: 448
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 180ba9e7d1dd4ff30800000000000000
+      internalID: 4608551437454717057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 10
+        width: 444
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6a053706c67bded0800000000000000
+      internalID: -2388184584493397396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 9
+        width: 445
+        height: 555
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ed235c75d39ac160800000000000000
+      internalID: 7046607112097705440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 14
+        width: 474
+        height: 543
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cce780d9fb94b840800000000000000
+      internalID: 5238983763786460356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Odo_Axe_Walk_0: -3238809491296314160
+      Odo_Axe_Walk_1: -6531616118340564786
+      Odo_Axe_Walk_10: 7003614840718354245
+      Odo_Axe_Walk_11: 1910375028146998511
+      Odo_Axe_Walk_12: 4608551437454717057
+      Odo_Axe_Walk_13: -2388184584493397396
+      Odo_Axe_Walk_14: 7046607112097705440
+      Odo_Axe_Walk_15: 5238983763786460356
+      Odo_Axe_Walk_2: -8251181590576523771
+      Odo_Axe_Walk_3: 4156593143168288681
+      Odo_Axe_Walk_4: -1347813983705662202
+      Odo_Axe_Walk_5: 1509233625634362401
+      Odo_Axe_Walk_6: -1548562434237089047
+      Odo_Axe_Walk_7: -4249635854681054556
+      Odo_Axe_Walk_8: 279957377031464416
+      Odo_Axe_Walk_9: -9176731611859098839
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: dce5f12ca9ab6df459977f21dade6dfa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3145503945217952456
+    second: Suen_ParvisOff_Walk_0
+  - first:
+      213: -4858886909316576932
+    second: Suen_ParvisOff_Walk_1
+  - first:
+      213: 7872055322554831720
+    second: Suen_ParvisOff_Walk_2
+  - first:
+      213: 6705583482180315936
+    second: Suen_ParvisOff_Walk_3
+  - first:
+      213: 6112097972408662159
+    second: Suen_ParvisOff_Walk_4
+  - first:
+      213: 7393142152552053239
+    second: Suen_ParvisOff_Walk_5
+  - first:
+      213: -308377949546513542
+    second: Suen_ParvisOff_Walk_6
+  - first:
+      213: 410819548753883815
+    second: Suen_ParvisOff_Walk_7
+  - first:
+      213: 4903741103022171579
+    second: Suen_ParvisOff_Walk_8
+  - first:
+      213: 8539721722175709779
+    second: Suen_ParvisOff_Walk_9
+  - first:
+      213: -2348592407596228106
+    second: Suen_ParvisOff_Walk_10
+  - first:
+      213: 775963718634016271
+    second: Suen_ParvisOff_Walk_11
+  - first:
+      213: 8372760755975140629
+    second: Suen_ParvisOff_Walk_12
+  - first:
+      213: 7101655904029177271
+    second: Suen_ParvisOff_Walk_13
+  - first:
+      213: -1121658326888351328
+    second: Suen_ParvisOff_Walk_14
+  - first:
+      213: -3060998190682116298
+    second: Suen_ParvisOff_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 1766
+        width: 296
+        height: 557
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 835b1b1d3dce854d0800000000000000
+      internalID: -3145503945217952456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 1762
+        width: 302
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c59c3667914c19cb0800000000000000
+      internalID: -4858886909316576932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1762
+        width: 301
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8639a11ab982f3d60800000000000000
+      internalID: 7872055322554831720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 1761
+        width: 290
+        height: 567
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ba51b36a40f0d50800000000000000
+      internalID: 6705583482180315936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1182
+        width: 291
+        height: 570
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f88bdcdf8b882d450800000000000000
+      internalID: 6112097972408662159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 1182
+        width: 294
+        height: 570
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f9f4d00e97b99660800000000000000
+      internalID: 7393142152552053239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1182
+        width: 296
+        height: 567
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b77b483eb68bbf0800000000000000
+      internalID: -308377949546513542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 1183
+        width: 314
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a2f246f33683b500800000000000000
+      internalID: 410819548753883815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 596
+        width: 326
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb56e145d869d0440800000000000000
+      internalID: 4903741103022171579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 592
+        width: 334
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35268f239af238670800000000000000
+      internalID: 8539721722175709779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 592
+        width: 328
+        height: 565
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f12c0f06af186fd0800000000000000
+      internalID: -2348592407596228106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 592
+        width: 307
+        height: 571
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e85cf04e6c4ca00800000000000000
+      internalID: 775963718634016271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 10
+        width: 295
+        height: 573
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 515ba39fb85023470800000000000000
+      internalID: 8372760755975140629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 11
+        width: 293
+        height: 572
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b5f6b42b662e8260800000000000000
+      internalID: 7101655904029177271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 14
+        width: 291
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a9f57ac1b11f60f0800000000000000
+      internalID: -1121658326888351328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Suen_ParvisOff_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 14
+        width: 296
+        height: 558
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63f674a0d562585d0800000000000000
+      internalID: -3060998190682116298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Suen_ParvisOff_Walk_0: -3145503945217952456
+      Suen_ParvisOff_Walk_1: -4858886909316576932
+      Suen_ParvisOff_Walk_10: -2348592407596228106
+      Suen_ParvisOff_Walk_11: 775963718634016271
+      Suen_ParvisOff_Walk_12: 8372760755975140629
+      Suen_ParvisOff_Walk_13: 7101655904029177271
+      Suen_ParvisOff_Walk_14: -1121658326888351328
+      Suen_ParvisOff_Walk_15: -3060998190682116298
+      Suen_ParvisOff_Walk_2: 7872055322554831720
+      Suen_ParvisOff_Walk_3: 6705583482180315936
+      Suen_ParvisOff_Walk_4: 6112097972408662159
+      Suen_ParvisOff_Walk_5: 7393142152552053239
+      Suen_ParvisOff_Walk_6: -308377949546513542
+      Suen_ParvisOff_Walk_7: 410819548753883815
+      Suen_ParvisOff_Walk_8: 4903741103022171579
+      Suen_ParvisOff_Walk_9: 8539721722175709779
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

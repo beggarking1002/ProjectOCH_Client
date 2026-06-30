@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 7cebcb4dd71b17e44b0a9e1b57dea340
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6674622611488701469
+    second: GrayWolf_Idle_0
+  - first:
+      213: 1682036517537882522
+    second: GrayWolf_Idle_1
+  - first:
+      213: 3493149767916669218
+    second: GrayWolf_Idle_2
+  - first:
+      213: -4907544406510853901
+    second: GrayWolf_Idle_3
+  - first:
+      213: 1721171305546804018
+    second: GrayWolf_Idle_4
+  - first:
+      213: -1535366357227123565
+    second: GrayWolf_Idle_5
+  - first:
+      213: 5914731905423390079
+    second: GrayWolf_Idle_6
+  - first:
+      213: -9152633681321198254
+    second: GrayWolf_Idle_7
+  - first:
+      213: -1991670028572700341
+    second: GrayWolf_Idle_8
+  - first:
+      213: 1264367599690626330
+    second: GrayWolf_Idle_9
+  - first:
+      213: 6077860656689856371
+    second: GrayWolf_Idle_10
+  - first:
+      213: 2230354362572368096
+    second: GrayWolf_Idle_11
+  - first:
+      213: -5935834797931125462
+    second: GrayWolf_Idle_12
+  - first:
+      213: -3991879283627556249
+    second: GrayWolf_Idle_13
+  - first:
+      213: -8083183245966394898
+    second: GrayWolf_Idle_14
+  - first:
+      213: 5463232814708515345
+    second: GrayWolf_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GrayWolf_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1387
+        width: 586
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e30d68391afe53a0800000000000000
+      internalID: -6674622611488701469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 1388
+        width: 587
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a91a4170d4bc75710800000000000000
+      internalID: 1682036517537882522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1388
+        width: 588
+        height: 449
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22949e7d4392a7030800000000000000
+      internalID: 3493149767916669218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 1387
+        width: 589
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f027721d56e4ebb0800000000000000
+      internalID: -4907544406510853901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 927
+        width: 589
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b66b8ee24d2e710800000000000000
+      internalID: 1721171305546804018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 927
+        width: 589
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c446dce6841bae0800000000000000
+      internalID: -1535366357227123565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 927
+        width: 588
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f753e649459551250800000000000000
+      internalID: 5914731905423390079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 927
+        width: 589
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25df299d8205bf080800000000000000
+      internalID: -9152633681321198254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 467
+        width: 587
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b41d12d49aa2c54e0800000000000000
+      internalID: -1991670028572700341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 467
+        width: 585
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a15b21d02afeb8110800000000000000
+      internalID: 1264367599690626330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 467
+        width: 585
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37f325cb016e85450800000000000000
+      internalID: 6077860656689856371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1796
+        y: 467
+        width: 583
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e86e50d97fc3fe10800000000000000
+      internalID: 2230354362572368096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 7
+        width: 582
+        height: 447
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a25a9ef53bdaf9da0800000000000000
+      internalID: -5935834797931125462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 7
+        width: 583
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 762832101fef998c0800000000000000
+      internalID: -3991879283627556249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 7
+        width: 583
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9b8c11aa3c2df80800000000000000
+      internalID: -8083183245966394898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayWolf_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1793
+        y: 8
+        width: 585
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11265fdac4d41db40800000000000000
+      internalID: 5463232814708515345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GrayWolf_Idle_0: -6674622611488701469
+      GrayWolf_Idle_1: 1682036517537882522
+      GrayWolf_Idle_10: 6077860656689856371
+      GrayWolf_Idle_11: 2230354362572368096
+      GrayWolf_Idle_12: -5935834797931125462
+      GrayWolf_Idle_13: -3991879283627556249
+      GrayWolf_Idle_14: -8083183245966394898
+      GrayWolf_Idle_15: 5463232814708515345
+      GrayWolf_Idle_2: 3493149767916669218
+      GrayWolf_Idle_3: -4907544406510853901
+      GrayWolf_Idle_4: 1721171305546804018
+      GrayWolf_Idle_5: -1535366357227123565
+      GrayWolf_Idle_6: 5914731905423390079
+      GrayWolf_Idle_7: -9152633681321198254
+      GrayWolf_Idle_8: -1991670028572700341
+      GrayWolf_Idle_9: 1264367599690626330
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

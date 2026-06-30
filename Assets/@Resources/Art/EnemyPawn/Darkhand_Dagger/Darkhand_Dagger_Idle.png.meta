@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: d5920cdb46f71cb45bf063a5bb1d1f79
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 946821739396336287
+    second: Darkhand_Dagger_Idle_0
+  - first:
+      213: -7976160922914499671
+    second: Darkhand_Dagger_Idle_1
+  - first:
+      213: -2187663099093640268
+    second: Darkhand_Dagger_Idle_2
+  - first:
+      213: -1191497296934678082
+    second: Darkhand_Dagger_Idle_3
+  - first:
+      213: 2602731197933834861
+    second: Darkhand_Dagger_Idle_4
+  - first:
+      213: 2810595438627750817
+    second: Darkhand_Dagger_Idle_5
+  - first:
+      213: -3589805544439388633
+    second: Darkhand_Dagger_Idle_6
+  - first:
+      213: 8430881927353617013
+    second: Darkhand_Dagger_Idle_7
+  - first:
+      213: -3088823957928150719
+    second: Darkhand_Dagger_Idle_8
+  - first:
+      213: 4325336262489403219
+    second: Darkhand_Dagger_Idle_9
+  - first:
+      213: 2360813245322683362
+    second: Darkhand_Dagger_Idle_10
+  - first:
+      213: -6703849793004362348
+    second: Darkhand_Dagger_Idle_11
+  - first:
+      213: 7109374661911609526
+    second: Darkhand_Dagger_Idle_12
+  - first:
+      213: -3658212297294417319
+    second: Darkhand_Dagger_Idle_13
+  - first:
+      213: -6744238492882442936
+    second: Darkhand_Dagger_Idle_14
+  - first:
+      213: 4882604172314628745
+    second: Darkhand_Dagger_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 2146
+        width: 369
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9a06520b59c32d00800000000000000
+      internalID: 946821739396336287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 2146
+        width: 371
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a3545e66ebfe4190800000000000000
+      internalID: -7976160922914499671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 2146
+        width: 372
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bb1b4a800cd3a1e0800000000000000
+      internalID: -2187663099093640268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 2146
+        width: 379
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb1de517583f67fe0800000000000000
+      internalID: -1191497296934678082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1432
+        width: 382
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d625ca21c32ce1420800000000000000
+      internalID: 2602731197933834861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1432
+        width: 386
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a38db609ad310720800000000000000
+      internalID: 2810595438627750817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 1432
+        width: 390
+        height: 711
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72666fe70e27e2ec0800000000000000
+      internalID: -3589805544439388633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 1432
+        width: 395
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57a4c27b172800570800000000000000
+      internalID: 8430881927353617013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 718
+        width: 397
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 149f9fdb9fa4225d0800000000000000
+      internalID: -3088823957928150719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 718
+        width: 398
+        height: 710
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35febc30a6ea60c30800000000000000
+      internalID: 4325336262489403219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 718
+        width: 398
+        height: 709
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e3ee74732b43c020800000000000000
+      internalID: 2360813245322683362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 718
+        width: 392
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 495266cb12427f2a0800000000000000
+      internalID: -6703849793004362348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 5
+        width: 387
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b08762869299a260800000000000000
+      internalID: 7109374661911609526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 5
+        width: 384
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 952fcc23c4b6b3dc0800000000000000
+      internalID: -3658212297294417319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 5
+        width: 376
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 845e93fb2d6a762a0800000000000000
+      internalID: -6744238492882442936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Dagger_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 5
+        width: 370
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98257a520ae72c340800000000000000
+      internalID: 4882604172314628745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Darkhand_Dagger_Idle_0: 946821739396336287
+      Darkhand_Dagger_Idle_1: -7976160922914499671
+      Darkhand_Dagger_Idle_10: 2360813245322683362
+      Darkhand_Dagger_Idle_11: -6703849793004362348
+      Darkhand_Dagger_Idle_12: 7109374661911609526
+      Darkhand_Dagger_Idle_13: -3658212297294417319
+      Darkhand_Dagger_Idle_14: -6744238492882442936
+      Darkhand_Dagger_Idle_15: 4882604172314628745
+      Darkhand_Dagger_Idle_2: -2187663099093640268
+      Darkhand_Dagger_Idle_3: -1191497296934678082
+      Darkhand_Dagger_Idle_4: 2602731197933834861
+      Darkhand_Dagger_Idle_5: 2810595438627750817
+      Darkhand_Dagger_Idle_6: -3589805544439388633
+      Darkhand_Dagger_Idle_7: 8430881927353617013
+      Darkhand_Dagger_Idle_8: -3088823957928150719
+      Darkhand_Dagger_Idle_9: 4325336262489403219
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

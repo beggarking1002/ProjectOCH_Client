@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: ebe11f2a5c82d7841b52a9d10e03c7f4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3587846075494625358
+    second: Sera_Warlock_Idle_Sprite_0
+  - first:
+      213: -3625600067438028220
+    second: Sera_Warlock_Idle_Sprite_1
+  - first:
+      213: 1581495470612694084
+    second: Sera_Warlock_Idle_Sprite_2
+  - first:
+      213: -4982765356298582467
+    second: Sera_Warlock_Idle_Sprite_3
+  - first:
+      213: 7166610609046381727
+    second: Sera_Warlock_Idle_Sprite_4
+  - first:
+      213: -41089996902253650
+    second: Sera_Warlock_Idle_Sprite_5
+  - first:
+      213: -2074090213183560043
+    second: Sera_Warlock_Idle_Sprite_6
+  - first:
+      213: 4019085533977472719
+    second: Sera_Warlock_Idle_Sprite_7
+  - first:
+      213: 9056296439904203115
+    second: Sera_Warlock_Idle_Sprite_8
+  - first:
+      213: -3119469934915698744
+    second: Sera_Warlock_Idle_Sprite_9
+  - first:
+      213: -6674212557660986282
+    second: Sera_Warlock_Idle_Sprite_10
+  - first:
+      213: 426509378018736374
+    second: Sera_Warlock_Idle_Sprite_11
+  - first:
+      213: -6214686440336933737
+    second: Sera_Warlock_Idle_Sprite_12
+  - first:
+      213: 8504468553931519093
+    second: Sera_Warlock_Idle_Sprite_13
+  - first:
+      213: -2854617055432986993
+    second: Sera_Warlock_Idle_Sprite_14
+  - first:
+      213: -3438661077491131183
+    second: Sera_Warlock_Idle_Sprite_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1578
+        width: 268
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e40f2a61ff69ac130800000000000000
+      internalID: 3587846075494625358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_1
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1578
+        width: 268
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44a59baa2f74fadc0800000000000000
+      internalID: -3625600067438028220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_2
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 1578
+        width: 270
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44442cb50c992f510800000000000000
+      internalID: 1581495470612694084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_3
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 1578
+        width: 271
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3643baee49a9dab0800000000000000
+      internalID: -4982765356298582467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1052
+        width: 276
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9461cbe06ae47360800000000000000
+      internalID: 7166610609046381727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_5
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 1052
+        width: 280
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eabb1d29dd40e6ff0800000000000000
+      internalID: -41089996902253650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_6
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 1052
+        width: 282
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 596641ba0f95733e0800000000000000
+      internalID: -2074090213183560043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_7
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 1052
+        width: 287
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fce63a6cff8a6c730800000000000000
+      internalID: 4019085533977472719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_8
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 527
+        width: 290
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b61ff1931ad6ead70800000000000000
+      internalID: 9056296439904203115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_9
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 527
+        width: 289
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cfb6d13f9a65b4d0800000000000000
+      internalID: -3119469934915698744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 527
+        width: 289
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6546a215a0f6063a0800000000000000
+      internalID: -6674212557660986282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_11
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 527
+        width: 288
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f8fd2205044be500800000000000000
+      internalID: 426509378018736374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_12
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1
+        width: 279
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79cb74dfb9ff0c9a0800000000000000
+      internalID: -6214686440336933737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_13
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 1
+        width: 276
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57471985711f50670800000000000000
+      internalID: 8504468553931519093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_14
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 1
+        width: 272
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8e252999ec5268d0800000000000000
+      internalID: -2854617055432986993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Warlock_Idle_Sprite_15
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 1
+        width: 269
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dcdd2508fb6740d0800000000000000
+      internalID: -3438661077491131183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sera_Warlock_Idle_Sprite_0: 3587846075494625358
+      Sera_Warlock_Idle_Sprite_1: -3625600067438028220
+      Sera_Warlock_Idle_Sprite_10: -6674212557660986282
+      Sera_Warlock_Idle_Sprite_11: 426509378018736374
+      Sera_Warlock_Idle_Sprite_12: -6214686440336933737
+      Sera_Warlock_Idle_Sprite_13: 8504468553931519093
+      Sera_Warlock_Idle_Sprite_14: -2854617055432986993
+      Sera_Warlock_Idle_Sprite_15: -3438661077491131183
+      Sera_Warlock_Idle_Sprite_2: 1581495470612694084
+      Sera_Warlock_Idle_Sprite_3: -4982765356298582467
+      Sera_Warlock_Idle_Sprite_4: 7166610609046381727
+      Sera_Warlock_Idle_Sprite_5: -41089996902253650
+      Sera_Warlock_Idle_Sprite_6: -2074090213183560043
+      Sera_Warlock_Idle_Sprite_7: 4019085533977472719
+      Sera_Warlock_Idle_Sprite_8: 9056296439904203115
+      Sera_Warlock_Idle_Sprite_9: -3119469934915698744
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

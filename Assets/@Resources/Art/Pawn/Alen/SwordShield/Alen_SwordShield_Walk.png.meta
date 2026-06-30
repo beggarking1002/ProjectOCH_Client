@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 5776feaaaf483524c9ab53f6f3e52e94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7186432735019547722
+    second: Alen_SwordShield_Walk_0
+  - first:
+      213: 6553352497294875115
+    second: Alen_SwordShield_Walk_1
+  - first:
+      213: 3846637296334797878
+    second: Alen_SwordShield_Walk_2
+  - first:
+      213: -1795893979406341674
+    second: Alen_SwordShield_Walk_3
+  - first:
+      213: 8215073171215965344
+    second: Alen_SwordShield_Walk_4
+  - first:
+      213: 72214355723972165
+    second: Alen_SwordShield_Walk_5
+  - first:
+      213: -5915646704485188995
+    second: Alen_SwordShield_Walk_6
+  - first:
+      213: 8837522995321460143
+    second: Alen_SwordShield_Walk_7
+  - first:
+      213: 4465814490906825185
+    second: Alen_SwordShield_Walk_8
+  - first:
+      213: -5179346928668507413
+    second: Alen_SwordShield_Walk_9
+  - first:
+      213: -5871594032681510391
+    second: Alen_SwordShield_Walk_10
+  - first:
+      213: 8716410595893622872
+    second: Alen_SwordShield_Walk_11
+  - first:
+      213: -6112186942469073319
+    second: Alen_SwordShield_Walk_12
+  - first:
+      213: 7851231761274106570
+    second: Alen_SwordShield_Walk_13
+  - first:
+      213: -8984733090082254443
+    second: Alen_SwordShield_Walk_14
+  - first:
+      213: -6540542408454892919
+    second: Alen_SwordShield_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 2135
+        width: 437
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b3cbeab089a44c90800000000000000
+      internalID: -7186432735019547722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 2135
+        width: 449
+        height: 675
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be91e29006f22fa50800000000000000
+      internalID: 6553352497294875115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 2135
+        width: 461
+        height: 680
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63cfdcb9d30026530800000000000000
+      internalID: 3846637296334797878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 2128
+        width: 490
+        height: 696
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d9e837d0f3b317e0800000000000000
+      internalID: -1795893979406341674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1420
+        width: 502
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ac5b2e168dc10270800000000000000
+      internalID: 8215073171215965344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1423
+        width: 508
+        height: 692
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54e6c9ce29e800100800000000000000
+      internalID: 72214355723972165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 1423
+        width: 517
+        height: 681
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7a337a2aa667eda0800000000000000
+      internalID: -5915646704485188995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 1421
+        width: 517
+        height: 680
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa55b7e475035aa70800000000000000
+      internalID: 8837522995321460143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 716
+        width: 512
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e11b4b5e92c9fd30800000000000000
+      internalID: 4465814490906825185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 717
+        width: 498
+        height: 691
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be20434e8634f18b0800000000000000
+      internalID: -5179346928668507413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 719
+        width: 485
+        height: 693
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a17b81658e38ea0800000000000000
+      internalID: -5871594032681510391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 720
+        width: 463
+        height: 689
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 858b0b46149e6f870800000000000000
+      internalID: 8716410595893622872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 15
+        width: 450
+        height: 683
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 956995d0c562d2ba0800000000000000
+      internalID: -6112186942469073319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 16
+        width: 440
+        height: 677
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac2f10470bd25fc60800000000000000
+      internalID: 7851231761274106570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 17
+        width: 436
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59113f39bd0df4380800000000000000
+      internalID: -8984733090082254443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alen_SwordShield_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1686
+        y: 18
+        width: 435
+        height: 670
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9821ba135535b35a0800000000000000
+      internalID: -6540542408454892919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Alen_SwordShield_Walk_0: -7186432735019547722
+      Alen_SwordShield_Walk_1: 6553352497294875115
+      Alen_SwordShield_Walk_10: -5871594032681510391
+      Alen_SwordShield_Walk_11: 8716410595893622872
+      Alen_SwordShield_Walk_12: -6112186942469073319
+      Alen_SwordShield_Walk_13: 7851231761274106570
+      Alen_SwordShield_Walk_14: -8984733090082254443
+      Alen_SwordShield_Walk_15: -6540542408454892919
+      Alen_SwordShield_Walk_2: 3846637296334797878
+      Alen_SwordShield_Walk_3: -1795893979406341674
+      Alen_SwordShield_Walk_4: 8215073171215965344
+      Alen_SwordShield_Walk_5: 72214355723972165
+      Alen_SwordShield_Walk_6: -5915646704485188995
+      Alen_SwordShield_Walk_7: 8837522995321460143
+      Alen_SwordShield_Walk_8: 4465814490906825185
+      Alen_SwordShield_Walk_9: -5179346928668507413
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

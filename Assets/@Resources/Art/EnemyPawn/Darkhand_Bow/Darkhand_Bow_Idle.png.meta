@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 33a62c4a011579c45b19f1cedd884ca8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5163064874867166499
+    second: Darkhand_Bow_Idle_0
+  - first:
+      213: 1978435030628823079
+    second: Darkhand_Bow_Idle_1
+  - first:
+      213: -1872944216134403170
+    second: Darkhand_Bow_Idle_2
+  - first:
+      213: -3241764896666311623
+    second: Darkhand_Bow_Idle_3
+  - first:
+      213: -3174268406742165520
+    second: Darkhand_Bow_Idle_4
+  - first:
+      213: -7053629050591650966
+    second: Darkhand_Bow_Idle_5
+  - first:
+      213: -7916734669280718161
+    second: Darkhand_Bow_Idle_6
+  - first:
+      213: 4343536196275267787
+    second: Darkhand_Bow_Idle_7
+  - first:
+      213: -1358973094417715707
+    second: Darkhand_Bow_Idle_8
+  - first:
+      213: 6615333712477256883
+    second: Darkhand_Bow_Idle_9
+  - first:
+      213: -36921244317779402
+    second: Darkhand_Bow_Idle_10
+  - first:
+      213: 1202291484423111961
+    second: Darkhand_Bow_Idle_11
+  - first:
+      213: 2030493655582581266
+    second: Darkhand_Bow_Idle_12
+  - first:
+      213: 8499137942899177969
+    second: Darkhand_Bow_Idle_13
+  - first:
+      213: -1342448169489844607
+    second: Darkhand_Bow_Idle_14
+  - first:
+      213: -4159577872802937022
+    second: Darkhand_Bow_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1777
+        width: 403
+        height: 590
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32d01ca0624e6a740800000000000000
+      internalID: 5163064874867166499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 1778
+        width: 402
+        height: 588
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 720f1db9d20d47b10800000000000000
+      internalID: 1978435030628823079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 1778
+        width: 400
+        height: 588
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9bbf21a827f106e0800000000000000
+      internalID: -1872944216134403170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1281
+        y: 1778
+        width: 395
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 934afd88000f203d0800000000000000
+      internalID: -3241764896666311623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 1186
+        width: 393
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f7536ab3bbb2f3d0800000000000000
+      internalID: -3174268406742165520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 1186
+        width: 392
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6bdb1e00c97c1e90800000000000000
+      internalID: -7053629050591650966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 1186
+        width: 392
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa2d08053cb122290800000000000000
+      internalID: -7916734669280718161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 1186
+        width: 396
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc8e9005827574c30800000000000000
+      internalID: 4343536196275267787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 594
+        width: 400
+        height: 588
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e2be7bb25f32de0800000000000000
+      internalID: -1358973094417715707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 594
+        width: 408
+        height: 588
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bc7fd246f26ecb50800000000000000
+      internalID: 6615333712477256883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 594
+        width: 411
+        height: 588
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63af5cbe254dc7ff0800000000000000
+      internalID: -36921244317779402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 594
+        width: 410
+        height: 589
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 915448d2cb56fa010800000000000000
+      internalID: 1202291484423111961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 2
+        width: 411
+        height: 589
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2122fa3c833cd2c10800000000000000
+      internalID: 2030493655582581266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 2
+        width: 407
+        height: 589
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f9bc8fbde003f570800000000000000
+      internalID: 8499137942899177969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 2
+        width: 405
+        height: 589
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1863f20a08aae5de0800000000000000
+      internalID: -1342448169489844607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Darkhand_Bow_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 2
+        width: 403
+        height: 589
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 247810c86f53646c0800000000000000
+      internalID: -4159577872802937022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Darkhand_Bow_Idle_0: 5163064874867166499
+      Darkhand_Bow_Idle_1: 1978435030628823079
+      Darkhand_Bow_Idle_10: -36921244317779402
+      Darkhand_Bow_Idle_11: 1202291484423111961
+      Darkhand_Bow_Idle_12: 2030493655582581266
+      Darkhand_Bow_Idle_13: 8499137942899177969
+      Darkhand_Bow_Idle_14: -1342448169489844607
+      Darkhand_Bow_Idle_15: -4159577872802937022
+      Darkhand_Bow_Idle_2: -1872944216134403170
+      Darkhand_Bow_Idle_3: -3241764896666311623
+      Darkhand_Bow_Idle_4: -3174268406742165520
+      Darkhand_Bow_Idle_5: -7053629050591650966
+      Darkhand_Bow_Idle_6: -7916734669280718161
+      Darkhand_Bow_Idle_7: 4343536196275267787
+      Darkhand_Bow_Idle_8: -1358973094417715707
+      Darkhand_Bow_Idle_9: 6615333712477256883
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

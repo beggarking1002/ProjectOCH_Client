@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: 00908c598dd53344a8a5e8b7f6096e2f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5703852977035758130
+    second: Beige_Fire_Idle_0
+  - first:
+      213: -1894559273686632128
+    second: Beige_Fire_Idle_1
+  - first:
+      213: 7330207122852076177
+    second: Beige_Fire_Idle_2
+  - first:
+      213: -2845046319675771244
+    second: Beige_Fire_Idle_3
+  - first:
+      213: 8983556717942546105
+    second: Beige_Fire_Idle_4
+  - first:
+      213: -6491249712209758156
+    second: Beige_Fire_Idle_5
+  - first:
+      213: 7646407406069689933
+    second: Beige_Fire_Idle_6
+  - first:
+      213: 6699652930194984536
+    second: Beige_Fire_Idle_7
+  - first:
+      213: 3585960950049226964
+    second: Beige_Fire_Idle_8
+  - first:
+      213: 8236173443245544862
+    second: Beige_Fire_Idle_9
+  - first:
+      213: 7260213343981180290
+    second: Beige_Fire_Idle_10
+  - first:
+      213: -3055691201300972130
+    second: Beige_Fire_Idle_11
+  - first:
+      213: 5160374784232025427
+    second: Beige_Fire_Idle_12
+  - first:
+      213: -451745388279455851
+    second: Beige_Fire_Idle_13
+  - first:
+      213: 2624828711682311410
+    second: Beige_Fire_Idle_14
+  - first:
+      213: -3303442020900838636
+    second: Beige_Fire_Idle_15
+  - first:
+      213: -6201829119505400093
+    second: Beige_Fire_Idle_16
+  - first:
+      213: -7772108530998724089
+    second: Beige_Fire_Idle_17
+  - first:
+      213: -4995480221024809034
+    second: Beige_Fire_Idle_18
+  - first:
+      213: 1327786443124750335
+    second: Beige_Fire_Idle_19
+  - first:
+      213: -1466021624202756449
+    second: Beige_Fire_Idle_20
+  - first:
+      213: 7495616626670489298
+    second: Beige_Fire_Idle_21
+  - first:
+      213: 5956226842525335803
+    second: Beige_Fire_Idle_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 2158
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23a4543ff08282f40800000000000000
+      internalID: 5703852977035758130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 1639
+        width: 247
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0497cfdd06c25b5e0800000000000000
+      internalID: -1894559273686632128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1639
+        width: 247
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19ad2a78a802ab560800000000000000
+      internalID: 7330207122852076177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 1639
+        width: 249
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 496713a227d5488d0800000000000000
+      internalID: -2845046319675771244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 2156
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be1a80fc310cac70800000000000000
+      internalID: 8983556717942546105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1639
+        width: 241
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 438716367c27ae5a0800000000000000
+      internalID: -6491249712209758156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1095
+        width: 252
+        height: 534
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4e23bef50f7d1a60800000000000000
+      internalID: 7646407406069689933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 1624
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85e4daef7d2f9fc50800000000000000
+      internalID: 6699652930194984536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 1095
+        width: 256
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d04b1e1c74e3c130800000000000000
+      internalID: 3585960950049226964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1612
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9518290c14cc4270800000000000000
+      internalID: 8236173443245544862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 1095
+        width: 258
+        height: 518
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2859c81f19571c460800000000000000
+      internalID: 7260213343981180290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 1613
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9d3b2bca010895d0800000000000000
+      internalID: -3055691201300972130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 1095
+        width: 257
+        height: 516
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35d680286855d9740800000000000000
+      internalID: 5160374784232025427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 551
+        width: 258
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f9eaa76f31bb9f0800000000000000
+      internalID: -451745388279455851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 551
+        width: 258
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f4021c6ec34d6420800000000000000
+      internalID: 2624828711682311410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 551
+        width: 254
+        height: 528
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4136b100cf0d722d0800000000000000
+      internalID: -3303442020900838636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_16
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 551
+        width: 250
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eef436464daee9a0800000000000000
+      internalID: -6201829119505400093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_17
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 7
+        width: 248
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70ab90e287ce32490800000000000000
+      internalID: -7772108530998724089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_18
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 7
+        width: 245
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bf8357c43d7caab0800000000000000
+      internalID: -4995480221024809034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_19
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 526
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff7b7003cbe3d6210800000000000000
+      internalID: 1327786443124750335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_20
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 7
+        width: 244
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9e7a50a915a7abe0800000000000000
+      internalID: -1466021624202756449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_21
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 526
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dec435cb97c50860800000000000000
+      internalID: 7495616626670489298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Fire_Idle_22
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 7
+        width: 242
+        height: 517
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf08e5e71c4c8a250800000000000000
+      internalID: 5956226842525335803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Beige_Fire_Idle_0: 5703852977035758130
+      Beige_Fire_Idle_1: -1894559273686632128
+      Beige_Fire_Idle_10: 7260213343981180290
+      Beige_Fire_Idle_11: -3055691201300972130
+      Beige_Fire_Idle_12: 5160374784232025427
+      Beige_Fire_Idle_13: -451745388279455851
+      Beige_Fire_Idle_14: 2624828711682311410
+      Beige_Fire_Idle_15: -3303442020900838636
+      Beige_Fire_Idle_16: -6201829119505400093
+      Beige_Fire_Idle_17: -7772108530998724089
+      Beige_Fire_Idle_18: -4995480221024809034
+      Beige_Fire_Idle_19: 1327786443124750335
+      Beige_Fire_Idle_2: 7330207122852076177
+      Beige_Fire_Idle_20: -1466021624202756449
+      Beige_Fire_Idle_21: 7495616626670489298
+      Beige_Fire_Idle_22: 5956226842525335803
+      Beige_Fire_Idle_3: -2845046319675771244
+      Beige_Fire_Idle_4: 8983556717942546105
+      Beige_Fire_Idle_5: -6491249712209758156
+      Beige_Fire_Idle_6: 7646407406069689933
+      Beige_Fire_Idle_7: 6699652930194984536
+      Beige_Fire_Idle_8: 3585960950049226964
+      Beige_Fire_Idle_9: 8236173443245544862
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

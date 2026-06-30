@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: bc521b4f1f61def47922e1539c2a2428
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2126577360026967972
+    second: Odo_Axe_Idle_0
+  - first:
+      213: -4159203054709983380
+    second: Odo_Axe_Idle_1
+  - first:
+      213: -4780594621020410602
+    second: Odo_Axe_Idle_2
+  - first:
+      213: 3397441133113837135
+    second: Odo_Axe_Idle_3
+  - first:
+      213: -4093197039511655380
+    second: Odo_Axe_Idle_4
+  - first:
+      213: 4436117490691736910
+    second: Odo_Axe_Idle_5
+  - first:
+      213: -4918567784101477592
+    second: Odo_Axe_Idle_6
+  - first:
+      213: -3606166655325935271
+    second: Odo_Axe_Idle_7
+  - first:
+      213: -7956569090000990271
+    second: Odo_Axe_Idle_8
+  - first:
+      213: -6007832964200327211
+    second: Odo_Axe_Idle_9
+  - first:
+      213: 5703716353279846383
+    second: Odo_Axe_Idle_10
+  - first:
+      213: 6045359493588548400
+    second: Odo_Axe_Idle_11
+  - first:
+      213: -1295723604516702683
+    second: Odo_Axe_Idle_12
+  - first:
+      213: -4294055378322424707
+    second: Odo_Axe_Idle_13
+  - first:
+      213: 5101912077918823996
+    second: Odo_Axe_Idle_14
+  - first:
+      213: -5779436378121472754
+    second: Odo_Axe_Idle_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1524
+        width: 411
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4af9bc387de138d10800000000000000
+      internalID: 2126577360026967972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 1524
+        width: 416
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c67ba4fabda8746c0800000000000000
+      internalID: -4159203054709983380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 1524
+        width: 419
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d6fe6558ae7adb0800000000000000
+      internalID: -4780594621020410602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 1524
+        width: 419
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f460d8cc5b2262f20800000000000000
+      internalID: 3397441133113837135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1016
+        width: 419
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2c2a30bafa0237c0800000000000000
+      internalID: -4093197039511655380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 1016
+        width: 417
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e45049eaa51409d30800000000000000
+      internalID: 4436117490691736910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 1016
+        width: 414
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82383f8f8acbdbbb0800000000000000
+      internalID: -4918567784101477592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_7
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 1016
+        width: 411
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9596074888254fdc0800000000000000
+      internalID: -3606166655325935271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 508
+        width: 410
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cf43af7196949190800000000000000
+      internalID: -7956569090000990271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_9
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 508
+        width: 407
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d715faffb3ef9ca0800000000000000
+      internalID: -6007832964200327211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_10
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 508
+        width: 407
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe7e4d0cdcba72f40800000000000000
+      internalID: 5703716353279846383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_11
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 508
+        width: 404
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b71e20e6e65e350800000000000000
+      internalID: 6045359493588548400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_12
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 403
+        height: 507
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52671b92f3aa40ee0800000000000000
+      internalID: -1295723604516702683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_13
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 1
+        width: 405
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7c7c3162637864c0800000000000000
+      internalID: -4294055378322424707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_14
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 1
+        width: 404
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3660a7f002adc640800000000000000
+      internalID: 5101912077918823996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Odo_Axe_Idle_15
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 1
+        width: 410
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0579102c315bcfa0800000000000000
+      internalID: -5779436378121472754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Odo_Axe_Idle_0: 2126577360026967972
+      Odo_Axe_Idle_1: -4159203054709983380
+      Odo_Axe_Idle_10: 5703716353279846383
+      Odo_Axe_Idle_11: 6045359493588548400
+      Odo_Axe_Idle_12: -1295723604516702683
+      Odo_Axe_Idle_13: -4294055378322424707
+      Odo_Axe_Idle_14: 5101912077918823996
+      Odo_Axe_Idle_15: -5779436378121472754
+      Odo_Axe_Idle_2: -4780594621020410602
+      Odo_Axe_Idle_3: 3397441133113837135
+      Odo_Axe_Idle_4: -4093197039511655380
+      Odo_Axe_Idle_5: 4436117490691736910
+      Odo_Axe_Idle_6: -4918567784101477592
+      Odo_Axe_Idle_7: -3606166655325935271
+      Odo_Axe_Idle_8: -7956569090000990271
+      Odo_Axe_Idle_9: -6007832964200327211
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: db80bc3e8fb1dc140b7e25ff575f7ddb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5626248998295598493
+    second: Sera_Necro_Walk_0
+  - first:
+      213: 1395311303774075703
+    second: Sera_Necro_Walk_1
+  - first:
+      213: -3868786225261118751
+    second: Sera_Necro_Walk_2
+  - first:
+      213: -3474003680931573445
+    second: Sera_Necro_Walk_3
+  - first:
+      213: 48840596053098178
+    second: Sera_Necro_Walk_4
+  - first:
+      213: -6369422752093614821
+    second: Sera_Necro_Walk_5
+  - first:
+      213: 3069600567726104417
+    second: Sera_Necro_Walk_6
+  - first:
+      213: -292427066126592718
+    second: Sera_Necro_Walk_7
+  - first:
+      213: -3824231271110863211
+    second: Sera_Necro_Walk_8
+  - first:
+      213: -5490497787539668071
+    second: Sera_Necro_Walk_9
+  - first:
+      213: -7528980763567527493
+    second: Sera_Necro_Walk_10
+  - first:
+      213: 8467346265650685546
+    second: Sera_Necro_Walk_11
+  - first:
+      213: -1888874637443830964
+    second: Sera_Necro_Walk_12
+  - first:
+      213: -3830082953047127045
+    second: Sera_Necro_Walk_13
+  - first:
+      213: 7246727107844645994
+    second: Sera_Necro_Walk_14
+  - first:
+      213: 3956836773509385897
+    second: Sera_Necro_Walk_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 1698
+        width: 352
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36a81be585c8be1b0800000000000000
+      internalID: -5626248998295598493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 1698
+        width: 353
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73b7a84fc342d5310800000000000000
+      internalID: 1395311303774075703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 1698
+        width: 350
+        height: 554
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eaf2630d6f4f4ac0800000000000000
+      internalID: -3868786225261118751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 1703
+        width: 348
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b319ca9ee0cd9cfc0800000000000000
+      internalID: -3474003680931573445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1140
+        width: 350
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cefc5a63448da000800000000000000
+      internalID: 48840596053098178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 1140
+        width: 349
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1d4b2de0c34b97a0800000000000000
+      internalID: -6369422752093614821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 1140
+        width: 350
+        height: 548
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16fd6a1f379699a20800000000000000
+      internalID: 3069600567726104417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 1137
+        width: 349
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23590d8f12711fbf0800000000000000
+      internalID: -292427066126592718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 573
+        width: 349
+        height: 548
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5961f7aabe99deac0800000000000000
+      internalID: -3824231271110863211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 572
+        width: 351
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99341a52a55ddc3b0800000000000000
+      internalID: -5490497787539668071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 574
+        width: 354
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb9eec2c2efa38790800000000000000
+      internalID: -7528980763567527493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 576
+        width: 351
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a66e652119e028570800000000000000
+      internalID: 8467346265650685546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 12
+        width: 351
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4b6ae1668e59c5e0800000000000000
+      internalID: -1888874637443830964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 13
+        width: 354
+        height: 549
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfbc85bc8dfc8dac0800000000000000
+      internalID: -3830082953047127045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 12
+        width: 357
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a642647e8eb819460800000000000000
+      internalID: 7246727107844645994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sera_Necro_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 7
+        width: 353
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aeca3fc41289e630800000000000000
+      internalID: 3956836773509385897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sera_Necro_Walk_0: -5626248998295598493
+      Sera_Necro_Walk_1: 1395311303774075703
+      Sera_Necro_Walk_10: -7528980763567527493
+      Sera_Necro_Walk_11: 8467346265650685546
+      Sera_Necro_Walk_12: -1888874637443830964
+      Sera_Necro_Walk_13: -3830082953047127045
+      Sera_Necro_Walk_14: 7246727107844645994
+      Sera_Necro_Walk_15: 3956836773509385897
+      Sera_Necro_Walk_2: -3868786225261118751
+      Sera_Necro_Walk_3: -3474003680931573445
+      Sera_Necro_Walk_4: 48840596053098178
+      Sera_Necro_Walk_5: -6369422752093614821
+      Sera_Necro_Walk_6: 3069600567726104417
+      Sera_Necro_Walk_7: -292427066126592718
+      Sera_Necro_Walk_8: -3824231271110863211
+      Sera_Necro_Walk_9: -5490497787539668071
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
