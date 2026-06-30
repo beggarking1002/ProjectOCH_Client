@@ -1793,7 +1793,7 @@ GameObject:
   - component: {fileID: 5043708084617295636}
   - component: {fileID: 8867542815428924311}
   m_Layer: 0
-  m_Name: FieldMap
+  m_Name: BattleField_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

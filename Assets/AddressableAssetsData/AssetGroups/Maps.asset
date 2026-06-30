@@ -22,7 +22,7 @@ MonoBehaviour:
     - Map
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b11cf7208d06ef48b4d45a70eee6b59
-    m_Address: FieldMap
+    m_Address: BattleField_001
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map

@@ -169,12 +169,12 @@ TextureImporter:
       name: Beige_Fire_Idle_0
       rect:
         serializedVersion: 2
-        x: 231
-        y: 2158
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1632
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -191,12 +191,12 @@ TextureImporter:
       name: Beige_Fire_Idle_1
       rect:
         serializedVersion: 2
-        x: 290
-        y: 1639
-        width: 247
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 274
+        y: 1632
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -213,12 +213,12 @@ TextureImporter:
       name: Beige_Fire_Idle_2
       rect:
         serializedVersion: 2
-        x: 564
-        y: 1639
-        width: 247
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 548
+        y: 1632
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -235,12 +235,12 @@ TextureImporter:
       name: Beige_Fire_Idle_3
       rect:
         serializedVersion: 2
-        x: 838
-        y: 1639
-        width: 249
-        height: 519
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 822
+        y: 1632
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -257,12 +257,12 @@ TextureImporter:
       name: Beige_Fire_Idle_4
       rect:
         serializedVersion: 2
-        x: 1057
-        y: 2156
-        width: 9
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1088
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -279,12 +279,12 @@ TextureImporter:
       name: Beige_Fire_Idle_5
       rect:
         serializedVersion: 2
-        x: 17
-        y: 1639
-        width: 241
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 274
+        y: 1088
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -301,12 +301,12 @@ TextureImporter:
       name: Beige_Fire_Idle_6
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1095
-        width: 252
-        height: 534
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 548
+        y: 1088
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -323,12 +323,12 @@ TextureImporter:
       name: Beige_Fire_Idle_7
       rect:
         serializedVersion: 2
-        x: 522
-        y: 1624
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 822
+        y: 1088
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -345,12 +345,12 @@ TextureImporter:
       name: Beige_Fire_Idle_8
       rect:
         serializedVersion: 2
-        x: 290
-        y: 1095
-        width: 256
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 544
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -367,12 +367,12 @@ TextureImporter:
       name: Beige_Fire_Idle_9
       rect:
         serializedVersion: 2
-        x: 792
-        y: 1612
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 274
+        y: 544
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -389,12 +389,12 @@ TextureImporter:
       name: Beige_Fire_Idle_10
       rect:
         serializedVersion: 2
-        x: 838
-        y: 1095
-        width: 258
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 548
+        y: 544
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -411,12 +411,12 @@ TextureImporter:
       name: Beige_Fire_Idle_11
       rect:
         serializedVersion: 2
-        x: 1066
-        y: 1613
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 822
+        y: 544
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -433,12 +433,12 @@ TextureImporter:
       name: Beige_Fire_Idle_12
       rect:
         serializedVersion: 2
-        x: 564
-        y: 1095
-        width: 257
-        height: 516
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -455,12 +455,12 @@ TextureImporter:
       name: Beige_Fire_Idle_13
       rect:
         serializedVersion: 2
-        x: 16
-        y: 551
-        width: 258
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 274
+        y: 0
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -477,12 +477,12 @@ TextureImporter:
       name: Beige_Fire_Idle_14
       rect:
         serializedVersion: 2
-        x: 290
-        y: 551
-        width: 258
-        height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 548
+        y: 0
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -499,12 +499,12 @@ TextureImporter:
       name: Beige_Fire_Idle_15
       rect:
         serializedVersion: 2
-        x: 565
-        y: 551
-        width: 254
-        height: 528
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 822
+        y: 0
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -517,165 +517,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_16
-      rect:
-        serializedVersion: 2
-        x: 839
-        y: 551
-        width: 250
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3eef436464daee9a0800000000000000
-      internalID: -6201829119505400093
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_17
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 7
-        width: 248
-        height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 70ab90e287ce32490800000000000000
-      internalID: -7772108530998724089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_18
-      rect:
-        serializedVersion: 2
-        x: 291
-        y: 7
-        width: 245
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6bf8357c43d7caab0800000000000000
-      internalID: -4995480221024809034
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_19
-      rect:
-        serializedVersion: 2
-        x: 509
-        y: 526
-        width: 7
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ff7b7003cbe3d6210800000000000000
-      internalID: 1327786443124750335
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_20
-      rect:
-        serializedVersion: 2
-        x: 565
-        y: 7
-        width: 244
-        height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f9e7a50a915a7abe0800000000000000
-      internalID: -1466021624202756449
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_21
-      rect:
-        serializedVersion: 2
-        x: 1052
-        y: 526
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2dec435cb97c50860800000000000000
-      internalID: 7495616626670489298
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beige_Fire_Idle_22
-      rect:
-        serializedVersion: 2
-        x: 838
-        y: 7
-        width: 242
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf08e5e71c4c8a250800000000000000
-      internalID: 5956226842525335803
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9f7a818e5dde498448a7c34282d2c0e7
     internalID: 0
     vertices: []
     indices: 
@@ -683,7 +529,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":274.0,"y":544.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Beige_Fire_Idle_0: 5703852977035758130
       Beige_Fire_Idle_1: -1894559273686632128
@@ -693,14 +541,7 @@ TextureImporter:
       Beige_Fire_Idle_13: -451745388279455851
       Beige_Fire_Idle_14: 2624828711682311410
       Beige_Fire_Idle_15: -3303442020900838636
-      Beige_Fire_Idle_16: -6201829119505400093
-      Beige_Fire_Idle_17: -7772108530998724089
-      Beige_Fire_Idle_18: -4995480221024809034
-      Beige_Fire_Idle_19: 1327786443124750335
       Beige_Fire_Idle_2: 7330207122852076177
-      Beige_Fire_Idle_20: -1466021624202756449
-      Beige_Fire_Idle_21: 7495616626670489298
-      Beige_Fire_Idle_22: 5956226842525335803
       Beige_Fire_Idle_3: -2845046319675771244
       Beige_Fire_Idle_4: 8983556717942546105
       Beige_Fire_Idle_5: -6491249712209758156

@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Pawn
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0eeb1a8b800611c49b9b3483241dc7cc
+    m_Address: Pawn_Beige_Ice
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Pawn
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
   m_SchemaSet:
