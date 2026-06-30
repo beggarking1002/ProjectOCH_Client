@@ -1,15 +1,15 @@
 using System.IO;
 using System.Text;
-using Field;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-internal sealed class FieldWalkMapExporter : EditorWindow
+internal sealed class WalkMapExporter : EditorWindow
 {
 	const string DefaultClientOutputDirectory = "Assets/GameData/Maps";
 	const string DefaultServerOutputDirectory = @"C:\ProjectOCH\Server\Data\Maps";
+	const int FixedPointScale = 100;
 
 	[SerializeField] string mapId;
 	[SerializeField] GameObject mapPrefab;
@@ -21,10 +21,10 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 	[SerializeField] string serverOutputDirectory = DefaultServerOutputDirectory;
 	[SerializeField] bool includeDebugCells;
 
-	[MenuItem("Tools/Project OCH/Field Map/Walk Map Exporter")]
+	[MenuItem("Tools/Project OCH/Map/Walk Map Exporter")]
 	static void Open()
 	{
-		FieldWalkMapExporter window = GetWindow<FieldWalkMapExporter>("Walk Map Exporter");
+		WalkMapExporter window = GetWindow<WalkMapExporter>("Walk Map Exporter");
 		window.minSize = new Vector2(420f, 300f);
 		window.InitializeDefaults();
 		window.Show();
@@ -115,14 +115,6 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 
 	void AutoFillFromScene()
 	{
-		FieldMapWalkArea walkArea = FindFirstObjectByType<FieldMapWalkArea>();
-		if (walkArea != null)
-		{
-			mapPrefab = null;
-			FillTilemapsFromRoot(walkArea.gameObject);
-			return;
-		}
-
 		Grid grid = FindFirstObjectByType<Grid>();
 		if (grid != null)
 		{
@@ -200,7 +192,7 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		ExportWalkMapData data = new ExportWalkMapData
 		{
 			map_id = mapId,
-			fixed_point_scale = FieldPositionCodec.FixedPointScale,
+			fixed_point_scale = FixedPointScale,
 			cell_size = new ExportVector2(sourceGroundTilemap.layoutGrid.cellSize.x, sourceGroundTilemap.layoutGrid.cellSize.y),
 			origin_world = new ExportVector2(sourceGroundTilemap.transform.position.x, sourceGroundTilemap.transform.position.y),
 			bounds = new ExportBounds
@@ -303,16 +295,16 @@ internal sealed class FieldWalkMapExporter : EditorWindow
 		{
 			cell_x = cell.x,
 			cell_y = cell.y,
-			world_x = Mathf.RoundToInt(world.x * FieldPositionCodec.FixedPointScale),
-			world_y = Mathf.RoundToInt(world.y * FieldPositionCodec.FixedPointScale),
+			world_x = Mathf.RoundToInt(world.x * FixedPointScale),
+			world_y = Mathf.RoundToInt(world.y * FixedPointScale),
 		};
 	}
 
 	static void ExpandBounds(ref ExportBounds bounds, Vector3Int cell, Tilemap sourceGroundTilemap)
 	{
 		Vector3 world = sourceGroundTilemap.GetCellCenterWorld(cell);
-		int worldX = Mathf.RoundToInt(world.x * FieldPositionCodec.FixedPointScale);
-		int worldY = Mathf.RoundToInt(world.y * FieldPositionCodec.FixedPointScale);
+		int worldX = Mathf.RoundToInt(world.x * FixedPointScale);
+		int worldY = Mathf.RoundToInt(world.y * FixedPointScale);
 
 		bounds.min_cell_x = Mathf.Min(bounds.min_cell_x, cell.x);
 		bounds.min_cell_y = Mathf.Min(bounds.min_cell_y, cell.y);

@@ -145,353 +145,353 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_0
+      name: Suen_Axeon_Walk_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 1754
-        width: 364
-        height: 552
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 0
+        y: 1740
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 653e4d297402b6640800000000000000
-      internalID: 5074184896941187926
+      spriteID: b1a1188ca559b1542b24e494a83a2ab8
+      internalID: 1322599773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_1
+      name: Suen_Axeon_Walk_1
       rect:
         serializedVersion: 2
-        x: 520
-        y: 1754
-        width: 363
-        height: 552
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 468
+        y: 1740
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 869d9d7846d095a10800000000000000
-      internalID: 1898563443340466536
+      spriteID: 57f8b8d05bff8d34e971987dc66f60de
+      internalID: -1989088498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_2
+      name: Suen_Axeon_Walk_2
       rect:
         serializedVersion: 2
-        x: 994
-        y: 1756
-        width: 352
-        height: 553
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 936
+        y: 1740
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1497e7cf366219e50800000000000000
-      internalID: 6814269922068035905
+      spriteID: f05f86e467e4ad84fb152b1cdabdfef6
+      internalID: 951878299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_3
+      name: Suen_Axeon_Walk_3
       rect:
         serializedVersion: 2
-        x: 1474
-        y: 1761
-        width: 341
-        height: 555
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 1404
+        y: 1740
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 589a8b1824a4ab4e0800000000000000
-      internalID: -1965176637889140347
+      spriteID: 5a1c9292c6df70a4388588c2df5e6b04
+      internalID: 899310047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_4
+      name: Suen_Axeon_Walk_4
       rect:
         serializedVersion: 2
-        x: 78
-        y: 1182
-        width: 349
-        height: 557
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 0
+        y: 1160
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 76d1ed2255e09a660800000000000000
-      internalID: 7397459621752741223
+      spriteID: 842e9f51438feb945a6276c8b96a3fd8
+      internalID: -1423237202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_5
+      name: Suen_Axeon_Walk_5
       rect:
         serializedVersion: 2
-        x: 558
-        y: 1184
-        width: 360
-        height: 554
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 468
+        y: 1160
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ecc04fc9da57e2fb0800000000000000
-      internalID: -4670666375013593906
+      spriteID: d6edeb93a238e924484a3880808fccdc
+      internalID: 1620817007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_6
+      name: Suen_Axeon_Walk_6
       rect:
         serializedVersion: 2
-        x: 1013
-        y: 1187
-        width: 386
-        height: 548
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 936
+        y: 1160
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: aa2699c9f49ba47d0800000000000000
-      internalID: -2933328455697603926
+      spriteID: abde5fdb89a4fcf4ca5f2b3365a10c6d
+      internalID: 483276448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_7
+      name: Suen_Axeon_Walk_7
       rect:
         serializedVersion: 2
-        x: 1466
-        y: 1189
-        width: 405
-        height: 541
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 1404
+        y: 1160
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ef8c4375bfdf02c30800000000000000
-      internalID: 4332742097472112894
+      spriteID: 70c945400c3098c4d8d1966126b81b39
+      internalID: -204877496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_8
+      name: Suen_Axeon_Walk_8
       rect:
         serializedVersion: 2
-        x: 50
-        y: 603
-        width: 414
-        height: 544
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 0
+        y: 580
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1dff181c9599e9660800000000000000
-      internalID: 7394516248966594513
+      spriteID: f0c62409bc3942744b56165ce3f7dc52
+      internalID: -1731123566
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_9
+      name: Suen_Axeon_Walk_9
       rect:
         serializedVersion: 2
-        x: 522
-        y: 602
-        width: 397
-        height: 548
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 468
+        y: 580
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 92851bf92342c9720800000000000000
-      internalID: 2854196063692216361
+      spriteID: 2fa34e16339a6d045a837601cf3f3c3f
+      internalID: 149689596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_10
+      name: Suen_Axeon_Walk_10
       rect:
         serializedVersion: 2
-        x: 1013
-        y: 603
-        width: 358
-        height: 552
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 936
+        y: 580
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 70a00a8db7efe2720800000000000000
-      internalID: 2823473824276679175
+      spriteID: 01f2a681e7c75704cbd151afa44affd8
+      internalID: 274313512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_11
+      name: Suen_Axeon_Walk_11
       rect:
         serializedVersion: 2
-        x: 1473
-        y: 605
-        width: 341
-        height: 554
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 1404
+        y: 580
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4e0c968ad91b07280800000000000000
-      internalID: -9047536360693841692
+      spriteID: ecf14b75ab3ece04d99b1dc60822e99b
+      internalID: 1762134477
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_12
+      name: Suen_Axeon_Walk_12
       rect:
         serializedVersion: 2
-        x: 63
-        y: 22
-        width: 352
-        height: 556
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 0
+        y: 0
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3fdfb305e4d33d570800000000000000
-      internalID: 8490197129086369267
+      spriteID: ebcff63068bf05e469b1212982787080
+      internalID: 1762618262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_13
+      name: Suen_Axeon_Walk_13
       rect:
         serializedVersion: 2
-        x: 526
-        y: 22
-        width: 360
-        height: 552
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 468
+        y: 0
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e587e4e43520b13e0800000000000000
-      internalID: -2082067845909415842
+      spriteID: ee3140b84668dc64f89fdd7e0feb5a08
+      internalID: -1769332495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_14
+      name: Suen_Axeon_Walk_14
       rect:
         serializedVersion: 2
-        x: 990
-        y: 16
-        width: 365
-        height: 553
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 936
+        y: 0
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 13eaeefaee29b5ff0800000000000000
-      internalID: -46281817305731535
+      spriteID: 0f842f4509ace134e88cfbc300e8202d
+      internalID: 295378390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: suen_axeon_walk_sprite_15
+      name: Suen_Axeon_Walk_15
       rect:
         serializedVersion: 2
-        x: 1455
-        y: 14
-        width: 365
-        height: 552
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+        x: 1404
+        y: 0
+        width: 468
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e72ef2325ac841860800000000000000
-      internalID: 7499773920366551678
+      spriteID: 871a2d2624e1f4b4fb39cd716532b799
+      internalID: -160223329
       vertices: []
       indices: 
       edges: []
@@ -510,24 +510,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.20000000298023225},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":468.0,"y":580.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      suen_axeon_walk_sprite_0: 5074184896941187926
-      suen_axeon_walk_sprite_1: 1898563443340466536
-      suen_axeon_walk_sprite_10: 2823473824276679175
-      suen_axeon_walk_sprite_11: -9047536360693841692
-      suen_axeon_walk_sprite_12: 8490197129086369267
-      suen_axeon_walk_sprite_13: -2082067845909415842
-      suen_axeon_walk_sprite_14: -46281817305731535
-      suen_axeon_walk_sprite_15: 7499773920366551678
-      suen_axeon_walk_sprite_2: 6814269922068035905
-      suen_axeon_walk_sprite_3: -1965176637889140347
-      suen_axeon_walk_sprite_4: 7397459621752741223
-      suen_axeon_walk_sprite_5: -4670666375013593906
-      suen_axeon_walk_sprite_6: -2933328455697603926
-      suen_axeon_walk_sprite_7: 4332742097472112894
-      suen_axeon_walk_sprite_8: 7394516248966594513
-      suen_axeon_walk_sprite_9: 2854196063692216361
+      Suen_Axeon_Walk_0: 1322599773
+      Suen_Axeon_Walk_1: -1989088498
+      Suen_Axeon_Walk_10: 274313512
+      Suen_Axeon_Walk_11: 1762134477
+      Suen_Axeon_Walk_12: 1762618262
+      Suen_Axeon_Walk_13: -1769332495
+      Suen_Axeon_Walk_14: 295378390
+      Suen_Axeon_Walk_15: -160223329
+      Suen_Axeon_Walk_2: 951878299
+      Suen_Axeon_Walk_3: 899310047
+      Suen_Axeon_Walk_4: -1423237202
+      Suen_Axeon_Walk_5: 1620817007
+      Suen_Axeon_Walk_6: 483276448
+      Suen_Axeon_Walk_7: -204877496
+      Suen_Axeon_Walk_8: -1731123566
+      Suen_Axeon_Walk_9: 149689596
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
