@@ -19,7 +19,7 @@ namespace Battle
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
 
 		BattleMapGrid _mapGrid;
-		string _pawnAddress;
+		string _fallbackPawnAddress;
 		ulong _battleId;
 		ulong _currentTurnPawnId;
 		bool _destroyed;
@@ -32,7 +32,7 @@ namespace Battle
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
 			_mapGrid = mapGrid;
-			_pawnAddress = pawnAddress;
+			_fallbackPawnAddress = pawnAddress;
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
@@ -87,7 +87,8 @@ namespace Battle
 				return null;
 			}
 
-			if (string.IsNullOrWhiteSpace(_pawnAddress))
+			string pawnAddress = GetPawnAddress(info);
+			if (string.IsNullOrWhiteSpace(pawnAddress))
 			{
 				Debug.LogError($"{nameof(BattleObjectManager)} requires a pawn address.");
 				return null;
@@ -99,7 +100,7 @@ namespace Battle
 				return existing;
 			}
 
-			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(_pawnAddress);
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(pawnAddress);
 			_pawnHandles[pawnId] = handle;
 
 			await handle.Task;
@@ -113,7 +114,7 @@ namespace Battle
 
 			if (handle.Status != AsyncOperationStatus.Succeeded)
 			{
-				Debug.LogError($"Failed to load battle pawn addressable: {_pawnAddress}");
+				Debug.LogError($"Failed to load battle pawn addressable: {pawnAddress}");
 				if (handle.IsValid())
 					Addressables.ReleaseInstance(handle);
 				_pawnHandles.Remove(pawnId);
@@ -121,7 +122,7 @@ namespace Battle
 			}
 
 			GameObject pawnObject = handle.Result;
-			pawnObject.name = isMine ? $"BattlePawn_My_{pawnId}" : $"BattlePawn_Enemy_{pawnId}";
+			pawnObject.name = isMine ? $"BattlePawn_My_{pawnId}_{pawnAddress}" : $"BattlePawn_Enemy_{pawnId}_{pawnAddress}";
 			SceneManager.MoveGameObjectToScene(pawnObject, gameObject.scene);
 
 			BattlePawnController pawn = pawnObject.GetComponent<BattlePawnController>();
@@ -135,8 +136,43 @@ namespace Battle
 			if (isMine)
 				_localPawnIds.Add(pawnId);
 
-			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
+			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, address={pawnAddress}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
 			return pawn;
+		}
+
+		string GetPawnAddress(BattlePawnInfo info)
+		{
+			if (info == null)
+				return _fallbackPawnAddress;
+
+			switch (info.PawnClass)
+			{
+				case Protocol.PawnClass.SuenAxeSword:
+					return "Pawn_Suen_AxeSword";
+				case Protocol.PawnClass.SuenParvis:
+					return "Pawn_Suen_Parvis";
+				case Protocol.PawnClass.BeigeFire:
+					return "Pawn_Beige_Fire";
+				case Protocol.PawnClass.BeigeIce:
+					return "Pawn_Beige_Ice";
+				case Protocol.PawnClass.ZillianLongbow:
+					return "Pawn_Zillian_Longbow";
+				case Protocol.PawnClass.ZillianMace:
+					return "Pawn_Zillian_Mace";
+				case Protocol.PawnClass.AlenSpear:
+					return "Pawn_Alen_Spear";
+				case Protocol.PawnClass.AlenSwordShield:
+					return "Pawn_Alen_SwordShield";
+				case Protocol.PawnClass.SeraNecromancer:
+					return "Pawn_Sera_Necromancer";
+				case Protocol.PawnClass.SeraWarlock:
+					return "Pawn_Sera_Warlock";
+				case Protocol.PawnClass.DarkhandSword:
+					return "Pawn_Darkhand_Sword";
+				default:
+					Debug.LogWarning($"Unknown pawn class {info.PawnClass}. Fallback address={_fallbackPawnAddress}");
+					return _fallbackPawnAddress;
+			}
 		}
 
 		public void DespawnPawn(ulong pawnId)
