@@ -48,7 +48,16 @@ namespace Protocol {
             "dGFydBgEIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSJAoGdGFyZ2V0GAUg",
             "ASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZBIZChFuZXh0X3R1cm5fcGF3bl9p",
             "ZBgGIAEoBBIqCgZyZXN1bHQYByABKA4yGi5Qcm90b2NvbC5CYXR0bGVNb3Zl",
-            "UmVzdWx0Eg4KBnJlYXNvbhgIIAEoCWIGcHJvdG8z"));
+            "UmVzdWx0Eg4KBnJlYXNvbhgIIAEoCSKTAQoOQ19CQVRUTEVfU0tJTEwSEQoJ",
+            "YmF0dGxlX2lkGAEgASgEEhYKDmNhc3Rlcl9wYXduX2lkGAIgASgEEhIKCnNr",
+            "aWxsX3Nsb3QYAyABKAUSFgoOdGFyZ2V0X3Bhd25faWQYBCABKAQSKgoMdGFy",
+            "Z2V0X2F4aWFsGAUgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZCLyAQoOU19C",
+            "QVRUTEVfU0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVfaWQYAiAB",
+            "KAQSFgoOY2FzdGVyX3Bhd25faWQYAyABKAQSEgoKc2tpbGxfc2xvdBgEIAEo",
+            "BRIWCg50YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0YXJnZXRfYXhpYWwYBiAB",
+            "KAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEg4KBmRhbWFnZRgHIAEoBRIRCgl0",
+            "YXJnZXRfaHAYCCABKAUSGQoRbmV4dF90dXJuX3Bhd25faWQYCSABKAQSDgoG",
+            "cmVhc29uGAogASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -67,7 +76,9 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER_BATTLE), global::Protocol.C_ENTER_BATTLE.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_MOVE), global::Protocol.C_BATTLE_MOVE.Parser, new[]{ "BattleId", "PawnId", "Target" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3701,6 +3712,883 @@ namespace Protocol {
             break;
           }
           case 66: {
+            Reason = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class C_BATTLE_SKILL : pb::IMessage<C_BATTLE_SKILL>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<C_BATTLE_SKILL> _parser = new pb::MessageParser<C_BATTLE_SKILL>(() => new C_BATTLE_SKILL());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<C_BATTLE_SKILL> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ProtocolReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_BATTLE_SKILL() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_BATTLE_SKILL(C_BATTLE_SKILL other) : this() {
+      battleId_ = other.battleId_;
+      casterPawnId_ = other.casterPawnId_;
+      skillSlot_ = other.skillSlot_;
+      targetPawnId_ = other.targetPawnId_;
+      targetAxial_ = other.targetAxial_ != null ? other.targetAxial_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_BATTLE_SKILL Clone() {
+      return new C_BATTLE_SKILL(this);
+    }
+
+    /// <summary>Field number for the "battle_id" field.</summary>
+    public const int BattleIdFieldNumber = 1;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "caster_pawn_id" field.</summary>
+    public const int CasterPawnIdFieldNumber = 2;
+    private ulong casterPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong CasterPawnId {
+      get { return casterPawnId_; }
+      set {
+        casterPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_slot" field.</summary>
+    public const int SkillSlotFieldNumber = 3;
+    private int skillSlot_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int SkillSlot {
+      get { return skillSlot_; }
+      set {
+        skillSlot_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_pawn_id" field.</summary>
+    public const int TargetPawnIdFieldNumber = 4;
+    private ulong targetPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong TargetPawnId {
+      get { return targetPawnId_; }
+      set {
+        targetPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_axial" field.</summary>
+    public const int TargetAxialFieldNumber = 5;
+    private global::Protocol.AxialCoord targetAxial_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.AxialCoord TargetAxial {
+      get { return targetAxial_; }
+      set {
+        targetAxial_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as C_BATTLE_SKILL);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(C_BATTLE_SKILL other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (BattleId != other.BattleId) return false;
+      if (CasterPawnId != other.CasterPawnId) return false;
+      if (SkillSlot != other.SkillSlot) return false;
+      if (TargetPawnId != other.TargetPawnId) return false;
+      if (!object.Equals(TargetAxial, other.TargetAxial)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (CasterPawnId != 0UL) hash ^= CasterPawnId.GetHashCode();
+      if (SkillSlot != 0) hash ^= SkillSlot.GetHashCode();
+      if (TargetPawnId != 0UL) hash ^= TargetPawnId.GetHashCode();
+      if (targetAxial_ != null) hash ^= TargetAxial.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (CasterPawnId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(CasterPawnId);
+      }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SkillSlot);
+      }
+      if (TargetPawnId != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(TargetPawnId);
+      }
+      if (targetAxial_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(TargetAxial);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (CasterPawnId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(CasterPawnId);
+      }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SkillSlot);
+      }
+      if (TargetPawnId != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(TargetPawnId);
+      }
+      if (targetAxial_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(TargetAxial);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (CasterPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(CasterPawnId);
+      }
+      if (SkillSlot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillSlot);
+      }
+      if (TargetPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TargetPawnId);
+      }
+      if (targetAxial_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetAxial);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(C_BATTLE_SKILL other) {
+      if (other == null) {
+        return;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.CasterPawnId != 0UL) {
+        CasterPawnId = other.CasterPawnId;
+      }
+      if (other.SkillSlot != 0) {
+        SkillSlot = other.SkillSlot;
+      }
+      if (other.TargetPawnId != 0UL) {
+        TargetPawnId = other.TargetPawnId;
+      }
+      if (other.targetAxial_ != null) {
+        if (targetAxial_ == null) {
+          TargetAxial = new global::Protocol.AxialCoord();
+        }
+        TargetAxial.MergeFrom(other.TargetAxial);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            CasterPawnId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            SkillSlot = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            TargetPawnId = input.ReadUInt64();
+            break;
+          }
+          case 42: {
+            if (targetAxial_ == null) {
+              TargetAxial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(TargetAxial);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            CasterPawnId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            SkillSlot = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            TargetPawnId = input.ReadUInt64();
+            break;
+          }
+          case 42: {
+            if (targetAxial_ == null) {
+              TargetAxial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(TargetAxial);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class S_BATTLE_SKILL : pb::IMessage<S_BATTLE_SKILL>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_BATTLE_SKILL> _parser = new pb::MessageParser<S_BATTLE_SKILL>(() => new S_BATTLE_SKILL());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_BATTLE_SKILL> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ProtocolReflection.Descriptor.MessageTypes[17]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_BATTLE_SKILL() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_BATTLE_SKILL(S_BATTLE_SKILL other) : this() {
+      success_ = other.success_;
+      battleId_ = other.battleId_;
+      casterPawnId_ = other.casterPawnId_;
+      skillSlot_ = other.skillSlot_;
+      targetPawnId_ = other.targetPawnId_;
+      targetAxial_ = other.targetAxial_ != null ? other.targetAxial_.Clone() : null;
+      damage_ = other.damage_;
+      targetHp_ = other.targetHp_;
+      nextTurnPawnId_ = other.nextTurnPawnId_;
+      reason_ = other.reason_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_BATTLE_SKILL Clone() {
+      return new S_BATTLE_SKILL(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "battle_id" field.</summary>
+    public const int BattleIdFieldNumber = 2;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "caster_pawn_id" field.</summary>
+    public const int CasterPawnIdFieldNumber = 3;
+    private ulong casterPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong CasterPawnId {
+      get { return casterPawnId_; }
+      set {
+        casterPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_slot" field.</summary>
+    public const int SkillSlotFieldNumber = 4;
+    private int skillSlot_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int SkillSlot {
+      get { return skillSlot_; }
+      set {
+        skillSlot_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_pawn_id" field.</summary>
+    public const int TargetPawnIdFieldNumber = 5;
+    private ulong targetPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong TargetPawnId {
+      get { return targetPawnId_; }
+      set {
+        targetPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_axial" field.</summary>
+    public const int TargetAxialFieldNumber = 6;
+    private global::Protocol.AxialCoord targetAxial_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.AxialCoord TargetAxial {
+      get { return targetAxial_; }
+      set {
+        targetAxial_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "damage" field.</summary>
+    public const int DamageFieldNumber = 7;
+    private int damage_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Damage {
+      get { return damage_; }
+      set {
+        damage_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_hp" field.</summary>
+    public const int TargetHpFieldNumber = 8;
+    private int targetHp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TargetHp {
+      get { return targetHp_; }
+      set {
+        targetHp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "next_turn_pawn_id" field.</summary>
+    public const int NextTurnPawnIdFieldNumber = 9;
+    private ulong nextTurnPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong NextTurnPawnId {
+      get { return nextTurnPawnId_; }
+      set {
+        nextTurnPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "reason" field.</summary>
+    public const int ReasonFieldNumber = 10;
+    private string reason_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Reason {
+      get { return reason_; }
+      set {
+        reason_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_BATTLE_SKILL);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_BATTLE_SKILL other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      if (BattleId != other.BattleId) return false;
+      if (CasterPawnId != other.CasterPawnId) return false;
+      if (SkillSlot != other.SkillSlot) return false;
+      if (TargetPawnId != other.TargetPawnId) return false;
+      if (!object.Equals(TargetAxial, other.TargetAxial)) return false;
+      if (Damage != other.Damage) return false;
+      if (TargetHp != other.TargetHp) return false;
+      if (NextTurnPawnId != other.NextTurnPawnId) return false;
+      if (Reason != other.Reason) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (CasterPawnId != 0UL) hash ^= CasterPawnId.GetHashCode();
+      if (SkillSlot != 0) hash ^= SkillSlot.GetHashCode();
+      if (TargetPawnId != 0UL) hash ^= TargetPawnId.GetHashCode();
+      if (targetAxial_ != null) hash ^= TargetAxial.GetHashCode();
+      if (Damage != 0) hash ^= Damage.GetHashCode();
+      if (TargetHp != 0) hash ^= TargetHp.GetHashCode();
+      if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
+      if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (BattleId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(BattleId);
+      }
+      if (CasterPawnId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(CasterPawnId);
+      }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(SkillSlot);
+      }
+      if (TargetPawnId != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(TargetPawnId);
+      }
+      if (targetAxial_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(TargetAxial);
+      }
+      if (Damage != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Damage);
+      }
+      if (TargetHp != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(TargetHp);
+      }
+      if (NextTurnPawnId != 0UL) {
+        output.WriteRawTag(72);
+        output.WriteUInt64(NextTurnPawnId);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Reason);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (BattleId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(BattleId);
+      }
+      if (CasterPawnId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(CasterPawnId);
+      }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(SkillSlot);
+      }
+      if (TargetPawnId != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(TargetPawnId);
+      }
+      if (targetAxial_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(TargetAxial);
+      }
+      if (Damage != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Damage);
+      }
+      if (TargetHp != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(TargetHp);
+      }
+      if (NextTurnPawnId != 0UL) {
+        output.WriteRawTag(72);
+        output.WriteUInt64(NextTurnPawnId);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(Reason);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (CasterPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(CasterPawnId);
+      }
+      if (SkillSlot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillSlot);
+      }
+      if (TargetPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TargetPawnId);
+      }
+      if (targetAxial_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetAxial);
+      }
+      if (Damage != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Damage);
+      }
+      if (TargetHp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TargetHp);
+      }
+      if (NextTurnPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(NextTurnPawnId);
+      }
+      if (Reason.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_BATTLE_SKILL other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.CasterPawnId != 0UL) {
+        CasterPawnId = other.CasterPawnId;
+      }
+      if (other.SkillSlot != 0) {
+        SkillSlot = other.SkillSlot;
+      }
+      if (other.TargetPawnId != 0UL) {
+        TargetPawnId = other.TargetPawnId;
+      }
+      if (other.targetAxial_ != null) {
+        if (targetAxial_ == null) {
+          TargetAxial = new global::Protocol.AxialCoord();
+        }
+        TargetAxial.MergeFrom(other.TargetAxial);
+      }
+      if (other.Damage != 0) {
+        Damage = other.Damage;
+      }
+      if (other.TargetHp != 0) {
+        TargetHp = other.TargetHp;
+      }
+      if (other.NextTurnPawnId != 0UL) {
+        NextTurnPawnId = other.NextTurnPawnId;
+      }
+      if (other.Reason.Length != 0) {
+        Reason = other.Reason;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 16: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            CasterPawnId = input.ReadUInt64();
+            break;
+          }
+          case 32: {
+            SkillSlot = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            TargetPawnId = input.ReadUInt64();
+            break;
+          }
+          case 50: {
+            if (targetAxial_ == null) {
+              TargetAxial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(TargetAxial);
+            break;
+          }
+          case 56: {
+            Damage = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            TargetHp = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            NextTurnPawnId = input.ReadUInt64();
+            break;
+          }
+          case 82: {
+            Reason = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 16: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            CasterPawnId = input.ReadUInt64();
+            break;
+          }
+          case 32: {
+            SkillSlot = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            TargetPawnId = input.ReadUInt64();
+            break;
+          }
+          case 50: {
+            if (targetAxial_ == null) {
+              TargetAxial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(TargetAxial);
+            break;
+          }
+          case 56: {
+            Damage = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            TargetHp = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            NextTurnPawnId = input.ReadUInt64();
+            break;
+          }
+          case 82: {
             Reason = input.ReadString();
             break;
           }

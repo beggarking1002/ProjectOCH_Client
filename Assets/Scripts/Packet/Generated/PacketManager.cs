@@ -22,6 +22,8 @@ public enum MsgId : ushort
     S_ENTER_BATTLE = 1013,
     C_BATTLE_MOVE = 1014,
     S_BATTLE_MOVE = 1015,
+    C_BATTLE_SKILL = 1016,
+    S_BATTLE_SKILL = 1017,
 }
 
 class PacketManager
@@ -63,6 +65,8 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_ENTER_BATTLE, PacketHandler.S_ENTER_BATTLEHandler);
         _onRecv.Add((ushort)MsgId.S_BATTLE_MOVE, MakePacket<S_BATTLE_MOVE>);
         _handler.Add((ushort)MsgId.S_BATTLE_MOVE, PacketHandler.S_BATTLE_MOVEHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_SKILL, MakePacket<S_BATTLE_SKILL>);
+        _handler.Add((ushort)MsgId.S_BATTLE_SKILL, PacketHandler.S_BATTLE_SKILLHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

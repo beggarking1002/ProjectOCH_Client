@@ -95,6 +95,11 @@ namespace Networking
 			return Network?.SendBattleMove(battleId, pawnId, q, r) == true;
 		}
 
+		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, ulong targetPawnId, int q, int r)
+		{
+			return Network?.SendBattleSkill(battleId, casterPawnId, skillSlot, targetPawnId, q, r) == true;
+		}
+
 		public bool SendChat(string message)
 		{
 			return Network?.SendChat(message) == true;

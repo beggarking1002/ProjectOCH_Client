@@ -53,6 +53,14 @@ namespace Battle
 			transform.position = _mapGrid.AxialToWorldCenter(axial, transform.position.z);
 		}
 
+		public void ApplyHp(int hp)
+		{
+			if (Info == null)
+				return;
+
+			Info.Hp = hp;
+		}
+
 		public void SetTurnIndicatorVisible(bool visible)
 		{
 			EnsureTurnIndicator();

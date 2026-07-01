@@ -39,6 +39,8 @@ namespace Battle
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
+			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
+			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 		}
 
 		public void SetActionMode(BattleActionMode mode)
@@ -67,6 +69,7 @@ namespace Battle
 		{
 			_destroyed = true;
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
+			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			ReleasePawns();
 		}
 
@@ -266,7 +269,7 @@ namespace Battle
 
 			if (_actionMode != BattleActionMode.Move)
 			{
-				Debug.Log($"Selected {_actionMode} target axial={axial}. Skill packet is not implemented yet.");
+				HandleSkillInput(axial);
 				return;
 			}
 
@@ -303,6 +306,39 @@ namespace Battle
 
 			myPawn.SetAxial(axial);
 			Debug.Log($"Move debug battle pawn to tile center. axial={axial}, world={myPawn.transform.position}");
+		}
+
+		void HandleSkillInput(AxialCoord targetAxial)
+		{
+			int skillSlot = GetSkillSlot(_actionMode);
+			if (skillSlot <= 0)
+				return;
+
+			if (TryGetControllablePawnId(out ulong casterPawnId) == false)
+			{
+				Debug.Log($"No controllable battle pawn for skill. currentTurnPawnId={_currentTurnPawnId}, battleId={_battleId}");
+				return;
+			}
+
+			ulong targetPawnId = FindPawnIdAtAxial(targetAxial);
+			if (_battleId != 0 && GameRoot.Instance != null)
+			{
+				bool sent = GameRoot.Instance.Network.SendBattleSkill(_battleId, casterPawnId, skillSlot, targetPawnId, targetAxial.Q, targetAxial.R);
+				if (sent)
+				{
+					_actionMode = BattleActionMode.WaitingServer;
+					Debug.Log($"Sent C_BATTLE_SKILL. battleId={_battleId}, casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+				}
+				else
+				{
+					Debug.LogWarning($"Failed to send C_BATTLE_SKILL. {GameRoot.Instance.Network.LastError}");
+				}
+
+				return;
+			}
+
+			Debug.Log($"Skill debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+			_actionMode = BattleActionMode.Move;
 		}
 
 		bool TryGetControllablePawnId(out ulong pawnId)
@@ -357,6 +393,53 @@ namespace Battle
 			_actionMode = BattleActionMode.Move;
 			RefreshTurnIndicators();
 			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={pawn.Axial}, nextTurnPawnId={_currentTurnPawnId}");
+		}
+
+		void OnBattleSkillReceived(S_BATTLE_SKILL packet)
+		{
+			if (packet == null || packet.BattleId != _battleId)
+				return;
+
+			_actionMode = BattleActionMode.Move;
+
+			if (packet.Success == false)
+			{
+				Debug.LogWarning($"Battle skill rejected. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, reason={packet.Reason}");
+				return;
+			}
+
+			if (packet.TargetPawnId != 0 && _pawns.TryGetValue(packet.TargetPawnId, out BattlePawnController targetPawn))
+				targetPawn.ApplyHp(packet.TargetHp);
+
+			_currentTurnPawnId = packet.NextTurnPawnId;
+			RefreshTurnIndicators();
+			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, targetHp={packet.TargetHp}, nextTurnPawnId={_currentTurnPawnId}");
+		}
+
+		ulong FindPawnIdAtAxial(AxialCoord axial)
+		{
+			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
+			{
+				if (pair.Value != null && pair.Value.Axial.Equals(axial))
+					return pair.Key;
+			}
+
+			return 0;
+		}
+
+		static int GetSkillSlot(BattleActionMode mode)
+		{
+			switch (mode)
+			{
+				case BattleActionMode.Skill1:
+					return 1;
+				case BattleActionMode.Skill2:
+					return 2;
+				case BattleActionMode.Skill3:
+					return 3;
+				default:
+					return 0;
+			}
 		}
 
 		bool TryGetPointerDown(out Vector2 screenPosition)

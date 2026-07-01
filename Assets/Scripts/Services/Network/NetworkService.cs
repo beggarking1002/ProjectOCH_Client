@@ -44,6 +44,7 @@ namespace Networking
 		public event Action<Protocol.S_MOVE> MoveReceived;
 		public event Action<Protocol.S_ENTER_BATTLE> EnterBattleReceived;
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
+		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -59,6 +60,7 @@ namespace Networking
 			PacketHandler.Instance.MoveReceived += OnMoveReceived;
 			PacketHandler.Instance.EnterBattleReceived += OnEnterBattleReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
+			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			_initialized = true;
 		}
 
@@ -86,6 +88,7 @@ namespace Networking
 				PacketHandler.Instance.MoveReceived -= OnMoveReceived;
 				PacketHandler.Instance.EnterBattleReceived -= OnEnterBattleReceived;
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
+				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			}
 
 			Disconnect();
@@ -172,6 +175,18 @@ namespace Networking
 			});
 		}
 
+		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, ulong targetPawnId, int q, int r)
+		{
+			return Send(new Protocol.C_BATTLE_SKILL
+			{
+				BattleId = battleId,
+				CasterPawnId = casterPawnId,
+				SkillSlot = skillSlot,
+				TargetPawnId = targetPawnId,
+				TargetAxial = new Protocol.AxialCoord { Q = q, R = r },
+			});
+		}
+
 		public bool SendChat(string message)
 		{
 			return Send(new Protocol.C_CHAT { Msg = message ?? string.Empty });
@@ -208,6 +223,9 @@ namespace Networking
 					break;
 				case Protocol.C_BATTLE_MOVE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_MOVE);
+					break;
+				case Protocol.C_BATTLE_SKILL pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_SKILL);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";
@@ -356,6 +374,19 @@ namespace Networking
 				Debug.LogWarning($"S_BATTLE_MOVE failed. pawnId={pkt.PawnId}, result={pkt.Result}, reason={pkt.Reason}");
 
 			BattleMoveReceived?.Invoke(pkt);
+		}
+
+		void OnBattleSkillReceived(Protocol.S_BATTLE_SKILL pkt)
+		{
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+				Debug.LogWarning($"S_BATTLE_SKILL failed. casterPawnId={pkt.CasterPawnId}, skillSlot={pkt.SkillSlot}, reason={pkt.Reason}");
+			else
+				Debug.Log($"S_BATTLE_SKILL success. casterPawnId={pkt.CasterPawnId}, skillSlot={pkt.SkillSlot}, targetPawnId={pkt.TargetPawnId}, damage={pkt.Damage}, targetHp={pkt.TargetHp}, nextTurnPawnId={pkt.NextTurnPawnId}");
+
+			BattleSkillReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)
