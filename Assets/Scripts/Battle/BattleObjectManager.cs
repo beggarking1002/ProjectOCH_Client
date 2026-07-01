@@ -22,12 +22,15 @@ namespace Battle
 		string _fallbackPawnAddress;
 		ulong _battleId;
 		ulong _currentTurnPawnId;
+		BattleActionMode _actionMode = BattleActionMode.Move;
 		bool _destroyed;
 		bool _missingCameraLogged;
 
 		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
 		public ulong BattleId => _battleId;
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
+		public BattleActionMode ActionMode => _actionMode;
+		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId);
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
@@ -36,6 +39,23 @@ namespace Battle
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
+		}
+
+		public void SetActionMode(BattleActionMode mode)
+		{
+			if (_actionMode == BattleActionMode.WaitingServer)
+			{
+				Debug.Log("Cannot change battle action mode while waiting for server.");
+				return;
+			}
+
+			_actionMode = mode;
+			Debug.Log($"Battle action mode changed: {_actionMode}");
+		}
+
+		public void DebugEndTurn()
+		{
+			Debug.Log("End Turn clicked. Server end-turn packet is not implemented yet.");
 		}
 
 		void Update()
@@ -58,6 +78,7 @@ namespace Battle
 
 			await SpawnPawnAsync(1, true, new AxialCoord(-2, -2));
 			await SpawnPawnAsync(2, false, new AxialCoord(2, 2));
+			RefreshTurnIndicators();
 		}
 
 		public async void SpawnFromEnterBattle(S_ENTER_BATTLE packet)
@@ -76,6 +97,7 @@ namespace Battle
 			foreach (BattlePawnInfo pawnInfo in packet.EnemyPawns)
 				await SpawnPawnAsync(pawnInfo.PawnId, false, ToBattleAxial(pawnInfo.Axial), pawnInfo);
 
+			RefreshTurnIndicators();
 			Debug.Log($"Spawned battle pawns from server. battleId={_battleId}, currentTurnPawnId={_currentTurnPawnId}, allied={packet.AlliedPawns.Count}, enemy={packet.EnemyPawns.Count}");
 		}
 
@@ -136,6 +158,7 @@ namespace Battle
 			if (isMine)
 				_localPawnIds.Add(pawnId);
 
+			RefreshTurnIndicators();
 			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, address={pawnAddress}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
 			return pawn;
 		}
@@ -202,6 +225,17 @@ namespace Battle
 			_localPawnIds.Clear();
 		}
 
+		void RefreshTurnIndicators()
+		{
+			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
+			{
+				if (pair.Value == null)
+					continue;
+
+				pair.Value.SetTurnIndicatorVisible(pair.Key == _currentTurnPawnId);
+			}
+		}
+
 		void HandleMouseInput()
 		{
 			if (_mapGrid == null || TryGetPointerDown(out Vector2 screenPosition) == false)
@@ -229,13 +263,25 @@ namespace Battle
 
 			Vector3 worldPosition = ray.GetPoint(enter);
 			AxialCoord axial = _mapGrid.WorldToAxial(worldPosition);
+
+			if (_actionMode != BattleActionMode.Move)
+			{
+				Debug.Log($"Selected {_actionMode} target axial={axial}. Skill packet is not implemented yet.");
+				return;
+			}
+
 			if (_mapGrid.IsWalkable(axial) == false)
 			{
 				Debug.Log($"Clicked blocked battle tile. axial={axial}");
 				return;
 			}
 
-			ulong movingPawnId = GetControllablePawnId();
+			if (TryGetControllablePawnId(out ulong movingPawnId) == false)
+			{
+				Debug.Log($"No controllable battle pawn. currentTurnPawnId={_currentTurnPawnId}, battleId={_battleId}");
+				return;
+			}
+
 			if (_pawns.TryGetValue(movingPawnId, out BattlePawnController myPawn) == false)
 				return;
 
@@ -243,9 +289,14 @@ namespace Battle
 			{
 				bool sent = GameRoot.Instance.Network.SendBattleMove(_battleId, movingPawnId, axial.Q, axial.R);
 				if (sent)
+				{
+					_actionMode = BattleActionMode.WaitingServer;
 					Debug.Log($"Sent C_BATTLE_MOVE. battleId={_battleId}, pawnId={movingPawnId}, axial={axial}");
+				}
 				else
+				{
 					Debug.LogWarning($"Failed to send C_BATTLE_MOVE. {GameRoot.Instance.Network.LastError}");
+				}
 
 				return;
 			}
@@ -254,15 +305,34 @@ namespace Battle
 			Debug.Log($"Move debug battle pawn to tile center. axial={axial}, world={myPawn.transform.position}");
 		}
 
-		ulong GetControllablePawnId()
+		bool TryGetControllablePawnId(out ulong pawnId)
 		{
 			if (_currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId))
-				return _currentTurnPawnId;
+			{
+				pawnId = _currentTurnPawnId;
+				return true;
+			}
 
-			foreach (ulong pawnId in _localPawnIds)
-				return pawnId;
+			if (_battleId != 0)
+			{
+				pawnId = 0;
+				return false;
+			}
 
-			return 1;
+			foreach (ulong localPawnId in _localPawnIds)
+			{
+				pawnId = localPawnId;
+				return true;
+			}
+
+			if (_pawns.ContainsKey(1))
+			{
+				pawnId = 1;
+				return true;
+			}
+
+			pawnId = 0;
+			return false;
 		}
 
 		void OnBattleMoveReceived(S_BATTLE_MOVE packet)
@@ -272,6 +342,7 @@ namespace Battle
 
 			if (packet.Success == false)
 			{
+				_actionMode = BattleActionMode.Move;
 				Debug.LogWarning($"Battle move rejected. pawnId={packet.PawnId}, result={packet.Result}, reason={packet.Reason}");
 				return;
 			}
@@ -283,6 +354,8 @@ namespace Battle
 				pawn.SetAxial(ToBattleAxial(packet.Target));
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
+			_actionMode = BattleActionMode.Move;
+			RefreshTurnIndicators();
 			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={pawn.Axial}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 

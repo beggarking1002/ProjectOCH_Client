@@ -120,6 +120,12 @@ namespace Scenes
 				objectManager.SpawnFromEnterBattle(enterBattle);
 			else
 				objectManager.SpawnDebugPawns();
+
+			BattleUIController uiController = battleMap.GetComponent<BattleUIController>();
+			if (uiController == null)
+				uiController = battleMap.AddComponent<BattleUIController>();
+
+			uiController.Initialize(objectManager);
 		}
 
 		void ReleaseBattleSceneContent()
