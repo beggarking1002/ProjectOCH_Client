@@ -29,10 +29,25 @@ namespace Protocol {
             "SkVDVF9UWVBFX1BST0pFQ1RJTEUQAhITCg9PQkpFQ1RfVFlQRV9FTlYQAypy",
             "CgxDcmVhdHVyZVR5cGUSFgoSQ1JFQVRVUkVfVFlQRV9OT05FEAASGAoUQ1JF",
             "QVRVUkVfVFlQRV9QTEFZRVIQARIZChVDUkVBVFVSRV9UWVBFX01PTlNURVIQ",
-            "AhIVChFDUkVBVFVSRV9UWVBFX05QQxADYgZwcm90bzM="));
+            "AhIVChFDUkVBVFVSRV9UWVBFX05QQxADKsgCCglQYXduQ2xhc3MSEwoPUEFX",
+            "Tl9DTEFTU19OT05FEAASHQoZUEFXTl9DTEFTU19TVUVOX0FYRV9TV09SRBAB",
+            "EhoKFlBBV05fQ0xBU1NfU1VFTl9QQVJWSVMQAhIZChVQQVdOX0NMQVNTX0JF",
+            "SUdFX0ZJUkUQAxIYChRQQVdOX0NMQVNTX0JFSUdFX0lDRRAEEh4KGlBBV05f",
+            "Q0xBU1NfWklMTElBTl9MT05HQk9XEAUSGwoXUEFXTl9DTEFTU19aSUxMSUFO",
+            "X01BQ0UQBhIZChVQQVdOX0NMQVNTX0FMRU5fU1BFQVIQBxIgChxQQVdOX0NM",
+            "QVNTX0FMRU5fU1dPUkRfU0hJRUxEEAgSHwobUEFXTl9DTEFTU19TRVJBX05F",
+            "Q1JPTUFOQ0VSEAkSGwoXUEFXTl9DTEFTU19TRVJBX1dBUkxPQ0sQCirJAgoQ",
+            "QmF0dGxlTW92ZVJlc3VsdBIbChdCQVRUTEVfTU9WRV9SRVNVTFRfTk9ORRAA",
+            "EhkKFUJBVFRMRV9NT1ZFX1JFU1VMVF9PSxABEiQKIEJBVFRMRV9NT1ZFX1JF",
+            "U1VMVF9OT1RfWU9VUl9UVVJOEAISIAocQkFUVExFX01PVkVfUkVTVUxUX05P",
+            "VF9PV05FUhADEiMKH0JBVFRMRV9NT1ZFX1JFU1VMVF9OT1RfV0FMS0FCTEUQ",
+            "BBIjCh9CQVRUTEVfTU9WRV9SRVNVTFRfT1VUX09GX1JBTkdFEAUSHwobQkFU",
+            "VExFX01PVkVfUkVTVUxUX09DQ1VQSUVEEAYSJQohQkFUVExFX01PVkVfUkVT",
+            "VUxUX0lOVkFMSURfQkFUVExFEAcSIwofQkFUVExFX01PVkVfUkVTVUxUX0lO",
+            "VkFMSURfUEFXThAIYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), }, null, null));
     }
     #endregion
 
@@ -50,6 +65,32 @@ namespace Protocol {
     [pbr::OriginalName("CREATURE_TYPE_PLAYER")] Player = 1,
     [pbr::OriginalName("CREATURE_TYPE_MONSTER")] Monster = 2,
     [pbr::OriginalName("CREATURE_TYPE_NPC")] Npc = 3,
+  }
+
+  public enum PawnClass {
+    [pbr::OriginalName("PAWN_CLASS_NONE")] None = 0,
+    [pbr::OriginalName("PAWN_CLASS_SUEN_AXE_SWORD")] SuenAxeSword = 1,
+    [pbr::OriginalName("PAWN_CLASS_SUEN_PARVIS")] SuenParvis = 2,
+    [pbr::OriginalName("PAWN_CLASS_BEIGE_FIRE")] BeigeFire = 3,
+    [pbr::OriginalName("PAWN_CLASS_BEIGE_ICE")] BeigeIce = 4,
+    [pbr::OriginalName("PAWN_CLASS_ZILLIAN_LONGBOW")] ZillianLongbow = 5,
+    [pbr::OriginalName("PAWN_CLASS_ZILLIAN_MACE")] ZillianMace = 6,
+    [pbr::OriginalName("PAWN_CLASS_ALEN_SPEAR")] AlenSpear = 7,
+    [pbr::OriginalName("PAWN_CLASS_ALEN_SWORD_SHIELD")] AlenSwordShield = 8,
+    [pbr::OriginalName("PAWN_CLASS_SERA_NECROMANCER")] SeraNecromancer = 9,
+    [pbr::OriginalName("PAWN_CLASS_SERA_WARLOCK")] SeraWarlock = 10,
+  }
+
+  public enum BattleMoveResult {
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_NONE")] None = 0,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_OK")] Ok = 1,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_NOT_YOUR_TURN")] NotYourTurn = 2,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_NOT_OWNER")] NotOwner = 3,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_NOT_WALKABLE")] NotWalkable = 4,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_OUT_OF_RANGE")] OutOfRange = 5,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_OCCUPIED")] Occupied = 6,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_INVALID_BATTLE")] InvalidBattle = 7,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_INVALID_PAWN")] InvalidPawn = 8,
   }
 
   #endregion

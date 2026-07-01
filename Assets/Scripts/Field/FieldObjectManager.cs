@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 namespace Field
 {
@@ -18,6 +21,7 @@ namespace Field
 		string _pawnAddress;
 		bool _initialized;
 		bool _destroyed;
+		bool _battleEnterRequested;
 		ulong _myObjectId;
 
 		public ulong MyObjectId => _myObjectId;
@@ -50,6 +54,11 @@ namespace Field
 			ReleasePawns();
 		}
 
+		void Update()
+		{
+			HandleBattleEnterDebugInput();
+		}
+
 		void SubscribeNetwork()
 		{
 			if (GameRoot.Instance == null)
@@ -70,6 +79,45 @@ namespace Field
 			GameRoot.Instance.Network.SpawnReceived -= HandleSpawn;
 			GameRoot.Instance.Network.DespawnReceived -= HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived -= HandleMove;
+		}
+
+		void HandleBattleEnterDebugInput()
+		{
+			if (WasBattleEnterKeyPressed() == false)
+				return;
+
+			if (_battleEnterRequested)
+			{
+				Debug.Log("C_ENTER_BATTLE already requested.");
+				return;
+			}
+
+			if (GameRoot.Instance == null)
+			{
+				Debug.LogWarning("Cannot send C_ENTER_BATTLE because GameRoot is not initialized.");
+				return;
+			}
+
+			if (GameRoot.Instance.Network.EnterBattle() == false)
+			{
+				Debug.LogWarning($"Failed to send C_ENTER_BATTLE. {GameRoot.Instance.Network.LastError}");
+				return;
+			}
+
+			_battleEnterRequested = true;
+			Debug.Log("Sent C_ENTER_BATTLE.");
+		}
+
+		static bool WasBattleEnterKeyPressed()
+		{
+#if ENABLE_INPUT_SYSTEM
+			Keyboard keyboard = Keyboard.current;
+			return keyboard != null && keyboard.bKey.wasPressedThisFrame;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			return Input.GetKeyDown(KeyCode.B);
+#else
+			return false;
+#endif
 		}
 
 		void HandleEnterGame(S_ENTER_GAME packet)

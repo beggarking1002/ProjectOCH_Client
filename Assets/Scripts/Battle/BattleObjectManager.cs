@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using App;
+using Protocol;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -12,20 +14,28 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class BattleObjectManager : MonoBehaviour
 	{
-		readonly Dictionary<int, BattlePawnController> _pawns = new Dictionary<int, BattlePawnController>();
-		readonly Dictionary<int, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<int, AsyncOperationHandle<GameObject>>();
+		readonly Dictionary<ulong, BattlePawnController> _pawns = new Dictionary<ulong, BattlePawnController>();
+		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
+		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
 
 		BattleMapGrid _mapGrid;
 		string _pawnAddress;
+		ulong _battleId;
+		ulong _currentTurnPawnId;
 		bool _destroyed;
 		bool _missingCameraLogged;
 
-		public IReadOnlyDictionary<int, BattlePawnController> Pawns => _pawns;
+		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
+		public ulong BattleId => _battleId;
+		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
 			_mapGrid = mapGrid;
 			_pawnAddress = pawnAddress;
+
+			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
+			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 		}
 
 		void Update()
@@ -36,16 +46,40 @@ namespace Battle
 		void OnDestroy()
 		{
 			_destroyed = true;
+			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			ReleasePawns();
 		}
 
 		public async void SpawnDebugPawns()
 		{
+			_battleId = 0;
+			_currentTurnPawnId = 1;
+			_localPawnIds.Clear();
+
 			await SpawnPawnAsync(1, true, new AxialCoord(-2, -2));
 			await SpawnPawnAsync(2, false, new AxialCoord(2, 2));
 		}
 
-		public async System.Threading.Tasks.Task<BattlePawnController> SpawnPawnAsync(int pawnId, bool isMine, AxialCoord axial)
+		public async void SpawnFromEnterBattle(S_ENTER_BATTLE packet)
+		{
+			if (packet == null || packet.Success == false)
+				return;
+
+			ReleasePawns();
+			_localPawnIds.Clear();
+			_battleId = packet.BattleId;
+			_currentTurnPawnId = packet.CurrentTurnPawnId;
+
+			foreach (BattlePawnInfo pawnInfo in packet.AlliedPawns)
+				await SpawnPawnAsync(pawnInfo.PawnId, true, ToBattleAxial(pawnInfo.Axial), pawnInfo);
+
+			foreach (BattlePawnInfo pawnInfo in packet.EnemyPawns)
+				await SpawnPawnAsync(pawnInfo.PawnId, false, ToBattleAxial(pawnInfo.Axial), pawnInfo);
+
+			Debug.Log($"Spawned battle pawns from server. battleId={_battleId}, currentTurnPawnId={_currentTurnPawnId}, allied={packet.AlliedPawns.Count}, enemy={packet.EnemyPawns.Count}");
+		}
+
+		public async System.Threading.Tasks.Task<BattlePawnController> SpawnPawnAsync(ulong pawnId, bool isMine, AxialCoord axial, BattlePawnInfo info = null)
 		{
 			if (_mapGrid == null)
 			{
@@ -95,16 +129,20 @@ namespace Battle
 				pawn = pawnObject.AddComponent<BattlePawnController>();
 
 			Color tint = isMine ? Color.white : new Color(1f, 0.75f, 0.75f, 1f);
-			pawn.Initialize(pawnId, isMine, _mapGrid, axial, tint);
+			pawn.Initialize(pawnId, isMine, _mapGrid, axial, tint, info);
 
 			_pawns[pawnId] = pawn;
-			Debug.Log($"Spawned battle pawn: id={pawnId}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
+			if (isMine)
+				_localPawnIds.Add(pawnId);
+
+			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
 			return pawn;
 		}
 
-		public void DespawnPawn(int pawnId)
+		public void DespawnPawn(ulong pawnId)
 		{
 			_pawns.Remove(pawnId);
+			_localPawnIds.Remove(pawnId);
 
 			if (_pawnHandles.TryGetValue(pawnId, out AsyncOperationHandle<GameObject> handle))
 			{
@@ -125,6 +163,7 @@ namespace Battle
 
 			_pawns.Clear();
 			_pawnHandles.Clear();
+			_localPawnIds.Clear();
 		}
 
 		void HandleMouseInput()
@@ -160,11 +199,55 @@ namespace Battle
 				return;
 			}
 
-			if (_pawns.TryGetValue(1, out BattlePawnController myPawn) == false)
+			ulong movingPawnId = GetControllablePawnId();
+			if (_pawns.TryGetValue(movingPawnId, out BattlePawnController myPawn) == false)
 				return;
 
+			if (_battleId != 0 && GameRoot.Instance != null)
+			{
+				bool sent = GameRoot.Instance.Network.SendBattleMove(_battleId, movingPawnId, axial.Q, axial.R);
+				if (sent)
+					Debug.Log($"Sent C_BATTLE_MOVE. battleId={_battleId}, pawnId={movingPawnId}, axial={axial}");
+				else
+					Debug.LogWarning($"Failed to send C_BATTLE_MOVE. {GameRoot.Instance.Network.LastError}");
+
+				return;
+			}
+
 			myPawn.SetAxial(axial);
-			Debug.Log($"Move battle pawn to tile center. axial={axial}, world={myPawn.transform.position}");
+			Debug.Log($"Move debug battle pawn to tile center. axial={axial}, world={myPawn.transform.position}");
+		}
+
+		ulong GetControllablePawnId()
+		{
+			if (_currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId))
+				return _currentTurnPawnId;
+
+			foreach (ulong pawnId in _localPawnIds)
+				return pawnId;
+
+			return 1;
+		}
+
+		void OnBattleMoveReceived(S_BATTLE_MOVE packet)
+		{
+			if (packet == null || packet.BattleId != _battleId)
+				return;
+
+			if (packet.Success == false)
+			{
+				Debug.LogWarning($"Battle move rejected. pawnId={packet.PawnId}, result={packet.Result}, reason={packet.Reason}");
+				return;
+			}
+
+			if (_pawns.TryGetValue(packet.PawnId, out BattlePawnController pawn) == false)
+				return;
+
+			if (packet.Target != null)
+				pawn.SetAxial(ToBattleAxial(packet.Target));
+
+			_currentTurnPawnId = packet.NextTurnPawnId;
+			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={pawn.Axial}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
 		bool TryGetPointerDown(out Vector2 screenPosition)
@@ -199,6 +282,14 @@ namespace Battle
 				&& screenPosition.y >= 0f
 				&& screenPosition.x <= camera.pixelWidth
 				&& screenPosition.y <= camera.pixelHeight;
+		}
+
+		static AxialCoord ToBattleAxial(Protocol.AxialCoord axial)
+		{
+			if (axial == null)
+				return default;
+
+			return new AxialCoord(axial.Q, axial.R);
 		}
 	}
 }

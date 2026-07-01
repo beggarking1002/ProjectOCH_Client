@@ -11,7 +11,7 @@ namespace Scenes
 		const string FieldSceneName = "FieldScene";
 		const string FieldMapAddress = "Field_001";
 		const string WorldMapAddress = "WorldMapRoot";
-		const string FieldPawnAddress = "Field_Pawn";
+		const string FieldPawnAddress = "Pawn_Beige_Ice";
 		const int WorldMapSortingOrderOffset = 1;
 
 		static FieldSceneAddressableLoader _instance;

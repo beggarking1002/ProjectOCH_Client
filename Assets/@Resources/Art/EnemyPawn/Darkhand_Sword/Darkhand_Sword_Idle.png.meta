@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 2160
-        width: 372
-        height: 707
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 2154
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_1
       rect:
         serializedVersion: 2
-        x: 413
-        y: 2160
-        width: 373
-        height: 709
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 400
+        y: 2154
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_2
       rect:
         serializedVersion: 2
-        x: 811
-        y: 2161
-        width: 377
-        height: 709
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 800
+        y: 2154
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_3
       rect:
         serializedVersion: 2
-        x: 1210
-        y: 2161
-        width: 380
-        height: 711
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1200
+        y: 2154
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_4
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1443
-        width: 384
-        height: 712
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1436
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_5
       rect:
         serializedVersion: 2
-        x: 408
-        y: 1443
-        width: 386
-        height: 711
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 400
+        y: 1436
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_6
       rect:
         serializedVersion: 2
-        x: 807
-        y: 1443
-        width: 391
-        height: 709
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 800
+        y: 1436
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_7
       rect:
         serializedVersion: 2
-        x: 1208
-        y: 1443
-        width: 392
-        height: 706
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1200
+        y: 1436
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_8
       rect:
         serializedVersion: 2
-        x: 8
-        y: 725
-        width: 392
-        height: 706
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 718
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_9
       rect:
         serializedVersion: 2
-        x: 408
-        y: 725
-        width: 392
-        height: 707
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 400
+        y: 718
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_10
       rect:
         serializedVersion: 2
-        x: 808
-        y: 725
-        width: 390
-        height: 710
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 800
+        y: 718
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_11
       rect:
         serializedVersion: 2
-        x: 1208
-        y: 725
-        width: 387
-        height: 711
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1200
+        y: 718
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_12
       rect:
         serializedVersion: 2
-        x: 8
-        y: 7
-        width: 384
-        height: 710
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_13
       rect:
         serializedVersion: 2
-        x: 408
-        y: 7
-        width: 383
-        height: 709
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 400
+        y: 0
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_14
       rect:
         serializedVersion: 2
-        x: 810
-        y: 7
-        width: 378
-        height: 707
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 800
+        y: 0
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Darkhand_Sword_Idle_15
       rect:
         serializedVersion: 2
-        x: 1213
-        y: 7
-        width: 372
-        height: 706
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1200
+        y: 0
+        width: 400
+        height: 718
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7fff94e3f2ab3cb42ada7f6aa8b75e36
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":400.0,"y":718.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Darkhand_Sword_Idle_0: -6501155222346049861
       Darkhand_Sword_Idle_1: -2688841057469243620

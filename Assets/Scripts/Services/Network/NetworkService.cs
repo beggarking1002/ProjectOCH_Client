@@ -25,6 +25,7 @@ namespace Networking
 		public string LastError { get; private set; }
 		public Protocol.S_LOGIN LastLogin { get; private set; }
 		public Protocol.S_ENTER_GAME LastEnterGame { get; private set; }
+		public Protocol.S_ENTER_BATTLE LastEnterBattle { get; private set; }
 
 		public bool IsConnected =>
 			_session != null &&
@@ -41,6 +42,8 @@ namespace Networking
 		public event Action<Protocol.S_SPAWN> SpawnReceived;
 		public event Action<Protocol.S_DESPAWN> DespawnReceived;
 		public event Action<Protocol.S_MOVE> MoveReceived;
+		public event Action<Protocol.S_ENTER_BATTLE> EnterBattleReceived;
+		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -54,6 +57,8 @@ namespace Networking
 			PacketHandler.Instance.SpawnReceived += OnSpawnReceived;
 			PacketHandler.Instance.DespawnReceived += OnDespawnReceived;
 			PacketHandler.Instance.MoveReceived += OnMoveReceived;
+			PacketHandler.Instance.EnterBattleReceived += OnEnterBattleReceived;
+			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			_initialized = true;
 		}
 
@@ -79,6 +84,8 @@ namespace Networking
 				PacketHandler.Instance.SpawnReceived -= OnSpawnReceived;
 				PacketHandler.Instance.DespawnReceived -= OnDespawnReceived;
 				PacketHandler.Instance.MoveReceived -= OnMoveReceived;
+				PacketHandler.Instance.EnterBattleReceived -= OnEnterBattleReceived;
+				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			}
 
 			Disconnect();
@@ -96,6 +103,7 @@ namespace Networking
 			LastError = null;
 			LastLogin = null;
 			LastEnterGame = null;
+			LastEnterBattle = null;
 			_knownPlayers.Clear();
 			SetState(GameServerConnectionState.Connecting);
 
@@ -149,6 +157,21 @@ namespace Networking
 			return Send(new Protocol.C_ENTER_GAME { PlayerIndex = playerIndex });
 		}
 
+		public bool EnterBattle()
+		{
+			return Send(new Protocol.C_ENTER_BATTLE());
+		}
+
+		public bool SendBattleMove(ulong battleId, ulong pawnId, int q, int r)
+		{
+			return Send(new Protocol.C_BATTLE_MOVE
+			{
+				BattleId = battleId,
+				PawnId = pawnId,
+				Target = new Protocol.AxialCoord { Q = q, R = r },
+			});
+		}
+
 		public bool SendChat(string message)
 		{
 			return Send(new Protocol.C_CHAT { Msg = message ?? string.Empty });
@@ -179,6 +202,12 @@ namespace Networking
 					break;
 				case Protocol.C_CHAT pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_CHAT);
+					break;
+				case Protocol.C_ENTER_BATTLE pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_ENTER_BATTLE);
+					break;
+				case Protocol.C_BATTLE_MOVE pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_MOVE);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";
@@ -297,6 +326,36 @@ namespace Networking
 			}
 
 			MoveReceived?.Invoke(pkt);
+		}
+
+		void OnEnterBattleReceived(Protocol.S_ENTER_BATTLE pkt)
+		{
+			LastEnterBattle = pkt;
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+			{
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Server rejected battle entry." : pkt.Reason;
+				Debug.LogWarning($"S_ENTER_BATTLE failed. reason={LastError}");
+			}
+			else
+			{
+				Debug.Log($"S_ENTER_BATTLE success. battleId={pkt.BattleId}, mapId={pkt.MapId}, allied={pkt.AlliedPawns.Count}, enemy={pkt.EnemyPawns.Count}, currentTurnPawnId={pkt.CurrentTurnPawnId}");
+			}
+
+			EnterBattleReceived?.Invoke(pkt);
+		}
+
+		void OnBattleMoveReceived(Protocol.S_BATTLE_MOVE pkt)
+		{
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+				Debug.LogWarning($"S_BATTLE_MOVE failed. pawnId={pkt.PawnId}, result={pkt.Result}, reason={pkt.Reason}");
+
+			BattleMoveReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)

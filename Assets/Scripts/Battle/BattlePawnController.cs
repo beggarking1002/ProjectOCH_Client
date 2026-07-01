@@ -10,20 +10,22 @@ namespace Battle
 		BattleMapGrid _mapGrid;
 		SpriteRenderer _spriteRenderer;
 
-		public int PawnId { get; private set; }
+		public ulong PawnId { get; private set; }
 		public bool IsMine { get; private set; }
 		public AxialCoord Axial { get; private set; }
+		public Protocol.BattlePawnInfo Info { get; private set; }
 
 		void Awake()
 		{
 			_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		}
 
-		public void Initialize(int pawnId, bool isMine, BattleMapGrid mapGrid, AxialCoord axial, Color tint)
+		public void Initialize(ulong pawnId, bool isMine, BattleMapGrid mapGrid, AxialCoord axial, Color tint, Protocol.BattlePawnInfo info = null)
 		{
 			PawnId = pawnId;
 			IsMine = isMine;
 			_mapGrid = mapGrid;
+			Info = info?.Clone();
 
 			if (_spriteRenderer == null)
 				_spriteRenderer = GetComponentInChildren<SpriteRenderer>();

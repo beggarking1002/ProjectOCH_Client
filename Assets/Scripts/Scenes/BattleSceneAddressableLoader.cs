@@ -1,4 +1,5 @@
 using Battle;
+using App;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -114,7 +115,11 @@ namespace Scenes
 				objectManager = battleMap.AddComponent<BattleObjectManager>();
 
 			objectManager.Initialize(mapGrid, BattlePawnAddress);
-			objectManager.SpawnDebugPawns();
+			Protocol.S_ENTER_BATTLE enterBattle = GameRoot.Instance != null ? GameRoot.Instance.Network.LastEnterBattle : null;
+			if (enterBattle != null && enterBattle.Success)
+				objectManager.SpawnFromEnterBattle(enterBattle);
+			else
+				objectManager.SpawnDebugPawns();
 		}
 
 		void ReleaseBattleSceneContent()

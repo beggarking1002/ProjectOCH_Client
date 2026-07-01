@@ -85,6 +85,16 @@ namespace Networking
 			return Network?.EnterGame(playerIndex) == true;
 		}
 
+		public bool EnterBattle()
+		{
+			return Network?.EnterBattle() == true;
+		}
+
+		public bool SendBattleMove(ulong battleId, ulong pawnId, int q, int r)
+		{
+			return Network?.SendBattleMove(battleId, pawnId, q, r) == true;
+		}
+
 		public bool SendChat(string message)
 		{
 			return Network?.SendChat(message) == true;

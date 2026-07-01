@@ -9,7 +9,8 @@ namespace Field
 	[DisallowMultipleComponent]
 	public sealed class FieldPawnController : MonoBehaviour
 	{
-		static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
+		const int DefaultSortingOrder = 20;
 
 		[SerializeField] float moveSpeed = 4f;
 		[SerializeField] float arriveDistance = 0.01f;
@@ -35,6 +36,7 @@ namespace Field
 		{
 			_animator = GetComponentInChildren<Animator>();
 			_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+			ApplyRenderSettings();
 			SetMoving(false);
 		}
 
@@ -51,7 +53,17 @@ namespace Field
 			IsMine = isMine;
 			_targetWorldPosition = startWorldPosition;
 			transform.position = _targetWorldPosition;
+			ApplyRenderSettings();
 			SetMoving(false);
+		}
+
+		void ApplyRenderSettings()
+		{
+			if (_spriteRenderer == null)
+				_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+			if (_spriteRenderer != null)
+				_spriteRenderer.sortingOrder = DefaultSortingOrder;
 		}
 
 		void HandleMouseInput()
