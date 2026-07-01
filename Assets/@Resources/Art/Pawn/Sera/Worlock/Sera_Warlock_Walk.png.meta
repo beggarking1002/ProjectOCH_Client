@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 360
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -145,353 +145,353 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_0
+      name: Sera_Warlock_Walk_0
       rect:
         serializedVersion: 2
-        x: 26
-        y: 1786
-        width: 284
-        height: 558
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1770
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 10a6bd6cd086f6910800000000000000
-      internalID: 1832797981743213057
+      spriteID: 457028a171e327446a3bc444d62b689c
+      internalID: 1523223600
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_1
+      name: Sera_Warlock_Walk_1
       rect:
         serializedVersion: 2
-        x: 366
-        y: 1784
-        width: 265
-        height: 562
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 336
+        y: 1770
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4713e4ee17022b920800000000000000
-      internalID: 3004499575111037300
+      spriteID: 3eb0bd36a0220a649aadd2ac6210d4b3
+      internalID: -463093594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_2
+      name: Sera_Warlock_Walk_2
       rect:
         serializedVersion: 2
-        x: 709
-        y: 1781
-        width: 252
-        height: 568
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 672
+        y: 1770
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b695ff6e1e2535d10800000000000000
-      internalID: 2113123780363508075
+      spriteID: dae3a5c16faaed94da1c7db82200912b
+      internalID: -516480476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_3
+      name: Sera_Warlock_Walk_3
       rect:
         serializedVersion: 2
-        x: 1059
-        y: 1782
-        width: 231
-        height: 576
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1008
+        y: 1770
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3f9e2c3b1da614630800000000000000
-      internalID: 3909523400430905843
+      spriteID: 09f33bdc104f0f149acd8e954dfdacbe
+      internalID: 482149488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_4
+      name: Sera_Warlock_Walk_4
       rect:
         serializedVersion: 2
-        x: 60
-        y: 1192
-        width: 226
-        height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1180
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 79a224ed8294b7f00800000000000000
-      internalID: 1115565772580727447
+      spriteID: 7aefdb04bc84da54c8f2f92cdeb4787a
+      internalID: 2028915745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_5
+      name: Sera_Warlock_Walk_5
       rect:
         serializedVersion: 2
-        x: 379
-        y: 1187
-        width: 281
-        height: 583
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 336
+        y: 1180
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 52bcb8d4b33e58610800000000000000
-      internalID: 1622953084580514597
+      spriteID: 0c5ab488e9c32f04191ce3e0d9b32fe5
+      internalID: -1656846474
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_6
+      name: Sera_Warlock_Walk_6
       rect:
         serializedVersion: 2
-        x: 702
-        y: 1187
-        width: 306
-        height: 580
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 672
+        y: 1180
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 773341d68a5893100800000000000000
-      internalID: 88248626141475703
+      spriteID: b4a9e95a49c87014282b9c88edb1feef
+      internalID: -666190809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_7
+      name: Sera_Warlock_Walk_7
       rect:
         serializedVersion: 2
-        x: 1033
-        y: 1187
-        width: 311
-        height: 579
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1008
+        y: 1180
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d8d0fcf08adb41830800000000000000
-      internalID: 4041063295175560589
+      spriteID: f8a53dc90ca34a24eaf9291fd66ae16f
+      internalID: -1322227304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_8
+      name: Sera_Warlock_Walk_8
       rect:
         serializedVersion: 2
-        x: 22
-        y: 597
-        width: 308
-        height: 578
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 590
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 64aa9c81cb7c0a930800000000000000
-      internalID: 4152538467119245894
+      spriteID: bb78527d9e4f48c45a0e681ff966ec6f
+      internalID: 1349150048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_9
+      name: Sera_Warlock_Walk_9
       rect:
         serializedVersion: 2
-        x: 376
-        y: 601
-        width: 279
-        height: 576
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 336
+        y: 590
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7d6b9771e6a4d2090800000000000000
-      internalID: -8057702321595238697
+      spriteID: 4e00fcc2df6629e4cab234f17d5fce24
+      internalID: -1987777422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_10
+      name: Sera_Warlock_Walk_10
       rect:
         serializedVersion: 2
-        x: 723
-        y: 607
-        width: 264
-        height: 570
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 672
+        y: 590
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d3fdfe00f2e1935e0800000000000000
-      internalID: -1929477778123530435
+      spriteID: 66c1d57d75a9c10478fa9f216c122cfd
+      internalID: 159951228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_11
+      name: Sera_Warlock_Walk_11
       rect:
         serializedVersion: 2
-        x: 1046
-        y: 606
-        width: 274
-        height: 567
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1008
+        y: 590
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 00a0795ddc4449690800000000000000
-      internalID: -7596371020624754176
+      spriteID: d1c289b2ab66f474fa5d28099a358bbc
+      internalID: -610155519
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_12
+      name: Sera_Warlock_Walk_12
       rect:
         serializedVersion: 2
-        x: 30
-        y: 16
-        width: 279
-        height: 563
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98a1531a982fff040800000000000000
-      internalID: 4683728810417658505
+      spriteID: e353335adf940df499fdd3bf9af32a94
+      internalID: -1662012697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_13
+      name: Sera_Warlock_Walk_13
       rect:
         serializedVersion: 2
-        x: 361
-        y: 16
-        width: 289
-        height: 559
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 336
+        y: 0
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8abe7e7a688125250800000000000000
-      internalID: 5931830625822043048
+      spriteID: d45f08d515f26114aaf731b999ce26fc
+      internalID: -509638061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_14
+      name: Sera_Warlock_Walk_14
       rect:
         serializedVersion: 2
-        x: 697
-        y: 17
-        width: 290
-        height: 557
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 672
+        y: 0
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 93ab8fdcd459b3620800000000000000
-      internalID: 2754959758467840569
+      spriteID: bdf4a9581ef390d4aa3f420a2d0e1b36
+      internalID: -273790066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sera_Warlock_Walk_Sprite_15
+      name: Sera_Warlock_Walk_15
       rect:
         serializedVersion: 2
-        x: 1034
-        y: 16
-        width: 286
-        height: 559
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1008
+        y: 0
+        width: 336
+        height: 590
+      alignment: 9
+      pivot: {x: 0.6, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c08a1b7b811444300800000000000000
-      internalID: 235384654947002380
+      spriteID: 726c14b9180d36443bf7ef9f244280af
+      internalID: 1623066575
       vertices: []
       indices: 
       edges: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9f3c5a8b6d620c342bfaa6ff6d637cf4
     internalID: 0
     vertices: []
     indices: 
@@ -508,24 +508,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":336.0,"y":590.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.6000000238418579,"y":0.05000000074505806},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Sera_Warlock_Walk_Sprite_0: 1832797981743213057
-      Sera_Warlock_Walk_Sprite_1: 3004499575111037300
-      Sera_Warlock_Walk_Sprite_10: -1929477778123530435
-      Sera_Warlock_Walk_Sprite_11: -7596371020624754176
-      Sera_Warlock_Walk_Sprite_12: 4683728810417658505
-      Sera_Warlock_Walk_Sprite_13: 5931830625822043048
-      Sera_Warlock_Walk_Sprite_14: 2754959758467840569
-      Sera_Warlock_Walk_Sprite_15: 235384654947002380
-      Sera_Warlock_Walk_Sprite_2: 2113123780363508075
-      Sera_Warlock_Walk_Sprite_3: 3909523400430905843
-      Sera_Warlock_Walk_Sprite_4: 1115565772580727447
-      Sera_Warlock_Walk_Sprite_5: 1622953084580514597
-      Sera_Warlock_Walk_Sprite_6: 88248626141475703
-      Sera_Warlock_Walk_Sprite_7: 4041063295175560589
-      Sera_Warlock_Walk_Sprite_8: 4152538467119245894
-      Sera_Warlock_Walk_Sprite_9: -8057702321595238697
+      Sera_Warlock_Walk_0: 1523223600
+      Sera_Warlock_Walk_1: -463093594
+      Sera_Warlock_Walk_10: 159951228
+      Sera_Warlock_Walk_11: -610155519
+      Sera_Warlock_Walk_12: -1662012697
+      Sera_Warlock_Walk_13: -509638061
+      Sera_Warlock_Walk_14: -273790066
+      Sera_Warlock_Walk_15: 1623066575
+      Sera_Warlock_Walk_2: -516480476
+      Sera_Warlock_Walk_3: 482149488
+      Sera_Warlock_Walk_4: 2028915745
+      Sera_Warlock_Walk_5: -1656846474
+      Sera_Warlock_Walk_6: -666190809
+      Sera_Warlock_Walk_7: -1322227304
+      Sera_Warlock_Walk_8: 1349150048
+      Sera_Warlock_Walk_9: -1987777422
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

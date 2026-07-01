@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -145,353 +145,353 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_0
+      name: Suen_AxeOff_Walk_0
       rect:
         serializedVersion: 2
-        x: 118
-        y: 1754
-        width: 319
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1740
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5921e7f8008be4b80800000000000000
-      internalID: -8408581141707222379
+      spriteID: 5a5826e8eab419d45b06ea04af5ca6a9
+      internalID: 2056154436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_1
+      name: Suen_AxeOff_Walk_1
       rect:
         serializedVersion: 2
-        x: 674
-        y: 1752
-        width: 318
-        height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 556
+        y: 1740
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dcc19406cda8f89a0800000000000000
-      internalID: -6228607080517264179
+      spriteID: c3fff32e490283d4bba427b0a990cc97
+      internalID: -701061059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_2
+      name: Suen_AxeOff_Walk_2
       rect:
         serializedVersion: 2
-        x: 1236
-        y: 1750
-        width: 318
-        height: 563
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1112
+        y: 1740
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 692187e8378f06a20800000000000000
-      internalID: 3053713722552357526
+      spriteID: de2d95366801c114c963a430b20e16d6
+      internalID: -1610699784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_3
+      name: Suen_AxeOff_Walk_3
       rect:
         serializedVersion: 2
-        x: 1798
-        y: 1751
-        width: 330
-        height: 566
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1668
+        y: 1740
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3c40e5c02cc93cd60800000000000000
-      internalID: 7909337727837799619
+      spriteID: e001536c8ae76304abe3847bc649f25e
+      internalID: 1365991520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_4
+      name: Suen_AxeOff_Walk_4
       rect:
         serializedVersion: 2
-        x: 136
-        y: 1175
-        width: 344
-        height: 565
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1160
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d8f29ff2ceffdccd0800000000000000
-      internalID: -2536089625257496691
+      spriteID: aafcf463253b5a3489841d13159cfc7e
+      internalID: -1896372007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_5
+      name: Suen_AxeOff_Walk_5
       rect:
         serializedVersion: 2
-        x: 702
-        y: 1182
-        width: 362
-        height: 558
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 556
+        y: 1160
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6486fc6d90eee3030800000000000000
-      internalID: 3476477688402634822
+      spriteID: 1b46c39b7b2abf24c99921ed90a34ffc
+      internalID: -207157681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_6
+      name: Suen_AxeOff_Walk_6
       rect:
         serializedVersion: 2
-        x: 1259
-        y: 1183
-        width: 380
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1112
+        y: 1160
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c3b16b4deb11cb910800000000000000
-      internalID: 1854376657879964476
+      spriteID: cafbc46a367f09d4c9174fd689a47192
+      internalID: 193533467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_7
+      name: Suen_AxeOff_Walk_7
       rect:
         serializedVersion: 2
-        x: 1793
-        y: 1178
-        width: 421
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1668
+        y: 1160
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7821f024a0f01a3a0800000000000000
-      internalID: -6656022237544508793
+      spriteID: 3de3b9634fa4222408a680f42ae16c1d
+      internalID: 1805964185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_8
+      name: Suen_AxeOff_Walk_8
       rect:
         serializedVersion: 2
-        x: 118
-        y: 595
-        width: 435
-        height: 554
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 580
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6c281d13a482f9ef0800000000000000
-      internalID: -99316367650356538
+      spriteID: c2c9249c152724b4c809f4a49c37a645
+      internalID: -1687898488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_9
+      name: Suen_AxeOff_Walk_9
       rect:
         serializedVersion: 2
-        x: 659
-        y: 590
-        width: 453
-        height: 557
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 556
+        y: 580
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5f2a315c8acbcea40800000000000000
-      internalID: 5398897486357308149
+      spriteID: 4e99c1dedf94ffd49b2228923f80ffd5
+      internalID: 1635871375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_10
+      name: Suen_AxeOff_Walk_10
       rect:
         serializedVersion: 2
-        x: 1222
-        y: 591
-        width: 443
-        height: 558
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1112
+        y: 580
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b00823731c9052180800000000000000
-      internalID: -9140889143219159029
+      spriteID: 7fbc6b9bfd45a2c468f1b4bcc2eb5b83
+      internalID: -1876092554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_11
+      name: Suen_AxeOff_Walk_11
       rect:
         serializedVersion: 2
-        x: 1816
-        y: 596
-        width: 365
-        height: 562
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1668
+        y: 580
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 31fbc259fdf327f70800000000000000
-      internalID: 9183472819674857235
+      spriteID: be727385a5958f14780513a9a4b1070e
+      internalID: -1758414476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_12
+      name: Suen_AxeOff_Walk_12
       rect:
         serializedVersion: 2
-        x: 138
-        y: 20
-        width: 354
-        height: 560
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 54164d469c6d4a550800000000000000
-      internalID: 6171293549872832837
+      spriteID: 2c76999f4fa83904fb062620a1231076
+      internalID: 1607330639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_13
+      name: Suen_AxeOff_Walk_13
       rect:
         serializedVersion: 2
-        x: 686
-        y: 22
-        width: 342
-        height: 557
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 556
+        y: 0
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d3f7f772cd4429d30800000000000000
-      internalID: 4436684295259520829
+      spriteID: dda08481027e7c7489f91c49ee36e80a
+      internalID: -1033278889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_14
+      name: Suen_AxeOff_Walk_14
       rect:
         serializedVersion: 2
-        x: 1236
-        y: 18
-        width: 330
-        height: 558
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1112
+        y: 0
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 05fd6e3f7710a7150800000000000000
-      internalID: 5871006678935592784
+      spriteID: 3be395dad386e9b4188a215a55c62139
+      internalID: 1847801874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (3)_15
+      name: Suen_AxeOff_Walk_15
       rect:
         serializedVersion: 2
-        x: 1786
-        y: 14
-        width: 321
-        height: 555
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1668
+        y: 0
+        width: 556
+        height: 580
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 394b35d6046f829e0800000000000000
-      internalID: -1645794907231374189
+      spriteID: 865373c494bf45d4c81cda613424e9eb
+      internalID: 622177998
       vertices: []
       indices: 
       edges: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7ee60cd50f3b77f4595d14900be279b0
     internalID: 0
     vertices: []
     indices: 
@@ -508,24 +508,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":556.0,"y":580.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_0: -8408581141707222379
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_1: -6228607080517264179
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_10: -9140889143219159029
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_11: 9183472819674857235
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_12: 6171293549872832837
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_13: 4436684295259520829
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_14: 5871006678935592784
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_15: -1645794907231374189
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_2: 3053713722552357526
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_3: 7909337727837799619
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_4: -2536089625257496691
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_5: 3476477688402634822
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_6: 1854376657879964476
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_7: -6656022237544508793
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_8: -99316367650356538
-      sprite-max-px-frames-16-rows-4-cols-4 (3)_9: 5398897486357308149
+      Suen_AxeOff_Walk_0: 2056154436
+      Suen_AxeOff_Walk_1: -701061059
+      Suen_AxeOff_Walk_10: -1876092554
+      Suen_AxeOff_Walk_11: -1758414476
+      Suen_AxeOff_Walk_12: 1607330639
+      Suen_AxeOff_Walk_13: -1033278889
+      Suen_AxeOff_Walk_14: 1847801874
+      Suen_AxeOff_Walk_15: 622177998
+      Suen_AxeOff_Walk_2: -1610699784
+      Suen_AxeOff_Walk_3: 1365991520
+      Suen_AxeOff_Walk_4: -1896372007
+      Suen_AxeOff_Walk_5: -207157681
+      Suen_AxeOff_Walk_6: 193533467
+      Suen_AxeOff_Walk_7: 1805964185
+      Suen_AxeOff_Walk_8: -1687898488
+      Suen_AxeOff_Walk_9: 1635871375
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_0
       rect:
         serializedVersion: 2
-        x: 39
-        y: 1760
-        width: 350
-        height: 553
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1746
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_1
       rect:
         serializedVersion: 2
-        x: 455
-        y: 1758
-        width: 364
-        height: 551
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 426
+        y: 1746
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_2
       rect:
         serializedVersion: 2
-        x: 881
-        y: 1756
-        width: 368
-        height: 553
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 852
+        y: 1746
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_3
       rect:
         serializedVersion: 2
-        x: 1334
-        y: 1758
-        width: 356
-        height: 561
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1278
+        y: 1746
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_4
       rect:
         serializedVersion: 2
-        x: 58
-        y: 1177
-        width: 356
-        height: 562
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1164
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_5
       rect:
         serializedVersion: 2
-        x: 492
-        y: 1182
-        width: 359
-        height: 564
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 426
+        y: 1164
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_6
       rect:
         serializedVersion: 2
-        x: 918
-        y: 1178
-        width: 360
-        height: 567
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 852
+        y: 1164
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_7
       rect:
         serializedVersion: 2
-        x: 1341
-        y: 1176
-        width: 363
-        height: 567
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1278
+        y: 1164
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_8
       rect:
         serializedVersion: 2
-        x: 50
-        y: 591
-        width: 368
-        height: 557
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 582
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_9
       rect:
         serializedVersion: 2
-        x: 471
-        y: 587
-        width: 366
-        height: 556
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 426
+        y: 582
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_10
       rect:
         serializedVersion: 2
-        x: 898
-        y: 589
-        width: 355
-        height: 558
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 852
+        y: 582
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_11
       rect:
         serializedVersion: 2
-        x: 1329
-        y: 588
-        width: 345
-        height: 565
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1278
+        y: 582
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_12
       rect:
         serializedVersion: 2
-        x: 55
-        y: 7
-        width: 338
-        height: 569
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_13
       rect:
         serializedVersion: 2
-        x: 482
-        y: 9
-        width: 335
-        height: 570
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 426
+        y: 0
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_14
       rect:
         serializedVersion: 2
-        x: 905
-        y: 12
-        width: 337
-        height: 568
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 852
+        y: 0
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Zillian_Longbow_Walk_15
       rect:
         serializedVersion: 2
-        x: 1316
-        y: 16
-        width: 351
-        height: 551
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1278
+        y: 0
+        width: 426
+        height: 582
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4b516311e038dec4481b7531d07f5e84
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":426.0,"y":582.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Zillian_Longbow_Walk_0: 7489664484778689165
       Zillian_Longbow_Walk_1: -7833796090513658217

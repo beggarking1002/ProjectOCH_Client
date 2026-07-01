@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Zillian_Mace_idle_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 1582
-        width: 321
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1578
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Zillian_Mace_idle_1
       rect:
         serializedVersion: 2
-        x: 339
-        y: 1582
-        width: 322
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 332
+        y: 1578
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Zillian_Mace_idle_2
       rect:
         serializedVersion: 2
-        x: 670
-        y: 1582
-        width: 324
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 664
+        y: 1578
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Zillian_Mace_idle_3
       rect:
         serializedVersion: 2
-        x: 1003
-        y: 1582
-        width: 324
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 996
+        y: 1578
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Zillian_Mace_idle_4
       rect:
         serializedVersion: 2
-        x: 7
-        y: 1056
-        width: 324
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1052
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Zillian_Mace_idle_5
       rect:
         serializedVersion: 2
-        x: 339
-        y: 1056
-        width: 324
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 332
+        y: 1052
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Zillian_Mace_idle_6
       rect:
         serializedVersion: 2
-        x: 671
-        y: 1055
-        width: 324
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 664
+        y: 1052
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Zillian_Mace_idle_7
       rect:
         serializedVersion: 2
-        x: 1003
-        y: 1055
-        width: 324
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 996
+        y: 1052
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Zillian_Mace_idle_8
       rect:
         serializedVersion: 2
-        x: 6
-        y: 529
-        width: 325
-        height: 520
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 526
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Zillian_Mace_idle_9
       rect:
         serializedVersion: 2
-        x: 338
-        y: 529
-        width: 324
-        height: 519
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 332
+        y: 526
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Zillian_Mace_idle_10
       rect:
         serializedVersion: 2
-        x: 669
-        y: 529
-        width: 325
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 664
+        y: 526
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Zillian_Mace_idle_11
       rect:
         serializedVersion: 2
-        x: 1001
-        y: 529
-        width: 324
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 996
+        y: 526
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Zillian_Mace_idle_12
       rect:
         serializedVersion: 2
-        x: 5
-        y: 3
-        width: 323
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Zillian_Mace_idle_13
       rect:
         serializedVersion: 2
-        x: 337
-        y: 3
-        width: 323
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 332
+        y: 0
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Zillian_Mace_idle_14
       rect:
         serializedVersion: 2
-        x: 669
-        y: 3
-        width: 322
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 664
+        y: 0
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Zillian_Mace_idle_15
       rect:
         serializedVersion: 2
-        x: 1002
-        y: 3
-        width: 320
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 996
+        y: 0
+        width: 332
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a3acabb91f70cc347a0ae9b3ed98cdf6
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":332.0,"y":526.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Zillian_Mace_idle_0: 636238451410140588
       Zillian_Mace_idle_1: -4335573228246439976

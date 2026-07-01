@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_0
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 1578
-        width: 263
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_1
       rect:
         serializedVersion: 2
-        x: 462
+        x: 390
         y: 1578
-        width: 264
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_2
       rect:
         serializedVersion: 2
-        x: 857
+        x: 780
         y: 1578
-        width: 273
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_3
       rect:
         serializedVersion: 2
-        x: 1264
+        x: 1170
         y: 1578
-        width: 292
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_4
       rect:
         serializedVersion: 2
-        x: 94
+        x: 0
         y: 1052
-        width: 292
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_5
       rect:
         serializedVersion: 2
-        x: 484
-        y: 1053
-        width: 296
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 390
+        y: 1052
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_6
       rect:
         serializedVersion: 2
-        x: 874
-        y: 1053
-        width: 296
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 780
+        y: 1052
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_7
       rect:
         serializedVersion: 2
-        x: 1264
-        y: 1053
-        width: 296
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1170
+        y: 1052
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_8
       rect:
         serializedVersion: 2
-        x: 68
-        y: 1
-        width: 265
+        x: 0
+        y: 526
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_9
       rect:
         serializedVersion: 2
-        x: 92
-        y: 527
-        width: 288
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 390
+        y: 526
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_10
       rect:
         serializedVersion: 2
-        x: 478
-        y: 527
-        width: 283
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 780
+        y: 526
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_11
       rect:
         serializedVersion: 2
-        x: 862
-        y: 527
-        width: 277
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1170
+        y: 526
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_12
       rect:
         serializedVersion: 2
-        x: 1242
-        y: 527
-        width: 266
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 390
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_13
       rect:
         serializedVersion: 2
-        x: 453
+        x: 390
         y: 0
-        width: 264
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_14
       rect:
         serializedVersion: 2
-        x: 843
+        x: 780
         y: 0
-        width: 264
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Suen_ParvisOff_Idle_15
       rect:
         serializedVersion: 2
-        x: 1233
+        x: 1170
         y: 0
-        width: 264
+        width: 390
         height: 526
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fb0736759e5243646a95ef67ab23a826
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":390.0,"y":526.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Suen_ParvisOff_Idle_0: 8393834793162845553
       Suen_ParvisOff_Idle_1: -6091111005058291868

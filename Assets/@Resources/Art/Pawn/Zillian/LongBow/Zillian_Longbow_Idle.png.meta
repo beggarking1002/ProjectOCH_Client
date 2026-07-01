@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 1560
-        width: 320
-        height: 519
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_1
       rect:
         serializedVersion: 2
-        x: 336
+        x: 330
         y: 1560
-        width: 322
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_2
       rect:
         serializedVersion: 2
-        x: 667
+        x: 660
         y: 1560
-        width: 322
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_3
       rect:
         serializedVersion: 2
-        x: 998
+        x: 990
         y: 1560
-        width: 322
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_4
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 1040
-        width: 323
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_5
       rect:
         serializedVersion: 2
-        x: 336
+        x: 330
         y: 1040
-        width: 324
-        height: 517
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_6
       rect:
         serializedVersion: 2
-        x: 665
+        x: 660
         y: 1040
-        width: 325
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_7
       rect:
         serializedVersion: 2
-        x: 995
+        x: 990
         y: 1040
-        width: 325
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_8
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 520
-        width: 324
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_9
       rect:
         serializedVersion: 2
-        x: 335
-        y: 521
-        width: 322
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 330
+        y: 520
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_10
       rect:
         serializedVersion: 2
-        x: 665
-        y: 521
-        width: 321
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 660
+        y: 520
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_11
       rect:
         serializedVersion: 2
-        x: 995
-        y: 521
-        width: 320
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 990
+        y: 520
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_12
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1
-        width: 320
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_13
       rect:
         serializedVersion: 2
-        x: 335
-        y: 1
-        width: 320
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 330
+        y: 0
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_14
       rect:
         serializedVersion: 2
-        x: 665
-        y: 1
-        width: 320
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 660
+        y: 0
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Zillian_Longbow_Idle_15
       rect:
         serializedVersion: 2
-        x: 995
-        y: 1
-        width: 320
-        height: 518
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 990
+        y: 0
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a8603b8926bff8f4190702c7a19b3213
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":330.0,"y":520.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Zillian_Longbow_Idle_0: -5979893866266074800
       Zillian_Longbow_Idle_1: -2816433922543426250

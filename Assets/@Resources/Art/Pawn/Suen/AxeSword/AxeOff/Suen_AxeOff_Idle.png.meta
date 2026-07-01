@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -145,353 +145,353 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_0
+      name: Suen_AxeOff_Idle_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1573
-        width: 293
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1572
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eca87eb80f2ae4070800000000000000
-      internalID: 8092584734454418126
+      spriteID: e6c72fb9b65fda343bad782af9be2219
+      internalID: -1553354627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_1
+      name: Suen_AxeOff_Idle_1
       rect:
         serializedVersion: 2
-        x: 317
-        y: 1573
-        width: 295
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 308
+        y: 1572
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 85c70ff6896dec080800000000000000
-      internalID: -9165152241450976168
+      spriteID: c027025ac1b6b3a47b4574a5b1993af5
+      internalID: -1431417008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_2
+      name: Suen_AxeOff_Idle_2
       rect:
         serializedVersion: 2
-        x: 626
-        y: 1573
-        width: 295
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 616
+        y: 1572
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ee0456716e63a8270800000000000000
-      internalID: 8253469628972744942
+      spriteID: 9f4044e0c583b0f45bab59a4350ea0f6
+      internalID: -466385021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_3
+      name: Suen_AxeOff_Idle_3
       rect:
         serializedVersion: 2
-        x: 935
-        y: 1573
-        width: 295
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 924
+        y: 1572
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 715b8ed6ed05cf660800000000000000
-      internalID: 7420895202256663831
+      spriteID: 0a51a1e43611abc4cb574e7d59901b9e
+      internalID: -183179638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_4
+      name: Suen_AxeOff_Idle_4
       rect:
         serializedVersion: 2
-        x: 11
-        y: 1049
-        width: 296
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1048
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b029dc93ac4350450800000000000000
-      internalID: 6054303317227311627
+      spriteID: d9c27a08425eb74499cea2c3157bd040
+      internalID: -1245271695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_5
+      name: Suen_AxeOff_Idle_5
       rect:
         serializedVersion: 2
-        x: 319
-        y: 1049
-        width: 296
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 308
+        y: 1048
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 57a23e33c7d6add90800000000000000
-      internalID: -7072219884618044811
+      spriteID: ac9f0d9de1169674285ceb637ca21a2a
+      internalID: 1615843729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_6
+      name: Suen_AxeOff_Idle_6
       rect:
         serializedVersion: 2
-        x: 627
-        y: 1049
-        width: 296
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 616
+        y: 1048
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 079d5293465334ef0800000000000000
-      internalID: -125197660064458384
+      spriteID: 2be540806d2e72642839aee738a2b00e
+      internalID: 260151637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_7
+      name: Suen_AxeOff_Idle_7
       rect:
         serializedVersion: 2
-        x: 934
-        y: 1049
-        width: 297
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 924
+        y: 1048
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d0677e30e7b44efb0800000000000000
-      internalID: -4619484313171823091
+      spriteID: 4c0a85af84032e24289f952ee48ad5a1
+      internalID: 1213927672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_8
+      name: Suen_AxeOff_Idle_8
       rect:
         serializedVersion: 2
-        x: 9
-        y: 525
-        width: 298
-        height: 521
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 524
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e98d9db2275466440800000000000000
-      internalID: 4928703198867871902
+      spriteID: 2c469c0a8e2911644954fb7dc23cfc21
+      internalID: -422970454
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_9
+      name: Suen_AxeOff_Idle_9
       rect:
         serializedVersion: 2
-        x: 317
-        y: 525
-        width: 296
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 308
+        y: 524
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4586966c372cb1b90800000000000000
-      internalID: -7270003370953709484
+      spriteID: beafb7116c3e8124eba9cd3c0b1742a0
+      internalID: 10746783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_10
+      name: Suen_AxeOff_Idle_10
       rect:
         serializedVersion: 2
-        x: 625
-        y: 525
-        width: 296
-        height: 522
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 616
+        y: 524
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9749f8e180b927c10800000000000000
-      internalID: 2049871239581766777
+      spriteID: ccda2d9e0da5be243b53bc6518e8f82d
+      internalID: -145171742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_11
+      name: Suen_AxeOff_Idle_11
       rect:
         serializedVersion: 2
-        x: 932
-        y: 525
-        width: 296
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 924
+        y: 524
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0a08f68a86a046330800000000000000
-      internalID: 3703096238224146592
+      spriteID: 265ebeccef3e6674d8fee37e41765a29
+      internalID: 307759089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_12
+      name: Suen_AxeOff_Idle_12
       rect:
         serializedVersion: 2
-        x: 7
-        y: 1
-        width: 296
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2d6a7023550aa7bb0800000000000000
-      internalID: -4937457753686300974
+      spriteID: 1916e5a01f94a0741a6e69ad764b07fa
+      internalID: 1958759710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_13
+      name: Suen_AxeOff_Idle_13
       rect:
         serializedVersion: 2
-        x: 315
-        y: 1
-        width: 296
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 308
+        y: 0
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ce953e85d60332dd0800000000000000
-      internalID: -2512110920941741588
+      spriteID: aeeb81d3c2046a5479c6581ef9022d0c
+      internalID: -1992326286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_14
+      name: Suen_AxeOff_Idle_14
       rect:
         serializedVersion: 2
-        x: 623
-        y: 1
-        width: 294
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 616
+        y: 0
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 883eaa9c57c80ade0800000000000000
-      internalID: -1323903852924443768
+      spriteID: 535f0478aa2b438469ee02f0abf012ac
+      internalID: -1712451313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-max-px-frames-16-rows-4-cols-4 (2)_15
+      name: Suen_AxeOff_Idle_15
       rect:
         serializedVersion: 2
-        x: 931
-        y: 1
-        width: 293
-        height: 523
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 924
+        y: 0
+        width: 308
+        height: 524
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: abad352f8542f08f0800000000000000
-      internalID: -572198663211459910
+      spriteID: 64d5fd1f06fa909419a996ba26ad316a
+      internalID: -778994631
       vertices: []
       indices: 
       edges: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1683ebb85a42ec44390dcb8ee28bf39b
     internalID: 0
     vertices: []
     indices: 
@@ -508,24 +508,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":308.0,"y":524.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_0: 8092584734454418126
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_1: -9165152241450976168
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_10: 2049871239581766777
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_11: 3703096238224146592
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_12: -4937457753686300974
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_13: -2512110920941741588
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_14: -1323903852924443768
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_15: -572198663211459910
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_2: 8253469628972744942
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_3: 7420895202256663831
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_4: 6054303317227311627
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_5: -7072219884618044811
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_6: -125197660064458384
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_7: -4619484313171823091
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_8: 4928703198867871902
-      sprite-max-px-frames-16-rows-4-cols-4 (2)_9: -7270003370953709484
+      Suen_AxeOff_Idle_0: -1553354627
+      Suen_AxeOff_Idle_1: -1431417008
+      Suen_AxeOff_Idle_10: -145171742
+      Suen_AxeOff_Idle_11: 307759089
+      Suen_AxeOff_Idle_12: 1958759710
+      Suen_AxeOff_Idle_13: -1992326286
+      Suen_AxeOff_Idle_14: -1712451313
+      Suen_AxeOff_Idle_15: -778994631
+      Suen_AxeOff_Idle_2: -466385021
+      Suen_AxeOff_Idle_3: -183179638
+      Suen_AxeOff_Idle_4: -1245271695
+      Suen_AxeOff_Idle_5: 1615843729
+      Suen_AxeOff_Idle_6: 260151637
+      Suen_AxeOff_Idle_7: 1213927672
+      Suen_AxeOff_Idle_8: -422970454
+      Suen_AxeOff_Idle_9: 10746783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

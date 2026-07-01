@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Alen_Spear_Idle_0
       rect:
         serializedVersion: 2
-        x: 33
+        x: 0
         y: 1524
-        width: 401
+        width: 466
         height: 508
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Alen_Spear_Idle_1
       rect:
         serializedVersion: 2
-        x: 499
+        x: 466
         y: 1524
-        width: 405
-        height: 506
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Alen_Spear_Idle_2
       rect:
         serializedVersion: 2
-        x: 965
+        x: 932
         y: 1524
-        width: 411
-        height: 504
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Alen_Spear_Idle_3
       rect:
         serializedVersion: 2
-        x: 1430
-        y: 1525
-        width: 426
-        height: 498
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1398
+        y: 1524
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Alen_Spear_Idle_4
       rect:
         serializedVersion: 2
-        x: 32
-        y: 1017
-        width: 428
-        height: 498
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1016
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Alen_Spear_Idle_5
       rect:
         serializedVersion: 2
-        x: 497
-        y: 1018
-        width: 432
-        height: 497
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 466
+        y: 1016
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Alen_Spear_Idle_6
       rect:
         serializedVersion: 2
-        x: 961
-        y: 1018
-        width: 436
-        height: 497
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 932
+        y: 1016
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Alen_Spear_Idle_7
       rect:
         serializedVersion: 2
-        x: 1426
-        y: 1018
-        width: 438
-        height: 497
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1398
+        y: 1016
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Alen_Spear_Idle_8
       rect:
         serializedVersion: 2
-        x: 27
-        y: 510
-        width: 438
-        height: 497
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 508
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Alen_Spear_Idle_9
       rect:
         serializedVersion: 2
-        x: 493
-        y: 509
-        width: 434
-        height: 497
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 466
+        y: 508
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Alen_Spear_Idle_10
       rect:
         serializedVersion: 2
-        x: 959
-        y: 509
-        width: 429
-        height: 497
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 932
+        y: 508
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Alen_Spear_Idle_11
       rect:
         serializedVersion: 2
-        x: 1425
-        y: 509
-        width: 424
-        height: 499
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1398
+        y: 508
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Alen_Spear_Idle_12
       rect:
         serializedVersion: 2
-        x: 28
-        y: 1
-        width: 417
-        height: 501
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Alen_Spear_Idle_13
       rect:
         serializedVersion: 2
-        x: 496
-        y: 1
-        width: 410
-        height: 503
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 466
+        y: 0
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Alen_Spear_Idle_14
       rect:
         serializedVersion: 2
-        x: 964
-        y: 1
-        width: 405
-        height: 505
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 932
+        y: 0
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Alen_Spear_Idle_15
       rect:
         serializedVersion: 2
-        x: 1430
-        y: 1
-        width: 401
-        height: 506
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1398
+        y: 0
+        width: 466
+        height: 508
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3c94347512afaf04082379a42757b6ea
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":466.0,"y":508.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Alen_Spear_Idle_0: -2265495333203479171
       Alen_Spear_Idle_1: 1823787601347921814

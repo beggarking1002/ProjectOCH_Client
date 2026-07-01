@@ -148,10 +148,10 @@ TextureImporter:
       name: Beige_Ice_Walk_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1822
-        width: 282
-        height: 557
+        x: 0
+        y: 1800
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,10 +170,10 @@ TextureImporter:
       name: Beige_Ice_Walk_1
       rect:
         serializedVersion: 2
-        x: 317
-        y: 1823
-        width: 274
-        height: 565
+        x: 300
+        y: 1800
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: Beige_Ice_Walk_2
       rect:
         serializedVersion: 2
-        x: 628
-        y: 1823
-        width: 261
-        height: 572
+        x: 600
+        y: 1800
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,10 +214,10 @@ TextureImporter:
       name: Beige_Ice_Walk_3
       rect:
         serializedVersion: 2
-        x: 939
-        y: 1823
-        width: 250
-        height: 574
+        x: 900
+        y: 1800
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: Beige_Ice_Walk_4
       rect:
         serializedVersion: 2
-        x: 43
-        y: 1224
-        width: 246
-        height: 570
+        x: 0
+        y: 1200
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +258,10 @@ TextureImporter:
       name: Beige_Ice_Walk_5
       rect:
         serializedVersion: 2
-        x: 335
-        y: 1224
-        width: 256
-        height: 565
+        x: 300
+        y: 1200
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,10 +280,10 @@ TextureImporter:
       name: Beige_Ice_Walk_6
       rect:
         serializedVersion: 2
-        x: 616
-        y: 1224
-        width: 276
-        height: 557
+        x: 600
+        y: 1200
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +302,10 @@ TextureImporter:
       name: Beige_Ice_Walk_7
       rect:
         serializedVersion: 2
-        x: 904
-        y: 1224
-        width: 287
-        height: 555
+        x: 900
+        y: 1200
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -324,10 +324,10 @@ TextureImporter:
       name: Beige_Ice_Walk_8
       rect:
         serializedVersion: 2
-        x: 1
-        y: 623
-        width: 290
-        height: 558
+        x: 0
+        y: 600
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: Beige_Ice_Walk_9
       rect:
         serializedVersion: 2
-        x: 305
-        y: 625
-        width: 285
-        height: 567
+        x: 300
+        y: 600
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,10 +368,10 @@ TextureImporter:
       name: Beige_Ice_Walk_10
       rect:
         serializedVersion: 2
-        x: 612
-        y: 625
-        width: 277
-        height: 572
+        x: 600
+        y: 600
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -390,10 +390,10 @@ TextureImporter:
       name: Beige_Ice_Walk_11
       rect:
         serializedVersion: 2
-        x: 921
-        y: 626
-        width: 266
-        height: 572
+        x: 900
+        y: 600
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,10 +412,10 @@ TextureImporter:
       name: Beige_Ice_Walk_12
       rect:
         serializedVersion: 2
-        x: 32
-        y: 25
-        width: 256
-        height: 569
+        x: 0
+        y: 0
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -434,10 +434,10 @@ TextureImporter:
       name: Beige_Ice_Walk_13
       rect:
         serializedVersion: 2
-        x: 333
-        y: 25
-        width: 256
-        height: 565
+        x: 300
+        y: 0
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -456,10 +456,10 @@ TextureImporter:
       name: Beige_Ice_Walk_14
       rect:
         serializedVersion: 2
-        x: 622
-        y: 25
-        width: 268
-        height: 558
+        x: 600
+        y: 0
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,10 +478,10 @@ TextureImporter:
       name: Beige_Ice_Walk_15
       rect:
         serializedVersion: 2
-        x: 909
-        y: 22
-        width: 282
-        height: 557
+        x: 900
+        y: 0
+        width: 300
+        height: 600
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -510,7 +510,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":300.0,"y":600.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Beige_Ice_Walk_0: 8620228644275092042
       Beige_Ice_Walk_1: 5360203769701256683

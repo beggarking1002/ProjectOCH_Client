@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Sera_Necro_Idle_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 1579
-        width: 266
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1578
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Sera_Necro_Idle_1
       rect:
         serializedVersion: 2
-        x: 280
+        x: 270
         y: 1578
-        width: 259
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Sera_Necro_Idle_2
       rect:
         serializedVersion: 2
-        x: 554
+        x: 540
         y: 1578
-        width: 255
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Sera_Necro_Idle_3
       rect:
         serializedVersion: 2
-        x: 826
+        x: 810
         y: 1578
-        width: 253
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Sera_Necro_Idle_4
       rect:
         serializedVersion: 2
-        x: 17
+        x: 0
         y: 1052
-        width: 253
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Sera_Necro_Idle_5
       rect:
         serializedVersion: 2
-        x: 288
+        x: 270
         y: 1052
-        width: 251
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Sera_Necro_Idle_6
       rect:
         serializedVersion: 2
-        x: 550
-        y: 527
-        width: 258
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 540
+        y: 1052
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Sera_Necro_Idle_7
       rect:
         serializedVersion: 2
-        x: 558
+        x: 810
         y: 1052
-        width: 251
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -324,12 +324,12 @@ TextureImporter:
       name: Sera_Necro_Idle_8
       rect:
         serializedVersion: 2
-        x: 817
-        y: 527
-        width: 261
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 526
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Sera_Necro_Idle_9
       rect:
         serializedVersion: 2
-        x: 827
-        y: 1052
-        width: 252
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 270
+        y: 526
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Sera_Necro_Idle_10
       rect:
         serializedVersion: 2
-        x: 15
-        y: 527
-        width: 254
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 540
+        y: 526
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Sera_Necro_Idle_11
       rect:
         serializedVersion: 2
-        x: 283
-        y: 527
-        width: 256
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 810
+        y: 526
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Sera_Necro_Idle_12
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1
-        width: 263
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Sera_Necro_Idle_13
       rect:
         serializedVersion: 2
-        x: 273
-        y: 1
-        width: 265
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 270
+        y: 0
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Sera_Necro_Idle_14
       rect:
         serializedVersion: 2
-        x: 542
-        y: 1
-        width: 266
-        height: 525
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 540
+        y: 0
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Sera_Necro_Idle_15
       rect:
         serializedVersion: 2
-        x: 812
-        y: 1
-        width: 266
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 810
+        y: 0
+        width: 270
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 39f752c87427176439c087bc71a64cf9
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":270.0,"y":526.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Sera_Necro_Idle_0: -6595678289374534459
       Sera_Necro_Idle_1: -3926882312826135441

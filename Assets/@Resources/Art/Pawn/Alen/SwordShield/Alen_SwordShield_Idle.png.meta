@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,12 +148,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1903
-        width: 394
-        height: 631
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1902
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,12 +170,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_1
       rect:
         serializedVersion: 2
-        x: 408
-        y: 1903
-        width: 396
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 404
+        y: 1902
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_2
       rect:
         serializedVersion: 2
-        x: 811
-        y: 1903
-        width: 397
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 808
+        y: 1902
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -214,12 +214,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_3
       rect:
         serializedVersion: 2
-        x: 1215
-        y: 1903
-        width: 398
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1212
+        y: 1902
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_4
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1269
-        width: 400
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 1268
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_5
       rect:
         serializedVersion: 2
-        x: 405
-        y: 1269
-        width: 401
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 404
+        y: 1268
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -280,12 +280,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_6
       rect:
         serializedVersion: 2
-        x: 809
-        y: 1269
-        width: 401
-        height: 633
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 808
+        y: 1268
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_7
       rect:
         serializedVersion: 2
-        x: 1213
-        y: 1269
-        width: 401
-        height: 633
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1212
+        y: 1268
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -325,11 +325,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 635
-        width: 402
-        height: 633
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 634
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -346,12 +346,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_9
       rect:
         serializedVersion: 2
-        x: 405
-        y: 635
-        width: 400
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 404
+        y: 634
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,12 +368,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_10
       rect:
         serializedVersion: 2
-        x: 809
-        y: 635
-        width: 399
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 808
+        y: 634
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,12 +390,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_11
       rect:
         serializedVersion: 2
-        x: 1213
-        y: 635
-        width: 399
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1212
+        y: 634
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -412,12 +412,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_12
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1
-        width: 398
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_13
       rect:
         serializedVersion: 2
-        x: 406
-        y: 1
-        width: 397
-        height: 632
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 404
+        y: 0
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_14
       rect:
         serializedVersion: 2
-        x: 811
-        y: 1
-        width: 396
-        height: 631
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 808
+        y: 0
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -478,12 +478,12 @@ TextureImporter:
       name: Alen_SwordShield_Idle_15
       rect:
         serializedVersion: 2
-        x: 1216
-        y: 2
-        width: 395
-        height: 630
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1212
+        y: 0
+        width: 404
+        height: 634
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d747cb95e9f8f584bb6829ef539e2585
     internalID: 0
     vertices: []
     indices: 
@@ -508,7 +508,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":4.0},"gridSpriteSize":{"x":404.0,"y":634.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Alen_SwordShield_Idle_0: -2789082921491162510
       Alen_SwordShield_Idle_1: -1269498197555672386

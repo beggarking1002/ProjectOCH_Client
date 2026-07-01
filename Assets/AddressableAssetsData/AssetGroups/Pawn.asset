@@ -15,14 +15,20 @@ MonoBehaviour:
   m_GroupName: Pawn
   m_GUID: f506cf312dbfb164db62e323d558a7af
   m_SerializeEntries:
-  - m_GUID: e9fddee7793dad04d8857af53ca4df75
-    m_Address: Field_Pawn
+  - m_GUID: 0eeb1a8b800611c49b9b3483241dc7cc
+    m_Address: Pawn_Beige_Ice
     m_ReadOnly: 0
     m_SerializedLabels:
     - Pawn
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0eeb1a8b800611c49b9b3483241dc7cc
-    m_Address: Pawn_Beige_Ice
+  - m_GUID: 40d966eae2a37b54d820ca6555b8a2b8
+    m_Address: Pawn_Beige_Fire
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Pawn
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9fddee7793dad04d8857af53ca4df75
+    m_Address: Field_Pawn
     m_ReadOnly: 0
     m_SerializedLabels:
     - Pawn
