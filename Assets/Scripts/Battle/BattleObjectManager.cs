@@ -3,6 +3,7 @@ using App;
 using Protocol;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 #if ENABLE_INPUT_SYSTEM
@@ -244,6 +245,9 @@ namespace Battle
 			if (_mapGrid == null || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
+			if (IsPointerOverUi())
+				return;
+
 			Camera camera = Camera.main;
 			if (camera == null)
 			{
@@ -312,7 +316,10 @@ namespace Battle
 		{
 			int skillSlot = GetSkillSlot(_actionMode);
 			if (skillSlot <= 0)
+			{
+				Debug.Log($"Battle action is not implemented yet. mode={_actionMode}, axial={targetAxial}");
 				return;
+			}
 
 			if (TryGetControllablePawnId(out ulong casterPawnId) == false)
 			{
@@ -437,6 +444,10 @@ namespace Battle
 					return 2;
 				case BattleActionMode.Skill3:
 					return 3;
+				case BattleActionMode.Skill4:
+					return 4;
+				case BattleActionMode.Ultimate:
+					return 5;
 				default:
 					return 0;
 			}
@@ -460,6 +471,12 @@ namespace Battle
 #endif
 			screenPosition = default;
 			return false;
+		}
+
+		static bool IsPointerOverUi()
+		{
+			EventSystem eventSystem = EventSystem.current;
+			return eventSystem != null && eventSystem.IsPointerOverGameObject();
 		}
 
 		static bool IsValidScreenPosition(Camera camera, Vector2 screenPosition)

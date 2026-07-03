@@ -8,7 +8,11 @@ using UnityEngine;
 internal static class AddressablesProjectSetup
 {
     private const string RemoteGroupName = "Remote Content";
+    private const string UiGroupName = "UI";
+    private const string UiLabel = "UI";
+    private const string BattleUiAddress = "BattleSceneUI";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
+    private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/Canvas_BattleUI.prefab";
 
     [InitializeOnLoadMethod]
     private static void InitializeOnFirstInstall()
@@ -49,6 +53,7 @@ internal static class AddressablesProjectSetup
 
         ConfigureDefaultRemoteLoadPath(settings);
         ConfigureRemoteCatalogPaths(settings);
+        RegisterUiAddressable(settings, BattleUiPrefabPath, BattleUiAddress);
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -80,7 +85,8 @@ internal static class AddressablesProjectSetup
 
         return settings.FindGroup(RemoteGroupName) == null
             || string.IsNullOrWhiteSpace(remoteLoadPath)
-            || remoteLoadPath == "<undefined>";
+            || remoteLoadPath == "<undefined>"
+            || IsMissingAddressable(settings, BattleUiPrefabPath);
     }
 
     private static void ConfigureDefaultRemoteLoadPath(AddressableAssetSettings settings)
@@ -113,5 +119,73 @@ internal static class AddressablesProjectSetup
                 settings,
                 AddressableAssetSettings.kRemoteLoadPath);
         }
+    }
+
+    private static void RegisterUiAddressable(
+        AddressableAssetSettings settings,
+        string assetPath,
+        string address)
+    {
+        string guid = AssetDatabase.AssetPathToGUID(assetPath);
+        if (string.IsNullOrWhiteSpace(guid))
+        {
+            Debug.LogWarning($"Addressable asset not found: {assetPath}");
+            return;
+        }
+
+        AddressableAssetGroup group = GetOrCreateUiGroup(settings);
+        if (group == null)
+        {
+            Debug.LogWarning($"Cannot register UI addressable without a group: {assetPath}");
+            return;
+        }
+
+        AddressableAssetEntry entry = settings.CreateOrMoveEntry(guid, group, false, false);
+        entry.address = address;
+        settings.AddLabel(UiLabel, false);
+        entry.SetLabel(UiLabel, true, true, false);
+        EditorUtility.SetDirty(group);
+    }
+
+    private static AddressableAssetGroup GetOrCreateUiGroup(AddressableAssetSettings settings)
+    {
+        AddressableAssetGroup group = settings.FindGroup(UiGroupName);
+        if (group != null)
+            return group;
+
+        group = settings.CreateGroup(
+            UiGroupName,
+            false,
+            false,
+            true,
+            null,
+            typeof(BundledAssetGroupSchema),
+            typeof(ContentUpdateGroupSchema));
+
+        BundledAssetGroupSchema bundleSchema = group.GetSchema<BundledAssetGroupSchema>();
+        if (bundleSchema != null)
+        {
+            bundleSchema.BuildPath.SetVariableByName(settings, AddressableAssetSettings.kLocalBuildPath);
+            bundleSchema.LoadPath.SetVariableByName(settings, AddressableAssetSettings.kLocalLoadPath);
+            bundleSchema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogether;
+            bundleSchema.IncludeInBuild = true;
+            EditorUtility.SetDirty(bundleSchema);
+        }
+
+        ContentUpdateGroupSchema updateSchema = group.GetSchema<ContentUpdateGroupSchema>();
+        if (updateSchema != null)
+        {
+            updateSchema.StaticContent = true;
+            EditorUtility.SetDirty(updateSchema);
+        }
+
+        return group;
+    }
+
+    private static bool IsMissingAddressable(AddressableAssetSettings settings, string assetPath)
+    {
+        string guid = AssetDatabase.AssetPathToGUID(assetPath);
+        return string.IsNullOrWhiteSpace(guid) == false
+            && settings.FindAssetEntry(guid) == null;
     }
 }

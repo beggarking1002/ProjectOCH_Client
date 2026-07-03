@@ -1,8 +1,14 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem.UI;
+#endif
+#if UNITY_EDITOR
+using UnityEditor;
 #endif
 
 namespace Battle
@@ -10,16 +16,38 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class BattleUIController : MonoBehaviour
 	{
+		const string BattleUiName = "Canvas_BattleUI";
+		const string BattleUiAddress = "BattleSceneUI";
+		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/Canvas_BattleUI.prefab";
+
+		static readonly ActionSlotBinding[] SlotBindings =
+		{
+			new ActionSlotBinding("ActionSlot_01", BattleActionMode.Move, false),
+			new ActionSlotBinding("ActionSlot_02", BattleActionMode.Skill1, false),
+			new ActionSlotBinding("ActionSlot_03", BattleActionMode.Skill2, false),
+			new ActionSlotBinding("ActionSlot_04", BattleActionMode.Skill3, false),
+			new ActionSlotBinding("ActionSlot_05", BattleActionMode.Skill4, false),
+			new ActionSlotBinding("ActionSlot_06", BattleActionMode.Ultimate, false),
+			new ActionSlotBinding("ActionSlot_07", BattleActionMode.SubAction, false),
+			new ActionSlotBinding("ActionSlot_08", BattleActionMode.Move, true),
+		};
+
+		readonly Button[] _actionButtons = new Button[SlotBindings.Length];
+		readonly Image[] _actionImages = new Image[SlotBindings.Length];
+		readonly Color[] _normalColors = new Color[SlotBindings.Length];
+
 		BattleObjectManager _objectManager;
-		Text _turnText;
-		Text _modeText;
+		GameObject _uiInstance;
+		AsyncOperationHandle<GameObject> _uiHandle;
+		bool _hasUiHandle;
+		bool _isBinding;
+		bool _bound;
 
 		public void Initialize(BattleObjectManager objectManager)
 		{
 			_objectManager = objectManager;
 			EnsureEventSystem();
-			BuildUi();
-			Refresh();
+			BindOrLoadUi();
 		}
 
 		void Update()
@@ -27,122 +55,201 @@ namespace Battle
 			Refresh();
 		}
 
-		void BuildUi()
+		void OnDestroy()
 		{
-			Canvas canvas = GetComponentInChildren<Canvas>();
-			if (canvas == null)
+			if (_hasUiHandle && _uiHandle.IsValid())
 			{
-				GameObject canvasObject = new GameObject("BattleUI_Canvas");
-				canvasObject.transform.SetParent(transform, false);
-				canvas = canvasObject.AddComponent<Canvas>();
-				canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-				canvas.sortingOrder = 1000;
-				canvasObject.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-				canvasObject.AddComponent<GraphicRaycaster>();
+				Addressables.ReleaseInstance(_uiHandle);
+				_hasUiHandle = false;
+				_uiHandle = default;
+				_uiInstance = null;
+				return;
 			}
 
-			GameObject panel = CreatePanel(canvas.transform);
-			_turnText = CreateText(panel.transform, "TurnText", "Turn: -", new Vector2(10f, -10f), new Vector2(260f, 28f));
-			_modeText = CreateText(panel.transform, "ModeText", "Mode: Move", new Vector2(10f, -42f), new Vector2(260f, 28f));
+			if (_uiInstance != null)
+				Destroy(_uiInstance);
+		}
 
-			CreateButton(panel.transform, "MoveButton", "Move", new Vector2(10f, -82f), () => SetMode(BattleActionMode.Move));
-			CreateButton(panel.transform, "Skill1Button", "Skill1", new Vector2(10f, -124f), () => SetMode(BattleActionMode.Skill1));
-			CreateButton(panel.transform, "Skill2Button", "Skill2", new Vector2(10f, -166f), () => SetMode(BattleActionMode.Skill2));
-			CreateButton(panel.transform, "Skill3Button", "Skill3", new Vector2(10f, -208f), () => SetMode(BattleActionMode.Skill3));
-			CreateButton(panel.transform, "EndTurnButton", "End Turn", new Vector2(10f, -250f), OnEndTurnClicked);
+		async void BindOrLoadUi()
+		{
+			if (_isBinding || _bound)
+				return;
+
+			_isBinding = true;
+
+			GameObject existing = FindExistingBattleUi();
+			if (existing != null)
+			{
+				BindUi(existing);
+				_isBinding = false;
+				return;
+			}
+
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(BattleUiAddress);
+			await handle.Task;
+
+			if (this == null)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				return;
+			}
+
+			if (handle.Status == AsyncOperationStatus.Succeeded)
+			{
+				_uiHandle = handle;
+				_hasUiHandle = true;
+				BindUi(handle.Result);
+				_isBinding = false;
+				return;
+			}
+
+			if (handle.IsValid())
+				Addressables.ReleaseInstance(handle);
+
+			GameObject editorInstance = InstantiateFromEditorAsset();
+			if (editorInstance != null)
+				BindUi(editorInstance);
+			else
+				Debug.LogError($"Failed to load {BattleUiName}. Register it as Addressable address '{BattleUiAddress}' or place it in the BattleScene.");
+
+			_isBinding = false;
+		}
+
+		void BindUi(GameObject uiObject)
+		{
+			if (uiObject == null)
+				return;
+
+			_uiInstance = uiObject;
+			_uiInstance.name = BattleUiName;
+			SceneManager.MoveGameObjectToScene(_uiInstance, gameObject.scene);
+
+			Canvas canvas = _uiInstance.GetComponent<Canvas>();
+			if (canvas != null)
+			{
+				canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+				canvas.sortingOrder = 1000;
+			}
+
+			_uiInstance.transform.localScale = Vector3.one;
+			BindActionSlots(_uiInstance.transform);
+			_bound = true;
+			Refresh();
+		}
+
+		void BindActionSlots(Transform root)
+		{
+			for (int i = 0; i < SlotBindings.Length; i++)
+			{
+				ActionSlotBinding binding = SlotBindings[i];
+				Transform slot = FindDeepChild(root, binding.Name);
+				if (slot == null)
+				{
+					Debug.LogWarning($"Missing battle action slot: {binding.Name}");
+					continue;
+				}
+
+				Image image = slot.GetComponent<Image>();
+				Button button = slot.GetComponent<Button>();
+				if (button == null)
+					button = slot.gameObject.AddComponent<Button>();
+
+				if (image != null)
+					button.targetGraphic = image;
+
+				int slotIndex = i;
+				button.onClick.RemoveAllListeners();
+				button.onClick.AddListener(() => OnActionSlotClicked(slotIndex));
+
+				_actionButtons[i] = button;
+				_actionImages[i] = image;
+				_normalColors[i] = image != null ? image.color : Color.white;
+			}
+		}
+
+		void OnActionSlotClicked(int slotIndex)
+		{
+			if (_objectManager == null || slotIndex < 0 || slotIndex >= SlotBindings.Length)
+				return;
+
+			ActionSlotBinding binding = SlotBindings[slotIndex];
+			if (binding.IsWaitCommand)
+			{
+				_objectManager.DebugEndTurn();
+				Refresh();
+				return;
+			}
+
+			_objectManager.SetActionMode(binding.Mode);
+			Refresh();
 		}
 
 		void Refresh()
 		{
-			if (_objectManager == null)
+			if (_objectManager == null || _bound == false)
 				return;
 
-			if (_turnText != null)
+			bool isWaiting = _objectManager.ActionMode == BattleActionMode.WaitingServer;
+			bool canAct = isWaiting == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
+
+			for (int i = 0; i < SlotBindings.Length; i++)
 			{
-				string ownership = _objectManager.IsCurrentTurnLocal ? "Mine" : "Enemy";
-				_turnText.text = $"Turn Pawn: {_objectManager.CurrentTurnPawnId} ({ownership})";
+				Button button = _actionButtons[i];
+				if (button != null)
+					button.interactable = canAct;
+
+				Image image = _actionImages[i];
+				if (image == null)
+					continue;
+
+				bool selected = SlotBindings[i].IsWaitCommand == false && SlotBindings[i].Mode == _objectManager.ActionMode;
+				Color color = selected ? new Color(1f, 0.88f, 0.35f, 1f) : _normalColors[i];
+				if (canAct == false)
+					color.a = 0.45f;
+
+				image.color = color;
+			}
+		}
+
+		static GameObject FindExistingBattleUi()
+		{
+			Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+			foreach (Canvas canvas in canvases)
+			{
+				if (canvas != null && canvas.gameObject.name == BattleUiName)
+					return canvas.gameObject;
 			}
 
-			if (_modeText != null)
-				_modeText.text = $"Mode: {_objectManager.ActionMode}";
+			return null;
 		}
 
-		void SetMode(BattleActionMode mode)
+		static Transform FindDeepChild(Transform parent, string childName)
 		{
-			if (_objectManager == null)
-				return;
+			if (parent == null)
+				return null;
 
-			_objectManager.SetActionMode(mode);
-			Refresh();
+			if (parent.name == childName)
+				return parent;
+
+			for (int i = 0; i < parent.childCount; i++)
+			{
+				Transform result = FindDeepChild(parent.GetChild(i), childName);
+				if (result != null)
+					return result;
+			}
+
+			return null;
 		}
 
-		void OnEndTurnClicked()
+		static GameObject InstantiateFromEditorAsset()
 		{
-			if (_objectManager == null)
-				return;
-
-			_objectManager.DebugEndTurn();
-			Refresh();
-		}
-
-		static GameObject CreatePanel(Transform parent)
-		{
-			GameObject panel = new GameObject("BattleActionPanel");
-			panel.transform.SetParent(parent, false);
-
-			RectTransform rect = panel.AddComponent<RectTransform>();
-			rect.anchorMin = new Vector2(0f, 1f);
-			rect.anchorMax = new Vector2(0f, 1f);
-			rect.pivot = new Vector2(0f, 1f);
-			rect.anchoredPosition = new Vector2(16f, -16f);
-			rect.sizeDelta = new Vector2(280f, 300f);
-
-			Image image = panel.AddComponent<Image>();
-			image.color = new Color(0f, 0f, 0f, 0.55f);
-			return panel;
-		}
-
-		static Text CreateText(Transform parent, string name, string text, Vector2 position, Vector2 size)
-		{
-			GameObject go = new GameObject(name);
-			go.transform.SetParent(parent, false);
-
-			RectTransform rect = go.AddComponent<RectTransform>();
-			rect.anchorMin = new Vector2(0f, 1f);
-			rect.anchorMax = new Vector2(0f, 1f);
-			rect.pivot = new Vector2(0f, 1f);
-			rect.anchoredPosition = position;
-			rect.sizeDelta = size;
-
-			Text label = go.AddComponent<Text>();
-			label.text = text;
-			label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-			label.fontSize = 18;
-			label.color = Color.white;
-			label.alignment = TextAnchor.MiddleLeft;
-			return label;
-		}
-
-		static void CreateButton(Transform parent, string name, string label, Vector2 position, UnityEngine.Events.UnityAction onClick)
-		{
-			GameObject go = new GameObject(name);
-			go.transform.SetParent(parent, false);
-
-			RectTransform rect = go.AddComponent<RectTransform>();
-			rect.anchorMin = new Vector2(0f, 1f);
-			rect.anchorMax = new Vector2(0f, 1f);
-			rect.pivot = new Vector2(0f, 1f);
-			rect.anchoredPosition = position;
-			rect.sizeDelta = new Vector2(160f, 34f);
-
-			Image image = go.AddComponent<Image>();
-			image.color = new Color(0.18f, 0.2f, 0.24f, 0.95f);
-
-			Button button = go.AddComponent<Button>();
-			button.onClick.AddListener(onClick);
-
-			Text text = CreateText(go.transform, "Text", label, Vector2.zero, rect.sizeDelta);
-			text.alignment = TextAnchor.MiddleCenter;
+#if UNITY_EDITOR
+			GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(BattleUiEditorPath);
+			return prefab != null ? Instantiate(prefab) : null;
+#else
+			return null;
+#endif
 		}
 
 		static void EnsureEventSystem()
@@ -168,6 +275,20 @@ namespace Battle
 #else
 			eventSystem.AddComponent<StandaloneInputModule>();
 #endif
+		}
+
+		readonly struct ActionSlotBinding
+		{
+			public readonly string Name;
+			public readonly BattleActionMode Mode;
+			public readonly bool IsWaitCommand;
+
+			public ActionSlotBinding(string name, BattleActionMode mode, bool isWaitCommand)
+			{
+				Name = name;
+				Mode = mode;
+				IsWaitCommand = isWaitCommand;
+			}
 		}
 	}
 }
