@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem;
 #endif
 #if UNITY_EDITOR
 using UnityEditor;
@@ -18,7 +19,7 @@ namespace Battle
 	{
 		const string BattleUiName = "Canvas_BattleUI";
 		const string BattleUiAddress = "BattleSceneUI";
-		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/Canvas_BattleUI.prefab";
+		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
 
 		static readonly ActionSlotBinding[] SlotBindings =
 		{
@@ -37,6 +38,13 @@ namespace Battle
 		readonly Color[] _normalColors = new Color[SlotBindings.Length];
 
 		BattleObjectManager _objectManager;
+		Button _turnExitButton;
+		Image _turnExitImage;
+		Color _turnExitNormalColor = Color.white;
+		Text _turnPanelText;
+		Text _tileInfoText;
+		Text _selectedPawnText;
+		Text _enemyPawnText;
 		GameObject _uiInstance;
 		AsyncOperationHandle<GameObject> _uiHandle;
 		bool _hasUiHandle;
@@ -134,6 +142,8 @@ namespace Battle
 
 			_uiInstance.transform.localScale = Vector3.one;
 			BindActionSlots(_uiInstance.transform);
+			BindTurnExit(_uiInstance.transform);
+			BindStatePanels(_uiInstance.transform);
 			_bound = true;
 			Refresh();
 		}
@@ -168,6 +178,38 @@ namespace Battle
 			}
 		}
 
+		void BindTurnExit(Transform root)
+		{
+			Transform turnExit = FindDeepChild(root, "TurnExit");
+			if (turnExit == null)
+			{
+				Debug.LogWarning("Missing battle UI button: TurnExit");
+				return;
+			}
+
+			_turnExitImage = turnExit.GetComponent<Image>();
+			_turnExitButton = turnExit.GetComponent<Button>();
+			if (_turnExitButton == null)
+				_turnExitButton = turnExit.gameObject.AddComponent<Button>();
+
+			if (_turnExitImage != null)
+			{
+				_turnExitButton.targetGraphic = _turnExitImage;
+				_turnExitNormalColor = _turnExitImage.color;
+			}
+
+			_turnExitButton.onClick.RemoveAllListeners();
+			_turnExitButton.onClick.AddListener(OnEndTurnClicked);
+		}
+
+		void BindStatePanels(Transform root)
+		{
+			_turnPanelText = CreateOrGetPanelText(root, "TurnPanel", "TurnPanel_StateText", 14);
+			_tileInfoText = CreateOrGetPanelText(root, "TileInfo", "TileInfo_StateText", 13);
+			_selectedPawnText = CreateOrGetPanelText(root, "Left_SelectedPawnPanel", "SelectedPawn_StateText", 13);
+			_enemyPawnText = CreateOrGetPanelText(root, "Right_EnemyPawnPanel", "EnemyPawn_StateText", 13);
+		}
+
 		void OnActionSlotClicked(int slotIndex)
 		{
 			if (_objectManager == null || slotIndex < 0 || slotIndex >= SlotBindings.Length)
@@ -176,12 +218,20 @@ namespace Battle
 			ActionSlotBinding binding = SlotBindings[slotIndex];
 			if (binding.IsWaitCommand)
 			{
-				_objectManager.DebugEndTurn();
-				Refresh();
+				OnEndTurnClicked();
 				return;
 			}
 
 			_objectManager.SetActionMode(binding.Mode);
+			Refresh();
+		}
+
+		void OnEndTurnClicked()
+		{
+			if (_objectManager == null)
+				return;
+
+			_objectManager.DebugEndTurn();
 			Refresh();
 		}
 
@@ -192,6 +242,18 @@ namespace Battle
 
 			bool isWaiting = _objectManager.ActionMode == BattleActionMode.WaitingServer;
 			bool canAct = isWaiting == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
+
+			if (_turnExitButton != null)
+				_turnExitButton.interactable = canAct;
+
+			if (_turnExitImage != null)
+			{
+				Color color = _turnExitNormalColor;
+				if (canAct == false)
+					color.a = 0.45f;
+
+				_turnExitImage.color = color;
+			}
 
 			for (int i = 0; i < SlotBindings.Length; i++)
 			{
@@ -210,6 +272,168 @@ namespace Battle
 
 				image.color = color;
 			}
+
+			RefreshStateTexts();
+		}
+
+		void RefreshStateTexts()
+		{
+			if (_turnPanelText != null)
+				_turnPanelText.text = BuildTurnText();
+
+			AxialCoord hoveredAxial = default;
+			bool hasHoveredTile = TryGetHoveredAxial(out hoveredAxial);
+
+			if (_tileInfoText != null)
+				_tileInfoText.text = BuildTileInfoText(hasHoveredTile, hoveredAxial);
+
+			if (_selectedPawnText != null)
+				_selectedPawnText.text = BuildPawnText("Selected", TryGetCurrentTurnPawn(out BattlePawnController selectedPawn) ? selectedPawn : null);
+
+			if (_enemyPawnText != null)
+			{
+				BattlePawnController enemyPawn = null;
+				if (hasHoveredTile && _objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out BattlePawnController hoveredPawn) && hoveredPawn.IsMine == false)
+					enemyPawn = hoveredPawn;
+
+				_enemyPawnText.text = BuildPawnText("Target", enemyPawn);
+			}
+		}
+
+		string BuildTurnText()
+		{
+			string ownership = _objectManager.IsCurrentTurnLocal ? "Mine" : "Enemy";
+			if (_objectManager.BattleId == 0)
+				ownership = "Debug";
+
+			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}";
+		}
+
+		string BuildTileInfoText(bool hasHoveredTile, AxialCoord axial)
+		{
+			if (hasHoveredTile == false)
+				return "Tile\nAxial: -\nState: -\nPawn: -";
+
+			string state = _objectManager.IsTileWalkable(axial) ? "Walkable" : "Blocked";
+			string pawn = "-";
+			if (_objectManager.TryGetPawnAtAxial(axial, out ulong pawnId, out BattlePawnController pawnController))
+			{
+				string side = pawnController.IsMine ? "Mine" : "Enemy";
+				pawn = $"{pawnId} ({side})";
+			}
+
+			return $"Tile\nAxial: {axial}\nState: {state}\nPawn: {pawn}";
+		}
+
+		static string BuildPawnText(string title, BattlePawnController pawn)
+		{
+			if (pawn == null)
+				return $"{title}\nPawn: -\nAxial: -\nHP: -";
+
+			string side = pawn.IsMine ? "Mine" : "Enemy";
+			string hp = pawn.Info != null ? pawn.Info.Hp.ToString() : "-";
+			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nAxial: {pawn.Axial}\nHP: {hp}";
+		}
+
+		bool TryGetCurrentTurnPawn(out BattlePawnController pawn)
+		{
+			pawn = null;
+			return _objectManager.CurrentTurnPawnId != 0
+				&& _objectManager.TryGetPawn(_objectManager.CurrentTurnPawnId, out pawn);
+		}
+
+		bool TryGetHoveredAxial(out AxialCoord axial)
+		{
+			axial = default;
+
+			if (_objectManager.MapGrid == null)
+				return false;
+
+			Camera camera = Camera.main;
+			if (camera == null)
+				return false;
+
+			if (TryGetPointerPosition(out Vector2 screenPosition) == false)
+				return false;
+
+			if (IsValidScreenPosition(camera, screenPosition) == false)
+				return false;
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _objectManager.MapGrid.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			Vector3 worldPosition = ray.GetPoint(enter);
+			axial = _objectManager.MapGrid.WorldToAxial(worldPosition);
+			return true;
+		}
+
+		static bool TryGetPointerPosition(out Vector2 screenPosition)
+		{
+#if ENABLE_INPUT_SYSTEM
+			Mouse mouse = Mouse.current;
+			if (mouse != null)
+			{
+				screenPosition = mouse.position.ReadValue();
+				return true;
+			}
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			screenPosition = Input.mousePosition;
+			return true;
+#endif
+			screenPosition = default;
+			return false;
+		}
+
+		static bool IsValidScreenPosition(Camera camera, Vector2 screenPosition)
+		{
+			if (float.IsNaN(screenPosition.x) || float.IsNaN(screenPosition.y))
+				return false;
+
+			if (float.IsInfinity(screenPosition.x) || float.IsInfinity(screenPosition.y))
+				return false;
+
+			return screenPosition.x >= 0f
+				&& screenPosition.y >= 0f
+				&& screenPosition.x <= camera.pixelWidth
+				&& screenPosition.y <= camera.pixelHeight;
+		}
+
+		static Text CreateOrGetPanelText(Transform root, string panelName, string textName, int fontSize)
+		{
+			Transform panel = FindDeepChild(root, panelName);
+			if (panel == null)
+			{
+				Debug.LogWarning($"Missing battle UI panel: {panelName}");
+				return null;
+			}
+
+			Transform existing = panel.Find(textName);
+			Text text = existing != null ? existing.GetComponent<Text>() : null;
+			if (text != null)
+				return text;
+
+			GameObject textObject = new GameObject(textName);
+			textObject.transform.SetParent(panel, false);
+
+			RectTransform rect = textObject.AddComponent<RectTransform>();
+			rect.anchorMin = Vector2.zero;
+			rect.anchorMax = Vector2.one;
+			rect.pivot = new Vector2(0f, 1f);
+			rect.offsetMin = new Vector2(8f, 6f);
+			rect.offsetMax = new Vector2(-8f, -6f);
+
+			text = textObject.AddComponent<Text>();
+			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.fontSize = fontSize;
+			text.color = Color.white;
+			text.alignment = TextAnchor.UpperLeft;
+			text.horizontalOverflow = HorizontalWrapMode.Wrap;
+			text.verticalOverflow = VerticalWrapMode.Truncate;
+			text.raycastTarget = false;
+			return text;
 		}
 
 		static GameObject FindExistingBattleUi()

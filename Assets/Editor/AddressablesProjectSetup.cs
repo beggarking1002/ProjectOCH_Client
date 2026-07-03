@@ -12,7 +12,7 @@ internal static class AddressablesProjectSetup
     private const string UiLabel = "UI";
     private const string BattleUiAddress = "BattleSceneUI";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
-    private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/Canvas_BattleUI.prefab";
+    private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
 
     [InitializeOnLoadMethod]
     private static void InitializeOnFirstInstall()

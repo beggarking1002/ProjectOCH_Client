@@ -22,6 +22,7 @@ public sealed class PacketHandler
 	public event Action<S_ENTER_BATTLE> EnterBattleReceived;
 	public event Action<S_BATTLE_MOVE> BattleMoveReceived;
 	public event Action<S_BATTLE_SKILL> BattleSkillReceived;
+	public event Action<S_BATTLE_END_TURN> BattleEndTurnReceived;
 
 	public static void S_LOGINHandler(PacketSession session, IMessage packet)
 	{
@@ -81,6 +82,12 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_BATTLE_SKILLHandler");
 		Instance.EnqueuePacket(packet as S_BATTLE_SKILL, Instance.BattleSkillReceived);
+	}
+
+	public static void S_BATTLE_END_TURNHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_END_TURNHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_END_TURN, Instance.BattleEndTurnReceived);
 	}
 
 	public void Flush()

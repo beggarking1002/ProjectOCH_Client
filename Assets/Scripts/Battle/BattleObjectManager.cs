@@ -28,6 +28,7 @@ namespace Battle
 		bool _missingCameraLogged;
 
 		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
+		public BattleMapGrid MapGrid => _mapGrid;
 		public ulong BattleId => _battleId;
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
@@ -42,6 +43,8 @@ namespace Battle
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
+			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
+			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
 		}
 
 		public void SetActionMode(BattleActionMode mode)
@@ -58,7 +61,73 @@ namespace Battle
 
 		public void DebugEndTurn()
 		{
-			Debug.Log("End Turn clicked. Server end-turn packet is not implemented yet.");
+			if (_actionMode == BattleActionMode.WaitingServer)
+			{
+				Debug.Log("Cannot end turn while waiting for server.");
+				return;
+			}
+
+			if (_battleId != 0)
+			{
+				if (TryGetControllablePawnId(out ulong pawnId) == false)
+				{
+					Debug.Log($"No controllable battle pawn for end turn. currentTurnPawnId={_currentTurnPawnId}, battleId={_battleId}");
+					return;
+				}
+
+				if (GameRoot.Instance == null)
+				{
+					Debug.LogWarning("Failed to send C_BATTLE_END_TURN. GameRoot is missing.");
+					return;
+				}
+
+				bool sent = GameRoot.Instance.Network.SendBattleEndTurn(_battleId, pawnId);
+				if (sent)
+				{
+					_actionMode = BattleActionMode.WaitingServer;
+					Debug.Log($"Sent C_BATTLE_END_TURN. battleId={_battleId}, pawnId={pawnId}");
+				}
+				else
+				{
+					Debug.LogWarning($"Failed to send C_BATTLE_END_TURN. {GameRoot.Instance.Network.LastError}");
+				}
+
+				return;
+			}
+
+			ulong nextTurnPawnId = GetNextDebugTurnPawnId();
+			if (nextTurnPawnId == 0)
+			{
+				Debug.Log("Cannot end debug turn because no battle pawns exist.");
+				return;
+			}
+
+			_currentTurnPawnId = nextTurnPawnId;
+			_actionMode = BattleActionMode.Move;
+			RefreshTurnIndicators();
+			Debug.Log($"Debug end turn. nextTurnPawnId={_currentTurnPawnId}");
+		}
+
+		public bool TryGetPawn(ulong pawnId, out BattlePawnController pawn)
+		{
+			return _pawns.TryGetValue(pawnId, out pawn) && pawn != null;
+		}
+
+		public bool TryGetPawnAtAxial(AxialCoord axial, out ulong pawnId, out BattlePawnController pawn)
+		{
+			pawnId = FindPawnIdAtAxial(axial);
+			if (pawnId == 0)
+			{
+				pawn = null;
+				return false;
+			}
+
+			return TryGetPawn(pawnId, out pawn);
+		}
+
+		public bool IsTileWalkable(AxialCoord axial)
+		{
+			return _mapGrid != null && _mapGrid.IsWalkable(axial);
 		}
 
 		void Update()
@@ -71,6 +140,7 @@ namespace Battle
 			_destroyed = true;
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
+			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
 			ReleasePawns();
 		}
 
@@ -350,6 +420,12 @@ namespace Battle
 
 		bool TryGetControllablePawnId(out ulong pawnId)
 		{
+			if (_battleId == 0 && _currentTurnPawnId != 0 && _pawns.ContainsKey(_currentTurnPawnId))
+			{
+				pawnId = _currentTurnPawnId;
+				return true;
+			}
+
 			if (_currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId))
 			{
 				pawnId = _currentTurnPawnId;
@@ -423,6 +499,24 @@ namespace Battle
 			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, targetHp={packet.TargetHp}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
+		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)
+		{
+			if (packet == null || packet.BattleId != _battleId)
+				return;
+
+			_actionMode = BattleActionMode.Move;
+
+			if (packet.Success == false)
+			{
+				Debug.LogWarning($"Battle end turn rejected. pawnId={packet.PawnId}, reason={packet.Reason}");
+				return;
+			}
+
+			_currentTurnPawnId = packet.NextTurnPawnId;
+			RefreshTurnIndicators();
+			Debug.Log($"Applied S_BATTLE_END_TURN. pawnId={packet.PawnId}, nextTurnPawnId={_currentTurnPawnId}");
+		}
+
 		ulong FindPawnIdAtAxial(AxialCoord axial)
 		{
 			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
@@ -432,6 +526,23 @@ namespace Battle
 			}
 
 			return 0;
+		}
+
+		ulong GetNextDebugTurnPawnId()
+		{
+			ulong smallestPawnId = 0;
+			ulong nextPawnId = 0;
+
+			foreach (ulong pawnId in _pawns.Keys)
+			{
+				if (smallestPawnId == 0 || pawnId < smallestPawnId)
+					smallestPawnId = pawnId;
+
+				if (pawnId > _currentTurnPawnId && (nextPawnId == 0 || pawnId < nextPawnId))
+					nextPawnId = pawnId;
+			}
+
+			return nextPawnId != 0 ? nextPawnId : smallestPawnId;
 		}
 
 		static int GetSkillSlot(BattleActionMode mode)

@@ -100,6 +100,11 @@ namespace Networking
 			return Network?.SendBattleSkill(battleId, casterPawnId, skillSlot, targetPawnId, q, r) == true;
 		}
 
+		public bool SendBattleEndTurn(ulong battleId, ulong pawnId)
+		{
+			return Network?.SendBattleEndTurn(battleId, pawnId) == true;
+		}
+
 		public bool SendChat(string message)
 		{
 			return Network?.SendChat(message) == true;

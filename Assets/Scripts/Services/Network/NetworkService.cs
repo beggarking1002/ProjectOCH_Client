@@ -45,6 +45,7 @@ namespace Networking
 		public event Action<Protocol.S_ENTER_BATTLE> EnterBattleReceived;
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
+		public event Action<Protocol.S_BATTLE_END_TURN> BattleEndTurnReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -61,6 +62,7 @@ namespace Networking
 			PacketHandler.Instance.EnterBattleReceived += OnEnterBattleReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
+			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
 			_initialized = true;
 		}
 
@@ -89,6 +91,7 @@ namespace Networking
 				PacketHandler.Instance.EnterBattleReceived -= OnEnterBattleReceived;
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
+				PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
 			}
 
 			Disconnect();
@@ -187,6 +190,15 @@ namespace Networking
 			});
 		}
 
+		public bool SendBattleEndTurn(ulong battleId, ulong pawnId)
+		{
+			return Send(new Protocol.C_BATTLE_END_TURN
+			{
+				BattleId = battleId,
+				PawnId = pawnId,
+			});
+		}
+
 		public bool SendChat(string message)
 		{
 			return Send(new Protocol.C_CHAT { Msg = message ?? string.Empty });
@@ -226,6 +238,9 @@ namespace Networking
 					break;
 				case Protocol.C_BATTLE_SKILL pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_SKILL);
+					break;
+				case Protocol.C_BATTLE_END_TURN pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_END_TURN);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";
@@ -387,6 +402,19 @@ namespace Networking
 				Debug.Log($"S_BATTLE_SKILL success. casterPawnId={pkt.CasterPawnId}, skillSlot={pkt.SkillSlot}, targetPawnId={pkt.TargetPawnId}, damage={pkt.Damage}, targetHp={pkt.TargetHp}, nextTurnPawnId={pkt.NextTurnPawnId}");
 
 			BattleSkillReceived?.Invoke(pkt);
+		}
+
+		void OnBattleEndTurnReceived(Protocol.S_BATTLE_END_TURN pkt)
+		{
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+				Debug.LogWarning($"S_BATTLE_END_TURN failed. pawnId={pkt.PawnId}, reason={pkt.Reason}");
+			else
+				Debug.Log($"S_BATTLE_END_TURN success. pawnId={pkt.PawnId}, nextTurnPawnId={pkt.NextTurnPawnId}");
+
+			BattleEndTurnReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)
