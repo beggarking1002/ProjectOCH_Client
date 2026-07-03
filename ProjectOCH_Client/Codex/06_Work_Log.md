@@ -1,165 +1,163 @@
 # Work Log
 
-Last updated: 2026-06-30
+Last updated: 2026-07-03
 
-## 2026-06-30
+## 2026-07-03
 
-### 멀티 클라 빌드/실행 도구
-
-추가:
-
-- `Assets/Editor/MultiplayerBuildAndRun.cs`
-
-메뉴:
-
-```text
-Tools/Project OCH/Multiplayer/Build Client Only
-Tools/Project OCH/Multiplayer/Build And Run/2 Players
-Tools/Project OCH/Multiplayer/Build And Run/3 Players
-Tools/Project OCH/Multiplayer/Build And Run/4 Players
-Tools/Project OCH/Multiplayer/Run Existing/1~4 Players
-Tools/Project OCH/Multiplayer/Stop Launched Players
-```
-
-동작:
-
-- Addressables content build.
-- Windows x64 클라이언트 1회 빌드.
-- 같은 exe를 여러 개 실행.
-- 각 클라에 `-playerIndex` 전달.
-- 각 클라 로그를 `Builds/Win64/Logs/Client_N.log`로 분리.
-
-### Run In Background 설정
-
-문제:
-
-- 포커스 없는 클라이언트가 네트워크 갱신을 하지 않다가 창을 클릭하면 한꺼번에 반영됨.
-
-수정:
-
-- `ProjectSettings/ProjectSettings.asset`
-  - `runInBackground: 1`
-- `Assets/Editor/MultiplayerBuildAndRun.cs`
-  - `PlayerSettings.runInBackground = true`
-- `Assets/Scripts/App/GameRoot.cs`
-  - `Application.runInBackground = true`
-
-### TitleScene 입장 흐름
-
-수정:
-
-- `Assets/Scripts/Scenes/TitleSceneFlow.cs`
-  - `GameStartButton` 클릭 시 `C_ENTER_GAME` 전송.
-  - 실행 인자 `-playerIndex`를 읽어 `C_ENTER_GAME.PlayerIndex`에 설정.
-  - `S_ENTER_GAME.success` 수신 시 `FieldScene` 로드.
-
-### FieldScene Addressables 로딩
-
-수정/추가:
-
-- `Assets/Scripts/Scenes/FieldSceneAddressableLoader.cs`
-- `Assets/Scripts/Field/FieldObjectManager.cs`
-- `Assets/Scripts/Field/FieldPositionCodec.cs`
-- `Assets/Scripts/Field/CameraController.cs`
-
-내용:
-
-- FieldScene 진입 시 Addressable `Field` 로드.
-- `WorldMapRoot`를 Field 위에 로드.
-- `Field_Pawn`은 `FieldObjectManager`가 생성.
-- 카메라는 내 pawn을 따라감.
-
-### Field 이동
-
-수정:
-
-- `Assets/Scripts/Field/FieldPawnController.cs`
-
-내용:
-
-- 마우스 클릭 위치를 `Vec2Fixed`로 변환해 `C_MOVE` 전송.
-- 서버 `S_MOVE`를 받아 이동.
-- 왼쪽 이동 시 sprite flip.
-- 이동 중 `Animator.IsMoving = true`.
-- 로컬 사전 검증 옵션 추가:
-  - `validateLocallyBeforeSend`
-  - `sendBlockedMoveForDebug`
-
-### 기존 플레이어 표시 문제
-
-문제:
-
-- 3번 클라가 입장할 때 기존 1번/2번이 안 보이다가, 그들이 이동해야 보임.
-
-원인:
-
-- `S_SPAWN`이 FieldScene 로드 전에 도착해 `FieldObjectManager`가 소비하지 못함.
-
-수정:
-
-- `NetworkService`가 `_knownPlayers` 캐시 유지.
-- `FieldObjectManager.Initialize`에서 `GetKnownPlayersSnapshot()`을 사용해 기존 player pawn 생성.
-
-### Walkmap Exporter
+### Battle skill packet client integration
 
 추가/수정:
 
-- `Assets/Editor/FieldWalkMapExporter.cs`
-- `Assets/Scripts/Field/FieldWalkMapData.cs`
+- `Assets/Scripts/Packet/PacketHandler.cs`
+  - `BattleSkillReceived` 이벤트 추가
+  - `S_BATTLE_SKILLHandler` 추가
+- `Assets/Scripts/Services/Network/NetworkService.cs`
+  - `SendBattleSkill(...)` 추가
+  - `C_BATTLE_SKILL` 송신 case 추가
+  - `S_BATTLE_SKILL` 수신 처리 추가
+- `Assets/Scripts/Network/GameServerConnection.cs`
+  - `SendBattleSkill(...)` wrapper 추가
+- `Assets/Scripts/Battle/BattleObjectManager.cs`
+  - Skill1/2/3 mode에서 타일 클릭 시 `C_BATTLE_SKILL` 송신
+  - 클릭한 axial 위 pawn을 찾아 `target_pawn_id` 채움
+  - `S_BATTLE_SKILL` 성공 시 target hp와 next turn 반영
+- `Assets/Scripts/Battle/BattlePawnController.cs`
+  - `ApplyHp(int hp)` 추가
 
-기능:
+검증:
 
-- 프리팹 에셋을 직접 넣어 walkmap JSON 추출.
-- 예: `Assets/@Resources/Prefab/Maps/Field_001.prefab`
-- `Ground_Tilemap` 기준 이동 가능 영역 추출.
-- row range 압축:
+- MSBuild 기준 C# 컴파일 통과.
+- 기존 `System.Net.Http` warning만 남음.
 
-```json
-{ "y": -16, "x_min": -5, "x_max": -4 }
+### Battle action state and turn indicator
+
+추가/수정:
+
+- `Assets/Scripts/Battle/BattleActionMode.cs`
+  - `Move`, `Skill1`, `Skill2`, `Skill3`, `WaitingServer`
+- `BattleObjectManager`
+  - 현재 턴 pawn만 조작 가능
+  - move/skill 송신 후 `WaitingServer`
+  - 서버 응답 후 `Move` 복귀
+- `BattlePawnController`
+  - 현재 턴 pawn 머리 위에 `TURN` TextMesh indicator 표시
+- `BattleUIController`
+  - 임시 코드 생성 UI
+  - Move/Skill1/Skill2/Skill3/End Turn 버튼
+  - 현재 턴 pawn과 mode 표시
+  - EventSystem을 Input System 기준으로 보정
+
+### Canvas_BattleUI prefab 확인
+
+사용자가 생성:
+
+```text
+Assets/@Resources/Prefab/UI/Canvas_BattleUI.prefab
 ```
 
-- `Include Debug Cells` 옵션으로 개별 cell 목록도 선택 출력 가능.
-- `Block_Tilemap` 또는 `Prop_Tilemap` 자동 감지.
-- `Subtract Block Tilemap`을 켠 경우에만 block tilemap을 제외.
+확인된 구조:
 
-### 서버 참고 사항 확인
+```text
+Canvas_BattleUI
+  TurnPanel
+  MenuDropDown
+  TurnQueue
+  Right_EnemyPawnPanel
+  TileInfo
+  Setting
+  Question
+  Left_SelectedPawnPanel
+  TrunExit
+  ActionPanel
+```
 
-서버 쪽 확인:
+상태:
 
-- `GameServer.cpp`
-  - `GFieldWalkMapData.LoadFromFile("C:\\ProjectOCH\\Server\\Data\\Maps\\Field_001.walkmap.json")`
-- `FieldWalkMapData.cpp`
-  - JSON 로드 및 `walkable_ranges` 검사.
-- `Room.cpp`
-  - `C_MOVE`에서 walkmap 검증 후 `S_MOVE`.
+- 목업으로 충분히 사용 가능.
+- `ActionPanel`, `TurnQueue`에 `HorizontalLayoutGroup`이 들어가 있다.
+- 아직 코드와 연결되어 있지 않다.
+- 다음 작업은 prefab 바인딩형 UI controller 작성.
 
-발견:
+## 2026-07-02
 
-- `Field_001`은 Hexagon Grid인데 서버 `FixedToCell`이 rectangle 공식이면 좌표계가 어긋날 수 있다.
+### Battle scene entry and pawn spawning
 
-## 2026-06-20
+추가/수정:
 
-### GameRoot / NetworkService 리팩터링
+- FieldScene에서 `B` key를 누르면 `C_ENTER_BATTLE` 송신.
+- `S_ENTER_BATTLE.success` 수신 시 `BattleScene` 로드.
+- `BattleSceneAddressableLoader`가 `BattleField_001` 로드.
+- 서버의 allied/enemy pawn 목록 기반으로 battle pawn spawn.
+- `PawnClass`와 Addressable prefab 주소 매핑.
 
-추가/정리:
+PawnClass 매핑:
 
-- `GameRoot`
-- `AppServices`
-- `NetworkService`
-- `GameServerConnection`은 호환 wrapper로 축소.
-- `PacketHandler` event 기반 main thread dispatch.
+```text
+SuenAxeSword      -> Pawn_Suen_AxeSword
+SuenParvis        -> Pawn_Suen_Parvis
+BeigeFire         -> Pawn_Beige_Fire
+BeigeIce          -> Pawn_Beige_Ice
+ZillianLongbow    -> Pawn_Zillian_Longbow
+ZillianMace       -> Pawn_Zillian_Mace
+AlenSpear         -> Pawn_Alen_Spear
+AlenSwordShield   -> Pawn_Alen_SwordShield
+SeraNecromancer   -> Pawn_Sera_Necromancer
+SeraWarlock       -> Pawn_Sera_Warlock
+DarkhandSword     -> Pawn_Darkhand_Sword
+```
 
-### Addressables 초기 설정
+### Battle movement
+
+- Battle은 axial 좌표계 사용.
+- 마우스로 타일을 클릭하면 tile center로 이동.
+- 서버 전투에서는 `C_BATTLE_MOVE` 송신 후 `S_BATTLE_MOVE`를 기다린다.
+- Debug battle에서는 서버 없이 local 이동 가능.
+
+## 2026-06-30
+
+### Multiplayer build/run tool
 
 추가:
 
-- `Assets/Editor/AddressablesProjectSetup.cs`
-- `Tools/Project OCH/Addressables/Initialize`
+- `Assets/Editor/MultiplayerBuildAndRun.cs`
 
-## 2026-06-15
+기능:
 
-### Addressables 패키지 설치
+- Addressables content build
+- Windows x64 client build
+- 같은 exe를 여러 개 실행
+- 각 클라이언트에 `-playerIndex` 전달
+- 로그 분리
 
-- Unity Addressables package `2.9.1` 설치.
+### Run in background
+
+적용:
+
+- `ProjectSettings/ProjectSettings.asset`
+- `Assets/Editor/MultiplayerBuildAndRun.cs`
+- `Assets/Scripts/App/GameRoot.cs`
+
+목적:
+
+- 여러 클라이언트 실행 시 포커스 없는 창도 네트워크 tick이 계속 돌도록 함.
+
+### Field movement and map validation
+
+- Field는 `Vec2Fixed` world 좌표 기반 이동.
+- 서버는 walkmap JSON으로 이동 가능 여부 검증.
+- 클라이언트는 옵션으로 로컬 검증을 먼저 할 수 있음.
+- `FieldWalkMapExporter`로 tilemap에서 walkmap JSON 생성.
+
+## 2026-06-20 이전
+
+### GameRoot / NetworkService refactor
+
+- 기존 대형 Managers singleton 구조 대신 `GameRoot -> AppServices -> NetworkService` 구조로 정리.
+- `PacketHandler`는 main thread event dispatch 역할.
+- `NetworkService`는 상태 캐시와 송신 API 담당.
+
+### Addressables setup
+
+- Addressables package 설치.
 - `Assets/AddressableAssetsData` 생성.
-- Local/Remote group 생성.
+- Local/Remote group 구성.

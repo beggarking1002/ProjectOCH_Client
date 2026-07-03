@@ -1,135 +1,176 @@
 # Server Protocol Notes
 
-Last updated: 2026-06-30
+Last updated: 2026-07-03
 
-## 관련 서버 경로
+## 서버 경로
 
-- 서버 루트: `C:\ProjectOCH\Server`
-- C++ 게임 서버: `C:\ProjectOCH\Server\GameServer`
-- packet handler:
-  - `C:\ProjectOCH\Server\GameServer\ServerPacketHandler.cpp`
-  - `C:\ProjectOCH\Server\GameServer\ServerPacketHandler.h`
-- room:
-  - `C:\ProjectOCH\Server\GameServer\Room.cpp`
-  - `C:\ProjectOCH\Server\GameServer\Room.h`
-- walkmap:
-  - `C:\ProjectOCH\Server\GameServer\FieldWalkMapData.cpp`
-  - `C:\ProjectOCH\Server\GameServer\FieldWalkMapData.h`
-- proto:
-  - `Protocol.proto`
-  - `Struct.proto`
-  - `Enum.proto`
+- Server root: `C:\ProjectOCH\Server`
+- GameServer: `C:\ProjectOCH\Server\GameServer`
+- 주요 파일:
+  - `GameServer.cpp`
+  - `ServerPacketHandler.cpp`
+  - `Room.cpp`
+  - `FieldWalkMapData.cpp`
+  - Battle 관련 구현은 서버 현재 상태를 다시 확인해야 한다.
 
-## 현재 서버 동작 요약
+## 현재 클라이언트가 기대하는 서버 동작
 
-### C_LOGIN
-
-`Handle_C_LOGIN`은 현재 DB 없이 `S_LOGIN.success = true`를 보낸다.
-
-### C_ENTER_GAME
+### Login
 
 ```text
-Handle_C_ENTER_GAME
- -> ObjectUtils::CreatePlayer
- -> GRoom->DoAsync(Room::HandleEnterPlayer)
- -> Room::EnterRoom
- -> SendEnterGame(player, true)
- -> SendExistingPlayers(player)
- -> SendSpawn(object, exceptId = new player's id)
+C_LOGIN
+ -> S_LOGIN { success = true/false }
 ```
 
-신규 클라:
+### Field 입장
 
 ```text
-S_ENTER_GAME
-S_SPAWN { existing players }
+C_ENTER_GAME
+ -> S_ENTER_GAME { success, player }
+ -> S_SPAWN { existing players }
+ -> 이후 다른 클라에게 S_SPAWN { new player }
 ```
 
-기존 클라:
+클라이언트는 `NetworkService._knownPlayers` 캐시를 유지한다. `S_SPAWN`이 FieldScene 로딩 전에 도착해도 FieldObjectManager 초기화 시 snapshot으로 복구한다.
+
+### Field 이동
 
 ```text
-S_SPAWN { new player }
+C_MOVE { Vec2Fixed target }
+ -> 서버 walkmap 검증
+ -> 성공: S_MOVE broadcast
+ -> 실패: 요청자에게 보정 S_MOVE 또는 실패 처리
 ```
 
-### C_MOVE
+Field는 `Vec2Fixed` world 좌표 기반이다. 서버 검증은 `Field_001.walkmap.json`을 사용한다.
 
-서버는 `C_MOVE.target`을 `Vec2Fixed` 월드 좌표로 받는다.
+## Battle 입장
 
-현재 목표 구조:
+클라이언트는 FieldScene에서 `B` key 입력 시 `C_ENTER_BATTLE`을 보낸다.
+
+서버는 성공 시:
 
 ```text
-C_MOVE.target
- -> FieldWalkMapData.FixedToCell
- -> walkable_ranges 검사
- -> 성공이면 player->position 갱신 후 S_MOVE broadcast
- -> 실패이면 position 갱신 없이 duration_ms=0 보정
+S_ENTER_BATTLE
+  success = true
+  battle_id
+  map_id
+  allied_pawns
+  enemy_pawns
+  current_turn_pawn_id
 ```
 
-## Walkmap JSON
-
-Unity exporter가 생성한다.
-
-클라이언트 기본 출력:
+실패 시:
 
 ```text
-Assets/GameData/Maps/Field_001.walkmap.json
+S_ENTER_BATTLE
+  success = false
+  reason
 ```
 
-서버 복사 위치:
+## Battle 이동
+
+클라이언트는 현재 턴인 내 pawn만 `C_BATTLE_MOVE`를 보낸다.
+
+서버가 검증해야 할 것:
+
+- battle id 유효성
+- pawn id 유효성
+- pawn owner가 요청 session과 일치하는지
+- 현재 턴 pawn인지
+- target axial이 battle map walkable인지
+- 이동 range 안인지
+- target이 occupied인지
+
+서버 응답:
 
 ```text
-C:\ProjectOCH\Server\Data\Maps\Field_001.walkmap.json
+S_BATTLE_MOVE
+  success
+  battle_id
+  pawn_id
+  start
+  target
+  next_turn_pawn_id
+  result
+  reason
 ```
 
-현재 JSON 핵심 필드:
+실패 시에도 클라이언트가 `WaitingServer`에서 빠져나올 수 있도록 `S_BATTLE_MOVE`를 보내는 것이 좋다.
 
-```json
-{
-  "map_id": "Field_001",
-  "fixed_point_scale": 100,
-  "cell_size": { "x": 0.95, "y": 1.0 },
-  "origin_world": { "x": 0.0, "y": 0.0 },
-  "bounds": {},
-  "walkable_ranges": [
-    { "y": -20, "x_min": 4, "x_max": 6 }
-  ],
-  "debug_walkable_cells": []
+## Battle 스킬
+
+클라이언트는 `Skill1~3` 선택 후 타일 클릭 시 아래를 보낸다.
+
+```text
+C_BATTLE_SKILL
+  battle_id
+  caster_pawn_id
+  skill_slot
+  target_pawn_id
+  target_axial
+```
+
+정책:
+
+- `skill_slot = 1, 2, 3`
+- `target_pawn_id`는 클릭한 axial에 pawn이 있으면 채우고, 없으면 0.
+- `target_axial`은 항상 채움.
+
+서버가 검증해야 할 것:
+
+- battle id 유효성
+- caster pawn 유효성
+- caster owner 검증
+- 현재 턴 검증
+- skill slot 유효성
+- 스킬별 range/target rule
+- target pawn 필요 여부
+- target axial walkable/valid 여부
+
+응답:
+
+```text
+S_BATTLE_SKILL
+  success
+  battle_id
+  caster_pawn_id
+  skill_slot
+  target_pawn_id
+  target_axial
+  damage
+  target_hp
+  next_turn_pawn_id
+  reason
+```
+
+현재 대화 기준으로는 서버가 Skill1만 success 처리할 가능성이 있다. 클라이언트는 Skill1~3 모두 보낼 수 있다.
+
+## TurnQueue 관련 proto 필요
+
+현재 클라이언트가 받은 정보는 `next_turn_pawn_id`뿐이다. 사용자가 원하는 UI는 다음과 같다.
+
+```text
+TurnQueue 왼쪽 = 현재 턴 캐릭터 초상화
+턴 종료 시 현재 초상화가 아래로 떨어지며 소멸
+나머지 초상화가 왼쪽으로 한 칸씩 이동
+오른쪽에 다음 예측 초상화 추가
+```
+
+이를 제대로 하려면 서버가 전체 턴 큐를 보내는 것이 좋다.
+
+추천 proto:
+
+```proto
+message S_BATTLE_TURN_QUEUE {
+  uint64 battle_id = 1;
+  repeated uint64 pawn_ids = 2;
 }
 ```
 
-`walkable_ranges`는 inclusive range다.
+또는 `S_ENTER_BATTLE`, `S_BATTLE_MOVE`, `S_BATTLE_SKILL`에 `repeated uint64 turn_queue = n;`을 추가해도 된다.
 
-```text
-x_min <= cellX <= x_max
-```
-
-## 중요한 좌표계 이슈
-
-`Field_001` 프리팹의 Grid는 Hexagon layout이다.
-
-프리팹 설정:
-
-```text
-Grid.m_CellSize = { x: 0.95, y: 1.0, z: 1 }
-Grid.m_CellLayout = 1
-Grid.m_CellSwizzle = 0
-Tilemap.m_TileAnchor = { x: 0, y: 0, z: 0 }
-```
-
-따라서 서버에서 단순 rectangle 공식으로 변환하면 클라 `Grid.WorldToCell()`과 어긋난다.
-
-문제 공식:
-
-```cpp
-cellX = floor((worldX - originX) / cellSizeX);
-cellY = floor((worldY - originY) / cellSizeY);
-```
-
-Hex Grid에서는 y row stride와 row offset을 반영해야 한다. 현재 서버 좌표 동기화 문제를 볼 때 `FieldWalkMapData::FixedToCell`과 `CellToFixed`가 가장 우선 확인 대상이다.
-
-## 서버 빌드 팁
-
-GameServer만 확인할 때:
+## 서버 빌드 참고
 
 ```powershell
 cd C:\ProjectOCH\Server
@@ -139,5 +180,3 @@ cd C:\ProjectOCH\Server
   /p:Configuration=Debug `
   /p:Platform=x64
 ```
-
-`GameServer.vcxproj`를 직접 빌드하면 PreBuild 상대 경로가 틀어질 수 있다. 솔루션 타겟으로 빌드하는 편이 안전하다.

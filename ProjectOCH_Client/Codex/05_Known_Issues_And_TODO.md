@@ -1,106 +1,139 @@
 # Known Issues And TODO
 
-Last updated: 2026-06-30
+Last updated: 2026-07-03
 
-## 높은 우선순위
+## 최우선 TODO
 
-### 서버와 클라의 Hex Grid 좌표 동기화
+### 1. Canvas_BattleUI prefab을 실제 BattleScene에 연결
 
-`Field_001`은 Unity Hexagon Grid다. 서버가 rectangle 공식으로 `FixedToCell`을 계산하면 경계나 row offset에서 클라와 다르게 판정한다.
+현재:
 
-확인 대상:
+- `Assets/@Resources/Prefab/UI/Canvas_BattleUI.prefab`이 존재한다.
+- `BattleSceneAddressableLoader`는 아직 이 prefab을 로드하지 않는다.
+- `BattleUIController`가 런타임에 임시 UI를 코드로 만든다.
 
-- 서버 `FieldWalkMapData::FixedToCell`
-- 서버 `FieldWalkMapData::CellToFixed`
-- 클라 `FieldMapWalkArea.IsWalkable`
-- exporter `FieldWalkMapExporter`
+해야 할 일:
 
-가능한 해결:
+1. prefab 이름 정리
+   - `ActionIcon1 (1)` 등 -> `ActionSlot_01~08`
+   - `TurnQueue` 자식 -> `TurnPortraitSlot_01~08`
+   - `TrunExit` -> `TurnExit`
+2. `ActionSlot_01~03`에 Button 또는 클릭 처리 추가
+3. prefab을 Addressables에 등록할지 Resources로 로드할지 결정
+4. `BattleUIController`를 prefab 바인딩 방식으로 변경
+5. 기존 코드 생성 UI 제거
 
-- 서버가 Unity Hex Grid 변환을 정확히 구현한다.
-- 또는 프로토콜에 클라가 계산한 target cell을 추가한다.
+### 2. 전투 스킬 UI와 BattleActionMode 연결
 
-현재는 프로토콜 변경 없이 서버 변환을 맞추려는 방향이다.
+현재:
 
-### Walkmap JSON 재생성 규칙
+- `BattleActionMode`는 `Move`, `Skill1`, `Skill2`, `Skill3`, `WaitingServer`.
+- `BattleObjectManager.SetActionMode()`가 존재한다.
+- Skill mode에서 타일 클릭 시 `C_BATTLE_SKILL`을 보낸다.
 
-현재 `FieldWalkMapExporter`는 기본적으로 `Ground_Tilemap` 타일을 이동 가능 영역으로 본다.
+해야 할 일:
 
-옵션:
+- `ActionSlot_01` -> Skill1
+- `ActionSlot_02` -> Skill2
+- `ActionSlot_03` -> Skill3
+- 선택된 슬롯 highlight 표시
+- `WaitingServer` 상태에서는 슬롯 클릭 비활성화 또는 무시
+- 스킬 실패 시 UI 상태를 `Move`로 복구
 
-- `Block Tilemap`
-  - `Block_Tilemap` 또는 `Prop_Tilemap` 자동 감지.
-- `Subtract Block Tilemap`
-  - 켜면 `Ground - Block`으로 추출.
-  - 꺼두면 Ground 기준만 사용.
+### 3. TurnQueue proto와 UI
 
-주의:
+현재:
 
-- `Block_Tilemap`이 배경/표시용으로 넓게 깔린 경우 이 옵션을 켜면 walkable이 0개가 될 수 있다.
-- 서버 검증용 JSON을 갱신하면 서버 `Data\Maps` 쪽도 같은 파일로 맞춰야 한다.
+- 클라이언트는 `next_turn_pawn_id`만 받는다.
+- 현재 턴 pawn 머리 위 `TURN` 표시는 된다.
+- 전체 턴 큐 UI를 정확히 만들 데이터는 부족하다.
 
-### 서버 검증 로그 확인
+해야 할 일:
 
-기본 클라 동작은 이동 불가 타일 클릭을 먼저 막는다.
-
-서버에서 `walkable=0` 로그를 보고 싶으면 `FieldPawnController`에서:
-
-```text
-validateLocallyBeforeSend = true
-sendBlockedMoveForDebug = true
-```
-
-또는 모든 클릭을 서버로 보내려면:
-
-```text
-validateLocallyBeforeSend = false
-```
-
-### S_ENTER_GAME / S_SPAWN 스냅샷 구조
-
-현재 서버는 `S_ENTER_GAME`과 기존 플레이어 목록용 `S_SPAWN`을 별도 패킷으로 보낸다.
-
-클라에서 씬 전환 중 `S_SPAWN`을 놓치지 않도록 `NetworkService._knownPlayers` 캐시를 사용한다.
-
-장기적으로는 아래처럼 정리하는 편이 더 명확하다.
+- 서버와 proto에 전체 턴 큐를 추가할지 결정.
+- 추천:
 
 ```proto
-message S_ENTER_GAME
-{
-    bool success = 1;
-    ObjectInfo player = 2;
-    repeated ObjectInfo players = 3;
+message S_BATTLE_TURN_QUEUE {
+  uint64 battle_id = 1;
+  repeated uint64 pawn_ids = 2;
 }
 ```
 
+또는 `S_ENTER_BATTLE`, `S_BATTLE_MOVE`, `S_BATTLE_SKILL`에 `repeated uint64 turn_queue` 추가.
+
+### 4. End Turn 패킷
+
+현재:
+
+- `BattleUIController.DebugEndTurn()`은 로그만 찍는다.
+- 서버 end turn 패킷이 없다.
+
+해야 할 일:
+
+- `C_BATTLE_END_TURN`, `S_BATTLE_TURN_CHANGED` 또는 유사 패킷 설계.
+- 또는 move/skill 사용 후 항상 턴이 끝나는 구조로 갈지 결정.
+
 ## 중간 우선순위
 
-### FieldMapWalkArea 런타임 설정
+### Skill 결과 연출
 
-`useBlockTilemap`은 현재 기본 false다. 실제 gameplay에서 Block 레이어를 클라 사전 검증에도 쓸지 결정해야 한다.
+현재:
 
-### 이동 보정과 예측
+- `S_BATTLE_SKILL` 성공 시 target hp 값만 local info에 반영한다.
+- 실제 HP bar, damage text, animation, death 처리 없음.
 
-현재 클라는 기본적으로 서버 `S_MOVE` 승인 후 이동한다. 즉 강한 서버 권위 구조에 가깝다.
+해야 할 일:
 
-나중에 조작감을 개선하려면:
+- `BattlePawnController.ApplyHp()` 이후 HP UI 갱신
+- damage floating text
+- skill animation trigger
+- hp <= 0 사망 처리
+- 사망 pawn 점유 해제는 서버 결과와 맞춰 처리
 
-- 클라 예측 이동
-- 서버 거부 시 rollback/reconciliation
-- 이동 중 새 명령 처리
+### Battle walkmap / prop tile
 
-을 설계해야 한다.
+전투 맵은 axial 기반이다. Ground tile 위에 Prop tile을 얹는 구조에서는 기본적으로 prop tile을 점유/이동 불가로 봐야 한다.
 
-### 스폰 위치 중복
+나중에 prop이 파괴되어 이동 가능해지는 경우:
 
-서버는 walkable cell에서 랜덤 스폰한다. 현재 같은 cell에 여러 플레이어가 겹치는지 여부는 별도 점유 검증이 필요하다.
+- 서버가 battle map의 동적 blocked state를 관리해야 한다.
+- 클라이언트는 서버가 내려준 상태를 표시만 한다.
+- 초기에는 정적 walkmap으로 충분하다.
 
-### Addressables 배포 경로
+### Battle UI prefab 구조 개선
 
-`Remote.LoadPath = http://localhost/[BuildTarget]`는 개발용이다. 배포 전 실제 remote path 전략이 필요하다.
+`ActionSlot`과 `TurnPortraitSlot`은 개별 prefab으로 분리하는 것이 좋다.
 
-## 낮은 우선순위
+추천:
 
-- `System.Net.Http` 버전 충돌 warning 정리.
-- `Google.Protobuf.dll` 버전 관리 문서화.
-- 기존 axial 관련 스크립트는 field에서 분리되었지만 battle용으로 남아 있다. battle 구현 시 재검토.
+```text
+BattleActionSlot.prefab
+  Frame Image
+  SkillIcon Image
+  CooldownOverlay Image
+  CooldownText TMP_Text
+  SelectionHighlight Image
+  Button
+
+BattleTurnPortraitSlot.prefab
+  Portrait Image
+  Frame Image
+  TeamColor Image
+  CurrentTurnHighlight Image
+```
+
+## 낮은 우선순위 / 정리
+
+- `System.Net.Http` version conflict warning 정리.
+- `Google.Protobuf.dll` 버전 문서화.
+- 기존 Field hex-grid 서버 좌표계 이슈 재검토.
+- Addressables remote path를 배포 환경에 맞게 결정.
+- `Canvas_BattleUI`를 Addressables 그룹에 넣을지 확인.
+
+## 주의할 점
+
+- UI EventSystem은 `InputSystemUIInputModule`을 써야 한다.
+- `StandaloneInputModule`이 남아 있으면 Input System only 설정에서 오류가 난다.
+- 서버 전투에서는 현재 턴이 아닌 pawn을 클라이언트에서 조작하지 못하게 막고 있다.
+- 그래도 최종 권위 검증은 항상 서버에서 해야 한다.
