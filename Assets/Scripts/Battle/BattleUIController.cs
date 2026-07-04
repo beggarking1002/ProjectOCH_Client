@@ -43,8 +43,8 @@ namespace Battle
 		Color _turnExitNormalColor = Color.white;
 		Text _turnPanelText;
 		Text _tileInfoText;
-		Text _selectedPawnText;
-		Text _enemyPawnText;
+		PawnPanelView _selectedPawnPanel;
+		PawnPanelView _enemyPawnPanel;
 		GameObject _uiInstance;
 		AsyncOperationHandle<GameObject> _uiHandle;
 		bool _hasUiHandle;
@@ -206,8 +206,8 @@ namespace Battle
 		{
 			_turnPanelText = CreateOrGetPanelText(root, "TurnPanel", "TurnPanel_StateText", 14);
 			_tileInfoText = CreateOrGetPanelText(root, "TileInfo", "TileInfo_StateText", 13);
-			_selectedPawnText = CreateOrGetPanelText(root, "Left_SelectedPawnPanel", "SelectedPawn_StateText", 13);
-			_enemyPawnText = CreateOrGetPanelText(root, "Right_EnemyPawnPanel", "EnemyPawn_StateText", 13);
+			_selectedPawnPanel = CreateOrGetPawnPanelView(root, "Left_SelectedPawnPanel", "SelectedPawn_StateText", "SelectedPawn_StatusBars", 13);
+			_enemyPawnPanel = CreateOrGetPawnPanelView(root, "Right_EnemyPawnPanel", "EnemyPawn_StateText", "EnemyPawn_StatusBars", 13);
 		}
 
 		void OnActionSlotClicked(int slotIndex)
@@ -289,16 +289,16 @@ namespace Battle
 			if (_tileInfoText != null)
 				_tileInfoText.text = BuildTileInfoText(hasHoveredTile, hoveredAxial);
 
-			if (_selectedPawnText != null)
-				_selectedPawnText.text = BuildPawnText("Selected", TryGetCurrentTurnPawn(out BattlePawnController selectedPawn) ? selectedPawn : null);
+			if (_selectedPawnPanel != null)
+				_selectedPawnPanel.SetPawn("Selected", TryGetCurrentTurnPawn(out BattlePawnController selectedPawn) ? selectedPawn : null);
 
-			if (_enemyPawnText != null)
+			if (_enemyPawnPanel != null)
 			{
 				BattlePawnController enemyPawn = null;
 				if (hasHoveredTile && _objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out BattlePawnController hoveredPawn) && hoveredPawn.IsMine == false)
 					enemyPawn = hoveredPawn;
 
-				_enemyPawnText.text = BuildPawnText("Target", enemyPawn);
+				_enemyPawnPanel.SetPawn("Target", enemyPawn);
 			}
 		}
 
@@ -446,10 +446,26 @@ namespace Battle
 				return null;
 			}
 
+			return CreateOrGetPanelText(panel, textName, fontSize, new Vector2(8f, 6f), new Vector2(-8f, -6f));
+		}
+
+		static Text CreateOrGetPanelText(Transform panel, string textName, int fontSize, Vector2 offsetMin, Vector2 offsetMax)
+		{
 			Transform existing = panel.Find(textName);
 			Text text = existing != null ? existing.GetComponent<Text>() : null;
 			if (text != null)
+			{
+				RectTransform existingRect = text.GetComponent<RectTransform>();
+				if (existingRect != null)
+				{
+					existingRect.anchorMin = Vector2.zero;
+					existingRect.anchorMax = Vector2.one;
+					existingRect.offsetMin = offsetMin;
+					existingRect.offsetMax = offsetMax;
+				}
+
 				return text;
+			}
 
 			GameObject textObject = new GameObject(textName);
 			textObject.transform.SetParent(panel, false);
@@ -458,8 +474,8 @@ namespace Battle
 			rect.anchorMin = Vector2.zero;
 			rect.anchorMax = Vector2.one;
 			rect.pivot = new Vector2(0f, 1f);
-			rect.offsetMin = new Vector2(8f, 6f);
-			rect.offsetMax = new Vector2(-8f, -6f);
+			rect.offsetMin = offsetMin;
+			rect.offsetMax = offsetMax;
 
 			text = textObject.AddComponent<Text>();
 			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -470,6 +486,125 @@ namespace Battle
 			text.verticalOverflow = VerticalWrapMode.Truncate;
 			text.raycastTarget = false;
 			return text;
+		}
+
+		static PawnPanelView CreateOrGetPawnPanelView(Transform root, string panelName, string textName, string barsName, int fontSize)
+		{
+			Transform panel = FindDeepChild(root, panelName);
+			if (panel == null)
+			{
+				Debug.LogWarning($"Missing battle UI panel: {panelName}");
+				return null;
+			}
+
+			Text text = CreateOrGetPanelText(panel, textName, fontSize, new Vector2(8f, 58f), new Vector2(-8f, -6f));
+			Transform bars = panel.Find(barsName);
+			RectTransform barsRect;
+			if (bars != null)
+			{
+				barsRect = bars.GetComponent<RectTransform>();
+				if (barsRect == null)
+					barsRect = bars.gameObject.AddComponent<RectTransform>();
+			}
+			else
+			{
+				GameObject barsObject = new GameObject(barsName);
+				barsObject.transform.SetParent(panel, false);
+				barsRect = barsObject.AddComponent<RectTransform>();
+			}
+
+			barsRect.anchorMin = new Vector2(0f, 0f);
+			barsRect.anchorMax = new Vector2(1f, 0f);
+			barsRect.pivot = new Vector2(0.5f, 0f);
+			barsRect.offsetMin = new Vector2(8f, 8f);
+			barsRect.offsetMax = new Vector2(-8f, 52f);
+
+			Image hpFill = CreateOrGetPanelBar(barsRect, "HpBar", 24f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
+			Image armorFill = CreateOrGetPanelBar(barsRect, "ArmorBar", 4f, new Color(0.35f, 0.68f, 1f, 1f), true);
+			return new PawnPanelView(text, hpFill, armorFill);
+		}
+
+		static Image CreateOrGetPanelBar(RectTransform parent, string name, float bottom, Color fillColor, bool preserveExistingStyle)
+		{
+			Transform existing = parent.Find(name);
+			RectTransform trackRect;
+			Image trackImage;
+			bool createdTrack = existing == null;
+			bool createdTrackImage = false;
+			if (existing != null)
+			{
+				trackRect = existing.GetComponent<RectTransform>();
+				if (trackRect == null)
+					trackRect = existing.gameObject.AddComponent<RectTransform>();
+
+				trackImage = existing.GetComponent<Image>();
+				if (trackImage == null)
+				{
+					trackImage = existing.gameObject.AddComponent<Image>();
+					createdTrackImage = true;
+				}
+			}
+			else
+			{
+				GameObject trackObject = new GameObject(name);
+				trackObject.transform.SetParent(parent, false);
+				trackRect = trackObject.AddComponent<RectTransform>();
+				trackImage = trackObject.AddComponent<Image>();
+			}
+
+			trackRect.anchorMin = new Vector2(0f, 0f);
+			trackRect.anchorMax = new Vector2(1f, 0f);
+			trackRect.pivot = new Vector2(0.5f, 0f);
+			trackRect.offsetMin = new Vector2(0f, bottom);
+			trackRect.offsetMax = new Vector2(0f, bottom + 12f);
+			if (createdTrack || createdTrackImage || preserveExistingStyle == false)
+				trackImage.color = new Color(0.02f, 0.025f, 0.03f, 0.78f);
+
+			trackImage.raycastTarget = false;
+
+			Transform fill = existing != null ? existing.Find("Fill") : null;
+			RectTransform fillRect;
+			Image fillImage;
+			bool createdFill = fill == null;
+			bool createdFillImage = false;
+			if (fill != null)
+			{
+				fillRect = fill.GetComponent<RectTransform>();
+				if (fillRect == null)
+					fillRect = fill.gameObject.AddComponent<RectTransform>();
+
+				fillImage = fill.GetComponent<Image>();
+				if (fillImage == null)
+				{
+					fillImage = fill.gameObject.AddComponent<Image>();
+					createdFillImage = true;
+				}
+			}
+			else
+			{
+				GameObject fillObject = new GameObject("Fill");
+				fillObject.transform.SetParent(trackRect, false);
+				fillRect = fillObject.AddComponent<RectTransform>();
+				fillImage = fillObject.AddComponent<Image>();
+			}
+
+			fillRect.anchorMin = new Vector2(0f, 0f);
+			fillRect.anchorMax = new Vector2(1f, 1f);
+			fillRect.offsetMin = new Vector2(1f, 1f);
+			fillRect.offsetMax = new Vector2(-1f, -1f);
+			if (createdFill || createdFillImage || preserveExistingStyle == false)
+				fillImage.color = fillColor;
+
+			fillImage.raycastTarget = false;
+			return fillImage;
+		}
+
+		static float GetRatio(int value, int maxValue)
+		{
+			if (maxValue <= 0)
+				return value > 0 ? 1f : 0f;
+
+			return Mathf.Clamp01((float)value / maxValue);
 		}
 
 		static GameObject FindExistingBattleUi()
@@ -535,6 +670,38 @@ namespace Battle
 #else
 			eventSystem.AddComponent<StandaloneInputModule>();
 #endif
+		}
+
+		sealed class PawnPanelView
+		{
+			readonly Text _text;
+			readonly Image _hpFill;
+			readonly Image _armorFill;
+
+			public PawnPanelView(Text text, Image hpFill, Image armorFill)
+			{
+				_text = text;
+				_hpFill = hpFill;
+				_armorFill = armorFill;
+			}
+
+			public void SetPawn(string title, BattlePawnController pawn)
+			{
+				if (_text != null)
+					_text.text = BuildPawnText(title, pawn);
+
+				SetFill(_hpFill, pawn != null ? GetRatio(pawn.Hp, pawn.MaxHp) : 0f);
+				SetFill(_armorFill, pawn != null ? GetRatio(pawn.Armor, pawn.MaxArmor) : 0f);
+			}
+
+			static void SetFill(Image fill, float ratio)
+			{
+				if (fill == null)
+					return;
+
+				RectTransform rect = fill.rectTransform;
+				rect.anchorMax = new Vector2(Mathf.Clamp01(ratio), 1f);
+			}
 		}
 
 		readonly struct ActionSlotBinding
