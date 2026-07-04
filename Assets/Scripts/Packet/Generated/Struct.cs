@@ -30,18 +30,33 @@ namespace Protocol {
             "GAEgASgEEikKC29iamVjdF90eXBlGAIgASgOMhQuUHJvdG9jb2wuT2JqZWN0",
             "VHlwZRItCg1jcmVhdHVyZV90eXBlGAMgASgOMhYuUHJvdG9jb2wuQ3JlYXR1",
             "cmVUeXBlEiUKCHBvc2l0aW9uGAQgASgLMhMuUHJvdG9jb2wuVmVjMkZpeGVk",
-            "IrEBCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVy",
+            "It0CCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVy",
             "X2lkGAIgASgEEicKCnBhd25fY2xhc3MYAyABKA4yEy5Qcm90b2NvbC5QYXdu",
             "Q2xhc3MSIwoFYXhpYWwYBCABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEgoK",
             "AmhwGAUgASgFEg4KBm1heF9ocBgGIAEoBRISCgptb3ZlX3JhbmdlGAcgASgF",
-            "YgZwcm90bzM="));
+            "Eg0KBWFybW9yGAggASgFEhEKCW1heF9hcm1vchgJIAEoBRISCgpjdXJyZW50",
+            "X2FwGAogASgFEhAKCGNhbl9tb3ZlGAsgASgIEiEKGXVzZWRfc3ViX2FjdGlv",
+            "bl90aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgNIAEoCBIWCg5p",
+            "c19zaGllbGRfdW5pdBgOIAEoCBIQCghpc19tZWxlZRgPIAEoCCKdAQoPQmF0",
+            "dGxlUGF3bkRlbHRhEg8KB3Bhd25faWQYASABKAQSCgoCaHAYAiABKAUSDQoF",
+            "YXJtb3IYAyABKAUSEgoKY3VycmVudF9hcBgEIAEoBRIQCghjYW5fbW92ZRgF",
+            "IAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190dXJuGAYgASgIEhUKDXVz",
+            "ZWRfdWx0aW1hdGUYByABKAgikQIKD0JhdHRsZUFjdGlvbkxvZxIYChBhdHRh",
+            "Y2tlcl9wYXduX2lkGAEgASgEEhgKEGRlZmVuZGVyX3Bhd25faWQYAiABKAQS",
+            "EgoKc2tpbGxfc2xvdBgDIAEoBRITCgthY3Rpb25fdHlwZRgEIAEoCRIOCgZk",
+            "YW1hZ2UYBSABKAUSEwoLaXNfY3JpdGljYWwYBiABKAgSEQoJaXNfZXZhZGVk",
+            "GAcgASgIEhIKCmlzX2d1YXJkZWQYCCABKAgSGgoSaXNfcGVyZmVjdF9ndWFy",
+            "ZGVkGAkgASgIEhIKCmlzX2NvdW50ZXIYCiABKAgSEAoIaHBfYWZ0ZXIYCyAB",
+            "KAUSEwoLYXJtb3JfYWZ0ZXIYDCABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.Vec2Fixed), global::Protocol.Vec2Fixed.Parser, new[]{ "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AxialCoord), global::Protocol.AxialCoord.Parser, new[]{ "Q", "R" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Position" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsShieldUnit", "IsMelee" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter" }, null, null, null, null)
           }));
     }
     #endregion
@@ -850,6 +865,14 @@ namespace Protocol {
       hp_ = other.hp_;
       maxHp_ = other.maxHp_;
       moveRange_ = other.moveRange_;
+      armor_ = other.armor_;
+      maxArmor_ = other.maxArmor_;
+      currentAp_ = other.currentAp_;
+      canMove_ = other.canMove_;
+      usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
+      usedUltimate_ = other.usedUltimate_;
+      isShieldUnit_ = other.isShieldUnit_;
+      isMelee_ = other.isMelee_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -943,6 +966,102 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "armor" field.</summary>
+    public const int ArmorFieldNumber = 8;
+    private int armor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Armor {
+      get { return armor_; }
+      set {
+        armor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_armor" field.</summary>
+    public const int MaxArmorFieldNumber = 9;
+    private int maxArmor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MaxArmor {
+      get { return maxArmor_; }
+      set {
+        maxArmor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "current_ap" field.</summary>
+    public const int CurrentApFieldNumber = 10;
+    private int currentAp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CurrentAp {
+      get { return currentAp_; }
+      set {
+        currentAp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "can_move" field.</summary>
+    public const int CanMoveFieldNumber = 11;
+    private bool canMove_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool CanMove {
+      get { return canMove_; }
+      set {
+        canMove_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_sub_action_this_turn" field.</summary>
+    public const int UsedSubActionThisTurnFieldNumber = 12;
+    private bool usedSubActionThisTurn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedSubActionThisTurn {
+      get { return usedSubActionThisTurn_; }
+      set {
+        usedSubActionThisTurn_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_ultimate" field.</summary>
+    public const int UsedUltimateFieldNumber = 13;
+    private bool usedUltimate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedUltimate {
+      get { return usedUltimate_; }
+      set {
+        usedUltimate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_shield_unit" field.</summary>
+    public const int IsShieldUnitFieldNumber = 14;
+    private bool isShieldUnit_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsShieldUnit {
+      get { return isShieldUnit_; }
+      set {
+        isShieldUnit_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_melee" field.</summary>
+    public const int IsMeleeFieldNumber = 15;
+    private bool isMelee_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsMelee {
+      get { return isMelee_; }
+      set {
+        isMelee_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -965,6 +1084,14 @@ namespace Protocol {
       if (Hp != other.Hp) return false;
       if (MaxHp != other.MaxHp) return false;
       if (MoveRange != other.MoveRange) return false;
+      if (Armor != other.Armor) return false;
+      if (MaxArmor != other.MaxArmor) return false;
+      if (CurrentAp != other.CurrentAp) return false;
+      if (CanMove != other.CanMove) return false;
+      if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
+      if (UsedUltimate != other.UsedUltimate) return false;
+      if (IsShieldUnit != other.IsShieldUnit) return false;
+      if (IsMelee != other.IsMelee) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -979,6 +1106,14 @@ namespace Protocol {
       if (Hp != 0) hash ^= Hp.GetHashCode();
       if (MaxHp != 0) hash ^= MaxHp.GetHashCode();
       if (MoveRange != 0) hash ^= MoveRange.GetHashCode();
+      if (Armor != 0) hash ^= Armor.GetHashCode();
+      if (MaxArmor != 0) hash ^= MaxArmor.GetHashCode();
+      if (CurrentAp != 0) hash ^= CurrentAp.GetHashCode();
+      if (CanMove != false) hash ^= CanMove.GetHashCode();
+      if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
+      if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
+      if (IsShieldUnit != false) hash ^= IsShieldUnit.GetHashCode();
+      if (IsMelee != false) hash ^= IsMelee.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1025,6 +1160,38 @@ namespace Protocol {
         output.WriteRawTag(56);
         output.WriteInt32(MoveRange);
       }
+      if (Armor != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(Armor);
+      }
+      if (MaxArmor != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(MaxArmor);
+      }
+      if (CurrentAp != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(CurrentAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(88);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(UsedUltimate);
+      }
+      if (IsShieldUnit != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(IsShieldUnit);
+      }
+      if (IsMelee != false) {
+        output.WriteRawTag(120);
+        output.WriteBool(IsMelee);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1063,6 +1230,38 @@ namespace Protocol {
         output.WriteRawTag(56);
         output.WriteInt32(MoveRange);
       }
+      if (Armor != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(Armor);
+      }
+      if (MaxArmor != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(MaxArmor);
+      }
+      if (CurrentAp != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(CurrentAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(88);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(UsedUltimate);
+      }
+      if (IsShieldUnit != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(IsShieldUnit);
+      }
+      if (IsMelee != false) {
+        output.WriteRawTag(120);
+        output.WriteBool(IsMelee);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1093,6 +1292,30 @@ namespace Protocol {
       }
       if (MoveRange != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MoveRange);
+      }
+      if (Armor != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Armor);
+      }
+      if (MaxArmor != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxArmor);
+      }
+      if (CurrentAp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentAp);
+      }
+      if (CanMove != false) {
+        size += 1 + 1;
+      }
+      if (UsedSubActionThisTurn != false) {
+        size += 1 + 1;
+      }
+      if (UsedUltimate != false) {
+        size += 1 + 1;
+      }
+      if (IsShieldUnit != false) {
+        size += 1 + 1;
+      }
+      if (IsMelee != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1129,6 +1352,30 @@ namespace Protocol {
       }
       if (other.MoveRange != 0) {
         MoveRange = other.MoveRange;
+      }
+      if (other.Armor != 0) {
+        Armor = other.Armor;
+      }
+      if (other.MaxArmor != 0) {
+        MaxArmor = other.MaxArmor;
+      }
+      if (other.CurrentAp != 0) {
+        CurrentAp = other.CurrentAp;
+      }
+      if (other.CanMove != false) {
+        CanMove = other.CanMove;
+      }
+      if (other.UsedSubActionThisTurn != false) {
+        UsedSubActionThisTurn = other.UsedSubActionThisTurn;
+      }
+      if (other.UsedUltimate != false) {
+        UsedUltimate = other.UsedUltimate;
+      }
+      if (other.IsShieldUnit != false) {
+        IsShieldUnit = other.IsShieldUnit;
+      }
+      if (other.IsMelee != false) {
+        IsMelee = other.IsMelee;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1176,6 +1423,38 @@ namespace Protocol {
             MoveRange = input.ReadInt32();
             break;
           }
+          case 64: {
+            Armor = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            MaxArmor = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            CurrentAp = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 96: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 104: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+          case 112: {
+            IsShieldUnit = input.ReadBool();
+            break;
+          }
+          case 120: {
+            IsMelee = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -1220,6 +1499,1045 @@ namespace Protocol {
           }
           case 56: {
             MoveRange = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            Armor = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            MaxArmor = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            CurrentAp = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 96: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 104: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+          case 112: {
+            IsShieldUnit = input.ReadBool();
+            break;
+          }
+          case 120: {
+            IsMelee = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class BattlePawnDelta : pb::IMessage<BattlePawnDelta>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BattlePawnDelta> _parser = new pb::MessageParser<BattlePawnDelta>(() => new BattlePawnDelta());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<BattlePawnDelta> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattlePawnDelta() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattlePawnDelta(BattlePawnDelta other) : this() {
+      pawnId_ = other.pawnId_;
+      hp_ = other.hp_;
+      armor_ = other.armor_;
+      currentAp_ = other.currentAp_;
+      canMove_ = other.canMove_;
+      usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
+      usedUltimate_ = other.usedUltimate_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattlePawnDelta Clone() {
+      return new BattlePawnDelta(this);
+    }
+
+    /// <summary>Field number for the "pawn_id" field.</summary>
+    public const int PawnIdFieldNumber = 1;
+    private ulong pawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong PawnId {
+      get { return pawnId_; }
+      set {
+        pawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hp" field.</summary>
+    public const int HpFieldNumber = 2;
+    private int hp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Hp {
+      get { return hp_; }
+      set {
+        hp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "armor" field.</summary>
+    public const int ArmorFieldNumber = 3;
+    private int armor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Armor {
+      get { return armor_; }
+      set {
+        armor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "current_ap" field.</summary>
+    public const int CurrentApFieldNumber = 4;
+    private int currentAp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CurrentAp {
+      get { return currentAp_; }
+      set {
+        currentAp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "can_move" field.</summary>
+    public const int CanMoveFieldNumber = 5;
+    private bool canMove_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool CanMove {
+      get { return canMove_; }
+      set {
+        canMove_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_sub_action_this_turn" field.</summary>
+    public const int UsedSubActionThisTurnFieldNumber = 6;
+    private bool usedSubActionThisTurn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedSubActionThisTurn {
+      get { return usedSubActionThisTurn_; }
+      set {
+        usedSubActionThisTurn_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_ultimate" field.</summary>
+    public const int UsedUltimateFieldNumber = 7;
+    private bool usedUltimate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedUltimate {
+      get { return usedUltimate_; }
+      set {
+        usedUltimate_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as BattlePawnDelta);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(BattlePawnDelta other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PawnId != other.PawnId) return false;
+      if (Hp != other.Hp) return false;
+      if (Armor != other.Armor) return false;
+      if (CurrentAp != other.CurrentAp) return false;
+      if (CanMove != other.CanMove) return false;
+      if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
+      if (UsedUltimate != other.UsedUltimate) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PawnId != 0UL) hash ^= PawnId.GetHashCode();
+      if (Hp != 0) hash ^= Hp.GetHashCode();
+      if (Armor != 0) hash ^= Armor.GetHashCode();
+      if (CurrentAp != 0) hash ^= CurrentAp.GetHashCode();
+      if (CanMove != false) hash ^= CanMove.GetHashCode();
+      if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
+      if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (PawnId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(PawnId);
+      }
+      if (Hp != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Hp);
+      }
+      if (Armor != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Armor);
+      }
+      if (CurrentAp != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(CurrentAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(UsedUltimate);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (PawnId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(PawnId);
+      }
+      if (Hp != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Hp);
+      }
+      if (Armor != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Armor);
+      }
+      if (CurrentAp != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(CurrentAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(UsedUltimate);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (PawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(PawnId);
+      }
+      if (Hp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Hp);
+      }
+      if (Armor != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Armor);
+      }
+      if (CurrentAp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentAp);
+      }
+      if (CanMove != false) {
+        size += 1 + 1;
+      }
+      if (UsedSubActionThisTurn != false) {
+        size += 1 + 1;
+      }
+      if (UsedUltimate != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(BattlePawnDelta other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PawnId != 0UL) {
+        PawnId = other.PawnId;
+      }
+      if (other.Hp != 0) {
+        Hp = other.Hp;
+      }
+      if (other.Armor != 0) {
+        Armor = other.Armor;
+      }
+      if (other.CurrentAp != 0) {
+        CurrentAp = other.CurrentAp;
+      }
+      if (other.CanMove != false) {
+        CanMove = other.CanMove;
+      }
+      if (other.UsedSubActionThisTurn != false) {
+        UsedSubActionThisTurn = other.UsedSubActionThisTurn;
+      }
+      if (other.UsedUltimate != false) {
+        UsedUltimate = other.UsedUltimate;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            PawnId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            Hp = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Armor = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            CurrentAp = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 48: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 56: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            PawnId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            Hp = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Armor = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            CurrentAp = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 48: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 56: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class BattleActionLog : pb::IMessage<BattleActionLog>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BattleActionLog> _parser = new pb::MessageParser<BattleActionLog>(() => new BattleActionLog());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<BattleActionLog> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleActionLog() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleActionLog(BattleActionLog other) : this() {
+      attackerPawnId_ = other.attackerPawnId_;
+      defenderPawnId_ = other.defenderPawnId_;
+      skillSlot_ = other.skillSlot_;
+      actionType_ = other.actionType_;
+      damage_ = other.damage_;
+      isCritical_ = other.isCritical_;
+      isEvaded_ = other.isEvaded_;
+      isGuarded_ = other.isGuarded_;
+      isPerfectGuarded_ = other.isPerfectGuarded_;
+      isCounter_ = other.isCounter_;
+      hpAfter_ = other.hpAfter_;
+      armorAfter_ = other.armorAfter_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleActionLog Clone() {
+      return new BattleActionLog(this);
+    }
+
+    /// <summary>Field number for the "attacker_pawn_id" field.</summary>
+    public const int AttackerPawnIdFieldNumber = 1;
+    private ulong attackerPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong AttackerPawnId {
+      get { return attackerPawnId_; }
+      set {
+        attackerPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "defender_pawn_id" field.</summary>
+    public const int DefenderPawnIdFieldNumber = 2;
+    private ulong defenderPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong DefenderPawnId {
+      get { return defenderPawnId_; }
+      set {
+        defenderPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_slot" field.</summary>
+    public const int SkillSlotFieldNumber = 3;
+    private int skillSlot_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int SkillSlot {
+      get { return skillSlot_; }
+      set {
+        skillSlot_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "action_type" field.</summary>
+    public const int ActionTypeFieldNumber = 4;
+    private string actionType_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ActionType {
+      get { return actionType_; }
+      set {
+        actionType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "damage" field.</summary>
+    public const int DamageFieldNumber = 5;
+    private int damage_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Damage {
+      get { return damage_; }
+      set {
+        damage_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_critical" field.</summary>
+    public const int IsCriticalFieldNumber = 6;
+    private bool isCritical_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsCritical {
+      get { return isCritical_; }
+      set {
+        isCritical_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_evaded" field.</summary>
+    public const int IsEvadedFieldNumber = 7;
+    private bool isEvaded_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsEvaded {
+      get { return isEvaded_; }
+      set {
+        isEvaded_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_guarded" field.</summary>
+    public const int IsGuardedFieldNumber = 8;
+    private bool isGuarded_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsGuarded {
+      get { return isGuarded_; }
+      set {
+        isGuarded_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_perfect_guarded" field.</summary>
+    public const int IsPerfectGuardedFieldNumber = 9;
+    private bool isPerfectGuarded_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsPerfectGuarded {
+      get { return isPerfectGuarded_; }
+      set {
+        isPerfectGuarded_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_counter" field.</summary>
+    public const int IsCounterFieldNumber = 10;
+    private bool isCounter_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsCounter {
+      get { return isCounter_; }
+      set {
+        isCounter_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hp_after" field.</summary>
+    public const int HpAfterFieldNumber = 11;
+    private int hpAfter_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int HpAfter {
+      get { return hpAfter_; }
+      set {
+        hpAfter_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "armor_after" field.</summary>
+    public const int ArmorAfterFieldNumber = 12;
+    private int armorAfter_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ArmorAfter {
+      get { return armorAfter_; }
+      set {
+        armorAfter_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as BattleActionLog);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(BattleActionLog other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AttackerPawnId != other.AttackerPawnId) return false;
+      if (DefenderPawnId != other.DefenderPawnId) return false;
+      if (SkillSlot != other.SkillSlot) return false;
+      if (ActionType != other.ActionType) return false;
+      if (Damage != other.Damage) return false;
+      if (IsCritical != other.IsCritical) return false;
+      if (IsEvaded != other.IsEvaded) return false;
+      if (IsGuarded != other.IsGuarded) return false;
+      if (IsPerfectGuarded != other.IsPerfectGuarded) return false;
+      if (IsCounter != other.IsCounter) return false;
+      if (HpAfter != other.HpAfter) return false;
+      if (ArmorAfter != other.ArmorAfter) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AttackerPawnId != 0UL) hash ^= AttackerPawnId.GetHashCode();
+      if (DefenderPawnId != 0UL) hash ^= DefenderPawnId.GetHashCode();
+      if (SkillSlot != 0) hash ^= SkillSlot.GetHashCode();
+      if (ActionType.Length != 0) hash ^= ActionType.GetHashCode();
+      if (Damage != 0) hash ^= Damage.GetHashCode();
+      if (IsCritical != false) hash ^= IsCritical.GetHashCode();
+      if (IsEvaded != false) hash ^= IsEvaded.GetHashCode();
+      if (IsGuarded != false) hash ^= IsGuarded.GetHashCode();
+      if (IsPerfectGuarded != false) hash ^= IsPerfectGuarded.GetHashCode();
+      if (IsCounter != false) hash ^= IsCounter.GetHashCode();
+      if (HpAfter != 0) hash ^= HpAfter.GetHashCode();
+      if (ArmorAfter != 0) hash ^= ArmorAfter.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (AttackerPawnId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(AttackerPawnId);
+      }
+      if (DefenderPawnId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(DefenderPawnId);
+      }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SkillSlot);
+      }
+      if (ActionType.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ActionType);
+      }
+      if (Damage != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Damage);
+      }
+      if (IsCritical != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsCritical);
+      }
+      if (IsEvaded != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(IsEvaded);
+      }
+      if (IsGuarded != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(IsGuarded);
+      }
+      if (IsPerfectGuarded != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsPerfectGuarded);
+      }
+      if (IsCounter != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsCounter);
+      }
+      if (HpAfter != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(HpAfter);
+      }
+      if (ArmorAfter != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(ArmorAfter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (AttackerPawnId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(AttackerPawnId);
+      }
+      if (DefenderPawnId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(DefenderPawnId);
+      }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SkillSlot);
+      }
+      if (ActionType.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ActionType);
+      }
+      if (Damage != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Damage);
+      }
+      if (IsCritical != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsCritical);
+      }
+      if (IsEvaded != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(IsEvaded);
+      }
+      if (IsGuarded != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(IsGuarded);
+      }
+      if (IsPerfectGuarded != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(IsPerfectGuarded);
+      }
+      if (IsCounter != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(IsCounter);
+      }
+      if (HpAfter != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(HpAfter);
+      }
+      if (ArmorAfter != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(ArmorAfter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (AttackerPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(AttackerPawnId);
+      }
+      if (DefenderPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(DefenderPawnId);
+      }
+      if (SkillSlot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillSlot);
+      }
+      if (ActionType.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ActionType);
+      }
+      if (Damage != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Damage);
+      }
+      if (IsCritical != false) {
+        size += 1 + 1;
+      }
+      if (IsEvaded != false) {
+        size += 1 + 1;
+      }
+      if (IsGuarded != false) {
+        size += 1 + 1;
+      }
+      if (IsPerfectGuarded != false) {
+        size += 1 + 1;
+      }
+      if (IsCounter != false) {
+        size += 1 + 1;
+      }
+      if (HpAfter != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HpAfter);
+      }
+      if (ArmorAfter != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ArmorAfter);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(BattleActionLog other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AttackerPawnId != 0UL) {
+        AttackerPawnId = other.AttackerPawnId;
+      }
+      if (other.DefenderPawnId != 0UL) {
+        DefenderPawnId = other.DefenderPawnId;
+      }
+      if (other.SkillSlot != 0) {
+        SkillSlot = other.SkillSlot;
+      }
+      if (other.ActionType.Length != 0) {
+        ActionType = other.ActionType;
+      }
+      if (other.Damage != 0) {
+        Damage = other.Damage;
+      }
+      if (other.IsCritical != false) {
+        IsCritical = other.IsCritical;
+      }
+      if (other.IsEvaded != false) {
+        IsEvaded = other.IsEvaded;
+      }
+      if (other.IsGuarded != false) {
+        IsGuarded = other.IsGuarded;
+      }
+      if (other.IsPerfectGuarded != false) {
+        IsPerfectGuarded = other.IsPerfectGuarded;
+      }
+      if (other.IsCounter != false) {
+        IsCounter = other.IsCounter;
+      }
+      if (other.HpAfter != 0) {
+        HpAfter = other.HpAfter;
+      }
+      if (other.ArmorAfter != 0) {
+        ArmorAfter = other.ArmorAfter;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            AttackerPawnId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            DefenderPawnId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            SkillSlot = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            ActionType = input.ReadString();
+            break;
+          }
+          case 40: {
+            Damage = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            IsCritical = input.ReadBool();
+            break;
+          }
+          case 56: {
+            IsEvaded = input.ReadBool();
+            break;
+          }
+          case 64: {
+            IsGuarded = input.ReadBool();
+            break;
+          }
+          case 72: {
+            IsPerfectGuarded = input.ReadBool();
+            break;
+          }
+          case 80: {
+            IsCounter = input.ReadBool();
+            break;
+          }
+          case 88: {
+            HpAfter = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            ArmorAfter = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            AttackerPawnId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            DefenderPawnId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            SkillSlot = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            ActionType = input.ReadString();
+            break;
+          }
+          case 40: {
+            Damage = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            IsCritical = input.ReadBool();
+            break;
+          }
+          case 56: {
+            IsEvaded = input.ReadBool();
+            break;
+          }
+          case 64: {
+            IsGuarded = input.ReadBool();
+            break;
+          }
+          case 72: {
+            IsPerfectGuarded = input.ReadBool();
+            break;
+          }
+          case 80: {
+            IsCounter = input.ReadBool();
+            break;
+          }
+          case 88: {
+            HpAfter = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            ArmorAfter = input.ReadInt32();
             break;
           }
         }

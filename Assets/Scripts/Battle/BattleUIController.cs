@@ -242,6 +242,7 @@ namespace Battle
 
 			bool isWaiting = _objectManager.ActionMode == BattleActionMode.WaitingServer;
 			bool canAct = isWaiting == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
+			TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn);
 
 			if (_turnExitButton != null)
 				_turnExitButton.interactable = canAct;
@@ -257,9 +258,10 @@ namespace Battle
 
 			for (int i = 0; i < SlotBindings.Length; i++)
 			{
+				bool isAvailable = IsActionAvailable(SlotBindings[i], currentTurnPawn);
 				Button button = _actionButtons[i];
 				if (button != null)
-					button.interactable = canAct;
+					button.interactable = canAct && isAvailable;
 
 				Image image = _actionImages[i];
 				if (image == null)
@@ -267,7 +269,7 @@ namespace Battle
 
 				bool selected = SlotBindings[i].IsWaitCommand == false && SlotBindings[i].Mode == _objectManager.ActionMode;
 				Color color = selected ? new Color(1f, 0.88f, 0.35f, 1f) : _normalColors[i];
-				if (canAct == false)
+				if (canAct == false || isAvailable == false)
 					color.a = 0.45f;
 
 				image.color = color;
@@ -306,7 +308,15 @@ namespace Battle
 			if (_objectManager.BattleId == 0)
 				ownership = "Debug";
 
-			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}";
+			string ap = "-";
+			string canMove = "-";
+			if (TryGetCurrentTurnPawn(out BattlePawnController pawn))
+			{
+				ap = pawn.CurrentAp.ToString();
+				canMove = pawn.CanMove ? "Yes" : "No";
+			}
+
+			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}\nAP: {ap}\nMove: {canMove}\nLog:\n{_objectManager.BattleLogText}";
 		}
 
 		string BuildTileInfoText(bool hasHoveredTile, AxialCoord axial)
@@ -328,12 +338,38 @@ namespace Battle
 		static string BuildPawnText(string title, BattlePawnController pawn)
 		{
 			if (pawn == null)
-				return $"{title}\nPawn: -\nAxial: -\nHP: -";
+				return $"{title}\nPawn: -\nAxial: -\nHP: -\nArmor: -\nAP: -";
 
 			string side = pawn.IsMine ? "Mine" : "Enemy";
-			string hp = pawn.Info != null ? pawn.Info.Hp.ToString() : "-";
+			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
+			string armor = pawn.MaxArmor > 0 ? $"{pawn.Armor}/{pawn.MaxArmor}" : pawn.Armor.ToString();
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nAxial: {pawn.Axial}\nHP: {hp}";
+			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
+			string type = $"{(pawn.IsMelee ? "Melee" : "Ranged")}, {(pawn.IsShieldUnit ? "Shield" : "NoShield")}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nType: {type}\nAxial: {pawn.Axial}\nHP: {hp}\nArmor: {armor}\nAP: {pawn.CurrentAp}\nState: {flags}";
+		}
+
+		static bool IsActionAvailable(ActionSlotBinding binding, BattlePawnController pawn)
+		{
+			if (binding.IsWaitCommand || pawn == null)
+				return true;
+
+			switch (binding.Mode)
+			{
+				case BattleActionMode.Move:
+					return pawn.CanMove;
+				case BattleActionMode.SubAction:
+					return pawn.UsedSubActionThisTurn == false;
+				case BattleActionMode.Ultimate:
+					return pawn.UsedUltimate == false;
+				case BattleActionMode.Skill1:
+				case BattleActionMode.Skill2:
+				case BattleActionMode.Skill3:
+				case BattleActionMode.Skill4:
+					return pawn.CurrentAp > 0;
+				default:
+					return true;
+			}
 		}
 
 		bool TryGetCurrentTurnPawn(out BattlePawnController pawn)

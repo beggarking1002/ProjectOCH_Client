@@ -37,15 +37,15 @@ namespace Protocol {
             "X01BQ0UQBhIZChVQQVdOX0NMQVNTX0FMRU5fU1BFQVIQBxIgChxQQVdOX0NM",
             "QVNTX0FMRU5fU1dPUkRfU0hJRUxEEAgSHwobUEFXTl9DTEFTU19TRVJBX05F",
             "Q1JPTUFOQ0VSEAkSGwoXUEFXTl9DTEFTU19TRVJBX1dBUkxPQ0sQChIdChlQ",
-            "QVdOX0NMQVNTX0RBUktIQU5EX1NXT1JEEGUqyQIKEEJhdHRsZU1vdmVSZXN1",
+            "QVdOX0NMQVNTX0RBUktIQU5EX1NXT1JEEGUq7QIKEEJhdHRsZU1vdmVSZXN1",
             "bHQSGwoXQkFUVExFX01PVkVfUkVTVUxUX05PTkUQABIZChVCQVRUTEVfTU9W",
             "RV9SRVNVTFRfT0sQARIkCiBCQVRUTEVfTU9WRV9SRVNVTFRfTk9UX1lPVVJf",
             "VFVSThACEiAKHEJBVFRMRV9NT1ZFX1JFU1VMVF9OT1RfT1dORVIQAxIjCh9C",
             "QVRUTEVfTU9WRV9SRVNVTFRfTk9UX1dBTEtBQkxFEAQSIwofQkFUVExFX01P",
             "VkVfUkVTVUxUX09VVF9PRl9SQU5HRRAFEh8KG0JBVFRMRV9NT1ZFX1JFU1VM",
             "VF9PQ0NVUElFRBAGEiUKIUJBVFRMRV9NT1ZFX1JFU1VMVF9JTlZBTElEX0JB",
-            "VFRMRRAHEiMKH0JBVFRMRV9NT1ZFX1JFU1VMVF9JTlZBTElEX1BBV04QCGIG",
-            "cHJvdG8z"));
+            "VFRMRRAHEiMKH0JBVFRMRV9NT1ZFX1JFU1VMVF9JTlZBTElEX1BBV04QCBIi",
+            "Ch5CQVRUTEVfTU9WRV9SRVNVTFRfQ0FOTk9UX01PVkUQCWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), }, null, null));
@@ -93,6 +93,7 @@ namespace Protocol {
     [pbr::OriginalName("BATTLE_MOVE_RESULT_OCCUPIED")] Occupied = 6,
     [pbr::OriginalName("BATTLE_MOVE_RESULT_INVALID_BATTLE")] InvalidBattle = 7,
     [pbr::OriginalName("BATTLE_MOVE_RESULT_INVALID_PAWN")] InvalidPawn = 8,
+    [pbr::OriginalName("BATTLE_MOVE_RESULT_CANNOT_MOVE")] CannotMove = 9,
   }
 
   #endregion

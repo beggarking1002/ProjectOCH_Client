@@ -15,9 +15,12 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class BattleObjectManager : MonoBehaviour
 	{
+		const int MaxBattleLogLines = 6;
+
 		readonly Dictionary<ulong, BattlePawnController> _pawns = new Dictionary<ulong, BattlePawnController>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
+		readonly Queue<string> _battleLogLines = new Queue<string>();
 
 		BattleMapGrid _mapGrid;
 		string _fallbackPawnAddress;
@@ -33,6 +36,7 @@ namespace Battle
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
 		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId);
+		public string BattleLogText => _battleLogLines.Count > 0 ? string.Join("\n", _battleLogLines) : "-";
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
@@ -162,6 +166,7 @@ namespace Battle
 
 			ReleasePawns();
 			_localPawnIds.Clear();
+			_battleLogLines.Clear();
 			_battleId = packet.BattleId;
 			_currentTurnPawnId = packet.CurrentTurnPawnId;
 
@@ -472,10 +477,14 @@ namespace Battle
 			if (packet.Target != null)
 				pawn.SetAxial(ToBattleAxial(packet.Target));
 
+			ApplyPawnDeltas(packet.PawnDeltas);
+			ApplyTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove);
+			AppendBattleLogs(packet.Logs);
+
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			_actionMode = BattleActionMode.Move;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={pawn.Axial}, nextTurnPawnId={_currentTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={pawn.Axial}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
 		void OnBattleSkillReceived(S_BATTLE_SKILL packet)
@@ -491,12 +500,20 @@ namespace Battle
 				return;
 			}
 
+			ApplyPawnDeltas(packet.PawnDeltas);
+			ApplyTurnState(packet.CasterPawnId, packet.RemainingAp, packet.CanMove, packet.UsedSubActionThisTurn, packet.UsedUltimate);
+
 			if (packet.TargetPawnId != 0 && _pawns.TryGetValue(packet.TargetPawnId, out BattlePawnController targetPawn))
+			{
 				targetPawn.ApplyHp(packet.TargetHp);
+				targetPawn.ApplyArmor(packet.TargetArmor);
+			}
+
+			AppendBattleLogs(packet.Logs);
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, targetHp={packet.TargetHp}, nextTurnPawnId={_currentTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, targetHp={packet.TargetHp}, targetArmor={packet.TargetArmor}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
 		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)
@@ -512,9 +529,80 @@ namespace Battle
 				return;
 			}
 
+			ApplyPawnDeltas(packet.PawnDeltas);
+			ApplyTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove, packet.UsedSubActionThisTurn, packet.UsedUltimate);
+			AppendBattleLogs(packet.Logs);
+
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_END_TURN. pawnId={packet.PawnId}, nextTurnPawnId={_currentTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_END_TURN. pawnId={packet.PawnId}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
+		}
+
+		void ApplyPawnDeltas(IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			if (pawnDeltas == null)
+				return;
+
+			foreach (BattlePawnDelta delta in pawnDeltas)
+			{
+				if (delta == null || delta.PawnId == 0)
+					continue;
+
+				if (_pawns.TryGetValue(delta.PawnId, out BattlePawnController pawn))
+					pawn.ApplyDelta(delta);
+			}
+		}
+
+		void ApplyTurnState(ulong pawnId, int remainingAp, bool canMove)
+		{
+			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawnController pawn))
+				pawn.ApplyTurnState(remainingAp, canMove);
+		}
+
+		void ApplyTurnState(ulong pawnId, int remainingAp, bool canMove, bool usedSubActionThisTurn, bool usedUltimate)
+		{
+			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawnController pawn))
+				pawn.ApplyTurnState(remainingAp, canMove, usedSubActionThisTurn, usedUltimate);
+		}
+
+		void AppendBattleLogs(IEnumerable<BattleActionLog> logs)
+		{
+			if (logs == null)
+				return;
+
+			foreach (BattleActionLog log in logs)
+			{
+				if (log == null)
+					continue;
+
+				string line = FormatBattleLog(log);
+				if (string.IsNullOrWhiteSpace(line))
+					continue;
+
+				_battleLogLines.Enqueue(line);
+				while (_battleLogLines.Count > MaxBattleLogLines)
+					_battleLogLines.Dequeue();
+
+				Debug.Log($"BattleLog: {line}");
+			}
+		}
+
+		static string FormatBattleLog(BattleActionLog log)
+		{
+			string action = string.IsNullOrWhiteSpace(log.ActionType) ? $"Skill{log.SkillSlot}" : log.ActionType;
+			string flags = "";
+			if (log.IsCritical)
+				flags += " CRIT";
+			if (log.IsEvaded)
+				flags += " EVADE";
+			if (log.IsGuarded)
+				flags += " GUARD";
+			if (log.IsPerfectGuarded)
+				flags += " PERFECT";
+			if (log.IsCounter)
+				flags += " COUNTER";
+
+			return $"{action}: {log.AttackerPawnId}->{log.DefenderPawnId} dmg={log.Damage} hp={log.HpAfter} armor={log.ArmorAfter}{flags}";
 		}
 
 		ulong FindPawnIdAtAxial(AxialCoord axial)

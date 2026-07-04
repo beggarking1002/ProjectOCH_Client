@@ -43,25 +43,36 @@ namespace Protocol {
             "dHRsZVBhd25JbmZvEhwKFGN1cnJlbnRfdHVybl9wYXduX2lkGAYgASgEEg4K",
             "BnJlYXNvbhgHIAEoCSJZCg1DX0JBVFRMRV9NT1ZFEhEKCWJhdHRsZV9pZBgB",
             "IAEoBBIPCgdwYXduX2lkGAIgASgEEiQKBnRhcmdldBgDIAEoCzIULlByb3Rv",
-            "Y29sLkF4aWFsQ29vcmQi5gEKDVNfQkFUVExFX01PVkUSDwoHc3VjY2VzcxgB",
+            "Y29sLkF4aWFsQ29vcmQi5wIKDVNfQkFUVExFX01PVkUSDwoHc3VjY2VzcxgB",
             "IAEoCBIRCgliYXR0bGVfaWQYAiABKAQSDwoHcGF3bl9pZBgDIAEoBBIjCgVz",
             "dGFydBgEIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSJAoGdGFyZ2V0GAUg",
             "ASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZBIZChFuZXh0X3R1cm5fcGF3bl9p",
             "ZBgGIAEoBBIqCgZyZXN1bHQYByABKA4yGi5Qcm90b2NvbC5CYXR0bGVNb3Zl",
-            "UmVzdWx0Eg4KBnJlYXNvbhgIIAEoCSKTAQoOQ19CQVRUTEVfU0tJTEwSEQoJ",
-            "YmF0dGxlX2lkGAEgASgEEhYKDmNhc3Rlcl9wYXduX2lkGAIgASgEEhIKCnNr",
-            "aWxsX3Nsb3QYAyABKAUSFgoOdGFyZ2V0X3Bhd25faWQYBCABKAQSKgoMdGFy",
-            "Z2V0X2F4aWFsGAUgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZCLyAQoOU19C",
-            "QVRUTEVfU0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVfaWQYAiAB",
-            "KAQSFgoOY2FzdGVyX3Bhd25faWQYAyABKAQSEgoKc2tpbGxfc2xvdBgEIAEo",
-            "BRIWCg50YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0YXJnZXRfYXhpYWwYBiAB",
-            "KAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEg4KBmRhbWFnZRgHIAEoBRIRCgl0",
-            "YXJnZXRfaHAYCCABKAUSGQoRbmV4dF90dXJuX3Bhd25faWQYCSABKAQSDgoG",
-            "cmVhc29uGAogASgJIjcKEUNfQkFUVExFX0VORF9UVVJOEhEKCWJhdHRsZV9p",
-            "ZBgBIAEoBBIPCgdwYXduX2lkGAIgASgEInMKEVNfQkFUVExFX0VORF9UVVJO",
-            "Eg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg8KB3Bhd25f",
-            "aWQYAyABKAQSGQoRbmV4dF90dXJuX3Bhd25faWQYBCABKAQSDgoGcmVhc29u",
-            "GAUgASgJYgZwcm90bzM="));
+            "UmVzdWx0Eg4KBnJlYXNvbhgIIAEoCRIUCgxyZW1haW5pbmdfYXAYCSABKAUS",
+            "EAoIY2FuX21vdmUYCiABKAgSLgoLcGF3bl9kZWx0YXMYCyADKAsyGS5Qcm90",
+            "b2NvbC5CYXR0bGVQYXduRGVsdGESJwoEbG9ncxgMIAMoCzIZLlByb3RvY29s",
+            "LkJhdHRsZUFjdGlvbkxvZyKTAQoOQ19CQVRUTEVfU0tJTEwSEQoJYmF0dGxl",
+            "X2lkGAEgASgEEhYKDmNhc3Rlcl9wYXduX2lkGAIgASgEEhIKCnNraWxsX3Ns",
+            "b3QYAyABKAUSFgoOdGFyZ2V0X3Bhd25faWQYBCABKAQSKgoMdGFyZ2V0X2F4",
+            "aWFsGAUgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZCLDAwoOU19CQVRUTEVf",
+            "U0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVfaWQYAiABKAQSFgoO",
+            "Y2FzdGVyX3Bhd25faWQYAyABKAQSEgoKc2tpbGxfc2xvdBgEIAEoBRIWCg50",
+            "YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0YXJnZXRfYXhpYWwYBiABKAsyFC5Q",
+            "cm90b2NvbC5BeGlhbENvb3JkEg4KBmRhbWFnZRgHIAEoBRIRCgl0YXJnZXRf",
+            "aHAYCCABKAUSGQoRbmV4dF90dXJuX3Bhd25faWQYCSABKAQSDgoGcmVhc29u",
+            "GAogASgJEhQKDHJlbWFpbmluZ19hcBgLIAEoBRIQCghjYW5fbW92ZRgMIAEo",
+            "CBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190dXJuGA0gASgIEhUKDXVzZWRf",
+            "dWx0aW1hdGUYDiABKAgSFAoMdGFyZ2V0X2FybW9yGA8gASgFEi4KC3Bhd25f",
+            "ZGVsdGFzGBAgAygLMhkuUHJvdG9jb2wuQmF0dGxlUGF3bkRlbHRhEicKBGxv",
+            "Z3MYESADKAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rpb25Mb2ciNwoRQ19CQVRU",
+            "TEVfRU5EX1RVUk4SEQoJYmF0dGxlX2lkGAEgASgEEg8KB3Bhd25faWQYAiAB",
+            "KAQirgIKEVNfQkFUVExFX0VORF9UVVJOEg8KB3N1Y2Nlc3MYASABKAgSEQoJ",
+            "YmF0dGxlX2lkGAIgASgEEg8KB3Bhd25faWQYAyABKAQSGQoRbmV4dF90dXJu",
+            "X3Bhd25faWQYBCABKAQSDgoGcmVhc29uGAUgASgJEhQKDHJlbWFpbmluZ19h",
+            "cBgGIAEoBRIQCghjYW5fbW92ZRgHIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25f",
+            "dGhpc190dXJuGAggASgIEhUKDXVzZWRfdWx0aW1hdGUYCSABKAgSLgoLcGF3",
+            "bl9kZWx0YXMYCiADKAsyGS5Qcm90b2NvbC5CYXR0bGVQYXduRGVsdGESJwoE",
+            "bG9ncxgLIAMoCzIZLlByb3RvY29sLkJhdHRsZUFjdGlvbkxvZ2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -80,11 +91,11 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER_BATTLE), global::Protocol.C_ENTER_BATTLE.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_MOVE), global::Protocol.C_BATTLE_MOVE.Parser, new[]{ "BattleId", "PawnId", "Target" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "RemainingAp", "CanMove", "PawnDeltas", "Logs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_END_TURN), global::Protocol.C_BATTLE_END_TURN.Parser, new[]{ "BattleId", "PawnId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3304,6 +3315,10 @@ namespace Protocol {
       nextTurnPawnId_ = other.nextTurnPawnId_;
       result_ = other.result_;
       reason_ = other.reason_;
+      remainingAp_ = other.remainingAp_;
+      canMove_ = other.canMove_;
+      pawnDeltas_ = other.pawnDeltas_.Clone();
+      logs_ = other.logs_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3409,6 +3424,52 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "remaining_ap" field.</summary>
+    public const int RemainingApFieldNumber = 9;
+    private int remainingAp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RemainingAp {
+      get { return remainingAp_; }
+      set {
+        remainingAp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "can_move" field.</summary>
+    public const int CanMoveFieldNumber = 10;
+    private bool canMove_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool CanMove {
+      get { return canMove_; }
+      set {
+        canMove_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pawn_deltas" field.</summary>
+    public const int PawnDeltasFieldNumber = 11;
+    private static readonly pb::FieldCodec<global::Protocol.BattlePawnDelta> _repeated_pawnDeltas_codec
+        = pb::FieldCodec.ForMessage(90, global::Protocol.BattlePawnDelta.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattlePawnDelta> pawnDeltas_ = new pbc::RepeatedField<global::Protocol.BattlePawnDelta>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattlePawnDelta> PawnDeltas {
+      get { return pawnDeltas_; }
+    }
+
+    /// <summary>Field number for the "logs" field.</summary>
+    public const int LogsFieldNumber = 12;
+    private static readonly pb::FieldCodec<global::Protocol.BattleActionLog> _repeated_logs_codec
+        = pb::FieldCodec.ForMessage(98, global::Protocol.BattleActionLog.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleActionLog> logs_ = new pbc::RepeatedField<global::Protocol.BattleActionLog>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleActionLog> Logs {
+      get { return logs_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3432,6 +3493,10 @@ namespace Protocol {
       if (NextTurnPawnId != other.NextTurnPawnId) return false;
       if (Result != other.Result) return false;
       if (Reason != other.Reason) return false;
+      if (RemainingAp != other.RemainingAp) return false;
+      if (CanMove != other.CanMove) return false;
+      if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
+      if(!logs_.Equals(other.logs_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3447,6 +3512,10 @@ namespace Protocol {
       if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
       if (Result != global::Protocol.BattleMoveResult.None) hash ^= Result.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (RemainingAp != 0) hash ^= RemainingAp.GetHashCode();
+      if (CanMove != false) hash ^= CanMove.GetHashCode();
+      hash ^= pawnDeltas_.GetHashCode();
+      hash ^= logs_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3497,6 +3566,16 @@ namespace Protocol {
         output.WriteRawTag(66);
         output.WriteString(Reason);
       }
+      if (RemainingAp != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(RemainingAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(CanMove);
+      }
+      pawnDeltas_.WriteTo(output, _repeated_pawnDeltas_codec);
+      logs_.WriteTo(output, _repeated_logs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3539,6 +3618,16 @@ namespace Protocol {
         output.WriteRawTag(66);
         output.WriteString(Reason);
       }
+      if (RemainingAp != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(RemainingAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(80);
+        output.WriteBool(CanMove);
+      }
+      pawnDeltas_.WriteTo(ref output, _repeated_pawnDeltas_codec);
+      logs_.WriteTo(ref output, _repeated_logs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3573,6 +3662,14 @@ namespace Protocol {
       if (Reason.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
       }
+      if (RemainingAp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingAp);
+      }
+      if (CanMove != false) {
+        size += 1 + 1;
+      }
+      size += pawnDeltas_.CalculateSize(_repeated_pawnDeltas_codec);
+      size += logs_.CalculateSize(_repeated_logs_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3615,6 +3712,14 @@ namespace Protocol {
       if (other.Reason.Length != 0) {
         Reason = other.Reason;
       }
+      if (other.RemainingAp != 0) {
+        RemainingAp = other.RemainingAp;
+      }
+      if (other.CanMove != false) {
+        CanMove = other.CanMove;
+      }
+      pawnDeltas_.Add(other.pawnDeltas_);
+      logs_.Add(other.logs_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3668,6 +3773,22 @@ namespace Protocol {
             Reason = input.ReadString();
             break;
           }
+          case 72: {
+            RemainingAp = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 90: {
+            pawnDeltas_.AddEntriesFrom(input, _repeated_pawnDeltas_codec);
+            break;
+          }
+          case 98: {
+            logs_.AddEntriesFrom(input, _repeated_logs_codec);
+            break;
+          }
         }
       }
     #endif
@@ -3719,6 +3840,22 @@ namespace Protocol {
           }
           case 66: {
             Reason = input.ReadString();
+            break;
+          }
+          case 72: {
+            RemainingAp = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 90: {
+            pawnDeltas_.AddEntriesFrom(ref input, _repeated_pawnDeltas_codec);
+            break;
+          }
+          case 98: {
+            logs_.AddEntriesFrom(ref input, _repeated_logs_codec);
             break;
           }
         }
@@ -4118,6 +4255,13 @@ namespace Protocol {
       targetHp_ = other.targetHp_;
       nextTurnPawnId_ = other.nextTurnPawnId_;
       reason_ = other.reason_;
+      remainingAp_ = other.remainingAp_;
+      canMove_ = other.canMove_;
+      usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
+      usedUltimate_ = other.usedUltimate_;
+      targetArmor_ = other.targetArmor_;
+      pawnDeltas_ = other.pawnDeltas_.Clone();
+      logs_ = other.logs_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4247,6 +4391,88 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "remaining_ap" field.</summary>
+    public const int RemainingApFieldNumber = 11;
+    private int remainingAp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RemainingAp {
+      get { return remainingAp_; }
+      set {
+        remainingAp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "can_move" field.</summary>
+    public const int CanMoveFieldNumber = 12;
+    private bool canMove_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool CanMove {
+      get { return canMove_; }
+      set {
+        canMove_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_sub_action_this_turn" field.</summary>
+    public const int UsedSubActionThisTurnFieldNumber = 13;
+    private bool usedSubActionThisTurn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedSubActionThisTurn {
+      get { return usedSubActionThisTurn_; }
+      set {
+        usedSubActionThisTurn_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_ultimate" field.</summary>
+    public const int UsedUltimateFieldNumber = 14;
+    private bool usedUltimate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedUltimate {
+      get { return usedUltimate_; }
+      set {
+        usedUltimate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_armor" field.</summary>
+    public const int TargetArmorFieldNumber = 15;
+    private int targetArmor_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TargetArmor {
+      get { return targetArmor_; }
+      set {
+        targetArmor_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pawn_deltas" field.</summary>
+    public const int PawnDeltasFieldNumber = 16;
+    private static readonly pb::FieldCodec<global::Protocol.BattlePawnDelta> _repeated_pawnDeltas_codec
+        = pb::FieldCodec.ForMessage(130, global::Protocol.BattlePawnDelta.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattlePawnDelta> pawnDeltas_ = new pbc::RepeatedField<global::Protocol.BattlePawnDelta>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattlePawnDelta> PawnDeltas {
+      get { return pawnDeltas_; }
+    }
+
+    /// <summary>Field number for the "logs" field.</summary>
+    public const int LogsFieldNumber = 17;
+    private static readonly pb::FieldCodec<global::Protocol.BattleActionLog> _repeated_logs_codec
+        = pb::FieldCodec.ForMessage(138, global::Protocol.BattleActionLog.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleActionLog> logs_ = new pbc::RepeatedField<global::Protocol.BattleActionLog>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleActionLog> Logs {
+      get { return logs_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4272,6 +4498,13 @@ namespace Protocol {
       if (TargetHp != other.TargetHp) return false;
       if (NextTurnPawnId != other.NextTurnPawnId) return false;
       if (Reason != other.Reason) return false;
+      if (RemainingAp != other.RemainingAp) return false;
+      if (CanMove != other.CanMove) return false;
+      if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
+      if (UsedUltimate != other.UsedUltimate) return false;
+      if (TargetArmor != other.TargetArmor) return false;
+      if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
+      if(!logs_.Equals(other.logs_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4289,6 +4522,13 @@ namespace Protocol {
       if (TargetHp != 0) hash ^= TargetHp.GetHashCode();
       if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (RemainingAp != 0) hash ^= RemainingAp.GetHashCode();
+      if (CanMove != false) hash ^= CanMove.GetHashCode();
+      if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
+      if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
+      if (TargetArmor != 0) hash ^= TargetArmor.GetHashCode();
+      hash ^= pawnDeltas_.GetHashCode();
+      hash ^= logs_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4347,6 +4587,28 @@ namespace Protocol {
         output.WriteRawTag(82);
         output.WriteString(Reason);
       }
+      if (RemainingAp != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(RemainingAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(UsedUltimate);
+      }
+      if (TargetArmor != 0) {
+        output.WriteRawTag(120);
+        output.WriteInt32(TargetArmor);
+      }
+      pawnDeltas_.WriteTo(output, _repeated_pawnDeltas_codec);
+      logs_.WriteTo(output, _repeated_logs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4397,6 +4659,28 @@ namespace Protocol {
         output.WriteRawTag(82);
         output.WriteString(Reason);
       }
+      if (RemainingAp != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(RemainingAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(UsedUltimate);
+      }
+      if (TargetArmor != 0) {
+        output.WriteRawTag(120);
+        output.WriteInt32(TargetArmor);
+      }
+      pawnDeltas_.WriteTo(ref output, _repeated_pawnDeltas_codec);
+      logs_.WriteTo(ref output, _repeated_logs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4437,6 +4721,23 @@ namespace Protocol {
       if (Reason.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
       }
+      if (RemainingAp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingAp);
+      }
+      if (CanMove != false) {
+        size += 1 + 1;
+      }
+      if (UsedSubActionThisTurn != false) {
+        size += 1 + 1;
+      }
+      if (UsedUltimate != false) {
+        size += 1 + 1;
+      }
+      if (TargetArmor != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TargetArmor);
+      }
+      size += pawnDeltas_.CalculateSize(_repeated_pawnDeltas_codec);
+      size += logs_.CalculateSize(_repeated_logs_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4482,6 +4783,23 @@ namespace Protocol {
       if (other.Reason.Length != 0) {
         Reason = other.Reason;
       }
+      if (other.RemainingAp != 0) {
+        RemainingAp = other.RemainingAp;
+      }
+      if (other.CanMove != false) {
+        CanMove = other.CanMove;
+      }
+      if (other.UsedSubActionThisTurn != false) {
+        UsedSubActionThisTurn = other.UsedSubActionThisTurn;
+      }
+      if (other.UsedUltimate != false) {
+        UsedUltimate = other.UsedUltimate;
+      }
+      if (other.TargetArmor != 0) {
+        TargetArmor = other.TargetArmor;
+      }
+      pawnDeltas_.Add(other.pawnDeltas_);
+      logs_.Add(other.logs_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -4540,6 +4858,34 @@ namespace Protocol {
             Reason = input.ReadString();
             break;
           }
+          case 88: {
+            RemainingAp = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 104: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 112: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+          case 120: {
+            TargetArmor = input.ReadInt32();
+            break;
+          }
+          case 130: {
+            pawnDeltas_.AddEntriesFrom(input, _repeated_pawnDeltas_codec);
+            break;
+          }
+          case 138: {
+            logs_.AddEntriesFrom(input, _repeated_logs_codec);
+            break;
+          }
         }
       }
     #endif
@@ -4596,6 +4942,34 @@ namespace Protocol {
           }
           case 82: {
             Reason = input.ReadString();
+            break;
+          }
+          case 88: {
+            RemainingAp = input.ReadInt32();
+            break;
+          }
+          case 96: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 104: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 112: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+          case 120: {
+            TargetArmor = input.ReadInt32();
+            break;
+          }
+          case 130: {
+            pawnDeltas_.AddEntriesFrom(ref input, _repeated_pawnDeltas_codec);
+            break;
+          }
+          case 138: {
+            logs_.AddEntriesFrom(ref input, _repeated_logs_codec);
             break;
           }
         }
@@ -4870,6 +5244,12 @@ namespace Protocol {
       pawnId_ = other.pawnId_;
       nextTurnPawnId_ = other.nextTurnPawnId_;
       reason_ = other.reason_;
+      remainingAp_ = other.remainingAp_;
+      canMove_ = other.canMove_;
+      usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
+      usedUltimate_ = other.usedUltimate_;
+      pawnDeltas_ = other.pawnDeltas_.Clone();
+      logs_ = other.logs_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4939,6 +5319,76 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "remaining_ap" field.</summary>
+    public const int RemainingApFieldNumber = 6;
+    private int remainingAp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RemainingAp {
+      get { return remainingAp_; }
+      set {
+        remainingAp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "can_move" field.</summary>
+    public const int CanMoveFieldNumber = 7;
+    private bool canMove_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool CanMove {
+      get { return canMove_; }
+      set {
+        canMove_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_sub_action_this_turn" field.</summary>
+    public const int UsedSubActionThisTurnFieldNumber = 8;
+    private bool usedSubActionThisTurn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedSubActionThisTurn {
+      get { return usedSubActionThisTurn_; }
+      set {
+        usedSubActionThisTurn_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "used_ultimate" field.</summary>
+    public const int UsedUltimateFieldNumber = 9;
+    private bool usedUltimate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedUltimate {
+      get { return usedUltimate_; }
+      set {
+        usedUltimate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pawn_deltas" field.</summary>
+    public const int PawnDeltasFieldNumber = 10;
+    private static readonly pb::FieldCodec<global::Protocol.BattlePawnDelta> _repeated_pawnDeltas_codec
+        = pb::FieldCodec.ForMessage(82, global::Protocol.BattlePawnDelta.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattlePawnDelta> pawnDeltas_ = new pbc::RepeatedField<global::Protocol.BattlePawnDelta>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattlePawnDelta> PawnDeltas {
+      get { return pawnDeltas_; }
+    }
+
+    /// <summary>Field number for the "logs" field.</summary>
+    public const int LogsFieldNumber = 11;
+    private static readonly pb::FieldCodec<global::Protocol.BattleActionLog> _repeated_logs_codec
+        = pb::FieldCodec.ForMessage(90, global::Protocol.BattleActionLog.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleActionLog> logs_ = new pbc::RepeatedField<global::Protocol.BattleActionLog>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleActionLog> Logs {
+      get { return logs_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4959,6 +5409,12 @@ namespace Protocol {
       if (PawnId != other.PawnId) return false;
       if (NextTurnPawnId != other.NextTurnPawnId) return false;
       if (Reason != other.Reason) return false;
+      if (RemainingAp != other.RemainingAp) return false;
+      if (CanMove != other.CanMove) return false;
+      if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
+      if (UsedUltimate != other.UsedUltimate) return false;
+      if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
+      if(!logs_.Equals(other.logs_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4971,6 +5427,12 @@ namespace Protocol {
       if (PawnId != 0UL) hash ^= PawnId.GetHashCode();
       if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (RemainingAp != 0) hash ^= RemainingAp.GetHashCode();
+      if (CanMove != false) hash ^= CanMove.GetHashCode();
+      if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
+      if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
+      hash ^= pawnDeltas_.GetHashCode();
+      hash ^= logs_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5009,6 +5471,24 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteString(Reason);
       }
+      if (RemainingAp != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(RemainingAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(UsedUltimate);
+      }
+      pawnDeltas_.WriteTo(output, _repeated_pawnDeltas_codec);
+      logs_.WriteTo(output, _repeated_logs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5039,6 +5519,24 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteString(Reason);
       }
+      if (RemainingAp != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(RemainingAp);
+      }
+      if (CanMove != false) {
+        output.WriteRawTag(56);
+        output.WriteBool(CanMove);
+      }
+      if (UsedSubActionThisTurn != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(UsedSubActionThisTurn);
+      }
+      if (UsedUltimate != false) {
+        output.WriteRawTag(72);
+        output.WriteBool(UsedUltimate);
+      }
+      pawnDeltas_.WriteTo(ref output, _repeated_pawnDeltas_codec);
+      logs_.WriteTo(ref output, _repeated_logs_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5064,6 +5562,20 @@ namespace Protocol {
       if (Reason.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
       }
+      if (RemainingAp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingAp);
+      }
+      if (CanMove != false) {
+        size += 1 + 1;
+      }
+      if (UsedSubActionThisTurn != false) {
+        size += 1 + 1;
+      }
+      if (UsedUltimate != false) {
+        size += 1 + 1;
+      }
+      size += pawnDeltas_.CalculateSize(_repeated_pawnDeltas_codec);
+      size += logs_.CalculateSize(_repeated_logs_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5091,6 +5603,20 @@ namespace Protocol {
       if (other.Reason.Length != 0) {
         Reason = other.Reason;
       }
+      if (other.RemainingAp != 0) {
+        RemainingAp = other.RemainingAp;
+      }
+      if (other.CanMove != false) {
+        CanMove = other.CanMove;
+      }
+      if (other.UsedSubActionThisTurn != false) {
+        UsedSubActionThisTurn = other.UsedSubActionThisTurn;
+      }
+      if (other.UsedUltimate != false) {
+        UsedUltimate = other.UsedUltimate;
+      }
+      pawnDeltas_.Add(other.pawnDeltas_);
+      logs_.Add(other.logs_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5126,6 +5652,30 @@ namespace Protocol {
             Reason = input.ReadString();
             break;
           }
+          case 48: {
+            RemainingAp = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 64: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 72: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+          case 82: {
+            pawnDeltas_.AddEntriesFrom(input, _repeated_pawnDeltas_codec);
+            break;
+          }
+          case 90: {
+            logs_.AddEntriesFrom(input, _repeated_logs_codec);
+            break;
+          }
         }
       }
     #endif
@@ -5159,6 +5709,30 @@ namespace Protocol {
           }
           case 42: {
             Reason = input.ReadString();
+            break;
+          }
+          case 48: {
+            RemainingAp = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            CanMove = input.ReadBool();
+            break;
+          }
+          case 64: {
+            UsedSubActionThisTurn = input.ReadBool();
+            break;
+          }
+          case 72: {
+            UsedUltimate = input.ReadBool();
+            break;
+          }
+          case 82: {
+            pawnDeltas_.AddEntriesFrom(ref input, _repeated_pawnDeltas_codec);
+            break;
+          }
+          case 90: {
+            logs_.AddEntriesFrom(ref input, _repeated_logs_codec);
             break;
           }
         }
