@@ -81,7 +81,9 @@ namespace Protocol {
             "SVRFX1JFU1BPTlNFEhsKE3JlcXVlc3Rlcl9wbGF5ZXJfaWQYASABKAQSDgoG",
             "YWNjZXB0GAIgASgIInEKFlNfQkFUVExFX0lOVklURV9SRVNVTFQSEAoIYWNj",
             "ZXB0ZWQYASABKAgSGwoTcmVxdWVzdGVyX3BsYXllcl9pZBgCIAEoBBIYChB0",
-            "YXJnZXRfcGxheWVyX2lkGAMgASgEEg4KBnJlYXNvbhgEIAEoCWIGcHJvdG8z"));
+            "YXJnZXRfcGxheWVyX2lkGAMgASgEEg4KBnJlYXNvbhgEIAEoCSJQChJTX0JB",
+            "VFRMRV9QQVdOX0RFQUQSEQoJYmF0dGxlX2lkGAEgASgEEg8KB3Bhd25faWQY",
+            "AiABKAQSFgoOa2lsbGVyX3Bhd25faWQYAyABKARiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -109,7 +111,8 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_REQUEST), global::Protocol.S_BATTLE_INVITE_REQUEST.Parser, new[]{ "Success", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_RECEIVED), global::Protocol.S_BATTLE_INVITE_RECEIVED.Parser, new[]{ "RequesterPlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_INVITE_RESPONSE), global::Protocol.C_BATTLE_INVITE_RESPONSE.Parser, new[]{ "RequesterPlayerId", "Accept" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_RESULT), global::Protocol.S_BATTLE_INVITE_RESULT.Parser, new[]{ "Accepted", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_RESULT), global::Protocol.S_BATTLE_INVITE_RESULT.Parser, new[]{ "Accepted", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_PAWN_DEAD), global::Protocol.S_BATTLE_PAWN_DEAD.Parser, new[]{ "BattleId", "PawnId", "KillerPawnId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -6951,6 +6954,269 @@ namespace Protocol {
           }
           case 34: {
             Reason = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class S_BATTLE_PAWN_DEAD : pb::IMessage<S_BATTLE_PAWN_DEAD>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_BATTLE_PAWN_DEAD> _parser = new pb::MessageParser<S_BATTLE_PAWN_DEAD>(() => new S_BATTLE_PAWN_DEAD());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_BATTLE_PAWN_DEAD> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ProtocolReflection.Descriptor.MessageTypes[25]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_BATTLE_PAWN_DEAD() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_BATTLE_PAWN_DEAD(S_BATTLE_PAWN_DEAD other) : this() {
+      battleId_ = other.battleId_;
+      pawnId_ = other.pawnId_;
+      killerPawnId_ = other.killerPawnId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_BATTLE_PAWN_DEAD Clone() {
+      return new S_BATTLE_PAWN_DEAD(this);
+    }
+
+    /// <summary>Field number for the "battle_id" field.</summary>
+    public const int BattleIdFieldNumber = 1;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pawn_id" field.</summary>
+    public const int PawnIdFieldNumber = 2;
+    private ulong pawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong PawnId {
+      get { return pawnId_; }
+      set {
+        pawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "killer_pawn_id" field.</summary>
+    public const int KillerPawnIdFieldNumber = 3;
+    private ulong killerPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong KillerPawnId {
+      get { return killerPawnId_; }
+      set {
+        killerPawnId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_BATTLE_PAWN_DEAD);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_BATTLE_PAWN_DEAD other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (BattleId != other.BattleId) return false;
+      if (PawnId != other.PawnId) return false;
+      if (KillerPawnId != other.KillerPawnId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (PawnId != 0UL) hash ^= PawnId.GetHashCode();
+      if (KillerPawnId != 0UL) hash ^= KillerPawnId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (PawnId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(PawnId);
+      }
+      if (KillerPawnId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(KillerPawnId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (PawnId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(PawnId);
+      }
+      if (KillerPawnId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(KillerPawnId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (PawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(PawnId);
+      }
+      if (KillerPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(KillerPawnId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_BATTLE_PAWN_DEAD other) {
+      if (other == null) {
+        return;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.PawnId != 0UL) {
+        PawnId = other.PawnId;
+      }
+      if (other.KillerPawnId != 0UL) {
+        KillerPawnId = other.KillerPawnId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            PawnId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            KillerPawnId = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            PawnId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            KillerPawnId = input.ReadUInt64();
             break;
           }
         }

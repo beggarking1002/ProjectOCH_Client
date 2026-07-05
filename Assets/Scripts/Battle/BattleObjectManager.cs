@@ -35,7 +35,11 @@ namespace Battle
 		public ulong BattleId => _battleId;
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
-		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId);
+		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0
+			&& _localPawnIds.Contains(_currentTurnPawnId)
+			&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawnController currentTurnPawn)
+			&& currentTurnPawn != null
+			&& currentTurnPawn.IsDead == false;
 		public string BattleLogText => _battleLogLines.Count > 0 ? string.Join("\n", _battleLogLines) : "-";
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
@@ -49,6 +53,8 @@ namespace Battle
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
+			PacketHandler.Instance.BattlePawnDeadReceived -= OnBattlePawnDeadReceived;
+			PacketHandler.Instance.BattlePawnDeadReceived += OnBattlePawnDeadReceived;
 		}
 
 		public void SetActionMode(BattleActionMode mode)
@@ -114,7 +120,7 @@ namespace Battle
 
 		public bool TryGetPawn(ulong pawnId, out BattlePawnController pawn)
 		{
-			return _pawns.TryGetValue(pawnId, out pawn) && pawn != null;
+			return _pawns.TryGetValue(pawnId, out pawn) && pawn != null && pawn.IsDead == false;
 		}
 
 		public bool TryGetPawnAtAxial(AxialCoord axial, out ulong pawnId, out BattlePawnController pawn)
@@ -145,6 +151,7 @@ namespace Battle
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
+			PacketHandler.Instance.BattlePawnDeadReceived -= OnBattlePawnDeadReceived;
 			ReleasePawns();
 		}
 
@@ -311,7 +318,7 @@ namespace Battle
 				if (pair.Value == null)
 					continue;
 
-				pair.Value.SetTurnIndicatorVisible(pair.Key == _currentTurnPawnId);
+				pair.Value.SetTurnIndicatorVisible(pair.Key == _currentTurnPawnId && pair.Value.IsDead == false);
 			}
 		}
 
@@ -425,16 +432,16 @@ namespace Battle
 
 		bool TryGetControllablePawnId(out ulong pawnId)
 		{
-			if (_battleId == 0 && _currentTurnPawnId != 0 && _pawns.ContainsKey(_currentTurnPawnId))
+			if (_currentTurnPawnId != 0
+				&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawnController currentPawn)
+				&& currentPawn != null
+				&& currentPawn.IsDead == false)
 			{
-				pawnId = _currentTurnPawnId;
-				return true;
-			}
-
-			if (_currentTurnPawnId != 0 && _localPawnIds.Contains(_currentTurnPawnId))
-			{
-				pawnId = _currentTurnPawnId;
-				return true;
+				if (_battleId == 0 || _localPawnIds.Contains(_currentTurnPawnId))
+				{
+					pawnId = _currentTurnPawnId;
+					return true;
+				}
 			}
 
 			if (_battleId != 0)
@@ -445,11 +452,14 @@ namespace Battle
 
 			foreach (ulong localPawnId in _localPawnIds)
 			{
-				pawnId = localPawnId;
-				return true;
+				if (_pawns.TryGetValue(localPawnId, out BattlePawnController localPawn) && localPawn != null && localPawn.IsDead == false)
+				{
+					pawnId = localPawnId;
+					return true;
+				}
 			}
 
-			if (_pawns.ContainsKey(1))
+			if (_pawns.TryGetValue(1, out BattlePawnController fallbackPawn) && fallbackPawn != null && fallbackPawn.IsDead == false)
 			{
 				pawnId = 1;
 				return true;
@@ -518,8 +528,14 @@ namespace Battle
 
 		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)
 		{
-			if (packet == null || packet.BattleId != _battleId)
+			if (packet == null)
 				return;
+
+			if (packet.BattleId != _battleId)
+			{
+				Debug.LogWarning($"Ignored S_BATTLE_END_TURN because battleId mismatched. packetBattleId={packet.BattleId}, localBattleId={_battleId}, pawnId={packet.PawnId}, nextTurnPawnId={packet.NextTurnPawnId}");
+				return;
+			}
 
 			_actionMode = BattleActionMode.Move;
 
@@ -535,7 +551,37 @@ namespace Battle
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_END_TURN. pawnId={packet.PawnId}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_END_TURN. battleId={_battleId}, pawnId={packet.PawnId}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}, isCurrentTurnLocal={IsCurrentTurnLocal}");
+		}
+
+		void OnBattlePawnDeadReceived(S_BATTLE_PAWN_DEAD packet)
+		{
+			if (packet == null)
+				return;
+
+			if (packet.BattleId != _battleId)
+			{
+				Debug.LogWarning($"Ignored S_BATTLE_PAWN_DEAD because battleId mismatched. packetBattleId={packet.BattleId}, localBattleId={_battleId}, pawnId={packet.PawnId}, killerPawnId={packet.KillerPawnId}");
+				return;
+			}
+
+			ApplyPawnDead(packet.PawnId, packet.KillerPawnId);
+			RefreshTurnIndicators();
+			Debug.Log($"Applied S_BATTLE_PAWN_DEAD. battleId={_battleId}, pawnId={packet.PawnId}, killerPawnId={packet.KillerPawnId}");
+		}
+
+		void ApplyPawnDead(ulong pawnId, ulong killerPawnId)
+		{
+			if (pawnId == 0)
+				return;
+
+			if (_pawns.TryGetValue(pawnId, out BattlePawnController pawn) == false || pawn == null)
+			{
+				Debug.LogWarning($"Cannot apply pawn death because pawn is missing. pawnId={pawnId}, killerPawnId={killerPawnId}");
+				return;
+			}
+
+			pawn.ApplyDead(killerPawnId);
 		}
 
 		void ApplyPawnDeltas(IEnumerable<BattlePawnDelta> pawnDeltas)
@@ -609,7 +655,7 @@ namespace Battle
 		{
 			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
 			{
-				if (pair.Value != null && pair.Value.Axial.Equals(axial))
+				if (pair.Value != null && pair.Value.IsDead == false && pair.Value.Axial.Equals(axial))
 					return pair.Key;
 			}
 
@@ -621,8 +667,12 @@ namespace Battle
 			ulong smallestPawnId = 0;
 			ulong nextPawnId = 0;
 
-			foreach (ulong pawnId in _pawns.Keys)
+			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
 			{
+				if (pair.Value == null || pair.Value.IsDead)
+					continue;
+
+				ulong pawnId = pair.Key;
 				if (smallestPawnId == 0 || pawnId < smallestPawnId)
 					smallestPawnId = pawnId;
 

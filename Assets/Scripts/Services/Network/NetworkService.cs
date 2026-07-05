@@ -29,6 +29,8 @@ namespace Networking
 		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
+		public Protocol.S_BATTLE_END_TURN LastBattleEndTurn { get; private set; }
+		public Protocol.S_BATTLE_PAWN_DEAD LastBattlePawnDead { get; private set; }
 
 		public bool IsConnected =>
 			_session != null &&
@@ -52,6 +54,7 @@ namespace Networking
 		public event Action<Protocol.S_BATTLE_INVITE_REQUEST> BattleInviteRequestReceived;
 		public event Action<Protocol.S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
 		public event Action<Protocol.S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
+		public event Action<Protocol.S_BATTLE_PAWN_DEAD> BattlePawnDeadReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -72,6 +75,7 @@ namespace Networking
 			PacketHandler.Instance.BattleInviteRequestReceived += OnBattleInviteRequestReceived;
 			PacketHandler.Instance.BattleInviteReceived += OnBattleInviteReceived;
 			PacketHandler.Instance.BattleInviteResultReceived += OnBattleInviteResultReceived;
+			PacketHandler.Instance.BattlePawnDeadReceived += OnBattlePawnDeadReceived;
 			_initialized = true;
 		}
 
@@ -104,6 +108,7 @@ namespace Networking
 				PacketHandler.Instance.BattleInviteRequestReceived -= OnBattleInviteRequestReceived;
 				PacketHandler.Instance.BattleInviteReceived -= OnBattleInviteReceived;
 				PacketHandler.Instance.BattleInviteResultReceived -= OnBattleInviteResultReceived;
+				PacketHandler.Instance.BattlePawnDeadReceived -= OnBattlePawnDeadReceived;
 			}
 
 			Disconnect();
@@ -125,6 +130,8 @@ namespace Networking
 			LastBattleInviteRequest = null;
 			LastBattleInviteReceived = null;
 			LastBattleInviteResult = null;
+			LastBattleEndTurn = null;
+			LastBattlePawnDead = null;
 			_knownPlayers.Clear();
 			SetState(GameServerConnectionState.Connecting);
 
@@ -444,6 +451,7 @@ namespace Networking
 
 		void OnBattleEndTurnReceived(Protocol.S_BATTLE_END_TURN pkt)
 		{
+			LastBattleEndTurn = pkt;
 			if (pkt == null)
 				return;
 
@@ -496,6 +504,16 @@ namespace Networking
 				Debug.Log($"S_BATTLE_INVITE_RESULT declined. requesterPlayerId={pkt.RequesterPlayerId}, targetPlayerId={pkt.TargetPlayerId}, reason={pkt.Reason}");
 
 			BattleInviteResultReceived?.Invoke(pkt);
+		}
+
+		void OnBattlePawnDeadReceived(Protocol.S_BATTLE_PAWN_DEAD pkt)
+		{
+			LastBattlePawnDead = pkt;
+			if (pkt == null)
+				return;
+
+			Debug.Log($"S_BATTLE_PAWN_DEAD. battleId={pkt.BattleId}, pawnId={pkt.PawnId}, killerPawnId={pkt.KillerPawnId}");
+			BattlePawnDeadReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)
