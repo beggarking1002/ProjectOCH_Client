@@ -26,6 +26,11 @@ public enum MsgId : ushort
     S_BATTLE_SKILL = 1017,
     C_BATTLE_END_TURN = 1018,
     S_BATTLE_END_TURN = 1019,
+    C_BATTLE_INVITE = 1020,
+    S_BATTLE_INVITE_REQUEST = 1021,
+    S_BATTLE_INVITE_RECEIVED = 1022,
+    C_BATTLE_INVITE_RESPONSE = 1023,
+    S_BATTLE_INVITE_RESULT = 1024,
 }
 
 class PacketManager
@@ -71,6 +76,12 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_BATTLE_SKILL, PacketHandler.S_BATTLE_SKILLHandler);
         _onRecv.Add((ushort)MsgId.S_BATTLE_END_TURN, MakePacket<S_BATTLE_END_TURN>);
         _handler.Add((ushort)MsgId.S_BATTLE_END_TURN, PacketHandler.S_BATTLE_END_TURNHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_INVITE_REQUEST, MakePacket<S_BATTLE_INVITE_REQUEST>);
+        _handler.Add((ushort)MsgId.S_BATTLE_INVITE_REQUEST, PacketHandler.S_BATTLE_INVITE_REQUESTHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_INVITE_RECEIVED, MakePacket<S_BATTLE_INVITE_RECEIVED>);
+        _handler.Add((ushort)MsgId.S_BATTLE_INVITE_RECEIVED, PacketHandler.S_BATTLE_INVITE_RECEIVEDHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_INVITE_RESULT, MakePacket<S_BATTLE_INVITE_RESULT>);
+        _handler.Add((ushort)MsgId.S_BATTLE_INVITE_RESULT, PacketHandler.S_BATTLE_INVITE_RESULTHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

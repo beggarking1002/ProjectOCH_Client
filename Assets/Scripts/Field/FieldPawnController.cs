@@ -1,5 +1,6 @@
 using App;
 using UnityEngine;
+using UnityEngine.EventSystems;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -71,6 +72,9 @@ namespace Field
 			if (IsMine == false || _walkArea == null || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
+			if (FieldPointerInputBlocker.IsConsumedThisFrame || FieldBattleInviteUI.IsBlockingInput || IsPointerOverUi())
+				return;
+
 			Camera camera = Camera.main;
 			if (camera == null)
 			{
@@ -140,6 +144,11 @@ namespace Field
 				&& screenPosition.y >= 0f
 				&& screenPosition.x <= camera.pixelWidth
 				&& screenPosition.y <= camera.pixelHeight;
+		}
+
+		static bool IsPointerOverUi()
+		{
+			return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
 		}
 
 		void RequestMove(Vector3 targetWorldPosition)

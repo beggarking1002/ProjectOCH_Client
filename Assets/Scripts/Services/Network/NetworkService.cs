@@ -26,6 +26,9 @@ namespace Networking
 		public Protocol.S_LOGIN LastLogin { get; private set; }
 		public Protocol.S_ENTER_GAME LastEnterGame { get; private set; }
 		public Protocol.S_ENTER_BATTLE LastEnterBattle { get; private set; }
+		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
+		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
+		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
 
 		public bool IsConnected =>
 			_session != null &&
@@ -46,6 +49,9 @@ namespace Networking
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
 		public event Action<Protocol.S_BATTLE_END_TURN> BattleEndTurnReceived;
+		public event Action<Protocol.S_BATTLE_INVITE_REQUEST> BattleInviteRequestReceived;
+		public event Action<Protocol.S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
+		public event Action<Protocol.S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -63,6 +69,9 @@ namespace Networking
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
+			PacketHandler.Instance.BattleInviteRequestReceived += OnBattleInviteRequestReceived;
+			PacketHandler.Instance.BattleInviteReceived += OnBattleInviteReceived;
+			PacketHandler.Instance.BattleInviteResultReceived += OnBattleInviteResultReceived;
 			_initialized = true;
 		}
 
@@ -92,6 +101,9 @@ namespace Networking
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 				PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
+				PacketHandler.Instance.BattleInviteRequestReceived -= OnBattleInviteRequestReceived;
+				PacketHandler.Instance.BattleInviteReceived -= OnBattleInviteReceived;
+				PacketHandler.Instance.BattleInviteResultReceived -= OnBattleInviteResultReceived;
 			}
 
 			Disconnect();
@@ -110,6 +122,9 @@ namespace Networking
 			LastLogin = null;
 			LastEnterGame = null;
 			LastEnterBattle = null;
+			LastBattleInviteRequest = null;
+			LastBattleInviteReceived = null;
+			LastBattleInviteResult = null;
 			_knownPlayers.Clear();
 			SetState(GameServerConnectionState.Connecting);
 
@@ -166,6 +181,23 @@ namespace Networking
 		public bool EnterBattle()
 		{
 			return Send(new Protocol.C_ENTER_BATTLE());
+		}
+
+		public bool SendBattleInvite(ulong targetPlayerId)
+		{
+			return Send(new Protocol.C_BATTLE_INVITE
+			{
+				TargetPlayerId = targetPlayerId,
+			});
+		}
+
+		public bool SendBattleInviteResponse(ulong requesterPlayerId, bool accept)
+		{
+			return Send(new Protocol.C_BATTLE_INVITE_RESPONSE
+			{
+				RequesterPlayerId = requesterPlayerId,
+				Accept = accept,
+			});
 		}
 
 		public bool SendBattleMove(ulong battleId, ulong pawnId, int q, int r)
@@ -241,6 +273,12 @@ namespace Networking
 					break;
 				case Protocol.C_BATTLE_END_TURN pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_END_TURN);
+					break;
+				case Protocol.C_BATTLE_INVITE pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_INVITE);
+					break;
+				case Protocol.C_BATTLE_INVITE_RESPONSE pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_INVITE_RESPONSE);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";
@@ -415,6 +453,49 @@ namespace Networking
 				Debug.Log($"S_BATTLE_END_TURN success. pawnId={pkt.PawnId}, nextTurnPawnId={pkt.NextTurnPawnId}");
 
 			BattleEndTurnReceived?.Invoke(pkt);
+		}
+
+		void OnBattleInviteRequestReceived(Protocol.S_BATTLE_INVITE_REQUEST pkt)
+		{
+			LastBattleInviteRequest = pkt;
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+			{
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Server rejected battle invite." : pkt.Reason;
+				Debug.LogWarning($"S_BATTLE_INVITE_REQUEST failed. targetPlayerId={pkt.TargetPlayerId}, reason={LastError}");
+			}
+			else
+			{
+				Debug.Log($"S_BATTLE_INVITE_REQUEST success. requesterPlayerId={pkt.RequesterPlayerId}, targetPlayerId={pkt.TargetPlayerId}");
+			}
+
+			BattleInviteRequestReceived?.Invoke(pkt);
+		}
+
+		void OnBattleInviteReceived(Protocol.S_BATTLE_INVITE_RECEIVED pkt)
+		{
+			LastBattleInviteReceived = pkt;
+			if (pkt == null)
+				return;
+
+			Debug.Log($"S_BATTLE_INVITE_RECEIVED. requesterPlayerId={pkt.RequesterPlayerId}");
+			BattleInviteReceived?.Invoke(pkt);
+		}
+
+		void OnBattleInviteResultReceived(Protocol.S_BATTLE_INVITE_RESULT pkt)
+		{
+			LastBattleInviteResult = pkt;
+			if (pkt == null)
+				return;
+
+			if (pkt.Accepted)
+				Debug.Log($"S_BATTLE_INVITE_RESULT accepted. requesterPlayerId={pkt.RequesterPlayerId}, targetPlayerId={pkt.TargetPlayerId}");
+			else
+				Debug.Log($"S_BATTLE_INVITE_RESULT declined. requesterPlayerId={pkt.RequesterPlayerId}, targetPlayerId={pkt.TargetPlayerId}, reason={pkt.Reason}");
+
+			BattleInviteResultReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)

@@ -3,6 +3,7 @@ using App;
 using Protocol;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 #if ENABLE_INPUT_SYSTEM
@@ -11,6 +12,7 @@ using UnityEngine.InputSystem;
 
 namespace Field
 {
+	[DefaultExecutionOrder(-50)]
 	[DisallowMultipleComponent]
 	public sealed class FieldObjectManager : MonoBehaviour
 	{
@@ -23,6 +25,7 @@ namespace Field
 		bool _destroyed;
 		bool _battleEnterRequested;
 		ulong _myObjectId;
+		FieldBattleInviteUI _battleInviteUi;
 
 		public ulong MyObjectId => _myObjectId;
 		public FieldPawnController MyPawn => _myObjectId != 0 && _pawns.TryGetValue(_myObjectId, out FieldPawnController pawn) ? pawn : null;
@@ -44,6 +47,7 @@ namespace Field
 			else
 				SpawnFallbackLocalPawn();
 
+			EnsureBattleInviteUi();
 			SpawnKnownPlayers();
 		}
 
@@ -56,7 +60,79 @@ namespace Field
 
 		void Update()
 		{
+			HandleBattleInviteClickInput();
 			HandleBattleEnterDebugInput();
+		}
+
+		void EnsureBattleInviteUi()
+		{
+			if (_battleInviteUi != null)
+				return;
+
+			_battleInviteUi = GetComponent<FieldBattleInviteUI>();
+			if (_battleInviteUi == null)
+				_battleInviteUi = gameObject.AddComponent<FieldBattleInviteUI>();
+		}
+
+		void HandleBattleInviteClickInput()
+		{
+			if (_battleInviteUi == null || FieldBattleInviteUI.IsBlockingInput || TryGetPointerDown(out Vector2 screenPosition) == false)
+				return;
+
+			if (IsPointerOverUi())
+				return;
+
+			if (TryGetRemotePawnAt(screenPosition, out FieldPawnController targetPawn) == false)
+				return;
+
+			FieldPointerInputBlocker.ConsumeCurrentFrame();
+			_battleInviteUi.ShowInviteConfirm(targetPawn.ObjectId);
+		}
+
+		bool TryGetRemotePawnAt(Vector2 screenPosition, out FieldPawnController targetPawn)
+		{
+			targetPawn = null;
+
+			if (_walkArea == null)
+				return false;
+
+			Camera camera = Camera.main;
+			if (camera == null || IsValidScreenPosition(camera, screenPosition) == false)
+				return false;
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _walkArea.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			Vector3 worldPosition = ray.GetPoint(enter);
+			float nearestDistance = float.MaxValue;
+
+			foreach (FieldPawnController pawn in _pawns.Values)
+			{
+				if (pawn == null || pawn.IsMine || pawn.ObjectId == 0)
+					continue;
+
+				float radius = GetClickRadius(pawn);
+				float distance = Vector2.Distance(worldPosition, pawn.transform.position);
+				if (distance > radius || distance >= nearestDistance)
+					continue;
+
+				nearestDistance = distance;
+				targetPawn = pawn;
+			}
+
+			return targetPawn != null;
+		}
+
+		static float GetClickRadius(FieldPawnController pawn)
+		{
+			Renderer renderer = pawn.GetComponentInChildren<Renderer>();
+			if (renderer == null)
+				return 0.55f;
+
+			Vector3 extents = renderer.bounds.extents;
+			return Mathf.Clamp(Mathf.Max(extents.x, extents.y) * 0.8f, 0.45f, 1.5f);
 		}
 
 		void SubscribeNetwork()
@@ -118,6 +194,45 @@ namespace Field
 #else
 			return false;
 #endif
+		}
+
+		static bool TryGetPointerDown(out Vector2 screenPosition)
+		{
+#if ENABLE_INPUT_SYSTEM
+			Mouse mouse = Mouse.current;
+			if (mouse != null && mouse.leftButton.wasPressedThisFrame)
+			{
+				screenPosition = mouse.position.ReadValue();
+				return true;
+			}
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			if (Input.GetMouseButtonDown(0))
+			{
+				screenPosition = Input.mousePosition;
+				return true;
+			}
+#endif
+			screenPosition = default;
+			return false;
+		}
+
+		static bool IsValidScreenPosition(Camera camera, Vector2 screenPosition)
+		{
+			if (float.IsNaN(screenPosition.x) || float.IsNaN(screenPosition.y))
+				return false;
+
+			if (float.IsInfinity(screenPosition.x) || float.IsInfinity(screenPosition.y))
+				return false;
+
+			return screenPosition.x >= 0f
+				&& screenPosition.y >= 0f
+				&& screenPosition.x <= camera.pixelWidth
+				&& screenPosition.y <= camera.pixelHeight;
+		}
+
+		static bool IsPointerOverUi()
+		{
+			return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
 		}
 
 		void HandleEnterGame(S_ENTER_GAME packet)

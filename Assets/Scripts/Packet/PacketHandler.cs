@@ -23,6 +23,9 @@ public sealed class PacketHandler
 	public event Action<S_BATTLE_MOVE> BattleMoveReceived;
 	public event Action<S_BATTLE_SKILL> BattleSkillReceived;
 	public event Action<S_BATTLE_END_TURN> BattleEndTurnReceived;
+	public event Action<S_BATTLE_INVITE_REQUEST> BattleInviteRequestReceived;
+	public event Action<S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
+	public event Action<S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
 
 	public static void S_LOGINHandler(PacketSession session, IMessage packet)
 	{
@@ -88,6 +91,24 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_BATTLE_END_TURNHandler");
 		Instance.EnqueuePacket(packet as S_BATTLE_END_TURN, Instance.BattleEndTurnReceived);
+	}
+
+	public static void S_BATTLE_INVITE_REQUESTHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_INVITE_REQUESTHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_INVITE_REQUEST, Instance.BattleInviteRequestReceived);
+	}
+
+	public static void S_BATTLE_INVITE_RECEIVEDHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_INVITE_RECEIVEDHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_INVITE_RECEIVED, Instance.BattleInviteReceived);
+	}
+
+	public static void S_BATTLE_INVITE_RESULTHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_INVITE_RESULTHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_INVITE_RESULT, Instance.BattleInviteResultReceived);
 	}
 
 	public void Flush()

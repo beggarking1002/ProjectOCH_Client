@@ -205,7 +205,7 @@ internal static class PawnStatusWorldUIPrefabSetup
 
         spriteRenderer.color = color;
         spriteRenderer.sortingOrder = sortingOrder;
-        spriteRenderer.sprite = LoadDefaultBarSprite();
+        spriteRenderer.sprite = null;
         EditorUtility.SetDirty(spriteRenderer);
         return spriteRenderer;
     }
@@ -266,8 +266,4 @@ internal static class PawnStatusWorldUIPrefabSetup
             property.objectReferenceValue = value;
     }
 
-    private static Sprite LoadDefaultBarSprite()
-    {
-        return AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
-    }
 }

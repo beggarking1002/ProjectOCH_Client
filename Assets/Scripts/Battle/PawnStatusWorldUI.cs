@@ -183,10 +183,18 @@ namespace Battle
 			if (renderer == null)
 				return;
 
-			if (renderer.sprite == null)
+			if (ShouldUseRuntimeBarSprite(renderer.sprite))
 				renderer.sprite = GetBarSprite();
 
 			renderer.sortingOrder = sortingOrder;
+		}
+
+		static bool ShouldUseRuntimeBarSprite(Sprite sprite)
+		{
+			if (sprite == null)
+				return true;
+
+			return sprite.name == "UISprite";
 		}
 
 		static void EnsureTextSortingOrder(TextMesh textMesh)
