@@ -32,6 +32,9 @@ public enum MsgId : ushort
     C_BATTLE_INVITE_RESPONSE = 1023,
     S_BATTLE_INVITE_RESULT = 1024,
     S_BATTLE_PAWN_DEAD = 1025,
+    S_BATTLE_RESULT = 1026,
+    C_BATTLE_RESULT_ACK = 1027,
+    S_BATTLE_RESULT_ACK = 1028,
 }
 
 class PacketManager
@@ -85,6 +88,10 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_BATTLE_INVITE_RESULT, PacketHandler.S_BATTLE_INVITE_RESULTHandler);
         _onRecv.Add((ushort)MsgId.S_BATTLE_PAWN_DEAD, MakePacket<S_BATTLE_PAWN_DEAD>);
         _handler.Add((ushort)MsgId.S_BATTLE_PAWN_DEAD, PacketHandler.S_BATTLE_PAWN_DEADHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_RESULT, MakePacket<S_BATTLE_RESULT>);
+        _handler.Add((ushort)MsgId.S_BATTLE_RESULT, PacketHandler.S_BATTLE_RESULTHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_RESULT_ACK, MakePacket<S_BATTLE_RESULT_ACK>);
+        _handler.Add((ushort)MsgId.S_BATTLE_RESULT_ACK, PacketHandler.S_BATTLE_RESULT_ACKHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

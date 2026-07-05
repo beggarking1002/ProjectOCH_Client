@@ -1,3 +1,6 @@
+using System.Collections;
+using App;
+using Protocol;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
@@ -20,6 +23,7 @@ namespace Battle
 		const string BattleUiName = "Canvas_BattleUI";
 		const string BattleUiAddress = "BattleSceneUI";
 		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+		const float BattleResultDelaySeconds = 2f;
 
 		static readonly ActionSlotBinding[] SlotBindings =
 		{
@@ -46,15 +50,23 @@ namespace Battle
 		PawnPanelView _selectedPawnPanel;
 		PawnPanelView _enemyPawnPanel;
 		GameObject _uiInstance;
+		GameObject _resultOverlay;
+		Text _resultTitleText;
+		Button _resultOkButton;
 		AsyncOperationHandle<GameObject> _uiHandle;
+		Coroutine _resultCoroutine;
+		ulong _battleResultId;
 		bool _hasUiHandle;
 		bool _isBinding;
 		bool _bound;
+		bool _battleResultReceived;
+		bool _battleResultAckSent;
 
 		public void Initialize(BattleObjectManager objectManager)
 		{
 			_objectManager = objectManager;
 			EnsureEventSystem();
+			SubscribeNetwork();
 			BindOrLoadUi();
 		}
 
@@ -65,6 +77,10 @@ namespace Battle
 
 		void OnDestroy()
 		{
+			UnsubscribeNetwork();
+			if (_resultCoroutine != null)
+				StopCoroutine(_resultCoroutine);
+
 			if (_hasUiHandle && _uiHandle.IsValid())
 			{
 				Addressables.ReleaseInstance(_uiHandle);
@@ -76,6 +92,23 @@ namespace Battle
 
 			if (_uiInstance != null)
 				Destroy(_uiInstance);
+		}
+
+		void SubscribeNetwork()
+		{
+			if (GameRoot.Instance == null)
+				return;
+
+			GameRoot.Instance.Network.BattleResultReceived -= OnBattleResultReceived;
+			GameRoot.Instance.Network.BattleResultReceived += OnBattleResultReceived;
+		}
+
+		void UnsubscribeNetwork()
+		{
+			if (GameRoot.Instance == null)
+				return;
+
+			GameRoot.Instance.Network.BattleResultReceived -= OnBattleResultReceived;
 		}
 
 		async void BindOrLoadUi()
@@ -144,6 +177,7 @@ namespace Battle
 			BindActionSlots(_uiInstance.transform);
 			BindTurnExit(_uiInstance.transform);
 			BindStatePanels(_uiInstance.transform);
+			EnsureResultOverlay();
 			_bound = true;
 			Refresh();
 		}
@@ -215,6 +249,9 @@ namespace Battle
 			if (_objectManager == null || slotIndex < 0 || slotIndex >= SlotBindings.Length)
 				return;
 
+			if (_battleResultReceived)
+				return;
+
 			ActionSlotBinding binding = SlotBindings[slotIndex];
 			if (binding.IsWaitCommand)
 			{
@@ -231,6 +268,9 @@ namespace Battle
 			if (_objectManager == null)
 				return;
 
+			if (_battleResultReceived)
+				return;
+
 			_objectManager.DebugEndTurn();
 			Refresh();
 		}
@@ -241,7 +281,7 @@ namespace Battle
 				return;
 
 			bool isWaiting = _objectManager.ActionMode == BattleActionMode.WaitingServer;
-			bool canAct = isWaiting == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
+			bool canAct = _battleResultReceived == false && isWaiting == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
 			TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn);
 
 			if (_turnExitButton != null)
@@ -276,6 +316,173 @@ namespace Battle
 			}
 
 			RefreshStateTexts();
+		}
+
+		void OnBattleResultReceived(S_BATTLE_RESULT packet)
+		{
+			if (packet == null || _objectManager == null)
+				return;
+
+			if (packet.BattleId != _objectManager.BattleId)
+			{
+				Debug.LogWarning($"Ignored S_BATTLE_RESULT because battleId mismatched. packetBattleId={packet.BattleId}, localBattleId={_objectManager.BattleId}, victory={packet.Victory}");
+				return;
+			}
+
+			_battleResultReceived = true;
+			_battleResultAckSent = false;
+			_battleResultId = packet.BattleId;
+
+			if (_resultCoroutine != null)
+				StopCoroutine(_resultCoroutine);
+
+			_resultCoroutine = StartCoroutine(ShowBattleResultAfterDelay(packet.Victory));
+			Refresh();
+		}
+
+		IEnumerator ShowBattleResultAfterDelay(bool victory)
+		{
+			yield return new WaitForSeconds(BattleResultDelaySeconds);
+
+			EnsureResultOverlay();
+			if (_resultTitleText != null)
+				_resultTitleText.text = victory ? "You Win!" : "You Lose!";
+
+			if (_resultOkButton != null)
+				_resultOkButton.interactable = true;
+
+			if (_resultOverlay != null)
+				_resultOverlay.SetActive(true);
+
+			_resultCoroutine = null;
+		}
+
+		void OnBattleResultOkClicked()
+		{
+			if (_battleResultAckSent)
+				return;
+
+			if (GameRoot.Instance == null)
+			{
+				Debug.LogWarning("Cannot send C_BATTLE_RESULT_ACK because GameRoot is missing.");
+				return;
+			}
+
+			bool sent = GameRoot.Instance.Network.SendBattleResultAck(_battleResultId);
+			if (sent == false)
+			{
+				Debug.LogWarning($"Failed to send C_BATTLE_RESULT_ACK. {GameRoot.Instance.Network.LastError}");
+				return;
+			}
+
+			_battleResultAckSent = true;
+			if (_resultOkButton != null)
+				_resultOkButton.interactable = false;
+
+			Debug.Log($"Sent C_BATTLE_RESULT_ACK. battleId={_battleResultId}");
+		}
+
+		void EnsureResultOverlay()
+		{
+			if (_uiInstance == null)
+				return;
+
+			if (_resultOverlay != null)
+				return;
+
+			Transform existing = FindDeepChild(_uiInstance.transform, "BattleResultOverlay_Runtime");
+			if (existing != null)
+			{
+				_resultOverlay = existing.gameObject;
+				_resultTitleText = FindDeepChild(existing, "ResultTitle")?.GetComponent<Text>();
+				_resultOkButton = FindDeepChild(existing, "ResultOkButton")?.GetComponent<Button>();
+				if (_resultOkButton != null)
+				{
+					_resultOkButton.onClick.RemoveAllListeners();
+					_resultOkButton.onClick.AddListener(OnBattleResultOkClicked);
+				}
+
+				_resultOverlay.SetActive(false);
+				return;
+			}
+
+			GameObject overlay = new GameObject("BattleResultOverlay_Runtime");
+			overlay.transform.SetParent(_uiInstance.transform, false);
+			_resultOverlay = overlay;
+
+			RectTransform overlayRect = overlay.AddComponent<RectTransform>();
+			overlayRect.anchorMin = Vector2.zero;
+			overlayRect.anchorMax = Vector2.one;
+			overlayRect.offsetMin = Vector2.zero;
+			overlayRect.offsetMax = Vector2.zero;
+
+			Image overlayImage = overlay.AddComponent<Image>();
+			overlayImage.color = new Color(0f, 0f, 0f, 0.58f);
+			overlayImage.raycastTarget = true;
+
+			GameObject panel = new GameObject("ResultPanel");
+			panel.transform.SetParent(overlay.transform, false);
+			RectTransform panelRect = panel.AddComponent<RectTransform>();
+			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+			panelRect.pivot = new Vector2(0.5f, 0.5f);
+			panelRect.sizeDelta = new Vector2(360f, 190f);
+			panelRect.anchoredPosition = Vector2.zero;
+
+			Image panelImage = panel.AddComponent<Image>();
+			panelImage.color = new Color(0.05f, 0.055f, 0.065f, 0.96f);
+			panelImage.raycastTarget = true;
+
+			GameObject titleObject = new GameObject("ResultTitle");
+			titleObject.transform.SetParent(panel.transform, false);
+			RectTransform titleRect = titleObject.AddComponent<RectTransform>();
+			titleRect.anchorMin = new Vector2(0f, 0f);
+			titleRect.anchorMax = new Vector2(1f, 1f);
+			titleRect.offsetMin = new Vector2(24f, 76f);
+			titleRect.offsetMax = new Vector2(-24f, -26f);
+
+			_resultTitleText = titleObject.AddComponent<Text>();
+			_resultTitleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			_resultTitleText.fontSize = 42;
+			_resultTitleText.color = Color.white;
+			_resultTitleText.alignment = TextAnchor.MiddleCenter;
+			_resultTitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
+			_resultTitleText.verticalOverflow = VerticalWrapMode.Truncate;
+			_resultTitleText.raycastTarget = false;
+
+			GameObject buttonObject = new GameObject("ResultOkButton");
+			buttonObject.transform.SetParent(panel.transform, false);
+			RectTransform buttonRect = buttonObject.AddComponent<RectTransform>();
+			buttonRect.anchorMin = new Vector2(0.5f, 0f);
+			buttonRect.anchorMax = new Vector2(0.5f, 0f);
+			buttonRect.pivot = new Vector2(0.5f, 0f);
+			buttonRect.sizeDelta = new Vector2(120f, 38f);
+			buttonRect.anchoredPosition = new Vector2(0f, 24f);
+
+			Image buttonImage = buttonObject.AddComponent<Image>();
+			buttonImage.color = new Color(0.92f, 0.92f, 0.92f, 1f);
+
+			_resultOkButton = buttonObject.AddComponent<Button>();
+			_resultOkButton.targetGraphic = buttonImage;
+			_resultOkButton.onClick.AddListener(OnBattleResultOkClicked);
+
+			GameObject buttonTextObject = new GameObject("Text");
+			buttonTextObject.transform.SetParent(buttonObject.transform, false);
+			RectTransform buttonTextRect = buttonTextObject.AddComponent<RectTransform>();
+			buttonTextRect.anchorMin = Vector2.zero;
+			buttonTextRect.anchorMax = Vector2.one;
+			buttonTextRect.offsetMin = Vector2.zero;
+			buttonTextRect.offsetMax = Vector2.zero;
+
+			Text buttonText = buttonTextObject.AddComponent<Text>();
+			buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			buttonText.fontSize = 18;
+			buttonText.color = new Color(0.07f, 0.075f, 0.085f, 1f);
+			buttonText.alignment = TextAnchor.MiddleCenter;
+			buttonText.text = "OK";
+			buttonText.raycastTarget = false;
+
+			_resultOverlay.SetActive(false);
 		}
 
 		void RefreshStateTexts()

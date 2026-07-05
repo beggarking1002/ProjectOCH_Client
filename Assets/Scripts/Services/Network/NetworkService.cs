@@ -31,6 +31,8 @@ namespace Networking
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
 		public Protocol.S_BATTLE_END_TURN LastBattleEndTurn { get; private set; }
 		public Protocol.S_BATTLE_PAWN_DEAD LastBattlePawnDead { get; private set; }
+		public Protocol.S_BATTLE_RESULT LastBattleResult { get; private set; }
+		public Protocol.S_BATTLE_RESULT_ACK LastBattleResultAck { get; private set; }
 
 		public bool IsConnected =>
 			_session != null &&
@@ -55,6 +57,8 @@ namespace Networking
 		public event Action<Protocol.S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
 		public event Action<Protocol.S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
 		public event Action<Protocol.S_BATTLE_PAWN_DEAD> BattlePawnDeadReceived;
+		public event Action<Protocol.S_BATTLE_RESULT> BattleResultReceived;
+		public event Action<Protocol.S_BATTLE_RESULT_ACK> BattleResultAckReceived;
 
 		public void Initialize(string host, int port, bool verifyWithLoginPacket)
 		{
@@ -76,6 +80,8 @@ namespace Networking
 			PacketHandler.Instance.BattleInviteReceived += OnBattleInviteReceived;
 			PacketHandler.Instance.BattleInviteResultReceived += OnBattleInviteResultReceived;
 			PacketHandler.Instance.BattlePawnDeadReceived += OnBattlePawnDeadReceived;
+			PacketHandler.Instance.BattleResultReceived += OnBattleResultReceived;
+			PacketHandler.Instance.BattleResultAckReceived += OnBattleResultAckReceived;
 			_initialized = true;
 		}
 
@@ -109,6 +115,8 @@ namespace Networking
 				PacketHandler.Instance.BattleInviteReceived -= OnBattleInviteReceived;
 				PacketHandler.Instance.BattleInviteResultReceived -= OnBattleInviteResultReceived;
 				PacketHandler.Instance.BattlePawnDeadReceived -= OnBattlePawnDeadReceived;
+				PacketHandler.Instance.BattleResultReceived -= OnBattleResultReceived;
+				PacketHandler.Instance.BattleResultAckReceived -= OnBattleResultAckReceived;
 			}
 
 			Disconnect();
@@ -132,6 +140,8 @@ namespace Networking
 			LastBattleInviteResult = null;
 			LastBattleEndTurn = null;
 			LastBattlePawnDead = null;
+			LastBattleResult = null;
+			LastBattleResultAck = null;
 			_knownPlayers.Clear();
 			SetState(GameServerConnectionState.Connecting);
 
@@ -238,6 +248,14 @@ namespace Networking
 			});
 		}
 
+		public bool SendBattleResultAck(ulong battleId)
+		{
+			return Send(new Protocol.C_BATTLE_RESULT_ACK
+			{
+				BattleId = battleId,
+			});
+		}
+
 		public bool SendChat(string message)
 		{
 			return Send(new Protocol.C_CHAT { Msg = message ?? string.Empty });
@@ -286,6 +304,9 @@ namespace Networking
 					break;
 				case Protocol.C_BATTLE_INVITE_RESPONSE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_INVITE_RESPONSE);
+					break;
+				case Protocol.C_BATTLE_RESULT_ACK pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_RESULT_ACK);
 					break;
 				default:
 					LastError = $"Unsupported client packet type: {packet.GetType().Name}";
@@ -514,6 +535,30 @@ namespace Networking
 
 			Debug.Log($"S_BATTLE_PAWN_DEAD. battleId={pkt.BattleId}, pawnId={pkt.PawnId}, killerPawnId={pkt.KillerPawnId}");
 			BattlePawnDeadReceived?.Invoke(pkt);
+		}
+
+		void OnBattleResultReceived(Protocol.S_BATTLE_RESULT pkt)
+		{
+			LastBattleResult = pkt;
+			if (pkt == null)
+				return;
+
+			Debug.Log($"S_BATTLE_RESULT. battleId={pkt.BattleId}, victory={pkt.Victory}");
+			BattleResultReceived?.Invoke(pkt);
+		}
+
+		void OnBattleResultAckReceived(Protocol.S_BATTLE_RESULT_ACK pkt)
+		{
+			LastBattleResultAck = pkt;
+			if (pkt == null)
+				return;
+
+			if (pkt.Success)
+				Debug.Log($"S_BATTLE_RESULT_ACK success. battleId={pkt.BattleId}");
+			else
+				Debug.LogWarning($"S_BATTLE_RESULT_ACK failed. battleId={pkt.BattleId}, reason={pkt.Reason}");
+
+			BattleResultAckReceived?.Invoke(pkt);
 		}
 
 		bool TryCreateEndPoint(string targetHost, int targetPort, out IPEndPoint endPoint)

@@ -8,6 +8,7 @@ namespace Scenes
 	public sealed class BattleSceneFlow : MonoBehaviour
 	{
 		const string BattleSceneName = "BattleScene";
+		const string FieldSceneName = "FieldScene";
 
 		static BattleSceneFlow _instance;
 		bool _subscribed;
@@ -37,7 +38,10 @@ namespace Scenes
 		void OnDisable()
 		{
 			if (_subscribed && GameRoot.Instance != null)
+			{
 				GameRoot.Instance.Network.EnterBattleReceived -= OnEnterBattleReceived;
+				GameRoot.Instance.Network.BattleResultAckReceived -= OnBattleResultAckReceived;
+			}
 
 			_subscribed = false;
 		}
@@ -48,6 +52,7 @@ namespace Scenes
 				return;
 
 			GameRoot.Instance.Network.EnterBattleReceived += OnEnterBattleReceived;
+			GameRoot.Instance.Network.BattleResultAckReceived += OnBattleResultAckReceived;
 			_subscribed = true;
 		}
 
@@ -61,6 +66,24 @@ namespace Scenes
 
 			Debug.Log($"Loading {BattleSceneName}. battleId={packet.BattleId}, mapId={packet.MapId}");
 			SceneManager.LoadScene(BattleSceneName);
+		}
+
+		void OnBattleResultAckReceived(S_BATTLE_RESULT_ACK packet)
+		{
+			if (packet == null)
+				return;
+
+			if (packet.Success == false)
+			{
+				Debug.LogWarning($"Battle result ack rejected. battleId={packet.BattleId}, reason={packet.Reason}");
+				return;
+			}
+
+			if (SceneManager.GetActiveScene().name == FieldSceneName)
+				return;
+
+			Debug.Log($"Loading {FieldSceneName} after battle result ack. battleId={packet.BattleId}");
+			SceneManager.LoadScene(FieldSceneName);
 		}
 	}
 }

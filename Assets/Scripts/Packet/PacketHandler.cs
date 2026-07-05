@@ -27,6 +27,8 @@ public sealed class PacketHandler
 	public event Action<S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
 	public event Action<S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
 	public event Action<S_BATTLE_PAWN_DEAD> BattlePawnDeadReceived;
+	public event Action<S_BATTLE_RESULT> BattleResultReceived;
+	public event Action<S_BATTLE_RESULT_ACK> BattleResultAckReceived;
 
 	public static void S_LOGINHandler(PacketSession session, IMessage packet)
 	{
@@ -116,6 +118,18 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_BATTLE_PAWN_DEADHandler");
 		Instance.EnqueuePacket(packet as S_BATTLE_PAWN_DEAD, Instance.BattlePawnDeadReceived);
+	}
+
+	public static void S_BATTLE_RESULTHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_RESULTHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_RESULT, Instance.BattleResultReceived);
+	}
+
+	public static void S_BATTLE_RESULT_ACKHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_RESULT_ACKHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_RESULT_ACK, Instance.BattleResultAckReceived);
 	}
 
 	public void Flush()

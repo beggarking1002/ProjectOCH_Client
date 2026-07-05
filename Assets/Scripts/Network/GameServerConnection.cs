@@ -105,6 +105,11 @@ namespace Networking
 			return Network?.SendBattleEndTurn(battleId, pawnId) == true;
 		}
 
+		public bool SendBattleResultAck(ulong battleId)
+		{
+			return Network?.SendBattleResultAck(battleId) == true;
+		}
+
 		public bool SendChat(string message)
 		{
 			return Network?.SendChat(message) == true;
