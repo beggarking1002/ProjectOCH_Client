@@ -410,6 +410,15 @@ namespace Battle
 			}
 
 			ulong targetPawnId = FindPawnIdAtAxial(targetAxial);
+			if (targetPawnId != 0
+				&& _pawns.TryGetValue(targetPawnId, out BattlePawnController targetPawn)
+				&& targetPawn != null
+				&& targetPawn.IsMine)
+			{
+				Debug.Log($"Cannot target allied pawn with attack skill. casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+				return;
+			}
+
 			if (_battleId != 0 && GameRoot.Instance != null)
 			{
 				bool sent = GameRoot.Instance.Network.SendBattleSkill(_battleId, casterPawnId, skillSlot, targetPawnId, targetAxial.Q, targetAxial.R);
