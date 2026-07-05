@@ -126,6 +126,24 @@ internal static class BattleUiPrefabSetup
 
         fillImage.color = fillColor;
         fillImage.raycastTarget = false;
+
+        RectTransform valueTextRect = EnsureRectTransform(track, "ValueText");
+        valueTextRect.anchorMin = Vector2.zero;
+        valueTextRect.anchorMax = Vector2.one;
+        valueTextRect.offsetMin = Vector2.zero;
+        valueTextRect.offsetMax = Vector2.zero;
+
+        Text valueText = valueTextRect.GetComponent<Text>();
+        if (valueText == null)
+            valueText = valueTextRect.gameObject.AddComponent<Text>();
+
+        valueText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        valueText.fontSize = 10;
+        valueText.color = Color.white;
+        valueText.alignment = TextAnchor.MiddleCenter;
+        valueText.horizontalOverflow = HorizontalWrapMode.Overflow;
+        valueText.verticalOverflow = VerticalWrapMode.Truncate;
+        valueText.raycastTarget = false;
     }
 
     private static RectTransform EnsureRectTransform(Transform parent, string name)

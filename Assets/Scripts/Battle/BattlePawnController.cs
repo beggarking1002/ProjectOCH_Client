@@ -6,20 +6,11 @@ namespace Battle
 	public sealed class BattlePawnController : MonoBehaviour
 	{
 		const int DefaultSortingOrder = 20;
-		const int StatusBarBackgroundSortingOrder = 38;
-		const int StatusBarFillSortingOrder = 39;
-		const int TurnIndicatorSortingOrder = 40;
-		const float StatusBarWidth = 0.72f;
-		const float StatusBarHeight = 0.065f;
-		const float StatusBarTrackPadding = 0.018f;
-		const float StatusBarGap = 0.035f;
+		const int TurnIndicatorSortingOrder = 41;
 
-		static Sprite _statusBarSprite;
 		BattleMapGrid _mapGrid;
 		SpriteRenderer _spriteRenderer;
-		GameObject _statusBars;
-		SpriteRenderer _hpBarFill;
-		SpriteRenderer _armorBarFill;
+		PawnStatusWorldUI _statusWorldUi;
 		GameObject _turnIndicator;
 
 		public ulong PawnId { get; private set; }
@@ -41,6 +32,7 @@ namespace Battle
 		void Awake()
 		{
 			_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+			_statusWorldUi = GetComponentInChildren<PawnStatusWorldUI>(true);
 		}
 
 		public void Initialize(ulong pawnId, bool isMine, BattleMapGrid mapGrid, AxialCoord axial, Color tint, Protocol.BattlePawnInfo info = null)
@@ -60,9 +52,9 @@ namespace Battle
 			}
 
 			EnsureTurnIndicator();
-			EnsureStatusBars();
+			EnsureStatusWorldUi();
 			SetTurnIndicatorVisible(false);
-			RefreshStatusBars();
+			RefreshStatusWorldUi();
 			SetAxial(axial);
 		}
 
@@ -82,7 +74,7 @@ namespace Battle
 		{
 			EnsureInfo();
 			Info.Hp = hp;
-			RefreshStatusBars();
+			RefreshStatusWorldUi();
 		}
 
 		public void ApplyDelta(Protocol.BattlePawnDelta delta)
@@ -97,7 +89,7 @@ namespace Battle
 			Info.CanMove = delta.CanMove;
 			Info.UsedSubActionThisTurn = delta.UsedSubActionThisTurn;
 			Info.UsedUltimate = delta.UsedUltimate;
-			RefreshStatusBars();
+			RefreshStatusWorldUi();
 		}
 
 		public void ApplyTurnState(int currentAp, bool canMove, bool usedSubActionThisTurn, bool usedUltimate)
@@ -120,7 +112,7 @@ namespace Battle
 		{
 			EnsureInfo();
 			Info.Armor = armor;
-			RefreshStatusBars();
+			RefreshStatusWorldUi();
 		}
 
 		public void SetTurnIndicatorVisible(bool visible)
@@ -168,82 +160,30 @@ namespace Battle
 				renderer.sortingOrder = TurnIndicatorSortingOrder;
 		}
 
-		void EnsureStatusBars()
+		void EnsureStatusWorldUi()
 		{
-			if (_statusBars != null)
-				return;
+			if (_statusWorldUi == null)
+				_statusWorldUi = GetComponentInChildren<PawnStatusWorldUI>(true);
 
-			_statusBars = new GameObject("PawnStatusBars");
-			_statusBars.transform.SetParent(transform, false);
-			_statusBars.transform.localPosition = new Vector3(0f, GetStatusBarsHeight(), 0f);
+			if (_statusWorldUi == null)
+			{
+				GameObject statusObject = new GameObject("PawnStatusWorldUI_RuntimeFallback");
+				statusObject.transform.SetParent(transform, false);
+				_statusWorldUi = statusObject.AddComponent<PawnStatusWorldUI>();
+			}
 
-			float hpY = (StatusBarHeight + StatusBarGap) * 0.5f;
-			float armorY = -hpY;
-			Vector2 trackSize = new Vector2(StatusBarWidth + StatusBarTrackPadding * 2f, StatusBarHeight + StatusBarTrackPadding * 2f);
-			Color trackColor = new Color(0.02f, 0.025f, 0.03f, 0.82f);
-
-			CreateBarRenderer("HpBarTrack", _statusBars.transform, new Vector2(0f, hpY), trackSize, trackColor, StatusBarBackgroundSortingOrder);
-			_hpBarFill = CreateBarRenderer("HpBarFill", _statusBars.transform, new Vector2(0f, hpY), new Vector2(StatusBarWidth, StatusBarHeight), new Color(0.82f, 0.18f, 0.16f, 1f), StatusBarFillSortingOrder);
-			CreateBarRenderer("ArmorBarTrack", _statusBars.transform, new Vector2(0f, armorY), trackSize, trackColor, StatusBarBackgroundSortingOrder);
-			_armorBarFill = CreateBarRenderer("ArmorBarFill", _statusBars.transform, new Vector2(0f, armorY), new Vector2(StatusBarWidth, StatusBarHeight), new Color(0.35f, 0.68f, 1f, 1f), StatusBarFillSortingOrder);
+			_statusWorldUi.transform.localPosition = new Vector3(0f, GetStatusWorldUiHeight(), 0f);
+			_statusWorldUi.Initialize(IsMine);
 		}
 
-		void RefreshStatusBars()
+		void RefreshStatusWorldUi()
 		{
-			EnsureStatusBars();
-
-			SetBarFill(_hpBarFill, GetRatio(Hp, MaxHp));
-			SetBarFill(_armorBarFill, GetRatio(Armor, MaxArmor));
-			_statusBars.transform.localPosition = new Vector3(0f, GetStatusBarsHeight(), 0f);
+			EnsureStatusWorldUi();
+			_statusWorldUi.SetValues(Hp, MaxHp, Armor, MaxArmor);
+			_statusWorldUi.transform.localPosition = new Vector3(0f, GetStatusWorldUiHeight(), 0f);
 
 			if (_turnIndicator != null)
 				_turnIndicator.transform.localPosition = new Vector3(0f, GetTurnIndicatorHeight(), 0f);
-		}
-
-		static SpriteRenderer CreateBarRenderer(string name, Transform parent, Vector2 localPosition, Vector2 size, Color color, int sortingOrder)
-		{
-			GameObject barObject = new GameObject(name);
-			barObject.transform.SetParent(parent, false);
-			barObject.transform.localPosition = new Vector3(localPosition.x, localPosition.y, 0f);
-			barObject.transform.localScale = new Vector3(size.x, size.y, 1f);
-
-			SpriteRenderer renderer = barObject.AddComponent<SpriteRenderer>();
-			renderer.sprite = GetStatusBarSprite();
-			renderer.color = color;
-			renderer.sortingOrder = sortingOrder;
-			return renderer;
-		}
-
-		static void SetBarFill(SpriteRenderer fill, float ratio)
-		{
-			if (fill == null)
-				return;
-
-			ratio = Mathf.Clamp01(ratio);
-			fill.transform.localScale = new Vector3(StatusBarWidth * ratio, StatusBarHeight, 1f);
-			fill.transform.localPosition = new Vector3((-StatusBarWidth + StatusBarWidth * ratio) * 0.5f, fill.transform.localPosition.y, 0f);
-		}
-
-		static float GetRatio(int value, int maxValue)
-		{
-			if (maxValue <= 0)
-				return value > 0 ? 1f : 0f;
-
-			return (float)value / maxValue;
-		}
-
-		static Sprite GetStatusBarSprite()
-		{
-			if (_statusBarSprite != null)
-				return _statusBarSprite;
-
-			Texture2D texture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
-			texture.name = "Runtime_PawnStatusBarSprite";
-			texture.SetPixel(0, 0, Color.white);
-			texture.Apply();
-
-			_statusBarSprite = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
-			return _statusBarSprite;
 		}
 
 		float GetTurnIndicatorHeight()
@@ -254,10 +194,10 @@ namespace Battle
 			if (_spriteRenderer == null)
 				return 1.55f;
 
-			return Mathf.Max(1.55f, _spriteRenderer.bounds.size.y * 0.65f + 0.7f);
+			return Mathf.Max(1.75f, _spriteRenderer.bounds.size.y * 0.65f + 0.9f);
 		}
 
-		float GetStatusBarsHeight()
+		float GetStatusWorldUiHeight()
 		{
 			if (_spriteRenderer == null)
 				_spriteRenderer = GetComponentInChildren<SpriteRenderer>();

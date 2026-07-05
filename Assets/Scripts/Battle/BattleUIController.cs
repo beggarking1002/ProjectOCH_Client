@@ -285,17 +285,19 @@ namespace Battle
 
 			AxialCoord hoveredAxial = default;
 			bool hasHoveredTile = TryGetHoveredAxial(out hoveredAxial);
+			BattlePawnController selectedPawn = TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn) ? currentTurnPawn : null;
+			BattlePawnController hoveredPawn = null;
 
 			if (_tileInfoText != null)
 				_tileInfoText.text = BuildTileInfoText(hasHoveredTile, hoveredAxial);
 
 			if (_selectedPawnPanel != null)
-				_selectedPawnPanel.SetPawn("Selected", TryGetCurrentTurnPawn(out BattlePawnController selectedPawn) ? selectedPawn : null);
+				_selectedPawnPanel.SetPawn("Selected", selectedPawn);
 
 			if (_enemyPawnPanel != null)
 			{
 				BattlePawnController enemyPawn = null;
-				if (hasHoveredTile && _objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out BattlePawnController hoveredPawn) && hoveredPawn.IsMine == false)
+				if (hasHoveredTile && _objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out hoveredPawn) && hoveredPawn.IsMine == false)
 					enemyPawn = hoveredPawn;
 
 				_enemyPawnPanel.SetPawn("Target", enemyPawn);
@@ -519,12 +521,12 @@ namespace Battle
 			barsRect.offsetMin = new Vector2(8f, 8f);
 			barsRect.offsetMax = new Vector2(-8f, 52f);
 
-			Image hpFill = CreateOrGetPanelBar(barsRect, "HpBar", 24f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
-			Image armorFill = CreateOrGetPanelBar(barsRect, "ArmorBar", 4f, new Color(0.35f, 0.68f, 1f, 1f), true);
-			return new PawnPanelView(text, hpFill, armorFill);
+			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 24f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
+			PanelBarView armorBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 4f, new Color(0.35f, 0.68f, 1f, 1f), true);
+			return new PawnPanelView(text, hpBar, armorBar);
 		}
 
-		static Image CreateOrGetPanelBar(RectTransform parent, string name, float bottom, Color fillColor, bool preserveExistingStyle)
+		static PanelBarView CreateOrGetPanelBar(RectTransform parent, string name, float bottom, Color fillColor, bool preserveExistingStyle)
 		{
 			Transform existing = parent.Find(name);
 			RectTransform trackRect;
@@ -596,7 +598,47 @@ namespace Battle
 				fillImage.color = fillColor;
 
 			fillImage.raycastTarget = false;
-			return fillImage;
+			Text valueText = CreateOrGetBarText(trackRect, "ValueText");
+			return new PanelBarView(fillImage, valueText);
+		}
+
+		static Text CreateOrGetBarText(RectTransform parent, string name)
+		{
+			Transform existing = parent.Find(name);
+			Text text = existing != null ? existing.GetComponent<Text>() : null;
+			RectTransform rect;
+			if (text != null)
+			{
+				rect = text.GetComponent<RectTransform>();
+				if (rect == null)
+					rect = text.gameObject.AddComponent<RectTransform>();
+			}
+			else
+			{
+				GameObject textObject = existing != null ? existing.gameObject : new GameObject(name);
+				textObject.transform.SetParent(parent, false);
+				rect = textObject.GetComponent<RectTransform>();
+				if (rect == null)
+					rect = textObject.AddComponent<RectTransform>();
+
+				text = textObject.GetComponent<Text>();
+				if (text == null)
+					text = textObject.AddComponent<Text>();
+			}
+
+			rect.anchorMin = Vector2.zero;
+			rect.anchorMax = Vector2.one;
+			rect.offsetMin = Vector2.zero;
+			rect.offsetMax = Vector2.zero;
+
+			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.fontSize = 10;
+			text.color = Color.white;
+			text.alignment = TextAnchor.MiddleCenter;
+			text.horizontalOverflow = HorizontalWrapMode.Overflow;
+			text.verticalOverflow = VerticalWrapMode.Truncate;
+			text.raycastTarget = false;
+			return text;
 		}
 
 		static float GetRatio(int value, int maxValue)
@@ -605,6 +647,11 @@ namespace Battle
 				return value > 0 ? 1f : 0f;
 
 			return Mathf.Clamp01((float)value / maxValue);
+		}
+
+		static string FormatValue(int value, int maxValue)
+		{
+			return maxValue > 0 ? $"{value}/{maxValue}" : value.ToString();
 		}
 
 		static GameObject FindExistingBattleUi()
@@ -675,14 +722,14 @@ namespace Battle
 		sealed class PawnPanelView
 		{
 			readonly Text _text;
-			readonly Image _hpFill;
-			readonly Image _armorFill;
+			readonly PanelBarView _hpBar;
+			readonly PanelBarView _armorBar;
 
-			public PawnPanelView(Text text, Image hpFill, Image armorFill)
+			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView armorBar)
 			{
 				_text = text;
-				_hpFill = hpFill;
-				_armorFill = armorFill;
+				_hpBar = hpBar;
+				_armorBar = armorBar;
 			}
 
 			public void SetPawn(string title, BattlePawnController pawn)
@@ -690,8 +737,34 @@ namespace Battle
 				if (_text != null)
 					_text.text = BuildPawnText(title, pawn);
 
-				SetFill(_hpFill, pawn != null ? GetRatio(pawn.Hp, pawn.MaxHp) : 0f);
-				SetFill(_armorFill, pawn != null ? GetRatio(pawn.Armor, pawn.MaxArmor) : 0f);
+				if (pawn == null)
+				{
+					_hpBar.Set(0f, "HP -");
+					_armorBar.Set(0f, "Armor -");
+					return;
+				}
+
+				_hpBar.Set(GetRatio(pawn.Hp, pawn.MaxHp), $"HP {FormatValue(pawn.Hp, pawn.MaxHp)}");
+				_armorBar.Set(GetRatio(pawn.Armor, pawn.MaxArmor), $"Armor {FormatValue(pawn.Armor, pawn.MaxArmor)}");
+			}
+		}
+
+		sealed class PanelBarView
+		{
+			readonly Image _fill;
+			readonly Text _valueText;
+
+			public PanelBarView(Image fill, Text valueText)
+			{
+				_fill = fill;
+				_valueText = valueText;
+			}
+
+			public void Set(float ratio, string text)
+			{
+				SetFill(_fill, ratio);
+				if (_valueText != null)
+					_valueText.text = text;
 			}
 
 			static void SetFill(Image fill, float ratio)
