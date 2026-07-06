@@ -632,6 +632,9 @@ namespace Battle
 			ApplyPawnDeltas(packet.PawnDeltas);
 			ApplyTurnState(packet.CasterPawnId, packet.RemainingAp, packet.CanMove, packet.UsedSubActionThisTurn, packet.UsedUltimate);
 
+			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawnController casterPawn))
+				casterPawn.TriggerSkill(packet.SkillSlot);
+
 			if (packet.TargetPawnId != 0 && _pawns.TryGetValue(packet.TargetPawnId, out BattlePawnController targetPawn))
 			{
 				targetPawn.ApplyHp(packet.TargetHp);

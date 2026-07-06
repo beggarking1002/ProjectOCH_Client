@@ -36,7 +36,7 @@ namespace Battle
 			new ActionSlotBinding("ActionSlot_05", BattleActionMode.Skill4, false),
 			new ActionSlotBinding("ActionSlot_06", BattleActionMode.Ultimate, false),
 			new ActionSlotBinding("ActionSlot_07", BattleActionMode.SubAction, false),
-			new ActionSlotBinding("ActionSlot_08", BattleActionMode.Move, true),
+			new ActionSlotBinding("ActionSlot_08", BattleActionMode.Passive, false),
 		};
 
 		readonly Button[] _actionButtons = new Button[SlotBindings.Length];
@@ -216,7 +216,15 @@ namespace Battle
 
 				int slotIndex = i;
 				button.onClick.RemoveAllListeners();
-				button.onClick.AddListener(() => OnActionSlotClicked(slotIndex));
+				if (binding.Mode != BattleActionMode.Passive)
+				{
+					button.transition = Selectable.Transition.ColorTint;
+					button.onClick.AddListener(() => OnActionSlotClicked(slotIndex));
+				}
+				else
+				{
+					button.transition = Selectable.Transition.None;
+				}
 
 				_actionButtons[i] = button;
 				_actionImages[i] = image;
@@ -324,9 +332,10 @@ namespace Battle
 				if (image == null)
 					continue;
 
-				bool selected = SlotBindings[i].IsWaitCommand == false && SlotBindings[i].Mode == _objectManager.ActionMode;
+				bool isPassive = SlotBindings[i].Mode == BattleActionMode.Passive;
+				bool selected = isPassive == false && SlotBindings[i].IsWaitCommand == false && SlotBindings[i].Mode == _objectManager.ActionMode;
 				Color color = selected ? new Color(1f, 0.88f, 0.35f, 1f) : _normalColors[i];
-				if (canAct == false || isAvailable == false)
+				if (isPassive == false && (canAct == false || isAvailable == false))
 					color.a = 0.45f;
 
 				image.color = color;
@@ -573,6 +582,8 @@ namespace Battle
 					return pawn.UsedSubActionThisTurn == false;
 				case BattleActionMode.Ultimate:
 					return pawn.UsedUltimate == false;
+				case BattleActionMode.Passive:
+					return false;
 				case BattleActionMode.Skill1:
 				case BattleActionMode.Skill2:
 				case BattleActionMode.Skill3:

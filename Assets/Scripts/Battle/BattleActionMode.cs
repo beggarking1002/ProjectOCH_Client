@@ -9,6 +9,7 @@ namespace Battle
 		Skill4,
 		Ultimate,
 		SubAction,
+		Passive,
 		WaitingServer,
 	}
 }

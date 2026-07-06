@@ -16,6 +16,7 @@ namespace Battle
 		const float MaxMoveDurationSeconds = 1.2f;
 		const string VisualRootName = "visual";
 		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
+		static readonly int Skill1Hash = Animator.StringToHash("Skill1");
 
 		BattleMapGrid _mapGrid;
 		Transform _visualRoot;
@@ -254,6 +255,26 @@ namespace Battle
 			Debug.Log($"Battle pawn dead. pawnId={PawnId}, killerPawnId={killerPawnId}");
 		}
 
+		public void TriggerSkill(int skillSlot)
+		{
+			if (IsDead)
+				return;
+
+			if (_animator == null)
+				_animator = FindVisualAnimator();
+
+			if (_animator == null)
+				return;
+
+			switch (skillSlot)
+			{
+				case 1:
+					if (HasTriggerParameter(_animator, Skill1Hash))
+						_animator.SetTrigger(Skill1Hash);
+					break;
+			}
+		}
+
 		public void SetTurnIndicatorVisible(bool visible)
 		{
 			EnsureTurnIndicator();
@@ -463,6 +484,22 @@ namespace Battle
 			{
 				AnimatorControllerParameter parameter = parameters[i];
 				if (parameter.type == AnimatorControllerParameterType.Bool && parameter.nameHash == nameHash)
+					return true;
+			}
+
+			return false;
+		}
+
+		static bool HasTriggerParameter(Animator animator, int nameHash)
+		{
+			if (animator == null || animator.runtimeAnimatorController == null)
+				return false;
+
+			AnimatorControllerParameter[] parameters = animator.parameters;
+			for (int i = 0; i < parameters.Length; i++)
+			{
+				AnimatorControllerParameter parameter = parameters[i];
+				if (parameter.type == AnimatorControllerParameterType.Trigger && parameter.nameHash == nameHash)
 					return true;
 			}
 
