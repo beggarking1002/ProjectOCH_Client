@@ -30,35 +30,35 @@ namespace Protocol {
             "GAEgASgEEikKC29iamVjdF90eXBlGAIgASgOMhQuUHJvdG9jb2wuT2JqZWN0",
             "VHlwZRItCg1jcmVhdHVyZV90eXBlGAMgASgOMhYuUHJvdG9jb2wuQ3JlYXR1",
             "cmVUeXBlEiUKCHBvc2l0aW9uGAQgASgLMhMuUHJvdG9jb2wuVmVjMkZpeGVk",
-            "IqkDCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVy",
+            "IrMDCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVy",
             "X2lkGAIgASgEEicKCnBhd25fY2xhc3MYAyABKA4yEy5Qcm90b2NvbC5QYXdu",
             "Q2xhc3MSIwoFYXhpYWwYBCABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEgoK",
             "AmhwGAUgASgFEg4KBm1heF9ocBgGIAEoBRISCgptb3ZlX3JhbmdlGAcgASgF",
             "Eg0KBWFybW9yGAggASgFEhEKCW1heF9hcm1vchgJIAEoBRISCgpjdXJyZW50",
             "X2FwGAogASgFEhAKCGNhbl9tb3ZlGAsgASgIEiEKGXVzZWRfc3ViX2FjdGlv",
-            "bl90aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgNIAEoCBIWCg5p",
-            "c19zaGllbGRfdW5pdBgOIAEoCBIQCghpc19tZWxlZRgPIAEoCBIPCgdpc19k",
-            "ZWFkGBAgASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YESABKA4yHy5Qcm90b2Nv",
-            "bC5CYXR0bGVGYWNpbmdEaXJlY3Rpb24i6QEKD0JhdHRsZVBhd25EZWx0YRIP",
-            "CgdwYXduX2lkGAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgFEhIK",
-            "CmN1cnJlbnRfYXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNlZF9z",
-            "dWJfYWN0aW9uX3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRlGAcg",
-            "ASgIEg8KB2lzX2RlYWQYCCABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgJIAEo",
-            "DjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbiKpAgoPQmF0dGxl",
-            "QWN0aW9uTG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5k",
-            "ZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlv",
-            "bl90eXBlGAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgG",
-            "IAEoCBIRCglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIa",
-            "ChJpc19wZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEo",
-            "CBIQCghocF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5p",
-            "c19iYWNrX2F0dGFjaxgNIAEoCGIGcHJvdG8z"));
+            "bl90aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgNIAEoCBIPCgdp",
+            "c19kZWFkGBAgASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YESABKA4yHy5Qcm90",
+            "b2NvbC5CYXR0bGVGYWNpbmdEaXJlY3Rpb24SJgoEcm9sZRgSIAEoDjIYLlBy",
+            "b3RvY29sLkJhdHRsZVBhd25Sb2xlSgQIDhAPSgQIDxAQIu8BCg9CYXR0bGVQ",
+            "YXduRGVsdGESDwoHcGF3bl9pZBgBIAEoBBIKCgJocBgCIAEoBRINCgVhcm1v",
+            "chgDIAEoBRISCgpjdXJyZW50X2FwGAQgASgFEhAKCGNhbl9tb3ZlGAUgASgI",
+            "EiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1cm4YBiABKAgSFQoNdXNlZF91",
+            "bHRpbWF0ZRgHIAEoCBIPCgdpc19kZWFkGAggASgIEjkKEGZhY2luZ19kaXJl",
+            "Y3Rpb24YCSABKA4yHy5Qcm90b2NvbC5CYXR0bGVGYWNpbmdEaXJlY3Rpb25K",
+            "BAgKEAsiqQIKD0JhdHRsZUFjdGlvbkxvZxIYChBhdHRhY2tlcl9wYXduX2lk",
+            "GAEgASgEEhgKEGRlZmVuZGVyX3Bhd25faWQYAiABKAQSEgoKc2tpbGxfc2xv",
+            "dBgDIAEoBRITCgthY3Rpb25fdHlwZRgEIAEoCRIOCgZkYW1hZ2UYBSABKAUS",
+            "EwoLaXNfY3JpdGljYWwYBiABKAgSEQoJaXNfZXZhZGVkGAcgASgIEhIKCmlz",
+            "X2d1YXJkZWQYCCABKAgSGgoSaXNfcGVyZmVjdF9ndWFyZGVkGAkgASgIEhIK",
+            "CmlzX2NvdW50ZXIYCiABKAgSEAoIaHBfYWZ0ZXIYCyABKAUSEwoLYXJtb3Jf",
+            "YWZ0ZXIYDCABKAUSFgoOaXNfYmFja19hdHRhY2sYDSABKAhiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.Vec2Fixed), global::Protocol.Vec2Fixed.Parser, new[]{ "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AxialCoord), global::Protocol.AxialCoord.Parser, new[]{ "Q", "R" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Position" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsShieldUnit", "IsMelee", "IsDead", "FacingDirection" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
           }));
@@ -875,10 +875,9 @@ namespace Protocol {
       canMove_ = other.canMove_;
       usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
       usedUltimate_ = other.usedUltimate_;
-      isShieldUnit_ = other.isShieldUnit_;
-      isMelee_ = other.isMelee_;
       isDead_ = other.isDead_;
       facingDirection_ = other.facingDirection_;
+      role_ = other.role_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1044,30 +1043,6 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "is_shield_unit" field.</summary>
-    public const int IsShieldUnitFieldNumber = 14;
-    private bool isShieldUnit_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsShieldUnit {
-      get { return isShieldUnit_; }
-      set {
-        isShieldUnit_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "is_melee" field.</summary>
-    public const int IsMeleeFieldNumber = 15;
-    private bool isMelee_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsMelee {
-      get { return isMelee_; }
-      set {
-        isMelee_ = value;
-      }
-    }
-
     /// <summary>Field number for the "is_dead" field.</summary>
     public const int IsDeadFieldNumber = 16;
     private bool isDead_;
@@ -1089,6 +1064,18 @@ namespace Protocol {
       get { return facingDirection_; }
       set {
         facingDirection_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "role" field.</summary>
+    public const int RoleFieldNumber = 18;
+    private global::Protocol.BattlePawnRole role_ = global::Protocol.BattlePawnRole.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.BattlePawnRole Role {
+      get { return role_; }
+      set {
+        role_ = value;
       }
     }
 
@@ -1120,10 +1107,9 @@ namespace Protocol {
       if (CanMove != other.CanMove) return false;
       if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
       if (UsedUltimate != other.UsedUltimate) return false;
-      if (IsShieldUnit != other.IsShieldUnit) return false;
-      if (IsMelee != other.IsMelee) return false;
       if (IsDead != other.IsDead) return false;
       if (FacingDirection != other.FacingDirection) return false;
+      if (Role != other.Role) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1144,10 +1130,9 @@ namespace Protocol {
       if (CanMove != false) hash ^= CanMove.GetHashCode();
       if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
       if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
-      if (IsShieldUnit != false) hash ^= IsShieldUnit.GetHashCode();
-      if (IsMelee != false) hash ^= IsMelee.GetHashCode();
       if (IsDead != false) hash ^= IsDead.GetHashCode();
       if (FacingDirection != global::Protocol.BattleFacingDirection.None) hash ^= FacingDirection.GetHashCode();
+      if (Role != global::Protocol.BattlePawnRole.None) hash ^= Role.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1218,14 +1203,6 @@ namespace Protocol {
         output.WriteRawTag(104);
         output.WriteBool(UsedUltimate);
       }
-      if (IsShieldUnit != false) {
-        output.WriteRawTag(112);
-        output.WriteBool(IsShieldUnit);
-      }
-      if (IsMelee != false) {
-        output.WriteRawTag(120);
-        output.WriteBool(IsMelee);
-      }
       if (IsDead != false) {
         output.WriteRawTag(128, 1);
         output.WriteBool(IsDead);
@@ -1233,6 +1210,10 @@ namespace Protocol {
       if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
         output.WriteRawTag(136, 1);
         output.WriteEnum((int) FacingDirection);
+      }
+      if (Role != global::Protocol.BattlePawnRole.None) {
+        output.WriteRawTag(144, 1);
+        output.WriteEnum((int) Role);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1296,14 +1277,6 @@ namespace Protocol {
         output.WriteRawTag(104);
         output.WriteBool(UsedUltimate);
       }
-      if (IsShieldUnit != false) {
-        output.WriteRawTag(112);
-        output.WriteBool(IsShieldUnit);
-      }
-      if (IsMelee != false) {
-        output.WriteRawTag(120);
-        output.WriteBool(IsMelee);
-      }
       if (IsDead != false) {
         output.WriteRawTag(128, 1);
         output.WriteBool(IsDead);
@@ -1311,6 +1284,10 @@ namespace Protocol {
       if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
         output.WriteRawTag(136, 1);
         output.WriteEnum((int) FacingDirection);
+      }
+      if (Role != global::Protocol.BattlePawnRole.None) {
+        output.WriteRawTag(144, 1);
+        output.WriteEnum((int) Role);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1361,17 +1338,14 @@ namespace Protocol {
       if (UsedUltimate != false) {
         size += 1 + 1;
       }
-      if (IsShieldUnit != false) {
-        size += 1 + 1;
-      }
-      if (IsMelee != false) {
-        size += 1 + 1;
-      }
       if (IsDead != false) {
         size += 2 + 1;
       }
       if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) FacingDirection);
+      }
+      if (Role != global::Protocol.BattlePawnRole.None) {
+        size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) Role);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1427,17 +1401,14 @@ namespace Protocol {
       if (other.UsedUltimate != false) {
         UsedUltimate = other.UsedUltimate;
       }
-      if (other.IsShieldUnit != false) {
-        IsShieldUnit = other.IsShieldUnit;
-      }
-      if (other.IsMelee != false) {
-        IsMelee = other.IsMelee;
-      }
       if (other.IsDead != false) {
         IsDead = other.IsDead;
       }
       if (other.FacingDirection != global::Protocol.BattleFacingDirection.None) {
         FacingDirection = other.FacingDirection;
+      }
+      if (other.Role != global::Protocol.BattlePawnRole.None) {
+        Role = other.Role;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1509,20 +1480,16 @@ namespace Protocol {
             UsedUltimate = input.ReadBool();
             break;
           }
-          case 112: {
-            IsShieldUnit = input.ReadBool();
-            break;
-          }
-          case 120: {
-            IsMelee = input.ReadBool();
-            break;
-          }
           case 128: {
             IsDead = input.ReadBool();
             break;
           }
           case 136: {
             FacingDirection = (global::Protocol.BattleFacingDirection) input.ReadEnum();
+            break;
+          }
+          case 144: {
+            Role = (global::Protocol.BattlePawnRole) input.ReadEnum();
             break;
           }
         }
@@ -1595,20 +1562,16 @@ namespace Protocol {
             UsedUltimate = input.ReadBool();
             break;
           }
-          case 112: {
-            IsShieldUnit = input.ReadBool();
-            break;
-          }
-          case 120: {
-            IsMelee = input.ReadBool();
-            break;
-          }
           case 128: {
             IsDead = input.ReadBool();
             break;
           }
           case 136: {
             FacingDirection = (global::Protocol.BattleFacingDirection) input.ReadEnum();
+            break;
+          }
+          case 144: {
+            Role = (global::Protocol.BattlePawnRole) input.ReadEnum();
             break;
           }
         }

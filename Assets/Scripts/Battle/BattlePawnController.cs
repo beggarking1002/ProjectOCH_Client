@@ -40,8 +40,10 @@ namespace Battle
 		public bool CanMove => Info == null || Info.CanMove;
 		public bool UsedSubActionThisTurn => Info != null && Info.UsedSubActionThisTurn;
 		public bool UsedUltimate => Info != null && Info.UsedUltimate;
-		public bool IsShieldUnit => Info != null && Info.IsShieldUnit;
-		public bool IsMelee => Info == null || Info.IsMelee;
+		public Protocol.BattlePawnRole Role => Info != null ? Info.Role : Protocol.BattlePawnRole.None;
+		public bool IsShieldUnit => Role == Protocol.BattlePawnRole.Tanker;
+		public bool IsMelee => Role == Protocol.BattlePawnRole.Tanker
+			|| Role == Protocol.BattlePawnRole.Melee;
 		public bool IsDead => Info != null && Info.IsDead;
 		public Protocol.BattleFacingDirection FacingDirection => Info != null ? Info.FacingDirection : Protocol.BattleFacingDirection.None;
 		public bool IsMoving { get; private set; }
@@ -347,7 +349,7 @@ namespace Battle
 				MaxHp = 0,
 				CurrentAp = 2,
 				CanMove = true,
-				IsMelee = true,
+				Role = Protocol.BattlePawnRole.Melee,
 			};
 		}
 
