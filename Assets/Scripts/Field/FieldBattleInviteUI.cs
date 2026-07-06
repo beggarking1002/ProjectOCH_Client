@@ -1,7 +1,10 @@
 using App;
 using Protocol;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem.UI;
@@ -12,19 +15,26 @@ namespace Field
 	[DisallowMultipleComponent]
 	public sealed class FieldBattleInviteUI : MonoBehaviour
 	{
+		const string BattleInviteUiName = "Canvas_FieldBattleInviteUI";
+		const string BattleInviteUiAddress = "FieldBattleInviteUI";
 		const int CanvasSortingOrder = 1200;
 
 		static FieldBattleInviteUI _instance;
 
 		Canvas _canvas;
+		GameObject _uiInstance;
 		GameObject _panel;
 		Text _messageText;
 		Button _primaryButton;
 		Button _secondaryButton;
 		Text _primaryButtonText;
 		Text _secondaryButtonText;
+		AsyncOperationHandle<GameObject> _uiHandle;
 		ulong _outgoingTargetPlayerId;
 		ulong _incomingRequesterPlayerId;
+		bool _hasUiHandle;
+		bool _isBinding;
+		bool _bound;
 		bool _subscribed;
 
 		public static bool IsBlockingInput => _instance != null && _instance._panel != null && _instance._panel.activeSelf;
@@ -33,8 +43,7 @@ namespace Field
 		{
 			_instance = this;
 			EnsureEventSystem();
-			BuildUi();
-			Hide();
+			BindOrLoadUi();
 		}
 
 		void OnEnable()
@@ -57,6 +66,14 @@ namespace Field
 		{
 			if (_instance == this)
 				_instance = null;
+
+			if (_hasUiHandle && _uiHandle.IsValid())
+			{
+				Addressables.ReleaseInstance(_uiHandle);
+				_hasUiHandle = false;
+				_uiHandle = default;
+				_uiInstance = null;
+			}
 		}
 
 		public void ShowInviteConfirm(ulong targetPlayerId)
@@ -189,6 +206,9 @@ namespace Field
 
 		void ShowWaiting(string message)
 		{
+			if (EnsureUiReady() == false)
+				return;
+
 			SetPanelActive(true);
 			_messageText.text = message;
 			SetButtonVisible(_primaryButton, false);
@@ -197,6 +217,9 @@ namespace Field
 
 		void ShowOneButton(string message, string buttonText, UnityEngine.Events.UnityAction onClick)
 		{
+			if (EnsureUiReady() == false)
+				return;
+
 			SetPanelActive(true);
 			_messageText.text = message;
 			ConfigureButton(_primaryButton, _primaryButtonText, buttonText, onClick);
@@ -206,6 +229,9 @@ namespace Field
 
 		void ShowTwoButton(string message, string primaryText, string secondaryText, UnityEngine.Events.UnityAction primaryClick, UnityEngine.Events.UnityAction secondaryClick)
 		{
+			if (EnsureUiReady() == false)
+				return;
+
 			SetPanelActive(true);
 			_messageText.text = message;
 			ConfigureButton(_primaryButton, _primaryButtonText, primaryText, primaryClick);
@@ -246,84 +272,134 @@ namespace Field
 				button.gameObject.SetActive(visible);
 		}
 
-		void BuildUi()
+		async void BindOrLoadUi()
 		{
-			GameObject canvasObject = new GameObject("Canvas_FieldBattleInviteUI");
-			canvasObject.transform.SetParent(transform, false);
-			_canvas = canvasObject.AddComponent<Canvas>();
+			if (_isBinding || _bound)
+				return;
+
+			_isBinding = true;
+
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(BattleInviteUiAddress);
+			await handle.Task;
+
+			if (this == null)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				return;
+			}
+
+			if (_bound)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				_isBinding = false;
+				return;
+			}
+
+			if (handle.Status == AsyncOperationStatus.Succeeded)
+			{
+				_uiHandle = handle;
+				_hasUiHandle = true;
+				BindUi(handle.Result);
+				_isBinding = false;
+				return;
+			}
+
+			if (handle.IsValid())
+				Addressables.ReleaseInstance(handle);
+
+			Debug.LogError($"Failed to load addressable UI prefab: {BattleInviteUiAddress}");
+
+			_isBinding = false;
+		}
+
+		bool EnsureUiReady()
+		{
+			if (_bound)
+				return true;
+
+			if (_isBinding)
+				Debug.LogWarning($"Battle invite UI is still loading from Addressables. address={BattleInviteUiAddress}");
+			else
+				Debug.LogError($"Battle invite UI is not available. Register addressable prefab '{BattleInviteUiAddress}'.");
+
+			return false;
+		}
+
+		void BindUi(GameObject uiObject)
+		{
+			if (uiObject == null)
+				return;
+
+			_uiInstance = uiObject;
+			_uiInstance.name = BattleInviteUiName;
+			SceneManager.MoveGameObjectToScene(_uiInstance, gameObject.scene);
+
+			_canvas = _uiInstance.GetComponent<Canvas>();
+			if (_canvas == null)
+				_canvas = _uiInstance.GetComponentInChildren<Canvas>(true);
+
+			if (_canvas == null)
+			{
+				Debug.LogError($"Addressable UI prefab '{BattleInviteUiAddress}' requires a Canvas.");
+				return;
+			}
+
 			_canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 			_canvas.sortingOrder = CanvasSortingOrder;
-			canvasObject.AddComponent<CanvasScaler>();
-			canvasObject.AddComponent<GraphicRaycaster>();
 
-			_panel = new GameObject("Panel");
-			_panel.transform.SetParent(canvasObject.transform, false);
-			Image panelImage = _panel.AddComponent<Image>();
-			panelImage.color = new Color(0.05f, 0.06f, 0.08f, 0.92f);
+			if (_canvas.GetComponent<CanvasScaler>() == null)
+			{
+				Debug.LogError($"Addressable UI prefab '{BattleInviteUiAddress}' requires a CanvasScaler on its Canvas.");
+				return;
+			}
 
-			RectTransform panelRect = _panel.GetComponent<RectTransform>();
-			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
-			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
-			panelRect.pivot = new Vector2(0.5f, 0.5f);
-			panelRect.anchoredPosition = Vector2.zero;
-			panelRect.sizeDelta = new Vector2(460f, 210f);
+			if (_canvas.GetComponent<GraphicRaycaster>() == null)
+			{
+				Debug.LogError($"Addressable UI prefab '{BattleInviteUiAddress}' requires a GraphicRaycaster on its Canvas.");
+				return;
+			}
 
-			_messageText = CreateText(_panel.transform, "Message", 22, TextAnchor.MiddleCenter);
-			RectTransform messageRect = _messageText.GetComponent<RectTransform>();
-			messageRect.anchorMin = new Vector2(0.08f, 0.44f);
-			messageRect.anchorMax = new Vector2(0.92f, 0.86f);
-			messageRect.offsetMin = Vector2.zero;
-			messageRect.offsetMax = Vector2.zero;
+			Transform panelTransform = FindDeepChild(_uiInstance.transform, "Panel");
+			_panel = panelTransform != null ? panelTransform.gameObject : null;
+			if (_panel == null)
+			{
+				Debug.LogError($"Addressable UI prefab '{BattleInviteUiAddress}' requires a child named Panel.");
+				return;
+			}
 
-			_primaryButton = CreateButton(_panel.transform, "PrimaryButton", "OK", out _primaryButtonText);
-			RectTransform primaryRect = _primaryButton.GetComponent<RectTransform>();
-			primaryRect.anchorMin = new Vector2(0.16f, 0.12f);
-			primaryRect.anchorMax = new Vector2(0.46f, 0.32f);
-			primaryRect.offsetMin = Vector2.zero;
-			primaryRect.offsetMax = Vector2.zero;
+			_messageText = FindDeepChild(_panel.transform, "Message")?.GetComponent<Text>();
+			_primaryButton = FindDeepChild(_panel.transform, "PrimaryButton")?.GetComponent<Button>();
+			_secondaryButton = FindDeepChild(_panel.transform, "SecondaryButton")?.GetComponent<Button>();
+			_primaryButtonText = _primaryButton != null ? FindDeepChild(_primaryButton.transform, "Text")?.GetComponent<Text>() : null;
+			_secondaryButtonText = _secondaryButton != null ? FindDeepChild(_secondaryButton.transform, "Text")?.GetComponent<Text>() : null;
+			if (_messageText == null || _primaryButton == null || _secondaryButton == null)
+			{
+				Debug.LogError($"Addressable UI prefab '{BattleInviteUiAddress}' requires Message(Text), PrimaryButton(Button), and SecondaryButton(Button).");
+				return;
+			}
 
-			_secondaryButton = CreateButton(_panel.transform, "SecondaryButton", "No", out _secondaryButtonText);
-			RectTransform secondaryRect = _secondaryButton.GetComponent<RectTransform>();
-			secondaryRect.anchorMin = new Vector2(0.54f, 0.12f);
-			secondaryRect.anchorMax = new Vector2(0.84f, 0.32f);
-			secondaryRect.offsetMin = Vector2.zero;
-			secondaryRect.offsetMax = Vector2.zero;
+			_bound = true;
+			Hide();
 		}
 
-		static Text CreateText(Transform parent, string name, int fontSize, TextAnchor alignment)
+		static Transform FindDeepChild(Transform parent, string childName)
 		{
-			GameObject textObject = new GameObject(name);
-			textObject.transform.SetParent(parent, false);
-			Text text = textObject.AddComponent<Text>();
-			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-			text.fontSize = fontSize;
-			text.alignment = alignment;
-			text.color = Color.white;
-			text.horizontalOverflow = HorizontalWrapMode.Wrap;
-			text.verticalOverflow = VerticalWrapMode.Truncate;
-			return text;
-		}
+			if (parent == null)
+				return null;
 
-		static Button CreateButton(Transform parent, string name, string text, out Text label)
-		{
-			GameObject buttonObject = new GameObject(name);
-			buttonObject.transform.SetParent(parent, false);
+			if (parent.name == childName)
+				return parent;
 
-			Image image = buttonObject.AddComponent<Image>();
-			image.color = new Color(0.18f, 0.24f, 0.32f, 1f);
+			for (int i = 0; i < parent.childCount; i++)
+			{
+				Transform result = FindDeepChild(parent.GetChild(i), childName);
+				if (result != null)
+					return result;
+			}
 
-			Button button = buttonObject.AddComponent<Button>();
-			button.targetGraphic = image;
-
-			label = CreateText(buttonObject.transform, "Text", 18, TextAnchor.MiddleCenter);
-			label.text = text;
-			RectTransform labelRect = label.GetComponent<RectTransform>();
-			labelRect.anchorMin = Vector2.zero;
-			labelRect.anchorMax = Vector2.one;
-			labelRect.offsetMin = Vector2.zero;
-			labelRect.offsetMax = Vector2.zero;
-
-			return button;
+			return null;
 		}
 
 		static void EnsureEventSystem()

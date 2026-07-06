@@ -35,11 +35,19 @@ namespace Field
 				1f - Mathf.Exp(-followSpeed * Time.deltaTime));
 		}
 
-		public void SetTarget(Transform followTarget)
+		public void SetTarget(Transform followTarget, bool snapImmediately = true)
 		{
 			target = followTarget;
-			if (target != null)
-				transform.position = target.position + offset;
+			if (snapImmediately)
+				SnapToTarget();
+		}
+
+		public void SnapToTarget()
+		{
+			if (target == null)
+				return;
+
+			transform.position = target.position + offset;
 		}
 
 		void FindFieldPawnTarget()

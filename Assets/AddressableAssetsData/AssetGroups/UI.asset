@@ -15,6 +15,24 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 13e676e0aeaaafc4d878556badfecc3e
   m_SerializeEntries:
+  - m_GUID: d0c9e4b5a08b4a719842fa39ef08cda1
+    m_Address: SceneTransitionOverlay
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f17a4bb4a87f4e2aa9dc3c8ce4f9df31
+    m_Address: FieldBattleInviteUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b28ad33b19a04da3a38e2ae4bcf46fd0
+    m_Address: BattleResultUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb86b06d79d9ce345ba2692fb6f3db66
     m_Address: BattleSceneUI
     m_ReadOnly: 0

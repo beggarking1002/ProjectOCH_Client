@@ -100,7 +100,7 @@ namespace Scenes
 			Debug.Log($"Sent C_ENTER_GAME. playerIndex={playerIndex}");
 		}
 
-		void OnEnterGameReceived(S_ENTER_GAME packet)
+		async void OnEnterGameReceived(S_ENTER_GAME packet)
 		{
 			if (packet.Success == false)
 			{
@@ -112,6 +112,7 @@ namespace Scenes
 			}
 
 			Debug.Log("S_ENTER_GAME success. Loading FieldScene.");
+			await SceneTransitionOverlay.ShowAsync();
 			SceneManager.LoadScene(FieldSceneName);
 		}
 

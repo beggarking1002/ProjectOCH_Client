@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using App;
 using Protocol;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Battle
 		const string BattleUiName = "Canvas_BattleUI";
 		const string BattleUiAddress = "BattleSceneUI";
 		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+		const string BattleResultUiAddress = "BattleResultUI";
 		const float BattleResultDelaySeconds = 2f;
 
 		static readonly ActionSlotBinding[] SlotBindings =
@@ -54,20 +56,28 @@ namespace Battle
 		Text _resultTitleText;
 		Button _resultOkButton;
 		AsyncOperationHandle<GameObject> _uiHandle;
+		AsyncOperationHandle<GameObject> _resultUiHandle;
 		Coroutine _resultCoroutine;
 		ulong _battleResultId;
 		bool _hasUiHandle;
+		bool _hasResultUiHandle;
 		bool _isBinding;
+		bool _isLoadingResultOverlay;
 		bool _bound;
 		bool _battleResultReceived;
 		bool _battleResultAckSent;
 
-		public void Initialize(BattleObjectManager objectManager)
+		public async void Initialize(BattleObjectManager objectManager)
+		{
+			await InitializeAsync(objectManager);
+		}
+
+		public async Task InitializeAsync(BattleObjectManager objectManager)
 		{
 			_objectManager = objectManager;
 			EnsureEventSystem();
 			SubscribeNetwork();
-			BindOrLoadUi();
+			await BindOrLoadUiAsync();
 		}
 
 		void Update()
@@ -80,6 +90,8 @@ namespace Battle
 			UnsubscribeNetwork();
 			if (_resultCoroutine != null)
 				StopCoroutine(_resultCoroutine);
+
+			ReleaseResultOverlayHandle();
 
 			if (_hasUiHandle && _uiHandle.IsValid())
 			{
@@ -111,7 +123,7 @@ namespace Battle
 			GameRoot.Instance.Network.BattleResultReceived -= OnBattleResultReceived;
 		}
 
-		async void BindOrLoadUi()
+		async Task BindOrLoadUiAsync()
 		{
 			if (_isBinding || _bound)
 				return;
@@ -177,7 +189,7 @@ namespace Battle
 			BindActionSlots(_uiInstance.transform);
 			BindTurnExit(_uiInstance.transform);
 			BindStatePanels(_uiInstance.transform);
-			EnsureResultOverlay();
+			BindOrLoadResultOverlay();
 			_bound = true;
 			Refresh();
 		}
@@ -344,7 +356,19 @@ namespace Battle
 		{
 			yield return new WaitForSeconds(BattleResultDelaySeconds);
 
-			EnsureResultOverlay();
+			if (_resultOverlay == null)
+				BindOrLoadResultOverlay();
+
+			while (_isLoadingResultOverlay)
+				yield return null;
+
+			if (_resultOverlay == null)
+			{
+				Debug.LogError($"Battle result UI is not available. Register addressable prefab '{BattleResultUiAddress}'.");
+				_resultCoroutine = null;
+				yield break;
+			}
+
 			if (_resultTitleText != null)
 				_resultTitleText.text = victory ? "You Win!" : "You Lose!";
 
@@ -382,105 +406,78 @@ namespace Battle
 			Debug.Log($"Sent C_BATTLE_RESULT_ACK. battleId={_battleResultId}");
 		}
 
-		void EnsureResultOverlay()
+		async void BindOrLoadResultOverlay()
 		{
-			if (_uiInstance == null)
+			if (_uiInstance == null || _resultOverlay != null || _isLoadingResultOverlay)
 				return;
 
-			if (_resultOverlay != null)
-				return;
+			_isLoadingResultOverlay = true;
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(BattleResultUiAddress);
+			await handle.Task;
+			_isLoadingResultOverlay = false;
 
-			Transform existing = FindDeepChild(_uiInstance.transform, "BattleResultOverlay_Runtime");
-			if (existing != null)
+			if (this == null)
 			{
-				_resultOverlay = existing.gameObject;
-				_resultTitleText = FindDeepChild(existing, "ResultTitle")?.GetComponent<Text>();
-				_resultOkButton = FindDeepChild(existing, "ResultOkButton")?.GetComponent<Button>();
-				if (_resultOkButton != null)
-				{
-					_resultOkButton.onClick.RemoveAllListeners();
-					_resultOkButton.onClick.AddListener(OnBattleResultOkClicked);
-				}
-
-				_resultOverlay.SetActive(false);
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
 				return;
 			}
 
-			GameObject overlay = new GameObject("BattleResultOverlay_Runtime");
-			overlay.transform.SetParent(_uiInstance.transform, false);
-			_resultOverlay = overlay;
+			if (_resultOverlay != null)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				return;
+			}
 
-			RectTransform overlayRect = overlay.AddComponent<RectTransform>();
-			overlayRect.anchorMin = Vector2.zero;
-			overlayRect.anchorMax = Vector2.one;
-			overlayRect.offsetMin = Vector2.zero;
-			overlayRect.offsetMax = Vector2.zero;
+			if (handle.Status == AsyncOperationStatus.Succeeded)
+			{
+				_resultUiHandle = handle;
+				_hasResultUiHandle = true;
+				handle.Result.transform.SetParent(_uiInstance.transform, false);
+				BindResultOverlay(handle.Result.transform);
+				return;
+			}
 
-			Image overlayImage = overlay.AddComponent<Image>();
-			overlayImage.color = new Color(0f, 0f, 0f, 0.58f);
-			overlayImage.raycastTarget = true;
+			if (handle.IsValid())
+				Addressables.ReleaseInstance(handle);
 
-			GameObject panel = new GameObject("ResultPanel");
-			panel.transform.SetParent(overlay.transform, false);
-			RectTransform panelRect = panel.AddComponent<RectTransform>();
-			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
-			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
-			panelRect.pivot = new Vector2(0.5f, 0.5f);
-			panelRect.sizeDelta = new Vector2(360f, 190f);
-			panelRect.anchoredPosition = Vector2.zero;
+			Debug.LogError($"Failed to load addressable UI prefab: {BattleResultUiAddress}");
+		}
 
-			Image panelImage = panel.AddComponent<Image>();
-			panelImage.color = new Color(0.05f, 0.055f, 0.065f, 0.96f);
-			panelImage.raycastTarget = true;
+		void ReleaseResultOverlayHandle()
+		{
+			if (_hasResultUiHandle && _resultUiHandle.IsValid())
+			{
+				Addressables.ReleaseInstance(_resultUiHandle);
+				_hasResultUiHandle = false;
+				_resultUiHandle = default;
+				_resultOverlay = null;
+				_resultTitleText = null;
+				_resultOkButton = null;
+			}
+		}
 
-			GameObject titleObject = new GameObject("ResultTitle");
-			titleObject.transform.SetParent(panel.transform, false);
-			RectTransform titleRect = titleObject.AddComponent<RectTransform>();
-			titleRect.anchorMin = new Vector2(0f, 0f);
-			titleRect.anchorMax = new Vector2(1f, 1f);
-			titleRect.offsetMin = new Vector2(24f, 76f);
-			titleRect.offsetMax = new Vector2(-24f, -26f);
+		void BindResultOverlay(Transform overlay)
+		{
+			if (overlay == null)
+				return;
 
-			_resultTitleText = titleObject.AddComponent<Text>();
-			_resultTitleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-			_resultTitleText.fontSize = 42;
-			_resultTitleText.color = Color.white;
-			_resultTitleText.alignment = TextAnchor.MiddleCenter;
-			_resultTitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
-			_resultTitleText.verticalOverflow = VerticalWrapMode.Truncate;
-			_resultTitleText.raycastTarget = false;
+			_resultOverlay = overlay.gameObject;
+			_resultTitleText = FindDeepChild(overlay, "ResultTitle")?.GetComponent<Text>();
+			_resultOkButton = FindDeepChild(overlay, "ResultOkButton")?.GetComponent<Button>();
+			if (_resultOkButton != null)
+			{
+				_resultOkButton.onClick.RemoveAllListeners();
+				_resultOkButton.onClick.AddListener(OnBattleResultOkClicked);
+			}
+			else
+			{
+				Debug.LogWarning("Battle result overlay requires a Button named ResultOkButton.");
+			}
 
-			GameObject buttonObject = new GameObject("ResultOkButton");
-			buttonObject.transform.SetParent(panel.transform, false);
-			RectTransform buttonRect = buttonObject.AddComponent<RectTransform>();
-			buttonRect.anchorMin = new Vector2(0.5f, 0f);
-			buttonRect.anchorMax = new Vector2(0.5f, 0f);
-			buttonRect.pivot = new Vector2(0.5f, 0f);
-			buttonRect.sizeDelta = new Vector2(120f, 38f);
-			buttonRect.anchoredPosition = new Vector2(0f, 24f);
-
-			Image buttonImage = buttonObject.AddComponent<Image>();
-			buttonImage.color = new Color(0.92f, 0.92f, 0.92f, 1f);
-
-			_resultOkButton = buttonObject.AddComponent<Button>();
-			_resultOkButton.targetGraphic = buttonImage;
-			_resultOkButton.onClick.AddListener(OnBattleResultOkClicked);
-
-			GameObject buttonTextObject = new GameObject("Text");
-			buttonTextObject.transform.SetParent(buttonObject.transform, false);
-			RectTransform buttonTextRect = buttonTextObject.AddComponent<RectTransform>();
-			buttonTextRect.anchorMin = Vector2.zero;
-			buttonTextRect.anchorMax = Vector2.one;
-			buttonTextRect.offsetMin = Vector2.zero;
-			buttonTextRect.offsetMax = Vector2.zero;
-
-			Text buttonText = buttonTextObject.AddComponent<Text>();
-			buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-			buttonText.fontSize = 18;
-			buttonText.color = new Color(0.07f, 0.075f, 0.085f, 1f);
-			buttonText.alignment = TextAnchor.MiddleCenter;
-			buttonText.text = "OK";
-			buttonText.raycastTarget = false;
+			if (_resultTitleText == null)
+				Debug.LogWarning("Battle result overlay requires a Text named ResultTitle.");
 
 			_resultOverlay.SetActive(false);
 		}

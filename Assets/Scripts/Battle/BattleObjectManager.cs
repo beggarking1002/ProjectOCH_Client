@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using App;
 using Protocol;
 using UnityEngine;
@@ -157,6 +158,11 @@ namespace Battle
 
 		public async void SpawnDebugPawns()
 		{
+			await SpawnDebugPawnsAsync();
+		}
+
+		public async Task SpawnDebugPawnsAsync()
+		{
 			_battleId = 0;
 			_currentTurnPawnId = 1;
 			_localPawnIds.Clear();
@@ -167,6 +173,11 @@ namespace Battle
 		}
 
 		public async void SpawnFromEnterBattle(S_ENTER_BATTLE packet)
+		{
+			await SpawnFromEnterBattleAsync(packet);
+		}
+
+		public async Task SpawnFromEnterBattleAsync(S_ENTER_BATTLE packet)
 		{
 			if (packet == null || packet.Success == false)
 				return;

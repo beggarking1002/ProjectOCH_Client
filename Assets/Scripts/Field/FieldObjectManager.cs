@@ -29,6 +29,8 @@ namespace Field
 
 		public ulong MyObjectId => _myObjectId;
 		public FieldPawnController MyPawn => _myObjectId != 0 && _pawns.TryGetValue(_myObjectId, out FieldPawnController pawn) ? pawn : null;
+		public bool IsLocalPawnReady => MyPawn != null;
+		public event System.Action<FieldObjectManager> LocalPawnReady;
 
 		public void Initialize(FieldMapWalkArea walkArea, string pawnAddress)
 		{
@@ -330,7 +332,7 @@ namespace Field
 			{
 				existing.Initialize(_walkArea, GetPosition(info, existing.transform.position.z), objectId, isMine);
 				if (isMine)
-					BindCameraToPawn(existing.transform);
+					NotifyLocalPawnReady(existing.transform);
 				return;
 			}
 
@@ -369,7 +371,7 @@ namespace Field
 			if (isMine)
 			{
 				_myObjectId = objectId;
-				BindCameraToPawn(pawn.transform);
+				NotifyLocalPawnReady(pawn.transform);
 			}
 		}
 
@@ -405,7 +407,7 @@ namespace Field
 			{
 				existing.Initialize(_walkArea, GetPosition(info, existing.transform.position.z), objectId, isMine);
 				if (isMine)
-					BindCameraToPawn(existing.transform);
+					NotifyLocalPawnReady(existing.transform);
 				return;
 			}
 
@@ -444,7 +446,7 @@ namespace Field
 			if (isMine)
 			{
 				_myObjectId = objectId;
-				BindCameraToPawn(pawn.transform);
+				NotifyLocalPawnReady(pawn.transform);
 			}
 		}
 
@@ -518,6 +520,12 @@ namespace Field
 			return _walkArea != null ? _walkArea.GetDefaultSpawnPosition(z) : new Vector3(0f, 0f, z);
 		}
 
+		void NotifyLocalPawnReady(Transform pawnTransform)
+		{
+			BindCameraToPawn(pawnTransform);
+			LocalPawnReady?.Invoke(this);
+		}
+
 		static void BindCameraToPawn(Transform pawnTransform)
 		{
 			Camera camera = Camera.main;
@@ -528,7 +536,7 @@ namespace Field
 			if (controller == null)
 				controller = camera.gameObject.AddComponent<CameraController>();
 
-			controller.SetTarget(pawnTransform);
+			controller.SetTarget(pawnTransform, true);
 		}
 	}
 }

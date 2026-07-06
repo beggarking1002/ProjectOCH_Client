@@ -1,5 +1,6 @@
 using Battle;
 using App;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -12,12 +13,14 @@ namespace Scenes
 		const string BattleSceneName = "BattleScene";
 		const string BattleMapAddress = "BattleField_001";
 		const string BattlePawnAddress = "Pawn_Beige_Ice";
+		const float BattleReadyTimeoutSeconds = 5f;
 
 		static BattleSceneAddressableLoader _instance;
 
 		AsyncOperationHandle<GameObject> _mapHandle;
 		bool _hasMapHandle;
 		bool _isLoading;
+		bool _battleSceneTransitionCompleted;
 		int _loadVersion;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -73,6 +76,16 @@ namespace Scenes
 
 			_isLoading = true;
 			int version = ++_loadVersion;
+			_battleSceneTransitionCompleted = false;
+
+			await SceneTransitionOverlay.ShowAsync();
+			if (version != _loadVersion || SceneManager.GetActiveScene().name != BattleSceneName)
+			{
+				_isLoading = false;
+				return;
+			}
+
+			StartCoroutine(BattleReadyTimeout(version));
 
 			AsyncOperationHandle<GameObject> mapHandle = Addressables.InstantiateAsync(BattleMapAddress);
 			_mapHandle = mapHandle;
@@ -91,6 +104,7 @@ namespace Scenes
 			{
 				Debug.LogError($"Failed to load battle map addressable: {BattleMapAddress}");
 				ReleaseHandle(mapHandle);
+				SceneTransitionOverlay.Hide();
 				return;
 			}
 
@@ -107,6 +121,7 @@ namespace Scenes
 			if (mapGrid.Grid == null)
 			{
 				Debug.LogError($"{BattleMapAddress} requires a Grid component.");
+				SceneTransitionOverlay.Hide();
 				return;
 			}
 
@@ -117,21 +132,30 @@ namespace Scenes
 			objectManager.Initialize(mapGrid, BattlePawnAddress);
 			Protocol.S_ENTER_BATTLE enterBattle = GameRoot.Instance != null ? GameRoot.Instance.Network.LastEnterBattle : null;
 			if (enterBattle != null && enterBattle.Success)
-				objectManager.SpawnFromEnterBattle(enterBattle);
+				await objectManager.SpawnFromEnterBattleAsync(enterBattle);
 			else
-				objectManager.SpawnDebugPawns();
+				await objectManager.SpawnDebugPawnsAsync();
+
+			if (version != _loadVersion || SceneManager.GetActiveScene().name != BattleSceneName)
+				return;
 
 			BattleUIController uiController = battleMap.GetComponent<BattleUIController>();
 			if (uiController == null)
 				uiController = battleMap.AddComponent<BattleUIController>();
 
-			uiController.Initialize(objectManager);
+			await uiController.InitializeAsync(objectManager);
+
+			if (version != _loadVersion || SceneManager.GetActiveScene().name != BattleSceneName)
+				return;
+
+			CompleteBattleSceneTransition();
 		}
 
 		void ReleaseBattleSceneContent()
 		{
 			_loadVersion++;
 			_isLoading = false;
+			_battleSceneTransitionCompleted = false;
 
 			if (_hasMapHandle && _mapHandle.IsValid())
 				Addressables.ReleaseInstance(_mapHandle);
@@ -150,6 +174,28 @@ namespace Scenes
 				_hasMapHandle = false;
 				_mapHandle = default;
 			}
+		}
+
+		void CompleteBattleSceneTransition()
+		{
+			if (_battleSceneTransitionCompleted)
+				return;
+
+			_battleSceneTransitionCompleted = true;
+			Debug.Log("BattleScene is ready. Hiding transition overlay.");
+			SceneTransitionOverlay.Hide();
+		}
+
+		IEnumerator BattleReadyTimeout(int version)
+		{
+			yield return new WaitForSecondsRealtime(BattleReadyTimeoutSeconds);
+
+			if (version != _loadVersion || _battleSceneTransitionCompleted || SceneManager.GetActiveScene().name != BattleSceneName)
+				yield break;
+
+			_battleSceneTransitionCompleted = true;
+			Debug.LogWarning($"BattleScene readiness timed out after {BattleReadyTimeoutSeconds:0.#} seconds. Hiding transition overlay.");
+			SceneTransitionOverlay.Hide();
 		}
 	}
 }

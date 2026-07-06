@@ -56,7 +56,7 @@ namespace Scenes
 			_subscribed = true;
 		}
 
-		void OnEnterBattleReceived(S_ENTER_BATTLE packet)
+		async void OnEnterBattleReceived(S_ENTER_BATTLE packet)
 		{
 			if (packet == null || packet.Success == false)
 				return;
@@ -65,10 +65,11 @@ namespace Scenes
 				return;
 
 			Debug.Log($"Loading {BattleSceneName}. battleId={packet.BattleId}, mapId={packet.MapId}");
+			await SceneTransitionOverlay.ShowAsync();
 			SceneManager.LoadScene(BattleSceneName);
 		}
 
-		void OnBattleResultAckReceived(S_BATTLE_RESULT_ACK packet)
+		async void OnBattleResultAckReceived(S_BATTLE_RESULT_ACK packet)
 		{
 			if (packet == null)
 				return;
@@ -83,6 +84,7 @@ namespace Scenes
 				return;
 
 			Debug.Log($"Loading {FieldSceneName} after battle result ack. battleId={packet.BattleId}");
+			await SceneTransitionOverlay.ShowAsync();
 			SceneManager.LoadScene(FieldSceneName);
 		}
 	}

@@ -3,6 +3,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using Field;
+using System.Collections;
 
 namespace Scenes
 {
@@ -13,14 +14,19 @@ namespace Scenes
 		const string WorldMapAddress = "WorldMapRoot";
 		const string FieldPawnAddress = "Pawn_Beige_Ice";
 		const int WorldMapSortingOrderOffset = 1;
+		const float FieldReadyTimeoutSeconds = 5f;
 
 		static FieldSceneAddressableLoader _instance;
 
 		AsyncOperationHandle<GameObject> _fieldMapHandle;
 		AsyncOperationHandle<GameObject> _worldMapHandle;
+		FieldObjectManager _objectManager;
 		bool _hasFieldMapHandle;
 		bool _hasWorldMapHandle;
 		bool _isLoading;
+		bool _isLocalPawnReady;
+		bool _isWorldMapReady;
+		bool _fieldSceneTransitionCompleted;
 		int _loadVersion;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -76,6 +82,17 @@ namespace Scenes
 
 			_isLoading = true;
 			int version = ++_loadVersion;
+			_isLocalPawnReady = false;
+			_isWorldMapReady = false;
+			_fieldSceneTransitionCompleted = false;
+
+			await SceneTransitionOverlay.ShowAsync();
+			if (version != _loadVersion || SceneManager.GetActiveScene().name != FieldSceneName)
+			{
+				_isLoading = false;
+				return;
+			}
+			StartCoroutine(FieldReadyTimeout(version));
 
 			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldMapAddress);
 			_fieldMapHandle = handle;
@@ -95,6 +112,7 @@ namespace Scenes
 			{
 				Debug.LogError($"Failed to load addressable map: {FieldMapAddress}");
 				ReleaseHandle(handle);
+				SceneTransitionOverlay.Hide();
 				return;
 			}
 
@@ -112,7 +130,12 @@ namespace Scenes
 			if (objectManager == null)
 				objectManager = fieldMap.AddComponent<FieldObjectManager>();
 
+			_objectManager = objectManager;
+			_objectManager.LocalPawnReady -= OnLocalPawnReady;
+			_objectManager.LocalPawnReady += OnLocalPawnReady;
 			objectManager.Initialize(walkArea, FieldPawnAddress);
+			_isLocalPawnReady = objectManager.IsLocalPawnReady;
+			TryCompleteFieldSceneTransition();
 			LoadWorldMap(fieldMap, version);
 		}
 
@@ -138,6 +161,8 @@ namespace Scenes
 			{
 				Debug.LogError($"Failed to load addressable world map: {WorldMapAddress}");
 				ReleaseWorldMapHandle(handle);
+				_isWorldMapReady = true;
+				TryCompleteFieldSceneTransition();
 				return;
 			}
 
@@ -149,12 +174,18 @@ namespace Scenes
 			ApplyWorldMapSorting(worldMap);
 			SceneManager.MoveGameObjectToScene(worldMap, SceneManager.GetActiveScene());
 			Debug.Log($"Loaded addressable world map: {WorldMapAddress}");
+			_isWorldMapReady = true;
+			TryCompleteFieldSceneTransition();
 		}
 
 		void ReleaseFieldSceneAddressables()
 		{
 			_loadVersion++;
 			_isLoading = false;
+			_isLocalPawnReady = false;
+			_isWorldMapReady = false;
+			_fieldSceneTransitionCompleted = false;
+			UnsubscribeObjectManagerReady();
 
 			if (_hasFieldMapHandle && _fieldMapHandle.IsValid())
 				Addressables.ReleaseInstance(_fieldMapHandle);
@@ -166,6 +197,45 @@ namespace Scenes
 			_hasWorldMapHandle = false;
 			_fieldMapHandle = default;
 			_worldMapHandle = default;
+		}
+
+		void OnLocalPawnReady(FieldObjectManager objectManager)
+		{
+			if (objectManager != _objectManager)
+				return;
+
+			_isLocalPawnReady = true;
+			TryCompleteFieldSceneTransition();
+		}
+
+		void TryCompleteFieldSceneTransition()
+		{
+			if (_fieldSceneTransitionCompleted || _isLocalPawnReady == false || _isWorldMapReady == false)
+				return;
+
+			_fieldSceneTransitionCompleted = true;
+			Debug.Log("FieldScene is ready. Hiding transition overlay.");
+			SceneTransitionOverlay.Hide();
+		}
+
+		IEnumerator FieldReadyTimeout(int version)
+		{
+			yield return new WaitForSecondsRealtime(FieldReadyTimeoutSeconds);
+
+			if (version != _loadVersion || _fieldSceneTransitionCompleted || SceneManager.GetActiveScene().name != FieldSceneName)
+				yield break;
+
+			_fieldSceneTransitionCompleted = true;
+			Debug.LogWarning($"FieldScene readiness timed out after {FieldReadyTimeoutSeconds:0.#} seconds. Hiding transition overlay.");
+			SceneTransitionOverlay.Hide();
+		}
+
+		void UnsubscribeObjectManagerReady()
+		{
+			if (_objectManager != null)
+				_objectManager.LocalPawnReady -= OnLocalPawnReady;
+
+			_objectManager = null;
 		}
 
 		void ReleaseHandle(AsyncOperationHandle<GameObject> handle)
