@@ -264,6 +264,9 @@ namespace Battle
 			if (_battleResultReceived)
 				return;
 
+			if (_objectManager.IsInteractionLocked)
+				return;
+
 			ActionSlotBinding binding = SlotBindings[slotIndex];
 			if (binding.IsWaitCommand)
 			{
@@ -283,6 +286,9 @@ namespace Battle
 			if (_battleResultReceived)
 				return;
 
+			if (_objectManager.IsInteractionLocked)
+				return;
+
 			_objectManager.DebugEndTurn();
 			Refresh();
 		}
@@ -292,8 +298,7 @@ namespace Battle
 			if (_objectManager == null || _bound == false)
 				return;
 
-			bool isWaiting = _objectManager.ActionMode == BattleActionMode.WaitingServer;
-			bool canAct = _battleResultReceived == false && isWaiting == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
+			bool canAct = _battleResultReceived == false && _objectManager.IsInteractionLocked == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
 			TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn);
 
 			if (_turnExitButton != null)
@@ -522,7 +527,7 @@ namespace Battle
 				canMove = pawn.CanMove ? "Yes" : "No";
 			}
 
-			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}\nAP: {ap}\nMove: {canMove}\nLog:\n{_objectManager.BattleLogText}";
+			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}\nMoving: {(_objectManager.IsAnimatingMove ? "Yes" : "No")}\nAP: {ap}\nMove: {canMove}\nLog:\n{_objectManager.BattleLogText}";
 		}
 
 		string BuildTileInfoText(bool hasHoveredTile, AxialCoord axial)

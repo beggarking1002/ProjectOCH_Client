@@ -28,6 +28,108 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 930100000000000002}
+  - {fileID: 930200000000000002}
+  - {fileID: 930300000000000002}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &930100000000000001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1133908017591881960}
+    m_Modifications:
+    - target: {fileID: 930000000000001001, guid: 9f4d2bc8c6f04d8eaf8d733a55b7f145, type: 3}
+      propertyPath: m_Name
+      value: PawnTeamRing
+      objectReference: {fileID: 0}
+    - target: {fileID: 930000000000001002, guid: 9f4d2bc8c6f04d8eaf8d733a55b7f145, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 930000000000001002, guid: 9f4d2bc8c6f04d8eaf8d733a55b7f145, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 930000000000001002, guid: 9f4d2bc8c6f04d8eaf8d733a55b7f145, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f4d2bc8c6f04d8eaf8d733a55b7f145, type: 3}
+--- !u!4 &930100000000000002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 930000000000001002, guid: 9f4d2bc8c6f04d8eaf8d733a55b7f145, type: 3}
+  m_PrefabInstance: {fileID: 930100000000000001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &930200000000000001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1133908017591881960}
+    m_Modifications:
+    - target: {fileID: 910000000000001001, guid: 588cc2bc16077d44982345ddd49803fa, type: 3}
+      propertyPath: m_Name
+      value: PawnStatusWorldUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 910000000000001002, guid: 588cc2bc16077d44982345ddd49803fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 910000000000001002, guid: 588cc2bc16077d44982345ddd49803fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 910000000000001002, guid: 588cc2bc16077d44982345ddd49803fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 588cc2bc16077d44982345ddd49803fa, type: 3}
+--- !u!4 &930200000000000002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 910000000000001002, guid: 588cc2bc16077d44982345ddd49803fa, type: 3}
+  m_PrefabInstance: {fileID: 930200000000000001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &930300000000000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 930300000000000002}
+  m_Layer: 0
+  m_Name: visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &930300000000000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930300000000000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1133908017591881960}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

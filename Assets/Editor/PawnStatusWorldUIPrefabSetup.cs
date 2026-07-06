@@ -6,7 +6,7 @@ using UnityEngine;
 internal static class PawnStatusWorldUIPrefabSetup
 {
     private const string StatusPrefabPath = "Assets/@Resources/Prefab/UI/PawnStatusWorldUI.prefab";
-    private const string PawnPrefabFolder = "Assets/@Resources/Prefab/Pawn";
+    private const string PawnBasePrefabPath = "Assets/@Resources/Prefab/Pawn/PawnBase.prefab";
     private const string StatusObjectName = "PawnStatusWorldUI";
     private const int BackgroundSortingOrder = 38;
     private const int FillSortingOrder = 39;
@@ -22,7 +22,7 @@ internal static class PawnStatusWorldUIPrefabSetup
         EditorApplication.delayCall += () =>
         {
             GameObject statusPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(StatusPrefabPath);
-            if (HasConfiguredStatusPrefab(statusPrefab) && AllPawnPrefabsUseStatusPrefab(statusPrefab))
+            if (HasConfiguredStatusPrefab(statusPrefab) && PawnBaseUsesStatusPrefab(statusPrefab))
                 return;
 
             SetupPawnStatusWorldUI();
@@ -36,12 +36,7 @@ internal static class PawnStatusWorldUIPrefabSetup
         if (statusPrefab == null)
             return;
 
-        string[] pawnPrefabGuids = AssetDatabase.FindAssets("Pawn_ t:Prefab", new[] { PawnPrefabFolder });
-        foreach (string guid in pawnPrefabGuids)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            AttachStatusPrefabToPawn(path, statusPrefab);
-        }
+        AttachStatusPrefabToPawnBase(statusPrefab);
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -60,24 +55,14 @@ internal static class PawnStatusWorldUIPrefabSetup
             && HasTextMesh(prefab.transform, "ArmorBarText");
     }
 
-    private static bool AllPawnPrefabsUseStatusPrefab(GameObject statusPrefab)
+    private static bool PawnBaseUsesStatusPrefab(GameObject statusPrefab)
     {
         if (statusPrefab == null)
             return false;
 
-        string[] pawnPrefabGuids = AssetDatabase.FindAssets("Pawn_ t:Prefab", new[] { PawnPrefabFolder });
-        if (pawnPrefabGuids.Length == 0)
-            return false;
-
-        foreach (string guid in pawnPrefabGuids)
-        {
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guid));
-            PawnStatusWorldUI statusUi = prefab != null ? prefab.GetComponentInChildren<PawnStatusWorldUI>(true) : null;
-            if (statusUi == null || IsStatusPrefabInstance(statusUi.gameObject, statusPrefab) == false)
-                return false;
-        }
-
-        return true;
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(PawnBasePrefabPath);
+        PawnStatusWorldUI statusUi = prefab != null ? prefab.GetComponentInChildren<PawnStatusWorldUI>(true) : null;
+        return statusUi != null && IsStatusPrefabInstance(statusUi.gameObject, statusPrefab);
     }
 
     private static GameObject EnsureStatusPrefab()
@@ -115,12 +100,12 @@ internal static class PawnStatusWorldUIPrefabSetup
         return savedPrefab;
     }
 
-    private static void AttachStatusPrefabToPawn(string pawnPrefabPath, GameObject statusPrefab)
+    private static void AttachStatusPrefabToPawnBase(GameObject statusPrefab)
     {
-        if (string.IsNullOrWhiteSpace(pawnPrefabPath) || statusPrefab == null)
+        if (statusPrefab == null)
             return;
 
-        GameObject pawnRoot = PrefabUtility.LoadPrefabContents(pawnPrefabPath);
+        GameObject pawnRoot = PrefabUtility.LoadPrefabContents(PawnBasePrefabPath);
         if (pawnRoot == null)
             return;
 
@@ -141,7 +126,7 @@ internal static class PawnStatusWorldUIPrefabSetup
             statusInstance.transform.localRotation = Quaternion.identity;
             statusInstance.transform.localScale = Vector3.one;
 
-            PrefabUtility.SaveAsPrefabAsset(pawnRoot, pawnPrefabPath);
+            PrefabUtility.SaveAsPrefabAsset(pawnRoot, PawnBasePrefabPath);
         }
         finally
         {

@@ -17,9 +17,12 @@ namespace Battle
 	public sealed class BattleObjectManager : MonoBehaviour
 	{
 		const int MaxBattleLogLines = 6;
+		const string BattlePawnBaseAddress = "PawnBase";
+		const string BattlePawnVisualRootName = "visual";
 
 		readonly Dictionary<ulong, BattlePawnController> _pawns = new Dictionary<ulong, BattlePawnController>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
+		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnVisualHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
 		readonly Queue<string> _battleLogLines = new Queue<string>();
 
@@ -30,12 +33,15 @@ namespace Battle
 		BattleActionMode _actionMode = BattleActionMode.Move;
 		bool _destroyed;
 		bool _missingCameraLogged;
+		bool _isAnimatingMove;
 
 		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
 		public ulong BattleId => _battleId;
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
+		public bool IsAnimatingMove => _isAnimatingMove;
+		public bool IsInteractionLocked => _isAnimatingMove || _actionMode == BattleActionMode.WaitingServer;
 		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0
 			&& _localPawnIds.Contains(_currentTurnPawnId)
 			&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawnController currentTurnPawn)
@@ -60,9 +66,9 @@ namespace Battle
 
 		public void SetActionMode(BattleActionMode mode)
 		{
-			if (_actionMode == BattleActionMode.WaitingServer)
+			if (IsInteractionLocked)
 			{
-				Debug.Log("Cannot change battle action mode while waiting for server.");
+				Debug.Log("Cannot change battle action mode while battle interaction is locked.");
 				return;
 			}
 
@@ -72,9 +78,9 @@ namespace Battle
 
 		public void DebugEndTurn()
 		{
-			if (_actionMode == BattleActionMode.WaitingServer)
+			if (IsInteractionLocked)
 			{
-				Debug.Log("Cannot end turn while waiting for server.");
+				Debug.Log("Cannot end turn while battle interaction is locked.");
 				return;
 			}
 
@@ -149,6 +155,7 @@ namespace Battle
 		void OnDestroy()
 		{
 			_destroyed = true;
+			_isAnimatingMove = false;
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -165,6 +172,7 @@ namespace Battle
 		{
 			_battleId = 0;
 			_currentTurnPawnId = 1;
+			_isAnimatingMove = false;
 			_localPawnIds.Clear();
 
 			await SpawnPawnAsync(1, true, new AxialCoord(-2, -2));
@@ -187,6 +195,7 @@ namespace Battle
 			_battleLogLines.Clear();
 			_battleId = packet.BattleId;
 			_currentTurnPawnId = packet.CurrentTurnPawnId;
+			_isAnimatingMove = false;
 
 			foreach (BattlePawnInfo pawnInfo in packet.AlliedPawns)
 				await SpawnPawnAsync(pawnInfo.PawnId, true, ToBattleAxial(pawnInfo.Axial), pawnInfo);
@@ -206,8 +215,8 @@ namespace Battle
 				return null;
 			}
 
-			string pawnAddress = GetPawnAddress(info);
-			if (string.IsNullOrWhiteSpace(pawnAddress))
+			string visualAddress = GetPawnAddress(info);
+			if (string.IsNullOrWhiteSpace(visualAddress))
 			{
 				Debug.LogError($"{nameof(BattleObjectManager)} requires a pawn address.");
 				return null;
@@ -219,44 +228,76 @@ namespace Battle
 				return existing;
 			}
 
-			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(pawnAddress);
-			_pawnHandles[pawnId] = handle;
+			AsyncOperationHandle<GameObject> baseHandle = Addressables.InstantiateAsync(BattlePawnBaseAddress);
+			_pawnHandles[pawnId] = baseHandle;
 
-			await handle.Task;
+			await baseHandle.Task;
 
 			if (_destroyed)
 			{
-				if (handle.IsValid())
-					Addressables.ReleaseInstance(handle);
+				if (baseHandle.IsValid())
+					Addressables.ReleaseInstance(baseHandle);
 				return null;
 			}
 
-			if (handle.Status != AsyncOperationStatus.Succeeded)
+			if (baseHandle.Status != AsyncOperationStatus.Succeeded)
 			{
-				Debug.LogError($"Failed to load battle pawn addressable: {pawnAddress}");
-				if (handle.IsValid())
-					Addressables.ReleaseInstance(handle);
+				Debug.LogError($"Failed to load battle pawn base addressable: {BattlePawnBaseAddress}");
+				if (baseHandle.IsValid())
+					Addressables.ReleaseInstance(baseHandle);
 				_pawnHandles.Remove(pawnId);
 				return null;
 			}
 
-			GameObject pawnObject = handle.Result;
-			pawnObject.name = isMine ? $"BattlePawn_My_{pawnId}_{pawnAddress}" : $"BattlePawn_Enemy_{pawnId}_{pawnAddress}";
+			GameObject pawnObject = baseHandle.Result;
+			pawnObject.name = isMine ? $"BattlePawn_My_{pawnId}_{visualAddress}" : $"BattlePawn_Enemy_{pawnId}_{visualAddress}";
 			SceneManager.MoveGameObjectToScene(pawnObject, gameObject.scene);
+
+			Transform visualRoot = FindVisualRoot(pawnObject.transform);
+			if (visualRoot == null)
+			{
+				Debug.LogError($"{BattlePawnBaseAddress} requires a child named '{BattlePawnVisualRootName}'.");
+				ReleasePawnHandles(pawnId);
+				return null;
+			}
+
+			AsyncOperationHandle<GameObject> visualHandle = Addressables.InstantiateAsync(visualAddress);
+			_pawnVisualHandles[pawnId] = visualHandle;
+			await visualHandle.Task;
+
+			if (_destroyed)
+			{
+				ReleasePawnHandles(pawnId);
+				return null;
+			}
+
+			if (visualHandle.Status != AsyncOperationStatus.Succeeded)
+			{
+				Debug.LogError($"Failed to load battle pawn visual addressable: {visualAddress}");
+				ReleasePawnHandles(pawnId);
+				return null;
+			}
+
+			GameObject visualObject = visualHandle.Result;
+			visualObject.name = visualAddress;
+			SceneManager.MoveGameObjectToScene(visualObject, gameObject.scene);
+			visualObject.transform.SetParent(visualRoot, false);
+			visualObject.transform.localPosition = Vector3.zero;
+			visualObject.transform.localRotation = Quaternion.identity;
+			visualObject.transform.localScale = Vector3.one;
 
 			BattlePawnController pawn = pawnObject.GetComponent<BattlePawnController>();
 			if (pawn == null)
 				pawn = pawnObject.AddComponent<BattlePawnController>();
 
-			Color tint = isMine ? Color.white : new Color(1f, 0.75f, 0.75f, 1f);
-			pawn.Initialize(pawnId, isMine, _mapGrid, axial, tint, info);
+			pawn.Initialize(pawnId, isMine, _mapGrid, axial, Color.white, info);
 
 			_pawns[pawnId] = pawn;
 			if (isMine)
 				_localPawnIds.Add(pawnId);
 
 			RefreshTurnIndicators();
-			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, address={pawnAddress}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
+			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, base={BattlePawnBaseAddress}, visual={visualAddress}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
 			return pawn;
 		}
 
@@ -299,6 +340,18 @@ namespace Battle
 		{
 			_pawns.Remove(pawnId);
 			_localPawnIds.Remove(pawnId);
+			ReleasePawnHandles(pawnId);
+		}
+
+		void ReleasePawnHandles(ulong pawnId)
+		{
+			if (_pawnVisualHandles.TryGetValue(pawnId, out AsyncOperationHandle<GameObject> visualHandle))
+			{
+				if (visualHandle.IsValid())
+					Addressables.ReleaseInstance(visualHandle);
+
+				_pawnVisualHandles.Remove(pawnId);
+			}
 
 			if (_pawnHandles.TryGetValue(pawnId, out AsyncOperationHandle<GameObject> handle))
 			{
@@ -311,6 +364,12 @@ namespace Battle
 
 		void ReleasePawns()
 		{
+			foreach (AsyncOperationHandle<GameObject> handle in _pawnVisualHandles.Values)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+			}
+
 			foreach (AsyncOperationHandle<GameObject> handle in _pawnHandles.Values)
 			{
 				if (handle.IsValid())
@@ -318,8 +377,25 @@ namespace Battle
 			}
 
 			_pawns.Clear();
+			_pawnVisualHandles.Clear();
 			_pawnHandles.Clear();
 			_localPawnIds.Clear();
+		}
+
+		static Transform FindVisualRoot(Transform root)
+		{
+			Transform direct = root.Find(BattlePawnVisualRootName);
+			if (direct != null)
+				return direct;
+
+			Transform[] children = root.GetComponentsInChildren<Transform>(true);
+			for (int i = 0; i < children.Length; i++)
+			{
+				if (children[i] != root && children[i].name == BattlePawnVisualRootName)
+					return children[i];
+			}
+
+			return null;
 		}
 
 		void RefreshTurnIndicators()
@@ -335,6 +411,9 @@ namespace Battle
 
 		void HandleMouseInput()
 		{
+			if (IsInteractionLocked)
+				return;
+
 			if (_mapGrid == null || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
@@ -401,12 +480,19 @@ namespace Battle
 				return;
 			}
 
-			myPawn.SetAxial(axial);
+			_isAnimatingMove = true;
+			myPawn.MoveToAxial(axial, () =>
+			{
+				_isAnimatingMove = false;
+			});
 			Debug.Log($"Move debug battle pawn to tile center. axial={axial}, world={myPawn.transform.position}");
 		}
 
 		void HandleSkillInput(AxialCoord targetAxial)
 		{
+			if (IsInteractionLocked)
+				return;
+
 			int skillSlot = GetSkillSlot(_actionMode);
 			if (skillSlot <= 0)
 			{
@@ -496,25 +582,38 @@ namespace Battle
 
 			if (packet.Success == false)
 			{
+				_isAnimatingMove = false;
 				_actionMode = BattleActionMode.Move;
 				Debug.LogWarning($"Battle move rejected. pawnId={packet.PawnId}, result={packet.Result}, reason={packet.Reason}");
 				return;
 			}
 
 			if (_pawns.TryGetValue(packet.PawnId, out BattlePawnController pawn) == false)
+			{
+				_isAnimatingMove = false;
+				_actionMode = BattleActionMode.Move;
+				Debug.LogWarning($"Cannot apply S_BATTLE_MOVE because pawn is missing. pawnId={packet.PawnId}");
 				return;
+			}
 
-			if (packet.Target != null)
-				pawn.SetAxial(ToBattleAxial(packet.Target));
+			AxialCoord targetAxial = packet.Target != null ? ToBattleAxial(packet.Target) : pawn.Axial;
+			ulong nextTurnPawnId = packet.NextTurnPawnId;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
 			ApplyTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove);
 			AppendBattleLogs(packet.Logs);
 
-			_currentTurnPawnId = packet.NextTurnPawnId;
-			_actionMode = BattleActionMode.Move;
+			_isAnimatingMove = true;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={pawn.Axial}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
+			pawn.MoveToAxial(targetAxial, () =>
+			{
+				_isAnimatingMove = false;
+				_currentTurnPawnId = nextTurnPawnId;
+				_actionMode = BattleActionMode.Move;
+				RefreshTurnIndicators();
+			});
+
+			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={targetAxial}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={nextTurnPawnId}");
 		}
 
 		void OnBattleSkillReceived(S_BATTLE_SKILL packet)
