@@ -566,7 +566,7 @@ namespace Battle
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
 			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
 			string type = $"{(pawn.IsMelee ? "Melee" : "Ranged")}, {(pawn.IsShieldUnit ? "Shield" : "NoShield")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nType: {type}\nAxial: {pawn.Axial}\nHP: {hp}\nArmor: {armor}\nAP: {pawn.CurrentAp}\nState: {flags}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nType: {type}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nArmor: {armor}\nAP: {pawn.CurrentAp}\nState: {flags}";
 		}
 
 		static bool IsActionAvailable(ActionSlotBinding binding, BattlePawnController pawn)

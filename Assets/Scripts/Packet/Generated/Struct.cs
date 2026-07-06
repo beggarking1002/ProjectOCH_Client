@@ -30,7 +30,7 @@ namespace Protocol {
             "GAEgASgEEikKC29iamVjdF90eXBlGAIgASgOMhQuUHJvdG9jb2wuT2JqZWN0",
             "VHlwZRItCg1jcmVhdHVyZV90eXBlGAMgASgOMhYuUHJvdG9jb2wuQ3JlYXR1",
             "cmVUeXBlEiUKCHBvc2l0aW9uGAQgASgLMhMuUHJvdG9jb2wuVmVjMkZpeGVk",
-            "Iu4CCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVy",
+            "IqkDCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVy",
             "X2lkGAIgASgEEicKCnBhd25fY2xhc3MYAyABKA4yEy5Qcm90b2NvbC5QYXdu",
             "Q2xhc3MSIwoFYXhpYWwYBCABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEgoK",
             "AmhwGAUgASgFEg4KBm1heF9ocBgGIAEoBRISCgptb3ZlX3JhbmdlGAcgASgF",
@@ -38,26 +38,29 @@ namespace Protocol {
             "X2FwGAogASgFEhAKCGNhbl9tb3ZlGAsgASgIEiEKGXVzZWRfc3ViX2FjdGlv",
             "bl90aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgNIAEoCBIWCg5p",
             "c19zaGllbGRfdW5pdBgOIAEoCBIQCghpc19tZWxlZRgPIAEoCBIPCgdpc19k",
-            "ZWFkGBAgASgIIq4BCg9CYXR0bGVQYXduRGVsdGESDwoHcGF3bl9pZBgBIAEo",
-            "BBIKCgJocBgCIAEoBRINCgVhcm1vchgDIAEoBRISCgpjdXJyZW50X2FwGAQg",
-            "ASgFEhAKCGNhbl9tb3ZlGAUgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlz",
-            "X3R1cm4YBiABKAgSFQoNdXNlZF91bHRpbWF0ZRgHIAEoCBIPCgdpc19kZWFk",
-            "GAggASgIIpECCg9CYXR0bGVBY3Rpb25Mb2cSGAoQYXR0YWNrZXJfcGF3bl9p",
-            "ZBgBIAEoBBIYChBkZWZlbmRlcl9wYXduX2lkGAIgASgEEhIKCnNraWxsX3Ns",
-            "b3QYAyABKAUSEwoLYWN0aW9uX3R5cGUYBCABKAkSDgoGZGFtYWdlGAUgASgF",
-            "EhMKC2lzX2NyaXRpY2FsGAYgASgIEhEKCWlzX2V2YWRlZBgHIAEoCBISCgpp",
-            "c19ndWFyZGVkGAggASgIEhoKEmlzX3BlcmZlY3RfZ3VhcmRlZBgJIAEoCBIS",
-            "Cgppc19jb3VudGVyGAogASgIEhAKCGhwX2FmdGVyGAsgASgFEhMKC2FybW9y",
-            "X2FmdGVyGAwgASgFYgZwcm90bzM="));
+            "ZWFkGBAgASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YESABKA4yHy5Qcm90b2Nv",
+            "bC5CYXR0bGVGYWNpbmdEaXJlY3Rpb24i6QEKD0JhdHRsZVBhd25EZWx0YRIP",
+            "CgdwYXduX2lkGAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgFEhIK",
+            "CmN1cnJlbnRfYXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNlZF9z",
+            "dWJfYWN0aW9uX3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRlGAcg",
+            "ASgIEg8KB2lzX2RlYWQYCCABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgJIAEo",
+            "DjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbiKpAgoPQmF0dGxl",
+            "QWN0aW9uTG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5k",
+            "ZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlv",
+            "bl90eXBlGAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgG",
+            "IAEoCBIRCglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIa",
+            "ChJpc19wZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEo",
+            "CBIQCghocF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5p",
+            "c19iYWNrX2F0dGFjaxgNIAEoCGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.Vec2Fixed), global::Protocol.Vec2Fixed.Parser, new[]{ "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AxialCoord), global::Protocol.AxialCoord.Parser, new[]{ "Q", "R" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Position" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsShieldUnit", "IsMelee", "IsDead" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsShieldUnit", "IsMelee", "IsDead", "FacingDirection" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
           }));
     }
     #endregion
@@ -875,6 +878,7 @@ namespace Protocol {
       isShieldUnit_ = other.isShieldUnit_;
       isMelee_ = other.isMelee_;
       isDead_ = other.isDead_;
+      facingDirection_ = other.facingDirection_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1076,6 +1080,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "facing_direction" field.</summary>
+    public const int FacingDirectionFieldNumber = 17;
+    private global::Protocol.BattleFacingDirection facingDirection_ = global::Protocol.BattleFacingDirection.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.BattleFacingDirection FacingDirection {
+      get { return facingDirection_; }
+      set {
+        facingDirection_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1107,6 +1123,7 @@ namespace Protocol {
       if (IsShieldUnit != other.IsShieldUnit) return false;
       if (IsMelee != other.IsMelee) return false;
       if (IsDead != other.IsDead) return false;
+      if (FacingDirection != other.FacingDirection) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1130,6 +1147,7 @@ namespace Protocol {
       if (IsShieldUnit != false) hash ^= IsShieldUnit.GetHashCode();
       if (IsMelee != false) hash ^= IsMelee.GetHashCode();
       if (IsDead != false) hash ^= IsDead.GetHashCode();
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) hash ^= FacingDirection.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1212,6 +1230,10 @@ namespace Protocol {
         output.WriteRawTag(128, 1);
         output.WriteBool(IsDead);
       }
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        output.WriteRawTag(136, 1);
+        output.WriteEnum((int) FacingDirection);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1286,6 +1308,10 @@ namespace Protocol {
         output.WriteRawTag(128, 1);
         output.WriteBool(IsDead);
       }
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        output.WriteRawTag(136, 1);
+        output.WriteEnum((int) FacingDirection);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1343,6 +1369,9 @@ namespace Protocol {
       }
       if (IsDead != false) {
         size += 2 + 1;
+      }
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) FacingDirection);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1406,6 +1435,9 @@ namespace Protocol {
       }
       if (other.IsDead != false) {
         IsDead = other.IsDead;
+      }
+      if (other.FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        FacingDirection = other.FacingDirection;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1487,6 +1519,10 @@ namespace Protocol {
           }
           case 128: {
             IsDead = input.ReadBool();
+            break;
+          }
+          case 136: {
+            FacingDirection = (global::Protocol.BattleFacingDirection) input.ReadEnum();
             break;
           }
         }
@@ -1571,6 +1607,10 @@ namespace Protocol {
             IsDead = input.ReadBool();
             break;
           }
+          case 136: {
+            FacingDirection = (global::Protocol.BattleFacingDirection) input.ReadEnum();
+            break;
+          }
         }
       }
     }
@@ -1620,6 +1660,7 @@ namespace Protocol {
       usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
       usedUltimate_ = other.usedUltimate_;
       isDead_ = other.isDead_;
+      facingDirection_ = other.facingDirection_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1725,6 +1766,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "facing_direction" field.</summary>
+    public const int FacingDirectionFieldNumber = 9;
+    private global::Protocol.BattleFacingDirection facingDirection_ = global::Protocol.BattleFacingDirection.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.BattleFacingDirection FacingDirection {
+      get { return facingDirection_; }
+      set {
+        facingDirection_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1748,6 +1801,7 @@ namespace Protocol {
       if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
       if (UsedUltimate != other.UsedUltimate) return false;
       if (IsDead != other.IsDead) return false;
+      if (FacingDirection != other.FacingDirection) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1763,6 +1817,7 @@ namespace Protocol {
       if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
       if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
       if (IsDead != false) hash ^= IsDead.GetHashCode();
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) hash ^= FacingDirection.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1813,6 +1868,10 @@ namespace Protocol {
         output.WriteRawTag(64);
         output.WriteBool(IsDead);
       }
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        output.WriteRawTag(72);
+        output.WriteEnum((int) FacingDirection);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1855,6 +1914,10 @@ namespace Protocol {
         output.WriteRawTag(64);
         output.WriteBool(IsDead);
       }
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        output.WriteRawTag(72);
+        output.WriteEnum((int) FacingDirection);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1888,6 +1951,9 @@ namespace Protocol {
       }
       if (IsDead != false) {
         size += 1 + 1;
+      }
+      if (FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FacingDirection);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1924,6 +1990,9 @@ namespace Protocol {
       }
       if (other.IsDead != false) {
         IsDead = other.IsDead;
+      }
+      if (other.FacingDirection != global::Protocol.BattleFacingDirection.None) {
+        FacingDirection = other.FacingDirection;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1972,6 +2041,10 @@ namespace Protocol {
             IsDead = input.ReadBool();
             break;
           }
+          case 72: {
+            FacingDirection = (global::Protocol.BattleFacingDirection) input.ReadEnum();
+            break;
+          }
         }
       }
     #endif
@@ -2017,6 +2090,10 @@ namespace Protocol {
           }
           case 64: {
             IsDead = input.ReadBool();
+            break;
+          }
+          case 72: {
+            FacingDirection = (global::Protocol.BattleFacingDirection) input.ReadEnum();
             break;
           }
         }
@@ -2072,6 +2149,7 @@ namespace Protocol {
       isCounter_ = other.isCounter_;
       hpAfter_ = other.hpAfter_;
       armorAfter_ = other.armorAfter_;
+      isBackAttack_ = other.isBackAttack_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2225,6 +2303,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "is_back_attack" field.</summary>
+    public const int IsBackAttackFieldNumber = 13;
+    private bool isBackAttack_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsBackAttack {
+      get { return isBackAttack_; }
+      set {
+        isBackAttack_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2252,6 +2342,7 @@ namespace Protocol {
       if (IsCounter != other.IsCounter) return false;
       if (HpAfter != other.HpAfter) return false;
       if (ArmorAfter != other.ArmorAfter) return false;
+      if (IsBackAttack != other.IsBackAttack) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2271,6 +2362,7 @@ namespace Protocol {
       if (IsCounter != false) hash ^= IsCounter.GetHashCode();
       if (HpAfter != 0) hash ^= HpAfter.GetHashCode();
       if (ArmorAfter != 0) hash ^= ArmorAfter.GetHashCode();
+      if (IsBackAttack != false) hash ^= IsBackAttack.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2337,6 +2429,10 @@ namespace Protocol {
         output.WriteRawTag(96);
         output.WriteInt32(ArmorAfter);
       }
+      if (IsBackAttack != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(IsBackAttack);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2395,6 +2491,10 @@ namespace Protocol {
         output.WriteRawTag(96);
         output.WriteInt32(ArmorAfter);
       }
+      if (IsBackAttack != false) {
+        output.WriteRawTag(104);
+        output.WriteBool(IsBackAttack);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2440,6 +2540,9 @@ namespace Protocol {
       }
       if (ArmorAfter != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ArmorAfter);
+      }
+      if (IsBackAttack != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2488,6 +2591,9 @@ namespace Protocol {
       }
       if (other.ArmorAfter != 0) {
         ArmorAfter = other.ArmorAfter;
+      }
+      if (other.IsBackAttack != false) {
+        IsBackAttack = other.IsBackAttack;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2552,6 +2658,10 @@ namespace Protocol {
             ArmorAfter = input.ReadInt32();
             break;
           }
+          case 104: {
+            IsBackAttack = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -2613,6 +2723,10 @@ namespace Protocol {
           }
           case 96: {
             ArmorAfter = input.ReadInt32();
+            break;
+          }
+          case 104: {
+            IsBackAttack = input.ReadBool();
             break;
           }
         }

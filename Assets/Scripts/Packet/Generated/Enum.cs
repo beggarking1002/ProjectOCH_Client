@@ -45,10 +45,13 @@ namespace Protocol {
             "VkVfUkVTVUxUX09VVF9PRl9SQU5HRRAFEh8KG0JBVFRMRV9NT1ZFX1JFU1VM",
             "VF9PQ0NVUElFRBAGEiUKIUJBVFRMRV9NT1ZFX1JFU1VMVF9JTlZBTElEX0JB",
             "VFRMRRAHEiMKH0JBVFRMRV9NT1ZFX1JFU1VMVF9JTlZBTElEX1BBV04QCBIi",
-            "Ch5CQVRUTEVfTU9WRV9SRVNVTFRfQ0FOTk9UX01PVkUQCWIGcHJvdG8z"));
+            "Ch5CQVRUTEVfTU9WRV9SRVNVTFRfQ0FOTk9UX01PVkUQCSp+ChVCYXR0bGVG",
+            "YWNpbmdEaXJlY3Rpb24SIAocQkFUVExFX0ZBQ0lOR19ESVJFQ1RJT05fTk9O",
+            "RRAAEiAKHEJBVFRMRV9GQUNJTkdfRElSRUNUSU9OX0xFRlQQARIhCh1CQVRU",
+            "TEVfRkFDSU5HX0RJUkVDVElPTl9SSUdIVBACYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), }, null, null));
     }
     #endregion
 
@@ -94,6 +97,12 @@ namespace Protocol {
     [pbr::OriginalName("BATTLE_MOVE_RESULT_INVALID_BATTLE")] InvalidBattle = 7,
     [pbr::OriginalName("BATTLE_MOVE_RESULT_INVALID_PAWN")] InvalidPawn = 8,
     [pbr::OriginalName("BATTLE_MOVE_RESULT_CANNOT_MOVE")] CannotMove = 9,
+  }
+
+  public enum BattleFacingDirection {
+    [pbr::OriginalName("BATTLE_FACING_DIRECTION_NONE")] None = 0,
+    [pbr::OriginalName("BATTLE_FACING_DIRECTION_LEFT")] Left = 1,
+    [pbr::OriginalName("BATTLE_FACING_DIRECTION_RIGHT")] Right = 2,
   }
 
   #endregion

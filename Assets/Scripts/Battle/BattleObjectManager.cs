@@ -769,6 +769,8 @@ namespace Battle
 				flags += " PERFECT";
 			if (log.IsCounter)
 				flags += " COUNTER";
+			if (log.IsBackAttack)
+				flags += " BACK";
 
 			return $"{action}: {log.AttackerPawnId}->{log.DefenderPawnId} dmg={log.Damage} hp={log.HpAfter} armor={log.ArmorAfter}{flags}";
 		}

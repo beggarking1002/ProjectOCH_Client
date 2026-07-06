@@ -43,6 +43,7 @@ namespace Battle
 		public bool IsShieldUnit => Info != null && Info.IsShieldUnit;
 		public bool IsMelee => Info == null || Info.IsMelee;
 		public bool IsDead => Info != null && Info.IsDead;
+		public Protocol.BattleFacingDirection FacingDirection => Info != null ? Info.FacingDirection : Protocol.BattleFacingDirection.None;
 		public bool IsMoving { get; private set; }
 
 		void Awake()
@@ -88,6 +89,7 @@ namespace Battle
 			SetTurnIndicatorVisible(false);
 			RefreshStatusWorldUi();
 			SetAxial(axial);
+			ApplyFacingDirection(FacingDirection);
 			ApplyDeadVisualState();
 		}
 
@@ -105,7 +107,9 @@ namespace Battle
 			if (_mapGrid == null)
 				return;
 
-			transform.position = _mapGrid.AxialToWorldCenter(axial, transform.position.z);
+			Vector3 target = _mapGrid.AxialToWorldCenter(axial, transform.position.z);
+			UpdateFacingForMove(target);
+			transform.position = target;
 		}
 
 		public void MoveToAxial(AxialCoord axial, Action onComplete = null)
@@ -139,6 +143,7 @@ namespace Battle
 			Vector3 start = transform.position;
 			Vector3 target = _mapGrid.AxialToWorldCenter(targetAxial, transform.position.z);
 			SetAxialState(targetAxial);
+			UpdateFacingForMove(target);
 
 			float duration = GetMoveDuration(startAxial, targetAxial);
 			if (duration <= 0f || Vector3.Distance(start, target) <= 0.001f)
@@ -195,6 +200,50 @@ namespace Battle
 				_animator.SetBool(IsMovingHash, isMoving);
 		}
 
+		void UpdateFacingForMove(Vector3 targetWorldPosition)
+		{
+			if (ApplyFacingDirection(FacingDirection))
+				return;
+
+			UpdateSpriteDirectionFromTarget(targetWorldPosition);
+		}
+
+		bool ApplyFacingDirection(Protocol.BattleFacingDirection direction)
+		{
+			if (_spriteRenderer == null)
+				_spriteRenderer = FindVisualSpriteRenderer();
+
+			if (_spriteRenderer == null)
+				return false;
+
+			switch (direction)
+			{
+				case Protocol.BattleFacingDirection.Left:
+					_spriteRenderer.flipX = true;
+					return true;
+				case Protocol.BattleFacingDirection.Right:
+					_spriteRenderer.flipX = false;
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		void UpdateSpriteDirectionFromTarget(Vector3 targetWorldPosition)
+		{
+			if (_spriteRenderer == null)
+				_spriteRenderer = FindVisualSpriteRenderer();
+
+			if (_spriteRenderer == null)
+				return;
+
+			float deltaX = targetWorldPosition.x - transform.position.x;
+			if (Mathf.Abs(deltaX) <= 0.001f)
+				return;
+
+			_spriteRenderer.flipX = deltaX < 0f;
+		}
+
 		public void ApplyHp(int hp)
 		{
 			EnsureInfo();
@@ -215,6 +264,10 @@ namespace Battle
 			Info.UsedSubActionThisTurn = delta.UsedSubActionThisTurn;
 			Info.UsedUltimate = delta.UsedUltimate;
 			Info.IsDead = delta.IsDead;
+			if (delta.FacingDirection != Protocol.BattleFacingDirection.None)
+				Info.FacingDirection = delta.FacingDirection;
+
+			ApplyFacingDirection(FacingDirection);
 			RefreshStatusWorldUi();
 			ApplyDeadVisualState();
 		}
