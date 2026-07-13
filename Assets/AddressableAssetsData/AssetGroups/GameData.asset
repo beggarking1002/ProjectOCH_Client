@@ -10,50 +10,62 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: UI
+  m_Name: GameData
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: UI
-  m_GUID: 13e676e0aeaaafc4d878556badfecc3e
+  m_GroupName: GameData
+  m_GUID: ce05022e39832964da2a870109224207
   m_SerializeEntries:
-  - m_GUID: 588cc2bc16077d44982345ddd49803fa
-    m_Address: PawnStatusWorldUI
+  - m_GUID: 00d70fa550b3cd145bd213d6713df958
+    m_Address: BattleSkillView
     m_ReadOnly: 0
     m_SerializedLabels:
-    - UI
+    - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9f4d2bc8c6f04d8eaf8d733a55b7f145
-    m_Address: PawnTeamRing
+  - m_GUID: 05f972077b004da408ec0e13ae5e398c
+    m_Address: BattleSkillEffectParam
     m_ReadOnly: 0
     m_SerializedLabels:
-    - UI
+    - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b28ad33b19a04da3a38e2ae4bcf46fd0
-    m_Address: BattleResultUI
+  - m_GUID: 53f859fca2a1d3645828512143fa4d2b
+    m_Address: ClassKey
     m_ReadOnly: 0
     m_SerializedLabels:
-    - UI
+    - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d0c9e4b5a08b4a719842fa39ef08cda1
-    m_Address: SceneTransitionOverlay
+  - m_GUID: 6442d38a2d097f3449512435a50cb0c6
+    m_Address: EnumDef
     m_ReadOnly: 0
     m_SerializedLabels:
-    - UI
+    - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f17a4bb4a87f4e2aa9dc3c8ce4f9df31
-    m_Address: FieldBattleInviteUI
+  - m_GUID: 7853aaf34e2a6cc49b8814d53cf77493
+    m_Address: DisplayText
     m_ReadOnly: 0
     m_SerializedLabels:
-    - UI
+    - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fb86b06d79d9ce345ba2692fb6f3db66
-    m_Address: BattleSceneUI
+  - m_GUID: 9b1d0dc6c8d53074eb5b003e68829ea1
+    m_Address: PawnTemplate
     m_ReadOnly: 0
     m_SerializedLabels:
-    - UI
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d97972b8c5b50ac4db8295105816800f
+    m_Address: BattleSkill
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed9c90b7231c4224e9d49ef881f978eb
+    m_Address: BattleSkillEffect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: d0f519e288fdcfc4e8b7c5281adc3ef1, type: 2}
-    - {fileID: 11400000, guid: 6a1b84d22e2eb3c428705e5bf2c08f8e, type: 2}
+    - {fileID: 11400000, guid: 2783863e96afc214a9964c26a742151c, type: 2}
+    - {fileID: 11400000, guid: 60c84cf6e351b41458f39fbeceb66097, type: 2}

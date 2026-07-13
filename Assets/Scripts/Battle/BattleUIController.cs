@@ -29,21 +29,26 @@ namespace Battle
 
 		static readonly ActionSlotBinding[] SlotBindings =
 		{
-			new ActionSlotBinding("ActionSlot_01", BattleActionMode.Move, false),
-			new ActionSlotBinding("ActionSlot_02", BattleActionMode.Skill1, false),
-			new ActionSlotBinding("ActionSlot_03", BattleActionMode.Skill2, false),
-			new ActionSlotBinding("ActionSlot_04", BattleActionMode.Skill3, false),
-			new ActionSlotBinding("ActionSlot_05", BattleActionMode.Skill4, false),
-			new ActionSlotBinding("ActionSlot_06", BattleActionMode.Ultimate, false),
-			new ActionSlotBinding("ActionSlot_07", BattleActionMode.SubAction, false),
-			new ActionSlotBinding("ActionSlot_08", BattleActionMode.Passive, false),
+			new ActionSlotBinding("ActionSlot_01", BattleActionMode.Passive, 1, false),
+			new ActionSlotBinding("ActionSlot_02", BattleActionMode.Skill1, 2, false),
+			new ActionSlotBinding("ActionSlot_03", BattleActionMode.Skill2, 3, false),
+			new ActionSlotBinding("ActionSlot_04", BattleActionMode.Skill3, 4, false),
+			new ActionSlotBinding("ActionSlot_05", BattleActionMode.Skill4, 5, false),
+			new ActionSlotBinding("ActionSlot_06", BattleActionMode.Ultimate, 6, false),
+			new ActionSlotBinding("ActionSlot_07", BattleActionMode.SubAction, 7, false),
+			new ActionSlotBinding("ActionSlot_08", BattleActionMode.Move, 8, false),
 		};
 
 		readonly Button[] _actionButtons = new Button[SlotBindings.Length];
 		readonly Image[] _actionImages = new Image[SlotBindings.Length];
+		readonly Image[] _actionIconImages = new Image[SlotBindings.Length];
+		readonly Text[] _actionTexts = new Text[SlotBindings.Length];
+		readonly string[] _actionIconKeys = new string[SlotBindings.Length];
+		readonly string[] _actionTooltips = new string[SlotBindings.Length];
 		readonly Color[] _normalColors = new Color[SlotBindings.Length];
 
 		BattleObjectManager _objectManager;
+		BattleGameDataRepository _gameData;
 		Button _turnExitButton;
 		Image _turnExitImage;
 		Color _turnExitNormalColor = Color.white;
@@ -62,10 +67,13 @@ namespace Battle
 		bool _hasUiHandle;
 		bool _hasResultUiHandle;
 		bool _isBinding;
+		bool _isLoadingGameData;
 		bool _isLoadingResultOverlay;
 		bool _bound;
 		bool _battleResultReceived;
 		bool _battleResultAckSent;
+		int _hoveredActionSlotIndex = -1;
+		int _selectedActionSlotIndex = -1;
 
 		public async void Initialize(BattleObjectManager objectManager)
 		{
@@ -78,6 +86,7 @@ namespace Battle
 			EnsureEventSystem();
 			SubscribeNetwork();
 			await BindOrLoadUiAsync();
+			await LoadGameDataAsync();
 		}
 
 		void Update()
@@ -130,7 +139,7 @@ namespace Battle
 
 			_isBinding = true;
 
-			GameObject existing = FindExistingBattleUi();
+			GameObject existing = FindExistingBattleUi(gameObject.scene);
 			if (existing != null)
 			{
 				BindUi(existing);
@@ -228,8 +237,22 @@ namespace Battle
 
 				_actionButtons[i] = button;
 				_actionImages[i] = image;
+				_actionIconImages[i] = FindOrCreateActionIcon(slot);
+				_actionTexts[i] = FindOrCreateActionLabel(slot);
 				_normalColors[i] = image != null ? image.color : Color.white;
+				BindActionSlotTooltip(slot.gameObject, i);
 			}
+		}
+
+		async Task LoadGameDataAsync()
+		{
+			if (_isLoadingGameData)
+				return;
+
+			_isLoadingGameData = true;
+			_gameData = await BattleGameDataRepository.LoadAsync();
+			_isLoadingGameData = false;
+			Refresh();
 		}
 
 		void BindTurnExit(Transform root)
@@ -283,6 +306,7 @@ namespace Battle
 			}
 
 			_objectManager.SetActionMode(binding.Mode);
+			_selectedActionSlotIndex = slotIndex;
 			Refresh();
 		}
 
@@ -308,6 +332,7 @@ namespace Battle
 
 			bool canAct = _battleResultReceived == false && _objectManager.IsInteractionLocked == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
 			TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn);
+			RefreshActionSlotData(currentTurnPawn);
 
 			if (_turnExitButton != null)
 				_turnExitButton.interactable = canAct;
@@ -339,6 +364,16 @@ namespace Battle
 					color.a = 0.45f;
 
 				image.color = color;
+
+				Image iconImage = _actionIconImages[i];
+				if (iconImage != null)
+				{
+					Color iconColor = Color.white;
+					if (isPassive == false && (canAct == false || isAvailable == false))
+						iconColor.a = 0.45f;
+
+					iconImage.color = iconColor;
+				}
 			}
 
 			RefreshStateTexts();
@@ -507,7 +542,12 @@ namespace Battle
 			BattlePawnController hoveredPawn = null;
 
 			if (_tileInfoText != null)
-				_tileInfoText.text = BuildTileInfoText(hasHoveredTile, hoveredAxial);
+			{
+				string actionTooltip = BuildActiveActionTooltip();
+				_tileInfoText.text = string.IsNullOrWhiteSpace(actionTooltip)
+					? BuildTileInfoText(hasHoveredTile, hoveredAxial)
+					: actionTooltip;
+			}
 
 			if (_selectedPawnPanel != null)
 				_selectedPawnPanel.SetPawn("Selected", selectedPawn);
@@ -555,6 +595,216 @@ namespace Battle
 			return $"Tile\nAxial: {axial}\nState: {state}\nPawn: {pawn}";
 		}
 
+		string BuildActiveActionTooltip()
+		{
+			int slotIndex = _hoveredActionSlotIndex >= 0 ? _hoveredActionSlotIndex : _selectedActionSlotIndex;
+			if (slotIndex < 0 || slotIndex >= _actionTooltips.Length)
+				return string.Empty;
+
+			return _actionTooltips[slotIndex];
+		}
+
+		void RefreshActionSlotData(BattlePawnController currentTurnPawn)
+		{
+			Protocol.PawnClass pawnClass = currentTurnPawn != null && currentTurnPawn.Info != null
+				? currentTurnPawn.Info.PawnClass
+				: Protocol.PawnClass.None;
+
+			for (int i = 0; i < SlotBindings.Length; i++)
+			{
+				ActionSlotBinding binding = SlotBindings[i];
+				string label = BuildDefaultActionLabel(binding.Mode);
+				string tooltip = label;
+				string iconKey = string.Empty;
+
+				if (binding.Mode == BattleActionMode.Move)
+				{
+					label = "Move";
+					tooltip = "Move\nMove to a reachable tile.";
+				}
+				else if (_gameData != null
+					&& pawnClass != Protocol.PawnClass.None
+					&& _gameData.TryGetSkill(pawnClass, binding.ActionSlot, out BattleSkillDefinition skill))
+				{
+					label = BuildSkillDisplayName(skill);
+					tooltip = BuildSkillTooltip(skill);
+
+					if (_gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view))
+						iconKey = view.IconKey;
+				}
+
+				_actionTooltips[i] = tooltip;
+				SetActionText(i, label);
+				SetActionIcon(i, iconKey);
+			}
+		}
+
+		string BuildSkillDisplayName(BattleSkillDefinition skill)
+		{
+			if (_gameData != null
+				&& _gameData.TryGetDisplayText("SKILL", skill.SkillKey, out BattleDisplayTextSet textSet)
+				&& textSet.TryGet("NAME", out BattleLocalizedText name)
+				&& string.IsNullOrWhiteSpace(name.KoKr) == false)
+			{
+				return name.KoKr;
+			}
+
+			return HumanizeKey(skill.SkillKey);
+		}
+
+		string BuildSkillTooltip(BattleSkillDefinition skill)
+		{
+			string name = BuildSkillDisplayName(skill);
+			string shortText = string.Empty;
+			string descText = string.Empty;
+			if (_gameData != null
+				&& _gameData.TryGetDisplayText("SKILL", skill.SkillKey, out BattleDisplayTextSet textSet))
+			{
+				if (textSet.TryGet("SHORT", out BattleLocalizedText shortLocalized))
+					shortText = shortLocalized.KoKr;
+
+				if (textSet.TryGet("DESC", out BattleLocalizedText descLocalized))
+					descText = descLocalized.KoKr;
+			}
+
+			string range = skill.RangeMin == skill.RangeMax
+				? skill.RangeMax.ToString()
+				: $"{skill.RangeMin}-{skill.RangeMax}";
+			string tooltip = $"{name}\nSlot: {skill.ActionSlot} / AP: {skill.ApCost} / Range: {range}\nTarget: {skill.TargetType}";
+			if (string.IsNullOrWhiteSpace(shortText) == false)
+				tooltip += $"\n{shortText}";
+
+			if (string.IsNullOrWhiteSpace(descText) == false)
+				tooltip += $"\n\n{descText}";
+
+			return tooltip;
+		}
+
+		void SetActionText(int slotIndex, string text)
+		{
+			if (slotIndex < 0 || slotIndex >= _actionTexts.Length)
+				return;
+
+			Text label = _actionTexts[slotIndex];
+			if (label != null)
+				label.text = text;
+		}
+
+		void SetActionIcon(int slotIndex, string iconKey)
+		{
+			if (slotIndex < 0 || slotIndex >= _actionIconImages.Length)
+				return;
+
+			Image iconImage = _actionIconImages[slotIndex];
+			if (iconImage == null)
+				return;
+
+			if (string.Equals(_actionIconKeys[slotIndex], iconKey, System.StringComparison.OrdinalIgnoreCase))
+				return;
+
+			_actionIconKeys[slotIndex] = iconKey;
+			if (string.IsNullOrWhiteSpace(iconKey))
+			{
+				iconImage.sprite = null;
+				iconImage.enabled = false;
+				return;
+			}
+
+			LoadActionIconAsync(slotIndex, iconKey);
+		}
+
+		async void LoadActionIconAsync(int slotIndex, string iconKey)
+		{
+			Sprite sprite = await BattleSkillIconCache.LoadAsync(iconKey);
+			if (this == null || slotIndex < 0 || slotIndex >= _actionIconImages.Length)
+				return;
+
+			if (string.Equals(_actionIconKeys[slotIndex], iconKey, System.StringComparison.OrdinalIgnoreCase) == false)
+				return;
+
+			Image iconImage = _actionIconImages[slotIndex];
+			if (iconImage == null)
+				return;
+
+			iconImage.sprite = sprite;
+			iconImage.enabled = sprite != null;
+			iconImage.preserveAspect = true;
+		}
+
+		void BindActionSlotTooltip(GameObject slotObject, int slotIndex)
+		{
+			if (slotObject == null)
+				return;
+
+			EventTrigger trigger = slotObject.GetComponent<EventTrigger>();
+			if (trigger == null)
+				trigger = slotObject.AddComponent<EventTrigger>();
+
+			if (trigger.triggers == null)
+				trigger.triggers = new System.Collections.Generic.List<EventTrigger.Entry>();
+
+			EventTrigger.Entry enter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+			enter.callback.AddListener(_ =>
+			{
+				_hoveredActionSlotIndex = slotIndex;
+				RefreshStateTexts();
+			});
+			trigger.triggers.Add(enter);
+
+			EventTrigger.Entry exit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+			exit.callback.AddListener(_ =>
+			{
+				if (_hoveredActionSlotIndex == slotIndex)
+					_hoveredActionSlotIndex = -1;
+
+				RefreshStateTexts();
+			});
+			trigger.triggers.Add(exit);
+		}
+
+		static string BuildDefaultActionLabel(BattleActionMode mode)
+		{
+			switch (mode)
+			{
+				case BattleActionMode.Passive:
+					return "Passive";
+				case BattleActionMode.Move:
+					return "Move";
+				case BattleActionMode.Skill1:
+					return "Skill 1";
+				case BattleActionMode.Skill2:
+					return "Skill 2";
+				case BattleActionMode.Skill3:
+					return "Skill 3";
+				case BattleActionMode.Skill4:
+					return "Skill 4";
+				case BattleActionMode.Ultimate:
+					return "Ultimate";
+				case BattleActionMode.SubAction:
+					return "SubAction";
+				default:
+					return mode.ToString();
+			}
+		}
+
+		static string HumanizeKey(string key)
+		{
+			if (string.IsNullOrWhiteSpace(key))
+				return string.Empty;
+
+			string[] parts = key.Split('_');
+			for (int i = 0; i < parts.Length; i++)
+			{
+				if (parts[i].Length == 0)
+					continue;
+
+				string lower = parts[i].ToLowerInvariant();
+				parts[i] = char.ToUpperInvariant(lower[0]) + lower.Substring(1);
+			}
+
+			return string.Join(" ", parts);
+		}
+
 		static string BuildPawnText(string title, BattlePawnController pawn)
 		{
 			if (pawn == null)
@@ -568,7 +818,7 @@ namespace Battle
 			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nArmor: {armor}\nAP: {pawn.CurrentAp}\nState: {flags}";
 		}
 
-		static bool IsActionAvailable(ActionSlotBinding binding, BattlePawnController pawn)
+		bool IsActionAvailable(ActionSlotBinding binding, BattlePawnController pawn)
 		{
 			if (binding.IsWaitCommand || pawn == null)
 				return true;
@@ -578,19 +828,34 @@ namespace Battle
 				case BattleActionMode.Move:
 					return pawn.CanMove;
 				case BattleActionMode.SubAction:
-					return pawn.UsedSubActionThisTurn == false;
+					return pawn.UsedSubActionThisTurn == false && HasEnoughAp(binding, pawn);
 				case BattleActionMode.Ultimate:
-					return pawn.UsedUltimate == false;
+					return pawn.UsedUltimate == false && HasEnoughAp(binding, pawn);
 				case BattleActionMode.Passive:
 					return false;
 				case BattleActionMode.Skill1:
 				case BattleActionMode.Skill2:
 				case BattleActionMode.Skill3:
 				case BattleActionMode.Skill4:
-					return pawn.CurrentAp > 0;
+					return HasEnoughAp(binding, pawn);
 				default:
 					return true;
 			}
+		}
+
+		bool HasEnoughAp(ActionSlotBinding binding, BattlePawnController pawn)
+		{
+			if (pawn == null)
+				return false;
+
+			if (_gameData != null
+				&& pawn.Info != null
+				&& _gameData.TryGetSkill(pawn.Info.PawnClass, binding.ActionSlot, out BattleSkillDefinition skill))
+			{
+				return pawn.CurrentAp >= skill.ApCost;
+			}
+
+			return pawn.CurrentAp > 0;
 		}
 
 		bool TryGetCurrentTurnPawn(out BattlePawnController pawn)
@@ -703,6 +968,88 @@ namespace Battle
 			text.fontSize = fontSize;
 			text.color = Color.white;
 			text.alignment = TextAnchor.UpperLeft;
+			text.horizontalOverflow = HorizontalWrapMode.Wrap;
+			text.verticalOverflow = VerticalWrapMode.Truncate;
+			text.raycastTarget = false;
+			return text;
+		}
+
+		static Image FindOrCreateActionIcon(Transform slot)
+		{
+			if (slot == null)
+				return null;
+
+			Transform existing = slot.Find("Icon");
+			RectTransform rect;
+			Image image;
+			if (existing != null)
+			{
+				rect = existing.GetComponent<RectTransform>();
+				if (rect == null)
+					rect = existing.gameObject.AddComponent<RectTransform>();
+
+				image = existing.GetComponent<Image>();
+				if (image == null)
+					image = existing.gameObject.AddComponent<Image>();
+			}
+			else
+			{
+				GameObject iconObject = new GameObject("Icon");
+				iconObject.layer = slot.gameObject.layer;
+				iconObject.transform.SetParent(slot, false);
+				rect = iconObject.AddComponent<RectTransform>();
+				image = iconObject.AddComponent<Image>();
+			}
+
+			rect.anchorMin = new Vector2(0.14f, 0.34f);
+			rect.anchorMax = new Vector2(0.86f, 0.92f);
+			rect.offsetMin = Vector2.zero;
+			rect.offsetMax = Vector2.zero;
+			rect.localScale = Vector3.one;
+
+			image.raycastTarget = false;
+			image.preserveAspect = true;
+			image.enabled = image.sprite != null;
+			return image;
+		}
+
+		static Text FindOrCreateActionLabel(Transform slot)
+		{
+			if (slot == null)
+				return null;
+
+			Transform existing = slot.Find("Label");
+			Text text;
+			RectTransform rect;
+			if (existing != null)
+			{
+				text = existing.GetComponent<Text>();
+				if (text == null)
+					text = existing.gameObject.AddComponent<Text>();
+
+				rect = existing.GetComponent<RectTransform>();
+				if (rect == null)
+					rect = existing.gameObject.AddComponent<RectTransform>();
+			}
+			else
+			{
+				GameObject labelObject = new GameObject("Label");
+				labelObject.layer = slot.gameObject.layer;
+				labelObject.transform.SetParent(slot, false);
+				rect = labelObject.AddComponent<RectTransform>();
+				text = labelObject.AddComponent<Text>();
+			}
+
+			rect.anchorMin = new Vector2(0.04f, 0.02f);
+			rect.anchorMax = new Vector2(0.96f, 0.34f);
+			rect.offsetMin = Vector2.zero;
+			rect.offsetMax = Vector2.zero;
+			rect.localScale = Vector3.one;
+
+			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.fontSize = 9;
+			text.color = Color.white;
+			text.alignment = TextAnchor.MiddleCenter;
 			text.horizontalOverflow = HorizontalWrapMode.Wrap;
 			text.verticalOverflow = VerticalWrapMode.Truncate;
 			text.raycastTarget = false;
@@ -873,13 +1220,17 @@ namespace Battle
 			return maxValue > 0 ? $"{value}/{maxValue}" : value.ToString();
 		}
 
-		static GameObject FindExistingBattleUi()
+		static GameObject FindExistingBattleUi(Scene targetScene)
 		{
 			Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 			foreach (Canvas canvas in canvases)
 			{
-				if (canvas != null && canvas.gameObject.name == BattleUiName)
+				if (canvas != null
+					&& canvas.gameObject.scene == targetScene
+					&& canvas.gameObject.name == BattleUiName)
+				{
 					return canvas.gameObject;
+				}
 			}
 
 			return null;
@@ -1000,12 +1351,14 @@ namespace Battle
 		{
 			public readonly string Name;
 			public readonly BattleActionMode Mode;
+			public readonly int ActionSlot;
 			public readonly bool IsWaitCommand;
 
-			public ActionSlotBinding(string name, BattleActionMode mode, bool isWaitCommand)
+			public ActionSlotBinding(string name, BattleActionMode mode, int actionSlot, bool isWaitCommand)
 			{
 				Name = name;
 				Mode = mode;
+				ActionSlot = actionSlot;
 				IsWaitCommand = isWaitCommand;
 			}
 		}

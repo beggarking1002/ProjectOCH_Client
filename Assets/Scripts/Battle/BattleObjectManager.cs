@@ -27,6 +27,7 @@ namespace Battle
 		readonly Queue<string> _battleLogLines = new Queue<string>();
 
 		BattleMapGrid _mapGrid;
+		BattleGameDataRepository _gameData;
 		string _fallbackPawnAddress;
 		ulong _battleId;
 		ulong _currentTurnPawnId;
@@ -34,6 +35,7 @@ namespace Battle
 		bool _destroyed;
 		bool _missingCameraLogged;
 		bool _isAnimatingMove;
+		bool _isLoadingGameData;
 
 		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
@@ -62,6 +64,18 @@ namespace Battle
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
 			PacketHandler.Instance.BattlePawnDeadReceived -= OnBattlePawnDeadReceived;
 			PacketHandler.Instance.BattlePawnDeadReceived += OnBattlePawnDeadReceived;
+
+			_ = LoadGameDataAsync();
+		}
+
+		async Task LoadGameDataAsync()
+		{
+			if (_isLoadingGameData)
+				return;
+
+			_isLoadingGameData = true;
+			_gameData = await BattleGameDataRepository.LoadAsync();
+			_isLoadingGameData = false;
 		}
 
 		public void SetActionMode(BattleActionMode mode)
@@ -506,15 +520,15 @@ namespace Battle
 				return;
 			}
 
-			ulong targetPawnId = FindPawnIdAtAxial(targetAxial);
-			if (targetPawnId != 0
-				&& _pawns.TryGetValue(targetPawnId, out BattlePawnController targetPawn)
-				&& targetPawn != null
-				&& targetPawn.IsMine)
+			if (_pawns.TryGetValue(casterPawnId, out BattlePawnController casterPawn) == false || casterPawn == null)
 			{
-				Debug.Log($"Cannot target allied pawn with attack skill. casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+				Debug.LogWarning($"Cannot use battle skill because caster pawn is missing. casterPawnId={casterPawnId}, skillSlot={skillSlot}");
 				return;
 			}
+
+			ulong targetPawnId = FindPawnIdAtAxial(targetAxial);
+			if (ValidateSkillTarget(casterPawn, skillSlot, ref targetPawnId, ref targetAxial) == false)
+				return;
 
 			if (_battleId != 0 && GameRoot.Instance != null)
 			{
@@ -534,6 +548,71 @@ namespace Battle
 
 			Debug.Log($"Skill debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
 			_actionMode = BattleActionMode.Move;
+		}
+
+		bool ValidateSkillTarget(BattlePawnController casterPawn, int skillSlot, ref ulong targetPawnId, ref AxialCoord targetAxial)
+		{
+			string targetType = GetSkillTargetType(casterPawn, skillSlot);
+			if (string.IsNullOrWhiteSpace(targetType))
+				targetType = "ENEMY_SINGLE";
+
+			BattlePawnController targetPawn = null;
+			if (targetPawnId != 0)
+				_pawns.TryGetValue(targetPawnId, out targetPawn);
+
+			switch (targetType)
+			{
+				case "SELF":
+				case "SELF_TOGGLE":
+					targetPawnId = casterPawn.PawnId;
+					targetAxial = casterPawn.Axial;
+					return true;
+				case "ALLY_SINGLE":
+					if (targetPawn == null || targetPawn.IsMine == false)
+					{
+						Debug.Log($"Skill requires allied target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
+				case "ENEMY_SINGLE":
+					if (targetPawn == null || targetPawn.IsMine)
+					{
+						Debug.Log($"Skill requires enemy target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
+				case "TILE_OR_ENEMY":
+					if (targetPawn != null && targetPawn.IsMine)
+					{
+						Debug.Log($"Skill cannot target allied pawn. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
+				default:
+					if (targetPawn != null && targetPawn.IsMine)
+					{
+						Debug.Log($"Skill target rejected by fallback ally guard. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetType={targetType}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
+			}
+		}
+
+		string GetSkillTargetType(BattlePawnController casterPawn, int skillSlot)
+		{
+			if (_gameData != null
+				&& casterPawn != null
+				&& casterPawn.Info != null
+				&& _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out BattleSkillDefinition skill))
+			{
+				return skill.TargetType;
+			}
+
+			return string.Empty;
 		}
 
 		bool TryGetControllablePawnId(out ulong pawnId)
@@ -633,7 +712,7 @@ namespace Battle
 			ApplyTurnState(packet.CasterPawnId, packet.RemainingAp, packet.CanMove, packet.UsedSubActionThisTurn, packet.UsedUltimate);
 
 			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawnController casterPawn))
-				casterPawn.TriggerSkill(packet.SkillSlot);
+				TriggerSkillAnimation(casterPawn, packet.SkillSlot);
 
 			if (packet.TargetPawnId != 0 && _pawns.TryGetValue(packet.TargetPawnId, out BattlePawnController targetPawn))
 			{
@@ -646,6 +725,24 @@ namespace Battle
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
 			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, targetHp={packet.TargetHp}, targetArmor={packet.TargetArmor}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
+		}
+
+		void TriggerSkillAnimation(BattlePawnController casterPawn, int skillSlot)
+		{
+			if (casterPawn == null)
+				return;
+
+			if (_gameData != null
+				&& casterPawn.Info != null
+				&& _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out BattleSkillDefinition skill)
+				&& _gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view)
+				&& string.IsNullOrWhiteSpace(view.AnimTrigger) == false)
+			{
+				casterPawn.TriggerSkill(view.AnimTrigger);
+				return;
+			}
+
+			casterPawn.TriggerSkill(skillSlot);
 		}
 
 		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)
@@ -812,15 +909,17 @@ namespace Battle
 			switch (mode)
 			{
 				case BattleActionMode.Skill1:
-					return 1;
-				case BattleActionMode.Skill2:
 					return 2;
-				case BattleActionMode.Skill3:
+				case BattleActionMode.Skill2:
 					return 3;
-				case BattleActionMode.Skill4:
+				case BattleActionMode.Skill3:
 					return 4;
-				case BattleActionMode.Ultimate:
+				case BattleActionMode.Skill4:
 					return 5;
+				case BattleActionMode.Ultimate:
+					return 6;
+				case BattleActionMode.SubAction:
+					return 7;
 				default:
 					return 0;
 			}

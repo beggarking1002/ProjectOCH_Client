@@ -1,0 +1,23 @@
+OwnerType,OwnerKey,TextType,ko_KR,en_US,Note
+string,string,enum,string,string,string
+SKILL,BEIGE_ICE_COLD_ACCUMULATION,NAME,냉기 축적,,패시브 표시 이름
+SKILL,BEIGE_ICE_COLD_ACCUMULATION,SHORT,스킬 사용 시 냉기 증가,,패시브 짧은 설명
+SKILL,BEIGE_ICE_COLD_ACCUMULATION,DESC,"스킬을 쓸 때마다 냉기가 부여됩니다. 턴 시작 시 냉기가 1 감소하며, 턴 종료 시 냉기가 최대치의 90% 이상이면 큰 피해를, 70% 이상이면 낮은 피해를 입습니다.",,패시브 상세 설명
+SKILL,BEIGE_ICE_ICE_BOLT,NAME,아이스 볼트,,스킬 표시 이름
+SKILL,BEIGE_ICE_ICE_BOLT,SHORT,"기본 공격, 냉기 +1",,짧은 설명
+SKILL,BEIGE_ICE_ICE_BOLT,DESC,기본 평타입니다. 대상에게 피해를 주고 냉기를 1 얻습니다.,,상세 설명
+SKILL,BEIGE_ICE_ICE_SHIELD,NAME,아이스 실드,,스킬 표시 이름
+SKILL,BEIGE_ICE_ICE_SHIELD,SHORT,아군 1명에게 2턴 보호막,,짧은 설명
+SKILL,BEIGE_ICE_ICE_SHIELD,DESC,본인 포함 아군 하나에게 2턴간 보호막을 부여하고 냉기를 1 얻습니다. 보호막이 깨질 때 인접 적에게 동상 1을 부여합니다.,,상세 설명
+SKILL,BEIGE_ICE_HAIL,NAME,우박,,스킬 표시 이름
+SKILL,BEIGE_ICE_HAIL,SHORT,"타일 변환 또는 동상 부여, 냉기 +3",,짧은 설명
+SKILL,BEIGE_ICE_HAIL,DESC,"적이 없는 타일과 적이 있는 타일 모두에 사용할 수 있습니다. 일반 땅 타일은 빙판 타일로 바꾸고, 물 타일은 해당 타일과 인접 6타일을 빙판으로 바꿉니다. 적이 있는 타일에 사용하면 해당 적에게 동상 1을 부여하고 냉기를 3 얻습니다.",,상세 설명
+SKILL,BEIGE_ICE_STORM_CENTER,NAME,폭풍의 중심,,스킬 표시 이름
+SKILL,BEIGE_ICE_STORM_CENTER,SHORT,"주변 1타일 오라, 턴당 냉기 +2",,짧은 설명
+SKILL,BEIGE_ICE_STORM_CENTER,DESC,"On/Off형 스킬입니다. 본인 주변 1타일 범위에 피해를 주는 오라를 켜거나 끕니다. 효과 범위 안의 적들은 턴마다 동상 1을 받고, 시전자는 턴마다 냉기를 2 얻습니다.",,상세 설명
+SKILL,BEIGE_ICE_COLD_HARD_WORKER,NAME,차가운 노력가,,궁극기 표시 이름
+SKILL,BEIGE_ICE_COLD_HARD_WORKER,SHORT,"3턴간 냉기 피해 무시, 기술 강화",,궁극기 짧은 설명
+SKILL,BEIGE_ICE_COLD_HARD_WORKER,DESC,"3턴간 냉기 중첩으로 받는 피해를 무시하고 모든 기술이 강화됩니다. 아이스 볼트 피해가 2배가 되고, 아이스 실드는 인접한 한 명에게도 추가 부여되며, 우박은 세모 모양 3타일 범위가 되고, 폭풍의 중심 반지름이 1타일 증가합니다.",,궁극기 상세 설명
+SKILL,BEIGE_ICE_THAWING_POTION,NAME,해동 포션,,보조행동 표시 이름
+SKILL,BEIGE_ICE_THAWING_POTION,SHORT,"냉기 절반 제거, 공격력 감소",,보조행동 짧은 설명
+SKILL,BEIGE_ICE_THAWING_POTION,DESC,현재 쌓인 냉기를 절반 제거합니다. 사용한 턴과 다음 턴 동안 공격력이 10% 감소합니다.,,보조행동 상세 설명

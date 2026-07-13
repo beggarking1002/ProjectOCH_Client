@@ -9,10 +9,35 @@ internal static class AddressablesProjectSetup
 {
     private const string RemoteGroupName = "Remote Content";
     private const string UiGroupName = "UI";
+    private const string GameDataGroupName = "GameData";
+    private const string SkillIconGroupName = "SkillIcon";
     private const string UiLabel = "UI";
+    private const string GameDataLabel = "GameData";
+    private const string SkillIconLabel = "SkillIcon";
     private const string BattleUiAddress = "BattleSceneUI";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
     private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+    private static readonly string[] GameDataCsvPaths =
+    {
+        "Assets/GameData/ClassKey.csv",
+        "Assets/GameData/PawnTemplate.csv",
+        "Assets/GameData/BattleSkill.csv",
+        "Assets/GameData/BattleSkillEffect.csv",
+        "Assets/GameData/BattleSkillEffectParam.csv",
+        "Assets/GameData/BattleSkillView.csv",
+        "Assets/GameData/DisplayText.csv",
+        "Assets/GameData/EnumDef.csv",
+    };
+    private static readonly SkillIconAsset[] SkillIconAssets =
+    {
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Passive.png", "icon_beige_ice_passive"),
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Skill1.png", "icon_beige_ice_skill1"),
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Skill2.png", "icon_beige_ice_skill2"),
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Skill3.png", "icon_beige_ice_skill3"),
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Skill4.png", "icon_beige_ice_skill4"),
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Ulti.png", "icon_beige_ice_ulti"),
+        new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Sub.png", "icon_beige_ice_sub"),
+    };
 
     [InitializeOnLoadMethod]
     private static void InitializeOnFirstInstall()
@@ -54,6 +79,8 @@ internal static class AddressablesProjectSetup
         ConfigureDefaultRemoteLoadPath(settings);
         ConfigureRemoteCatalogPaths(settings);
         RegisterUiAddressable(settings, BattleUiPrefabPath, BattleUiAddress);
+        RegisterGameDataAddressables(settings);
+        RegisterSkillIconAddressables(settings);
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -86,7 +113,9 @@ internal static class AddressablesProjectSetup
         return settings.FindGroup(RemoteGroupName) == null
             || string.IsNullOrWhiteSpace(remoteLoadPath)
             || remoteLoadPath == "<undefined>"
-            || IsMissingAddressable(settings, BattleUiPrefabPath);
+            || IsMissingAddressable(settings, BattleUiPrefabPath)
+            || IsMissingAnyAddressable(settings, GameDataCsvPaths)
+            || IsMissingAnySkillIconAddressable(settings);
     }
 
     private static void ConfigureDefaultRemoteLoadPath(AddressableAssetSettings settings)
@@ -153,8 +182,101 @@ internal static class AddressablesProjectSetup
         if (group != null)
             return group;
 
+        return GetOrCreateLocalGroup(settings, UiGroupName);
+    }
+
+    private static void RegisterSkillIconAddressables(AddressableAssetSettings settings)
+    {
+        AddressableAssetGroup group = GetOrCreateLocalGroup(settings, SkillIconGroupName);
+        if (group == null)
+        {
+            Debug.LogWarning("Cannot register skill icon addressables without a group.");
+            return;
+        }
+
+        settings.AddLabel(SkillIconLabel, false);
+        foreach (SkillIconAsset icon in SkillIconAssets)
+        {
+            string guid = AssetDatabase.AssetPathToGUID(icon.Path);
+            if (string.IsNullOrWhiteSpace(guid))
+            {
+                Debug.LogWarning($"Skill icon asset not found: {icon.Path}");
+                continue;
+            }
+
+            EnsureSpriteImporter(icon.Path);
+            AddressableAssetEntry entry = settings.CreateOrMoveEntry(guid, group, false, false);
+            entry.address = icon.Address;
+            entry.SetLabel(SkillIconLabel, true, true, false);
+        }
+
+        EditorUtility.SetDirty(group);
+    }
+
+    private static void RegisterGameDataAddressables(AddressableAssetSettings settings)
+    {
+        AddressableAssetGroup group = GetOrCreateLocalGroup(settings, GameDataGroupName);
+        if (group == null)
+        {
+            Debug.LogWarning("Cannot register GameData addressables without a group.");
+            return;
+        }
+
+        settings.AddLabel(GameDataLabel, false);
+        foreach (string assetPath in GameDataCsvPaths)
+        {
+            string guid = AssetDatabase.AssetPathToGUID(assetPath);
+            if (string.IsNullOrWhiteSpace(guid))
+            {
+                Debug.LogWarning($"GameData asset not found: {assetPath}");
+                continue;
+            }
+
+            AddressableAssetEntry entry = settings.CreateOrMoveEntry(guid, group, false, false);
+            entry.address = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+            entry.SetLabel(GameDataLabel, true, true, false);
+        }
+
+        EditorUtility.SetDirty(group);
+    }
+
+    private static void EnsureSpriteImporter(string assetPath)
+    {
+        TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+        if (importer == null)
+            return;
+
+        bool changed = false;
+        if (importer.textureType != TextureImporterType.Sprite)
+        {
+            importer.textureType = TextureImporterType.Sprite;
+            changed = true;
+        }
+
+        if (importer.spriteImportMode != SpriteImportMode.Single)
+        {
+            importer.spriteImportMode = SpriteImportMode.Single;
+            changed = true;
+        }
+
+        if (importer.alphaIsTransparency == false)
+        {
+            importer.alphaIsTransparency = true;
+            changed = true;
+        }
+
+        if (changed)
+            importer.SaveAndReimport();
+    }
+
+    private static AddressableAssetGroup GetOrCreateLocalGroup(AddressableAssetSettings settings, string groupName)
+    {
+        AddressableAssetGroup group = settings.FindGroup(groupName);
+        if (group != null)
+            return group;
+
         group = settings.CreateGroup(
-            UiGroupName,
+            groupName,
             false,
             false,
             true,
@@ -187,5 +309,39 @@ internal static class AddressablesProjectSetup
         string guid = AssetDatabase.AssetPathToGUID(assetPath);
         return string.IsNullOrWhiteSpace(guid) == false
             && settings.FindAssetEntry(guid) == null;
+    }
+
+    private static bool IsMissingAnyAddressable(AddressableAssetSettings settings, string[] assetPaths)
+    {
+        foreach (string assetPath in assetPaths)
+        {
+            if (IsMissingAddressable(settings, assetPath))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsMissingAnySkillIconAddressable(AddressableAssetSettings settings)
+    {
+        foreach (SkillIconAsset icon in SkillIconAssets)
+        {
+            if (IsMissingAddressable(settings, icon.Path))
+                return true;
+        }
+
+        return false;
+    }
+
+    private readonly struct SkillIconAsset
+    {
+        public readonly string Path;
+        public readonly string Address;
+
+        public SkillIconAsset(string path, string address)
+        {
+            Path = path;
+            Address = address;
+        }
     }
 }

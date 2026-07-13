@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Codex/06_Work_Log.md",
+                "file": "Codex/02_Gameplay_Protocol_Data.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06_Work_Log"
+              "title": "02_Gameplay_Protocol_Data"
             }
           }
         ]
@@ -185,6 +185,8 @@
   },
   "active": "c34b2d3671ea4b0a",
   "lastOpenFiles": [
+    "Codex/03_Current_Status_Workflow.md",
+    "Codex/02_Gameplay_Protocol_Data.md",
     "Codex/07_Architecture_Refactor.md",
     "Codex/06_Work_Log.md",
     "Codex/05_Known_Issues_And_TODO.md",

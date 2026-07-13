@@ -16,7 +16,7 @@ namespace Battle
 		const float MaxMoveDurationSeconds = 1.2f;
 		const string VisualRootName = "visual";
 		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
-		static readonly int Skill1Hash = Animator.StringToHash("Skill1");
+		const string DefaultSkillTrigger = "Skill1";
 
 		BattleMapGrid _mapGrid;
 		Transform _visualRoot;
@@ -312,7 +312,25 @@ namespace Battle
 
 		public void TriggerSkill(int skillSlot)
 		{
+			switch (skillSlot)
+			{
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+					TriggerSkill(DefaultSkillTrigger);
+					break;
+			}
+		}
+
+		public void TriggerSkill(string triggerName)
+		{
 			if (IsDead)
+				return;
+
+			if (string.IsNullOrWhiteSpace(triggerName))
 				return;
 
 			if (_animator == null)
@@ -321,13 +339,14 @@ namespace Battle
 			if (_animator == null)
 				return;
 
-			switch (skillSlot)
+			int triggerHash = Animator.StringToHash(triggerName);
+			if (HasTriggerParameter(_animator, triggerHash))
 			{
-				case 1:
-					if (HasTriggerParameter(_animator, Skill1Hash))
-						_animator.SetTrigger(Skill1Hash);
-					break;
+				_animator.SetTrigger(triggerHash);
+				return;
 			}
+
+			Debug.LogWarning($"Animator trigger not found. pawnId={PawnId}, trigger={triggerName}");
 		}
 
 		public void SetTurnIndicatorVisible(bool visible)
