@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Battle
@@ -26,6 +27,9 @@ namespace Battle
 		PawnTeamRing _teamRing;
 		GameObject _turnIndicator;
 		Coroutine _moveCoroutine;
+		readonly Dictionary<Protocol.BattleResourceType, ResourceState> _resources = new Dictionary<Protocol.BattleResourceType, ResourceState>();
+		readonly Dictionary<ulong, BarrierState> _barriers = new Dictionary<ulong, BarrierState>();
+		readonly Dictionary<string, StatusState> _statuses = new Dictionary<string, StatusState>(StringComparer.Ordinal);
 
 		public ulong PawnId { get; private set; }
 		public bool IsMine { get; private set; }
@@ -47,6 +51,20 @@ namespace Battle
 		public bool IsDead => Info != null && Info.IsDead;
 		public Protocol.BattleFacingDirection FacingDirection => Info != null ? Info.FacingDirection : Protocol.BattleFacingDirection.None;
 		public bool IsMoving { get; private set; }
+		public IReadOnlyDictionary<Protocol.BattleResourceType, ResourceState> Resources => _resources;
+		public IReadOnlyDictionary<ulong, BarrierState> Barriers => _barriers;
+		public IReadOnlyDictionary<string, StatusState> Statuses => _statuses;
+		public int TotalBarrierValue
+		{
+			get
+			{
+				long total = 0;
+				foreach (BarrierState barrier in _barriers.Values)
+					total += barrier.Value;
+
+				return total > int.MaxValue ? int.MaxValue : (int)total;
+			}
+		}
 
 		void Awake()
 		{
@@ -74,6 +92,10 @@ namespace Battle
 			IsMine = isMine;
 			_mapGrid = mapGrid;
 			Info = info?.Clone();
+			ReplaceLocalStateCollections(
+				Info?.Resources,
+				Info?.Barriers,
+				Info?.Statuses);
 
 			_visualRoot = FindVisualRoot();
 			_spriteRenderer = FindVisualSpriteRenderer();
@@ -266,8 +288,9 @@ namespace Battle
 			Info.UsedSubActionThisTurn = delta.UsedSubActionThisTurn;
 			Info.UsedUltimate = delta.UsedUltimate;
 			Info.IsDead = delta.IsDead;
-			if (delta.FacingDirection != Protocol.BattleFacingDirection.None)
-				Info.FacingDirection = delta.FacingDirection;
+			Info.FacingDirection = delta.FacingDirection;
+			ReplaceLocalStateCollections(delta.Resources, delta.Barriers, delta.Statuses);
+			ReplaceInfoStateCollections(delta.Resources, delta.Barriers, delta.Statuses);
 
 			ApplyFacingDirection(FacingDirection);
 			RefreshStatusWorldUi();
@@ -308,6 +331,93 @@ namespace Battle
 			RefreshStatusWorldUi();
 			ApplyDeadVisualState();
 			Debug.Log($"Battle pawn dead. pawnId={PawnId}, killerPawnId={killerPawnId}");
+		}
+
+		void ReplaceLocalStateCollections(
+			IEnumerable<Protocol.BattleResourceState> resources,
+			IEnumerable<Protocol.BattleBarrierState> barriers,
+			IEnumerable<Protocol.BattleStatusState> statuses)
+		{
+			_resources.Clear();
+			_barriers.Clear();
+			_statuses.Clear();
+
+			if (resources != null)
+			{
+				foreach (Protocol.BattleResourceState resource in resources)
+				{
+					if (resource == null || resource.ResourceType == Protocol.BattleResourceType.None)
+						continue;
+
+					_resources[resource.ResourceType] = new ResourceState(resource.ResourceType, resource.Value, resource.MaxValue);
+				}
+			}
+
+			if (barriers != null)
+			{
+				foreach (Protocol.BattleBarrierState barrier in barriers)
+				{
+					if (barrier == null || barrier.BarrierId == 0)
+						continue;
+
+					_barriers[barrier.BarrierId] = new BarrierState(
+						barrier.BarrierId,
+						barrier.SourceSkillKey,
+						barrier.Value,
+						barrier.RemainingOwnerTurns);
+				}
+			}
+
+			if (statuses == null)
+				return;
+
+			foreach (Protocol.BattleStatusState status in statuses)
+			{
+				if (status == null || string.IsNullOrWhiteSpace(status.StatusKey))
+					continue;
+
+				_statuses[status.StatusKey] = new StatusState(status.StatusKey, status.Stacks, status.RemainingOwnerTurns);
+			}
+		}
+
+		void ReplaceInfoStateCollections(
+			IEnumerable<Protocol.BattleResourceState> resources,
+			IEnumerable<Protocol.BattleBarrierState> barriers,
+			IEnumerable<Protocol.BattleStatusState> statuses)
+		{
+			if (Info == null)
+				return;
+
+			Info.Resources.Clear();
+			Info.Barriers.Clear();
+			Info.Statuses.Clear();
+
+			if (resources != null)
+			{
+				foreach (Protocol.BattleResourceState resource in resources)
+				{
+					if (resource != null)
+						Info.Resources.Add(resource.Clone());
+				}
+			}
+
+			if (barriers != null)
+			{
+				foreach (Protocol.BattleBarrierState barrier in barriers)
+				{
+					if (barrier != null)
+						Info.Barriers.Add(barrier.Clone());
+				}
+			}
+
+			if (statuses == null)
+				return;
+
+			foreach (Protocol.BattleStatusState status in statuses)
+			{
+				if (status != null)
+					Info.Statuses.Add(status.Clone());
+			}
 		}
 
 		public void TriggerSkill(int skillSlot)
@@ -578,6 +688,50 @@ namespace Battle
 			}
 
 			return false;
+		}
+
+		public readonly struct ResourceState
+		{
+			public Protocol.BattleResourceType ResourceType { get; }
+			public int Value { get; }
+			public int MaxValue { get; }
+
+			public ResourceState(Protocol.BattleResourceType resourceType, int value, int maxValue)
+			{
+				ResourceType = resourceType;
+				Value = value;
+				MaxValue = maxValue;
+			}
+		}
+
+		public readonly struct BarrierState
+		{
+			public ulong BarrierId { get; }
+			public string SourceSkillKey { get; }
+			public int Value { get; }
+			public int RemainingOwnerTurns { get; }
+
+			public BarrierState(ulong barrierId, string sourceSkillKey, int value, int remainingOwnerTurns)
+			{
+				BarrierId = barrierId;
+				SourceSkillKey = sourceSkillKey ?? string.Empty;
+				Value = value;
+				RemainingOwnerTurns = remainingOwnerTurns;
+			}
+		}
+
+		public readonly struct StatusState
+		{
+			public string StatusKey { get; }
+			public int Stacks { get; }
+			public int RemainingOwnerTurns { get; }
+
+			public StatusState(string statusKey, int stacks, int remainingOwnerTurns)
+			{
+				StatusKey = statusKey ?? string.Empty;
+				Stacks = stacks;
+				RemainingOwnerTurns = remainingOwnerTurns;
+			}
 		}
 	}
 }

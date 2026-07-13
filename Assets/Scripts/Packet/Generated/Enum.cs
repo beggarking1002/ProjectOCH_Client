@@ -51,10 +51,12 @@ namespace Protocol {
             "TEVfRkFDSU5HX0RJUkVDVElPTl9SSUdIVBACKoEBCg5CYXR0bGVQYXduUm9s",
             "ZRIZChVCQVRUTEVfUEFXTl9ST0xFX05PTkUQABIbChdCQVRUTEVfUEFXTl9S",
             "T0xFX1RBTktFUhABEhoKFkJBVFRMRV9QQVdOX1JPTEVfTUVMRUUQAhIbChdC",
-            "QVRUTEVfUEFXTl9ST0xFX1JBTkdFRBADYgZwcm90bzM="));
+            "QVRUTEVfUEFXTl9ST0xFX1JBTkdFRBADKlIKEkJhdHRsZVJlc291cmNlVHlw",
+            "ZRIdChlCQVRUTEVfUkVTT1VSQ0VfVFlQRV9OT05FEAASHQoZQkFUVExFX1JF",
+            "U09VUkNFX1RZUEVfQ09MRBABYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), typeof(global::Protocol.BattlePawnRole), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), typeof(global::Protocol.BattlePawnRole), typeof(global::Protocol.BattleResourceType), }, null, null));
     }
     #endregion
 
@@ -113,6 +115,11 @@ namespace Protocol {
     [pbr::OriginalName("BATTLE_PAWN_ROLE_TANKER")] Tanker = 1,
     [pbr::OriginalName("BATTLE_PAWN_ROLE_MELEE")] Melee = 2,
     [pbr::OriginalName("BATTLE_PAWN_ROLE_RANGED")] Ranged = 3,
+  }
+
+  public enum BattleResourceType {
+    [pbr::OriginalName("BATTLE_RESOURCE_TYPE_NONE")] None = 0,
+    [pbr::OriginalName("BATTLE_RESOURCE_TYPE_COLD")] Cold = 1,
   }
 
   #endregion

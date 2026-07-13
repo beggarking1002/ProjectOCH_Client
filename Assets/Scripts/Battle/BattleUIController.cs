@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using App;
 using Protocol;
@@ -82,7 +83,7 @@ namespace Battle
 
 		public async Task InitializeAsync(BattleObjectManager objectManager)
 		{
-			_objectManager = objectManager;
+			BindObjectManager(objectManager);
 			EnsureEventSystem();
 			SubscribeNetwork();
 			await BindOrLoadUiAsync();
@@ -96,6 +97,7 @@ namespace Battle
 
 		void OnDestroy()
 		{
+			UnbindObjectManager();
 			UnsubscribeNetwork();
 			if (_resultCoroutine != null)
 				StopCoroutine(_resultCoroutine);
@@ -130,6 +132,25 @@ namespace Battle
 				return;
 
 			GameRoot.Instance.Network.BattleResultReceived -= OnBattleResultReceived;
+		}
+
+		void BindObjectManager(BattleObjectManager objectManager)
+		{
+			if (_objectManager == objectManager)
+				return;
+
+			UnbindObjectManager();
+			_objectManager = objectManager;
+			if (_objectManager != null)
+				_objectManager.BattleActionLogApplied += OnBattleActionLogApplied;
+		}
+
+		void UnbindObjectManager()
+		{
+			if (_objectManager != null)
+				_objectManager.BattleActionLogApplied -= OnBattleActionLogApplied;
+
+			_objectManager = null;
 		}
 
 		async Task BindOrLoadUiAsync()
@@ -399,6 +420,81 @@ namespace Battle
 
 			_resultCoroutine = StartCoroutine(ShowBattleResultAfterDelay(packet.Victory));
 			Refresh();
+		}
+
+		void OnBattleActionLogApplied(BattleActionLog log)
+		{
+			if (log == null || _uiInstance == null || _objectManager == null)
+				return;
+
+			if (_objectManager.Pawns.TryGetValue(log.DefenderPawnId, out BattlePawnController targetPawn) == false || targetPawn == null)
+				_objectManager.Pawns.TryGetValue(log.AttackerPawnId, out targetPawn);
+
+			if (targetPawn == null)
+				return;
+
+			bool showMiss = log.IsEvaded;
+			bool showDamage = log.Damage != 0;
+			if (showMiss == false && showDamage == false)
+				return;
+
+			Camera camera = Camera.main;
+			if (camera == null)
+				return;
+
+			string value = showMiss
+				? "MISS"
+				: log.Damage > 0 ? $"-{log.Damage}" : $"+{-log.Damage}";
+			if (log.IsCritical)
+				value += "\nCRIT";
+			else if (log.IsPerfectGuarded)
+				value += "\nPERFECT";
+			else if (log.IsGuarded)
+				value += "\nGUARD";
+
+			Color color = showMiss
+				? new Color(0.82f, 0.86f, 0.92f, 1f)
+				: log.IsCritical ? new Color(1f, 0.83f, 0.2f, 1f)
+				: log.IsGuarded || log.IsPerfectGuarded ? new Color(0.42f, 0.74f, 1f, 1f)
+				: new Color(1f, 0.34f, 0.3f, 1f);
+
+			GameObject textObject = new GameObject("BattleDamageNumber");
+			textObject.layer = _uiInstance.layer;
+			textObject.transform.SetParent(_uiInstance.transform, false);
+			RectTransform rect = textObject.AddComponent<RectTransform>();
+			rect.sizeDelta = new Vector2(92f, 38f);
+			rect.position = camera.WorldToScreenPoint(targetPawn.transform.position + Vector3.up * 0.75f);
+
+			Text text = textObject.AddComponent<Text>();
+			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.fontSize = log.IsCritical ? 20 : 17;
+			text.fontStyle = FontStyle.Bold;
+			text.color = color;
+			text.alignment = TextAnchor.MiddleCenter;
+			text.horizontalOverflow = HorizontalWrapMode.Overflow;
+			text.verticalOverflow = VerticalWrapMode.Overflow;
+			text.raycastTarget = false;
+
+			StartCoroutine(AnimateDamageNumber(rect, text, color));
+		}
+
+		IEnumerator AnimateDamageNumber(RectTransform rect, Text text, Color color)
+		{
+			const float duration = 0.75f;
+			Vector3 start = rect.position;
+			float elapsed = 0f;
+			while (elapsed < duration)
+			{
+				elapsed += Time.deltaTime;
+				float ratio = Mathf.Clamp01(elapsed / duration);
+				rect.position = start + Vector3.up * (42f * ratio);
+				rect.localScale = Vector3.one * Mathf.Lerp(1.1f, 0.8f, ratio);
+				text.color = new Color(color.r, color.g, color.b, 1f - ratio);
+				yield return null;
+			}
+
+			if (rect != null)
+				Destroy(rect.gameObject);
 		}
 
 		IEnumerator ShowBattleResultAfterDelay(bool victory)
@@ -813,9 +909,29 @@ namespace Battle
 			string side = pawn.IsMine ? "Mine" : "Enemy";
 			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
 			string armor = pawn.MaxArmor > 0 ? $"{pawn.Armor}/{pawn.MaxArmor}" : pawn.Armor.ToString();
+			string cold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawnController.ResourceState coldResource)
+				? FormatValue(coldResource.Value, coldResource.MaxValue)
+				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
 			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nArmor: {armor}\nAP: {pawn.CurrentAp}\nState: {flags}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nArmor: {armor}\nBarrier: {pawn.TotalBarrierValue}\nCOLD: {cold}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
+		}
+
+		static string FormatStatuses(IReadOnlyDictionary<string, BattlePawnController.StatusState> statuses)
+		{
+			if (statuses == null || statuses.Count == 0)
+				return "-";
+
+			List<string> keys = new List<string>(statuses.Keys);
+			keys.Sort(System.StringComparer.Ordinal);
+			List<string> values = new List<string>(keys.Count);
+			for (int i = 0; i < keys.Count; i++)
+			{
+				BattlePawnController.StatusState status = statuses[keys[i]];
+				values.Add($"{status.StatusKey} x{status.Stacks} T{status.RemainingOwnerTurns}");
+			}
+
+			return string.Join(", ", values);
 		}
 
 		bool IsActionAvailable(ActionSlotBinding binding, BattlePawnController pawn)
@@ -1065,7 +1181,7 @@ namespace Battle
 				return null;
 			}
 
-			Text text = CreateOrGetPanelText(panel, textName, fontSize, new Vector2(8f, 58f), new Vector2(-8f, -6f));
+			Text text = CreateOrGetPanelText(panel, textName, fontSize, new Vector2(8f, 122f), new Vector2(-8f, -6f));
 			Transform bars = panel.Find(barsName);
 			RectTransform barsRect;
 			if (bars != null)
@@ -1085,11 +1201,40 @@ namespace Battle
 			barsRect.anchorMax = new Vector2(1f, 0f);
 			barsRect.pivot = new Vector2(0.5f, 0f);
 			barsRect.offsetMin = new Vector2(8f, 8f);
-			barsRect.offsetMax = new Vector2(-8f, 52f);
+			barsRect.offsetMax = new Vector2(-8f, 116f);
 
-			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 24f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
-			PanelBarView armorBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 4f, new Color(0.35f, 0.68f, 1f, 1f), true);
-			return new PawnPanelView(text, hpBar, armorBar);
+			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 88f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
+			PanelBarView armorBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 68f, new Color(0.35f, 0.68f, 1f, 1f), true);
+			PanelBarView barrierBar = CreateOrGetPanelBar(barsRect, "BarrierBar", 48f, new Color(0.76f, 0.48f, 1f, 1f), false);
+			PanelBarView coldBar = CreateOrGetPanelBar(barsRect, "ColdBar", 28f, new Color(0.34f, 0.88f, 1f, 1f), false);
+			StatusIconStripView statusIcons = CreateOrGetStatusIconStrip(barsRect);
+			return new PawnPanelView(text, hpBar, armorBar, barrierBar, coldBar, statusIcons);
+		}
+
+		static StatusIconStripView CreateOrGetStatusIconStrip(RectTransform parent)
+		{
+			Transform existing = parent.Find("StatusIcons");
+			RectTransform rect;
+			if (existing != null)
+			{
+				rect = existing.GetComponent<RectTransform>();
+				if (rect == null)
+					rect = existing.gameObject.AddComponent<RectTransform>();
+			}
+			else
+			{
+				GameObject iconsObject = new GameObject("StatusIcons");
+				iconsObject.layer = parent.gameObject.layer;
+				iconsObject.transform.SetParent(parent, false);
+				rect = iconsObject.AddComponent<RectTransform>();
+			}
+
+			rect.anchorMin = new Vector2(0f, 0f);
+			rect.anchorMax = new Vector2(1f, 0f);
+			rect.pivot = new Vector2(0.5f, 0f);
+			rect.offsetMin = new Vector2(0f, 2f);
+			rect.offsetMax = new Vector2(0f, 24f);
+			return new StatusIconStripView(rect);
 		}
 
 		static PanelBarView CreateOrGetPanelBar(RectTransform parent, string name, float bottom, Color fillColor, bool preserveExistingStyle)
@@ -1165,7 +1310,7 @@ namespace Battle
 
 			fillImage.raycastTarget = false;
 			Text valueText = CreateOrGetBarText(trackRect, "ValueText");
-			return new PanelBarView(fillImage, valueText);
+			return new PanelBarView(trackRect.gameObject, fillImage, valueText);
 		}
 
 		static Text CreateOrGetBarText(RectTransform parent, string name)
@@ -1294,12 +1439,18 @@ namespace Battle
 			readonly Text _text;
 			readonly PanelBarView _hpBar;
 			readonly PanelBarView _armorBar;
+			readonly PanelBarView _barrierBar;
+			readonly PanelBarView _coldBar;
+			readonly StatusIconStripView _statusIcons;
 
-			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView armorBar)
+			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView armorBar, PanelBarView barrierBar, PanelBarView coldBar, StatusIconStripView statusIcons)
 			{
 				_text = text;
 				_hpBar = hpBar;
 				_armorBar = armorBar;
+				_barrierBar = barrierBar;
+				_coldBar = coldBar;
+				_statusIcons = statusIcons;
 			}
 
 			public void SetPawn(string title, BattlePawnController pawn)
@@ -1311,30 +1462,54 @@ namespace Battle
 				{
 					_hpBar.Set(0f, "HP -");
 					_armorBar.Set(0f, "Armor -");
+					_barrierBar.SetVisible(false);
+					_coldBar.SetVisible(false);
+					_statusIcons.SetStatuses(null);
 					return;
 				}
 
 				_hpBar.Set(GetRatio(pawn.Hp, pawn.MaxHp), $"HP {FormatValue(pawn.Hp, pawn.MaxHp)}");
 				_armorBar.Set(GetRatio(pawn.Armor, pawn.MaxArmor), $"Armor {FormatValue(pawn.Armor, pawn.MaxArmor)}");
+
+				int totalBarrier = pawn.TotalBarrierValue;
+				_barrierBar.SetVisible(totalBarrier > 0);
+				if (totalBarrier > 0)
+					_barrierBar.Set(GetRatio(totalBarrier, pawn.MaxHp), $"Barrier {totalBarrier}");
+
+				bool hasCold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawnController.ResourceState cold);
+				_coldBar.SetVisible(hasCold);
+				if (hasCold)
+					_coldBar.Set(GetRatio(cold.Value, cold.MaxValue), $"COLD {FormatValue(cold.Value, cold.MaxValue)}");
+
+				_statusIcons.SetStatuses(pawn.Statuses);
 			}
 		}
 
 		sealed class PanelBarView
 		{
+			readonly GameObject _root;
 			readonly Image _fill;
 			readonly Text _valueText;
 
-			public PanelBarView(Image fill, Text valueText)
+			public PanelBarView(GameObject root, Image fill, Text valueText)
 			{
+				_root = root;
 				_fill = fill;
 				_valueText = valueText;
 			}
 
 			public void Set(float ratio, string text)
 			{
+				SetVisible(true);
 				SetFill(_fill, ratio);
 				if (_valueText != null)
 					_valueText.text = text;
+			}
+
+			public void SetVisible(bool visible)
+			{
+				if (_root != null && _root.activeSelf != visible)
+					_root.SetActive(visible);
 			}
 
 			static void SetFill(Image fill, float ratio)
@@ -1360,6 +1535,134 @@ namespace Battle
 				Mode = mode;
 				ActionSlot = actionSlot;
 				IsWaitCommand = isWaitCommand;
+			}
+		}
+
+		sealed class StatusIconStripView
+		{
+			readonly RectTransform _root;
+			readonly List<StatusIconView> _icons = new List<StatusIconView>();
+
+			public StatusIconStripView(RectTransform root)
+			{
+				_root = root;
+			}
+
+			public void SetStatuses(IReadOnlyDictionary<string, BattlePawnController.StatusState> statuses)
+			{
+				int count = statuses != null ? statuses.Count : 0;
+				if (_root == null)
+					return;
+
+				_root.gameObject.SetActive(count > 0);
+				if (count == 0)
+				{
+					for (int i = 0; i < _icons.Count; i++)
+						_icons[i].SetVisible(false);
+
+					return;
+				}
+
+				List<string> keys = new List<string>(statuses.Keys);
+				keys.Sort(System.StringComparer.Ordinal);
+				while (_icons.Count < keys.Count)
+					_icons.Add(CreateIcon(_root, _icons.Count));
+
+				for (int i = 0; i < _icons.Count; i++)
+				{
+					bool visible = i < keys.Count;
+					_icons[i].SetVisible(visible);
+					if (visible == false)
+						continue;
+
+					_icons[i].Set(statuses[keys[i]], i, keys.Count);
+				}
+			}
+
+			static StatusIconView CreateIcon(RectTransform parent, int index)
+			{
+				GameObject iconObject = new GameObject($"StatusIcon_{index}");
+				iconObject.layer = parent.gameObject.layer;
+				iconObject.transform.SetParent(parent, false);
+				RectTransform rect = iconObject.AddComponent<RectTransform>();
+				Image background = iconObject.AddComponent<Image>();
+				background.raycastTarget = false;
+
+				GameObject labelObject = new GameObject("Label");
+				labelObject.layer = iconObject.layer;
+				labelObject.transform.SetParent(iconObject.transform, false);
+				RectTransform labelRect = labelObject.AddComponent<RectTransform>();
+				labelRect.anchorMin = Vector2.zero;
+				labelRect.anchorMax = Vector2.one;
+				labelRect.offsetMin = Vector2.zero;
+				labelRect.offsetMax = Vector2.zero;
+				Text label = labelObject.AddComponent<Text>();
+				label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+				label.fontSize = 7;
+				label.color = Color.white;
+				label.alignment = TextAnchor.MiddleCenter;
+				label.horizontalOverflow = HorizontalWrapMode.Overflow;
+				label.verticalOverflow = VerticalWrapMode.Overflow;
+				label.raycastTarget = false;
+				return new StatusIconView(iconObject, rect, background, label);
+			}
+		}
+
+		sealed class StatusIconView
+		{
+			readonly GameObject _root;
+			readonly RectTransform _rect;
+			readonly Image _background;
+			readonly Text _label;
+
+			public StatusIconView(GameObject root, RectTransform rect, Image background, Text label)
+			{
+				_root = root;
+				_rect = rect;
+				_background = background;
+				_label = label;
+			}
+
+			public void SetVisible(bool visible)
+			{
+				if (_root != null && _root.activeSelf != visible)
+					_root.SetActive(visible);
+			}
+
+			public void Set(BattlePawnController.StatusState status, int index, int count)
+			{
+				float width = 1f / Mathf.Max(1, count);
+				_rect.anchorMin = new Vector2(index * width, 0f);
+				_rect.anchorMax = new Vector2((index + 1) * width, 1f);
+				_rect.offsetMin = new Vector2(1f, 0f);
+				_rect.offsetMax = new Vector2(-1f, 0f);
+				_root.name = $"StatusIcon_{status.StatusKey}";
+				_background.color = GetStatusColor(status.StatusKey);
+				_label.text = $"{GetStatusAbbreviation(status.StatusKey)}\nx{status.Stacks} T{status.RemainingOwnerTurns}";
+			}
+
+			static string GetStatusAbbreviation(string statusKey)
+			{
+				if (string.IsNullOrWhiteSpace(statusKey))
+					return "?";
+
+				string compact = statusKey.Replace("_", string.Empty).ToUpperInvariant();
+				return compact.Length <= 3 ? compact : compact.Substring(0, 3);
+			}
+
+			static Color GetStatusColor(string statusKey)
+			{
+				string key = statusKey ?? string.Empty;
+				if (key.IndexOf("COLD", System.StringComparison.OrdinalIgnoreCase) >= 0
+					|| key.IndexOf("FROST", System.StringComparison.OrdinalIgnoreCase) >= 0
+					|| key.IndexOf("FREEZE", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.2f, 0.72f, 0.94f, 0.94f);
+				if (key.IndexOf("BURN", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.92f, 0.34f, 0.2f, 0.94f);
+				if (key.IndexOf("POISON", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.55f, 0.35f, 0.82f, 0.94f);
+
+				return new Color(0.33f, 0.4f, 0.52f, 0.94f);
 			}
 		}
 	}

@@ -30,6 +30,7 @@ namespace Battle
 		BattleGameDataRepository _gameData;
 		string _fallbackPawnAddress;
 		ulong _battleId;
+		ulong _battleStateVersion;
 		ulong _currentTurnPawnId;
 		BattleActionMode _actionMode = BattleActionMode.Move;
 		bool _destroyed;
@@ -40,6 +41,7 @@ namespace Battle
 		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
 		public ulong BattleId => _battleId;
+		public ulong BattleStateVersion => _battleStateVersion;
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
 		public bool IsAnimatingMove => _isAnimatingMove;
@@ -50,6 +52,7 @@ namespace Battle
 			&& currentTurnPawn != null
 			&& currentTurnPawn.IsDead == false;
 		public string BattleLogText => _battleLogLines.Count > 0 ? string.Join("\n", _battleLogLines) : "-";
+		public event System.Action<BattleActionLog> BattleActionLogApplied;
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
@@ -185,6 +188,7 @@ namespace Battle
 		public async Task SpawnDebugPawnsAsync()
 		{
 			_battleId = 0;
+			_battleStateVersion = 0;
 			_currentTurnPawnId = 1;
 			_isAnimatingMove = false;
 			_localPawnIds.Clear();
@@ -204,10 +208,17 @@ namespace Battle
 			if (packet == null || packet.Success == false)
 				return;
 
+			if (_battleId == packet.BattleId && _battleId != 0 && packet.BattleStateVersion <= _battleStateVersion)
+			{
+				Debug.Log($"Ignored stale S_ENTER_BATTLE. battleId={packet.BattleId}, packetVersion={packet.BattleStateVersion}, localVersion={_battleStateVersion}");
+				return;
+			}
+
 			ReleasePawns();
 			_localPawnIds.Clear();
 			_battleLogLines.Clear();
 			_battleId = packet.BattleId;
+			_battleStateVersion = packet.BattleStateVersion;
 			_currentTurnPawnId = packet.CurrentTurnPawnId;
 			_isAnimatingMove = false;
 
@@ -218,7 +229,7 @@ namespace Battle
 				await SpawnPawnAsync(pawnInfo.PawnId, false, ToBattleAxial(pawnInfo.Axial), pawnInfo);
 
 			RefreshTurnIndicators();
-			Debug.Log($"Spawned battle pawns from server. battleId={_battleId}, currentTurnPawnId={_currentTurnPawnId}, allied={packet.AlliedPawns.Count}, enemy={packet.EnemyPawns.Count}");
+			Debug.Log($"Spawned battle pawns from server. battleId={_battleId}, battleStateVersion={_battleStateVersion}, currentTurnPawnId={_currentTurnPawnId}, allied={packet.AlliedPawns.Count}, enemy={packet.EnemyPawns.Count}");
 		}
 
 		public async System.Threading.Tasks.Task<BattlePawnController> SpawnPawnAsync(ulong pawnId, bool isMine, AxialCoord axial, BattlePawnInfo info = null)
@@ -394,6 +405,18 @@ namespace Battle
 			_pawnVisualHandles.Clear();
 			_pawnHandles.Clear();
 			_localPawnIds.Clear();
+		}
+
+		bool TryApplyNewBattleStateVersion(ulong packetVersion, string packetName)
+		{
+			if (packetVersion <= _battleStateVersion)
+			{
+				Debug.Log($"Ignored stale {packetName}. battleId={_battleId}, packetVersion={packetVersion}, localVersion={_battleStateVersion}");
+				return false;
+			}
+
+			_battleStateVersion = packetVersion;
+			return true;
 		}
 
 		static Transform FindVisualRoot(Transform root)
@@ -675,11 +698,14 @@ namespace Battle
 				return;
 			}
 
+			if (TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_BATTLE_MOVE)) == false)
+				return;
+
 			AxialCoord targetAxial = packet.Target != null ? ToBattleAxial(packet.Target) : pawn.Axial;
 			ulong nextTurnPawnId = packet.NextTurnPawnId;
+			ulong appliedStateVersion = _battleStateVersion;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
-			ApplyTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove);
 			AppendBattleLogs(packet.Logs);
 
 			_isAnimatingMove = true;
@@ -687,12 +713,18 @@ namespace Battle
 			pawn.MoveToAxial(targetAxial, () =>
 			{
 				_isAnimatingMove = false;
+				if (_battleStateVersion != appliedStateVersion)
+				{
+					RefreshTurnIndicators();
+					return;
+				}
+
 				_currentTurnPawnId = nextTurnPawnId;
 				_actionMode = BattleActionMode.Move;
 				RefreshTurnIndicators();
 			});
 
-			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={targetAxial}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={nextTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={targetAxial}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={nextTurnPawnId}");
 		}
 
 		void OnBattleSkillReceived(S_BATTLE_SKILL packet)
@@ -700,31 +732,28 @@ namespace Battle
 			if (packet == null || packet.BattleId != _battleId)
 				return;
 
-			_actionMode = BattleActionMode.Move;
-
 			if (packet.Success == false)
 			{
+				_actionMode = BattleActionMode.Move;
 				Debug.LogWarning($"Battle skill rejected. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, reason={packet.Reason}");
 				return;
 			}
 
+			if (TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_BATTLE_SKILL)) == false)
+				return;
+
+			_actionMode = BattleActionMode.Move;
+
 			ApplyPawnDeltas(packet.PawnDeltas);
-			ApplyTurnState(packet.CasterPawnId, packet.RemainingAp, packet.CanMove, packet.UsedSubActionThisTurn, packet.UsedUltimate);
 
 			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawnController casterPawn))
 				TriggerSkillAnimation(casterPawn, packet.SkillSlot);
-
-			if (packet.TargetPawnId != 0 && _pawns.TryGetValue(packet.TargetPawnId, out BattlePawnController targetPawn))
-			{
-				targetPawn.ApplyHp(packet.TargetHp);
-				targetPawn.ApplyArmor(packet.TargetArmor);
-			}
 
 			AppendBattleLogs(packet.Logs);
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, targetHp={packet.TargetHp}, targetArmor={packet.TargetArmor}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
 		void TriggerSkillAnimation(BattlePawnController casterPawn, int skillSlot)
@@ -756,21 +785,24 @@ namespace Battle
 				return;
 			}
 
-			_actionMode = BattleActionMode.Move;
-
 			if (packet.Success == false)
 			{
+				_actionMode = BattleActionMode.Move;
 				Debug.LogWarning($"Battle end turn rejected. pawnId={packet.PawnId}, reason={packet.Reason}");
 				return;
 			}
 
+			if (TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_BATTLE_END_TURN)) == false)
+				return;
+
+			_actionMode = BattleActionMode.Move;
+
 			ApplyPawnDeltas(packet.PawnDeltas);
-			ApplyTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove, packet.UsedSubActionThisTurn, packet.UsedUltimate);
 			AppendBattleLogs(packet.Logs);
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_END_TURN. battleId={_battleId}, pawnId={packet.PawnId}, remainingAp={packet.RemainingAp}, canMove={packet.CanMove}, nextTurnPawnId={_currentTurnPawnId}, isCurrentTurnLocal={IsCurrentTurnLocal}");
+			Debug.Log($"Applied S_BATTLE_END_TURN. battleId={_battleId}, pawnId={packet.PawnId}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={_currentTurnPawnId}, isCurrentTurnLocal={IsCurrentTurnLocal}");
 		}
 
 		void OnBattlePawnDeadReceived(S_BATTLE_PAWN_DEAD packet)
@@ -818,18 +850,6 @@ namespace Battle
 			}
 		}
 
-		void ApplyTurnState(ulong pawnId, int remainingAp, bool canMove)
-		{
-			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawnController pawn))
-				pawn.ApplyTurnState(remainingAp, canMove);
-		}
-
-		void ApplyTurnState(ulong pawnId, int remainingAp, bool canMove, bool usedSubActionThisTurn, bool usedUltimate)
-		{
-			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawnController pawn))
-				pawn.ApplyTurnState(remainingAp, canMove, usedSubActionThisTurn, usedUltimate);
-		}
-
 		void AppendBattleLogs(IEnumerable<BattleActionLog> logs)
 		{
 			if (logs == null)
@@ -849,6 +869,7 @@ namespace Battle
 					_battleLogLines.Dequeue();
 
 				Debug.Log($"BattleLog: {line}");
+				BattleActionLogApplied?.Invoke(log);
 			}
 		}
 

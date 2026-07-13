@@ -38,6 +38,18 @@
 
 서버 패킷에 들어 있는 결과를 화면에 반영하는 것이 항상 우선이다.
 
+## Pawn 상태 스냅샷 계약
+
+`BattlePawnInfo`는 전투 입장 시 Pawn의 전체 상태를, `BattlePawnDelta`는 성공한 이동·스킬·턴 종료 응답의 Pawn 상태를 전달한다. 클라이언트는 `pawn_deltas`를 로그에서 역산하지 않고 최종 상태로 적용한다.
+
+- 기본 상태: HP, Armor, AP, 이동 가능 여부, 행동 사용 여부, 사망, Facing
+- 리소스: `BattleResourceType`별 `value` / `max_value`; 해당 목록이 비어 있으면 리소스 UI를 표시하지 않는다.
+- 보호막: `barrier_id`별 값과 남은 소유자 턴; UI의 보호막 총량은 모든 `value`의 합이다.
+- 상태 이상: `status_key`별 스택과 남은 소유자 턴
+- Delta의 `Resources`, `Barriers`, `Statuses`는 증분이 아니라 **전체 교체 스냅샷**이다. 빈 목록은 기존 로컬 목록을 비운다.
+
+전투 응답의 `battle_state_version`은 단조 증가하는 상태 버전이다. 성공 응답은 현재 적용 버전보다 클 때만 상태와 연출을 반영한다.
+
 ## 스킬 슬롯 계약
 
 `BattleSceneUI/ActionPanel`과 `C_BATTLE_SKILL.skill_slot`은 아래 표를 공유한다.
