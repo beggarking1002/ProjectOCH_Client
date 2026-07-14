@@ -1,4 +1,9 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace Battle
@@ -8,11 +13,25 @@ namespace Battle
 	{
 		[SerializeField] Grid grid;
 		[SerializeField] Tilemap groundTilemap;
+		[FormerlySerializedAs("propTilemap")]
 		[SerializeField] Tilemap blockTilemap;
+		[SerializeField] Tilemap combatOverlayTilemap;
+		[SerializeField] TileBase normalGroundTile;
+		[SerializeField] TileBase waterGroundTile;
+		[SerializeField] TileBase iceOverlayTile;
 		[SerializeField] bool useBlockTilemap = true;
+		readonly Dictionary<AxialCoord, BattleTileState> _serverTileStates = new Dictionary<AxialCoord, BattleTileState>();
+		readonly List<AsyncOperationHandle<TileBase>> _loadedTileHandles = new List<AsyncOperationHandle<TileBase>>();
+		bool _hasServerTileSnapshot;
+
+		const string NormalGroundTileAddress = "Tile/grass";
+		const string WaterGroundTileAddress = "Tile/water";
+		const string IceOverlayTileAddress = "Tile/ice";
 
 		public Transform PlaneTransform => transform;
 		public Grid Grid => grid;
+		public Tilemap CombatOverlayTilemap => combatOverlayTilemap;
+		public bool HasServerTileSnapshot => _hasServerTileSnapshot;
 
 		void Awake()
 		{
@@ -22,6 +41,17 @@ namespace Battle
 		void OnValidate()
 		{
 			InitializeIfNeeded();
+		}
+
+		void OnDestroy()
+		{
+			for (int i = 0; i < _loadedTileHandles.Count; i++)
+			{
+				if (_loadedTileHandles[i].IsValid())
+					Addressables.Release(_loadedTileHandles[i]);
+			}
+
+			_loadedTileHandles.Clear();
 		}
 
 		public void InitializeIfNeeded()
@@ -34,6 +64,28 @@ namespace Battle
 
 			if (blockTilemap == null)
 				blockTilemap = FindChildTilemap("Block_Tilemap", "Prop_Tilemap");
+
+			if (combatOverlayTilemap == null)
+				combatOverlayTilemap = FindChildTilemap("CombatOverlay_Tilemap");
+
+			ResolveTileAssetsFromAuthoredGround();
+		}
+
+		// Tile assets are loaded by address as well as serialized on the prefab.
+		// This keeps map presentation valid when an Addressables map bundle was
+		// built before the serialized TileBase fields were added.
+		public async Task LoadVisualTilesAsync()
+		{
+			InitializeIfNeeded();
+
+			if (normalGroundTile == null)
+				normalGroundTile = await LoadTileAsync(NormalGroundTileAddress);
+
+			if (waterGroundTile == null)
+				waterGroundTile = await LoadTileAsync(WaterGroundTileAddress);
+
+			if (iceOverlayTile == null)
+				iceOverlayTile = await LoadTileAsync(IceOverlayTileAddress);
 		}
 
 		public AxialCoord WorldToAxial(Vector3 worldPosition)
@@ -62,10 +114,200 @@ namespace Battle
 
 		public bool IsWalkable(AxialCoord axial)
 		{
-			if (HasGroundTile(axial) == false)
+			if (IsWalkableByServerTileState(axial) == false)
 				return false;
 
 			return useBlockTilemap == false || HasBlockTile(axial) == false;
+		}
+
+		bool IsWalkableByServerTileState(AxialCoord axial)
+		{
+			if (_hasServerTileSnapshot == false)
+				return HasGroundTile(axial);
+
+			if (_serverTileStates.TryGetValue(axial, out BattleTileState tileState) == false)
+				return false;
+
+			switch (tileState.TileType)
+			{
+				case Protocol.BattleTileType.Normal:
+					return true;
+				case Protocol.BattleTileType.Water:
+					return tileState.OverlayType == Protocol.BattleTileOverlayType.Ice;
+				default:
+					return false;
+			}
+		}
+
+		public void ApplyTileSnapshot(IEnumerable<Protocol.BattleTileInfo> tiles)
+		{
+			if (tiles == null)
+				return;
+
+			List<Protocol.BattleTileInfo> tileSnapshot = new List<Protocol.BattleTileInfo>();
+			foreach (Protocol.BattleTileInfo tile in tiles)
+			{
+				if (tile?.Axial != null)
+					tileSnapshot.Add(tile);
+			}
+
+			// Keep the authored map intact when connected to an older server that does not
+			// include the newly added tiles field.
+			if (tileSnapshot.Count == 0)
+				return;
+
+			InitializeIfNeeded();
+			bool canRedrawGround = normalGroundTile != null && waterGroundTile != null;
+			if (canRedrawGround == false)
+			{
+				// The base terrain is authored in the map prefab. This fallback also keeps
+				// an older Addressables bundle from making the map disappear while its
+				// serialized TileBase references are refreshed by the next content build.
+				Debug.LogWarning($"{nameof(BattleMapGrid)} is using the authored Ground_Tilemap because the loaded map does not contain NORMAL/WATER Tile references. Rebuild Addressables content before making a player build.");
+			}
+
+			_serverTileStates.Clear();
+			if (canRedrawGround)
+				groundTilemap?.ClearAllTiles();
+
+			combatOverlayTilemap?.ClearAllTiles();
+
+			for (int i = 0; i < tileSnapshot.Count; i++)
+				ApplyTileState(tileSnapshot[i], updateGroundVisual: canRedrawGround);
+
+			_hasServerTileSnapshot = true;
+		}
+
+		public void ApplyTileDeltas(IEnumerable<Protocol.BattleTileInfo> tileDeltas)
+		{
+			if (tileDeltas == null)
+				return;
+
+			foreach (Protocol.BattleTileInfo tileDelta in tileDeltas)
+			{
+				if (tileDelta?.Axial == null)
+					continue;
+
+				// A Delta updates state and the dynamic overlay only. Ground and Prop are
+				// authored/static layers and must not be changed by a skill response.
+				ApplyTileState(tileDelta, updateGroundVisual: false);
+			}
+		}
+
+		void ApplyTileState(Protocol.BattleTileInfo tileInfo, bool updateGroundVisual)
+		{
+			AxialCoord axial = new AxialCoord(tileInfo.Axial.Q, tileInfo.Axial.R);
+			_serverTileStates[axial] = new BattleTileState(tileInfo.TileType, tileInfo.OverlayType);
+
+			if (updateGroundVisual)
+				SetGroundTile(axial, tileInfo.TileType);
+
+			switch (tileInfo.OverlayType)
+			{
+				case Protocol.BattleTileOverlayType.Ice:
+					SetCombatOverlayTile(axial, iceOverlayTile);
+					break;
+				case Protocol.BattleTileOverlayType.None:
+					ClearCombatOverlayTile(axial);
+					break;
+				default:
+					Debug.LogWarning($"Unsupported battle tile overlay. axial={axial}, overlay={tileInfo.OverlayType}");
+					ClearCombatOverlayTile(axial);
+					break;
+			}
+		}
+
+		void SetGroundTile(AxialCoord axial, Protocol.BattleTileType tileType)
+		{
+			if (groundTilemap == null)
+				return;
+
+			TileBase tile = null;
+			switch (tileType)
+			{
+				case Protocol.BattleTileType.Normal:
+					tile = normalGroundTile;
+					break;
+				case Protocol.BattleTileType.Water:
+					tile = waterGroundTile;
+					break;
+			}
+
+			groundTilemap.SetTile(axial.ToCell(), tile);
+		}
+
+		void ResolveTileAssetsFromAuthoredGround()
+		{
+			if (groundTilemap == null || (normalGroundTile != null && waterGroundTile != null && iceOverlayTile != null))
+				return;
+
+			TileBase[] authoredTiles = groundTilemap.GetTilesBlock(groundTilemap.cellBounds);
+			for (int i = 0; i < authoredTiles.Length; i++)
+			{
+				TileBase tile = authoredTiles[i];
+				if (tile == null)
+					continue;
+
+				switch (tile.name)
+				{
+					case "Grass":
+						normalGroundTile ??= tile;
+						break;
+					case "Water":
+						waterGroundTile ??= tile;
+						break;
+					case "Ice":
+						iceOverlayTile ??= tile;
+						break;
+				}
+			}
+		}
+
+		async Task<TileBase> LoadTileAsync(string address)
+		{
+			AsyncOperationHandle<TileBase> handle = Addressables.LoadAssetAsync<TileBase>(address);
+			_loadedTileHandles.Add(handle);
+			await handle.Task;
+			if (handle.Status == AsyncOperationStatus.Succeeded)
+				return handle.Result;
+
+			Debug.LogError($"Failed to load battle tile addressable: {address}");
+			return null;
+		}
+
+		public TileBase GetCombatOverlayTile(AxialCoord axial)
+		{
+			return combatOverlayTilemap != null
+				? combatOverlayTilemap.GetTile(axial.ToCell())
+				: null;
+		}
+
+		public void SetCombatOverlayTile(AxialCoord axial, TileBase tile)
+		{
+			if (combatOverlayTilemap == null)
+			{
+				Debug.LogWarning($"{nameof(BattleMapGrid)} is missing CombatOverlay_Tilemap.");
+				return;
+			}
+
+			combatOverlayTilemap.SetTile(axial.ToCell(), tile);
+		}
+
+		public void ClearCombatOverlayTile(AxialCoord axial)
+		{
+			SetCombatOverlayTile(axial, null);
+		}
+
+		readonly struct BattleTileState
+		{
+			public readonly Protocol.BattleTileType TileType;
+			public readonly Protocol.BattleTileOverlayType OverlayType;
+
+			public BattleTileState(Protocol.BattleTileType tileType, Protocol.BattleTileOverlayType overlayType)
+			{
+				TileType = tileType;
+				OverlayType = overlayType;
+			}
 		}
 
 		public AxialCoord GetNeighbor(AxialCoord axial, int direction)

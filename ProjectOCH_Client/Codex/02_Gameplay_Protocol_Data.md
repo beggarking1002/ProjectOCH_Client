@@ -18,7 +18,14 @@
 - 스킬: 슬롯 선택 + 타일/Pawn 클릭 → `C_BATTLE_SKILL` → `S_BATTLE_SKILL` → Delta, HP/Armor, 애니메이션, 로그 반영
   - 요청의 대상은 항상 `target_axial`이다. Pawn 클릭은 해당 Pawn의 axial을, Self는 caster의 axial을, `TILE_OR_ENEMY`는 빈 타일도 그대로 보낸다.
   - 호환용 `target_pawn_id`는 클라이언트가 항상 `0`으로 전송하고 서버가 `target_axial`에서 실제 Pawn을 해석한다.
-  - 응답의 `target_pawn_id == 0`은 빈 타일 결과다. 대상 Pawn을 별도로 찾거나 수치를 직접 갱신하지 않고 `pawn_deltas`만 적용한다.
+- 응답의 `target_pawn_id == 0`은 빈 타일 결과다. 대상 Pawn을 별도로 찾거나 수치를 직접 갱신하지 않고 `pawn_deltas`만 적용한다.
+
+### 전투 타일 계약
+
+- `BattleTileInfo`는 axial, 원본 지형 `tile_type`(NORMAL/WATER), 동적 효과 `overlay_type`(NONE/ICE)을 함께 가진다.
+- `S_ENTER_BATTLE.tiles`는 전투 맵 전체 스냅샷이다. 클라이언트는 Ground를 `tile_type`으로 초기화하고 CombatOverlay를 `overlay_type`으로 초기화한다.
+- `S_BATTLE_SKILL.tile_deltas`, `S_BATTLE_END_TURN.tile_deltas`는 변경된 타일만 전달한다. Delta는 Ground/Prop을 바꾸지 않고 CombatOverlay와 로컬 타일 상태만 갱신한다.
+- 이동 미리보기 규칙: `NORMAL + NONE/ICE`는 이동 가능, `WATER + NONE`은 불가, `WATER + ICE`는 가능. Prop은 이 규칙과 별도로 이동을 막으며 최종 판정은 서버가 가진다.
 - 턴 종료: `C_BATTLE_END_TURN` → `S_BATTLE_END_TURN`
 - 사망/결과: `S_BATTLE_PAWN_DEAD`, `S_BATTLE_RESULT`; 결과 UI 확인 뒤 `C_BATTLE_RESULT_ACK`
 

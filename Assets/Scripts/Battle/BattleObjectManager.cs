@@ -254,6 +254,7 @@ namespace Battle
 			_battleStateVersion = packet.BattleStateVersion;
 			_currentTurnPawnId = packet.CurrentTurnPawnId;
 			_isAnimatingMove = false;
+			_mapGrid?.ApplyTileSnapshot(packet.Tiles);
 
 			foreach (BattlePawnInfo pawnInfo in packet.AlliedPawns)
 				await SpawnPawnAsync(pawnInfo.PawnId, true, ToBattleAxial(pawnInfo.Axial), pawnInfo);
@@ -726,8 +727,6 @@ namespace Battle
 			ulong appliedStateVersion = _battleStateVersion;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
-			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
-			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
 			AppendBattleLogs(packet.Logs);
 
 			_isAnimatingMove = true;
@@ -767,6 +766,9 @@ namespace Battle
 			_actionMode = BattleActionMode.Move;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
+			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
+			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
+			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
 
 			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawnController casterPawn))
 				TriggerSkillAnimation(casterPawn, packet.SkillSlot);
@@ -820,6 +822,7 @@ namespace Battle
 			_actionMode = BattleActionMode.Move;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
+			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			AppendBattleLogs(packet.Logs);
 
 			_currentTurnPawnId = packet.NextTurnPawnId;

@@ -24,6 +24,8 @@ BEIGE_ICE를 시작점으로 전투 스킬 UI와 GameData 연동을 확장 중�
 - 상태 아이콘은 현재 런타임 생성 칩(약어/스택/턴)이다. 아트 확정 후 `status_key`별 Sprite 매핑으로 교체한다.
 - `BattleActionLog`는 피해 숫자·MISS 등의 연출 전용이다. Pawn의 HP/AP/Armor 등 최종 수치는 언제나 `pawn_deltas`만 적용한다.
 - 스킬 요청은 `target_axial`만 권위 있는 대상으로 사용하며, NetworkService가 호환 필드 `target_pawn_id`를 항상 `0`으로 전송한다. 빈 타일 스킬 결과는 Pawn 피해 숫자를 표시하지 않는다.
+- `BattleField_001`에 빈 `CombatOverlay_Tilemap`을 추가했다. 현재 서버 패킷에는 overlay 상태가 없으므로 비어 있지만, `BattleMapGrid.SetCombatOverlayTile`/`ClearCombatOverlayTile`로 Ground를 보존한 채 ICE 등의 전투 타일을 표시할 준비가 됐다.
+- 전투 타일 동기화 프로토콜을 반영했다. `S_ENTER_BATTLE.tiles`는 Ground/Overlay 전체 초기화에, 스킬·턴 종료의 `tile_deltas`는 Overlay와 이동 가능 상태 갱신에 사용한다. `WATER + ICE`는 클라이언트 이동 미리보기에서도 이동 가능하다.
 
 ## 알려진 개발 단계 항목
 

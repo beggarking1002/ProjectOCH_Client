@@ -37,37 +37,41 @@ namespace Protocol {
             "DQoFdmFsdWUYAyABKAUSHQoVcmVtYWluaW5nX293bmVyX3R1cm5zGAQgASgF",
             "EhEKCW1heF92YWx1ZRgFIAEoBSJWChFCYXR0bGVTdGF0dXNTdGF0ZRISCgpz",
             "dGF0dXNfa2V5GAEgASgJEg4KBnN0YWNrcxgCIAEoBRIdChVyZW1haW5pbmdf",
-            "b3duZXJfdHVybnMYAyABKAUi8AQKDkJhdHRsZVBhd25JbmZvEg8KB3Bhd25f",
-            "aWQYASABKAQSEAoIb3duZXJfaWQYAiABKAQSJwoKcGF3bl9jbGFzcxgDIAEo",
-            "DjITLlByb3RvY29sLlBhd25DbGFzcxIjCgVheGlhbBgEIAEoCzIULlByb3Rv",
-            "Y29sLkF4aWFsQ29vcmQSCgoCaHAYBSABKAUSDgoGbWF4X2hwGAYgASgFEhIK",
-            "Cm1vdmVfcmFuZ2UYByABKAUSDQoFYXJtb3IYCCABKAUSEQoJbWF4X2FybW9y",
-            "GAkgASgFEhIKCmN1cnJlbnRfYXAYCiABKAUSEAoIY2FuX21vdmUYCyABKAgS",
-            "IQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgMIAEoCBIVCg11c2VkX3Vs",
-            "dGltYXRlGA0gASgIEg8KB2lzX2RlYWQYECABKAgSOQoQZmFjaW5nX2RpcmVj",
-            "dGlvbhgRIAEoDjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbhIm",
-            "CgRyb2xlGBIgASgOMhguUHJvdG9jb2wuQmF0dGxlUGF3blJvbGUSMAoJcmVz",
-            "b3VyY2VzGBMgAygLMh0uUHJvdG9jb2wuQmF0dGxlUmVzb3VyY2VTdGF0ZRIu",
-            "CghiYXJyaWVycxgUIAMoCzIcLlByb3RvY29sLkJhdHRsZUJhcnJpZXJTdGF0",
-            "ZRItCghzdGF0dXNlcxgVIAMoCzIbLlByb3RvY29sLkJhdHRsZVN0YXR1c1N0",
-            "YXRlEhYKDnNoaWVsZF9jdXJyZW50GBYgASgFEhIKCnNoaWVsZF9tYXgYFyAB",
-            "KAVKBAgOEA9KBAgPEBAirAMKD0JhdHRsZVBhd25EZWx0YRIPCgdwYXduX2lk",
-            "GAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgFEhIKCmN1cnJlbnRf",
-            "YXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNlZF9zdWJfYWN0aW9u",
-            "X3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRlGAcgASgIEg8KB2lz",
-            "X2RlYWQYCCABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgJIAEoDjIfLlByb3Rv",
-            "Y29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbhIwCglyZXNvdXJjZXMYCyADKAsy",
-            "HS5Qcm90b2NvbC5CYXR0bGVSZXNvdXJjZVN0YXRlEi4KCGJhcnJpZXJzGAwg",
-            "AygLMhwuUHJvdG9jb2wuQmF0dGxlQmFycmllclN0YXRlEi0KCHN0YXR1c2Vz",
-            "GA0gAygLMhsuUHJvdG9jb2wuQmF0dGxlU3RhdHVzU3RhdGUSFgoOc2hpZWxk",
-            "X2N1cnJlbnQYDiABKAUSEgoKc2hpZWxkX21heBgPIAEoBUoECAoQCyKpAgoP",
-            "QmF0dGxlQWN0aW9uTG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQ",
-            "ZGVmZW5kZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMK",
-            "C2FjdGlvbl90eXBlGAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0",
-            "aWNhbBgGIAEoCBIRCglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgI",
-            "IAEoCBIaChJpc19wZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRl",
-            "chgKIAEoCBIQCghocF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEo",
-            "BRIWCg5pc19iYWNrX2F0dGFjaxgNIAEoCGIGcHJvdG8z"));
+            "b3duZXJfdHVybnMYAyABKAUimQEKDkJhdHRsZVRpbGVJbmZvEiMKBWF4aWFs",
+            "GAEgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZBIrCgl0aWxlX3R5cGUYAiAB",
+            "KA4yGC5Qcm90b2NvbC5CYXR0bGVUaWxlVHlwZRI1CgxvdmVybGF5X3R5cGUY",
+            "AyABKA4yHy5Qcm90b2NvbC5CYXR0bGVUaWxlT3ZlcmxheVR5cGUi8AQKDkJh",
+            "dHRsZVBhd25JbmZvEg8KB3Bhd25faWQYASABKAQSEAoIb3duZXJfaWQYAiAB",
+            "KAQSJwoKcGF3bl9jbGFzcxgDIAEoDjITLlByb3RvY29sLlBhd25DbGFzcxIj",
+            "CgVheGlhbBgEIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSCgoCaHAYBSAB",
+            "KAUSDgoGbWF4X2hwGAYgASgFEhIKCm1vdmVfcmFuZ2UYByABKAUSDQoFYXJt",
+            "b3IYCCABKAUSEQoJbWF4X2FybW9yGAkgASgFEhIKCmN1cnJlbnRfYXAYCiAB",
+            "KAUSEAoIY2FuX21vdmUYCyABKAgSIQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNf",
+            "dHVybhgMIAEoCBIVCg11c2VkX3VsdGltYXRlGA0gASgIEg8KB2lzX2RlYWQY",
+            "ECABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgRIAEoDjIfLlByb3RvY29sLkJh",
+            "dHRsZUZhY2luZ0RpcmVjdGlvbhImCgRyb2xlGBIgASgOMhguUHJvdG9jb2wu",
+            "QmF0dGxlUGF3blJvbGUSMAoJcmVzb3VyY2VzGBMgAygLMh0uUHJvdG9jb2wu",
+            "QmF0dGxlUmVzb3VyY2VTdGF0ZRIuCghiYXJyaWVycxgUIAMoCzIcLlByb3Rv",
+            "Y29sLkJhdHRsZUJhcnJpZXJTdGF0ZRItCghzdGF0dXNlcxgVIAMoCzIbLlBy",
+            "b3RvY29sLkJhdHRsZVN0YXR1c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50GBYg",
+            "ASgFEhIKCnNoaWVsZF9tYXgYFyABKAVKBAgOEA9KBAgPEBAirAMKD0JhdHRs",
+            "ZVBhd25EZWx0YRIPCgdwYXduX2lkGAEgASgEEgoKAmhwGAIgASgFEg0KBWFy",
+            "bW9yGAMgASgFEhIKCmN1cnJlbnRfYXAYBCABKAUSEAoIY2FuX21vdmUYBSAB",
+            "KAgSIQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgGIAEoCBIVCg11c2Vk",
+            "X3VsdGltYXRlGAcgASgIEg8KB2lzX2RlYWQYCCABKAgSOQoQZmFjaW5nX2Rp",
+            "cmVjdGlvbhgJIAEoDjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlv",
+            "bhIwCglyZXNvdXJjZXMYCyADKAsyHS5Qcm90b2NvbC5CYXR0bGVSZXNvdXJj",
+            "ZVN0YXRlEi4KCGJhcnJpZXJzGAwgAygLMhwuUHJvdG9jb2wuQmF0dGxlQmFy",
+            "cmllclN0YXRlEi0KCHN0YXR1c2VzGA0gAygLMhsuUHJvdG9jb2wuQmF0dGxl",
+            "U3RhdHVzU3RhdGUSFgoOc2hpZWxkX2N1cnJlbnQYDiABKAUSEgoKc2hpZWxk",
+            "X21heBgPIAEoBUoECAoQCyKpAgoPQmF0dGxlQWN0aW9uTG9nEhgKEGF0dGFj",
+            "a2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5kZXJfcGF3bl9pZBgCIAEoBBIS",
+            "Cgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlvbl90eXBlGAQgASgJEg4KBmRh",
+            "bWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgGIAEoCBIRCglpc19ldmFkZWQY",
+            "ByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIaChJpc19wZXJmZWN0X2d1YXJk",
+            "ZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEoCBIQCghocF9hZnRlchgLIAEo",
+            "BRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5pc19iYWNrX2F0dGFjaxgNIAEo",
+            "CGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -77,6 +81,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleResourceState), global::Protocol.BattleResourceState.Parser, new[]{ "ResourceType", "Value", "MaxValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleBarrierState), global::Protocol.BattleBarrierState.Parser, new[]{ "BarrierId", "SourceSkillKey", "Value", "RemainingOwnerTurns", "MaxValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleStatusState), global::Protocol.BattleStatusState.Parser, new[]{ "StatusKey", "Stacks", "RemainingOwnerTurns" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleTileInfo), global::Protocol.BattleTileInfo.Parser, new[]{ "Axial", "TileType", "OverlayType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
@@ -1710,6 +1715,278 @@ namespace Protocol {
 
   }
 
+  public sealed partial class BattleTileInfo : pb::IMessage<BattleTileInfo>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BattleTileInfo> _parser = new pb::MessageParser<BattleTileInfo>(() => new BattleTileInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<BattleTileInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleTileInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleTileInfo(BattleTileInfo other) : this() {
+      axial_ = other.axial_ != null ? other.axial_.Clone() : null;
+      tileType_ = other.tileType_;
+      overlayType_ = other.overlayType_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleTileInfo Clone() {
+      return new BattleTileInfo(this);
+    }
+
+    /// <summary>Field number for the "axial" field.</summary>
+    public const int AxialFieldNumber = 1;
+    private global::Protocol.AxialCoord axial_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.AxialCoord Axial {
+      get { return axial_; }
+      set {
+        axial_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "tile_type" field.</summary>
+    public const int TileTypeFieldNumber = 2;
+    private global::Protocol.BattleTileType tileType_ = global::Protocol.BattleTileType.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.BattleTileType TileType {
+      get { return tileType_; }
+      set {
+        tileType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "overlay_type" field.</summary>
+    public const int OverlayTypeFieldNumber = 3;
+    private global::Protocol.BattleTileOverlayType overlayType_ = global::Protocol.BattleTileOverlayType.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.BattleTileOverlayType OverlayType {
+      get { return overlayType_; }
+      set {
+        overlayType_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as BattleTileInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(BattleTileInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Axial, other.Axial)) return false;
+      if (TileType != other.TileType) return false;
+      if (OverlayType != other.OverlayType) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (axial_ != null) hash ^= Axial.GetHashCode();
+      if (TileType != global::Protocol.BattleTileType.None) hash ^= TileType.GetHashCode();
+      if (OverlayType != global::Protocol.BattleTileOverlayType.None) hash ^= OverlayType.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (axial_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Axial);
+      }
+      if (TileType != global::Protocol.BattleTileType.None) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) TileType);
+      }
+      if (OverlayType != global::Protocol.BattleTileOverlayType.None) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) OverlayType);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (axial_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Axial);
+      }
+      if (TileType != global::Protocol.BattleTileType.None) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) TileType);
+      }
+      if (OverlayType != global::Protocol.BattleTileOverlayType.None) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) OverlayType);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (axial_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Axial);
+      }
+      if (TileType != global::Protocol.BattleTileType.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) TileType);
+      }
+      if (OverlayType != global::Protocol.BattleTileOverlayType.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) OverlayType);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(BattleTileInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.axial_ != null) {
+        if (axial_ == null) {
+          Axial = new global::Protocol.AxialCoord();
+        }
+        Axial.MergeFrom(other.Axial);
+      }
+      if (other.TileType != global::Protocol.BattleTileType.None) {
+        TileType = other.TileType;
+      }
+      if (other.OverlayType != global::Protocol.BattleTileOverlayType.None) {
+        OverlayType = other.OverlayType;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (axial_ == null) {
+              Axial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(Axial);
+            break;
+          }
+          case 16: {
+            TileType = (global::Protocol.BattleTileType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            OverlayType = (global::Protocol.BattleTileOverlayType) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (axial_ == null) {
+              Axial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(Axial);
+            break;
+          }
+          case 16: {
+            TileType = (global::Protocol.BattleTileType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            OverlayType = (global::Protocol.BattleTileOverlayType) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class BattlePawnInfo : pb::IMessage<BattlePawnInfo>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1724,7 +2001,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2629,7 +2906,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3266,7 +3543,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

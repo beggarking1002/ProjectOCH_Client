@@ -36,46 +36,49 @@ namespace Protocol {
             "MhMuUHJvdG9jb2wuVmVjMkZpeGVkEiMKBnRhcmdldBgDIAEoCzITLlByb3Rv",
             "Y29sLlZlYzJGaXhlZBITCgtkdXJhdGlvbl9tcxgEIAEoDSIVCgZDX0NIQVQS",
             "CwoDbXNnGAEgASgJIicKBlNfQ0hBVBIQCghwbGF5ZXJJZBgBIAEoBBILCgNt",
-            "c2cYAiABKAkiEAoOQ19FTlRFUl9CQVRUTEUi7wEKDlNfRU5URVJfQkFUVExF",
+            "c2cYAiABKAkiEAoOQ19FTlRFUl9CQVRUTEUimAIKDlNfRU5URVJfQkFUVExF",
             "Eg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg4KBm1hcF9p",
             "ZBgDIAEoCRIuCgxhbGxpZWRfcGF3bnMYBCADKAsyGC5Qcm90b2NvbC5CYXR0",
             "bGVQYXduSW5mbxItCgtlbmVteV9wYXducxgFIAMoCzIYLlByb3RvY29sLkJh",
             "dHRsZVBhd25JbmZvEhwKFGN1cnJlbnRfdHVybl9wYXduX2lkGAYgASgEEg4K",
-            "BnJlYXNvbhgHIAEoCRIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgIIAEoBCJZ",
-            "Cg1DX0JBVFRMRV9NT1ZFEhEKCWJhdHRsZV9pZBgBIAEoBBIPCgdwYXduX2lk",
-            "GAIgASgEEiQKBnRhcmdldBgDIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQi",
-            "hQMKDVNfQkFUVExFX01PVkUSDwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVf",
-            "aWQYAiABKAQSDwoHcGF3bl9pZBgDIAEoBBIjCgVzdGFydBgEIAEoCzIULlBy",
-            "b3RvY29sLkF4aWFsQ29vcmQSJAoGdGFyZ2V0GAUgASgLMhQuUHJvdG9jb2wu",
-            "QXhpYWxDb29yZBIZChFuZXh0X3R1cm5fcGF3bl9pZBgGIAEoBBIqCgZyZXN1",
-            "bHQYByABKA4yGi5Qcm90b2NvbC5CYXR0bGVNb3ZlUmVzdWx0Eg4KBnJlYXNv",
-            "bhgIIAEoCRIUCgxyZW1haW5pbmdfYXAYCSABKAUSEAoIY2FuX21vdmUYCiAB",
-            "KAgSLgoLcGF3bl9kZWx0YXMYCyADKAsyGS5Qcm90b2NvbC5CYXR0bGVQYXdu",
-            "RGVsdGESJwoEbG9ncxgMIAMoCzIZLlByb3RvY29sLkJhdHRsZUFjdGlvbkxv",
-            "ZxIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgNIAEoBCKTAQoOQ19CQVRUTEVf",
-            "U0tJTEwSEQoJYmF0dGxlX2lkGAEgASgEEhYKDmNhc3Rlcl9wYXduX2lkGAIg",
-            "ASgEEhIKCnNraWxsX3Nsb3QYAyABKAUSFgoOdGFyZ2V0X3Bhd25faWQYBCAB",
-            "KAQSKgoMdGFyZ2V0X2F4aWFsGAUgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29y",
-            "ZCLhAwoOU19CQVRUTEVfU0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0",
-            "bGVfaWQYAiABKAQSFgoOY2FzdGVyX3Bhd25faWQYAyABKAQSEgoKc2tpbGxf",
-            "c2xvdBgEIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0YXJnZXRf",
-            "YXhpYWwYBiABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEg4KBmRhbWFnZRgH",
-            "IAEoBRIRCgl0YXJnZXRfaHAYCCABKAUSGQoRbmV4dF90dXJuX3Bhd25faWQY",
-            "CSABKAQSDgoGcmVhc29uGAogASgJEhQKDHJlbWFpbmluZ19hcBgLIAEoBRIQ",
-            "CghjYW5fbW92ZRgMIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190dXJu",
-            "GA0gASgIEhUKDXVzZWRfdWx0aW1hdGUYDiABKAgSFAoMdGFyZ2V0X2FybW9y",
-            "GA8gASgFEi4KC3Bhd25fZGVsdGFzGBAgAygLMhkuUHJvdG9jb2wuQmF0dGxl",
-            "UGF3bkRlbHRhEicKBGxvZ3MYESADKAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rp",
-            "b25Mb2cSHAoUYmF0dGxlX3N0YXRlX3ZlcnNpb24YEiABKAQiNwoRQ19CQVRU",
-            "TEVfRU5EX1RVUk4SEQoJYmF0dGxlX2lkGAEgASgEEg8KB3Bhd25faWQYAiAB",
-            "KAQizAIKEVNfQkFUVExFX0VORF9UVVJOEg8KB3N1Y2Nlc3MYASABKAgSEQoJ",
-            "YmF0dGxlX2lkGAIgASgEEg8KB3Bhd25faWQYAyABKAQSGQoRbmV4dF90dXJu",
-            "X3Bhd25faWQYBCABKAQSDgoGcmVhc29uGAUgASgJEhQKDHJlbWFpbmluZ19h",
-            "cBgGIAEoBRIQCghjYW5fbW92ZRgHIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25f",
-            "dGhpc190dXJuGAggASgIEhUKDXVzZWRfdWx0aW1hdGUYCSABKAgSLgoLcGF3",
-            "bl9kZWx0YXMYCiADKAsyGS5Qcm90b2NvbC5CYXR0bGVQYXduRGVsdGESJwoE",
-            "bG9ncxgLIAMoCzIZLlByb3RvY29sLkJhdHRsZUFjdGlvbkxvZxIcChRiYXR0",
-            "bGVfc3RhdGVfdmVyc2lvbhgMIAEoBCIrCg9DX0JBVFRMRV9JTlZJVEUSGAoQ",
+            "BnJlYXNvbhgHIAEoCRIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgIIAEoBBIn",
+            "CgV0aWxlcxgJIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvIlkKDUNf",
+            "QkFUVExFX01PVkUSEQoJYmF0dGxlX2lkGAEgASgEEg8KB3Bhd25faWQYAiAB",
+            "KAQSJAoGdGFyZ2V0GAMgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZCKFAwoN",
+            "U19CQVRUTEVfTU9WRRIPCgdzdWNjZXNzGAEgASgIEhEKCWJhdHRsZV9pZBgC",
+            "IAEoBBIPCgdwYXduX2lkGAMgASgEEiMKBXN0YXJ0GAQgASgLMhQuUHJvdG9j",
+            "b2wuQXhpYWxDb29yZBIkCgZ0YXJnZXQYBSABKAsyFC5Qcm90b2NvbC5BeGlh",
+            "bENvb3JkEhkKEW5leHRfdHVybl9wYXduX2lkGAYgASgEEioKBnJlc3VsdBgH",
+            "IAEoDjIaLlByb3RvY29sLkJhdHRsZU1vdmVSZXN1bHQSDgoGcmVhc29uGAgg",
+            "ASgJEhQKDHJlbWFpbmluZ19hcBgJIAEoBRIQCghjYW5fbW92ZRgKIAEoCBIu",
+            "CgtwYXduX2RlbHRhcxgLIAMoCzIZLlByb3RvY29sLkJhdHRsZVBhd25EZWx0",
+            "YRInCgRsb2dzGAwgAygLMhkuUHJvdG9jb2wuQmF0dGxlQWN0aW9uTG9nEhwK",
+            "FGJhdHRsZV9zdGF0ZV92ZXJzaW9uGA0gASgEIpMBCg5DX0JBVFRMRV9TS0lM",
+            "TBIRCgliYXR0bGVfaWQYASABKAQSFgoOY2FzdGVyX3Bhd25faWQYAiABKAQS",
+            "EgoKc2tpbGxfc2xvdBgDIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgEIAEoBBIq",
+            "Cgx0YXJnZXRfYXhpYWwYBSABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkIpAE",
+            "Cg5TX0JBVFRMRV9TS0lMTBIPCgdzdWNjZXNzGAEgASgIEhEKCWJhdHRsZV9p",
+            "ZBgCIAEoBBIWCg5jYXN0ZXJfcGF3bl9pZBgDIAEoBBISCgpza2lsbF9zbG90",
+            "GAQgASgFEhYKDnRhcmdldF9wYXduX2lkGAUgASgEEioKDHRhcmdldF9heGlh",
+            "bBgGIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSDgoGZGFtYWdlGAcgASgF",
+            "EhEKCXRhcmdldF9ocBgIIAEoBRIZChFuZXh0X3R1cm5fcGF3bl9pZBgJIAEo",
+            "BBIOCgZyZWFzb24YCiABKAkSFAoMcmVtYWluaW5nX2FwGAsgASgFEhAKCGNh",
+            "bl9tb3ZlGAwgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1cm4YDSAB",
+            "KAgSFQoNdXNlZF91bHRpbWF0ZRgOIAEoCBIUCgx0YXJnZXRfYXJtb3IYDyAB",
+            "KAUSLgoLcGF3bl9kZWx0YXMYECADKAsyGS5Qcm90b2NvbC5CYXR0bGVQYXdu",
+            "RGVsdGESJwoEbG9ncxgRIAMoCzIZLlByb3RvY29sLkJhdHRsZUFjdGlvbkxv",
+            "ZxIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgSIAEoBBItCgt0aWxlX2RlbHRh",
+            "cxgTIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvIjcKEUNfQkFUVExF",
+            "X0VORF9UVVJOEhEKCWJhdHRsZV9pZBgBIAEoBBIPCgdwYXduX2lkGAIgASgE",
+            "IvsCChFTX0JBVFRMRV9FTkRfVFVSThIPCgdzdWNjZXNzGAEgASgIEhEKCWJh",
+            "dHRsZV9pZBgCIAEoBBIPCgdwYXduX2lkGAMgASgEEhkKEW5leHRfdHVybl9w",
+            "YXduX2lkGAQgASgEEg4KBnJlYXNvbhgFIAEoCRIUCgxyZW1haW5pbmdfYXAY",
+            "BiABKAUSEAoIY2FuX21vdmUYByABKAgSIQoZdXNlZF9zdWJfYWN0aW9uX3Ro",
+            "aXNfdHVybhgIIAEoCBIVCg11c2VkX3VsdGltYXRlGAkgASgIEi4KC3Bhd25f",
+            "ZGVsdGFzGAogAygLMhkuUHJvdG9jb2wuQmF0dGxlUGF3bkRlbHRhEicKBGxv",
+            "Z3MYCyADKAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rpb25Mb2cSHAoUYmF0dGxl",
+            "X3N0YXRlX3ZlcnNpb24YDCABKAQSLQoLdGlsZV9kZWx0YXMYDSADKAsyGC5Q",
+            "cm90b2NvbC5CYXR0bGVUaWxlSW5mbyIrCg9DX0JBVFRMRV9JTlZJVEUSGAoQ",
             "dGFyZ2V0X3BsYXllcl9pZBgBIAEoBCJxChdTX0JBVFRMRV9JTlZJVEVfUkVR",
             "VUVTVBIPCgdzdWNjZXNzGAEgASgIEhsKE3JlcXVlc3Rlcl9wbGF5ZXJfaWQY",
             "AiABKAQSGAoQdGFyZ2V0X3BsYXllcl9pZBgDIAEoBBIOCgZyZWFzb24YBCAB",
@@ -107,13 +110,13 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CHAT), global::Protocol.C_CHAT.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CHAT), global::Protocol.S_CHAT.Parser, new[]{ "PlayerId", "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER_BATTLE), global::Protocol.C_ENTER_BATTLE.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason", "BattleStateVersion" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason", "BattleStateVersion", "Tiles" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_MOVE), global::Protocol.C_BATTLE_MOVE.Parser, new[]{ "BattleId", "PawnId", "Target" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "RemainingAp", "CanMove", "PawnDeltas", "Logs", "BattleStateVersion" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_END_TURN), global::Protocol.C_BATTLE_END_TURN.Parser, new[]{ "BattleId", "PawnId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_INVITE), global::Protocol.C_BATTLE_INVITE.Parser, new[]{ "TargetPlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_REQUEST), global::Protocol.S_BATTLE_INVITE_REQUEST.Parser, new[]{ "Success", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_RECEIVED), global::Protocol.S_BATTLE_INVITE_RECEIVED.Parser, new[]{ "RequesterPlayerId" }, null, null, null, null),
@@ -2681,6 +2684,7 @@ namespace Protocol {
       currentTurnPawnId_ = other.currentTurnPawnId_;
       reason_ = other.reason_;
       battleStateVersion_ = other.battleStateVersion_;
+      tiles_ = other.tiles_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2784,6 +2788,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "tiles" field.</summary>
+    public const int TilesFieldNumber = 9;
+    private static readonly pb::FieldCodec<global::Protocol.BattleTileInfo> _repeated_tiles_codec
+        = pb::FieldCodec.ForMessage(74, global::Protocol.BattleTileInfo.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleTileInfo> tiles_ = new pbc::RepeatedField<global::Protocol.BattleTileInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleTileInfo> Tiles {
+      get { return tiles_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2807,6 +2822,7 @@ namespace Protocol {
       if (CurrentTurnPawnId != other.CurrentTurnPawnId) return false;
       if (Reason != other.Reason) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
+      if(!tiles_.Equals(other.tiles_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2822,6 +2838,7 @@ namespace Protocol {
       if (CurrentTurnPawnId != 0UL) hash ^= CurrentTurnPawnId.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
+      hash ^= tiles_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2866,6 +2883,7 @@ namespace Protocol {
         output.WriteRawTag(64);
         output.WriteUInt64(BattleStateVersion);
       }
+      tiles_.WriteTo(output, _repeated_tiles_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2902,6 +2920,7 @@ namespace Protocol {
         output.WriteRawTag(64);
         output.WriteUInt64(BattleStateVersion);
       }
+      tiles_.WriteTo(ref output, _repeated_tiles_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2932,6 +2951,7 @@ namespace Protocol {
       if (BattleStateVersion != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
+      size += tiles_.CalculateSize(_repeated_tiles_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2964,6 +2984,7 @@ namespace Protocol {
       if (other.BattleStateVersion != 0UL) {
         BattleStateVersion = other.BattleStateVersion;
       }
+      tiles_.Add(other.tiles_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3011,6 +3032,10 @@ namespace Protocol {
             BattleStateVersion = input.ReadUInt64();
             break;
           }
+          case 74: {
+            tiles_.AddEntriesFrom(input, _repeated_tiles_codec);
+            break;
+          }
         }
       }
     #endif
@@ -3056,6 +3081,10 @@ namespace Protocol {
           }
           case 64: {
             BattleStateVersion = input.ReadUInt64();
+            break;
+          }
+          case 74: {
+            tiles_.AddEntriesFrom(ref input, _repeated_tiles_codec);
             break;
           }
         }
@@ -4364,6 +4393,7 @@ namespace Protocol {
       pawnDeltas_ = other.pawnDeltas_.Clone();
       logs_ = other.logs_.Clone();
       battleStateVersion_ = other.battleStateVersion_;
+      tileDeltas_ = other.tileDeltas_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4587,6 +4617,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "tile_deltas" field.</summary>
+    public const int TileDeltasFieldNumber = 19;
+    private static readonly pb::FieldCodec<global::Protocol.BattleTileInfo> _repeated_tileDeltas_codec
+        = pb::FieldCodec.ForMessage(154, global::Protocol.BattleTileInfo.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleTileInfo> tileDeltas_ = new pbc::RepeatedField<global::Protocol.BattleTileInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleTileInfo> TileDeltas {
+      get { return tileDeltas_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4620,6 +4661,7 @@ namespace Protocol {
       if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
       if(!logs_.Equals(other.logs_)) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
+      if(!tileDeltas_.Equals(other.tileDeltas_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4645,6 +4687,7 @@ namespace Protocol {
       hash ^= pawnDeltas_.GetHashCode();
       hash ^= logs_.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
+      hash ^= tileDeltas_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4729,6 +4772,7 @@ namespace Protocol {
         output.WriteRawTag(144, 1);
         output.WriteUInt64(BattleStateVersion);
       }
+      tileDeltas_.WriteTo(output, _repeated_tileDeltas_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4805,6 +4849,7 @@ namespace Protocol {
         output.WriteRawTag(144, 1);
         output.WriteUInt64(BattleStateVersion);
       }
+      tileDeltas_.WriteTo(ref output, _repeated_tileDeltas_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4865,6 +4910,7 @@ namespace Protocol {
       if (BattleStateVersion != 0UL) {
         size += 2 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
+      size += tileDeltas_.CalculateSize(_repeated_tileDeltas_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -4930,6 +4976,7 @@ namespace Protocol {
       if (other.BattleStateVersion != 0UL) {
         BattleStateVersion = other.BattleStateVersion;
       }
+      tileDeltas_.Add(other.tileDeltas_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5020,6 +5067,10 @@ namespace Protocol {
             BattleStateVersion = input.ReadUInt64();
             break;
           }
+          case 154: {
+            tileDeltas_.AddEntriesFrom(input, _repeated_tileDeltas_codec);
+            break;
+          }
         }
       }
     #endif
@@ -5108,6 +5159,10 @@ namespace Protocol {
           }
           case 144: {
             BattleStateVersion = input.ReadUInt64();
+            break;
+          }
+          case 154: {
+            tileDeltas_.AddEntriesFrom(ref input, _repeated_tileDeltas_codec);
             break;
           }
         }
@@ -5389,6 +5444,7 @@ namespace Protocol {
       pawnDeltas_ = other.pawnDeltas_.Clone();
       logs_ = other.logs_.Clone();
       battleStateVersion_ = other.battleStateVersion_;
+      tileDeltas_ = other.tileDeltas_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5540,6 +5596,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "tile_deltas" field.</summary>
+    public const int TileDeltasFieldNumber = 13;
+    private static readonly pb::FieldCodec<global::Protocol.BattleTileInfo> _repeated_tileDeltas_codec
+        = pb::FieldCodec.ForMessage(106, global::Protocol.BattleTileInfo.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleTileInfo> tileDeltas_ = new pbc::RepeatedField<global::Protocol.BattleTileInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleTileInfo> TileDeltas {
+      get { return tileDeltas_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5567,6 +5634,7 @@ namespace Protocol {
       if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
       if(!logs_.Equals(other.logs_)) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
+      if(!tileDeltas_.Equals(other.tileDeltas_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5586,6 +5654,7 @@ namespace Protocol {
       hash ^= pawnDeltas_.GetHashCode();
       hash ^= logs_.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
+      hash ^= tileDeltas_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5646,6 +5715,7 @@ namespace Protocol {
         output.WriteRawTag(96);
         output.WriteUInt64(BattleStateVersion);
       }
+      tileDeltas_.WriteTo(output, _repeated_tileDeltas_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5698,6 +5768,7 @@ namespace Protocol {
         output.WriteRawTag(96);
         output.WriteUInt64(BattleStateVersion);
       }
+      tileDeltas_.WriteTo(ref output, _repeated_tileDeltas_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5740,6 +5811,7 @@ namespace Protocol {
       if (BattleStateVersion != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
+      size += tileDeltas_.CalculateSize(_repeated_tileDeltas_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5784,6 +5856,7 @@ namespace Protocol {
       if (other.BattleStateVersion != 0UL) {
         BattleStateVersion = other.BattleStateVersion;
       }
+      tileDeltas_.Add(other.tileDeltas_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5847,6 +5920,10 @@ namespace Protocol {
             BattleStateVersion = input.ReadUInt64();
             break;
           }
+          case 106: {
+            tileDeltas_.AddEntriesFrom(input, _repeated_tileDeltas_codec);
+            break;
+          }
         }
       }
     #endif
@@ -5908,6 +5985,10 @@ namespace Protocol {
           }
           case 96: {
             BattleStateVersion = input.ReadUInt64();
+            break;
+          }
+          case 106: {
+            tileDeltas_.AddEntriesFrom(ref input, _repeated_tileDeltas_codec);
             break;
           }
         }

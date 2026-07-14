@@ -118,6 +118,7 @@ namespace Scenes
 				mapGrid = battleMap.AddComponent<BattleMapGrid>();
 
 			mapGrid.InitializeIfNeeded();
+			await mapGrid.LoadVisualTilesAsync();
 			if (mapGrid.Grid == null)
 			{
 				Debug.LogError($"{BattleMapAddress} requires a Grid component.");

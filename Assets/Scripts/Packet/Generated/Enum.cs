@@ -53,10 +53,14 @@ namespace Protocol {
             "T0xFX1RBTktFUhABEhoKFkJBVFRMRV9QQVdOX1JPTEVfTUVMRUUQAhIbChdC",
             "QVRUTEVfUEFXTl9ST0xFX1JBTkdFRBADKlIKEkJhdHRsZVJlc291cmNlVHlw",
             "ZRIdChlCQVRUTEVfUkVTT1VSQ0VfVFlQRV9OT05FEAASHQoZQkFUVExFX1JF",
-            "U09VUkNFX1RZUEVfQ09MRBABYgZwcm90bzM="));
+            "U09VUkNFX1RZUEVfQ09MRBABKmQKDkJhdHRsZVRpbGVUeXBlEhkKFUJBVFRM",
+            "RV9USUxFX1RZUEVfTk9ORRAAEhsKF0JBVFRMRV9USUxFX1RZUEVfTk9STUFM",
+            "EAESGgoWQkFUVExFX1RJTEVfVFlQRV9XQVRFUhACKlwKFUJhdHRsZVRpbGVP",
+            "dmVybGF5VHlwZRIhCh1CQVRUTEVfVElMRV9PVkVSTEFZX1RZUEVfTk9ORRAA",
+            "EiAKHEJBVFRMRV9USUxFX09WRVJMQVlfVFlQRV9JQ0UQAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), typeof(global::Protocol.BattlePawnRole), typeof(global::Protocol.BattleResourceType), }, null, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), typeof(global::Protocol.BattlePawnRole), typeof(global::Protocol.BattleResourceType), typeof(global::Protocol.BattleTileType), typeof(global::Protocol.BattleTileOverlayType), }, null, null));
     }
     #endregion
 
@@ -120,6 +124,17 @@ namespace Protocol {
   public enum BattleResourceType {
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_NONE")] None = 0,
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_COLD")] Cold = 1,
+  }
+
+  public enum BattleTileType {
+    [pbr::OriginalName("BATTLE_TILE_TYPE_NONE")] None = 0,
+    [pbr::OriginalName("BATTLE_TILE_TYPE_NORMAL")] Normal = 1,
+    [pbr::OriginalName("BATTLE_TILE_TYPE_WATER")] Water = 2,
+  }
+
+  public enum BattleTileOverlayType {
+    [pbr::OriginalName("BATTLE_TILE_OVERLAY_TYPE_NONE")] None = 0,
+    [pbr::OriginalName("BATTLE_TILE_OVERLAY_TYPE_ICE")] Ice = 1,
   }
 
   #endregion
