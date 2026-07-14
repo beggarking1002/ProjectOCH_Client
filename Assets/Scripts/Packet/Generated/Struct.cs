@@ -37,41 +37,44 @@ namespace Protocol {
             "DQoFdmFsdWUYAyABKAUSHQoVcmVtYWluaW5nX293bmVyX3R1cm5zGAQgASgF",
             "EhEKCW1heF92YWx1ZRgFIAEoBSJWChFCYXR0bGVTdGF0dXNTdGF0ZRISCgpz",
             "dGF0dXNfa2V5GAEgASgJEg4KBnN0YWNrcxgCIAEoBRIdChVyZW1haW5pbmdf",
-            "b3duZXJfdHVybnMYAyABKAUimQEKDkJhdHRsZVRpbGVJbmZvEiMKBWF4aWFs",
-            "GAEgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZBIrCgl0aWxlX3R5cGUYAiAB",
-            "KA4yGC5Qcm90b2NvbC5CYXR0bGVUaWxlVHlwZRI1CgxvdmVybGF5X3R5cGUY",
-            "AyABKA4yHy5Qcm90b2NvbC5CYXR0bGVUaWxlT3ZlcmxheVR5cGUi8AQKDkJh",
-            "dHRsZVBhd25JbmZvEg8KB3Bhd25faWQYASABKAQSEAoIb3duZXJfaWQYAiAB",
-            "KAQSJwoKcGF3bl9jbGFzcxgDIAEoDjITLlByb3RvY29sLlBhd25DbGFzcxIj",
-            "CgVheGlhbBgEIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSCgoCaHAYBSAB",
-            "KAUSDgoGbWF4X2hwGAYgASgFEhIKCm1vdmVfcmFuZ2UYByABKAUSDQoFYXJt",
-            "b3IYCCABKAUSEQoJbWF4X2FybW9yGAkgASgFEhIKCmN1cnJlbnRfYXAYCiAB",
-            "KAUSEAoIY2FuX21vdmUYCyABKAgSIQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNf",
-            "dHVybhgMIAEoCBIVCg11c2VkX3VsdGltYXRlGA0gASgIEg8KB2lzX2RlYWQY",
-            "ECABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgRIAEoDjIfLlByb3RvY29sLkJh",
-            "dHRsZUZhY2luZ0RpcmVjdGlvbhImCgRyb2xlGBIgASgOMhguUHJvdG9jb2wu",
-            "QmF0dGxlUGF3blJvbGUSMAoJcmVzb3VyY2VzGBMgAygLMh0uUHJvdG9jb2wu",
-            "QmF0dGxlUmVzb3VyY2VTdGF0ZRIuCghiYXJyaWVycxgUIAMoCzIcLlByb3Rv",
-            "Y29sLkJhdHRsZUJhcnJpZXJTdGF0ZRItCghzdGF0dXNlcxgVIAMoCzIbLlBy",
-            "b3RvY29sLkJhdHRsZVN0YXR1c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50GBYg",
-            "ASgFEhIKCnNoaWVsZF9tYXgYFyABKAVKBAgOEA9KBAgPEBAirAMKD0JhdHRs",
-            "ZVBhd25EZWx0YRIPCgdwYXduX2lkGAEgASgEEgoKAmhwGAIgASgFEg0KBWFy",
-            "bW9yGAMgASgFEhIKCmN1cnJlbnRfYXAYBCABKAUSEAoIY2FuX21vdmUYBSAB",
-            "KAgSIQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgGIAEoCBIVCg11c2Vk",
-            "X3VsdGltYXRlGAcgASgIEg8KB2lzX2RlYWQYCCABKAgSOQoQZmFjaW5nX2Rp",
-            "cmVjdGlvbhgJIAEoDjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlv",
-            "bhIwCglyZXNvdXJjZXMYCyADKAsyHS5Qcm90b2NvbC5CYXR0bGVSZXNvdXJj",
-            "ZVN0YXRlEi4KCGJhcnJpZXJzGAwgAygLMhwuUHJvdG9jb2wuQmF0dGxlQmFy",
-            "cmllclN0YXRlEi0KCHN0YXR1c2VzGA0gAygLMhsuUHJvdG9jb2wuQmF0dGxl",
-            "U3RhdHVzU3RhdGUSFgoOc2hpZWxkX2N1cnJlbnQYDiABKAUSEgoKc2hpZWxk",
-            "X21heBgPIAEoBUoECAoQCyKpAgoPQmF0dGxlQWN0aW9uTG9nEhgKEGF0dGFj",
-            "a2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5kZXJfcGF3bl9pZBgCIAEoBBIS",
-            "Cgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlvbl90eXBlGAQgASgJEg4KBmRh",
-            "bWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgGIAEoCBIRCglpc19ldmFkZWQY",
-            "ByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIaChJpc19wZXJmZWN0X2d1YXJk",
-            "ZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEoCBIQCghocF9hZnRlchgLIAEo",
-            "BRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5pc19iYWNrX2F0dGFjaxgNIAEo",
-            "CGIGcHJvdG8z"));
+            "b3duZXJfdHVybnMYAyABKAUiOwoPQmF0dGxlQXVyYVN0YXRlEhgKEHNvdXJj",
+            "ZV9za2lsbF9rZXkYASABKAkSDgoGcmFkaXVzGAIgASgFIpkBCg5CYXR0bGVU",
+            "aWxlSW5mbxIjCgVheGlhbBgBIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQS",
+            "KwoJdGlsZV90eXBlGAIgASgOMhguUHJvdG9jb2wuQmF0dGxlVGlsZVR5cGUS",
+            "NQoMb3ZlcmxheV90eXBlGAMgASgOMh8uUHJvdG9jb2wuQmF0dGxlVGlsZU92",
+            "ZXJsYXlUeXBlIpoFCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgE",
+            "EhAKCG93bmVyX2lkGAIgASgEEicKCnBhd25fY2xhc3MYAyABKA4yEy5Qcm90",
+            "b2NvbC5QYXduQ2xhc3MSIwoFYXhpYWwYBCABKAsyFC5Qcm90b2NvbC5BeGlh",
+            "bENvb3JkEgoKAmhwGAUgASgFEg4KBm1heF9ocBgGIAEoBRISCgptb3ZlX3Jh",
+            "bmdlGAcgASgFEg0KBWFybW9yGAggASgFEhEKCW1heF9hcm1vchgJIAEoBRIS",
+            "CgpjdXJyZW50X2FwGAogASgFEhAKCGNhbl9tb3ZlGAsgASgIEiEKGXVzZWRf",
+            "c3ViX2FjdGlvbl90aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgN",
+            "IAEoCBIPCgdpc19kZWFkGBAgASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YESAB",
+            "KA4yHy5Qcm90b2NvbC5CYXR0bGVGYWNpbmdEaXJlY3Rpb24SJgoEcm9sZRgS",
+            "IAEoDjIYLlByb3RvY29sLkJhdHRsZVBhd25Sb2xlEjAKCXJlc291cmNlcxgT",
+            "IAMoCzIdLlByb3RvY29sLkJhdHRsZVJlc291cmNlU3RhdGUSLgoIYmFycmll",
+            "cnMYFCADKAsyHC5Qcm90b2NvbC5CYXR0bGVCYXJyaWVyU3RhdGUSLQoIc3Rh",
+            "dHVzZXMYFSADKAsyGy5Qcm90b2NvbC5CYXR0bGVTdGF0dXNTdGF0ZRIWCg5z",
+            "aGllbGRfY3VycmVudBgWIAEoBRISCgpzaGllbGRfbWF4GBcgASgFEigKBWF1",
+            "cmFzGBggAygLMhkuUHJvdG9jb2wuQmF0dGxlQXVyYVN0YXRlSgQIDhAPSgQI",
+            "DxAQItYDCg9CYXR0bGVQYXduRGVsdGESDwoHcGF3bl9pZBgBIAEoBBIKCgJo",
+            "cBgCIAEoBRINCgVhcm1vchgDIAEoBRISCgpjdXJyZW50X2FwGAQgASgFEhAK",
+            "CGNhbl9tb3ZlGAUgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1cm4Y",
+            "BiABKAgSFQoNdXNlZF91bHRpbWF0ZRgHIAEoCBIPCgdpc19kZWFkGAggASgI",
+            "EjkKEGZhY2luZ19kaXJlY3Rpb24YCSABKA4yHy5Qcm90b2NvbC5CYXR0bGVG",
+            "YWNpbmdEaXJlY3Rpb24SMAoJcmVzb3VyY2VzGAsgAygLMh0uUHJvdG9jb2wu",
+            "QmF0dGxlUmVzb3VyY2VTdGF0ZRIuCghiYXJyaWVycxgMIAMoCzIcLlByb3Rv",
+            "Y29sLkJhdHRsZUJhcnJpZXJTdGF0ZRItCghzdGF0dXNlcxgNIAMoCzIbLlBy",
+            "b3RvY29sLkJhdHRsZVN0YXR1c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50GA4g",
+            "ASgFEhIKCnNoaWVsZF9tYXgYDyABKAUSKAoFYXVyYXMYECADKAsyGS5Qcm90",
+            "b2NvbC5CYXR0bGVBdXJhU3RhdGVKBAgKEAsiqQIKD0JhdHRsZUFjdGlvbkxv",
+            "ZxIYChBhdHRhY2tlcl9wYXduX2lkGAEgASgEEhgKEGRlZmVuZGVyX3Bhd25f",
+            "aWQYAiABKAQSEgoKc2tpbGxfc2xvdBgDIAEoBRITCgthY3Rpb25fdHlwZRgE",
+            "IAEoCRIOCgZkYW1hZ2UYBSABKAUSEwoLaXNfY3JpdGljYWwYBiABKAgSEQoJ",
+            "aXNfZXZhZGVkGAcgASgIEhIKCmlzX2d1YXJkZWQYCCABKAgSGgoSaXNfcGVy",
+            "ZmVjdF9ndWFyZGVkGAkgASgIEhIKCmlzX2NvdW50ZXIYCiABKAgSEAoIaHBf",
+            "YWZ0ZXIYCyABKAUSEwoLYXJtb3JfYWZ0ZXIYDCABKAUSFgoOaXNfYmFja19h",
+            "dHRhY2sYDSABKAhiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -81,9 +84,10 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleResourceState), global::Protocol.BattleResourceState.Parser, new[]{ "ResourceType", "Value", "MaxValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleBarrierState), global::Protocol.BattleBarrierState.Parser, new[]{ "BarrierId", "SourceSkillKey", "Value", "RemainingOwnerTurns", "MaxValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleStatusState), global::Protocol.BattleStatusState.Parser, new[]{ "StatusKey", "Stacks", "RemainingOwnerTurns" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleAuraState), global::Protocol.BattleAuraState.Parser, new[]{ "SourceSkillKey", "Radius" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleTileInfo), global::Protocol.BattleTileInfo.Parser, new[]{ "Axial", "TileType", "OverlayType" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
           }));
     }
@@ -1715,6 +1719,232 @@ namespace Protocol {
 
   }
 
+  public sealed partial class BattleAuraState : pb::IMessage<BattleAuraState>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<BattleAuraState> _parser = new pb::MessageParser<BattleAuraState>(() => new BattleAuraState());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<BattleAuraState> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleAuraState() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleAuraState(BattleAuraState other) : this() {
+      sourceSkillKey_ = other.sourceSkillKey_;
+      radius_ = other.radius_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public BattleAuraState Clone() {
+      return new BattleAuraState(this);
+    }
+
+    /// <summary>Field number for the "source_skill_key" field.</summary>
+    public const int SourceSkillKeyFieldNumber = 1;
+    private string sourceSkillKey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SourceSkillKey {
+      get { return sourceSkillKey_; }
+      set {
+        sourceSkillKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "radius" field.</summary>
+    public const int RadiusFieldNumber = 2;
+    private int radius_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Radius {
+      get { return radius_; }
+      set {
+        radius_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as BattleAuraState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(BattleAuraState other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SourceSkillKey != other.SourceSkillKey) return false;
+      if (Radius != other.Radius) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SourceSkillKey.Length != 0) hash ^= SourceSkillKey.GetHashCode();
+      if (Radius != 0) hash ^= Radius.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (SourceSkillKey.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SourceSkillKey);
+      }
+      if (Radius != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Radius);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (SourceSkillKey.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SourceSkillKey);
+      }
+      if (Radius != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Radius);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (SourceSkillKey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SourceSkillKey);
+      }
+      if (Radius != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Radius);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(BattleAuraState other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SourceSkillKey.Length != 0) {
+        SourceSkillKey = other.SourceSkillKey;
+      }
+      if (other.Radius != 0) {
+        Radius = other.Radius;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            SourceSkillKey = input.ReadString();
+            break;
+          }
+          case 16: {
+            Radius = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            SourceSkillKey = input.ReadString();
+            break;
+          }
+          case 16: {
+            Radius = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class BattleTileInfo : pb::IMessage<BattleTileInfo>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1729,7 +1959,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2001,7 +2231,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2042,6 +2272,7 @@ namespace Protocol {
       statuses_ = other.statuses_.Clone();
       shieldCurrent_ = other.shieldCurrent_;
       shieldMax_ = other.shieldMax_;
+      auras_ = other.auras_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2300,6 +2531,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "auras" field.</summary>
+    public const int AurasFieldNumber = 24;
+    private static readonly pb::FieldCodec<global::Protocol.BattleAuraState> _repeated_auras_codec
+        = pb::FieldCodec.ForMessage(194, global::Protocol.BattleAuraState.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleAuraState> auras_ = new pbc::RepeatedField<global::Protocol.BattleAuraState>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleAuraState> Auras {
+      get { return auras_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2336,6 +2578,7 @@ namespace Protocol {
       if(!statuses_.Equals(other.statuses_)) return false;
       if (ShieldCurrent != other.ShieldCurrent) return false;
       if (ShieldMax != other.ShieldMax) return false;
+      if(!auras_.Equals(other.auras_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2364,6 +2607,7 @@ namespace Protocol {
       hash ^= statuses_.GetHashCode();
       if (ShieldCurrent != 0) hash ^= ShieldCurrent.GetHashCode();
       if (ShieldMax != 0) hash ^= ShieldMax.GetHashCode();
+      hash ^= auras_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2457,6 +2701,7 @@ namespace Protocol {
         output.WriteRawTag(184, 1);
         output.WriteInt32(ShieldMax);
       }
+      auras_.WriteTo(output, _repeated_auras_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2542,6 +2787,7 @@ namespace Protocol {
         output.WriteRawTag(184, 1);
         output.WriteInt32(ShieldMax);
       }
+      auras_.WriteTo(ref output, _repeated_auras_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2609,6 +2855,7 @@ namespace Protocol {
       if (ShieldMax != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(ShieldMax);
       }
+      size += auras_.CalculateSize(_repeated_auras_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2681,6 +2928,7 @@ namespace Protocol {
       if (other.ShieldMax != 0) {
         ShieldMax = other.ShieldMax;
       }
+      auras_.Add(other.auras_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2781,6 +3029,10 @@ namespace Protocol {
           }
           case 184: {
             ShieldMax = input.ReadInt32();
+            break;
+          }
+          case 194: {
+            auras_.AddEntriesFrom(input, _repeated_auras_codec);
             break;
           }
         }
@@ -2885,6 +3137,10 @@ namespace Protocol {
             ShieldMax = input.ReadInt32();
             break;
           }
+          case 194: {
+            auras_.AddEntriesFrom(ref input, _repeated_auras_codec);
+            break;
+          }
         }
       }
     }
@@ -2906,7 +3162,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2940,6 +3196,7 @@ namespace Protocol {
       statuses_ = other.statuses_.Clone();
       shieldCurrent_ = other.shieldCurrent_;
       shieldMax_ = other.shieldMax_;
+      auras_ = other.auras_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3114,6 +3371,17 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "auras" field.</summary>
+    public const int AurasFieldNumber = 16;
+    private static readonly pb::FieldCodec<global::Protocol.BattleAuraState> _repeated_auras_codec
+        = pb::FieldCodec.ForMessage(130, global::Protocol.BattleAuraState.Parser);
+    private readonly pbc::RepeatedField<global::Protocol.BattleAuraState> auras_ = new pbc::RepeatedField<global::Protocol.BattleAuraState>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Protocol.BattleAuraState> Auras {
+      get { return auras_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3143,6 +3411,7 @@ namespace Protocol {
       if(!statuses_.Equals(other.statuses_)) return false;
       if (ShieldCurrent != other.ShieldCurrent) return false;
       if (ShieldMax != other.ShieldMax) return false;
+      if(!auras_.Equals(other.auras_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3164,6 +3433,7 @@ namespace Protocol {
       hash ^= statuses_.GetHashCode();
       if (ShieldCurrent != 0) hash ^= ShieldCurrent.GetHashCode();
       if (ShieldMax != 0) hash ^= ShieldMax.GetHashCode();
+      hash ^= auras_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3229,6 +3499,7 @@ namespace Protocol {
         output.WriteRawTag(120);
         output.WriteInt32(ShieldMax);
       }
+      auras_.WriteTo(output, _repeated_auras_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3286,6 +3557,7 @@ namespace Protocol {
         output.WriteRawTag(120);
         output.WriteInt32(ShieldMax);
       }
+      auras_.WriteTo(ref output, _repeated_auras_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3332,6 +3604,7 @@ namespace Protocol {
       if (ShieldMax != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ShieldMax);
       }
+      size += auras_.CalculateSize(_repeated_auras_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3380,6 +3653,7 @@ namespace Protocol {
       if (other.ShieldMax != 0) {
         ShieldMax = other.ShieldMax;
       }
+      auras_.Add(other.auras_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3449,6 +3723,10 @@ namespace Protocol {
           }
           case 120: {
             ShieldMax = input.ReadInt32();
+            break;
+          }
+          case 130: {
+            auras_.AddEntriesFrom(input, _repeated_auras_codec);
             break;
           }
         }
@@ -3522,6 +3800,10 @@ namespace Protocol {
             ShieldMax = input.ReadInt32();
             break;
           }
+          case 130: {
+            auras_.AddEntriesFrom(ref input, _repeated_auras_codec);
+            break;
+          }
         }
       }
     }
@@ -3543,7 +3825,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Protocol.StructReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

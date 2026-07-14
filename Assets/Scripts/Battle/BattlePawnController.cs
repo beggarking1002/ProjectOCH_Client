@@ -16,6 +16,7 @@ namespace Battle
 		const float MinMoveDurationSeconds = 0.18f;
 		const float MaxMoveDurationSeconds = 1.2f;
 		const string VisualRootName = "visual";
+		const string StormCenterAuraSkillKey = "BEIGE_ICE_STORM_CENTER";
 		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
 		const string DefaultSkillTrigger = "Skill1";
 
@@ -24,12 +25,14 @@ namespace Battle
 		SpriteRenderer _spriteRenderer;
 		Animator _animator;
 		PawnStatusWorldUI _statusWorldUi;
+		BattleAuraVisual _auraVisual;
 		PawnTeamRing _teamRing;
 		GameObject _turnIndicator;
 		Coroutine _moveCoroutine;
 		readonly Dictionary<Protocol.BattleResourceType, ResourceState> _resources = new Dictionary<Protocol.BattleResourceType, ResourceState>();
 		readonly Dictionary<ulong, BarrierState> _barriers = new Dictionary<ulong, BarrierState>();
 		readonly Dictionary<string, StatusState> _statuses = new Dictionary<string, StatusState>(StringComparer.Ordinal);
+		readonly Dictionary<string, AuraState> _auras = new Dictionary<string, AuraState>(StringComparer.Ordinal);
 
 		public ulong PawnId { get; private set; }
 		public bool IsMine { get; private set; }
@@ -57,6 +60,7 @@ namespace Battle
 		public IReadOnlyDictionary<Protocol.BattleResourceType, ResourceState> Resources => _resources;
 		public IReadOnlyDictionary<ulong, BarrierState> Barriers => _barriers;
 		public IReadOnlyDictionary<string, StatusState> Statuses => _statuses;
+		public IReadOnlyDictionary<string, AuraState> Auras => _auras;
 		public int TotalBarrierValue
 		{
 			get
@@ -75,6 +79,7 @@ namespace Battle
 			_spriteRenderer = FindVisualSpriteRenderer();
 			_animator = FindVisualAnimator();
 			_statusWorldUi = GetComponentInChildren<PawnStatusWorldUI>(true);
+			_auraVisual = GetComponent<BattleAuraVisual>();
 			_teamRing = GetComponentInChildren<PawnTeamRing>(true);
 		}
 
@@ -98,7 +103,8 @@ namespace Battle
 			ReplaceLocalStateCollections(
 				Info?.Resources,
 				Info?.Barriers,
-				Info?.Statuses);
+				Info?.Statuses,
+				Info?.Auras);
 
 			_visualRoot = FindVisualRoot();
 			_spriteRenderer = FindVisualSpriteRenderer();
@@ -115,6 +121,7 @@ namespace Battle
 			EnsureStatusWorldUi();
 			SetTurnIndicatorVisible(false);
 			RefreshStatusWorldUi();
+			RefreshAuraVisual();
 			SetAxial(axial);
 			ApplyFacingDirection(FacingDirection);
 			ApplyDeadVisualState();
@@ -137,6 +144,7 @@ namespace Battle
 			Vector3 target = _mapGrid.AxialToWorldCenter(axial, transform.position.z);
 			UpdateFacingForMove(target);
 			transform.position = target;
+			RefreshAuraVisual();
 		}
 
 		public void MoveToAxial(AxialCoord axial, Action onComplete = null)
@@ -299,11 +307,12 @@ namespace Battle
 			Info.FacingDirection = delta.FacingDirection;
 			Info.ShieldCurrent = delta.ShieldCurrent;
 			Info.ShieldMax = delta.ShieldMax;
-			ReplaceLocalStateCollections(delta.Resources, delta.Barriers, delta.Statuses);
-			ReplaceInfoStateCollections(delta.Resources, delta.Barriers, delta.Statuses);
+			ReplaceLocalStateCollections(delta.Resources, delta.Barriers, delta.Statuses, delta.Auras);
+			ReplaceInfoStateCollections(delta.Resources, delta.Barriers, delta.Statuses, delta.Auras);
 
 			ApplyFacingDirection(FacingDirection);
 			RefreshStatusWorldUi();
+			RefreshAuraVisual();
 			ApplyDeadVisualState();
 		}
 
@@ -339,6 +348,7 @@ namespace Battle
 			Info.IsDead = true;
 			SetTurnIndicatorVisible(false);
 			RefreshStatusWorldUi();
+			RefreshAuraVisual();
 			ApplyDeadVisualState();
 			Debug.Log($"Battle pawn dead. pawnId={PawnId}, killerPawnId={killerPawnId}");
 		}
@@ -346,11 +356,13 @@ namespace Battle
 		void ReplaceLocalStateCollections(
 			IEnumerable<Protocol.BattleResourceState> resources,
 			IEnumerable<Protocol.BattleBarrierState> barriers,
-			IEnumerable<Protocol.BattleStatusState> statuses)
+			IEnumerable<Protocol.BattleStatusState> statuses,
+			IEnumerable<Protocol.BattleAuraState> auras)
 		{
 			_resources.Clear();
 			_barriers.Clear();
 			_statuses.Clear();
+			_auras.Clear();
 
 			if (resources != null)
 			{
@@ -379,22 +391,34 @@ namespace Battle
 				}
 			}
 
-			if (statuses == null)
+			if (statuses != null)
+			{
+				foreach (Protocol.BattleStatusState status in statuses)
+				{
+					if (status == null || string.IsNullOrWhiteSpace(status.StatusKey))
+						continue;
+
+					_statuses[status.StatusKey] = new StatusState(status.StatusKey, status.Stacks, status.RemainingOwnerTurns);
+				}
+			}
+
+			if (auras == null)
 				return;
 
-			foreach (Protocol.BattleStatusState status in statuses)
+			foreach (Protocol.BattleAuraState aura in auras)
 			{
-				if (status == null || string.IsNullOrWhiteSpace(status.StatusKey))
+				if (aura == null || string.IsNullOrWhiteSpace(aura.SourceSkillKey) || aura.Radius <= 0)
 					continue;
 
-				_statuses[status.StatusKey] = new StatusState(status.StatusKey, status.Stacks, status.RemainingOwnerTurns);
+				_auras[aura.SourceSkillKey] = new AuraState(aura.SourceSkillKey, aura.Radius);
 			}
 		}
 
 		void ReplaceInfoStateCollections(
 			IEnumerable<Protocol.BattleResourceState> resources,
 			IEnumerable<Protocol.BattleBarrierState> barriers,
-			IEnumerable<Protocol.BattleStatusState> statuses)
+			IEnumerable<Protocol.BattleStatusState> statuses,
+			IEnumerable<Protocol.BattleAuraState> auras)
 		{
 			if (Info == null)
 				return;
@@ -402,6 +426,7 @@ namespace Battle
 			Info.Resources.Clear();
 			Info.Barriers.Clear();
 			Info.Statuses.Clear();
+			Info.Auras.Clear();
 
 			if (resources != null)
 			{
@@ -421,14 +446,40 @@ namespace Battle
 				}
 			}
 
-			if (statuses == null)
+			if (statuses != null)
+			{
+				foreach (Protocol.BattleStatusState status in statuses)
+				{
+					if (status != null)
+						Info.Statuses.Add(status.Clone());
+				}
+			}
+
+			if (auras == null)
 				return;
 
-			foreach (Protocol.BattleStatusState status in statuses)
+			foreach (Protocol.BattleAuraState aura in auras)
 			{
-				if (status != null)
-					Info.Statuses.Add(status.Clone());
+				if (aura != null)
+					Info.Auras.Add(aura.Clone());
 			}
+		}
+
+		void RefreshAuraVisual()
+		{
+			if (_auras.TryGetValue(StormCenterAuraSkillKey, out AuraState stormCenterAura)
+				&& IsDead == false
+				&& _mapGrid != null)
+			{
+				if (_auraVisual == null)
+					_auraVisual = gameObject.AddComponent<BattleAuraVisual>();
+
+				_auraVisual.SetStormCenter(_mapGrid, Axial, stormCenterAura.Radius);
+				return;
+			}
+
+			if (_auraVisual != null)
+				_auraVisual.Hide();
 		}
 
 		public void TriggerSkill(int skillSlot)
@@ -745,6 +796,132 @@ namespace Battle
 				Stacks = stacks;
 				RemainingOwnerTurns = remainingOwnerTurns;
 			}
+		}
+
+		public readonly struct AuraState
+		{
+			public string SourceSkillKey { get; }
+			public int Radius { get; }
+
+			public AuraState(string sourceSkillKey, int radius)
+			{
+				SourceSkillKey = sourceSkillKey ?? string.Empty;
+				Radius = radius;
+			}
+		}
+	}
+
+	// Presentation-only, Pawn-attached range indicator. Gameplay damage and targets
+	// remain server authoritative and are applied through PawnDeltas.
+	[DisallowMultipleComponent]
+	sealed class BattleAuraVisual : MonoBehaviour
+	{
+		const int AuraSortingOrder = 19;
+		const float PulseSpeed = 2.4f;
+		const float MinAlpha = 0.38f;
+		const float MaxAlpha = 0.78f;
+
+		LineRenderer _ring;
+		Material _material;
+		BattleMapGrid _mapGrid;
+		AxialCoord _axial;
+		int _radius;
+		bool _isVisible;
+
+		public void SetStormCenter(BattleMapGrid mapGrid, AxialCoord axial, int radius)
+		{
+			if (mapGrid == null || radius <= 0)
+			{
+				Hide();
+				return;
+			}
+
+			_mapGrid = mapGrid;
+			_axial = axial;
+			_radius = radius;
+			EnsureRing();
+			UpdateRingPositions();
+			_isVisible = true;
+			_ring.enabled = true;
+		}
+
+		public void Hide()
+		{
+			_isVisible = false;
+			if (_ring != null)
+				_ring.enabled = false;
+		}
+
+		void LateUpdate()
+		{
+			if (_isVisible == false || _ring == null || _ring.enabled == false)
+				return;
+
+			UpdateRingPositions();
+			float pulse = (Mathf.Sin(Time.time * PulseSpeed) + 1f) * 0.5f;
+			Color color = new Color(0.36f, 0.86f, 1f, Mathf.Lerp(MinAlpha, MaxAlpha, pulse));
+			_ring.startColor = color;
+			_ring.endColor = color;
+		}
+
+		void OnDestroy()
+		{
+			if (_material != null)
+				Destroy(_material);
+		}
+
+		void EnsureRing()
+		{
+			if (_ring != null)
+				return;
+
+			_ring = gameObject.AddComponent<LineRenderer>();
+			// BattleField_001's root uses a zero Z scale. World-space points avoid
+			// corrupting this visual when converting through the Pawn's local space.
+			_ring.useWorldSpace = true;
+			_ring.loop = true;
+			_ring.positionCount = 6;
+			_ring.startWidth = 0.055f;
+			_ring.endWidth = 0.055f;
+			_ring.numCornerVertices = 2;
+			_ring.numCapVertices = 2;
+			_ring.sortingOrder = AuraSortingOrder;
+			Shader shader = Shader.Find("Sprites/Default");
+			if (shader != null)
+			{
+				_material = new Material(shader);
+				_ring.material = _material;
+			}
+		}
+
+		void UpdateRingPositions()
+		{
+			if (_ring == null || _mapGrid == null)
+				return;
+
+			Vector3 center = _mapGrid.AxialToWorldCenter(_axial, transform.position.z);
+			List<Vector3> perimeterPoints = new List<Vector3>(6);
+			for (int direction = 0; direction < 6; direction++)
+			{
+				AxialCoord edgeAxial = _axial;
+				for (int step = 0; step < _radius; step++)
+					edgeAxial = _mapGrid.GetNeighbor(edgeAxial, direction);
+
+				perimeterPoints.Add(_mapGrid.AxialToWorldCenter(edgeAxial, transform.position.z));
+			}
+
+			// Unity's hex Tilemap projects its cell coordinates in a different screen
+			// order from the server's axial direction array. Sort by world-space angle
+			// before joining points so the presentation ring cannot zig-zag or cross.
+			perimeterPoints.Sort((left, right) =>
+			{
+				float leftAngle = Mathf.Atan2(left.y - center.y, left.x - center.x);
+				float rightAngle = Mathf.Atan2(right.y - center.y, right.x - center.x);
+				return leftAngle.CompareTo(rightAngle);
+			});
+
+			for (int index = 0; index < perimeterPoints.Count; index++)
+				_ring.SetPosition(index, perimeterPoints[index]);
 		}
 	}
 }

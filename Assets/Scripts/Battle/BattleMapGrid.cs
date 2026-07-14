@@ -91,25 +91,42 @@ namespace Battle
 		public AxialCoord WorldToAxial(Vector3 worldPosition)
 		{
 			EnsureGrid();
-			return AxialCoord.FromCell(grid.WorldToCell(worldPosition));
+			return CellToAxial(grid.WorldToCell(worldPosition));
 		}
 
 		public Vector3 AxialToWorldCenter(AxialCoord axial, float z = 0f)
 		{
 			EnsureGrid();
-			Vector3 position = grid.GetCellCenterWorld(axial.ToCell());
+			Vector3 position = grid.GetCellCenterWorld(AxialToCell(axial));
 			position.z = z;
 			return position;
 		}
 
+		// Battle protocol coordinates are point-top, odd-r axial values. Unity's
+		// Hexagon Grid stores the same map as offset cell coordinates: odd rows are
+		// shifted right. Keep this conversion exclusively at the client map boundary.
+		public static AxialCoord CellToAxial(Vector3Int cell)
+		{
+			int row = cell.y;
+			int q = cell.x - ((row - (row & 1)) / 2);
+			return new AxialCoord(q, row);
+		}
+
+		public static Vector3Int AxialToCell(AxialCoord axial, int z = 0)
+		{
+			int row = axial.R;
+			int column = axial.Q + ((row - (row & 1)) / 2);
+			return new Vector3Int(column, row, z);
+		}
+
 		public bool HasGroundTile(AxialCoord axial)
 		{
-			return groundTilemap != null && groundTilemap.HasTile(axial.ToCell());
+			return groundTilemap != null && groundTilemap.HasTile(AxialToCell(axial));
 		}
 
 		public bool HasBlockTile(AxialCoord axial)
 		{
-			return blockTilemap != null && blockTilemap.HasTile(axial.ToCell());
+			return blockTilemap != null && blockTilemap.HasTile(AxialToCell(axial));
 		}
 
 		public bool IsWalkable(AxialCoord axial)
@@ -233,7 +250,7 @@ namespace Battle
 					break;
 			}
 
-			groundTilemap.SetTile(axial.ToCell(), tile);
+			groundTilemap.SetTile(AxialToCell(axial), tile);
 		}
 
 		void ResolveTileAssetsFromAuthoredGround()
@@ -278,7 +295,7 @@ namespace Battle
 		public TileBase GetCombatOverlayTile(AxialCoord axial)
 		{
 			return combatOverlayTilemap != null
-				? combatOverlayTilemap.GetTile(axial.ToCell())
+				? combatOverlayTilemap.GetTile(AxialToCell(axial))
 				: null;
 		}
 
@@ -290,7 +307,7 @@ namespace Battle
 				return;
 			}
 
-			combatOverlayTilemap.SetTile(axial.ToCell(), tile);
+			combatOverlayTilemap.SetTile(AxialToCell(axial), tile);
 		}
 
 		public void ClearCombatOverlayTile(AxialCoord axial)
