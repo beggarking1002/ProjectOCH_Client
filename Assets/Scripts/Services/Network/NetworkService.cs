@@ -227,14 +227,15 @@ namespace Networking
 			});
 		}
 
-		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, ulong targetPawnId, int q, int r)
+		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r)
 		{
 			return Send(new Protocol.C_BATTLE_SKILL
 			{
 				BattleId = battleId,
 				CasterPawnId = casterPawnId,
 				SkillSlot = skillSlot,
-				TargetPawnId = targetPawnId,
+				// The server resolves any Pawn from TargetAxial. Keep the legacy field at zero.
+				TargetPawnId = 0,
 				TargetAxial = new Protocol.AxialCoord { Q = q, R = r },
 			});
 		}

@@ -23,6 +23,7 @@ BEIGE_ICE를 시작점으로 전투 스킬 UI와 GameData 연동을 확장 중�
 - `BattleUIController`와 `PawnStatusWorldUI`는 `shield_current` / `shield_max`를 하나의 보호 바로 표시한다. COLD 리소스는 해당 Pawn에만 표시하며 Status는 키·스택·남은 턴을 상세 패널에 표시함
 - 상태 아이콘은 현재 런타임 생성 칩(약어/스택/턴)이다. 아트 확정 후 `status_key`별 Sprite 매핑으로 교체한다.
 - `BattleActionLog`는 피해 숫자·MISS 등의 연출 전용이다. Pawn의 HP/AP/Armor 등 최종 수치는 언제나 `pawn_deltas`만 적용한다.
+- 스킬 요청은 `target_axial`만 권위 있는 대상으로 사용하며, NetworkService가 호환 필드 `target_pawn_id`를 항상 `0`으로 전송한다. 빈 타일 스킬 결과는 Pawn 피해 숫자를 표시하지 않는다.
 
 ## 알려진 개발 단계 항목
 

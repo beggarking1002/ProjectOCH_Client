@@ -565,17 +565,22 @@ namespace Battle
 				return;
 			}
 
-			ulong targetPawnId = FindPawnIdAtAxial(targetAxial);
-			if (ValidateSkillTarget(casterPawn, skillSlot, ref targetPawnId, ref targetAxial) == false)
+			ulong resolvedTargetPawnId = FindPawnIdAtAxial(targetAxial);
+			if (ValidateSkillTarget(casterPawn, skillSlot, resolvedTargetPawnId, ref targetAxial) == false)
 				return;
+
+			// Self-target validation can replace the clicked tile with the caster's tile.
+			resolvedTargetPawnId = FindPawnIdAtAxial(targetAxial);
 
 			if (_battleId != 0 && GameRoot.Instance != null)
 			{
-				bool sent = GameRoot.Instance.Network.SendBattleSkill(_battleId, casterPawnId, skillSlot, targetPawnId, targetAxial.Q, targetAxial.R);
+				// The server resolves the target Pawn from target_axial. The legacy
+				// target_pawn_id field is intentionally sent as zero by NetworkService.
+				bool sent = GameRoot.Instance.Network.SendBattleSkill(_battleId, casterPawnId, skillSlot, targetAxial.Q, targetAxial.R);
 				if (sent)
 				{
 					_actionMode = BattleActionMode.WaitingServer;
-					Debug.Log($"Sent C_BATTLE_SKILL. battleId={_battleId}, casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+					Debug.Log($"Sent C_BATTLE_SKILL. battleId={_battleId}, casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId=0, axial={targetAxial}, locallyResolvedPawnId={resolvedTargetPawnId}");
 				}
 				else
 				{
@@ -585,31 +590,30 @@ namespace Battle
 				return;
 			}
 
-			Debug.Log($"Skill debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+			Debug.Log($"Skill debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 			_actionMode = BattleActionMode.Move;
 		}
 
-		bool ValidateSkillTarget(BattlePawnController casterPawn, int skillSlot, ref ulong targetPawnId, ref AxialCoord targetAxial)
+		bool ValidateSkillTarget(BattlePawnController casterPawn, int skillSlot, ulong resolvedTargetPawnId, ref AxialCoord targetAxial)
 		{
 			string targetType = GetSkillTargetType(casterPawn, skillSlot);
 			if (string.IsNullOrWhiteSpace(targetType))
 				targetType = "ENEMY_SINGLE";
 
 			BattlePawnController targetPawn = null;
-			if (targetPawnId != 0)
-				_pawns.TryGetValue(targetPawnId, out targetPawn);
+			if (resolvedTargetPawnId != 0)
+				_pawns.TryGetValue(resolvedTargetPawnId, out targetPawn);
 
 			switch (targetType)
 			{
 				case "SELF":
 				case "SELF_TOGGLE":
-					targetPawnId = casterPawn.PawnId;
 					targetAxial = casterPawn.Axial;
 					return true;
 				case "ALLY_SINGLE":
 					if (targetPawn == null || targetPawn.IsMine == false)
 					{
-						Debug.Log($"Skill requires allied target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						Debug.Log($"Skill requires allied target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 						return false;
 					}
 
@@ -617,7 +621,7 @@ namespace Battle
 				case "ENEMY_SINGLE":
 					if (targetPawn == null || targetPawn.IsMine)
 					{
-						Debug.Log($"Skill requires enemy target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						Debug.Log($"Skill requires enemy target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 						return false;
 					}
 
@@ -625,7 +629,7 @@ namespace Battle
 				case "TILE_OR_ENEMY":
 					if (targetPawn != null && targetPawn.IsMine)
 					{
-						Debug.Log($"Skill cannot target allied pawn. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						Debug.Log($"Skill cannot target allied pawn. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 						return false;
 					}
 
@@ -633,7 +637,7 @@ namespace Battle
 				default:
 					if (targetPawn != null && targetPawn.IsMine)
 					{
-						Debug.Log($"Skill target rejected by fallback ally guard. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetType={targetType}, targetPawnId={targetPawnId}, axial={targetAxial}");
+						Debug.Log($"Skill target rejected by fallback ally guard. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, targetType={targetType}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 						return false;
 					}
 
@@ -722,6 +726,8 @@ namespace Battle
 			ulong appliedStateVersion = _battleStateVersion;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
+			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
+			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
 			AppendBattleLogs(packet.Logs);
 
 			_isAnimatingMove = true;
@@ -769,7 +775,7 @@ namespace Battle
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
-			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, damage={packet.Damage}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={_currentTurnPawnId}");
+			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, targetKind={(packet.TargetPawnId == 0 ? "Tile" : "Pawn")}, damage={packet.Damage}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
 		void TriggerSkillAnimation(BattlePawnController casterPawn, int skillSlot)

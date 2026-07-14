@@ -427,8 +427,14 @@ namespace Battle
 			if (log == null || _uiInstance == null || _objectManager == null)
 				return;
 
-			if (_objectManager.Pawns.TryGetValue(log.DefenderPawnId, out BattlePawnController targetPawn) == false || targetPawn == null)
-				_objectManager.Pawns.TryGetValue(log.AttackerPawnId, out targetPawn);
+			// A tile-targeted result has no defender Pawn. Do not turn it into a damage
+			// number on the caster; Pawn presentation is only for actual defender IDs.
+			if (log.DefenderPawnId == 0
+				|| _objectManager.Pawns.TryGetValue(log.DefenderPawnId, out BattlePawnController targetPawn) == false
+				|| targetPawn == null)
+			{
+				return;
+			}
 
 			if (targetPawn == null)
 				return;

@@ -16,6 +16,9 @@
 - `S_ENTER_BATTLE`의 아군/적 Pawn, 현재 턴 Pawn ID, Battle ID를 기준으로 Pawn을 생성한다.
 - 이동: 클릭 → `C_BATTLE_MOVE` → `S_BATTLE_MOVE` → 서버가 확정한 위치·AP·다음 턴 반영
 - 스킬: 슬롯 선택 + 타일/Pawn 클릭 → `C_BATTLE_SKILL` → `S_BATTLE_SKILL` → Delta, HP/Armor, 애니메이션, 로그 반영
+  - 요청의 대상은 항상 `target_axial`이다. Pawn 클릭은 해당 Pawn의 axial을, Self는 caster의 axial을, `TILE_OR_ENEMY`는 빈 타일도 그대로 보낸다.
+  - 호환용 `target_pawn_id`는 클라이언트가 항상 `0`으로 전송하고 서버가 `target_axial`에서 실제 Pawn을 해석한다.
+  - 응답의 `target_pawn_id == 0`은 빈 타일 결과다. 대상 Pawn을 별도로 찾거나 수치를 직접 갱신하지 않고 `pawn_deltas`만 적용한다.
 - 턴 종료: `C_BATTLE_END_TURN` → `S_BATTLE_END_TURN`
 - 사망/결과: `S_BATTLE_PAWN_DEAD`, `S_BATTLE_RESULT`; 결과 UI 확인 뒤 `C_BATTLE_RESULT_ACK`
 
