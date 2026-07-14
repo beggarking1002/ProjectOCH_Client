@@ -19,6 +19,22 @@ namespace Battle
 		const int MaxBattleLogLines = 6;
 		const string BattlePawnBaseAddress = "PawnBase";
 		const string BattlePawnVisualRootName = "visual";
+		// The client maps only the protocol PawnClass to presentation assets. It does not
+		// mirror the server's BattlePawn inheritance hierarchy.
+		static readonly Dictionary<Protocol.PawnClass, string> PawnVisualAddressByClass = new Dictionary<Protocol.PawnClass, string>
+		{
+			{ Protocol.PawnClass.SuenAxeSword, "Pawn_Suen_AxeSword" },
+			{ Protocol.PawnClass.SuenParvis, "Pawn_Suen_Parvis" },
+			{ Protocol.PawnClass.BeigeFire, "Pawn_Beige_Fire" },
+			{ Protocol.PawnClass.BeigeIce, "Pawn_Beige_Ice" },
+			{ Protocol.PawnClass.ZillianLongbow, "Pawn_Zillian_Longbow" },
+			{ Protocol.PawnClass.ZillianMace, "Pawn_Zillian_Mace" },
+			{ Protocol.PawnClass.AlenSpear, "Pawn_Alen_Spear" },
+			{ Protocol.PawnClass.AlenSwordShield, "Pawn_Alen_SwordShield" },
+			{ Protocol.PawnClass.SeraNecromancer, "Pawn_Sera_Necromancer" },
+			{ Protocol.PawnClass.SeraWarlock, "Pawn_Sera_Warlock" },
+			{ Protocol.PawnClass.DarkhandSword, "Pawn_Darkhand_Sword" },
+		};
 
 		readonly Dictionary<ulong, BattlePawnController> _pawns = new Dictionary<ulong, BattlePawnController>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
@@ -79,6 +95,22 @@ namespace Battle
 			_isLoadingGameData = true;
 			_gameData = await BattleGameDataRepository.LoadAsync();
 			_isLoadingGameData = false;
+			ValidatePawnClassPresentationMappings();
+		}
+
+		void ValidatePawnClassPresentationMappings()
+		{
+			if (_gameData == null)
+				return;
+
+			foreach (KeyValuePair<string, PawnClass> pair in _gameData.ClassKeyToPawnClass)
+			{
+				if (pair.Value == PawnClass.None)
+					continue;
+
+				if (PawnVisualAddressByClass.ContainsKey(pair.Value) == false)
+					Debug.LogWarning($"PawnClass has GameData but no visual mapping. classKey={pair.Key}, pawnClass={pair.Value}");
+			}
 		}
 
 		public void SetActionMode(BattleActionMode mode)
@@ -208,9 +240,8 @@ namespace Battle
 			if (packet == null || packet.Success == false)
 				return;
 
-			if (_battleId == packet.BattleId && _battleId != 0 && packet.BattleStateVersion <= _battleStateVersion)
+			if (_battleId == packet.BattleId && _battleId != 0 && TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_ENTER_BATTLE)) == false)
 			{
-				Debug.Log($"Ignored stale S_ENTER_BATTLE. battleId={packet.BattleId}, packetVersion={packet.BattleStateVersion}, localVersion={_battleStateVersion}");
 				return;
 			}
 
@@ -218,6 +249,8 @@ namespace Battle
 			_localPawnIds.Clear();
 			_battleLogLines.Clear();
 			_battleId = packet.BattleId;
+			// A new battle owns an independent version sequence. A duplicate enter packet for
+			// the current battle was rejected above; this assignment initializes a new one.
 			_battleStateVersion = packet.BattleStateVersion;
 			_currentTurnPawnId = packet.CurrentTurnPawnId;
 			_isAnimatingMove = false;
@@ -331,34 +364,11 @@ namespace Battle
 			if (info == null)
 				return _fallbackPawnAddress;
 
-			switch (info.PawnClass)
-			{
-				case Protocol.PawnClass.SuenAxeSword:
-					return "Pawn_Suen_AxeSword";
-				case Protocol.PawnClass.SuenParvis:
-					return "Pawn_Suen_Parvis";
-				case Protocol.PawnClass.BeigeFire:
-					return "Pawn_Beige_Fire";
-				case Protocol.PawnClass.BeigeIce:
-					return "Pawn_Beige_Ice";
-				case Protocol.PawnClass.ZillianLongbow:
-					return "Pawn_Zillian_Longbow";
-				case Protocol.PawnClass.ZillianMace:
-					return "Pawn_Zillian_Mace";
-				case Protocol.PawnClass.AlenSpear:
-					return "Pawn_Alen_Spear";
-				case Protocol.PawnClass.AlenSwordShield:
-					return "Pawn_Alen_SwordShield";
-				case Protocol.PawnClass.SeraNecromancer:
-					return "Pawn_Sera_Necromancer";
-				case Protocol.PawnClass.SeraWarlock:
-					return "Pawn_Sera_Warlock";
-				case Protocol.PawnClass.DarkhandSword:
-					return "Pawn_Darkhand_Sword";
-				default:
-					Debug.LogWarning($"Unknown pawn class {info.PawnClass}. Fallback address={_fallbackPawnAddress}");
-					return _fallbackPawnAddress;
-			}
+			if (PawnVisualAddressByClass.TryGetValue(info.PawnClass, out string visualAddress))
+				return visualAddress;
+
+			Debug.LogWarning($"Missing PawnClass presentation mapping. pawnClass={info.PawnClass}, fallbackAddress={_fallbackPawnAddress}");
+			return _fallbackPawnAddress;
 		}
 
 		public void DespawnPawn(ulong pawnId)
@@ -409,9 +419,15 @@ namespace Battle
 
 		bool TryApplyNewBattleStateVersion(ulong packetVersion, string packetName)
 		{
-			if (packetVersion <= _battleStateVersion)
+			if (packetVersion < _battleStateVersion)
 			{
-				Debug.Log($"Ignored stale {packetName}. battleId={_battleId}, packetVersion={packetVersion}, localVersion={_battleStateVersion}");
+				Debug.Log($"Ignored outdated {packetName}. battleId={_battleId}, packetVersion={packetVersion}, localVersion={_battleStateVersion}");
+				return false;
+			}
+
+			if (packetVersion == _battleStateVersion)
+			{
+				Debug.Log($"Ignored duplicate {packetName}. battleId={_battleId}, battleStateVersion={packetVersion}");
 				return false;
 			}
 

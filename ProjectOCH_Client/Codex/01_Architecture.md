@@ -79,3 +79,4 @@ Assets/
 - `GameServerConnection`은 `GameRoot.Network`를 감싸는 MonoBehaviour 호환 래퍼다. 새 기능은 원칙적으로 `GameRoot.Instance.Network`를 사용한다.
 - `Field.AxialCoord`와 `Battle.AxialCoord`는 이름과 구현이 비슷하지만 별도 타입이다. 두 영역 간 코드를 옮길 때 namespace 혼동에 유의한다.
 - 장면 콘텐츠는 주소 문자열(`Field_001`, `BattleField_001`, `BattleSceneUI` 등)에 의존한다. 주소를 변경하면 로더와 Addressables 등록을 함께 수정한다.
+- 전투 Pawn은 서버의 `PawnClass`만으로 공통 `PawnBase`와 클래스별 시각 프리팹을 조합한다. 서버의 `BattlePawn` 상속 구조를 클라이언트에 복제하지 않으며, 스킬 UI도 같은 `PawnClass`를 GameData 키로 사용한다.

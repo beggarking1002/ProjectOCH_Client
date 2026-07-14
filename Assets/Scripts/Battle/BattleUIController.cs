@@ -909,12 +909,13 @@ namespace Battle
 			string side = pawn.IsMine ? "Mine" : "Enemy";
 			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
 			string armor = pawn.MaxArmor > 0 ? $"{pawn.Armor}/{pawn.MaxArmor}" : pawn.Armor.ToString();
+			string shield = pawn.ShieldMax > 0 ? $"{pawn.ShieldCurrent}/{pawn.ShieldMax}" : pawn.ShieldCurrent.ToString();
 			string cold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawnController.ResourceState coldResource)
 				? FormatValue(coldResource.Value, coldResource.MaxValue)
 				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
 			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nArmor: {armor}\nBarrier: {pawn.TotalBarrierValue}\nCOLD: {cold}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nCOLD: {cold}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
 		}
 
 		static string FormatStatuses(IReadOnlyDictionary<string, BattlePawnController.StatusState> statuses)
@@ -1204,11 +1205,10 @@ namespace Battle
 			barsRect.offsetMax = new Vector2(-8f, 116f);
 
 			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 88f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
-			PanelBarView armorBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 68f, new Color(0.35f, 0.68f, 1f, 1f), true);
-			PanelBarView barrierBar = CreateOrGetPanelBar(barsRect, "BarrierBar", 48f, new Color(0.76f, 0.48f, 1f, 1f), false);
-			PanelBarView coldBar = CreateOrGetPanelBar(barsRect, "ColdBar", 28f, new Color(0.34f, 0.88f, 1f, 1f), false);
+			PanelBarView shieldBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 68f, new Color(0.35f, 0.68f, 1f, 1f), true);
+			PanelBarView coldBar = CreateOrGetPanelBar(barsRect, "ColdBar", 48f, new Color(0.34f, 0.88f, 1f, 1f), false);
 			StatusIconStripView statusIcons = CreateOrGetStatusIconStrip(barsRect);
-			return new PawnPanelView(text, hpBar, armorBar, barrierBar, coldBar, statusIcons);
+			return new PawnPanelView(text, hpBar, shieldBar, coldBar, statusIcons);
 		}
 
 		static StatusIconStripView CreateOrGetStatusIconStrip(RectTransform parent)
@@ -1438,17 +1438,15 @@ namespace Battle
 		{
 			readonly Text _text;
 			readonly PanelBarView _hpBar;
-			readonly PanelBarView _armorBar;
-			readonly PanelBarView _barrierBar;
+			readonly PanelBarView _shieldBar;
 			readonly PanelBarView _coldBar;
 			readonly StatusIconStripView _statusIcons;
 
-			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView armorBar, PanelBarView barrierBar, PanelBarView coldBar, StatusIconStripView statusIcons)
+			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView shieldBar, PanelBarView coldBar, StatusIconStripView statusIcons)
 			{
 				_text = text;
 				_hpBar = hpBar;
-				_armorBar = armorBar;
-				_barrierBar = barrierBar;
+				_shieldBar = shieldBar;
 				_coldBar = coldBar;
 				_statusIcons = statusIcons;
 			}
@@ -1461,20 +1459,17 @@ namespace Battle
 				if (pawn == null)
 				{
 					_hpBar.Set(0f, "HP -");
-					_armorBar.Set(0f, "Armor -");
-					_barrierBar.SetVisible(false);
+					_shieldBar.SetVisible(false);
 					_coldBar.SetVisible(false);
 					_statusIcons.SetStatuses(null);
 					return;
 				}
 
 				_hpBar.Set(GetRatio(pawn.Hp, pawn.MaxHp), $"HP {FormatValue(pawn.Hp, pawn.MaxHp)}");
-				_armorBar.Set(GetRatio(pawn.Armor, pawn.MaxArmor), $"Armor {FormatValue(pawn.Armor, pawn.MaxArmor)}");
-
-				int totalBarrier = pawn.TotalBarrierValue;
-				_barrierBar.SetVisible(totalBarrier > 0);
-				if (totalBarrier > 0)
-					_barrierBar.Set(GetRatio(totalBarrier, pawn.MaxHp), $"Barrier {totalBarrier}");
+				bool hasShield = pawn.ShieldCurrent > 0 || pawn.ShieldMax > 0;
+				_shieldBar.SetVisible(hasShield);
+				if (hasShield)
+					_shieldBar.Set(GetRatio(pawn.ShieldCurrent, pawn.ShieldMax), $"Shield {FormatValue(pawn.ShieldCurrent, pawn.ShieldMax)}");
 
 				bool hasCold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawnController.ResourceState cold);
 				_coldBar.SetVisible(hasCold);

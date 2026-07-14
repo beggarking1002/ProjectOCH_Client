@@ -44,11 +44,11 @@
 
 - 기본 상태: HP, Armor, AP, 이동 가능 여부, 행동 사용 여부, 사망, Facing
 - 리소스: `BattleResourceType`별 `value` / `max_value`; 해당 목록이 비어 있으면 리소스 UI를 표시하지 않는다.
-- 보호막: `barrier_id`별 값과 남은 소유자 턴; UI의 보호막 총량은 모든 `value`의 합이다.
+- 보호막: `armor`/`max_armor`는 기본 장갑, `barrier_id`별 `value`/`max_value`와 남은 소유자 턴은 임시 보호막이다. UI 보호 바는 클라이언트에서 재계산하지 않고 서버의 `shield_current` / `shield_max`를 사용한다.
 - 상태 이상: `status_key`별 스택과 남은 소유자 턴
 - Delta의 `Resources`, `Barriers`, `Statuses`는 증분이 아니라 **전체 교체 스냅샷**이다. 빈 목록은 기존 로컬 목록을 비운다.
 
-전투 응답의 `battle_state_version`은 단조 증가하는 상태 버전이다. 성공 응답은 현재 적용 버전보다 클 때만 상태와 연출을 반영한다.
+전투 응답의 `battle_state_version`은 단조 증가하는 상태 버전이다. 성공 응답은 현재 적용 버전보다 클 때만 상태와 연출을 반영한다. 낮은 버전은 과거 패킷, 같은 버전은 중복 패킷으로 보고 모두 무시한다.
 
 ## 스킬 슬롯 계약
 

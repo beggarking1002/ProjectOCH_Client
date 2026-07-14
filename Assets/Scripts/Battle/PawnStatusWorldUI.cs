@@ -28,13 +28,15 @@ namespace Battle
 			EnsureReferences();
 		}
 
-		public void SetValues(int hp, int maxHp, int armor, int maxArmor)
+		// The existing serialized ArmorBar references are retained for prefab compatibility,
+		// but the bar now presents the server's aggregate shield values.
+		public void SetValues(int hp, int maxHp, int shieldCurrent, int shieldMax)
 		{
 			EnsureReferences();
 			SetBarFill(_hpFill, GetRatio(hp, maxHp));
-			SetBarFill(_armorFill, GetRatio(armor, maxArmor));
+			SetBarFill(_armorFill, GetRatio(shieldCurrent, shieldMax));
 			SetText(_hpText, FormatValue(hp, maxHp));
-			SetText(_armorText, FormatValue(armor, maxArmor));
+			SetText(_armorText, FormatValue(shieldCurrent, shieldMax));
 		}
 
 		void Awake()

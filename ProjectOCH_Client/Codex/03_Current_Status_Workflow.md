@@ -16,10 +16,11 @@ BEIGE_ICE를 시작점으로 전투 스킬 UI와 GameData 연동을 확장 중�
 
 신규 전투 상태 프로토콜 반영도 진행 중이다.
 
-- 생성된 C#은 `BattleResourceType`, Resource/Barrier/Status 상태, `battle_state_version`을 포함함
-- `BattlePawnController`는 Pawn별 리소스·보호막·상태 로컬 모델을 보관하며, 입장 정보와 Delta의 목록을 전체 교체함
-- `BattleObjectManager`는 `S_ENTER_BATTLE`에서 기존 Pawn을 재생성하고, 성공 Delta의 상태·로그·연출을 더 높은 `battle_state_version`에서만 적용함
-- `BattleUIController`는 COLD 리소스가 있는 Pawn에만 냉기 게이지를 표시하고, 모든 Barrier `value`의 합계와 Status의 키·스택·남은 턴을 상세 패널에 표시함
+- 생성된 C#은 `BattleResourceType`, Resource/Barrier/Status 상태, `battle_state_version`, `shield_current` / `shield_max`, Barrier `max_value`를 포함함
+- `BattlePawnController`는 Pawn별 리소스·보호막·상태 로컬 모델과 UI용 Shield 값을 보관하며, 입장 정보와 Delta의 목록을 전체 교체함
+- `BattleObjectManager`는 `S_ENTER_BATTLE`에서 기존 Pawn을 재생성하고, 성공 Delta의 상태·로그·연출을 더 높은 `battle_state_version`에서만 적용함. 낮은 버전은 과거 패킷, 같은 버전은 중복 패킷으로 구분해 무시함
+- 전투 Pawn 표현은 `PawnClass → Addressables 시각 프리팹` 매핑으로 결정한다. 서버의 `BattlePawn` 상속 구조는 복제하지 않으며, GameData에만 존재하는 새 PawnClass는 매핑 누락 경고와 기본 프리팹 fallback으로 안전하게 처리함
+- `BattleUIController`와 `PawnStatusWorldUI`는 `shield_current` / `shield_max`를 하나의 보호 바로 표시한다. COLD 리소스는 해당 Pawn에만 표시하며 Status는 키·스택·남은 턴을 상세 패널에 표시함
 - 상태 아이콘은 현재 런타임 생성 칩(약어/스택/턴)이다. 아트 확정 후 `status_key`별 Sprite 매핑으로 교체한다.
 - `BattleActionLog`는 피해 숫자·MISS 등의 연출 전용이다. Pawn의 HP/AP/Armor 등 최종 수치는 언제나 `pawn_deltas`만 적용한다.
 

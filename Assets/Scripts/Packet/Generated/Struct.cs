@@ -32,40 +32,42 @@ namespace Protocol {
             "cmVUeXBlEiUKCHBvc2l0aW9uGAQgASgLMhMuUHJvdG9jb2wuVmVjMkZpeGVk",
             "ImwKE0JhdHRsZVJlc291cmNlU3RhdGUSMwoNcmVzb3VyY2VfdHlwZRgBIAEo",
             "DjIcLlByb3RvY29sLkJhdHRsZVJlc291cmNlVHlwZRINCgV2YWx1ZRgCIAEo",
-            "BRIRCgltYXhfdmFsdWUYAyABKAUicAoSQmF0dGxlQmFycmllclN0YXRlEhIK",
-            "CmJhcnJpZXJfaWQYASABKAQSGAoQc291cmNlX3NraWxsX2tleRgCIAEoCRIN",
-            "CgV2YWx1ZRgDIAEoBRIdChVyZW1haW5pbmdfb3duZXJfdHVybnMYBCABKAUi",
-            "VgoRQmF0dGxlU3RhdHVzU3RhdGUSEgoKc3RhdHVzX2tleRgBIAEoCRIOCgZz",
-            "dGFja3MYAiABKAUSHQoVcmVtYWluaW5nX293bmVyX3R1cm5zGAMgASgFIsQE",
-            "Cg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgEEhAKCG93bmVyX2lk",
-            "GAIgASgEEicKCnBhd25fY2xhc3MYAyABKA4yEy5Qcm90b2NvbC5QYXduQ2xh",
-            "c3MSIwoFYXhpYWwYBCABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEgoKAmhw",
-            "GAUgASgFEg4KBm1heF9ocBgGIAEoBRISCgptb3ZlX3JhbmdlGAcgASgFEg0K",
-            "BWFybW9yGAggASgFEhEKCW1heF9hcm1vchgJIAEoBRISCgpjdXJyZW50X2Fw",
-            "GAogASgFEhAKCGNhbl9tb3ZlGAsgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90",
-            "aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgNIAEoCBIPCgdpc19k",
-            "ZWFkGBAgASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YESABKA4yHy5Qcm90b2Nv",
-            "bC5CYXR0bGVGYWNpbmdEaXJlY3Rpb24SJgoEcm9sZRgSIAEoDjIYLlByb3Rv",
-            "Y29sLkJhdHRsZVBhd25Sb2xlEjAKCXJlc291cmNlcxgTIAMoCzIdLlByb3Rv",
-            "Y29sLkJhdHRsZVJlc291cmNlU3RhdGUSLgoIYmFycmllcnMYFCADKAsyHC5Q",
-            "cm90b2NvbC5CYXR0bGVCYXJyaWVyU3RhdGUSLQoIc3RhdHVzZXMYFSADKAsy",
-            "Gy5Qcm90b2NvbC5CYXR0bGVTdGF0dXNTdGF0ZUoECA4QD0oECA8QECKAAwoP",
-            "QmF0dGxlUGF3bkRlbHRhEg8KB3Bhd25faWQYASABKAQSCgoCaHAYAiABKAUS",
-            "DQoFYXJtb3IYAyABKAUSEgoKY3VycmVudF9hcBgEIAEoBRIQCghjYW5fbW92",
-            "ZRgFIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190dXJuGAYgASgIEhUK",
-            "DXVzZWRfdWx0aW1hdGUYByABKAgSDwoHaXNfZGVhZBgIIAEoCBI5ChBmYWNp",
-            "bmdfZGlyZWN0aW9uGAkgASgOMh8uUHJvdG9jb2wuQmF0dGxlRmFjaW5nRGly",
-            "ZWN0aW9uEjAKCXJlc291cmNlcxgLIAMoCzIdLlByb3RvY29sLkJhdHRsZVJl",
-            "c291cmNlU3RhdGUSLgoIYmFycmllcnMYDCADKAsyHC5Qcm90b2NvbC5CYXR0",
-            "bGVCYXJyaWVyU3RhdGUSLQoIc3RhdHVzZXMYDSADKAsyGy5Qcm90b2NvbC5C",
-            "YXR0bGVTdGF0dXNTdGF0ZUoECAoQCyKpAgoPQmF0dGxlQWN0aW9uTG9nEhgK",
-            "EGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5kZXJfcGF3bl9pZBgC",
-            "IAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlvbl90eXBlGAQgASgJ",
-            "Eg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgGIAEoCBIRCglpc19l",
-            "dmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIaChJpc19wZXJmZWN0",
-            "X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEoCBIQCghocF9hZnRl",
-            "chgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5pc19iYWNrX2F0dGFj",
-            "axgNIAEoCGIGcHJvdG8z"));
+            "BRIRCgltYXhfdmFsdWUYAyABKAUigwEKEkJhdHRsZUJhcnJpZXJTdGF0ZRIS",
+            "CgpiYXJyaWVyX2lkGAEgASgEEhgKEHNvdXJjZV9za2lsbF9rZXkYAiABKAkS",
+            "DQoFdmFsdWUYAyABKAUSHQoVcmVtYWluaW5nX293bmVyX3R1cm5zGAQgASgF",
+            "EhEKCW1heF92YWx1ZRgFIAEoBSJWChFCYXR0bGVTdGF0dXNTdGF0ZRISCgpz",
+            "dGF0dXNfa2V5GAEgASgJEg4KBnN0YWNrcxgCIAEoBRIdChVyZW1haW5pbmdf",
+            "b3duZXJfdHVybnMYAyABKAUi8AQKDkJhdHRsZVBhd25JbmZvEg8KB3Bhd25f",
+            "aWQYASABKAQSEAoIb3duZXJfaWQYAiABKAQSJwoKcGF3bl9jbGFzcxgDIAEo",
+            "DjITLlByb3RvY29sLlBhd25DbGFzcxIjCgVheGlhbBgEIAEoCzIULlByb3Rv",
+            "Y29sLkF4aWFsQ29vcmQSCgoCaHAYBSABKAUSDgoGbWF4X2hwGAYgASgFEhIK",
+            "Cm1vdmVfcmFuZ2UYByABKAUSDQoFYXJtb3IYCCABKAUSEQoJbWF4X2FybW9y",
+            "GAkgASgFEhIKCmN1cnJlbnRfYXAYCiABKAUSEAoIY2FuX21vdmUYCyABKAgS",
+            "IQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgMIAEoCBIVCg11c2VkX3Vs",
+            "dGltYXRlGA0gASgIEg8KB2lzX2RlYWQYECABKAgSOQoQZmFjaW5nX2RpcmVj",
+            "dGlvbhgRIAEoDjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbhIm",
+            "CgRyb2xlGBIgASgOMhguUHJvdG9jb2wuQmF0dGxlUGF3blJvbGUSMAoJcmVz",
+            "b3VyY2VzGBMgAygLMh0uUHJvdG9jb2wuQmF0dGxlUmVzb3VyY2VTdGF0ZRIu",
+            "CghiYXJyaWVycxgUIAMoCzIcLlByb3RvY29sLkJhdHRsZUJhcnJpZXJTdGF0",
+            "ZRItCghzdGF0dXNlcxgVIAMoCzIbLlByb3RvY29sLkJhdHRsZVN0YXR1c1N0",
+            "YXRlEhYKDnNoaWVsZF9jdXJyZW50GBYgASgFEhIKCnNoaWVsZF9tYXgYFyAB",
+            "KAVKBAgOEA9KBAgPEBAirAMKD0JhdHRsZVBhd25EZWx0YRIPCgdwYXduX2lk",
+            "GAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgFEhIKCmN1cnJlbnRf",
+            "YXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNlZF9zdWJfYWN0aW9u",
+            "X3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRlGAcgASgIEg8KB2lz",
+            "X2RlYWQYCCABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgJIAEoDjIfLlByb3Rv",
+            "Y29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbhIwCglyZXNvdXJjZXMYCyADKAsy",
+            "HS5Qcm90b2NvbC5CYXR0bGVSZXNvdXJjZVN0YXRlEi4KCGJhcnJpZXJzGAwg",
+            "AygLMhwuUHJvdG9jb2wuQmF0dGxlQmFycmllclN0YXRlEi0KCHN0YXR1c2Vz",
+            "GA0gAygLMhsuUHJvdG9jb2wuQmF0dGxlU3RhdHVzU3RhdGUSFgoOc2hpZWxk",
+            "X2N1cnJlbnQYDiABKAUSEgoKc2hpZWxkX21heBgPIAEoBUoECAoQCyKpAgoP",
+            "QmF0dGxlQWN0aW9uTG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQ",
+            "ZGVmZW5kZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMK",
+            "C2FjdGlvbl90eXBlGAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0",
+            "aWNhbBgGIAEoCBIRCglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgI",
+            "IAEoCBIaChJpc19wZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRl",
+            "chgKIAEoCBIQCghocF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEo",
+            "BRIWCg5pc19iYWNrX2F0dGFjaxgNIAEoCGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -73,10 +75,10 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.AxialCoord), global::Protocol.AxialCoord.Parser, new[]{ "Q", "R" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "ObjectType", "CreatureType", "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleResourceState), global::Protocol.BattleResourceState.Parser, new[]{ "ResourceType", "Value", "MaxValue" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleBarrierState), global::Protocol.BattleBarrierState.Parser, new[]{ "BarrierId", "SourceSkillKey", "Value", "RemainingOwnerTurns" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleBarrierState), global::Protocol.BattleBarrierState.Parser, new[]{ "BarrierId", "SourceSkillKey", "Value", "RemainingOwnerTurns", "MaxValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleStatusState), global::Protocol.BattleStatusState.Parser, new[]{ "StatusKey", "Stacks", "RemainingOwnerTurns" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
           }));
     }
@@ -1146,6 +1148,7 @@ namespace Protocol {
       sourceSkillKey_ = other.sourceSkillKey_;
       value_ = other.value_;
       remainingOwnerTurns_ = other.remainingOwnerTurns_;
+      maxValue_ = other.maxValue_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1203,6 +1206,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "max_value" field.</summary>
+    public const int MaxValueFieldNumber = 5;
+    private int maxValue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MaxValue {
+      get { return maxValue_; }
+      set {
+        maxValue_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1222,6 +1237,7 @@ namespace Protocol {
       if (SourceSkillKey != other.SourceSkillKey) return false;
       if (Value != other.Value) return false;
       if (RemainingOwnerTurns != other.RemainingOwnerTurns) return false;
+      if (MaxValue != other.MaxValue) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1233,6 +1249,7 @@ namespace Protocol {
       if (SourceSkillKey.Length != 0) hash ^= SourceSkillKey.GetHashCode();
       if (Value != 0) hash ^= Value.GetHashCode();
       if (RemainingOwnerTurns != 0) hash ^= RemainingOwnerTurns.GetHashCode();
+      if (MaxValue != 0) hash ^= MaxValue.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1267,6 +1284,10 @@ namespace Protocol {
         output.WriteRawTag(32);
         output.WriteInt32(RemainingOwnerTurns);
       }
+      if (MaxValue != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(MaxValue);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1293,6 +1314,10 @@ namespace Protocol {
         output.WriteRawTag(32);
         output.WriteInt32(RemainingOwnerTurns);
       }
+      if (MaxValue != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(MaxValue);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1314,6 +1339,9 @@ namespace Protocol {
       }
       if (RemainingOwnerTurns != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingOwnerTurns);
+      }
+      if (MaxValue != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxValue);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1338,6 +1366,9 @@ namespace Protocol {
       }
       if (other.RemainingOwnerTurns != 0) {
         RemainingOwnerTurns = other.RemainingOwnerTurns;
+      }
+      if (other.MaxValue != 0) {
+        MaxValue = other.MaxValue;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1370,6 +1401,10 @@ namespace Protocol {
             RemainingOwnerTurns = input.ReadInt32();
             break;
           }
+          case 40: {
+            MaxValue = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -1399,6 +1434,10 @@ namespace Protocol {
           }
           case 32: {
             RemainingOwnerTurns = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            MaxValue = input.ReadInt32();
             break;
           }
         }
@@ -1724,6 +1763,8 @@ namespace Protocol {
       resources_ = other.resources_.Clone();
       barriers_ = other.barriers_.Clone();
       statuses_ = other.statuses_.Clone();
+      shieldCurrent_ = other.shieldCurrent_;
+      shieldMax_ = other.shieldMax_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1958,6 +1999,30 @@ namespace Protocol {
       get { return statuses_; }
     }
 
+    /// <summary>Field number for the "shield_current" field.</summary>
+    public const int ShieldCurrentFieldNumber = 22;
+    private int shieldCurrent_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ShieldCurrent {
+      get { return shieldCurrent_; }
+      set {
+        shieldCurrent_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "shield_max" field.</summary>
+    public const int ShieldMaxFieldNumber = 23;
+    private int shieldMax_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ShieldMax {
+      get { return shieldMax_; }
+      set {
+        shieldMax_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1992,6 +2057,8 @@ namespace Protocol {
       if(!resources_.Equals(other.resources_)) return false;
       if(!barriers_.Equals(other.barriers_)) return false;
       if(!statuses_.Equals(other.statuses_)) return false;
+      if (ShieldCurrent != other.ShieldCurrent) return false;
+      if (ShieldMax != other.ShieldMax) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2018,6 +2085,8 @@ namespace Protocol {
       hash ^= resources_.GetHashCode();
       hash ^= barriers_.GetHashCode();
       hash ^= statuses_.GetHashCode();
+      if (ShieldCurrent != 0) hash ^= ShieldCurrent.GetHashCode();
+      if (ShieldMax != 0) hash ^= ShieldMax.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2103,6 +2172,14 @@ namespace Protocol {
       resources_.WriteTo(output, _repeated_resources_codec);
       barriers_.WriteTo(output, _repeated_barriers_codec);
       statuses_.WriteTo(output, _repeated_statuses_codec);
+      if (ShieldCurrent != 0) {
+        output.WriteRawTag(176, 1);
+        output.WriteInt32(ShieldCurrent);
+      }
+      if (ShieldMax != 0) {
+        output.WriteRawTag(184, 1);
+        output.WriteInt32(ShieldMax);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2180,6 +2257,14 @@ namespace Protocol {
       resources_.WriteTo(ref output, _repeated_resources_codec);
       barriers_.WriteTo(ref output, _repeated_barriers_codec);
       statuses_.WriteTo(ref output, _repeated_statuses_codec);
+      if (ShieldCurrent != 0) {
+        output.WriteRawTag(176, 1);
+        output.WriteInt32(ShieldCurrent);
+      }
+      if (ShieldMax != 0) {
+        output.WriteRawTag(184, 1);
+        output.WriteInt32(ShieldMax);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2241,6 +2326,12 @@ namespace Protocol {
       size += resources_.CalculateSize(_repeated_resources_codec);
       size += barriers_.CalculateSize(_repeated_barriers_codec);
       size += statuses_.CalculateSize(_repeated_statuses_codec);
+      if (ShieldCurrent != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(ShieldCurrent);
+      }
+      if (ShieldMax != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(ShieldMax);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2307,6 +2398,12 @@ namespace Protocol {
       resources_.Add(other.resources_);
       barriers_.Add(other.barriers_);
       statuses_.Add(other.statuses_);
+      if (other.ShieldCurrent != 0) {
+        ShieldCurrent = other.ShieldCurrent;
+      }
+      if (other.ShieldMax != 0) {
+        ShieldMax = other.ShieldMax;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2399,6 +2496,14 @@ namespace Protocol {
           }
           case 170: {
             statuses_.AddEntriesFrom(input, _repeated_statuses_codec);
+            break;
+          }
+          case 176: {
+            ShieldCurrent = input.ReadInt32();
+            break;
+          }
+          case 184: {
+            ShieldMax = input.ReadInt32();
             break;
           }
         }
@@ -2495,6 +2600,14 @@ namespace Protocol {
             statuses_.AddEntriesFrom(ref input, _repeated_statuses_codec);
             break;
           }
+          case 176: {
+            ShieldCurrent = input.ReadInt32();
+            break;
+          }
+          case 184: {
+            ShieldMax = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -2548,6 +2661,8 @@ namespace Protocol {
       resources_ = other.resources_.Clone();
       barriers_ = other.barriers_.Clone();
       statuses_ = other.statuses_.Clone();
+      shieldCurrent_ = other.shieldCurrent_;
+      shieldMax_ = other.shieldMax_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2698,6 +2813,30 @@ namespace Protocol {
       get { return statuses_; }
     }
 
+    /// <summary>Field number for the "shield_current" field.</summary>
+    public const int ShieldCurrentFieldNumber = 14;
+    private int shieldCurrent_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ShieldCurrent {
+      get { return shieldCurrent_; }
+      set {
+        shieldCurrent_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "shield_max" field.</summary>
+    public const int ShieldMaxFieldNumber = 15;
+    private int shieldMax_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int ShieldMax {
+      get { return shieldMax_; }
+      set {
+        shieldMax_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2725,6 +2864,8 @@ namespace Protocol {
       if(!resources_.Equals(other.resources_)) return false;
       if(!barriers_.Equals(other.barriers_)) return false;
       if(!statuses_.Equals(other.statuses_)) return false;
+      if (ShieldCurrent != other.ShieldCurrent) return false;
+      if (ShieldMax != other.ShieldMax) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2744,6 +2885,8 @@ namespace Protocol {
       hash ^= resources_.GetHashCode();
       hash ^= barriers_.GetHashCode();
       hash ^= statuses_.GetHashCode();
+      if (ShieldCurrent != 0) hash ^= ShieldCurrent.GetHashCode();
+      if (ShieldMax != 0) hash ^= ShieldMax.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2801,6 +2944,14 @@ namespace Protocol {
       resources_.WriteTo(output, _repeated_resources_codec);
       barriers_.WriteTo(output, _repeated_barriers_codec);
       statuses_.WriteTo(output, _repeated_statuses_codec);
+      if (ShieldCurrent != 0) {
+        output.WriteRawTag(112);
+        output.WriteInt32(ShieldCurrent);
+      }
+      if (ShieldMax != 0) {
+        output.WriteRawTag(120);
+        output.WriteInt32(ShieldMax);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2850,6 +3001,14 @@ namespace Protocol {
       resources_.WriteTo(ref output, _repeated_resources_codec);
       barriers_.WriteTo(ref output, _repeated_barriers_codec);
       statuses_.WriteTo(ref output, _repeated_statuses_codec);
+      if (ShieldCurrent != 0) {
+        output.WriteRawTag(112);
+        output.WriteInt32(ShieldCurrent);
+      }
+      if (ShieldMax != 0) {
+        output.WriteRawTag(120);
+        output.WriteInt32(ShieldMax);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2890,6 +3049,12 @@ namespace Protocol {
       size += resources_.CalculateSize(_repeated_resources_codec);
       size += barriers_.CalculateSize(_repeated_barriers_codec);
       size += statuses_.CalculateSize(_repeated_statuses_codec);
+      if (ShieldCurrent != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ShieldCurrent);
+      }
+      if (ShieldMax != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ShieldMax);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2932,6 +3097,12 @@ namespace Protocol {
       resources_.Add(other.resources_);
       barriers_.Add(other.barriers_);
       statuses_.Add(other.statuses_);
+      if (other.ShieldCurrent != 0) {
+        ShieldCurrent = other.ShieldCurrent;
+      }
+      if (other.ShieldMax != 0) {
+        ShieldMax = other.ShieldMax;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2995,6 +3166,14 @@ namespace Protocol {
             statuses_.AddEntriesFrom(input, _repeated_statuses_codec);
             break;
           }
+          case 112: {
+            ShieldCurrent = input.ReadInt32();
+            break;
+          }
+          case 120: {
+            ShieldMax = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -3056,6 +3235,14 @@ namespace Protocol {
           }
           case 106: {
             statuses_.AddEntriesFrom(ref input, _repeated_statuses_codec);
+            break;
+          }
+          case 112: {
+            ShieldCurrent = input.ReadInt32();
+            break;
+          }
+          case 120: {
+            ShieldMax = input.ReadInt32();
             break;
           }
         }

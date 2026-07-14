@@ -39,6 +39,9 @@ namespace Battle
 		public int MaxHp => Info != null ? Info.MaxHp : 0;
 		public int Armor => Info != null ? Info.Armor : 0;
 		public int MaxArmor => Info != null ? Info.MaxArmor : 0;
+		// Shield is the server-authoritative UI aggregate: armor + every temporary barrier.
+		public int ShieldCurrent => Info != null ? Info.ShieldCurrent : 0;
+		public int ShieldMax => Info != null ? Info.ShieldMax : 0;
 		public int CurrentAp => Info != null ? Info.CurrentAp : 2;
 		public int MoveRange => Info != null ? Info.MoveRange : 0;
 		public bool CanMove => Info == null || Info.CanMove;
@@ -226,8 +229,13 @@ namespace Battle
 
 		void UpdateFacingForMove(Vector3 targetWorldPosition)
 		{
-			if (ApplyFacingDirection(FacingDirection))
+			// Network pawns always follow the server-facing value. Direction inferred from
+			// movement is reserved for local debug pawns that have no BattlePawnInfo.
+			if (Info != null)
+			{
+				ApplyFacingDirection(FacingDirection);
 				return;
+			}
 
 			UpdateSpriteDirectionFromTarget(targetWorldPosition);
 		}
@@ -289,6 +297,8 @@ namespace Battle
 			Info.UsedUltimate = delta.UsedUltimate;
 			Info.IsDead = delta.IsDead;
 			Info.FacingDirection = delta.FacingDirection;
+			Info.ShieldCurrent = delta.ShieldCurrent;
+			Info.ShieldMax = delta.ShieldMax;
 			ReplaceLocalStateCollections(delta.Resources, delta.Barriers, delta.Statuses);
 			ReplaceInfoStateCollections(delta.Resources, delta.Barriers, delta.Statuses);
 
@@ -364,7 +374,8 @@ namespace Battle
 						barrier.BarrierId,
 						barrier.SourceSkillKey,
 						barrier.Value,
-						barrier.RemainingOwnerTurns);
+						barrier.RemainingOwnerTurns,
+						barrier.MaxValue);
 				}
 			}
 
@@ -563,7 +574,7 @@ namespace Battle
 			if (_statusWorldUi == null)
 				return;
 
-			_statusWorldUi.SetValues(Hp, MaxHp, Armor, MaxArmor);
+			_statusWorldUi.SetValues(Hp, MaxHp, ShieldCurrent, ShieldMax);
 			_statusWorldUi.transform.localPosition = new Vector3(0f, GetStatusWorldUiHeight(), 0f);
 
 			if (_turnIndicator != null)
@@ -710,13 +721,15 @@ namespace Battle
 			public string SourceSkillKey { get; }
 			public int Value { get; }
 			public int RemainingOwnerTurns { get; }
+			public int MaxValue { get; }
 
-			public BarrierState(ulong barrierId, string sourceSkillKey, int value, int remainingOwnerTurns)
+			public BarrierState(ulong barrierId, string sourceSkillKey, int value, int remainingOwnerTurns, int maxValue)
 			{
 				BarrierId = barrierId;
 				SourceSkillKey = sourceSkillKey ?? string.Empty;
 				Value = value;
 				RemainingOwnerTurns = remainingOwnerTurns;
+				MaxValue = maxValue;
 			}
 		}
 
