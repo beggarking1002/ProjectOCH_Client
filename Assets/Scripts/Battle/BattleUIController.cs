@@ -44,6 +44,8 @@ namespace Battle
 		readonly Image[] _actionImages = new Image[SlotBindings.Length];
 		readonly Image[] _actionIconImages = new Image[SlotBindings.Length];
 		readonly Text[] _actionTexts = new Text[SlotBindings.Length];
+		readonly Sprite[] _defaultActionSprites = new Sprite[SlotBindings.Length];
+		readonly bool[] _defaultActionPreserveAspects = new bool[SlotBindings.Length];
 		readonly string[] _actionIconKeys = new string[SlotBindings.Length];
 		readonly string[] _actionTooltips = new string[SlotBindings.Length];
 		readonly Color[] _normalColors = new Color[SlotBindings.Length];
@@ -258,8 +260,14 @@ namespace Battle
 
 				_actionButtons[i] = button;
 				_actionImages[i] = image;
-				_actionIconImages[i] = FindOrCreateActionIcon(slot);
-				_actionTexts[i] = FindOrCreateActionLabel(slot);
+				// The authored slot image is the icon itself.  Class-specific skill
+				// sprites replace its dummy sprite instead of being layered on top.
+				_actionIconImages[i] = image;
+				_defaultActionSprites[i] = image != null ? image.sprite : null;
+				_defaultActionPreserveAspects[i] = image != null && image.preserveAspect;
+				HideLegacyActionIcon(slot);
+				HideActionSlotLabel(slot);
+				_actionTexts[i] = null;
 				_normalColors[i] = image != null ? image.color : Color.white;
 				BindActionSlotTooltip(slot.gameObject, i);
 			}
@@ -387,7 +395,7 @@ namespace Battle
 				image.color = color;
 
 				Image iconImage = _actionIconImages[i];
-				if (iconImage != null)
+				if (iconImage != null && iconImage != image)
 				{
 					Color iconColor = Color.white;
 					if (isPassive == false && (canAct == false || isAvailable == false))
@@ -807,8 +815,9 @@ namespace Battle
 			_actionIconKeys[slotIndex] = iconKey;
 			if (string.IsNullOrWhiteSpace(iconKey))
 			{
-				iconImage.sprite = null;
-				iconImage.enabled = false;
+				iconImage.sprite = _defaultActionSprites[slotIndex];
+				iconImage.preserveAspect = _defaultActionPreserveAspects[slotIndex];
+				iconImage.enabled = iconImage.sprite != null;
 				return;
 			}
 
@@ -831,6 +840,20 @@ namespace Battle
 			iconImage.sprite = sprite;
 			iconImage.enabled = sprite != null;
 			iconImage.preserveAspect = true;
+		}
+
+		static void HideLegacyActionIcon(Transform slot)
+		{
+			Transform legacyIcon = slot != null ? slot.Find("Icon") : null;
+			if (legacyIcon != null)
+				legacyIcon.gameObject.SetActive(false);
+		}
+
+		static void HideActionSlotLabel(Transform slot)
+		{
+			Transform label = slot != null ? slot.Find("Label") : null;
+			if (label != null)
+				label.gameObject.SetActive(false);
 		}
 
 		void BindActionSlotTooltip(GameObject slotObject, int slotIndex)

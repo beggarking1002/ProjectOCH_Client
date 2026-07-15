@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cfc0dcd616eb4514189407927f9c4474
+guid: 43017d83e48a83d46991be2b938e5f18
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8602419432061337699
-    second: Beige_Ice_Sub_0
+      213: 5440255441304553084
+    second: Beige_Ice_Skill2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Beige_Ice_Sub_0
+      name: Beige_Ice_Skill2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3600fe855eee16770800000000000000
-      internalID: 8602419432061337699
+      spriteID: c76085a008baf7b40800000000000000
+      internalID: 5440255441304553084
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Beige_Ice_Sub_0: 8602419432061337699
+      Beige_Ice_Skill2_0: 5440255441304553084
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4c0ad424f24eac54fbf177fb8655d666
+guid: 5c33449c1328b4d41888778390c8cb67
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2745576617108512578
-    second: Beige_Ice_Passive_0
+      213: 7386137153954001898
+    second: Beige_Ice_Ulti_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Beige_Ice_Passive_0
+      name: Beige_Ice_Ulti_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24f1f56f26f3a1620800000000000000
-      internalID: 2745576617108512578
+      spriteID: ae33ebbab94d08660800000000000000
+      internalID: 7386137153954001898
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Beige_Ice_Passive_0: 2745576617108512578
+      Beige_Ice_Ulti_0: 7386137153954001898
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

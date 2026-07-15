@@ -15,44 +15,44 @@ MonoBehaviour:
   m_GroupName: SkillIcon
   m_GUID: a3b1bbdddc13a364f9cb3a04985b0adf
   m_SerializeEntries:
-  - m_GUID: 081bf493b2ce22d44a23286286fd90de
-    m_Address: icon_beige_ice_ulti
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 44490355084ff4f43b19df987c49bd2a
-    m_Address: icon_beige_ice_skill3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4c0ad424f24eac54fbf177fb8655d666
+  - m_GUID: ce4e82a6d8123ec4a843c0c8506bfbb3
     m_Address: icon_beige_ice_passive
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7c804ac9b29a70c4f998a9bb28b60f6e
+  - m_GUID: f7251f1f68f9d474dbc2c1d81ff26afd
+    m_Address: icon_beige_ice_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43017d83e48a83d46991be2b938e5f18
     m_Address: icon_beige_ice_skill2
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cfc0dcd616eb4514189407927f9c4474
-    m_Address: icon_beige_ice_sub
+  - m_GUID: 194451487dcafd7408dc79e8f0b14ed4
+    m_Address: icon_beige_ice_skill3
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ea15b0379ef3de04397be32a7f132de6
+  - m_GUID: 6a1010ed0574cb14d9051e34f29197c5
     m_Address: icon_beige_ice_skill4
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: faf1291ade8674040bab82efc008459e
-    m_Address: icon_beige_ice_skill1
+  - m_GUID: 5c33449c1328b4d41888778390c8cb67
+    m_Address: icon_beige_ice_ulti
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61ecf419eb56ea347ba4bbc919893514
+    m_Address: icon_beige_ice_sub
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon

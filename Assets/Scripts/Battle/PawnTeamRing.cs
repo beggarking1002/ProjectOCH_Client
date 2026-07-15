@@ -24,6 +24,9 @@ namespace Battle
 
 		public void Initialize(bool isMine)
 		{
+			if (gameObject.activeSelf == false)
+				gameObject.SetActive(true);
+
 			EnsureRenderer();
 			SetColor(isMine ? AllyColor : EnemyColor);
 		}
