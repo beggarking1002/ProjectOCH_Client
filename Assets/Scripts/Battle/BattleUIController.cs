@@ -1670,6 +1670,11 @@ namespace Battle
 				if (string.IsNullOrWhiteSpace(statusKey))
 					return "?";
 
+				if (statusKey.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "EMP";
+				if (statusKey.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "IMM";
+
 				string compact = statusKey.Replace("_", string.Empty).ToUpperInvariant();
 				return compact.Length <= 3 ? compact : compact.Substring(0, 3);
 			}
@@ -1677,6 +1682,10 @@ namespace Battle
 			static Color GetStatusColor(string statusKey)
 			{
 				string key = statusKey ?? string.Empty;
+				if (key.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(1f, 0.73f, 0.22f, 0.96f);
+				if (key.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.42f, 0.9f, 1f, 0.96f);
 				if (key.IndexOf("COLD", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FROST", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FREEZE", System.StringComparison.OrdinalIgnoreCase) >= 0)
