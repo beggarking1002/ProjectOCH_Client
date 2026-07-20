@@ -735,9 +735,15 @@ namespace Battle
 
 		void RefreshTargetPreview()
 		{
-			if (_targetPreview == null || IsInteractionLocked || _actionMode == BattleActionMode.Move)
+			if (_targetPreview == null || IsInteractionLocked)
 			{
 				_targetPreview?.Hide();
+				return;
+			}
+
+			if (_actionMode == BattleActionMode.Move)
+			{
+				RefreshMovePreview();
 				return;
 			}
 
@@ -770,6 +776,37 @@ namespace Battle
 				&& IsValidSkillPreviewTarget(casterPawn, skill, hoveredAxial))
 			{
 				GetAffectedTargetTiles(casterPawn, skill, hoveredAxial, _affectedTargetTiles);
+			}
+
+			_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+		}
+
+		void RefreshMovePreview()
+		{
+			if (TryGetControllablePawnId(out ulong pawnId) == false
+				|| _pawns.TryGetValue(pawnId, out BattlePawn movingPawn) == false
+				|| movingPawn == null
+				|| movingPawn.CanMove == false
+				|| movingPawn.MoveRange <= 0)
+			{
+				_targetPreview.Hide();
+				return;
+			}
+
+			_validTargetTiles.Clear();
+			_affectedTargetTiles.Clear();
+			_mapGrid.GetKnownTileAxials(_knownTargetTiles);
+			for (int i = 0; i < _knownTargetTiles.Count; i++)
+			{
+				AxialCoord axial = _knownTargetTiles[i];
+				int distance = movingPawn.Axial.DistanceTo(axial);
+				if (distance <= 0 || distance > movingPawn.MoveRange)
+					continue;
+
+				if (_mapGrid.IsWalkable(axial) == false || FindPawnIdAtAxial(axial) != 0)
+					continue;
+
+				_validTargetTiles.Add(axial);
 			}
 
 			_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
