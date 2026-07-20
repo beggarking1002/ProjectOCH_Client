@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using App;
 using UnityEngine;
 
 namespace Battle
@@ -578,6 +579,7 @@ namespace Battle
 			textMesh.alignment = TextAlignment.Center;
 			textMesh.characterSize = 0.16f;
 			textMesh.fontSize = 32;
+			GameRoot.ApplyWorldTextFont(textMesh);
 			textMesh.color = Color.yellow;
 
 			MeshRenderer renderer = _turnIndicator.GetComponent<MeshRenderer>();

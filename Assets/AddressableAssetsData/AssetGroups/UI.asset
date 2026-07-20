@@ -51,6 +51,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: abaa846dcd76bcd4b804a9e873cad69a
+    m_Address: Font_Maplestory_Light
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
   m_SchemaSet:

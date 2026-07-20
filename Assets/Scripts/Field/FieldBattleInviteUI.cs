@@ -335,6 +335,7 @@ namespace Field
 			_uiInstance = uiObject;
 			_uiInstance.name = BattleInviteUiName;
 			SceneManager.MoveGameObjectToScene(_uiInstance, gameObject.scene);
+			GameRoot.ApplyUiFont(_uiInstance);
 
 			_canvas = _uiInstance.GetComponent<Canvas>();
 			if (_canvas == null)

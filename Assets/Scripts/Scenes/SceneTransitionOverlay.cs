@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using App;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -89,6 +90,7 @@ namespace Scenes
 			_overlayInstance = handle.Result;
 			_overlayInstance.name = OverlayAddress;
 			DontDestroyOnLoad(_overlayInstance);
+			GameRoot.ApplyUiFont(_overlayInstance);
 
 			Canvas canvas = _overlayInstance.GetComponent<Canvas>();
 			if (canvas == null)

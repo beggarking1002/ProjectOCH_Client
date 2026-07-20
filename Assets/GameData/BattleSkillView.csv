@@ -7,3 +7,10 @@ BEIGE_ICE_HAIL,Skill1,,,icon_beige_ice_skill3
 BEIGE_ICE_STORM_CENTER,Skill1,,,icon_beige_ice_skill4
 BEIGE_ICE_COLD_HARD_WORKER,Skill1,,,icon_beige_ice_ulti
 BEIGE_ICE_THAWING_POTION,,,,icon_beige_ice_sub
+BEIGE_FIRE_HEAT_ACCUMULATION,,,,icon_beige_fire_passive
+BEIGE_FIRE_FIREBALL,Skill1,,,icon_beige_fire_skill1
+BEIGE_FIRE_EXPLOSION,Skill1,,,icon_beige_fire_skill2
+BEIGE_FIRE_FIRE_WALL,Skill1,,,icon_beige_fire_skill3
+BEIGE_FIRE_TELEPORT,Skill1,,,icon_beige_fire_skill4
+BEIGE_FIRE_AMBITIOUS,Skill1,,,icon_beige_fire_ulti
+BEIGE_FIRE_COOLING_POTION,,,,icon_beige_fire_sub

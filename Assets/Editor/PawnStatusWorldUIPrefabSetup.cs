@@ -1,4 +1,5 @@
 using System.IO;
+using App;
 using Battle;
 using UnityEditor;
 using UnityEngine;
@@ -209,9 +210,10 @@ internal static class PawnStatusWorldUIPrefabSetup
         textMesh.text = "0/0";
         textMesh.anchor = TextAnchor.MiddleCenter;
         textMesh.alignment = TextAlignment.Center;
-        textMesh.characterSize = 0.07f;
-        textMesh.fontSize = 28;
-        textMesh.color = Color.white;
+		textMesh.characterSize = 0.07f;
+		textMesh.fontSize = 28;
+		GameRoot.ApplyWorldTextFont(textMesh);
+		textMesh.color = Color.white;
 
         MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
         if (meshRenderer != null)

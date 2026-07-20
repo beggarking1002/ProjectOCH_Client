@@ -1,3 +1,4 @@
+using App;
 using UnityEngine;
 
 namespace Battle
@@ -98,6 +99,8 @@ namespace Battle
 			EnsureSprite(_armorFill, FillSortingOrder);
 			EnsureTextSortingOrder(_hpText);
 			EnsureTextSortingOrder(_armorText);
+			ApplyProjectFont(_hpText);
+			ApplyProjectFont(_armorText);
 		}
 
 		SpriteRenderer FindSpriteRenderer(string objectName)
@@ -171,6 +174,7 @@ namespace Battle
 			textMesh.alignment = TextAlignment.Center;
 			textMesh.characterSize = 0.07f;
 			textMesh.fontSize = 28;
+			GameRoot.ApplyWorldTextFont(textMesh);
 			textMesh.color = Color.white;
 
 			MeshRenderer renderer = child.GetComponent<MeshRenderer>();
@@ -207,6 +211,11 @@ namespace Battle
 			MeshRenderer renderer = textMesh.GetComponent<MeshRenderer>();
 			if (renderer != null)
 				renderer.sortingOrder = TextSortingOrder;
+		}
+
+		static void ApplyProjectFont(TextMesh textMesh)
+		{
+			GameRoot.ApplyWorldTextFont(textMesh);
 		}
 
 		static void SetBarFill(SpriteRenderer fill, float ratio)

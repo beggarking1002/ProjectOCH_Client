@@ -209,6 +209,7 @@ namespace Battle
 			_uiInstance = uiObject;
 			_uiInstance.name = BattleUiName;
 			SceneManager.MoveGameObjectToScene(_uiInstance, gameObject.scene);
+			GameRoot.ApplyUiFont(_uiInstance);
 
 			Canvas canvas = _uiInstance.GetComponent<Canvas>();
 			if (canvas != null)
@@ -480,7 +481,7 @@ namespace Battle
 			rect.position = camera.WorldToScreenPoint(targetPawn.transform.position + Vector3.up * 0.75f);
 
 			Text text = textObject.AddComponent<Text>();
-			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.font = GameRoot.UiFont;
 			text.fontSize = log.IsCritical ? 20 : 17;
 			text.fontStyle = FontStyle.Bold;
 			text.color = color;
@@ -594,6 +595,7 @@ namespace Battle
 				_resultUiHandle = handle;
 				_hasResultUiHandle = true;
 				handle.Result.transform.SetParent(_uiInstance.transform, false);
+				GameRoot.ApplyUiFont(handle.Result);
 				BindResultOverlay(handle.Result.transform);
 				return;
 			}
@@ -1139,7 +1141,7 @@ namespace Battle
 			rect.offsetMax = offsetMax;
 
 			text = textObject.AddComponent<Text>();
-			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.font = GameRoot.UiFont;
 			text.fontSize = fontSize;
 			text.color = Color.white;
 			text.alignment = TextAnchor.UpperLeft;
@@ -1221,7 +1223,7 @@ namespace Battle
 			rect.offsetMax = Vector2.zero;
 			rect.localScale = Vector3.one;
 
-			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.font = GameRoot.UiFont;
 			text.fontSize = 9;
 			text.color = Color.white;
 			text.alignment = TextAnchor.MiddleCenter;
@@ -1400,7 +1402,7 @@ namespace Battle
 			rect.offsetMin = Vector2.zero;
 			rect.offsetMax = Vector2.zero;
 
-			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+			text.font = GameRoot.UiFont;
 			text.fontSize = 10;
 			text.color = Color.white;
 			text.alignment = TextAnchor.MiddleCenter;
@@ -1657,7 +1659,7 @@ namespace Battle
 				labelRect.offsetMin = Vector2.zero;
 				labelRect.offsetMax = Vector2.zero;
 				Text label = labelObject.AddComponent<Text>();
-				label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+				label.font = GameRoot.UiFont;
 				label.fontSize = 7;
 				label.color = Color.white;
 				label.alignment = TextAnchor.MiddleCenter;

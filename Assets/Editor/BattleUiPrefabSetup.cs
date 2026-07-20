@@ -1,3 +1,4 @@
+using App;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -89,7 +90,7 @@ internal static class BattleUiPrefabSetup
         if (text == null)
             text = textRect.gameObject.AddComponent<Text>();
 
-        text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+		text.font = GameRoot.UiFont;
         text.fontSize = 13;
         text.color = Color.white;
         text.alignment = TextAnchor.UpperLeft;
@@ -137,7 +138,7 @@ internal static class BattleUiPrefabSetup
         if (valueText == null)
             valueText = valueTextRect.gameObject.AddComponent<Text>();
 
-        valueText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+		valueText.font = GameRoot.UiFont;
         valueText.fontSize = 10;
         valueText.color = Color.white;
         valueText.alignment = TextAnchor.MiddleCenter;
