@@ -12,7 +12,7 @@ namespace Scenes
 		const string FieldSceneName = "FieldScene";
 		const string FieldMapAddress = "Field_001";
 		const string WorldMapAddress = "WorldMapRoot";
-		const string FieldPawnAddress = "Pawn_Beige_Ice";
+		const string FieldPawnAddress = "Pawn_Beige_Fire";
 		const int WorldMapSortingOrderOffset = 1;
 		const float FieldReadyTimeoutSeconds = 5f;
 

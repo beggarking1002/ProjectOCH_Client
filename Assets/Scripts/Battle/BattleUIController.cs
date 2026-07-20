@@ -781,6 +781,10 @@ namespace Battle
 				? skill.RangeMax.ToString()
 				: $"{skill.RangeMin}-{skill.RangeMax}";
 			string tooltip = $"{name}\nSlot: {skill.ActionSlot} / AP: {skill.ApCost} / Range: {range}\nTarget: {skill.TargetType}";
+			if (string.IsNullOrWhiteSpace(skill.TargetShape) == false)
+				tooltip += $" / Shape: {skill.TargetShape}";
+			if (string.IsNullOrWhiteSpace(skill.RequiredOverlayType) == false)
+				tooltip += $" / Requires: {skill.RequiredOverlayType}";
 			if (string.IsNullOrWhiteSpace(shortText) == false)
 				tooltip += $"\n{shortText}";
 
@@ -939,12 +943,37 @@ namespace Battle
 			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
 			string armor = pawn.MaxArmor > 0 ? $"{pawn.Armor}/{pawn.MaxArmor}" : pawn.Armor.ToString();
 			string shield = pawn.ShieldMax > 0 ? $"{pawn.ShieldCurrent}/{pawn.ShieldMax}" : pawn.ShieldCurrent.ToString();
-			string cold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawn.ResourceState coldResource)
-				? FormatValue(coldResource.Value, coldResource.MaxValue)
+			string resource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resourceState, out _)
+				? $"{resourceName} {FormatValue(resourceState.Value, resourceState.MaxValue)}"
 				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
 			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nCOLD: {cold}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
+		}
+
+		static bool TryGetPrimaryResource(BattlePawn pawn, out string name, out BattlePawn.ResourceState state, out Color color)
+		{
+			name = string.Empty;
+			state = default;
+			color = Color.white;
+			if (pawn == null)
+				return false;
+
+			if (pawn.Resources.TryGetValue(Protocol.BattleResourceType.Heat, out state))
+			{
+				name = "HEAT";
+				color = new Color(1f, 0.39f, 0.16f, 1f);
+				return true;
+			}
+
+			if (pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out state))
+			{
+				name = "COLD";
+				color = new Color(0.34f, 0.88f, 1f, 1f);
+				return true;
+			}
+
+			return false;
 		}
 
 		static string FormatStatuses(IReadOnlyDictionary<string, BattlePawn.StatusState> statuses)
@@ -1235,9 +1264,9 @@ namespace Battle
 
 			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 88f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
 			PanelBarView shieldBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 68f, new Color(0.35f, 0.68f, 1f, 1f), true);
-			PanelBarView coldBar = CreateOrGetPanelBar(barsRect, "ColdBar", 48f, new Color(0.34f, 0.88f, 1f, 1f), false);
+			PanelBarView resourceBar = CreateOrGetPanelBar(barsRect, "ResourceBar", 48f, new Color(0.34f, 0.88f, 1f, 1f), false);
 			StatusIconStripView statusIcons = CreateOrGetStatusIconStrip(barsRect);
-			return new PawnPanelView(text, hpBar, shieldBar, coldBar, statusIcons);
+			return new PawnPanelView(text, hpBar, shieldBar, resourceBar, statusIcons);
 		}
 
 		static StatusIconStripView CreateOrGetStatusIconStrip(RectTransform parent)
@@ -1468,15 +1497,15 @@ namespace Battle
 			readonly Text _text;
 			readonly PanelBarView _hpBar;
 			readonly PanelBarView _shieldBar;
-			readonly PanelBarView _coldBar;
+			readonly PanelBarView _resourceBar;
 			readonly StatusIconStripView _statusIcons;
 
-			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView shieldBar, PanelBarView coldBar, StatusIconStripView statusIcons)
+			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView shieldBar, PanelBarView resourceBar, StatusIconStripView statusIcons)
 			{
 				_text = text;
 				_hpBar = hpBar;
 				_shieldBar = shieldBar;
-				_coldBar = coldBar;
+				_resourceBar = resourceBar;
 				_statusIcons = statusIcons;
 			}
 
@@ -1489,7 +1518,7 @@ namespace Battle
 				{
 					_hpBar.Set(0f, "HP -");
 					_shieldBar.SetVisible(false);
-					_coldBar.SetVisible(false);
+					_resourceBar.SetVisible(false);
 					_statusIcons.SetStatuses(null);
 					return;
 				}
@@ -1500,10 +1529,10 @@ namespace Battle
 				if (hasShield)
 					_shieldBar.Set(GetRatio(pawn.ShieldCurrent, pawn.ShieldMax), $"Shield {FormatValue(pawn.ShieldCurrent, pawn.ShieldMax)}");
 
-				bool hasCold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawn.ResourceState cold);
-				_coldBar.SetVisible(hasCold);
-				if (hasCold)
-					_coldBar.Set(GetRatio(cold.Value, cold.MaxValue), $"COLD {FormatValue(cold.Value, cold.MaxValue)}");
+				bool hasResource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resource, out Color resourceColor);
+				_resourceBar.SetVisible(hasResource);
+				if (hasResource)
+					_resourceBar.Set(GetRatio(resource.Value, resource.MaxValue), $"{resourceName} {FormatValue(resource.Value, resource.MaxValue)}", resourceColor);
 
 				_statusIcons.SetStatuses(pawn.Statuses);
 			}
@@ -1528,6 +1557,13 @@ namespace Battle
 				SetFill(_fill, ratio);
 				if (_valueText != null)
 					_valueText.text = text;
+			}
+
+			public void Set(float ratio, string text, Color color)
+			{
+				Set(ratio, text);
+				if (_fill != null)
+					_fill.color = color;
 			}
 
 			public void SetVisible(bool visible)

@@ -12,7 +12,7 @@ namespace Scenes
 	{
 		const string BattleSceneName = "BattleScene";
 		const string BattleMapAddress = "BattleField_001";
-		const string BattlePawnAddress = "Pawn_Beige_Ice";
+		const string BattlePawnAddress = "Pawn_Beige_Fire";
 		const float BattleReadyTimeoutSeconds = 5f;
 
 		static BattleSceneAddressableLoader _instance;

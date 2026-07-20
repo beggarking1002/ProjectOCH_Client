@@ -30,6 +30,12 @@
 - 해동 포션의 피해 감소 상태는 `DMG x1 T2`(갈색)으로 표시한다. 반복 사용은 서버 상태의 남은 턴 갱신을 따른다.
 - 스킬 슬롯은 더미 위에 아이콘을 겹치지 않고 루트 슬롯 Image를 교체한다. 스킬 이름은 슬롯에 표시하지 않고 툴팁에서만 제공한다.
 
+### Beige Fire
+
+- 서버 GameData의 BattleSkill, Effect, EffectParam, EnumDef를 동기화했다. `TargetShape`, `RequiredOverlayType`, HEAT, FIRE Overlay를 포함한다.
+- FIRE는 Combat Overlay로만 표시되며 일반 지형의 이동 가능 여부를 바꾸지 않는다.
+- Teleport은 사거리 내 FIRE Overlay의 빈 타일만 유효 대상이며, Explosion/Fire Wall은 서버와 같은 RADIUS_1/LINE_3 프리뷰를 표시한다.
+
 ### Pawn 프리팹
 
 - `PawnTeamRing`을 `PawnBase`에서 제거하고 모든 클래스별 시각 프리팹에 넣었다.

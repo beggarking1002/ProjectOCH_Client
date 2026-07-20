@@ -19,6 +19,7 @@ namespace Battle
 		[SerializeField] TileBase normalGroundTile;
 		[SerializeField] TileBase waterGroundTile;
 		[SerializeField] TileBase iceOverlayTile;
+		[SerializeField] TileBase fireOverlayTile;
 		[SerializeField] bool useBlockTilemap = true;
 		readonly Dictionary<AxialCoord, BattleTileState> _serverTileStates = new Dictionary<AxialCoord, BattleTileState>();
 		readonly List<AsyncOperationHandle<TileBase>> _loadedTileHandles = new List<AsyncOperationHandle<TileBase>>();
@@ -27,6 +28,7 @@ namespace Battle
 		const string NormalGroundTileAddress = "Tile/grass";
 		const string WaterGroundTileAddress = "Tile/water";
 		const string IceOverlayTileAddress = "Tile/ice";
+		const string FireOverlayTileAddress = "Tile/fire";
 
 		public Transform PlaneTransform => transform;
 		public Grid Grid => grid;
@@ -86,6 +88,9 @@ namespace Battle
 
 			if (iceOverlayTile == null)
 				iceOverlayTile = await LoadTileAsync(IceOverlayTileAddress);
+
+			if (fireOverlayTile == null)
+				fireOverlayTile = await LoadTileAsync(FireOverlayTileAddress);
 		}
 
 		public AxialCoord WorldToAxial(Vector3 worldPosition)
@@ -127,6 +132,43 @@ namespace Battle
 		public bool HasBlockTile(AxialCoord axial)
 		{
 			return blockTilemap != null && blockTilemap.HasTile(AxialToCell(axial));
+		}
+
+		public bool IsTileInBounds(AxialCoord axial)
+		{
+			return _hasServerTileSnapshot
+				? _serverTileStates.ContainsKey(axial)
+				: HasGroundTile(axial);
+		}
+
+		public bool HasOverlay(AxialCoord axial, Protocol.BattleTileOverlayType overlayType)
+		{
+			return overlayType != Protocol.BattleTileOverlayType.None
+				&& _serverTileStates.TryGetValue(axial, out BattleTileState tileState)
+				&& tileState.OverlayType == overlayType;
+		}
+
+		public void GetKnownTileAxials(List<AxialCoord> destination)
+		{
+			if (destination == null)
+				return;
+
+			destination.Clear();
+			if (_hasServerTileSnapshot)
+			{
+				foreach (AxialCoord axial in _serverTileStates.Keys)
+					destination.Add(axial);
+				return;
+			}
+
+			if (groundTilemap == null)
+				return;
+
+			foreach (Vector3Int cell in groundTilemap.cellBounds.allPositionsWithin)
+			{
+				if (groundTilemap.HasTile(cell))
+					destination.Add(CellToAxial(cell));
+			}
 		}
 
 		public bool IsWalkable(AxialCoord axial)
@@ -224,6 +266,9 @@ namespace Battle
 				case Protocol.BattleTileOverlayType.Ice:
 					SetCombatOverlayTile(axial, iceOverlayTile);
 					break;
+				case Protocol.BattleTileOverlayType.Fire:
+					SetCombatOverlayTile(axial, fireOverlayTile);
+					break;
 				case Protocol.BattleTileOverlayType.None:
 					ClearCombatOverlayTile(axial);
 					break;
@@ -255,7 +300,7 @@ namespace Battle
 
 		void ResolveTileAssetsFromAuthoredGround()
 		{
-			if (groundTilemap == null || (normalGroundTile != null && waterGroundTile != null && iceOverlayTile != null))
+			if (groundTilemap == null || (normalGroundTile != null && waterGroundTile != null && iceOverlayTile != null && fireOverlayTile != null))
 				return;
 
 			TileBase[] authoredTiles = groundTilemap.GetTilesBlock(groundTilemap.cellBounds);
@@ -275,6 +320,9 @@ namespace Battle
 						break;
 					case "Ice":
 						iceOverlayTile ??= tile;
+						break;
+					case "Fire":
+						fireOverlayTile ??= tile;
 						break;
 				}
 			}

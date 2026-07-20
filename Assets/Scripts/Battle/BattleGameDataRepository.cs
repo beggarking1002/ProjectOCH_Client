@@ -235,6 +235,8 @@ namespace Battle
 					row.GetInt("RangeMin"),
 					row.GetInt("RangeMax"),
 					row.Get("TargetType"),
+					row.Get("TargetShape"),
+					row.Get("RequiredOverlayType"),
 					row.Get("EffectGroupKey"));
 
 				_skillsByKey[skill.SkillKey] = skill;
@@ -689,6 +691,8 @@ namespace Battle
 		public readonly int RangeMin;
 		public readonly int RangeMax;
 		public readonly string TargetType;
+		public readonly string TargetShape;
+		public readonly string RequiredOverlayType;
 		public readonly string EffectGroupKey;
 
 		public BattleSkillDefinition(
@@ -701,6 +705,8 @@ namespace Battle
 			int rangeMin,
 			int rangeMax,
 			string targetType,
+			string targetShape,
+			string requiredOverlayType,
 			string effectGroupKey)
 		{
 			SkillKey = skillKey;
@@ -712,6 +718,8 @@ namespace Battle
 			RangeMin = rangeMin;
 			RangeMax = rangeMax;
 			TargetType = targetType;
+			TargetShape = targetShape;
+			RequiredOverlayType = requiredOverlayType;
 			EffectGroupKey = effectGroupKey;
 		}
 	}

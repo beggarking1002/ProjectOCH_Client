@@ -41,6 +41,9 @@ namespace Battle
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnVisualHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
 		readonly Queue<string> _battleLogLines = new Queue<string>();
+		readonly List<AxialCoord> _knownTargetTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _validTargetTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _affectedTargetTiles = new List<AxialCoord>();
 
 		BattleMapGrid _mapGrid;
 		BattleGameDataRepository _gameData;
@@ -53,6 +56,7 @@ namespace Battle
 		bool _missingCameraLogged;
 		bool _isAnimatingMove;
 		bool _isLoadingGameData;
+		BattleTargetPreview _targetPreview;
 
 		public IReadOnlyDictionary<ulong, BattlePawn> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
@@ -74,6 +78,9 @@ namespace Battle
 		{
 			_mapGrid = mapGrid;
 			_fallbackPawnAddress = pawnAddress;
+			_targetPreview = _mapGrid != null
+				? _mapGrid.GetComponent<BattleTargetPreview>() ?? _mapGrid.gameObject.AddComponent<BattleTargetPreview>()
+				: null;
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
@@ -122,6 +129,8 @@ namespace Battle
 			}
 
 			_actionMode = mode;
+			if (_actionMode == BattleActionMode.Move)
+				_targetPreview?.Hide();
 			Debug.Log($"Battle action mode changed: {_actionMode}");
 		}
 
@@ -199,6 +208,7 @@ namespace Battle
 		void Update()
 		{
 			HandleMouseInput();
+			RefreshTargetPreview();
 		}
 
 		void OnDestroy()
@@ -367,7 +377,7 @@ namespace Battle
 					case Protocol.PawnClass.BeigeIce:
 						return pawnObject.AddComponent<BeigeIce>();
 					case Protocol.PawnClass.BeigeFire:
-						return pawnObject.AddComponent<Beige>();
+						return pawnObject.AddComponent<BeigeFire>();
 				}
 			}
 
@@ -614,8 +624,34 @@ namespace Battle
 			string targetType = GetSkillTargetType(casterPawn, skillSlot);
 			if (string.IsNullOrWhiteSpace(targetType))
 				targetType = "ENEMY_SINGLE";
+			if (targetType == "SELF" || targetType == "SELF_TOGGLE")
+				targetAxial = casterPawn.Axial;
+
+			if (_mapGrid == null || _mapGrid.IsTileInBounds(targetAxial) == false)
+			{
+				Debug.Log($"Skill target is outside the battle map. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, axial={targetAxial}");
+				return false;
+			}
+
+			if (TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill))
+			{
+				int distance = casterPawn.Axial.DistanceTo(targetAxial);
+				if (distance < skill.RangeMin || distance > skill.RangeMax)
+				{
+					Debug.Log($"Skill target is out of range. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, distance={distance}, range={skill.RangeMin}-{skill.RangeMax}");
+					return false;
+				}
+
+				Protocol.BattleTileOverlayType requiredOverlay = ParseRequiredOverlayType(skill.RequiredOverlayType);
+				if (requiredOverlay != Protocol.BattleTileOverlayType.None && _mapGrid.HasOverlay(targetAxial, requiredOverlay) == false)
+				{
+					Debug.Log($"Skill target is missing its required overlay. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, requiredOverlay={requiredOverlay}, axial={targetAxial}");
+					return false;
+				}
+			}
 
 			BattlePawn targetPawn = null;
+			resolvedTargetPawnId = FindPawnIdAtAxial(targetAxial);
 			if (resolvedTargetPawnId != 0)
 				_pawns.TryGetValue(resolvedTargetPawnId, out targetPawn);
 
@@ -649,6 +685,14 @@ namespace Battle
 					}
 
 					return true;
+				case "EMPTY_TILE":
+					if (targetPawn != null)
+					{
+						Debug.Log($"Skill requires an empty tile. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
 				default:
 					if (targetPawn != null && targetPawn.IsMine)
 					{
@@ -671,6 +715,182 @@ namespace Battle
 			}
 
 			return string.Empty;
+		}
+
+		bool TryGetSkillDefinition(BattlePawn casterPawn, int skillSlot, out BattleSkillDefinition skill)
+		{
+			skill = null;
+			return _gameData != null
+				&& casterPawn != null
+				&& casterPawn.Info != null
+				&& _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out skill);
+		}
+
+		static Protocol.BattleTileOverlayType ParseRequiredOverlayType(string value)
+		{
+			return string.Equals(value, "FIRE", System.StringComparison.OrdinalIgnoreCase)
+				? Protocol.BattleTileOverlayType.Fire
+				: Protocol.BattleTileOverlayType.None;
+		}
+
+		void RefreshTargetPreview()
+		{
+			if (_targetPreview == null || IsInteractionLocked || _actionMode == BattleActionMode.Move)
+			{
+				_targetPreview?.Hide();
+				return;
+			}
+
+			int skillSlot = GetSkillSlot(_actionMode);
+			if (skillSlot <= 0 || TryGetControllablePawnId(out ulong casterPawnId) == false
+				|| _pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn) == false
+				|| TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill) == false)
+			{
+				_targetPreview.Hide();
+				return;
+			}
+
+			_validTargetTiles.Clear();
+			if (skill.TargetType == "SELF" || skill.TargetType == "SELF_TOGGLE")
+			{
+				_validTargetTiles.Add(casterPawn.Axial);
+			}
+			else
+			{
+				_mapGrid.GetKnownTileAxials(_knownTargetTiles);
+				for (int i = 0; i < _knownTargetTiles.Count; i++)
+				{
+					if (IsValidSkillPreviewTarget(casterPawn, skill, _knownTargetTiles[i]))
+						_validTargetTiles.Add(_knownTargetTiles[i]);
+				}
+			}
+
+			_affectedTargetTiles.Clear();
+			if (TryGetPointerAxial(out AxialCoord hoveredAxial)
+				&& IsValidSkillPreviewTarget(casterPawn, skill, hoveredAxial))
+			{
+				GetAffectedTargetTiles(casterPawn, skill, hoveredAxial, _affectedTargetTiles);
+			}
+
+			_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+		}
+
+		bool IsValidSkillPreviewTarget(BattlePawn casterPawn, BattleSkillDefinition skill, AxialCoord targetAxial)
+		{
+			if (casterPawn == null || skill == null || _mapGrid == null)
+				return false;
+
+			string targetType = skill.TargetType;
+			if (targetType == "SELF" || targetType == "SELF_TOGGLE")
+				targetAxial = casterPawn.Axial;
+
+			if (_mapGrid.IsTileInBounds(targetAxial) == false)
+				return false;
+
+			int distance = casterPawn.Axial.DistanceTo(targetAxial);
+			if (distance < skill.RangeMin || distance > skill.RangeMax)
+				return false;
+
+			Protocol.BattleTileOverlayType requiredOverlay = ParseRequiredOverlayType(skill.RequiredOverlayType);
+			if (requiredOverlay != Protocol.BattleTileOverlayType.None && _mapGrid.HasOverlay(targetAxial, requiredOverlay) == false)
+				return false;
+
+			ulong targetPawnId = FindPawnIdAtAxial(targetAxial);
+			BattlePawn targetPawn = null;
+			if (targetPawnId != 0)
+				_pawns.TryGetValue(targetPawnId, out targetPawn);
+
+			switch (targetType)
+			{
+				case "SELF":
+				case "SELF_TOGGLE":
+					return targetPawn == casterPawn;
+				case "ALLY_SINGLE":
+					return targetPawn != null && targetPawn.IsMine;
+				case "ENEMY_SINGLE":
+					return targetPawn != null && targetPawn.IsMine == false;
+				case "TILE_OR_ENEMY":
+					return targetPawn == null || targetPawn.IsMine == false;
+				case "EMPTY_TILE":
+					return targetPawn == null;
+				default:
+					return targetPawn == null || targetPawn.IsMine == false;
+			}
+		}
+
+		void GetAffectedTargetTiles(BattlePawn casterPawn, BattleSkillDefinition skill, AxialCoord targetAxial, List<AxialCoord> destination)
+		{
+			destination.Clear();
+			AddAffectedTile(targetAxial, destination);
+			if (skill.TargetShape == "RADIUS_1")
+			{
+				for (int direction = 0; direction < 6; direction++)
+					AddAffectedTile(_mapGrid.GetNeighbor(targetAxial, direction), destination);
+				return;
+			}
+
+			if (skill.TargetShape != "LINE_3" || casterPawn.Axial.DistanceTo(targetAxial) <= 0)
+				return;
+
+			int directionIndex = FindDirectionIndex(casterPawn.Axial, targetAxial);
+			AxialCoord next = targetAxial;
+			for (int distance = 1; distance <= 2; distance++)
+			{
+				next = _mapGrid.GetNeighbor(next, directionIndex);
+				AddAffectedTile(next, destination);
+			}
+		}
+
+		void AddAffectedTile(AxialCoord axial, List<AxialCoord> destination)
+		{
+			if (_mapGrid.IsTileInBounds(axial) && destination.Contains(axial) == false)
+				destination.Add(axial);
+		}
+
+		int FindDirectionIndex(AxialCoord source, AxialCoord target)
+		{
+			int distance = source.DistanceTo(target);
+			for (int direction = 0; direction < 6; direction++)
+			{
+				if (_mapGrid.GetNeighbor(source, direction).DistanceTo(target) == distance - 1)
+					return direction;
+			}
+
+			return 0;
+		}
+
+		bool TryGetPointerAxial(out AxialCoord axial)
+		{
+			axial = default;
+			if (_mapGrid == null || IsPointerOverUi())
+				return false;
+
+			Camera camera = Camera.main;
+			if (camera == null)
+				return false;
+
+			Vector2 screenPosition;
+#if ENABLE_INPUT_SYSTEM
+			Mouse mouse = Mouse.current;
+			if (mouse == null)
+				return false;
+
+			screenPosition = mouse.position.ReadValue();
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			screenPosition = Input.mousePosition;
+#else
+			return false;
+#endif
+			if (IsValidScreenPosition(camera, screenPosition) == false)
+				return false;
+
+			Plane mapPlane = new Plane(Vector3.forward, _mapGrid.PlaneTransform.position);
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			axial = _mapGrid.WorldToAxial(ray.GetPoint(enter));
+			return true;
 		}
 
 		bool TryGetControllablePawnId(out ulong pawnId)
@@ -785,7 +1005,15 @@ namespace Battle
 			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
 
 			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawn casterPawn))
+			{
+				// BattlePawnDelta intentionally has no axial field. Teleport is the one
+				// skill response whose server-authoritative target axial is the caster's
+				// new position, so apply it only after a successful server response.
+				if (IsOverlayTeleport(casterPawn, packet.SkillSlot) && packet.TargetAxial != null)
+					casterPawn.SetAxial(ToBattleAxial(packet.TargetAxial));
+
 				TriggerSkillAnimation(casterPawn, packet.SkillSlot);
+			}
 
 			AppendBattleLogs(packet.Logs);
 
@@ -810,6 +1038,13 @@ namespace Battle
 			}
 
 			casterPawn.TriggerSkill(skillSlot);
+		}
+
+		bool IsOverlayTeleport(BattlePawn casterPawn, int skillSlot)
+		{
+			return TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill)
+				&& skill.TargetType == "EMPTY_TILE"
+				&& ParseRequiredOverlayType(skill.RequiredOverlayType) != Protocol.BattleTileOverlayType.None;
 		}
 
 		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)

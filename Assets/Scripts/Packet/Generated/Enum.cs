@@ -51,13 +51,15 @@ namespace Protocol {
             "TEVfRkFDSU5HX0RJUkVDVElPTl9SSUdIVBACKoEBCg5CYXR0bGVQYXduUm9s",
             "ZRIZChVCQVRUTEVfUEFXTl9ST0xFX05PTkUQABIbChdCQVRUTEVfUEFXTl9S",
             "T0xFX1RBTktFUhABEhoKFkJBVFRMRV9QQVdOX1JPTEVfTUVMRUUQAhIbChdC",
-            "QVRUTEVfUEFXTl9ST0xFX1JBTkdFRBADKlIKEkJhdHRsZVJlc291cmNlVHlw",
+            "QVRUTEVfUEFXTl9ST0xFX1JBTkdFRBADKnEKEkJhdHRsZVJlc291cmNlVHlw",
             "ZRIdChlCQVRUTEVfUkVTT1VSQ0VfVFlQRV9OT05FEAASHQoZQkFUVExFX1JF",
-            "U09VUkNFX1RZUEVfQ09MRBABKmQKDkJhdHRsZVRpbGVUeXBlEhkKFUJBVFRM",
-            "RV9USUxFX1RZUEVfTk9ORRAAEhsKF0JBVFRMRV9USUxFX1RZUEVfTk9STUFM",
-            "EAESGgoWQkFUVExFX1RJTEVfVFlQRV9XQVRFUhACKlwKFUJhdHRsZVRpbGVP",
-            "dmVybGF5VHlwZRIhCh1CQVRUTEVfVElMRV9PVkVSTEFZX1RZUEVfTk9ORRAA",
-            "EiAKHEJBVFRMRV9USUxFX09WRVJMQVlfVFlQRV9JQ0UQAWIGcHJvdG8z"));
+            "U09VUkNFX1RZUEVfQ09MRBABEh0KGUJBVFRMRV9SRVNPVVJDRV9UWVBFX0hF",
+            "QVQQAipkCg5CYXR0bGVUaWxlVHlwZRIZChVCQVRUTEVfVElMRV9UWVBFX05P",
+            "TkUQABIbChdCQVRUTEVfVElMRV9UWVBFX05PUk1BTBABEhoKFkJBVFRMRV9U",
+            "SUxFX1RZUEVfV0FURVIQAip/ChVCYXR0bGVUaWxlT3ZlcmxheVR5cGUSIQod",
+            "QkFUVExFX1RJTEVfT1ZFUkxBWV9UWVBFX05PTkUQABIgChxCQVRUTEVfVElM",
+            "RV9PVkVSTEFZX1RZUEVfSUNFEAESIQodQkFUVExFX1RJTEVfT1ZFUkxBWV9U",
+            "WVBFX0ZJUkUQAmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), typeof(global::Protocol.BattlePawnRole), typeof(global::Protocol.BattleResourceType), typeof(global::Protocol.BattleTileType), typeof(global::Protocol.BattleTileOverlayType), }, null, null));
@@ -124,6 +126,7 @@ namespace Protocol {
   public enum BattleResourceType {
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_NONE")] None = 0,
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_COLD")] Cold = 1,
+    [pbr::OriginalName("BATTLE_RESOURCE_TYPE_HEAT")] Heat = 2,
   }
 
   public enum BattleTileType {
@@ -135,6 +138,7 @@ namespace Protocol {
   public enum BattleTileOverlayType {
     [pbr::OriginalName("BATTLE_TILE_OVERLAY_TYPE_NONE")] None = 0,
     [pbr::OriginalName("BATTLE_TILE_OVERLAY_TYPE_ICE")] Ice = 1,
+    [pbr::OriginalName("BATTLE_TILE_OVERLAY_TYPE_FIRE")] Fire = 2,
   }
 
   #endregion

@@ -28,6 +28,9 @@
 - 호환용 `target_pawn_id`는 클라이언트가 `0`으로 보내고 서버가 axial에서 실제 Pawn을 찾는다.
 - 응답의 `target_pawn_id == 0`은 빈 타일 결과다. 대상 Pawn을 찾아서 HP를 직접 바꾸지 않는다.
 - 클라이언트의 대상 검사와 사거리 표시는 입력 UX 보조다. 최종 대상·피해·사망·AP는 서버 응답을 따른다.
+- `EMPTY_TILE`은 Pawn이 없는 타일만 대상으로 삼는다. `RequiredOverlayType=FIRE`는 해당 타일이 FIRE Overlay인 경우에만 유효하다.
+- `TargetShape=RADIUS_1`은 선택 타일과 인접 6칸, `LINE_3`은 서버와 같은 axial 방향으로 선택 타일에서 이어지는 3칸을 프리뷰로 표시한다.
+- Overlay Teleport은 `S_BATTLE_SKILL.target_axial`이 서버가 확정한 caster의 새 위치다. `BattlePawnDelta`에는 axial이 없으므로, 성공 응답에서만 이 좌표를 Pawn Transform과 내부 axial에 함께 반영한다.
 
 ## 상태 스냅샷과 버전
 
@@ -48,10 +51,10 @@
 
 ## 타일 동기화와 이동 규칙
 
-- `BattleTileInfo` = `axial`, 원본 `tile_type`(NORMAL/WATER), 동적 `overlay_type`(NONE/ICE).
+- `BattleTileInfo` = `axial`, 원본 `tile_type`(NORMAL/WATER), 동적 `overlay_type`(NONE/ICE/FIRE).
 - `S_ENTER_BATTLE.tiles`는 전투 맵 전체 스냅샷이다.
 - 스킬·턴 종료의 `tile_deltas`는 변경 타일만 전달하며 Ground/Prop을 바꾸지 않고 `CombatOverlay_Tilemap`만 갱신한다.
-- 이동 표현 규칙: `NORMAL + NONE/ICE` 가능, `WATER + NONE` 불가, `WATER + ICE` 가능. Prop은 별도로 이동을 막는다.
+- 이동 표현 규칙: `NORMAL + NONE/ICE/FIRE` 가능, `WATER + NONE/FIRE` 불가, `WATER + ICE` 가능. Prop은 별도로 이동을 막는다.
 
 ## 스킬 슬롯 계약
 
@@ -100,6 +103,8 @@
 | `EnumDef.csv` | 표기용 enum / 상태 키 정의 |
 
 `SkillIcon` Addressables 그룹에는 Beige Ice의 `icon_beige_ice_passive`, `skill1`~`skill4`, `ulti`, `sub` 주소가 등록돼 있다. 새 아이콘 또는 CSV를 플레이어 빌드에 반영하려면 Addressables 콘텐츠 빌드가 필요하다.
+
+`BattleSkill.csv`의 `TargetShape`, `RequiredOverlayType`은 서버 데이터 계약과 동기화한다. 현재 Beige Fire는 HEAT 자원을 사용하며 Fireball(단일), Explosion(`RADIUS_1`), Fire Wall(`LINE_3` + FIRE), Teleport(`EMPTY_TILE` + FIRE), Ambitious, Cooling Potion을 제공한다.
 
 ## 핵심 패킷
 
