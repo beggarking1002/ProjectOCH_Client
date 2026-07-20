@@ -53,47 +53,48 @@ namespace Protocol {
             "ASgJEhQKDHJlbWFpbmluZ19hcBgJIAEoBRIQCghjYW5fbW92ZRgKIAEoCBIu",
             "CgtwYXduX2RlbHRhcxgLIAMoCzIZLlByb3RvY29sLkJhdHRsZVBhd25EZWx0",
             "YRInCgRsb2dzGAwgAygLMhkuUHJvdG9jb2wuQmF0dGxlQWN0aW9uTG9nEhwK",
-            "FGJhdHRsZV9zdGF0ZV92ZXJzaW9uGA0gASgEIpMBCg5DX0JBVFRMRV9TS0lM",
+            "FGJhdHRsZV9zdGF0ZV92ZXJzaW9uGA0gASgEIscBCg5DX0JBVFRMRV9TS0lM",
             "TBIRCgliYXR0bGVfaWQYASABKAQSFgoOY2FzdGVyX3Bhd25faWQYAiABKAQS",
             "EgoKc2tpbGxfc2xvdBgDIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgEIAEoBBIq",
-            "Cgx0YXJnZXRfYXhpYWwYBSABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkIpAE",
-            "Cg5TX0JBVFRMRV9TS0lMTBIPCgdzdWNjZXNzGAEgASgIEhEKCWJhdHRsZV9p",
-            "ZBgCIAEoBBIWCg5jYXN0ZXJfcGF3bl9pZBgDIAEoBBISCgpza2lsbF9zbG90",
-            "GAQgASgFEhYKDnRhcmdldF9wYXduX2lkGAUgASgEEioKDHRhcmdldF9heGlh",
-            "bBgGIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSDgoGZGFtYWdlGAcgASgF",
-            "EhEKCXRhcmdldF9ocBgIIAEoBRIZChFuZXh0X3R1cm5fcGF3bl9pZBgJIAEo",
-            "BBIOCgZyZWFzb24YCiABKAkSFAoMcmVtYWluaW5nX2FwGAsgASgFEhAKCGNh",
-            "bl9tb3ZlGAwgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1cm4YDSAB",
-            "KAgSFQoNdXNlZF91bHRpbWF0ZRgOIAEoCBIUCgx0YXJnZXRfYXJtb3IYDyAB",
-            "KAUSLgoLcGF3bl9kZWx0YXMYECADKAsyGS5Qcm90b2NvbC5CYXR0bGVQYXdu",
-            "RGVsdGESJwoEbG9ncxgRIAMoCzIZLlByb3RvY29sLkJhdHRsZUFjdGlvbkxv",
-            "ZxIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgSIAEoBBItCgt0aWxlX2RlbHRh",
-            "cxgTIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvIjcKEUNfQkFUVExF",
-            "X0VORF9UVVJOEhEKCWJhdHRsZV9pZBgBIAEoBBIPCgdwYXduX2lkGAIgASgE",
-            "IvsCChFTX0JBVFRMRV9FTkRfVFVSThIPCgdzdWNjZXNzGAEgASgIEhEKCWJh",
-            "dHRsZV9pZBgCIAEoBBIPCgdwYXduX2lkGAMgASgEEhkKEW5leHRfdHVybl9w",
-            "YXduX2lkGAQgASgEEg4KBnJlYXNvbhgFIAEoCRIUCgxyZW1haW5pbmdfYXAY",
-            "BiABKAUSEAoIY2FuX21vdmUYByABKAgSIQoZdXNlZF9zdWJfYWN0aW9uX3Ro",
-            "aXNfdHVybhgIIAEoCBIVCg11c2VkX3VsdGltYXRlGAkgASgIEi4KC3Bhd25f",
-            "ZGVsdGFzGAogAygLMhkuUHJvdG9jb2wuQmF0dGxlUGF3bkRlbHRhEicKBGxv",
-            "Z3MYCyADKAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rpb25Mb2cSHAoUYmF0dGxl",
-            "X3N0YXRlX3ZlcnNpb24YDCABKAQSLQoLdGlsZV9kZWx0YXMYDSADKAsyGC5Q",
-            "cm90b2NvbC5CYXR0bGVUaWxlSW5mbyIrCg9DX0JBVFRMRV9JTlZJVEUSGAoQ",
-            "dGFyZ2V0X3BsYXllcl9pZBgBIAEoBCJxChdTX0JBVFRMRV9JTlZJVEVfUkVR",
-            "VUVTVBIPCgdzdWNjZXNzGAEgASgIEhsKE3JlcXVlc3Rlcl9wbGF5ZXJfaWQY",
-            "AiABKAQSGAoQdGFyZ2V0X3BsYXllcl9pZBgDIAEoBBIOCgZyZWFzb24YBCAB",
-            "KAkiNwoYU19CQVRUTEVfSU5WSVRFX1JFQ0VJVkVEEhsKE3JlcXVlc3Rlcl9w",
-            "bGF5ZXJfaWQYASABKAQiRwoYQ19CQVRUTEVfSU5WSVRFX1JFU1BPTlNFEhsK",
-            "E3JlcXVlc3Rlcl9wbGF5ZXJfaWQYASABKAQSDgoGYWNjZXB0GAIgASgIInEK",
-            "FlNfQkFUVExFX0lOVklURV9SRVNVTFQSEAoIYWNjZXB0ZWQYASABKAgSGwoT",
-            "cmVxdWVzdGVyX3BsYXllcl9pZBgCIAEoBBIYChB0YXJnZXRfcGxheWVyX2lk",
-            "GAMgASgEEg4KBnJlYXNvbhgEIAEoCSJQChJTX0JBVFRMRV9QQVdOX0RFQUQS",
-            "EQoJYmF0dGxlX2lkGAEgASgEEg8KB3Bhd25faWQYAiABKAQSFgoOa2lsbGVy",
-            "X3Bhd25faWQYAyABKAQiNQoPU19CQVRUTEVfUkVTVUxUEhEKCWJhdHRsZV9p",
-            "ZBgBIAEoBBIPCgd2aWN0b3J5GAIgASgIIigKE0NfQkFUVExFX1JFU1VMVF9B",
-            "Q0sSEQoJYmF0dGxlX2lkGAEgASgEIkkKE1NfQkFUVExFX1JFU1VMVF9BQ0sS",
-            "DwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVfaWQYAiABKAQSDgoGcmVhc29u",
-            "GAMgASgJYgZwcm90bzM="));
+            "Cgx0YXJnZXRfYXhpYWwYBSABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEjIK",
+            "FGxpbmVfZGlyZWN0aW9uX2F4aWFsGAYgASgLMhQuUHJvdG9jb2wuQXhpYWxD",
+            "b29yZCKQBAoOU19CQVRUTEVfU0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIRCgli",
+            "YXR0bGVfaWQYAiABKAQSFgoOY2FzdGVyX3Bhd25faWQYAyABKAQSEgoKc2tp",
+            "bGxfc2xvdBgEIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0YXJn",
+            "ZXRfYXhpYWwYBiABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEg4KBmRhbWFn",
+            "ZRgHIAEoBRIRCgl0YXJnZXRfaHAYCCABKAUSGQoRbmV4dF90dXJuX3Bhd25f",
+            "aWQYCSABKAQSDgoGcmVhc29uGAogASgJEhQKDHJlbWFpbmluZ19hcBgLIAEo",
+            "BRIQCghjYW5fbW92ZRgMIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190",
+            "dXJuGA0gASgIEhUKDXVzZWRfdWx0aW1hdGUYDiABKAgSFAoMdGFyZ2V0X2Fy",
+            "bW9yGA8gASgFEi4KC3Bhd25fZGVsdGFzGBAgAygLMhkuUHJvdG9jb2wuQmF0",
+            "dGxlUGF3bkRlbHRhEicKBGxvZ3MYESADKAsyGS5Qcm90b2NvbC5CYXR0bGVB",
+            "Y3Rpb25Mb2cSHAoUYmF0dGxlX3N0YXRlX3ZlcnNpb24YEiABKAQSLQoLdGls",
+            "ZV9kZWx0YXMYEyADKAsyGC5Qcm90b2NvbC5CYXR0bGVUaWxlSW5mbyI3ChFD",
+            "X0JBVFRMRV9FTkRfVFVSThIRCgliYXR0bGVfaWQYASABKAQSDwoHcGF3bl9p",
+            "ZBgCIAEoBCL7AgoRU19CQVRUTEVfRU5EX1RVUk4SDwoHc3VjY2VzcxgBIAEo",
+            "CBIRCgliYXR0bGVfaWQYAiABKAQSDwoHcGF3bl9pZBgDIAEoBBIZChFuZXh0",
+            "X3R1cm5fcGF3bl9pZBgEIAEoBBIOCgZyZWFzb24YBSABKAkSFAoMcmVtYWlu",
+            "aW5nX2FwGAYgASgFEhAKCGNhbl9tb3ZlGAcgASgIEiEKGXVzZWRfc3ViX2Fj",
+            "dGlvbl90aGlzX3R1cm4YCCABKAgSFQoNdXNlZF91bHRpbWF0ZRgJIAEoCBIu",
+            "CgtwYXduX2RlbHRhcxgKIAMoCzIZLlByb3RvY29sLkJhdHRsZVBhd25EZWx0",
+            "YRInCgRsb2dzGAsgAygLMhkuUHJvdG9jb2wuQmF0dGxlQWN0aW9uTG9nEhwK",
+            "FGJhdHRsZV9zdGF0ZV92ZXJzaW9uGAwgASgEEi0KC3RpbGVfZGVsdGFzGA0g",
+            "AygLMhguUHJvdG9jb2wuQmF0dGxlVGlsZUluZm8iKwoPQ19CQVRUTEVfSU5W",
+            "SVRFEhgKEHRhcmdldF9wbGF5ZXJfaWQYASABKAQicQoXU19CQVRUTEVfSU5W",
+            "SVRFX1JFUVVFU1QSDwoHc3VjY2VzcxgBIAEoCBIbChNyZXF1ZXN0ZXJfcGxh",
+            "eWVyX2lkGAIgASgEEhgKEHRhcmdldF9wbGF5ZXJfaWQYAyABKAQSDgoGcmVh",
+            "c29uGAQgASgJIjcKGFNfQkFUVExFX0lOVklURV9SRUNFSVZFRBIbChNyZXF1",
+            "ZXN0ZXJfcGxheWVyX2lkGAEgASgEIkcKGENfQkFUVExFX0lOVklURV9SRVNQ",
+            "T05TRRIbChNyZXF1ZXN0ZXJfcGxheWVyX2lkGAEgASgEEg4KBmFjY2VwdBgC",
+            "IAEoCCJxChZTX0JBVFRMRV9JTlZJVEVfUkVTVUxUEhAKCGFjY2VwdGVkGAEg",
+            "ASgIEhsKE3JlcXVlc3Rlcl9wbGF5ZXJfaWQYAiABKAQSGAoQdGFyZ2V0X3Bs",
+            "YXllcl9pZBgDIAEoBBIOCgZyZWFzb24YBCABKAkiUAoSU19CQVRUTEVfUEFX",
+            "Tl9ERUFEEhEKCWJhdHRsZV9pZBgBIAEoBBIPCgdwYXduX2lkGAIgASgEEhYK",
+            "DmtpbGxlcl9wYXduX2lkGAMgASgEIjUKD1NfQkFUVExFX1JFU1VMVBIRCgli",
+            "YXR0bGVfaWQYASABKAQSDwoHdmljdG9yeRgCIAEoCCIoChNDX0JBVFRMRV9S",
+            "RVNVTFRfQUNLEhEKCWJhdHRsZV9pZBgBIAEoBCJJChNTX0JBVFRMRV9SRVNV",
+            "TFRfQUNLEg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg4K",
+            "BnJlYXNvbhgDIAEoCWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -113,7 +114,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason", "BattleStateVersion", "Tiles" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_MOVE), global::Protocol.C_BATTLE_MOVE.Parser, new[]{ "BattleId", "PawnId", "Target" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "RemainingAp", "CanMove", "PawnDeltas", "Logs", "BattleStateVersion" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "LineDirectionAxial" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_END_TURN), global::Protocol.C_BATTLE_END_TURN.Parser, new[]{ "BattleId", "PawnId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas" }, null, null, null, null),
@@ -4034,6 +4035,7 @@ namespace Protocol {
       skillSlot_ = other.skillSlot_;
       targetPawnId_ = other.targetPawnId_;
       targetAxial_ = other.targetAxial_ != null ? other.targetAxial_.Clone() : null;
+      lineDirectionAxial_ = other.lineDirectionAxial_ != null ? other.lineDirectionAxial_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4103,6 +4105,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "line_direction_axial" field.</summary>
+    public const int LineDirectionAxialFieldNumber = 6;
+    private global::Protocol.AxialCoord lineDirectionAxial_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.AxialCoord LineDirectionAxial {
+      get { return lineDirectionAxial_; }
+      set {
+        lineDirectionAxial_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4123,6 +4137,7 @@ namespace Protocol {
       if (SkillSlot != other.SkillSlot) return false;
       if (TargetPawnId != other.TargetPawnId) return false;
       if (!object.Equals(TargetAxial, other.TargetAxial)) return false;
+      if (!object.Equals(LineDirectionAxial, other.LineDirectionAxial)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4135,6 +4150,7 @@ namespace Protocol {
       if (SkillSlot != 0) hash ^= SkillSlot.GetHashCode();
       if (TargetPawnId != 0UL) hash ^= TargetPawnId.GetHashCode();
       if (targetAxial_ != null) hash ^= TargetAxial.GetHashCode();
+      if (lineDirectionAxial_ != null) hash ^= LineDirectionAxial.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4173,6 +4189,10 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteMessage(TargetAxial);
       }
+      if (lineDirectionAxial_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(LineDirectionAxial);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4203,6 +4223,10 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteMessage(TargetAxial);
       }
+      if (lineDirectionAxial_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(LineDirectionAxial);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4227,6 +4251,9 @@ namespace Protocol {
       }
       if (targetAxial_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetAxial);
+      }
+      if (lineDirectionAxial_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LineDirectionAxial);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4257,6 +4284,12 @@ namespace Protocol {
           TargetAxial = new global::Protocol.AxialCoord();
         }
         TargetAxial.MergeFrom(other.TargetAxial);
+      }
+      if (other.lineDirectionAxial_ != null) {
+        if (lineDirectionAxial_ == null) {
+          LineDirectionAxial = new global::Protocol.AxialCoord();
+        }
+        LineDirectionAxial.MergeFrom(other.LineDirectionAxial);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4296,6 +4329,13 @@ namespace Protocol {
             input.ReadMessage(TargetAxial);
             break;
           }
+          case 50: {
+            if (lineDirectionAxial_ == null) {
+              LineDirectionAxial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(LineDirectionAxial);
+            break;
+          }
         }
       }
     #endif
@@ -4332,6 +4372,13 @@ namespace Protocol {
               TargetAxial = new global::Protocol.AxialCoord();
             }
             input.ReadMessage(TargetAxial);
+            break;
+          }
+          case 50: {
+            if (lineDirectionAxial_ == null) {
+              LineDirectionAxial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(LineDirectionAxial);
             break;
           }
         }

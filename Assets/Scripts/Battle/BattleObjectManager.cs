@@ -57,6 +57,9 @@ namespace Battle
 		bool _isAnimatingMove;
 		bool _isLoadingGameData;
 		BattleTargetPreview _targetPreview;
+		bool _hasFireWallStartTarget;
+		ulong _fireWallCasterPawnId;
+		AxialCoord _fireWallStartAxial;
 
 		public IReadOnlyDictionary<ulong, BattlePawn> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
@@ -128,6 +131,9 @@ namespace Battle
 				return;
 			}
 
+			if (mode != BattleActionMode.Skill3)
+				ClearFireWallTargeting();
+
 			_actionMode = mode;
 			if (_actionMode == BattleActionMode.Move)
 				_targetPreview?.Hide();
@@ -178,6 +184,7 @@ namespace Battle
 			}
 
 			_currentTurnPawnId = nextTurnPawnId;
+			ClearFireWallTargeting();
 			_actionMode = BattleActionMode.Move;
 			RefreshTurnIndicators();
 			Debug.Log($"Debug end turn. nextTurnPawnId={_currentTurnPawnId}");
@@ -440,6 +447,7 @@ namespace Battle
 			_pawnVisualHandles.Clear();
 			_pawnHandles.Clear();
 			_localPawnIds.Clear();
+			ClearFireWallTargeting();
 		}
 
 		bool TryApplyNewBattleStateVersion(ulong packetVersion, string packetName)
@@ -590,6 +598,13 @@ namespace Battle
 				return;
 			}
 
+			if (TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill)
+				&& IsTwoStageFireWall(skill))
+			{
+				HandleFireWallInput(casterPawnId, casterPawn, skillSlot, targetAxial);
+				return;
+			}
+
 			ulong resolvedTargetPawnId = FindPawnIdAtAxial(targetAxial);
 			if (ValidateSkillTarget(casterPawn, skillSlot, resolvedTargetPawnId, ref targetAxial) == false)
 				return;
@@ -617,6 +632,70 @@ namespace Battle
 
 			Debug.Log($"Skill debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 			_actionMode = BattleActionMode.Move;
+		}
+
+		void HandleFireWallInput(ulong casterPawnId, BattlePawn casterPawn, int skillSlot, AxialCoord clickedAxial)
+		{
+			if (_hasFireWallStartTarget && _fireWallCasterPawnId == casterPawnId)
+			{
+				if (IsFireWallDirectionTarget(clickedAxial) == false)
+				{
+					Debug.Log($"Fire Wall direction must be one of the six in-bounds tiles adjacent to the starting tile. start={_fireWallStartAxial}, selected={clickedAxial}");
+					return;
+				}
+
+				if (_battleId != 0 && GameRoot.Instance != null)
+				{
+					bool sent = GameRoot.Instance.Network.SendBattleSkill(
+						_battleId,
+						casterPawnId,
+						skillSlot,
+						_fireWallStartAxial.Q,
+						_fireWallStartAxial.R,
+						clickedAxial.Q,
+						clickedAxial.R);
+					if (sent)
+					{
+						Debug.Log($"Sent two-stage C_BATTLE_SKILL Fire Wall. battleId={_battleId}, casterPawnId={casterPawnId}, skillSlot={skillSlot}, start={_fireWallStartAxial}, lineDirection={clickedAxial}");
+						ClearFireWallTargeting();
+						_actionMode = BattleActionMode.WaitingServer;
+					}
+					else
+					{
+						Debug.LogWarning($"Failed to send two-stage C_BATTLE_SKILL Fire Wall. {GameRoot.Instance.Network.LastError}");
+					}
+
+					return;
+				}
+
+				Debug.Log($"Fire Wall debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, start={_fireWallStartAxial}, lineDirection={clickedAxial}");
+				ClearFireWallTargeting();
+				_actionMode = BattleActionMode.Move;
+				return;
+			}
+
+			// Stage 1 keeps the normal Fire Wall target validation for its start tile.
+			ulong resolvedTargetPawnId = FindPawnIdAtAxial(clickedAxial);
+			if (ValidateSkillTarget(casterPawn, skillSlot, resolvedTargetPawnId, ref clickedAxial) == false)
+				return;
+
+			_hasFireWallStartTarget = true;
+			_fireWallCasterPawnId = casterPawnId;
+			_fireWallStartAxial = clickedAxial;
+			Debug.Log($"Fire Wall start selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, start={clickedAxial}");
+		}
+
+		static bool IsTwoStageFireWall(BattleSkillDefinition skill)
+		{
+			return skill != null
+				&& string.Equals(skill.SkillKey, "BEIGE_FIRE_FIRE_WALL", System.StringComparison.OrdinalIgnoreCase);
+		}
+
+		void ClearFireWallTargeting()
+		{
+			_hasFireWallStartTarget = false;
+			_fireWallCasterPawnId = 0;
+			_fireWallStartAxial = default;
 		}
 
 		bool ValidateSkillTarget(BattlePawn casterPawn, int skillSlot, ulong resolvedTargetPawnId, ref AxialCoord targetAxial)
@@ -756,6 +835,12 @@ namespace Battle
 				return;
 			}
 
+			if (IsTwoStageFireWall(skill) && _hasFireWallStartTarget && _fireWallCasterPawnId == casterPawnId)
+			{
+				RefreshFireWallDirectionPreview();
+				return;
+			}
+
 			_validTargetTiles.Clear();
 			if (skill.TargetType == "SELF" || skill.TargetType == "SELF_TOGGLE")
 			{
@@ -859,6 +944,11 @@ namespace Battle
 		{
 			destination.Clear();
 			AddAffectedTile(targetAxial, destination);
+			// The final Fire Wall line is selected in a second stage, so its first-stage
+			// hover only indicates the potential start tile.
+			if (IsTwoStageFireWall(skill))
+				return;
+
 			if (skill.TargetShape == "RADIUS_1")
 			{
 				for (int direction = 0; direction < 6; direction++)
@@ -876,6 +966,51 @@ namespace Battle
 				next = _mapGrid.GetNeighbor(next, directionIndex);
 				AddAffectedTile(next, destination);
 			}
+		}
+
+		void RefreshFireWallDirectionPreview()
+		{
+			_validTargetTiles.Clear();
+			_affectedTargetTiles.Clear();
+			AddAffectedTile(_fireWallStartAxial, _affectedTargetTiles);
+
+			for (int direction = 0; direction < 6; direction++)
+			{
+				AxialCoord adjacent = _mapGrid.GetNeighbor(_fireWallStartAxial, direction);
+				if (_mapGrid.IsTileInBounds(adjacent))
+					_validTargetTiles.Add(adjacent);
+			}
+
+			if (TryGetPointerAxial(out AxialCoord hoveredAxial) && IsFireWallDirectionTarget(hoveredAxial))
+			{
+				AddAffectedTile(hoveredAxial, _affectedTargetTiles);
+				int direction = FindAdjacentDirectionIndex(_fireWallStartAxial, hoveredAxial);
+				if (direction >= 0)
+					AddAffectedTile(_mapGrid.GetNeighbor(hoveredAxial, direction), _affectedTargetTiles);
+			}
+
+			_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+		}
+
+		bool IsFireWallDirectionTarget(AxialCoord targetAxial)
+		{
+			return _mapGrid != null
+				&& _mapGrid.IsTileInBounds(targetAxial)
+				&& FindAdjacentDirectionIndex(_fireWallStartAxial, targetAxial) >= 0;
+		}
+
+		int FindAdjacentDirectionIndex(AxialCoord source, AxialCoord target)
+		{
+			if (_mapGrid == null)
+				return -1;
+
+			for (int direction = 0; direction < 6; direction++)
+			{
+				if (_mapGrid.GetNeighbor(source, direction).Equals(target))
+					return direction;
+			}
+
+			return -1;
 		}
 
 		void AddAffectedTile(AxialCoord axial, List<AxialCoord> destination)
@@ -1026,6 +1161,7 @@ namespace Battle
 
 			if (packet.Success == false)
 			{
+				ClearFireWallTargeting();
 				_actionMode = BattleActionMode.Move;
 				Debug.LogWarning($"Battle skill rejected. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, reason={packet.Reason}");
 				return;
@@ -1034,6 +1170,7 @@ namespace Battle
 			if (TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_BATTLE_SKILL)) == false)
 				return;
 
+			ClearFireWallTargeting();
 			_actionMode = BattleActionMode.Move;
 
 			ApplyPawnDeltas(packet.PawnDeltas);
@@ -1097,6 +1234,7 @@ namespace Battle
 
 			if (packet.Success == false)
 			{
+				ClearFireWallTargeting();
 				_actionMode = BattleActionMode.Move;
 				Debug.LogWarning($"Battle end turn rejected. pawnId={packet.PawnId}, reason={packet.Reason}");
 				return;
@@ -1105,6 +1243,7 @@ namespace Battle
 			if (TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_BATTLE_END_TURN)) == false)
 				return;
 
+			ClearFireWallTargeting();
 			_actionMode = BattleActionMode.Move;
 
 			ApplyPawnDeltas(packet.PawnDeltas);

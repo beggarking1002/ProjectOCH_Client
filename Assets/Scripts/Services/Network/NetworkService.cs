@@ -227,9 +227,9 @@ namespace Networking
 			});
 		}
 
-		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r)
+		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r, int? lineDirectionQ = null, int? lineDirectionR = null)
 		{
-			return Send(new Protocol.C_BATTLE_SKILL
+			Protocol.C_BATTLE_SKILL packet = new Protocol.C_BATTLE_SKILL
 			{
 				BattleId = battleId,
 				CasterPawnId = casterPawnId,
@@ -237,7 +237,20 @@ namespace Networking
 				// The server resolves any Pawn from TargetAxial. Keep the legacy field at zero.
 				TargetPawnId = 0,
 				TargetAxial = new Protocol.AxialCoord { Q = q, R = r },
-			});
+			};
+
+			// Fire Wall is a two-stage skill. Its second selected tile supplies the
+			// adjacent line direction while TargetAxial remains the starting tile.
+			if (lineDirectionQ.HasValue && lineDirectionR.HasValue)
+			{
+				packet.LineDirectionAxial = new Protocol.AxialCoord
+				{
+					Q = lineDirectionQ.Value,
+					R = lineDirectionR.Value,
+				};
+			}
+
+			return Send(packet);
 		}
 
 		public bool SendBattleEndTurn(ulong battleId, ulong pawnId)
