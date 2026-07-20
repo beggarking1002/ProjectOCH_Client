@@ -360,7 +360,7 @@ namespace Battle
 				return;
 
 			bool canAct = _battleResultReceived == false && _objectManager.IsInteractionLocked == false && (_objectManager.IsCurrentTurnLocal || _objectManager.BattleId == 0);
-			TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn);
+			TryGetCurrentTurnPawn(out BattlePawn currentTurnPawn);
 			RefreshActionSlotData(currentTurnPawn);
 
 			if (_turnExitButton != null)
@@ -438,7 +438,7 @@ namespace Battle
 			// A tile-targeted result has no defender Pawn. Do not turn it into a damage
 			// number on the caster; Pawn presentation is only for actual defender IDs.
 			if (log.DefenderPawnId == 0
-				|| _objectManager.Pawns.TryGetValue(log.DefenderPawnId, out BattlePawnController targetPawn) == false
+				|| _objectManager.Pawns.TryGetValue(log.DefenderPawnId, out BattlePawn targetPawn) == false
 				|| targetPawn == null)
 			{
 				return;
@@ -648,8 +648,8 @@ namespace Battle
 
 			AxialCoord hoveredAxial = default;
 			bool hasHoveredTile = TryGetHoveredAxial(out hoveredAxial);
-			BattlePawnController selectedPawn = TryGetCurrentTurnPawn(out BattlePawnController currentTurnPawn) ? currentTurnPawn : null;
-			BattlePawnController hoveredPawn = null;
+			BattlePawn selectedPawn = TryGetCurrentTurnPawn(out BattlePawn currentTurnPawn) ? currentTurnPawn : null;
+			BattlePawn hoveredPawn = null;
 
 			if (_tileInfoText != null)
 			{
@@ -664,7 +664,7 @@ namespace Battle
 
 			if (_enemyPawnPanel != null)
 			{
-				BattlePawnController enemyPawn = null;
+				BattlePawn enemyPawn = null;
 				if (hasHoveredTile && _objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out hoveredPawn) && hoveredPawn.IsMine == false)
 					enemyPawn = hoveredPawn;
 
@@ -680,7 +680,7 @@ namespace Battle
 
 			string ap = "-";
 			string canMove = "-";
-			if (TryGetCurrentTurnPawn(out BattlePawnController pawn))
+			if (TryGetCurrentTurnPawn(out BattlePawn pawn))
 			{
 				ap = pawn.CurrentAp.ToString();
 				canMove = pawn.CanMove ? "Yes" : "No";
@@ -696,7 +696,7 @@ namespace Battle
 
 			string state = _objectManager.IsTileWalkable(axial) ? "Walkable" : "Blocked";
 			string pawn = "-";
-			if (_objectManager.TryGetPawnAtAxial(axial, out ulong pawnId, out BattlePawnController pawnController))
+			if (_objectManager.TryGetPawnAtAxial(axial, out ulong pawnId, out BattlePawn pawnController))
 			{
 				string side = pawnController.IsMine ? "Mine" : "Enemy";
 				pawn = $"{pawnId} ({side})";
@@ -714,7 +714,7 @@ namespace Battle
 			return _actionTooltips[slotIndex];
 		}
 
-		void RefreshActionSlotData(BattlePawnController currentTurnPawn)
+		void RefreshActionSlotData(BattlePawn currentTurnPawn)
 		{
 			Protocol.PawnClass pawnClass = currentTurnPawn != null && currentTurnPawn.Info != null
 				? currentTurnPawn.Info.PawnClass
@@ -930,7 +930,7 @@ namespace Battle
 			return string.Join(" ", parts);
 		}
 
-		static string BuildPawnText(string title, BattlePawnController pawn)
+		static string BuildPawnText(string title, BattlePawn pawn)
 		{
 			if (pawn == null)
 				return $"{title}\nPawn: -\nAxial: -\nHP: -\nArmor: -\nAP: -";
@@ -939,7 +939,7 @@ namespace Battle
 			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
 			string armor = pawn.MaxArmor > 0 ? $"{pawn.Armor}/{pawn.MaxArmor}" : pawn.Armor.ToString();
 			string shield = pawn.ShieldMax > 0 ? $"{pawn.ShieldCurrent}/{pawn.ShieldMax}" : pawn.ShieldCurrent.ToString();
-			string cold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawnController.ResourceState coldResource)
+			string cold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawn.ResourceState coldResource)
 				? FormatValue(coldResource.Value, coldResource.MaxValue)
 				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
@@ -947,7 +947,7 @@ namespace Battle
 			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nCOLD: {cold}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
 		}
 
-		static string FormatStatuses(IReadOnlyDictionary<string, BattlePawnController.StatusState> statuses)
+		static string FormatStatuses(IReadOnlyDictionary<string, BattlePawn.StatusState> statuses)
 		{
 			if (statuses == null || statuses.Count == 0)
 				return "-";
@@ -957,14 +957,14 @@ namespace Battle
 			List<string> values = new List<string>(keys.Count);
 			for (int i = 0; i < keys.Count; i++)
 			{
-				BattlePawnController.StatusState status = statuses[keys[i]];
+				BattlePawn.StatusState status = statuses[keys[i]];
 				values.Add($"{status.StatusKey} x{status.Stacks} T{status.RemainingOwnerTurns}");
 			}
 
 			return string.Join(", ", values);
 		}
 
-		bool IsActionAvailable(ActionSlotBinding binding, BattlePawnController pawn)
+		bool IsActionAvailable(ActionSlotBinding binding, BattlePawn pawn)
 		{
 			if (binding.IsWaitCommand || pawn == null)
 				return true;
@@ -989,7 +989,7 @@ namespace Battle
 			}
 		}
 
-		bool HasEnoughAp(ActionSlotBinding binding, BattlePawnController pawn)
+		bool HasEnoughAp(ActionSlotBinding binding, BattlePawn pawn)
 		{
 			if (pawn == null)
 				return false;
@@ -1004,7 +1004,7 @@ namespace Battle
 			return pawn.CurrentAp > 0;
 		}
 
-		bool TryGetCurrentTurnPawn(out BattlePawnController pawn)
+		bool TryGetCurrentTurnPawn(out BattlePawn pawn)
 		{
 			pawn = null;
 			return _objectManager.CurrentTurnPawnId != 0
@@ -1480,7 +1480,7 @@ namespace Battle
 				_statusIcons = statusIcons;
 			}
 
-			public void SetPawn(string title, BattlePawnController pawn)
+			public void SetPawn(string title, BattlePawn pawn)
 			{
 				if (_text != null)
 					_text.text = BuildPawnText(title, pawn);
@@ -1500,7 +1500,7 @@ namespace Battle
 				if (hasShield)
 					_shieldBar.Set(GetRatio(pawn.ShieldCurrent, pawn.ShieldMax), $"Shield {FormatValue(pawn.ShieldCurrent, pawn.ShieldMax)}");
 
-				bool hasCold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawnController.ResourceState cold);
+				bool hasCold = pawn.Resources.TryGetValue(Protocol.BattleResourceType.Cold, out BattlePawn.ResourceState cold);
 				_coldBar.SetVisible(hasCold);
 				if (hasCold)
 					_coldBar.Set(GetRatio(cold.Value, cold.MaxValue), $"COLD {FormatValue(cold.Value, cold.MaxValue)}");
@@ -1572,7 +1572,7 @@ namespace Battle
 				_root = root;
 			}
 
-			public void SetStatuses(IReadOnlyDictionary<string, BattlePawnController.StatusState> statuses)
+			public void SetStatuses(IReadOnlyDictionary<string, BattlePawn.StatusState> statuses)
 			{
 				int count = statuses != null ? statuses.Count : 0;
 				if (_root == null)
@@ -1653,7 +1653,7 @@ namespace Battle
 					_root.SetActive(visible);
 			}
 
-			public void Set(BattlePawnController.StatusState status, int index, int count)
+			public void Set(BattlePawn.StatusState status, int index, int count)
 			{
 				float width = 1f / Mathf.Max(1, count);
 				_rect.anchorMin = new Vector2(index * width, 0f);
@@ -1674,6 +1674,8 @@ namespace Battle
 					return "EMP";
 				if (statusKey.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "IMM";
+				if (statusKey.IndexOf("THAWING_POTION_DAMAGE_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "DMG";
 
 				string compact = statusKey.Replace("_", string.Empty).ToUpperInvariant();
 				return compact.Length <= 3 ? compact : compact.Substring(0, 3);
@@ -1686,6 +1688,8 @@ namespace Battle
 					return new Color(1f, 0.73f, 0.22f, 0.96f);
 				if (key.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.42f, 0.9f, 1f, 0.96f);
+				if (key.IndexOf("THAWING_POTION_DAMAGE_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.72f, 0.43f, 0.27f, 0.96f);
 				if (key.IndexOf("COLD", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FROST", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FREEZE", System.StringComparison.OrdinalIgnoreCase) >= 0)

@@ -19,8 +19,8 @@ namespace Battle
 		const int MaxBattleLogLines = 6;
 		const string BattlePawnBaseAddress = "PawnBase";
 		const string BattlePawnVisualRootName = "visual";
-		// The client maps only the protocol PawnClass to presentation assets. It does not
-		// mirror the server's BattlePawn inheritance hierarchy.
+		// Presentation assets and local pawn behavior are selected by the protocol class.
+		// The hierarchy is only for client-side behavior; server snapshots remain authoritative.
 		static readonly Dictionary<Protocol.PawnClass, string> PawnVisualAddressByClass = new Dictionary<Protocol.PawnClass, string>
 		{
 			{ Protocol.PawnClass.SuenAxeSword, "Pawn_Suen_AxeSword" },
@@ -36,7 +36,7 @@ namespace Battle
 			{ Protocol.PawnClass.DarkhandSword, "Pawn_Darkhand_Sword" },
 		};
 
-		readonly Dictionary<ulong, BattlePawnController> _pawns = new Dictionary<ulong, BattlePawnController>();
+		readonly Dictionary<ulong, BattlePawn> _pawns = new Dictionary<ulong, BattlePawn>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnVisualHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
@@ -54,7 +54,7 @@ namespace Battle
 		bool _isAnimatingMove;
 		bool _isLoadingGameData;
 
-		public IReadOnlyDictionary<ulong, BattlePawnController> Pawns => _pawns;
+		public IReadOnlyDictionary<ulong, BattlePawn> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
 		public ulong BattleId => _battleId;
 		public ulong BattleStateVersion => _battleStateVersion;
@@ -64,7 +64,7 @@ namespace Battle
 		public bool IsInteractionLocked => _isAnimatingMove || _actionMode == BattleActionMode.WaitingServer;
 		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0
 			&& _localPawnIds.Contains(_currentTurnPawnId)
-			&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawnController currentTurnPawn)
+			&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawn currentTurnPawn)
 			&& currentTurnPawn != null
 			&& currentTurnPawn.IsDead == false;
 		public string BattleLogText => _battleLogLines.Count > 0 ? string.Join("\n", _battleLogLines) : "-";
@@ -174,12 +174,12 @@ namespace Battle
 			Debug.Log($"Debug end turn. nextTurnPawnId={_currentTurnPawnId}");
 		}
 
-		public bool TryGetPawn(ulong pawnId, out BattlePawnController pawn)
+		public bool TryGetPawn(ulong pawnId, out BattlePawn pawn)
 		{
 			return _pawns.TryGetValue(pawnId, out pawn) && pawn != null && pawn.IsDead == false;
 		}
 
-		public bool TryGetPawnAtAxial(AxialCoord axial, out ulong pawnId, out BattlePawnController pawn)
+		public bool TryGetPawnAtAxial(AxialCoord axial, out ulong pawnId, out BattlePawn pawn)
 		{
 			pawnId = FindPawnIdAtAxial(axial);
 			if (pawnId == 0)
@@ -266,7 +266,7 @@ namespace Battle
 			Debug.Log($"Spawned battle pawns from server. battleId={_battleId}, battleStateVersion={_battleStateVersion}, currentTurnPawnId={_currentTurnPawnId}, allied={packet.AlliedPawns.Count}, enemy={packet.EnemyPawns.Count}");
 		}
 
-		public async System.Threading.Tasks.Task<BattlePawnController> SpawnPawnAsync(ulong pawnId, bool isMine, AxialCoord axial, BattlePawnInfo info = null)
+		public async System.Threading.Tasks.Task<BattlePawn> SpawnPawnAsync(ulong pawnId, bool isMine, AxialCoord axial, BattlePawnInfo info = null)
 		{
 			if (_mapGrid == null)
 			{
@@ -281,7 +281,7 @@ namespace Battle
 				return null;
 			}
 
-			if (_pawns.TryGetValue(pawnId, out BattlePawnController existing))
+			if (_pawns.TryGetValue(pawnId, out BattlePawn existing))
 			{
 				existing.SetAxial(axial);
 				return existing;
@@ -345,9 +345,7 @@ namespace Battle
 			visualObject.transform.localRotation = Quaternion.identity;
 			visualObject.transform.localScale = Vector3.one;
 
-			BattlePawnController pawn = pawnObject.GetComponent<BattlePawnController>();
-			if (pawn == null)
-				pawn = pawnObject.AddComponent<BattlePawnController>();
+			BattlePawn pawn = AddPawnBehavior(pawnObject, info);
 
 			pawn.Initialize(pawnId, isMine, _mapGrid, axial, Color.white, info);
 
@@ -358,6 +356,22 @@ namespace Battle
 			RefreshTurnIndicators();
 			Debug.Log($"Spawned battle pawn: id={pawnId}, class={info?.PawnClass.ToString() ?? "Debug"}, base={BattlePawnBaseAddress}, visual={visualAddress}, mine={isMine}, axial={axial}, world={pawn.transform.position}");
 			return pawn;
+		}
+
+		static BattlePawn AddPawnBehavior(GameObject pawnObject, BattlePawnInfo info)
+		{
+			if (info != null)
+			{
+				switch (info.PawnClass)
+				{
+					case Protocol.PawnClass.BeigeIce:
+						return pawnObject.AddComponent<BeigeIce>();
+					case Protocol.PawnClass.BeigeFire:
+						return pawnObject.AddComponent<Beige>();
+				}
+			}
+
+			return pawnObject.AddComponent<BattlePawn>();
 		}
 
 		string GetPawnAddress(BattlePawnInfo info)
@@ -454,7 +468,7 @@ namespace Battle
 
 		void RefreshTurnIndicators()
 		{
-			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
+			foreach (KeyValuePair<ulong, BattlePawn> pair in _pawns)
 			{
 				if (pair.Value == null)
 					continue;
@@ -515,7 +529,7 @@ namespace Battle
 				return;
 			}
 
-			if (_pawns.TryGetValue(movingPawnId, out BattlePawnController myPawn) == false)
+			if (_pawns.TryGetValue(movingPawnId, out BattlePawn myPawn) == false)
 				return;
 
 			if (_battleId != 0 && GameRoot.Instance != null)
@@ -560,7 +574,7 @@ namespace Battle
 				return;
 			}
 
-			if (_pawns.TryGetValue(casterPawnId, out BattlePawnController casterPawn) == false || casterPawn == null)
+			if (_pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn) == false || casterPawn == null)
 			{
 				Debug.LogWarning($"Cannot use battle skill because caster pawn is missing. casterPawnId={casterPawnId}, skillSlot={skillSlot}");
 				return;
@@ -595,13 +609,13 @@ namespace Battle
 			_actionMode = BattleActionMode.Move;
 		}
 
-		bool ValidateSkillTarget(BattlePawnController casterPawn, int skillSlot, ulong resolvedTargetPawnId, ref AxialCoord targetAxial)
+		bool ValidateSkillTarget(BattlePawn casterPawn, int skillSlot, ulong resolvedTargetPawnId, ref AxialCoord targetAxial)
 		{
 			string targetType = GetSkillTargetType(casterPawn, skillSlot);
 			if (string.IsNullOrWhiteSpace(targetType))
 				targetType = "ENEMY_SINGLE";
 
-			BattlePawnController targetPawn = null;
+			BattlePawn targetPawn = null;
 			if (resolvedTargetPawnId != 0)
 				_pawns.TryGetValue(resolvedTargetPawnId, out targetPawn);
 
@@ -646,7 +660,7 @@ namespace Battle
 			}
 		}
 
-		string GetSkillTargetType(BattlePawnController casterPawn, int skillSlot)
+		string GetSkillTargetType(BattlePawn casterPawn, int skillSlot)
 		{
 			if (_gameData != null
 				&& casterPawn != null
@@ -662,7 +676,7 @@ namespace Battle
 		bool TryGetControllablePawnId(out ulong pawnId)
 		{
 			if (_currentTurnPawnId != 0
-				&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawnController currentPawn)
+				&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawn currentPawn)
 				&& currentPawn != null
 				&& currentPawn.IsDead == false)
 			{
@@ -681,14 +695,14 @@ namespace Battle
 
 			foreach (ulong localPawnId in _localPawnIds)
 			{
-				if (_pawns.TryGetValue(localPawnId, out BattlePawnController localPawn) && localPawn != null && localPawn.IsDead == false)
+				if (_pawns.TryGetValue(localPawnId, out BattlePawn localPawn) && localPawn != null && localPawn.IsDead == false)
 				{
 					pawnId = localPawnId;
 					return true;
 				}
 			}
 
-			if (_pawns.TryGetValue(1, out BattlePawnController fallbackPawn) && fallbackPawn != null && fallbackPawn.IsDead == false)
+			if (_pawns.TryGetValue(1, out BattlePawn fallbackPawn) && fallbackPawn != null && fallbackPawn.IsDead == false)
 			{
 				pawnId = 1;
 				return true;
@@ -711,7 +725,7 @@ namespace Battle
 				return;
 			}
 
-			if (_pawns.TryGetValue(packet.PawnId, out BattlePawnController pawn) == false)
+			if (_pawns.TryGetValue(packet.PawnId, out BattlePawn pawn) == false)
 			{
 				_isAnimatingMove = false;
 				_actionMode = BattleActionMode.Move;
@@ -770,7 +784,7 @@ namespace Battle
 			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
 			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
 
-			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawnController casterPawn))
+			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawn casterPawn))
 				TriggerSkillAnimation(casterPawn, packet.SkillSlot);
 
 			AppendBattleLogs(packet.Logs);
@@ -780,7 +794,7 @@ namespace Battle
 			Debug.Log($"Applied S_BATTLE_SKILL. casterPawnId={packet.CasterPawnId}, skillSlot={packet.SkillSlot}, targetPawnId={packet.TargetPawnId}, targetKind={(packet.TargetPawnId == 0 ? "Tile" : "Pawn")}, damage={packet.Damage}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={_currentTurnPawnId}");
 		}
 
-		void TriggerSkillAnimation(BattlePawnController casterPawn, int skillSlot)
+		void TriggerSkillAnimation(BattlePawn casterPawn, int skillSlot)
 		{
 			if (casterPawn == null)
 				return;
@@ -851,7 +865,7 @@ namespace Battle
 			if (pawnId == 0)
 				return;
 
-			if (_pawns.TryGetValue(pawnId, out BattlePawnController pawn) == false || pawn == null)
+			if (_pawns.TryGetValue(pawnId, out BattlePawn pawn) == false || pawn == null)
 			{
 				Debug.LogWarning($"Cannot apply pawn death because pawn is missing. pawnId={pawnId}, killerPawnId={killerPawnId}");
 				return;
@@ -870,7 +884,7 @@ namespace Battle
 				if (delta == null || delta.PawnId == 0)
 					continue;
 
-				if (_pawns.TryGetValue(delta.PawnId, out BattlePawnController pawn))
+				if (_pawns.TryGetValue(delta.PawnId, out BattlePawn pawn))
 					pawn.ApplyDelta(delta);
 			}
 		}
@@ -920,7 +934,7 @@ namespace Battle
 
 		ulong FindPawnIdAtAxial(AxialCoord axial)
 		{
-			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
+			foreach (KeyValuePair<ulong, BattlePawn> pair in _pawns)
 			{
 				if (pair.Value != null && pair.Value.IsDead == false && pair.Value.Axial.Equals(axial))
 					return pair.Key;
@@ -934,7 +948,7 @@ namespace Battle
 			ulong smallestPawnId = 0;
 			ulong nextPawnId = 0;
 
-			foreach (KeyValuePair<ulong, BattlePawnController> pair in _pawns)
+			foreach (KeyValuePair<ulong, BattlePawn> pair in _pawns)
 			{
 				if (pair.Value == null || pair.Value.IsDead)
 					continue;

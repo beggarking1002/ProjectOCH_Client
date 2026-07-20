@@ -68,6 +68,7 @@ ResourceKey,COLD,냉기 자원
 StatusKey,FROSTBITE,동상 상태
 StatusKey,BEIGE_ICE_COLD_HARD_WORKER_IGNORE_COLD_BACKLASH,차가운 노력가 냉기 역류 면역
 StatusKey,BEIGE_ICE_COLD_HARD_WORKER_EMPOWERED,차가운 노력가 스킬 강화
+StatusKey,BEIGE_ICE_THAWING_POTION_DAMAGE_DOWN,해동 포션 공격력 감소
 DamageType,MAGIC,마법 피해
 TileType,NORMAL,일반 지형
 TileType,WATER,물 지형
@@ -80,6 +81,8 @@ SkillModifierType,EXTRA_TARGET_COUNT,추가 대상 수
 SkillModifierType,TARGET_SHAPE_OVERRIDE,스킬 대상 범위 모양 변경
 SkillModifierType,AURA_RADIUS_DELTA,오라 반경 증감
 TargetShape,TRIANGLE_3,선택 타일 기준 3칸 삼각형
+StackPolicy,ADD,기존 중첩에 값을 더함
+StackPolicy,REFRESH,중첩 수는 유지하고 지속시간만 갱신
 Operation,ADD,덧셈
 Operation,MULTIPLY,곱셈
 Bool,TRUE,참
