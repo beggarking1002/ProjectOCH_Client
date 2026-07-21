@@ -16,6 +16,14 @@ namespace Battle
 		const float MoveSecondsPerTile = 0.28f;
 		const float MinMoveDurationSeconds = 0.18f;
 		const float MaxMoveDurationSeconds = 1.2f;
+		// These complete before the 0.5 s combat-log beat finishes, so an evading
+		// pawn can immediately answer with a counter-lunge on the next beat.
+		const float EvadePresentationDurationSeconds = 0.44f;
+		const float EvadePresentationDistance = 0.20f;
+		const float EvadePresentationJumpHeight = 0.075f;
+		const float MeleePresentationDurationSeconds = 0.42f;
+		const float MeleePresentationDistance = 0.18f;
+		const float MeleePresentationHopHeight = 0.035f;
 		const string VisualRootName = "visual";
 		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
 		const string DefaultSkillTrigger = "Skill1";
@@ -28,6 +36,8 @@ namespace Battle
 		PawnTeamRing _teamRing;
 		GameObject _turnIndicator;
 		Coroutine _moveCoroutine;
+		Coroutine _combatPresentationCoroutine;
+		Vector3 _combatPresentationBaseLocalPosition;
 		readonly Dictionary<Protocol.BattleResourceType, ResourceState> _resources = new Dictionary<Protocol.BattleResourceType, ResourceState>();
 		readonly Dictionary<ulong, BarrierState> _barriers = new Dictionary<ulong, BarrierState>();
 		readonly Dictionary<string, StatusState> _statuses = new Dictionary<string, StatusState>(StringComparer.Ordinal);
@@ -47,6 +57,7 @@ namespace Battle
 		public int CurrentAp => Info != null ? Info.CurrentAp : 2;
 		public int MoveRange => Info != null ? Info.MoveRange : 0;
 		public bool CanMove => Info == null || Info.CanMove;
+		public bool UsedNormalSkillThisTurn => Info != null && Info.UsedNormalSkillThisTurn;
 		public bool UsedSubActionThisTurn => Info != null && Info.UsedSubActionThisTurn;
 		public bool UsedUltimate => Info != null && Info.UsedUltimate;
 		public Protocol.BattlePawnRole Role => Info != null ? Info.Role : Protocol.BattlePawnRole.None;
@@ -87,6 +98,14 @@ namespace Battle
 			{
 				StopCoroutine(_moveCoroutine);
 				_moveCoroutine = null;
+			}
+
+			if (_combatPresentationCoroutine != null)
+			{
+				StopCoroutine(_combatPresentationCoroutine);
+				_combatPresentationCoroutine = null;
+				if (_visualRoot != null)
+					_visualRoot.localPosition = _combatPresentationBaseLocalPosition;
 			}
 
 			SetMoving(false);
@@ -300,6 +319,7 @@ namespace Battle
 			Info.Armor = delta.Armor;
 			Info.CurrentAp = delta.CurrentAp;
 			Info.CanMove = delta.CanMove;
+			Info.UsedNormalSkillThisTurn = delta.UsedNormalSkillThisTurn;
 			Info.UsedSubActionThisTurn = delta.UsedSubActionThisTurn;
 			Info.UsedUltimate = delta.UsedUltimate;
 			Info.IsDead = delta.IsDead;
@@ -336,6 +356,84 @@ namespace Battle
 			EnsureInfo();
 			Info.Armor = armor;
 			RefreshStatusWorldUi();
+		}
+
+		// Combat logs are presented one at a time. Keep this separate from ApplyDelta:
+		// the latter commits the complete server-authoritative snapshot after the
+		// presentation sequence has finished.
+		public void ApplyCombatLogPresentation(int hpAfter, int armorAfter)
+		{
+			EnsureInfo();
+			int armorDelta = armorAfter - Info.Armor;
+			Info.Hp = hpAfter;
+			Info.Armor = armorAfter;
+			// ShieldCurrent is the value used by the world/panel shield bar. Armor is
+			// part of that aggregate, so reflect every log's ArmorAfter immediately
+			// instead of waiting for the final pawn delta.
+			if (Info.ShieldMax > 0)
+				Info.ShieldCurrent = Mathf.Clamp(Info.ShieldCurrent + armorDelta, 0, Info.ShieldMax);
+
+			RefreshStatusWorldUi();
+		}
+
+		public void PlayEvadePresentation(Vector3 attackerWorldPosition)
+		{
+			Vector3 direction = transform.position - attackerWorldPosition;
+			direction.z = 0f;
+			if (direction.sqrMagnitude <= 0.0001f)
+				direction = FacingDirection == Protocol.BattleFacingDirection.Left ? Vector3.right : Vector3.left;
+
+			PlayCombatPresentation(direction, EvadePresentationDurationSeconds, EvadePresentationDistance, EvadePresentationJumpHeight);
+		}
+
+		public void PlayMeleeAttackPresentation(Vector3 defenderWorldPosition)
+		{
+			Vector3 direction = defenderWorldPosition - transform.position;
+			direction.z = 0f;
+			if (direction.sqrMagnitude <= 0.0001f)
+				direction = FacingDirection == Protocol.BattleFacingDirection.Left ? Vector3.left : Vector3.right;
+
+			PlayCombatPresentation(direction, MeleePresentationDurationSeconds, MeleePresentationDistance, MeleePresentationHopHeight);
+		}
+
+		void PlayCombatPresentation(Vector3 direction, float duration, float distance, float hopHeight)
+		{
+			if (IsDead)
+				return;
+
+			if (_visualRoot == null)
+				_visualRoot = FindVisualRoot();
+
+			if (_visualRoot == null || gameObject.activeInHierarchy == false)
+				return;
+
+			if (_combatPresentationCoroutine != null)
+			{
+				StopCoroutine(_combatPresentationCoroutine);
+				_visualRoot.localPosition = _combatPresentationBaseLocalPosition;
+			}
+
+			_combatPresentationBaseLocalPosition = _visualRoot.localPosition;
+			_combatPresentationCoroutine = StartCoroutine(PlayCombatPresentationRoutine(direction.normalized, duration, distance, hopHeight));
+		}
+
+		IEnumerator PlayCombatPresentationRoutine(Vector3 direction, float duration, float distance, float hopHeight)
+		{
+			Vector3 baseWorldPosition = _visualRoot.position;
+			float elapsed = 0f;
+			while (elapsed < duration)
+			{
+				elapsed += Time.unscaledDeltaTime;
+				float normalizedTime = Mathf.Clamp01(elapsed / duration);
+				float arc = Mathf.Sin(normalizedTime * Mathf.PI);
+				_visualRoot.position = baseWorldPosition + direction * (arc * distance) + Vector3.up * (arc * hopHeight);
+				yield return null;
+			}
+
+			if (_visualRoot != null)
+				_visualRoot.localPosition = _combatPresentationBaseLocalPosition;
+
+			_combatPresentationCoroutine = null;
 		}
 
 		public void ApplyDead(ulong killerPawnId)

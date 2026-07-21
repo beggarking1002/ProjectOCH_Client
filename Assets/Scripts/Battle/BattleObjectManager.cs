@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using App;
@@ -19,6 +20,7 @@ namespace Battle
 		const int MaxBattleLogLines = 6;
 		const string BattlePawnBaseAddress = "PawnBase";
 		const string BattlePawnVisualRootName = "visual";
+		const float SkillActionPresentationSeconds = 0.5f;
 		// Presentation assets and local pawn behavior are selected by the protocol class.
 		// The hierarchy is only for client-side behavior; server snapshots remain authoritative.
 		static readonly Dictionary<Protocol.PawnClass, string> PawnVisualAddressByClass = new Dictionary<Protocol.PawnClass, string>
@@ -55,6 +57,8 @@ namespace Battle
 		bool _destroyed;
 		bool _missingCameraLogged;
 		bool _isAnimatingMove;
+		bool _isPlayingSkillActionSequence;
+		Coroutine _skillActionSequenceCoroutine;
 		bool _isLoadingGameData;
 		BattleTargetPreview _targetPreview;
 		bool _hasFireWallStartTarget;
@@ -68,7 +72,7 @@ namespace Battle
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
 		public bool IsAnimatingMove => _isAnimatingMove;
-		public bool IsInteractionLocked => _isAnimatingMove || _actionMode == BattleActionMode.WaitingServer;
+		public bool IsInteractionLocked => _isAnimatingMove || _isPlayingSkillActionSequence || _actionMode == BattleActionMode.WaitingServer;
 		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0
 			&& _localPawnIds.Contains(_currentTurnPawnId)
 			&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawn currentTurnPawn)
@@ -222,6 +226,9 @@ namespace Battle
 		{
 			_destroyed = true;
 			_isAnimatingMove = false;
+			_isPlayingSkillActionSequence = false;
+			if (_skillActionSequenceCoroutine != null)
+				StopCoroutine(_skillActionSequenceCoroutine);
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -1243,7 +1250,6 @@ namespace Battle
 			ClearFireWallTargeting();
 			_actionMode = BattleActionMode.Move;
 
-			ApplyPawnDeltas(packet.PawnDeltas);
 			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
 			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
@@ -1256,10 +1262,9 @@ namespace Battle
 				if (IsOverlayTeleport(casterPawn, packet.SkillSlot) && packet.TargetAxial != null)
 					casterPawn.SetAxial(ToBattleAxial(packet.TargetAxial));
 
-				TriggerSkillAnimation(casterPawn, packet.SkillSlot);
 			}
 
-			AppendBattleLogs(packet.Logs);
+			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.Logs, packet.PawnDeltas);
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
@@ -1282,6 +1287,117 @@ namespace Battle
 			}
 
 			casterPawn.TriggerSkill(skillSlot);
+		}
+
+		void QueueSkillActionSequence(
+			ulong casterPawnId,
+			int skillSlot,
+			IEnumerable<BattleActionLog> logs,
+			IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			if (_skillActionSequenceCoroutine != null)
+				StopCoroutine(_skillActionSequenceCoroutine);
+
+			List<BattleActionLog> orderedLogs = new List<BattleActionLog>();
+			if (logs != null)
+			{
+				foreach (BattleActionLog log in logs)
+				{
+					if (log != null)
+						orderedLogs.Add(log);
+				}
+			}
+
+			List<BattlePawnDelta> finalPawnDeltas = new List<BattlePawnDelta>();
+			if (pawnDeltas != null)
+			{
+				foreach (BattlePawnDelta delta in pawnDeltas)
+				{
+					if (delta != null)
+						finalPawnDeltas.Add(delta);
+				}
+			}
+
+			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, orderedLogs, finalPawnDeltas));
+		}
+
+		IEnumerator PlaySkillActionSequence(
+			ulong casterPawnId,
+			int skillSlot,
+			List<BattleActionLog> orderedLogs,
+			List<BattlePawnDelta> finalPawnDeltas)
+		{
+			_isPlayingSkillActionSequence = true;
+			if (_pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn))
+				TriggerSkillAnimation(casterPawn, skillSlot);
+
+			// Primary-action logs are resolved with the initiating skill. Counter logs
+			// are kept in their packet order and receive their own 0.5 s presentation.
+			for (int i = 0; i < orderedLogs.Count; i++)
+			{
+				BattleActionLog primaryLog = orderedLogs[i];
+				if (primaryLog.IsCounter == false && primaryLog.AttackerPawnId == casterPawnId)
+				{
+					PlayMeleeAttackPresentation(primaryLog);
+					break;
+				}
+			}
+
+			for (int i = 0; i < orderedLogs.Count; i++)
+			{
+				if (orderedLogs[i].IsCounter == false)
+				{
+					ApplyCombatLogPresentation(orderedLogs[i]);
+					AppendBattleLog(orderedLogs[i]);
+				}
+			}
+
+			yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+
+			for (int i = 0; i < orderedLogs.Count; i++)
+			{
+				BattleActionLog counterLog = orderedLogs[i];
+				if (counterLog.IsCounter == false)
+					continue;
+
+				if (_pawns.TryGetValue(counterLog.AttackerPawnId, out BattlePawn counterPawn))
+					counterPawn.TriggerSkill("Skill1");
+
+				PlayMeleeAttackPresentation(counterLog);
+
+				ApplyCombatLogPresentation(counterLog);
+				AppendBattleLog(counterLog);
+				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+			}
+
+			ApplyPawnDeltas(finalPawnDeltas);
+			_isPlayingSkillActionSequence = false;
+			_skillActionSequenceCoroutine = null;
+		}
+
+		void ApplyCombatLogPresentation(BattleActionLog log)
+		{
+			if (log == null || log.DefenderPawnId == 0)
+				return;
+
+			if (_pawns.TryGetValue(log.DefenderPawnId, out BattlePawn defenderPawn))
+			{
+				if (log.IsEvaded && _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn attackerPawn))
+					defenderPawn.PlayEvadePresentation(attackerPawn.transform.position);
+
+				defenderPawn.ApplyCombatLogPresentation(log.HpAfter, log.ArmorAfter);
+			}
+		}
+
+		void PlayMeleeAttackPresentation(BattleActionLog log)
+		{
+			if (log == null
+				|| _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn attackerPawn) == false
+				|| attackerPawn.IsMelee == false
+				|| _pawns.TryGetValue(log.DefenderPawnId, out BattlePawn defenderPawn) == false)
+				return;
+
+			attackerPawn.PlayMeleeAttackPresentation(defenderPawn.transform.position);
 		}
 
 		bool IsOverlayTeleport(BattlePawn casterPawn, int skillSlot)
@@ -1377,20 +1493,25 @@ namespace Battle
 
 			foreach (BattleActionLog log in logs)
 			{
-				if (log == null)
-					continue;
-
-				string line = FormatBattleLog(log);
-				if (string.IsNullOrWhiteSpace(line))
-					continue;
-
-				_battleLogLines.Enqueue(line);
-				while (_battleLogLines.Count > MaxBattleLogLines)
-					_battleLogLines.Dequeue();
-
-				Debug.Log($"BattleLog: {line}");
-				BattleActionLogApplied?.Invoke(log);
+				AppendBattleLog(log);
 			}
+		}
+
+		void AppendBattleLog(BattleActionLog log)
+		{
+			if (log == null)
+				return;
+
+			string line = FormatBattleLog(log);
+			if (string.IsNullOrWhiteSpace(line))
+				return;
+
+			_battleLogLines.Enqueue(line);
+			while (_battleLogLines.Count > MaxBattleLogLines)
+				_battleLogLines.Dequeue();
+
+			Debug.Log($"BattleLog: {line}");
+			BattleActionLogApplied?.Invoke(log);
 		}
 
 		static string FormatBattleLog(BattleActionLog log)

@@ -43,7 +43,7 @@ namespace Protocol {
             "KwoJdGlsZV90eXBlGAIgASgOMhguUHJvdG9jb2wuQmF0dGxlVGlsZVR5cGUS",
             "NQoMb3ZlcmxheV90eXBlGAMgASgOMh8uUHJvdG9jb2wuQmF0dGxlVGlsZU92",
             "ZXJsYXlUeXBlEhUKDWVxdWlwbWVudF9rZXkYBCABKAkSHwoXZXF1aXBtZW50",
-            "X293bmVyX3Bhd25faWQYBSABKAQimgUKDkJhdHRsZVBhd25JbmZvEg8KB3Bh",
+            "X293bmVyX3Bhd25faWQYBSABKAQivwUKDkJhdHRsZVBhd25JbmZvEg8KB3Bh",
             "d25faWQYASABKAQSEAoIb3duZXJfaWQYAiABKAQSJwoKcGF3bl9jbGFzcxgD",
             "IAEoDjITLlByb3RvY29sLlBhd25DbGFzcxIjCgVheGlhbBgEIAEoCzIULlBy",
             "b3RvY29sLkF4aWFsQ29vcmQSCgoCaHAYBSABKAUSDgoGbWF4X2hwGAYgASgF",
@@ -58,24 +58,26 @@ namespace Protocol {
             "dGF0ZRItCghzdGF0dXNlcxgVIAMoCzIbLlByb3RvY29sLkJhdHRsZVN0YXR1",
             "c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50GBYgASgFEhIKCnNoaWVsZF9tYXgY",
             "FyABKAUSKAoFYXVyYXMYGCADKAsyGS5Qcm90b2NvbC5CYXR0bGVBdXJhU3Rh",
-            "dGVKBAgOEA9KBAgPEBAi1gMKD0JhdHRsZVBhd25EZWx0YRIPCgdwYXduX2lk",
-            "GAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgFEhIKCmN1cnJlbnRf",
-            "YXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNlZF9zdWJfYWN0aW9u",
-            "X3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRlGAcgASgIEg8KB2lz",
-            "X2RlYWQYCCABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgJIAEoDjIfLlByb3Rv",
-            "Y29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbhIwCglyZXNvdXJjZXMYCyADKAsy",
-            "HS5Qcm90b2NvbC5CYXR0bGVSZXNvdXJjZVN0YXRlEi4KCGJhcnJpZXJzGAwg",
-            "AygLMhwuUHJvdG9jb2wuQmF0dGxlQmFycmllclN0YXRlEi0KCHN0YXR1c2Vz",
-            "GA0gAygLMhsuUHJvdG9jb2wuQmF0dGxlU3RhdHVzU3RhdGUSFgoOc2hpZWxk",
-            "X2N1cnJlbnQYDiABKAUSEgoKc2hpZWxkX21heBgPIAEoBRIoCgVhdXJhcxgQ",
-            "IAMoCzIZLlByb3RvY29sLkJhdHRsZUF1cmFTdGF0ZUoECAoQCyKvAgoPQmF0",
-            "dGxlQWN0aW9uTG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQZGVm",
-            "ZW5kZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMKC2Fj",
-            "dGlvbl90eXBlGAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0aWNh",
-            "bBgGIAEoCBIRCglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEo",
-            "CBIaChJpc19wZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRlchgK",
-            "IAEoCBIQCghocF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEoBRIW",
-            "Cg5pc19iYWNrX2F0dGFjaxgNIAEoCEoECA4QD2IGcHJvdG8z"));
+            "dGUSIwobdXNlZF9ub3JtYWxfc2tpbGxfdGhpc190dXJuGBkgASgISgQIDhAP",
+            "SgQIDxAQIvsDCg9CYXR0bGVQYXduRGVsdGESDwoHcGF3bl9pZBgBIAEoBBIK",
+            "CgJocBgCIAEoBRINCgVhcm1vchgDIAEoBRISCgpjdXJyZW50X2FwGAQgASgF",
+            "EhAKCGNhbl9tb3ZlGAUgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1",
+            "cm4YBiABKAgSFQoNdXNlZF91bHRpbWF0ZRgHIAEoCBIPCgdpc19kZWFkGAgg",
+            "ASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YCSABKA4yHy5Qcm90b2NvbC5CYXR0",
+            "bGVGYWNpbmdEaXJlY3Rpb24SMAoJcmVzb3VyY2VzGAsgAygLMh0uUHJvdG9j",
+            "b2wuQmF0dGxlUmVzb3VyY2VTdGF0ZRIuCghiYXJyaWVycxgMIAMoCzIcLlBy",
+            "b3RvY29sLkJhdHRsZUJhcnJpZXJTdGF0ZRItCghzdGF0dXNlcxgNIAMoCzIb",
+            "LlByb3RvY29sLkJhdHRsZVN0YXR1c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50",
+            "GA4gASgFEhIKCnNoaWVsZF9tYXgYDyABKAUSKAoFYXVyYXMYECADKAsyGS5Q",
+            "cm90b2NvbC5CYXR0bGVBdXJhU3RhdGUSIwobdXNlZF9ub3JtYWxfc2tpbGxf",
+            "dGhpc190dXJuGBEgASgISgQIChALIq8CCg9CYXR0bGVBY3Rpb25Mb2cSGAoQ",
+            "YXR0YWNrZXJfcGF3bl9pZBgBIAEoBBIYChBkZWZlbmRlcl9wYXduX2lkGAIg",
+            "ASgEEhIKCnNraWxsX3Nsb3QYAyABKAUSEwoLYWN0aW9uX3R5cGUYBCABKAkS",
+            "DgoGZGFtYWdlGAUgASgFEhMKC2lzX2NyaXRpY2FsGAYgASgIEhEKCWlzX2V2",
+            "YWRlZBgHIAEoCBISCgppc19ndWFyZGVkGAggASgIEhoKEmlzX3BlcmZlY3Rf",
+            "Z3VhcmRlZBgJIAEoCBISCgppc19jb3VudGVyGAogASgIEhAKCGhwX2FmdGVy",
+            "GAsgASgFEhMKC2FybW9yX2FmdGVyGAwgASgFEhYKDmlzX2JhY2tfYXR0YWNr",
+            "GA0gASgISgQIDhAPYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -87,8 +89,8 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleStatusState), global::Protocol.BattleStatusState.Parser, new[]{ "StatusKey", "Stacks", "RemainingOwnerTurns" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleAuraState), global::Protocol.BattleAuraState.Parser, new[]{ "SourceSkillKey", "Radius" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleTileInfo), global::Protocol.BattleTileInfo.Parser, new[]{ "Axial", "TileType", "OverlayType", "EquipmentKey", "EquipmentOwnerPawnId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras", "UsedNormalSkillThisTurn" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras", "UsedNormalSkillThisTurn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
           }));
     }
@@ -2348,6 +2350,7 @@ namespace Protocol {
       shieldCurrent_ = other.shieldCurrent_;
       shieldMax_ = other.shieldMax_;
       auras_ = other.auras_.Clone();
+      usedNormalSkillThisTurn_ = other.usedNormalSkillThisTurn_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2617,6 +2620,18 @@ namespace Protocol {
       get { return auras_; }
     }
 
+    /// <summary>Field number for the "used_normal_skill_this_turn" field.</summary>
+    public const int UsedNormalSkillThisTurnFieldNumber = 25;
+    private bool usedNormalSkillThisTurn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedNormalSkillThisTurn {
+      get { return usedNormalSkillThisTurn_; }
+      set {
+        usedNormalSkillThisTurn_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2654,6 +2669,7 @@ namespace Protocol {
       if (ShieldCurrent != other.ShieldCurrent) return false;
       if (ShieldMax != other.ShieldMax) return false;
       if(!auras_.Equals(other.auras_)) return false;
+      if (UsedNormalSkillThisTurn != other.UsedNormalSkillThisTurn) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2683,6 +2699,7 @@ namespace Protocol {
       if (ShieldCurrent != 0) hash ^= ShieldCurrent.GetHashCode();
       if (ShieldMax != 0) hash ^= ShieldMax.GetHashCode();
       hash ^= auras_.GetHashCode();
+      if (UsedNormalSkillThisTurn != false) hash ^= UsedNormalSkillThisTurn.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2777,6 +2794,10 @@ namespace Protocol {
         output.WriteInt32(ShieldMax);
       }
       auras_.WriteTo(output, _repeated_auras_codec);
+      if (UsedNormalSkillThisTurn != false) {
+        output.WriteRawTag(200, 1);
+        output.WriteBool(UsedNormalSkillThisTurn);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2863,6 +2884,10 @@ namespace Protocol {
         output.WriteInt32(ShieldMax);
       }
       auras_.WriteTo(ref output, _repeated_auras_codec);
+      if (UsedNormalSkillThisTurn != false) {
+        output.WriteRawTag(200, 1);
+        output.WriteBool(UsedNormalSkillThisTurn);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2931,6 +2956,9 @@ namespace Protocol {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(ShieldMax);
       }
       size += auras_.CalculateSize(_repeated_auras_codec);
+      if (UsedNormalSkillThisTurn != false) {
+        size += 2 + 1;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3004,6 +3032,9 @@ namespace Protocol {
         ShieldMax = other.ShieldMax;
       }
       auras_.Add(other.auras_);
+      if (other.UsedNormalSkillThisTurn != false) {
+        UsedNormalSkillThisTurn = other.UsedNormalSkillThisTurn;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3108,6 +3139,10 @@ namespace Protocol {
           }
           case 194: {
             auras_.AddEntriesFrom(input, _repeated_auras_codec);
+            break;
+          }
+          case 200: {
+            UsedNormalSkillThisTurn = input.ReadBool();
             break;
           }
         }
@@ -3216,6 +3251,10 @@ namespace Protocol {
             auras_.AddEntriesFrom(ref input, _repeated_auras_codec);
             break;
           }
+          case 200: {
+            UsedNormalSkillThisTurn = input.ReadBool();
+            break;
+          }
         }
       }
     }
@@ -3272,6 +3311,7 @@ namespace Protocol {
       shieldCurrent_ = other.shieldCurrent_;
       shieldMax_ = other.shieldMax_;
       auras_ = other.auras_.Clone();
+      usedNormalSkillThisTurn_ = other.usedNormalSkillThisTurn_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3457,6 +3497,18 @@ namespace Protocol {
       get { return auras_; }
     }
 
+    /// <summary>Field number for the "used_normal_skill_this_turn" field.</summary>
+    public const int UsedNormalSkillThisTurnFieldNumber = 17;
+    private bool usedNormalSkillThisTurn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool UsedNormalSkillThisTurn {
+      get { return usedNormalSkillThisTurn_; }
+      set {
+        usedNormalSkillThisTurn_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3487,6 +3539,7 @@ namespace Protocol {
       if (ShieldCurrent != other.ShieldCurrent) return false;
       if (ShieldMax != other.ShieldMax) return false;
       if(!auras_.Equals(other.auras_)) return false;
+      if (UsedNormalSkillThisTurn != other.UsedNormalSkillThisTurn) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3509,6 +3562,7 @@ namespace Protocol {
       if (ShieldCurrent != 0) hash ^= ShieldCurrent.GetHashCode();
       if (ShieldMax != 0) hash ^= ShieldMax.GetHashCode();
       hash ^= auras_.GetHashCode();
+      if (UsedNormalSkillThisTurn != false) hash ^= UsedNormalSkillThisTurn.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3575,6 +3629,10 @@ namespace Protocol {
         output.WriteInt32(ShieldMax);
       }
       auras_.WriteTo(output, _repeated_auras_codec);
+      if (UsedNormalSkillThisTurn != false) {
+        output.WriteRawTag(136, 1);
+        output.WriteBool(UsedNormalSkillThisTurn);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3633,6 +3691,10 @@ namespace Protocol {
         output.WriteInt32(ShieldMax);
       }
       auras_.WriteTo(ref output, _repeated_auras_codec);
+      if (UsedNormalSkillThisTurn != false) {
+        output.WriteRawTag(136, 1);
+        output.WriteBool(UsedNormalSkillThisTurn);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3680,6 +3742,9 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ShieldMax);
       }
       size += auras_.CalculateSize(_repeated_auras_codec);
+      if (UsedNormalSkillThisTurn != false) {
+        size += 2 + 1;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3729,6 +3794,9 @@ namespace Protocol {
         ShieldMax = other.ShieldMax;
       }
       auras_.Add(other.auras_);
+      if (other.UsedNormalSkillThisTurn != false) {
+        UsedNormalSkillThisTurn = other.UsedNormalSkillThisTurn;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3804,6 +3872,10 @@ namespace Protocol {
             auras_.AddEntriesFrom(input, _repeated_auras_codec);
             break;
           }
+          case 136: {
+            UsedNormalSkillThisTurn = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -3877,6 +3949,10 @@ namespace Protocol {
           }
           case 130: {
             auras_.AddEntriesFrom(ref input, _repeated_auras_codec);
+            break;
+          }
+          case 136: {
+            UsedNormalSkillThisTurn = input.ReadBool();
             break;
           }
         }

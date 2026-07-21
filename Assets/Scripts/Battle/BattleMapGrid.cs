@@ -24,6 +24,7 @@ namespace Battle
 		[SerializeField] bool useBlockTilemap = true;
 		readonly Dictionary<AxialCoord, BattleTileState> _serverTileStates = new Dictionary<AxialCoord, BattleTileState>();
 		readonly Dictionary<AxialCoord, TextMesh> _equipmentMarkers = new Dictionary<AxialCoord, TextMesh>();
+		static Sprite _equipmentMarkerPlateSprite;
 		readonly List<AsyncOperationHandle<TileBase>> _loadedTileHandles = new List<AsyncOperationHandle<TileBase>>();
 		bool _hasServerTileSnapshot;
 
@@ -327,23 +328,55 @@ namespace Battle
 			{
 				GameObject markerObject = new GameObject("Equipment_Axe");
 				markerObject.transform.SetParent(transform, false);
+				CreateEquipmentMarkerPlate(markerObject.transform);
 				marker = markerObject.AddComponent<TextMesh>();
 				marker.text = "AXE";
 				marker.anchor = TextAnchor.MiddleCenter;
 				marker.alignment = TextAlignment.Center;
-				marker.characterSize = 0.09f;
-				marker.fontSize = 20;
+				marker.characterSize = 0.12f;
+				marker.fontSize = 42;
+				marker.fontStyle = FontStyle.Bold;
 				marker.color = new Color(1f, 0.78f, 0.28f, 1f);
 				GameRoot.ApplyWorldTextFont(marker);
 				MeshRenderer renderer = marker.GetComponent<MeshRenderer>();
 				if (renderer != null)
-					renderer.sortingOrder = 18;
+					renderer.sortingOrder = 19;
 
 				_equipmentMarkers[axial] = marker;
 			}
 
-			marker.transform.position = AxialToWorldCenter(axial, -0.04f) + Vector3.up * 0.12f;
+			marker.transform.position = AxialToWorldCenter(axial, -0.06f) + Vector3.up * 0.12f;
 			marker.gameObject.SetActive(true);
+		}
+
+		static void CreateEquipmentMarkerPlate(Transform parent)
+		{
+			GameObject plateObject = new GameObject("Plate");
+			plateObject.transform.SetParent(parent, false);
+			plateObject.transform.localScale = new Vector3(0.55f, 0.26f, 1f);
+			SpriteRenderer plate = plateObject.AddComponent<SpriteRenderer>();
+			plate.sprite = GetEquipmentMarkerPlateSprite();
+			plate.color = new Color(0.12f, 0.075f, 0.025f, 0.9f);
+			plate.sortingOrder = 18;
+		}
+
+		static Sprite GetEquipmentMarkerPlateSprite()
+		{
+			if (_equipmentMarkerPlateSprite != null)
+				return _equipmentMarkerPlateSprite;
+
+			Texture2D texture = new Texture2D(1, 1, TextureFormat.RGBA32, false)
+			{
+				name = "Runtime_EquipmentMarkerPlate",
+				filterMode = FilterMode.Point,
+				wrapMode = TextureWrapMode.Clamp,
+				hideFlags = HideFlags.DontSave,
+			};
+			texture.SetPixel(0, 0, Color.white);
+			texture.Apply();
+			_equipmentMarkerPlateSprite = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+			_equipmentMarkerPlateSprite.name = "Runtime_EquipmentMarkerPlate";
+			return _equipmentMarkerPlateSprite;
 		}
 
 		void ClearEquipmentMarkers()

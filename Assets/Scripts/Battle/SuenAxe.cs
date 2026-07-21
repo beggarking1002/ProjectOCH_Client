@@ -45,6 +45,16 @@ namespace Battle
 			Debug.LogWarning($"Suen axe animator is missing the AxeOn bool. pawnId={PawnId}");
 		}
 
+		public override void TriggerSkill(int skillSlot)
+		{
+			// Axe pickup only changes the equipped state. Let the server delta move the
+			// animator straight to AxeOn Idle instead of firing the generic Skill1 trigger.
+			if (skillSlot == 7)
+				return;
+
+			base.TriggerSkill(skillSlot);
+		}
+
 		public bool TryGetSkillPresentation(int actionSlot, out string displayName, out string iconKey)
 		{
 			displayName = string.Empty;

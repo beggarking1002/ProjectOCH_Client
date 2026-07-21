@@ -452,7 +452,7 @@ namespace Battle
 			while (_pendingBattleActionLogs.Count > 0)
 			{
 				ShowBattleActionLog(_pendingBattleActionLogs.Dequeue());
-				yield return new WaitForSecondsRealtime(0.34f);
+				yield return new WaitForSecondsRealtime(0.5f);
 			}
 
 			_battleActionLogPlayback = null;
@@ -988,7 +988,7 @@ namespace Battle
 				? $"{resourceName} {FormatValue(resourceState.Value, resourceState.MaxValue)}"
 				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
-			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
+			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedNormalSkillThisTurn ? "NormalUsed" : "NormalReady")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
 			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
 		}
 
@@ -1045,16 +1045,16 @@ namespace Battle
 				case BattleActionMode.Move:
 					return pawn.CanMove;
 				case BattleActionMode.SubAction:
-					return pawn.UsedSubActionThisTurn == false && HasEnoughAp(binding, pawn);
+					return pawn.UsedSubActionThisTurn == false;
 				case BattleActionMode.Ultimate:
-					return pawn.UsedUltimate == false && HasEnoughAp(binding, pawn);
+					return pawn.UsedUltimate == false;
 				case BattleActionMode.Passive:
 					return false;
 				case BattleActionMode.Skill1:
 				case BattleActionMode.Skill2:
 				case BattleActionMode.Skill3:
 				case BattleActionMode.Skill4:
-					return HasEnoughAp(binding, pawn);
+					return pawn.UsedNormalSkillThisTurn == false;
 				default:
 					return true;
 			}
