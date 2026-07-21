@@ -49,6 +49,7 @@ namespace Battle
 		readonly string[] _actionIconKeys = new string[SlotBindings.Length];
 		readonly string[] _actionTooltips = new string[SlotBindings.Length];
 		readonly Color[] _normalColors = new Color[SlotBindings.Length];
+		readonly Queue<BattleActionLog> _pendingBattleActionLogs = new Queue<BattleActionLog>();
 
 		BattleObjectManager _objectManager;
 		BattleGameDataRepository _gameData;
@@ -66,6 +67,7 @@ namespace Battle
 		AsyncOperationHandle<GameObject> _uiHandle;
 		AsyncOperationHandle<GameObject> _resultUiHandle;
 		Coroutine _resultCoroutine;
+		Coroutine _battleActionLogPlayback;
 		ulong _battleResultId;
 		bool _hasUiHandle;
 		bool _hasResultUiHandle;
@@ -103,6 +105,8 @@ namespace Battle
 			UnsubscribeNetwork();
 			if (_resultCoroutine != null)
 				StopCoroutine(_resultCoroutine);
+			if (_battleActionLogPlayback != null)
+				StopCoroutine(_battleActionLogPlayback);
 
 			ReleaseResultOverlayHandle();
 
@@ -436,6 +440,29 @@ namespace Battle
 			if (log == null || _uiInstance == null || _objectManager == null)
 				return;
 
+			// The server emits normal hits, counters, and re-counters in their resolved
+			// order. Queue them here so the client keeps that exact presentation order.
+			_pendingBattleActionLogs.Enqueue(log);
+			if (_battleActionLogPlayback == null)
+				_battleActionLogPlayback = StartCoroutine(PlayBattleActionLogs());
+		}
+
+		IEnumerator PlayBattleActionLogs()
+		{
+			while (_pendingBattleActionLogs.Count > 0)
+			{
+				ShowBattleActionLog(_pendingBattleActionLogs.Dequeue());
+				yield return new WaitForSecondsRealtime(0.34f);
+			}
+
+			_battleActionLogPlayback = null;
+		}
+
+		void ShowBattleActionLog(BattleActionLog log)
+		{
+			if (log == null || _uiInstance == null || _objectManager == null)
+				return;
+
 			// A tile-targeted result has no defender Pawn. Do not turn it into a damage
 			// number on the caster; Pawn presentation is only for actual defender IDs.
 			if (log.DefenderPawnId == 0
@@ -445,21 +472,22 @@ namespace Battle
 				return;
 			}
 
-			if (targetPawn == null)
-				return;
-
-			bool showMiss = log.IsEvaded;
+			bool showEvade = log.IsEvaded;
 			bool showDamage = log.Damage != 0;
-			if (showMiss == false && showDamage == false)
+			if (showEvade == false && showDamage == false)
 				return;
 
 			Camera camera = Camera.main;
 			if (camera == null)
 				return;
 
-			string value = showMiss
-				? "MISS"
+			string value = showEvade
+				? "EVADE"
 				: log.Damage > 0 ? $"-{log.Damage}" : $"+{-log.Damage}";
+			if (log.IsCounter)
+				value += "\nCOUNTER";
+			if (log.IsBackAttack)
+				value += "\nBACK";
 			if (log.IsCritical)
 				value += "\nCRIT";
 			else if (log.IsPerfectGuarded)
@@ -467,7 +495,7 @@ namespace Battle
 			else if (log.IsGuarded)
 				value += "\nGUARD";
 
-			Color color = showMiss
+			Color color = showEvade
 				? new Color(0.82f, 0.86f, 0.92f, 1f)
 				: log.IsCritical ? new Color(1f, 0.83f, 0.2f, 1f)
 				: log.IsGuarded || log.IsPerfectGuarded ? new Color(0.42f, 0.74f, 1f, 1f)
@@ -694,7 +722,7 @@ namespace Battle
 		string BuildTileInfoText(bool hasHoveredTile, AxialCoord axial)
 		{
 			if (hasHoveredTile == false)
-				return "Tile\nAxial: -\nState: -\nPawn: -";
+				return "Tile\nAxial: -\nState: -\nPawn: -\nEquipment: -";
 
 			string state = _objectManager.IsTileWalkable(axial) ? "Walkable" : "Blocked";
 			string pawn = "-";
@@ -704,7 +732,10 @@ namespace Battle
 				pawn = $"{pawnId} ({side})";
 			}
 
-			return $"Tile\nAxial: {axial}\nState: {state}\nPawn: {pawn}";
+			string equipment = _objectManager.MapGrid.TryGetEquipment(axial, out string equipmentKey, out ulong equipmentOwnerPawnId)
+				? $"{equipmentKey} (Owner: {equipmentOwnerPawnId})"
+				: "-";
+			return $"Tile\nAxial: {axial}\nState: {state}\nPawn: {pawn}\nEquipment: {equipment}";
 		}
 
 		string BuildActiveActionTooltip()
@@ -739,10 +770,18 @@ namespace Battle
 					&& _gameData.TryGetSkill(pawnClass, binding.ActionSlot, out BattleSkillDefinition skill))
 				{
 					label = BuildSkillDisplayName(skill);
-					tooltip = BuildSkillTooltip(skill);
+					tooltip = BuildSkillTooltip(skill, label);
 
 					if (_gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view))
 						iconKey = view.IconKey;
+
+					if (currentTurnPawn is SuenAxe suenAxe
+						&& suenAxe.TryGetSkillPresentation(skill.ActionSlot, out string suenName, out string suenIconKey))
+					{
+						label = suenName;
+						tooltip = BuildSkillTooltip(skill, label);
+						iconKey = suenIconKey;
+					}
 				}
 
 				_actionTooltips[i] = tooltip;
@@ -764,9 +803,9 @@ namespace Battle
 			return HumanizeKey(skill.SkillKey);
 		}
 
-		string BuildSkillTooltip(BattleSkillDefinition skill)
+		string BuildSkillTooltip(BattleSkillDefinition skill, string displayName = null)
 		{
-			string name = BuildSkillDisplayName(skill);
+			string name = string.IsNullOrWhiteSpace(displayName) ? BuildSkillDisplayName(skill) : displayName;
 			string shortText = string.Empty;
 			string descText = string.Empty;
 			if (_gameData != null
@@ -989,7 +1028,8 @@ namespace Battle
 			for (int i = 0; i < keys.Count; i++)
 			{
 				BattlePawn.StatusState status = statuses[keys[i]];
-				values.Add($"{status.StatusKey} x{status.Stacks} T{status.RemainingOwnerTurns}");
+				string displayName = SuenAxe.GetStatusDisplayName(status.StatusKey);
+				values.Add($"{displayName} x{status.Stacks} T{status.RemainingOwnerTurns}");
 			}
 
 			return string.Join(", ", values);
@@ -1708,6 +1748,10 @@ namespace Battle
 				if (string.IsNullOrWhiteSpace(statusKey))
 					return "?";
 
+				string suenLabel = SuenAxe.GetStatusIconLabel(statusKey);
+				if (string.IsNullOrWhiteSpace(suenLabel) == false)
+					return suenLabel;
+
 				if (statusKey.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "EMP";
 				if (statusKey.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
@@ -1722,6 +1766,19 @@ namespace Battle
 			static Color GetStatusColor(string statusKey)
 			{
 				string key = statusKey ?? string.Empty;
+				if (SuenAxe.GetStatusIconLabel(key) != null)
+				{
+					if (key.IndexOf("ACCURACY_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.68f, 0.36f, 0.25f, 0.96f);
+					if (key.IndexOf("EVASION", System.StringComparison.OrdinalIgnoreCase) >= 0
+						|| key.IndexOf("FIRST_HIT_EVADE", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.35f, 0.75f, 0.88f, 0.96f);
+					if (key.IndexOf("DAMAGE_REDUCTION", System.StringComparison.OrdinalIgnoreCase) >= 0
+						|| key.IndexOf("INTERCEPT_GUARD", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.4f, 0.6f, 0.94f, 0.96f);
+					return new Color(0.86f, 0.63f, 0.24f, 0.96f);
+				}
+
 				if (key.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(1f, 0.73f, 0.22f, 0.96f);
 				if (key.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)

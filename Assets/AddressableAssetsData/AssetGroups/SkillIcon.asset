@@ -99,6 +99,54 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb4ad57c55b19bd45936cd74ba849f2a
+    m_Address: icon_suen_axe_passive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5617219e006fa114ba4f16e78b2b5c5f
+    m_Address: icon_suen_axe_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e1693ab8697f1d4face079b32dd666f
+    m_Address: icon_suen_axe_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c049ad0deea1fa64baaf668be58ffe2f
+    m_Address: icon_suen_axe_skill4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bbcde226fa3b2e4088c030bf996ad76
+    m_Address: icon_suen_axe_sub
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24909a3a464978e479a6dcde56dfea1a
+    m_Address: icon_suen_axeoff_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76aa095a5621a2e4aab41df71a0daf8f
+    m_Address: icon_suen_axeoff_skill2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2988e41160fb20e4e846f70ae3cc5f7e
+    m_Address: icon_suen_axeoff_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
   m_SchemaSet:

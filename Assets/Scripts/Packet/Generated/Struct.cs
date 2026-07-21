@@ -38,43 +38,44 @@ namespace Protocol {
             "EhEKCW1heF92YWx1ZRgFIAEoBSJWChFCYXR0bGVTdGF0dXNTdGF0ZRISCgpz",
             "dGF0dXNfa2V5GAEgASgJEg4KBnN0YWNrcxgCIAEoBRIdChVyZW1haW5pbmdf",
             "b3duZXJfdHVybnMYAyABKAUiOwoPQmF0dGxlQXVyYVN0YXRlEhgKEHNvdXJj",
-            "ZV9za2lsbF9rZXkYASABKAkSDgoGcmFkaXVzGAIgASgFIpkBCg5CYXR0bGVU",
+            "ZV9za2lsbF9rZXkYASABKAkSDgoGcmFkaXVzGAIgASgFItEBCg5CYXR0bGVU",
             "aWxlSW5mbxIjCgVheGlhbBgBIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQS",
             "KwoJdGlsZV90eXBlGAIgASgOMhguUHJvdG9jb2wuQmF0dGxlVGlsZVR5cGUS",
             "NQoMb3ZlcmxheV90eXBlGAMgASgOMh8uUHJvdG9jb2wuQmF0dGxlVGlsZU92",
-            "ZXJsYXlUeXBlIpoFCg5CYXR0bGVQYXduSW5mbxIPCgdwYXduX2lkGAEgASgE",
-            "EhAKCG93bmVyX2lkGAIgASgEEicKCnBhd25fY2xhc3MYAyABKA4yEy5Qcm90",
-            "b2NvbC5QYXduQ2xhc3MSIwoFYXhpYWwYBCABKAsyFC5Qcm90b2NvbC5BeGlh",
-            "bENvb3JkEgoKAmhwGAUgASgFEg4KBm1heF9ocBgGIAEoBRISCgptb3ZlX3Jh",
-            "bmdlGAcgASgFEg0KBWFybW9yGAggASgFEhEKCW1heF9hcm1vchgJIAEoBRIS",
-            "CgpjdXJyZW50X2FwGAogASgFEhAKCGNhbl9tb3ZlGAsgASgIEiEKGXVzZWRf",
-            "c3ViX2FjdGlvbl90aGlzX3R1cm4YDCABKAgSFQoNdXNlZF91bHRpbWF0ZRgN",
-            "IAEoCBIPCgdpc19kZWFkGBAgASgIEjkKEGZhY2luZ19kaXJlY3Rpb24YESAB",
-            "KA4yHy5Qcm90b2NvbC5CYXR0bGVGYWNpbmdEaXJlY3Rpb24SJgoEcm9sZRgS",
-            "IAEoDjIYLlByb3RvY29sLkJhdHRsZVBhd25Sb2xlEjAKCXJlc291cmNlcxgT",
-            "IAMoCzIdLlByb3RvY29sLkJhdHRsZVJlc291cmNlU3RhdGUSLgoIYmFycmll",
-            "cnMYFCADKAsyHC5Qcm90b2NvbC5CYXR0bGVCYXJyaWVyU3RhdGUSLQoIc3Rh",
-            "dHVzZXMYFSADKAsyGy5Qcm90b2NvbC5CYXR0bGVTdGF0dXNTdGF0ZRIWCg5z",
-            "aGllbGRfY3VycmVudBgWIAEoBRISCgpzaGllbGRfbWF4GBcgASgFEigKBWF1",
-            "cmFzGBggAygLMhkuUHJvdG9jb2wuQmF0dGxlQXVyYVN0YXRlSgQIDhAPSgQI",
-            "DxAQItYDCg9CYXR0bGVQYXduRGVsdGESDwoHcGF3bl9pZBgBIAEoBBIKCgJo",
-            "cBgCIAEoBRINCgVhcm1vchgDIAEoBRISCgpjdXJyZW50X2FwGAQgASgFEhAK",
-            "CGNhbl9tb3ZlGAUgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1cm4Y",
-            "BiABKAgSFQoNdXNlZF91bHRpbWF0ZRgHIAEoCBIPCgdpc19kZWFkGAggASgI",
-            "EjkKEGZhY2luZ19kaXJlY3Rpb24YCSABKA4yHy5Qcm90b2NvbC5CYXR0bGVG",
-            "YWNpbmdEaXJlY3Rpb24SMAoJcmVzb3VyY2VzGAsgAygLMh0uUHJvdG9jb2wu",
-            "QmF0dGxlUmVzb3VyY2VTdGF0ZRIuCghiYXJyaWVycxgMIAMoCzIcLlByb3Rv",
-            "Y29sLkJhdHRsZUJhcnJpZXJTdGF0ZRItCghzdGF0dXNlcxgNIAMoCzIbLlBy",
-            "b3RvY29sLkJhdHRsZVN0YXR1c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50GA4g",
-            "ASgFEhIKCnNoaWVsZF9tYXgYDyABKAUSKAoFYXVyYXMYECADKAsyGS5Qcm90",
-            "b2NvbC5CYXR0bGVBdXJhU3RhdGVKBAgKEAsiqQIKD0JhdHRsZUFjdGlvbkxv",
-            "ZxIYChBhdHRhY2tlcl9wYXduX2lkGAEgASgEEhgKEGRlZmVuZGVyX3Bhd25f",
-            "aWQYAiABKAQSEgoKc2tpbGxfc2xvdBgDIAEoBRITCgthY3Rpb25fdHlwZRgE",
-            "IAEoCRIOCgZkYW1hZ2UYBSABKAUSEwoLaXNfY3JpdGljYWwYBiABKAgSEQoJ",
-            "aXNfZXZhZGVkGAcgASgIEhIKCmlzX2d1YXJkZWQYCCABKAgSGgoSaXNfcGVy",
-            "ZmVjdF9ndWFyZGVkGAkgASgIEhIKCmlzX2NvdW50ZXIYCiABKAgSEAoIaHBf",
-            "YWZ0ZXIYCyABKAUSEwoLYXJtb3JfYWZ0ZXIYDCABKAUSFgoOaXNfYmFja19h",
-            "dHRhY2sYDSABKAhiBnByb3RvMw=="));
+            "ZXJsYXlUeXBlEhUKDWVxdWlwbWVudF9rZXkYBCABKAkSHwoXZXF1aXBtZW50",
+            "X293bmVyX3Bhd25faWQYBSABKAQimgUKDkJhdHRsZVBhd25JbmZvEg8KB3Bh",
+            "d25faWQYASABKAQSEAoIb3duZXJfaWQYAiABKAQSJwoKcGF3bl9jbGFzcxgD",
+            "IAEoDjITLlByb3RvY29sLlBhd25DbGFzcxIjCgVheGlhbBgEIAEoCzIULlBy",
+            "b3RvY29sLkF4aWFsQ29vcmQSCgoCaHAYBSABKAUSDgoGbWF4X2hwGAYgASgF",
+            "EhIKCm1vdmVfcmFuZ2UYByABKAUSDQoFYXJtb3IYCCABKAUSEQoJbWF4X2Fy",
+            "bW9yGAkgASgFEhIKCmN1cnJlbnRfYXAYCiABKAUSEAoIY2FuX21vdmUYCyAB",
+            "KAgSIQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgMIAEoCBIVCg11c2Vk",
+            "X3VsdGltYXRlGA0gASgIEg8KB2lzX2RlYWQYECABKAgSOQoQZmFjaW5nX2Rp",
+            "cmVjdGlvbhgRIAEoDjIfLlByb3RvY29sLkJhdHRsZUZhY2luZ0RpcmVjdGlv",
+            "bhImCgRyb2xlGBIgASgOMhguUHJvdG9jb2wuQmF0dGxlUGF3blJvbGUSMAoJ",
+            "cmVzb3VyY2VzGBMgAygLMh0uUHJvdG9jb2wuQmF0dGxlUmVzb3VyY2VTdGF0",
+            "ZRIuCghiYXJyaWVycxgUIAMoCzIcLlByb3RvY29sLkJhdHRsZUJhcnJpZXJT",
+            "dGF0ZRItCghzdGF0dXNlcxgVIAMoCzIbLlByb3RvY29sLkJhdHRsZVN0YXR1",
+            "c1N0YXRlEhYKDnNoaWVsZF9jdXJyZW50GBYgASgFEhIKCnNoaWVsZF9tYXgY",
+            "FyABKAUSKAoFYXVyYXMYGCADKAsyGS5Qcm90b2NvbC5CYXR0bGVBdXJhU3Rh",
+            "dGVKBAgOEA9KBAgPEBAi1gMKD0JhdHRsZVBhd25EZWx0YRIPCgdwYXduX2lk",
+            "GAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgFEhIKCmN1cnJlbnRf",
+            "YXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNlZF9zdWJfYWN0aW9u",
+            "X3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRlGAcgASgIEg8KB2lz",
+            "X2RlYWQYCCABKAgSOQoQZmFjaW5nX2RpcmVjdGlvbhgJIAEoDjIfLlByb3Rv",
+            "Y29sLkJhdHRsZUZhY2luZ0RpcmVjdGlvbhIwCglyZXNvdXJjZXMYCyADKAsy",
+            "HS5Qcm90b2NvbC5CYXR0bGVSZXNvdXJjZVN0YXRlEi4KCGJhcnJpZXJzGAwg",
+            "AygLMhwuUHJvdG9jb2wuQmF0dGxlQmFycmllclN0YXRlEi0KCHN0YXR1c2Vz",
+            "GA0gAygLMhsuUHJvdG9jb2wuQmF0dGxlU3RhdHVzU3RhdGUSFgoOc2hpZWxk",
+            "X2N1cnJlbnQYDiABKAUSEgoKc2hpZWxkX21heBgPIAEoBRIoCgVhdXJhcxgQ",
+            "IAMoCzIZLlByb3RvY29sLkJhdHRsZUF1cmFTdGF0ZUoECAoQCyKvAgoPQmF0",
+            "dGxlQWN0aW9uTG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQZGVm",
+            "ZW5kZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMKC2Fj",
+            "dGlvbl90eXBlGAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0aWNh",
+            "bBgGIAEoCBIRCglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEo",
+            "CBIaChJpc19wZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRlchgK",
+            "IAEoCBIQCghocF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEoBRIW",
+            "Cg5pc19iYWNrX2F0dGFjaxgNIAEoCEoECA4QD2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -85,7 +86,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleBarrierState), global::Protocol.BattleBarrierState.Parser, new[]{ "BarrierId", "SourceSkillKey", "Value", "RemainingOwnerTurns", "MaxValue" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleStatusState), global::Protocol.BattleStatusState.Parser, new[]{ "StatusKey", "Stacks", "RemainingOwnerTurns" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleAuraState), global::Protocol.BattleAuraState.Parser, new[]{ "SourceSkillKey", "Radius" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleTileInfo), global::Protocol.BattleTileInfo.Parser, new[]{ "Axial", "TileType", "OverlayType" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleTileInfo), global::Protocol.BattleTileInfo.Parser, new[]{ "Axial", "TileType", "OverlayType", "EquipmentKey", "EquipmentOwnerPawnId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
@@ -1982,6 +1983,8 @@ namespace Protocol {
       axial_ = other.axial_ != null ? other.axial_.Clone() : null;
       tileType_ = other.tileType_;
       overlayType_ = other.overlayType_;
+      equipmentKey_ = other.equipmentKey_;
+      equipmentOwnerPawnId_ = other.equipmentOwnerPawnId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2027,6 +2030,30 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "equipment_key" field.</summary>
+    public const int EquipmentKeyFieldNumber = 4;
+    private string equipmentKey_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string EquipmentKey {
+      get { return equipmentKey_; }
+      set {
+        equipmentKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "equipment_owner_pawn_id" field.</summary>
+    public const int EquipmentOwnerPawnIdFieldNumber = 5;
+    private ulong equipmentOwnerPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong EquipmentOwnerPawnId {
+      get { return equipmentOwnerPawnId_; }
+      set {
+        equipmentOwnerPawnId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2045,6 +2072,8 @@ namespace Protocol {
       if (!object.Equals(Axial, other.Axial)) return false;
       if (TileType != other.TileType) return false;
       if (OverlayType != other.OverlayType) return false;
+      if (EquipmentKey != other.EquipmentKey) return false;
+      if (EquipmentOwnerPawnId != other.EquipmentOwnerPawnId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2055,6 +2084,8 @@ namespace Protocol {
       if (axial_ != null) hash ^= Axial.GetHashCode();
       if (TileType != global::Protocol.BattleTileType.None) hash ^= TileType.GetHashCode();
       if (OverlayType != global::Protocol.BattleTileOverlayType.None) hash ^= OverlayType.GetHashCode();
+      if (EquipmentKey.Length != 0) hash ^= EquipmentKey.GetHashCode();
+      if (EquipmentOwnerPawnId != 0UL) hash ^= EquipmentOwnerPawnId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2085,6 +2116,14 @@ namespace Protocol {
         output.WriteRawTag(24);
         output.WriteEnum((int) OverlayType);
       }
+      if (EquipmentKey.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(EquipmentKey);
+      }
+      if (EquipmentOwnerPawnId != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(EquipmentOwnerPawnId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2107,6 +2146,14 @@ namespace Protocol {
         output.WriteRawTag(24);
         output.WriteEnum((int) OverlayType);
       }
+      if (EquipmentKey.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(EquipmentKey);
+      }
+      if (EquipmentOwnerPawnId != 0UL) {
+        output.WriteRawTag(40);
+        output.WriteUInt64(EquipmentOwnerPawnId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2125,6 +2172,12 @@ namespace Protocol {
       }
       if (OverlayType != global::Protocol.BattleTileOverlayType.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) OverlayType);
+      }
+      if (EquipmentKey.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(EquipmentKey);
+      }
+      if (EquipmentOwnerPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(EquipmentOwnerPawnId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2149,6 +2202,12 @@ namespace Protocol {
       }
       if (other.OverlayType != global::Protocol.BattleTileOverlayType.None) {
         OverlayType = other.OverlayType;
+      }
+      if (other.EquipmentKey.Length != 0) {
+        EquipmentKey = other.EquipmentKey;
+      }
+      if (other.EquipmentOwnerPawnId != 0UL) {
+        EquipmentOwnerPawnId = other.EquipmentOwnerPawnId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2180,6 +2239,14 @@ namespace Protocol {
             OverlayType = (global::Protocol.BattleTileOverlayType) input.ReadEnum();
             break;
           }
+          case 34: {
+            EquipmentKey = input.ReadString();
+            break;
+          }
+          case 40: {
+            EquipmentOwnerPawnId = input.ReadUInt64();
+            break;
+          }
         }
       }
     #endif
@@ -2208,6 +2275,14 @@ namespace Protocol {
           }
           case 24: {
             OverlayType = (global::Protocol.BattleTileOverlayType) input.ReadEnum();
+            break;
+          }
+          case 34: {
+            EquipmentKey = input.ReadString();
+            break;
+          }
+          case 40: {
+            EquipmentOwnerPawnId = input.ReadUInt64();
             break;
           }
         }

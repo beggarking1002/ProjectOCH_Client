@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using App;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -22,6 +23,7 @@ namespace Battle
 		[SerializeField] TileBase fireOverlayTile;
 		[SerializeField] bool useBlockTilemap = true;
 		readonly Dictionary<AxialCoord, BattleTileState> _serverTileStates = new Dictionary<AxialCoord, BattleTileState>();
+		readonly Dictionary<AxialCoord, TextMesh> _equipmentMarkers = new Dictionary<AxialCoord, TextMesh>();
 		readonly List<AsyncOperationHandle<TileBase>> _loadedTileHandles = new List<AsyncOperationHandle<TileBase>>();
 		bool _hasServerTileSnapshot;
 
@@ -148,6 +150,28 @@ namespace Battle
 				&& tileState.OverlayType == overlayType;
 		}
 
+		public bool HasEquipment(AxialCoord axial, string equipmentKey, ulong ownerPawnId)
+		{
+			return _serverTileStates.TryGetValue(axial, out BattleTileState tileState)
+				&& string.Equals(tileState.EquipmentKey, equipmentKey, System.StringComparison.OrdinalIgnoreCase)
+				&& tileState.EquipmentOwnerPawnId == ownerPawnId;
+		}
+
+		public bool TryGetEquipment(AxialCoord axial, out string equipmentKey, out ulong ownerPawnId)
+		{
+			equipmentKey = string.Empty;
+			ownerPawnId = 0;
+			if (_serverTileStates.TryGetValue(axial, out BattleTileState tileState) == false
+				|| string.IsNullOrWhiteSpace(tileState.EquipmentKey))
+			{
+				return false;
+			}
+
+			equipmentKey = tileState.EquipmentKey;
+			ownerPawnId = tileState.EquipmentOwnerPawnId;
+			return true;
+		}
+
 		public void GetKnownTileAxials(List<AxialCoord> destination)
 		{
 			if (destination == null)
@@ -226,6 +250,7 @@ namespace Battle
 			}
 
 			_serverTileStates.Clear();
+			ClearEquipmentMarkers();
 			if (canRedrawGround)
 				groundTilemap?.ClearAllTiles();
 
@@ -256,7 +281,11 @@ namespace Battle
 		void ApplyTileState(Protocol.BattleTileInfo tileInfo, bool updateGroundVisual)
 		{
 			AxialCoord axial = new AxialCoord(tileInfo.Axial.Q, tileInfo.Axial.R);
-			_serverTileStates[axial] = new BattleTileState(tileInfo.TileType, tileInfo.OverlayType);
+			_serverTileStates[axial] = new BattleTileState(
+				tileInfo.TileType,
+				tileInfo.OverlayType,
+				tileInfo.EquipmentKey,
+				tileInfo.EquipmentOwnerPawnId);
 
 			if (updateGroundVisual)
 				SetGroundTile(axial, tileInfo.TileType);
@@ -275,8 +304,57 @@ namespace Battle
 				default:
 					Debug.LogWarning($"Unsupported battle tile overlay. axial={axial}, overlay={tileInfo.OverlayType}");
 					ClearCombatOverlayTile(axial);
-					break;
+				break;
 			}
+
+			UpdateEquipmentMarker(axial, tileInfo.EquipmentKey);
+		}
+
+		void UpdateEquipmentMarker(AxialCoord axial, string equipmentKey)
+		{
+			if (string.Equals(equipmentKey, "AXE", System.StringComparison.OrdinalIgnoreCase) == false)
+			{
+				if (_equipmentMarkers.TryGetValue(axial, out TextMesh existing))
+				{
+					Destroy(existing.gameObject);
+					_equipmentMarkers.Remove(axial);
+				}
+
+				return;
+			}
+
+			if (_equipmentMarkers.TryGetValue(axial, out TextMesh marker) == false || marker == null)
+			{
+				GameObject markerObject = new GameObject("Equipment_Axe");
+				markerObject.transform.SetParent(transform, false);
+				marker = markerObject.AddComponent<TextMesh>();
+				marker.text = "AXE";
+				marker.anchor = TextAnchor.MiddleCenter;
+				marker.alignment = TextAlignment.Center;
+				marker.characterSize = 0.09f;
+				marker.fontSize = 20;
+				marker.color = new Color(1f, 0.78f, 0.28f, 1f);
+				GameRoot.ApplyWorldTextFont(marker);
+				MeshRenderer renderer = marker.GetComponent<MeshRenderer>();
+				if (renderer != null)
+					renderer.sortingOrder = 18;
+
+				_equipmentMarkers[axial] = marker;
+			}
+
+			marker.transform.position = AxialToWorldCenter(axial, -0.04f) + Vector3.up * 0.12f;
+			marker.gameObject.SetActive(true);
+		}
+
+		void ClearEquipmentMarkers()
+		{
+			foreach (TextMesh marker in _equipmentMarkers.Values)
+			{
+				if (marker != null)
+					Destroy(marker.gameObject);
+			}
+
+			_equipmentMarkers.Clear();
 		}
 
 		void SetGroundTile(AxialCoord axial, Protocol.BattleTileType tileType)
@@ -367,11 +445,15 @@ namespace Battle
 		{
 			public readonly Protocol.BattleTileType TileType;
 			public readonly Protocol.BattleTileOverlayType OverlayType;
+			public readonly string EquipmentKey;
+			public readonly ulong EquipmentOwnerPawnId;
 
-			public BattleTileState(Protocol.BattleTileType tileType, Protocol.BattleTileOverlayType overlayType)
+			public BattleTileState(Protocol.BattleTileType tileType, Protocol.BattleTileOverlayType overlayType, string equipmentKey, ulong equipmentOwnerPawnId)
 			{
 				TileType = tileType;
 				OverlayType = overlayType;
+				EquipmentKey = equipmentKey ?? string.Empty;
+				EquipmentOwnerPawnId = equipmentOwnerPawnId;
 			}
 		}
 

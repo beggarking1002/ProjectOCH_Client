@@ -379,9 +379,11 @@ namespace Battle
 		{
 			if (info != null)
 			{
-				switch (info.PawnClass)
-				{
-					case Protocol.PawnClass.BeigeIce:
+					switch (info.PawnClass)
+					{
+						case Protocol.PawnClass.SuenAxeSword:
+							return pawnObject.AddComponent<SuenAxe>();
+						case Protocol.PawnClass.BeigeIce:
 						return pawnObject.AddComponent<BeigeIce>();
 					case Protocol.PawnClass.BeigeFire:
 						return pawnObject.AddComponent<BeigeFire>();
@@ -700,19 +702,38 @@ namespace Battle
 
 		bool ValidateSkillTarget(BattlePawn casterPawn, int skillSlot, ulong resolvedTargetPawnId, ref AxialCoord targetAxial)
 		{
-			string targetType = GetSkillTargetType(casterPawn, skillSlot);
+			BattleSkillDefinition skill = null;
+			TryGetSkillDefinition(casterPawn, skillSlot, out skill);
+			string targetType = skill != null ? skill.TargetType : GetSkillTargetType(casterPawn, skillSlot);
 			if (string.IsNullOrWhiteSpace(targetType))
 				targetType = "ENEMY_SINGLE";
-			if (targetType == "SELF" || targetType == "SELF_TOGGLE")
+
+			if (_mapGrid == null)
+				return false;
+
+			if (IsSelfCenteredAdjacentSkill(skill))
+			{
+				// Cleaner is sent as a SELF skill, but the player may confirm it either
+				// by clicking Suen or one of the six already-previewed neighboring tiles.
+				if (_mapGrid.IsTileInBounds(targetAxial) == false
+					|| casterPawn.Axial.DistanceTo(targetAxial) > 1)
+				{
+					Debug.Log($"Cleaner must be confirmed on Suen or an adjacent tile. casterPawnId={casterPawn.PawnId}, axial={targetAxial}");
+					return false;
+				}
+
+				targetAxial = casterPawn.Axial;
+			}
+			else if (targetType == "SELF" || targetType == "SELF_TOGGLE")
 				targetAxial = casterPawn.Axial;
 
-			if (_mapGrid == null || _mapGrid.IsTileInBounds(targetAxial) == false)
+			if (_mapGrid.IsTileInBounds(targetAxial) == false)
 			{
 				Debug.Log($"Skill target is outside the battle map. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, axial={targetAxial}");
 				return false;
 			}
 
-			if (TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill))
+			if (skill != null)
 			{
 				int distance = casterPawn.Axial.DistanceTo(targetAxial);
 				if (distance < skill.RangeMin || distance > skill.RangeMax)
@@ -748,6 +769,14 @@ namespace Battle
 					}
 
 					return true;
+				case "ALLY_OR_SELF":
+					if (targetPawn == null || targetPawn.IsMine == false)
+					{
+						Debug.Log($"Skill requires the caster or an allied target. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
 				case "ENEMY_SINGLE":
 					if (targetPawn == null || targetPawn.IsMine)
 					{
@@ -768,6 +797,14 @@ namespace Battle
 					if (targetPawn != null)
 					{
 						Debug.Log($"Skill requires an empty tile. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
+						return false;
+					}
+
+					return true;
+				case "PICKUP_TILE":
+					if (_mapGrid.HasEquipment(targetAxial, "AXE", casterPawn.PawnId) == false)
+					{
+						Debug.Log($"Skill requires the caster's axe equipment tile. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, axial={targetAxial}");
 						return false;
 					}
 
@@ -842,6 +879,17 @@ namespace Battle
 			}
 
 			_validTargetTiles.Clear();
+			_affectedTargetTiles.Clear();
+			if (IsSelfCenteredAdjacentSkill(skill))
+			{
+				// The center is the confirmation target; the orange ring is the fixed
+				// effect area and can also be clicked to confirm the same SELF packet.
+				_validTargetTiles.Add(casterPawn.Axial);
+				GetAffectedTargetTiles(casterPawn, skill, casterPawn.Axial, _affectedTargetTiles);
+				_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+				return;
+			}
+
 			if (skill.TargetType == "SELF" || skill.TargetType == "SELF_TOGGLE")
 			{
 				_validTargetTiles.Add(casterPawn.Axial);
@@ -856,7 +904,6 @@ namespace Battle
 				}
 			}
 
-			_affectedTargetTiles.Clear();
 			if (TryGetPointerAxial(out AxialCoord hoveredAxial)
 				&& IsValidSkillPreviewTarget(casterPawn, skill, hoveredAxial))
 			{
@@ -903,6 +950,10 @@ namespace Battle
 				return false;
 
 			string targetType = skill.TargetType;
+			if (IsSelfCenteredAdjacentSkill(skill))
+				return _mapGrid.IsTileInBounds(targetAxial)
+					&& casterPawn.Axial.DistanceTo(targetAxial) <= 1;
+
 			if (targetType == "SELF" || targetType == "SELF_TOGGLE")
 				targetAxial = casterPawn.Axial;
 
@@ -929,12 +980,16 @@ namespace Battle
 					return targetPawn == casterPawn;
 				case "ALLY_SINGLE":
 					return targetPawn != null && targetPawn.IsMine;
+				case "ALLY_OR_SELF":
+					return targetPawn != null && targetPawn.IsMine;
 				case "ENEMY_SINGLE":
 					return targetPawn != null && targetPawn.IsMine == false;
 				case "TILE_OR_ENEMY":
 					return targetPawn == null || targetPawn.IsMine == false;
 				case "EMPTY_TILE":
 					return targetPawn == null;
+				case "PICKUP_TILE":
+					return _mapGrid.HasEquipment(targetAxial, "AXE", casterPawn.PawnId);
 				default:
 					return targetPawn == null || targetPawn.IsMine == false;
 			}
@@ -943,6 +998,14 @@ namespace Battle
 		void GetAffectedTargetTiles(BattlePawn casterPawn, BattleSkillDefinition skill, AxialCoord targetAxial, List<AxialCoord> destination)
 		{
 			destination.Clear();
+			if (IsSelfCenteredAdjacentSkill(skill))
+			{
+				for (int direction = 0; direction < 6; direction++)
+					AddAffectedTile(_mapGrid.GetNeighbor(casterPawn.Axial, direction), destination);
+
+				return;
+			}
+
 			AddAffectedTile(targetAxial, destination);
 			// The final Fire Wall line is selected in a second stage, so its first-stage
 			// hover only indicates the potential start tile.
@@ -966,6 +1029,13 @@ namespace Battle
 				next = _mapGrid.GetNeighbor(next, directionIndex);
 				AddAffectedTile(next, destination);
 			}
+		}
+
+		static bool IsSelfCenteredAdjacentSkill(BattleSkillDefinition skill)
+		{
+			return skill != null
+				&& skill.TargetType == "SELF"
+				&& skill.TargetShape == "ADJACENT_6";
 		}
 
 		void RefreshFireWallDirectionPreview()

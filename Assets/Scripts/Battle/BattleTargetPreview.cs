@@ -7,7 +7,8 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class BattleTargetPreview : MonoBehaviour
 	{
-		const int SortingOrder = 30;
+		// Keep tile targeting above the map but below pawn rings (19) and pawn sprites (20).
+		const int SortingOrder = 18;
 		static readonly Color ValidTargetColor = new Color(0.25f, 1f, 0.48f, 0.65f);
 		static readonly Color AffectedTileColor = new Color(1f, 0.64f, 0.18f, 0.95f);
 
