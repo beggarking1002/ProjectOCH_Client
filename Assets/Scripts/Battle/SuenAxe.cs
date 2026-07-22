@@ -63,7 +63,7 @@ namespace Battle
 			{
 				case 2:
 					displayName = IsAxeOff ? "아픈 손가락" : "돈벌이";
-					iconKey = IsAxeOff ? "icon_suen_axeoff_skill1" : "icon_suen_axe_skill1";
+				iconKey = IsAxeOff ? "icon_suen_axeoff_skill1" : "icon_suen_axeon_skill1";
 					return true;
 				case 3:
 					displayName = "청소부";
@@ -71,15 +71,17 @@ namespace Battle
 					return true;
 				case 4:
 					displayName = IsAxeOff ? "칵 퉤!" : "잔금 지불";
-					iconKey = IsAxeOff ? "icon_suen_axeoff_skill2" : "icon_suen_axe_skill3";
+				iconKey = IsAxeOff ? "icon_suen_axeoff_skill2" : "icon_suen_axeon_skill2";
 					return true;
 				case 5:
 					displayName = "혼자 크는 남자";
-					iconKey = "icon_suen_axe_skill4";
+				// The delivered axe/sword set has no dedicated slot-5 art yet.
+				// Reuse the shared skill art rather than leaving the button blank.
+				iconKey = "icon_suen_axe_skill3";
 					return true;
 				case 6:
 					displayName = "최후의 생존자";
-					iconKey = "icon_suen_axeoff_skill3";
+				iconKey = "icon_suen_axe_ulti";
 					return true;
 				case 7:
 					displayName = "도끼 줍기";

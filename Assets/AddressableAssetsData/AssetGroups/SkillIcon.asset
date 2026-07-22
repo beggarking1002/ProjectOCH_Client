@@ -15,20 +15,50 @@ MonoBehaviour:
   m_GroupName: SkillIcon
   m_GUID: a3b1bbdddc13a364f9cb3a04985b0adf
   m_SerializeEntries:
-  - m_GUID: ce4e82a6d8123ec4a843c0c8506bfbb3
-    m_Address: icon_beige_ice_passive
+  - m_GUID: 24909a3a464978e479a6dcde56dfea1a
+    m_Address: icon_suen_axeoff_skill1
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f7251f1f68f9d474dbc2c1d81ff26afd
-    m_Address: icon_beige_ice_skill1
+  - m_GUID: 76aa095a5621a2e4aab41df71a0daf8f
+    m_Address: icon_suen_axeoff_skill2
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 43017d83e48a83d46991be2b938e5f18
-    m_Address: icon_beige_ice_skill2
+  - m_GUID: 052e791a55e77bc4e998c110b5562545
+    m_Address: icon_suen_axeon_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3741647616e4a24aa27357c3f3a408e
+    m_Address: icon_suen_axeon_skill2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb4ad57c55b19bd45936cd74ba849f2a
+    m_Address: icon_suen_axe_passive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e1693ab8697f1d4face079b32dd666f
+    m_Address: icon_suen_axe_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bbcde226fa3b2e4088c030bf996ad76
+    m_Address: icon_suen_axe_sub
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4ceb5e727e941f46ae204b99a3d9a03
+    m_Address: icon_suen_axe_ulti
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
@@ -39,8 +69,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6a1010ed0574cb14d9051e34f29197c5
-    m_Address: icon_beige_ice_skill4
+  - m_GUID: 2038f7a15e498f74da7f8dd5863b27c9
+    m_Address: icon_beige_fire_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4225c00a8fac70249a3791b8c3f3da97
+    m_Address: icon_beige_fire_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43017d83e48a83d46991be2b938e5f18
+    m_Address: icon_beige_ice_skill2
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
@@ -57,38 +99,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c29280786aa4440469dddfb3c66ee6b3
-    m_Address: icon_beige_fire_passive
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4225c00a8fac70249a3791b8c3f3da97
-    m_Address: icon_beige_fire_skill1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf0281aca391b1142b50076f487fa99d
-    m_Address: icon_beige_fire_skill2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2038f7a15e498f74da7f8dd5863b27c9
-    m_Address: icon_beige_fire_skill3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6998b0fe1d08be8469874e856eb81ac0
     m_Address: icon_beige_fire_skill4
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d0e65b75016bc984e9f9f5f3743a9359
-    m_Address: icon_beige_fire_ulti
+  - m_GUID: 6a1010ed0574cb14d9051e34f29197c5
+    m_Address: icon_beige_ice_skill4
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
@@ -99,50 +117,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bb4ad57c55b19bd45936cd74ba849f2a
-    m_Address: icon_suen_axe_passive
+  - m_GUID: bf0281aca391b1142b50076f487fa99d
+    m_Address: icon_beige_fire_skill2
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5617219e006fa114ba4f16e78b2b5c5f
-    m_Address: icon_suen_axe_skill1
+  - m_GUID: c29280786aa4440469dddfb3c66ee6b3
+    m_Address: icon_beige_fire_passive
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4e1693ab8697f1d4face079b32dd666f
-    m_Address: icon_suen_axe_skill3
+  - m_GUID: ce4e82a6d8123ec4a843c0c8506bfbb3
+    m_Address: icon_beige_ice_passive
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c049ad0deea1fa64baaf668be58ffe2f
-    m_Address: icon_suen_axe_skill4
+  - m_GUID: d0e65b75016bc984e9f9f5f3743a9359
+    m_Address: icon_beige_fire_ulti
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3bbcde226fa3b2e4088c030bf996ad76
-    m_Address: icon_suen_axe_sub
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 24909a3a464978e479a6dcde56dfea1a
-    m_Address: icon_suen_axeoff_skill1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 76aa095a5621a2e4aab41df71a0daf8f
-    m_Address: icon_suen_axeoff_skill2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - SkillIcon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2988e41160fb20e4e846f70ae3cc5f7e
-    m_Address: icon_suen_axeoff_skill3
+  - m_GUID: f7251f1f68f9d474dbc2c1d81ff26afd
+    m_Address: icon_beige_ice_skill1
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon

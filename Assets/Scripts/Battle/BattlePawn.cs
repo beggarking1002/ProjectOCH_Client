@@ -383,7 +383,9 @@ namespace Battle
 			if (direction.sqrMagnitude <= 0.0001f)
 				direction = FacingDirection == Protocol.BattleFacingDirection.Left ? Vector3.right : Vector3.left;
 
-			PlayCombatPresentation(direction, EvadePresentationDurationSeconds, EvadePresentationDistance, EvadePresentationJumpHeight);
+			// Use two separate hops: retreat, land, then hop back into the
+			// counter-ready position. This reads more clearly than one smooth arc.
+			PlayCombatPresentation(direction, EvadePresentationDurationSeconds, EvadePresentationDistance, EvadePresentationJumpHeight, true);
 		}
 
 		public void PlayMeleeAttackPresentation(Vector3 defenderWorldPosition)
@@ -393,10 +395,10 @@ namespace Battle
 			if (direction.sqrMagnitude <= 0.0001f)
 				direction = FacingDirection == Protocol.BattleFacingDirection.Left ? Vector3.left : Vector3.right;
 
-			PlayCombatPresentation(direction, MeleePresentationDurationSeconds, MeleePresentationDistance, MeleePresentationHopHeight);
+			PlayCombatPresentation(direction, MeleePresentationDurationSeconds, MeleePresentationDistance, MeleePresentationHopHeight, false);
 		}
 
-		void PlayCombatPresentation(Vector3 direction, float duration, float distance, float hopHeight)
+		void PlayCombatPresentation(Vector3 direction, float duration, float distance, float hopHeight, bool useReturnHop)
 		{
 			if (IsDead)
 				return;
@@ -414,10 +416,10 @@ namespace Battle
 			}
 
 			_combatPresentationBaseLocalPosition = _visualRoot.localPosition;
-			_combatPresentationCoroutine = StartCoroutine(PlayCombatPresentationRoutine(direction.normalized, duration, distance, hopHeight));
+			_combatPresentationCoroutine = StartCoroutine(PlayCombatPresentationRoutine(direction.normalized, duration, distance, hopHeight, useReturnHop));
 		}
 
-		IEnumerator PlayCombatPresentationRoutine(Vector3 direction, float duration, float distance, float hopHeight)
+		IEnumerator PlayCombatPresentationRoutine(Vector3 direction, float duration, float distance, float hopHeight, bool useReturnHop)
 		{
 			Vector3 baseWorldPosition = _visualRoot.position;
 			float elapsed = 0f;
@@ -425,8 +427,26 @@ namespace Battle
 			{
 				elapsed += Time.unscaledDeltaTime;
 				float normalizedTime = Mathf.Clamp01(elapsed / duration);
-				float arc = Mathf.Sin(normalizedTime * Mathf.PI);
-				_visualRoot.position = baseWorldPosition + direction * (arc * distance) + Vector3.up * (arc * hopHeight);
+				float distanceRatio;
+				float hopRatio;
+				if (useReturnHop)
+				{
+					// First half: hop backward and land. Second half: hop forward and land
+					// at the original position, ready for the following counter-lunge.
+					float phaseTime = normalizedTime <= 0.5f
+						? normalizedTime * 2f
+						: (normalizedTime - 0.5f) * 2f;
+					float easedPhaseTime = phaseTime * phaseTime * (3f - 2f * phaseTime);
+					distanceRatio = normalizedTime <= 0.5f ? easedPhaseTime : 1f - easedPhaseTime;
+					hopRatio = Mathf.Sin(phaseTime * Mathf.PI);
+				}
+				else
+				{
+					distanceRatio = Mathf.Sin(normalizedTime * Mathf.PI);
+					hopRatio = distanceRatio;
+				}
+
+				_visualRoot.position = baseWorldPosition + direction * (distanceRatio * distance) + Vector3.up * (hopRatio * hopHeight);
 				yield return null;
 			}
 
