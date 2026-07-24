@@ -21,6 +21,7 @@ namespace Battle
 		const string BattleSkillEffectTable = "BattleSkillEffect";
 		const string BattleSkillEffectParamTable = "BattleSkillEffectParam";
 		const string BattleSkillViewTable = "BattleSkillView";
+		const string BattleZocTable = "BattleZoc";
 		const string DisplayTextTable = "DisplayText";
 		const string EnumDefTable = "EnumDef";
 
@@ -32,6 +33,7 @@ namespace Battle
 			new TableAsset(BattleSkillEffectTable, "Assets/GameData/BattleSkillEffect.csv"),
 			new TableAsset(BattleSkillEffectParamTable, "Assets/GameData/BattleSkillEffectParam.csv"),
 			new TableAsset(BattleSkillViewTable, "Assets/GameData/BattleSkillView.csv"),
+			new TableAsset(BattleZocTable, "Assets/GameData/BattleZoc.csv"),
 			new TableAsset(DisplayTextTable, "Assets/GameData/DisplayText.csv"),
 			new TableAsset(EnumDefTable, "Assets/GameData/EnumDef.csv"),
 		};
@@ -45,6 +47,7 @@ namespace Battle
 		readonly Dictionary<string, List<BattleSkillEffectDefinition>> _effectsByGroup = new Dictionary<string, List<BattleSkillEffectDefinition>>(StringComparer.OrdinalIgnoreCase);
 		readonly Dictionary<string, Dictionary<string, string>> _effectParamsByInstance = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
 		readonly Dictionary<string, BattleSkillViewDefinition> _skillViewsBySkillKey = new Dictionary<string, BattleSkillViewDefinition>(StringComparer.OrdinalIgnoreCase);
+		readonly Dictionary<PawnClass, BattleZocDefinition> _zocProfilesByPawnClass = new Dictionary<PawnClass, BattleZocDefinition>();
 		readonly Dictionary<string, BattleDisplayTextSet> _displayTexts = new Dictionary<string, BattleDisplayTextSet>(StringComparer.OrdinalIgnoreCase);
 		readonly Dictionary<string, List<BattleEnumDefinition>> _enumDefinitions = new Dictionary<string, List<BattleEnumDefinition>>(StringComparer.OrdinalIgnoreCase);
 
@@ -52,6 +55,7 @@ namespace Battle
 		public IReadOnlyDictionary<string, BattlePawnTemplateDefinition> PawnTemplatesByClassKey => _pawnTemplatesByClassKey;
 		public IReadOnlyDictionary<string, BattleSkillDefinition> SkillsByKey => _skillsByKey;
 		public IReadOnlyDictionary<string, BattleSkillViewDefinition> SkillViewsBySkillKey => _skillViewsBySkillKey;
+		public IReadOnlyDictionary<PawnClass, BattleZocDefinition> ZocProfilesByPawnClass => _zocProfilesByPawnClass;
 
 		public static async Task<BattleGameDataRepository> LoadAsync()
 		{
@@ -129,6 +133,11 @@ namespace Battle
 			return _skillViewsBySkillKey.TryGetValue(skillKey, out view);
 		}
 
+		public bool TryGetZocProfile(PawnClass pawnClass, out BattleZocDefinition profile)
+		{
+			return _zocProfilesByPawnClass.TryGetValue(pawnClass, out profile);
+		}
+
 		public bool TryGetDisplayText(string ownerType, string ownerKey, out BattleDisplayTextSet textSet)
 		{
 			return _displayTexts.TryGetValue(BuildDisplayTextKey(ownerType, ownerKey), out textSet);
@@ -160,6 +169,9 @@ namespace Battle
 
 			if (csvByTable.TryGetValue(BattleSkillViewTable, out string battleSkillViewCsv))
 				ParseBattleSkillView(battleSkillViewCsv);
+
+			if (csvByTable.TryGetValue(BattleZocTable, out string battleZocCsv))
+				ParseBattleZoc(battleZocCsv);
 
 			if (csvByTable.TryGetValue(DisplayTextTable, out string displayTextCsv))
 				ParseDisplayText(displayTextCsv);
@@ -314,6 +326,29 @@ namespace Battle
 					row.Get("VfxKey"),
 					row.Get("SfxKey"),
 					row.Get("IconKey"));
+			}
+		}
+
+		void ParseBattleZoc(string csv)
+		{
+			foreach (CsvRow row in ReadRows(csv))
+			{
+				string classKey = row.Get("ClassKey");
+				if (string.IsNullOrWhiteSpace(classKey)
+					|| _classKeyToPawnClass.TryGetValue(classKey, out PawnClass pawnClass) == false)
+				{
+					continue;
+				}
+
+				_zocProfilesByPawnClass[pawnClass] = new BattleZocDefinition(
+					classKey,
+					pawnClass,
+					row.GetBool("Enabled"),
+					row.GetInt("Range"),
+					row.GetInt("FrontArcWidth"),
+					row.GetInt("ReactionLimitPerTurn"),
+					row.GetInt("ReactionSkillSlot"),
+					row.Get("Triggers"));
 			}
 		}
 
@@ -678,6 +713,40 @@ namespace Battle
 			BaseFocus = baseFocus;
 			BaseWill = baseWill;
 		}
+	}
+
+	public sealed class BattleZocDefinition
+	{
+		public readonly string ClassKey;
+		public readonly PawnClass PawnClass;
+		public readonly bool Enabled;
+		public readonly int Range;
+		public readonly int FrontArcWidth;
+		public readonly int ReactionLimitPerTurn;
+		public readonly int ReactionSkillSlot;
+		public readonly string Triggers;
+
+		public BattleZocDefinition(
+			string classKey,
+			PawnClass pawnClass,
+			bool enabled,
+			int range,
+			int frontArcWidth,
+			int reactionLimitPerTurn,
+			int reactionSkillSlot,
+			string triggers)
+		{
+			ClassKey = classKey;
+			PawnClass = pawnClass;
+			Enabled = enabled;
+			Range = range;
+			FrontArcWidth = frontArcWidth;
+			ReactionLimitPerTurn = reactionLimitPerTurn;
+			ReactionSkillSlot = reactionSkillSlot;
+			Triggers = triggers ?? string.Empty;
+		}
+
+		public bool TriggersOnLeaveZone => Triggers.IndexOf("LEAVE_ZONE", StringComparison.OrdinalIgnoreCase) >= 0;
 	}
 
 	public sealed class BattleSkillDefinition

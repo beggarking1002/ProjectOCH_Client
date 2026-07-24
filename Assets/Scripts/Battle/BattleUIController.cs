@@ -987,9 +987,12 @@ namespace Battle
 			string resource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resourceState, out _)
 				? $"{resourceName} {FormatValue(resourceState.Value, resourceState.MaxValue)}"
 				: "-";
+			string morale = TryGetMoraleResource(pawn, out BattlePawn.ResourceState moraleState)
+				? FormatValue(moraleState.Value, moraleState.MaxValue)
+				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
-			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.UsedNormalSkillThisTurn ? "NormalUsed" : "NormalReady")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
+			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.IsActionBlocked ? "ActionBlocked" : "ActionReady")}, {(pawn.UsedNormalSkillThisTurn ? "NormalUsed" : "NormalReady")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nMorale: {morale}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
 		}
 
 		static bool TryGetPrimaryResource(BattlePawn pawn, out string name, out BattlePawn.ResourceState state, out Color color)
@@ -1017,6 +1020,12 @@ namespace Battle
 			return false;
 		}
 
+		static bool TryGetMoraleResource(BattlePawn pawn, out BattlePawn.ResourceState state)
+		{
+			state = default;
+			return pawn != null && pawn.Resources.TryGetValue(Protocol.BattleResourceType.Morale, out state);
+		}
+
 		static string FormatStatuses(IReadOnlyDictionary<string, BattlePawn.StatusState> statuses)
 		{
 			if (statuses == null || statuses.Count == 0)
@@ -1039,6 +1048,9 @@ namespace Battle
 		{
 			if (binding.IsWaitCommand || pawn == null)
 				return true;
+
+			if (pawn.IsActionBlocked)
+				return false;
 
 			switch (binding.Mode)
 			{
@@ -1307,8 +1319,9 @@ namespace Battle
 			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 88f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
 			PanelBarView shieldBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 68f, new Color(0.35f, 0.68f, 1f, 1f), true);
 			PanelBarView resourceBar = CreateOrGetPanelBar(barsRect, "ResourceBar", 48f, new Color(0.34f, 0.88f, 1f, 1f), false);
+			PanelBarView moraleBar = CreateOrGetPanelBar(barsRect, "MoraleBar", 28f, new Color(0.95f, 0.73f, 0.22f, 1f), false);
 			StatusIconStripView statusIcons = CreateOrGetStatusIconStrip(barsRect);
-			return new PawnPanelView(text, hpBar, shieldBar, resourceBar, statusIcons);
+			return new PawnPanelView(text, hpBar, shieldBar, resourceBar, moraleBar, statusIcons);
 		}
 
 		static StatusIconStripView CreateOrGetStatusIconStrip(RectTransform parent)
@@ -1540,14 +1553,16 @@ namespace Battle
 			readonly PanelBarView _hpBar;
 			readonly PanelBarView _shieldBar;
 			readonly PanelBarView _resourceBar;
+			readonly PanelBarView _moraleBar;
 			readonly StatusIconStripView _statusIcons;
 
-			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView shieldBar, PanelBarView resourceBar, StatusIconStripView statusIcons)
+			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView shieldBar, PanelBarView resourceBar, PanelBarView moraleBar, StatusIconStripView statusIcons)
 			{
 				_text = text;
 				_hpBar = hpBar;
 				_shieldBar = shieldBar;
 				_resourceBar = resourceBar;
+				_moraleBar = moraleBar;
 				_statusIcons = statusIcons;
 			}
 
@@ -1561,6 +1576,7 @@ namespace Battle
 					_hpBar.Set(0f, "HP -");
 					_shieldBar.SetVisible(false);
 					_resourceBar.SetVisible(false);
+					_moraleBar.SetVisible(false);
 					_statusIcons.SetStatuses(null);
 					return;
 				}
@@ -1575,6 +1591,11 @@ namespace Battle
 				_resourceBar.SetVisible(hasResource);
 				if (hasResource)
 					_resourceBar.Set(GetRatio(resource.Value, resource.MaxValue), $"{resourceName} {FormatValue(resource.Value, resource.MaxValue)}", resourceColor);
+
+				bool hasMorale = TryGetMoraleResource(pawn, out BattlePawn.ResourceState morale);
+				_moraleBar.SetVisible(hasMorale);
+				if (hasMorale)
+					_moraleBar.Set(GetRatio(morale.Value, morale.MaxValue), $"MORALE {FormatValue(morale.Value, morale.MaxValue)}", new Color(0.95f, 0.73f, 0.22f, 1f));
 
 				_statusIcons.SetStatuses(pawn.Statuses);
 			}
@@ -1758,6 +1779,8 @@ namespace Battle
 					return "IMM";
 				if (statusKey.IndexOf("THAWING_POTION_DAMAGE_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "DMG";
+				if (statusKey.IndexOf("DIZZY", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "DIZ";
 
 				string compact = statusKey.Replace("_", string.Empty).ToUpperInvariant();
 				return compact.Length <= 3 ? compact : compact.Substring(0, 3);
@@ -1785,6 +1808,8 @@ namespace Battle
 					return new Color(0.42f, 0.9f, 1f, 0.96f);
 				if (key.IndexOf("THAWING_POTION_DAMAGE_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.72f, 0.43f, 0.27f, 0.96f);
+				if (key.IndexOf("DIZZY", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.9f, 0.78f, 0.22f, 0.96f);
 				if (key.IndexOf("COLD", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FROST", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FREEZE", System.StringComparison.OrdinalIgnoreCase) >= 0)

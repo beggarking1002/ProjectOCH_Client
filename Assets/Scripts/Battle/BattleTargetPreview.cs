@@ -11,6 +11,8 @@ namespace Battle
 		const int SortingOrder = 18;
 		static readonly Color ValidTargetColor = new Color(0.25f, 1f, 0.48f, 0.65f);
 		static readonly Color AffectedTileColor = new Color(1f, 0.64f, 0.18f, 0.95f);
+		static readonly Color ZocTileColor = new Color(1f, 0.8f, 0.18f, 0.7f);
+		static readonly Color ZocAttackerColor = new Color(1f, 0.22f, 0.2f, 0.98f);
 
 		readonly List<LineRenderer> _outlines = new List<LineRenderer>();
 		Material _material;
@@ -38,6 +40,32 @@ namespace Battle
 					DrawHex(_outlines[index++], mapGrid, affectedTiles[i], AffectedTileColor, 1f);
 			}
 
+			for (; index < _outlines.Count; index++)
+				_outlines[index].enabled = false;
+		}
+
+		// Move previews additionally identify both the enemy ZOC footprint and the
+		// pawns that would make the reaction attack for the hovered destination.
+		public void ShowMoveWithZoc(
+			BattleMapGrid mapGrid,
+			IReadOnlyList<AxialCoord> validTargets,
+			IReadOnlyList<AxialCoord> zocTiles,
+			IReadOnlyList<AxialCoord> zocAttackerTiles)
+		{
+			if (mapGrid == null)
+			{
+				Hide();
+				return;
+			}
+
+			int required = (validTargets?.Count ?? 0)
+				+ (zocTiles?.Count ?? 0)
+				+ (zocAttackerTiles?.Count ?? 0);
+			EnsureOutlineCount(required);
+			int index = 0;
+			DrawTiles(mapGrid, validTargets, ValidTargetColor, 0.72f, ref index);
+			DrawTiles(mapGrid, zocTiles, ZocTileColor, 0.88f, ref index);
+			DrawTiles(mapGrid, zocAttackerTiles, ZocAttackerColor, 1f, ref index);
 			for (; index < _outlines.Count; index++)
 				_outlines[index].enabled = false;
 		}
@@ -83,6 +111,15 @@ namespace Battle
 				_material = new Material(shader);
 
 			return _material;
+		}
+
+		void DrawTiles(BattleMapGrid mapGrid, IReadOnlyList<AxialCoord> tiles, Color color, float scale, ref int index)
+		{
+			if (tiles == null)
+				return;
+
+			for (int i = 0; i < tiles.Count; i++)
+				DrawHex(_outlines[index++], mapGrid, tiles[i], color, scale);
 		}
 
 		static void DrawHex(LineRenderer outline, BattleMapGrid mapGrid, AxialCoord axial, Color color, float scale)

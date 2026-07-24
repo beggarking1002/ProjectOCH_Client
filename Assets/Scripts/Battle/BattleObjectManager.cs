@@ -37,7 +37,6 @@ namespace Battle
 			{ Protocol.PawnClass.SeraWarlock, "Pawn_Sera_Warlock" },
 			{ Protocol.PawnClass.DarkhandSword, "Pawn_Darkhand_Sword" },
 		};
-
 		readonly Dictionary<ulong, BattlePawn> _pawns = new Dictionary<ulong, BattlePawn>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnVisualHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
@@ -46,6 +45,10 @@ namespace Battle
 		readonly List<AxialCoord> _knownTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _validTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _affectedTargetTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _zocTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _zocAttackerTiles = new List<AxialCoord>();
+		readonly HashSet<AxialCoord> _zocFrontier = new HashSet<AxialCoord>();
+		readonly HashSet<AxialCoord> _zocNextFrontier = new HashSet<AxialCoord>();
 
 		BattleMapGrid _mapGrid;
 		BattleGameDataRepository _gameData;
@@ -266,6 +269,12 @@ namespace Battle
 
 			if (_battleId == packet.BattleId && _battleId != 0 && TryApplyNewBattleStateVersion(packet.BattleStateVersion, nameof(S_ENTER_BATTLE)) == false)
 			{
+				return;
+			}
+
+			if (IsControllablePawnActionBlocked())
+			{
+				Debug.Log("Cannot change battle action mode while the current pawn is action-blocked.");
 				return;
 			}
 
@@ -507,6 +516,9 @@ namespace Battle
 		void HandleMouseInput()
 		{
 			if (IsInteractionLocked)
+				return;
+
+			if (IsControllablePawnActionBlocked())
 				return;
 
 			if (_mapGrid == null || TryGetPointerDown(out Vector2 screenPosition) == false)
@@ -864,6 +876,12 @@ namespace Battle
 				return;
 			}
 
+			if (IsControllablePawnActionBlocked())
+			{
+				_targetPreview.Hide();
+				return;
+			}
+
 			if (_actionMode == BattleActionMode.Move)
 			{
 				RefreshMovePreview();
@@ -934,6 +952,8 @@ namespace Battle
 
 			_validTargetTiles.Clear();
 			_affectedTargetTiles.Clear();
+			_zocTiles.Clear();
+			_zocAttackerTiles.Clear();
 			_mapGrid.GetKnownTileAxials(_knownTargetTiles);
 			for (int i = 0; i < _knownTargetTiles.Count; i++)
 			{
@@ -948,7 +968,99 @@ namespace Battle
 				_validTargetTiles.Add(axial);
 			}
 
-			_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+			if (TryGetPointerAxial(out AxialCoord hoveredAxial) && _validTargetTiles.Contains(hoveredAxial))
+				CollectMoveZocPreview(movingPawn);
+
+			_targetPreview.ShowMoveWithZoc(_mapGrid, _validTargetTiles, _zocTiles, _zocAttackerTiles);
+		}
+
+		void CollectMoveZocPreview(BattlePawn movingPawn)
+		{
+			if (movingPawn == null)
+				return;
+
+			foreach (KeyValuePair<ulong, BattlePawn> pair in _pawns)
+			{
+				BattlePawn potentialAttacker = pair.Value;
+				if (potentialAttacker == null
+					|| potentialAttacker.IsDead
+					|| potentialAttacker.IsMine == movingPawn.IsMine)
+					continue;
+
+				if (_gameData == null
+					|| potentialAttacker.Info == null
+					|| _gameData.TryGetZocProfile(potentialAttacker.Info.PawnClass, out BattleZocDefinition profile) == false
+					|| profile.Enabled == false
+					|| profile.TriggersOnLeaveZone == false
+					|| profile.ReactionLimitPerTurn <= 0
+					|| potentialAttacker.ZocReactionsUsedThisTurn >= profile.ReactionLimitPerTurn)
+				{
+					continue;
+				}
+
+				GetZocTiles(potentialAttacker, profile, _affectedTargetTiles);
+				if (_affectedTargetTiles.Contains(movingPawn.Axial) == false)
+					continue;
+
+				AddAffectedTile(potentialAttacker.Axial, _zocAttackerTiles);
+				for (int i = 0; i < _affectedTargetTiles.Count; i++)
+					AddAffectedTile(_affectedTargetTiles[i], _zocTiles);
+			}
+		}
+
+		void GetZocTiles(BattlePawn pawn, BattleZocDefinition profile, List<AxialCoord> destination)
+		{
+			destination.Clear();
+			if (pawn == null || _mapGrid == null || profile == null)
+				return;
+
+			int range = profile.Range;
+			if (range <= 0 || TryGetFacingDirectionIndex(pawn.FacingDirection, out int forwardDirection) == false)
+				return;
+
+			int sideDirectionCount = Mathf.Max(0, profile.FrontArcWidth - 1) / 2;
+
+			_zocFrontier.Clear();
+			_zocNextFrontier.Clear();
+			_zocFrontier.Add(pawn.Axial);
+			HashSet<AxialCoord> currentFrontier = _zocFrontier;
+			HashSet<AxialCoord> nextFrontier = _zocNextFrontier;
+			for (int distance = 1; distance <= range; distance++)
+			{
+				nextFrontier.Clear();
+				foreach (AxialCoord source in currentFrontier)
+				{
+					for (int offset = -sideDirectionCount; offset <= sideDirectionCount; offset++)
+					{
+						AxialCoord axial = _mapGrid.GetNeighbor(source, forwardDirection + offset);
+						if (_mapGrid.IsTileInBounds(axial) == false || pawn.Axial.DistanceTo(axial) != distance)
+							continue;
+
+						nextFrontier.Add(axial);
+					}
+				}
+
+				foreach (AxialCoord axial in nextFrontier)
+					AddAffectedTile(axial, destination);
+
+				HashSet<AxialCoord> swap = currentFrontier;
+				currentFrontier = nextFrontier;
+				nextFrontier = swap;
+			}
+		}
+
+		static bool TryGetFacingDirectionIndex(Protocol.BattleFacingDirection facingDirection, out int directionIndex)
+		{
+			directionIndex = (int)facingDirection - 1;
+			return directionIndex >= 0 && directionIndex < 6;
+		}
+
+		bool IsControllablePawnActionBlocked()
+		{
+			return TryGetControllablePawnId(out ulong pawnId)
+				&& _pawns.TryGetValue(pawnId, out BattlePawn pawn)
+				&& pawn != null
+				&& pawn.IsActionBlocked;
 		}
 
 		bool IsValidSkillPreviewTarget(BattlePawn casterPawn, BattleSkillDefinition skill, AxialCoord targetAxial)

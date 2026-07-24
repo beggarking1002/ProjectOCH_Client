@@ -60,6 +60,8 @@ namespace Battle
 		public bool UsedNormalSkillThisTurn => Info != null && Info.UsedNormalSkillThisTurn;
 		public bool UsedSubActionThisTurn => Info != null && Info.UsedSubActionThisTurn;
 		public bool UsedUltimate => Info != null && Info.UsedUltimate;
+		public bool IsActionBlocked => Info != null && Info.IsActionBlocked;
+		public int ZocReactionsUsedThisTurn => Info != null ? Info.ZocReactionsUsedThisTurn : 0;
 		public Protocol.BattlePawnRole Role => Info != null ? Info.Role : Protocol.BattlePawnRole.None;
 		public bool IsShieldUnit => Role == Protocol.BattlePawnRole.Tanker;
 		public bool IsMelee => Role == Protocol.BattlePawnRole.Tanker
@@ -322,6 +324,8 @@ namespace Battle
 			Info.UsedNormalSkillThisTurn = delta.UsedNormalSkillThisTurn;
 			Info.UsedSubActionThisTurn = delta.UsedSubActionThisTurn;
 			Info.UsedUltimate = delta.UsedUltimate;
+			Info.IsActionBlocked = delta.IsActionBlocked;
+			Info.ZocReactionsUsedThisTurn = delta.ZocReactionsUsedThisTurn;
 			Info.IsDead = delta.IsDead;
 			Info.FacingDirection = delta.FacingDirection;
 			Info.ShieldCurrent = delta.ShieldCurrent;

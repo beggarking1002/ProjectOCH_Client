@@ -53,18 +53,19 @@ namespace Protocol {
             "UkVDVElPTl9RX05FRxAEEicKI0JBVFRMRV9GQUNJTkdfRElSRUNUSU9OX1Ff",
             "TkVHX1JfUE9TEAUSIQodQkFUVExFX0ZBQ0lOR19ESVJFQ1RJT05fUl9QT1MQ",
             "BhIhCh1CQVRUTEVfRkFDSU5HX0RJUkVDVElPTl9SSUdIVBABEiAKHEJBVFRM",
-            "RV9GQUNJTkdfRElSRUNUSU9OX0xFRlQQBBoCEAEqgQEKDkJhdHRsZVBhd25S",
+            "RV9GQUNJTkdfRElSRUNUSU9OX0xFRlQQBBoCEAEqnQEKDkJhdHRsZVBhd25S",
             "b2xlEhkKFUJBVFRMRV9QQVdOX1JPTEVfTk9ORRAAEhsKF0JBVFRMRV9QQVdO",
             "X1JPTEVfVEFOS0VSEAESGgoWQkFUVExFX1BBV05fUk9MRV9NRUxFRRACEhsK",
-            "F0JBVFRMRV9QQVdOX1JPTEVfUkFOR0VEEAMqcQoSQmF0dGxlUmVzb3VyY2VU",
-            "eXBlEh0KGUJBVFRMRV9SRVNPVVJDRV9UWVBFX05PTkUQABIdChlCQVRUTEVf",
-            "UkVTT1VSQ0VfVFlQRV9DT0xEEAESHQoZQkFUVExFX1JFU09VUkNFX1RZUEVf",
-            "SEVBVBACKmQKDkJhdHRsZVRpbGVUeXBlEhkKFUJBVFRMRV9USUxFX1RZUEVf",
-            "Tk9ORRAAEhsKF0JBVFRMRV9USUxFX1RZUEVfTk9STUFMEAESGgoWQkFUVExF",
-            "X1RJTEVfVFlQRV9XQVRFUhACKn8KFUJhdHRsZVRpbGVPdmVybGF5VHlwZRIh",
-            "Ch1CQVRUTEVfVElMRV9PVkVSTEFZX1RZUEVfTk9ORRAAEiAKHEJBVFRMRV9U",
-            "SUxFX09WRVJMQVlfVFlQRV9JQ0UQARIhCh1CQVRUTEVfVElMRV9PVkVSTEFZ",
-            "X1RZUEVfRklSRRACYgZwcm90bzM="));
+            "F0JBVFRMRV9QQVdOX1JPTEVfUkFOR0VEEAMSGgoWQkFUVExFX1BBV05fUk9M",
+            "RV9TUEVBUhAEKpIBChJCYXR0bGVSZXNvdXJjZVR5cGUSHQoZQkFUVExFX1JF",
+            "U09VUkNFX1RZUEVfTk9ORRAAEh0KGUJBVFRMRV9SRVNPVVJDRV9UWVBFX0NP",
+            "TEQQARIdChlCQVRUTEVfUkVTT1VSQ0VfVFlQRV9IRUFUEAISHwobQkFUVExF",
+            "X1JFU09VUkNFX1RZUEVfTU9SQUxFEAMqZAoOQmF0dGxlVGlsZVR5cGUSGQoV",
+            "QkFUVExFX1RJTEVfVFlQRV9OT05FEAASGwoXQkFUVExFX1RJTEVfVFlQRV9O",
+            "T1JNQUwQARIaChZCQVRUTEVfVElMRV9UWVBFX1dBVEVSEAIqfwoVQmF0dGxl",
+            "VGlsZU92ZXJsYXlUeXBlEiEKHUJBVFRMRV9USUxFX09WRVJMQVlfVFlQRV9O",
+            "T05FEAASIAocQkFUVExFX1RJTEVfT1ZFUkxBWV9UWVBFX0lDRRABEiEKHUJB",
+            "VFRMRV9USUxFX09WRVJMQVlfVFlQRV9GSVJFEAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.ObjectType), typeof(global::Protocol.CreatureType), typeof(global::Protocol.PawnClass), typeof(global::Protocol.BattleMoveResult), typeof(global::Protocol.BattleFacingDirection), typeof(global::Protocol.BattlePawnRole), typeof(global::Protocol.BattleResourceType), typeof(global::Protocol.BattleTileType), typeof(global::Protocol.BattleTileOverlayType), }, null, null));
@@ -132,12 +133,14 @@ namespace Protocol {
     [pbr::OriginalName("BATTLE_PAWN_ROLE_TANKER")] Tanker = 1,
     [pbr::OriginalName("BATTLE_PAWN_ROLE_MELEE")] Melee = 2,
     [pbr::OriginalName("BATTLE_PAWN_ROLE_RANGED")] Ranged = 3,
+    [pbr::OriginalName("BATTLE_PAWN_ROLE_SPEAR")] Spear = 4,
   }
 
   public enum BattleResourceType {
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_NONE")] None = 0,
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_COLD")] Cold = 1,
     [pbr::OriginalName("BATTLE_RESOURCE_TYPE_HEAT")] Heat = 2,
+    [pbr::OriginalName("BATTLE_RESOURCE_TYPE_MORALE")] Morale = 3,
   }
 
   public enum BattleTileType {

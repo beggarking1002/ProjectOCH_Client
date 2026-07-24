@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: GameData
   m_GUID: ce05022e39832964da2a870109224207
   m_SerializeEntries:
+  - m_GUID: 0822b0e9fb584875b1c47b41eb7da799
+    m_Address: BattleZoc
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 00d70fa550b3cd145bd213d6713df958
     m_Address: BattleSkillView
     m_ReadOnly: 0
