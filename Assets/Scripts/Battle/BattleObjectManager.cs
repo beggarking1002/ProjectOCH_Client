@@ -62,6 +62,7 @@ namespace Battle
 		bool _isAnimatingMove;
 		bool _isPlayingSkillActionSequence;
 		Coroutine _skillActionSequenceCoroutine;
+		Coroutine _moveReactionSequenceCoroutine;
 		bool _isLoadingGameData;
 		BattleTargetPreview _targetPreview;
 		bool _hasFireWallStartTarget;
@@ -232,6 +233,8 @@ namespace Battle
 			_isPlayingSkillActionSequence = false;
 			if (_skillActionSequenceCoroutine != null)
 				StopCoroutine(_skillActionSequenceCoroutine);
+			if (_moveReactionSequenceCoroutine != null)
+				StopCoroutine(_moveReactionSequenceCoroutine);
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -1321,8 +1324,8 @@ namespace Battle
 			ulong nextTurnPawnId = packet.NextTurnPawnId;
 			ulong appliedStateVersion = _battleStateVersion;
 
-			ApplyPawnDeltas(packet.PawnDeltas);
-			AppendBattleLogs(packet.Logs);
+			List<BattleActionLog> moveLogs = CopyBattleActionLogs(packet.Logs);
+			List<BattlePawnDelta> movePawnDeltas = CopyBattlePawnDeltas(packet.PawnDeltas);
 
 			_isAnimatingMove = true;
 			RefreshTurnIndicators();
@@ -1335,9 +1338,19 @@ namespace Battle
 					return;
 				}
 
-				_currentTurnPawnId = nextTurnPawnId;
-				_actionMode = BattleActionMode.Move;
-				RefreshTurnIndicators();
+				if (moveLogs.Count > 0)
+				{
+					_isPlayingSkillActionSequence = true;
+					_moveReactionSequenceCoroutine = StartCoroutine(PlayMoveReactionSequence(
+						moveLogs,
+						movePawnDeltas,
+						nextTurnPawnId,
+						appliedStateVersion));
+					return;
+				}
+
+				ApplyPawnDeltas(movePawnDeltas);
+				CompleteMoveResult(nextTurnPawnId);
 			});
 
 			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={targetAxial}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={nextTurnPawnId}");
@@ -1410,25 +1423,8 @@ namespace Battle
 			if (_skillActionSequenceCoroutine != null)
 				StopCoroutine(_skillActionSequenceCoroutine);
 
-			List<BattleActionLog> orderedLogs = new List<BattleActionLog>();
-			if (logs != null)
-			{
-				foreach (BattleActionLog log in logs)
-				{
-					if (log != null)
-						orderedLogs.Add(log);
-				}
-			}
-
-			List<BattlePawnDelta> finalPawnDeltas = new List<BattlePawnDelta>();
-			if (pawnDeltas != null)
-			{
-				foreach (BattlePawnDelta delta in pawnDeltas)
-				{
-					if (delta != null)
-						finalPawnDeltas.Add(delta);
-				}
-			}
+			List<BattleActionLog> orderedLogs = CopyBattleActionLogs(logs);
+			List<BattlePawnDelta> finalPawnDeltas = CopyBattlePawnDeltas(pawnDeltas);
 
 			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, orderedLogs, finalPawnDeltas));
 		}
@@ -1485,6 +1481,125 @@ namespace Battle
 			ApplyPawnDeltas(finalPawnDeltas);
 			_isPlayingSkillActionSequence = false;
 			_skillActionSequenceCoroutine = null;
+		}
+
+		IEnumerator PlayMoveReactionSequence(
+			List<BattleActionLog> orderedLogs,
+			List<BattlePawnDelta> finalPawnDeltas,
+			ulong nextTurnPawnId,
+			ulong appliedStateVersion)
+		{
+			for (int i = 0; i < orderedLogs.Count; i++)
+			{
+				BattleActionLog log = orderedLogs[i];
+				if (log == null)
+					continue;
+
+				bool isZocReaction = IsZocReactionLog(log) || (i == 0 && log.IsCounter == false);
+				if (isZocReaction)
+					TriggerZocReactionPresentation(log);
+				else if (log.IsCounter && _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn counterPawn))
+				{
+					counterPawn.TriggerSkill("Skill1");
+					PlayMeleeAttackPresentation(log);
+				}
+				else
+				{
+					TriggerLoggedAttackPresentation(log);
+				}
+
+				ApplyCombatLogPresentation(log);
+				AppendBattleLog(log);
+				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+			}
+
+			if (_battleStateVersion == appliedStateVersion)
+			{
+				ApplyPawnDeltas(finalPawnDeltas);
+				CompleteMoveResult(nextTurnPawnId);
+			}
+
+			_isPlayingSkillActionSequence = false;
+			_moveReactionSequenceCoroutine = null;
+		}
+
+		void TriggerZocReactionPresentation(BattleActionLog log)
+		{
+			if (log == null || _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn attackerPawn) == false)
+				return;
+
+			int reactionSkillSlot = log.SkillSlot;
+			if (_gameData != null
+				&& attackerPawn.Info != null
+				&& _gameData.TryGetZocProfile(attackerPawn.Info.PawnClass, out BattleZocDefinition profile)
+				&& profile.ReactionSkillSlot > 0)
+			{
+				reactionSkillSlot = profile.ReactionSkillSlot;
+			}
+
+			if (reactionSkillSlot > 0)
+				TriggerSkillAnimation(attackerPawn, reactionSkillSlot);
+			else
+				attackerPawn.TriggerSkill("Skill1");
+
+			PlayMeleeAttackPresentation(log);
+		}
+
+		void TriggerLoggedAttackPresentation(BattleActionLog log)
+		{
+			if (log == null || _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn attackerPawn) == false)
+				return;
+
+			if (log.SkillSlot > 0)
+				TriggerSkillAnimation(attackerPawn, log.SkillSlot);
+			else
+				attackerPawn.TriggerSkill("Skill1");
+
+			PlayMeleeAttackPresentation(log);
+		}
+
+		static bool IsZocReactionLog(BattleActionLog log)
+		{
+			return log != null
+				&& string.IsNullOrWhiteSpace(log.ActionType) == false
+				&& log.ActionType.IndexOf("ZOC", System.StringComparison.OrdinalIgnoreCase) >= 0;
+		}
+
+		void CompleteMoveResult(ulong nextTurnPawnId)
+		{
+			_currentTurnPawnId = nextTurnPawnId;
+			_actionMode = BattleActionMode.Move;
+			RefreshTurnIndicators();
+		}
+
+		static List<BattleActionLog> CopyBattleActionLogs(IEnumerable<BattleActionLog> logs)
+		{
+			List<BattleActionLog> result = new List<BattleActionLog>();
+			if (logs == null)
+				return result;
+
+			foreach (BattleActionLog log in logs)
+			{
+				if (log != null)
+					result.Add(log);
+			}
+
+			return result;
+		}
+
+		static List<BattlePawnDelta> CopyBattlePawnDeltas(IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			List<BattlePawnDelta> result = new List<BattlePawnDelta>();
+			if (pawnDeltas == null)
+				return result;
+
+			foreach (BattlePawnDelta delta in pawnDeltas)
+			{
+				if (delta != null)
+					result.Add(delta);
+			}
+
+			return result;
 		}
 
 		void ApplyCombatLogPresentation(BattleActionLog log)

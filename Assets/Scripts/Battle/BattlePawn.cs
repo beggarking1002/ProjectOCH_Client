@@ -65,7 +65,8 @@ namespace Battle
 		public Protocol.BattlePawnRole Role => Info != null ? Info.Role : Protocol.BattlePawnRole.None;
 		public bool IsShieldUnit => Role == Protocol.BattlePawnRole.Tanker;
 		public bool IsMelee => Role == Protocol.BattlePawnRole.Tanker
-			|| Role == Protocol.BattlePawnRole.Melee;
+			|| Role == Protocol.BattlePawnRole.Melee
+			|| Role == Protocol.BattlePawnRole.Spear;
 		public bool IsDead => Info != null && Info.IsDead;
 		public Protocol.BattleFacingDirection FacingDirection => Info != null ? Info.FacingDirection : Protocol.BattleFacingDirection.None;
 		public bool IsMoving { get; private set; }
