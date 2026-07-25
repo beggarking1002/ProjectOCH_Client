@@ -43,6 +43,7 @@ namespace Battle
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
 		readonly Queue<string> _battleLogLines = new Queue<string>();
 		readonly List<AxialCoord> _knownTargetTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _skillRangeTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _validTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _affectedTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _zocTiles = new List<AxialCoord>();
@@ -69,6 +70,20 @@ namespace Battle
 		ulong _fireWallCasterPawnId;
 		AxialCoord _fireWallStartAxial;
 
+		readonly struct StatusTickPresentation
+		{
+			public readonly ulong PawnId;
+			public readonly string StatusKey;
+			public readonly int Amount;
+
+			public StatusTickPresentation(ulong pawnId, string statusKey, int amount)
+			{
+				PawnId = pawnId;
+				StatusKey = statusKey;
+				Amount = amount;
+			}
+		}
+
 		public IReadOnlyDictionary<ulong, BattlePawn> Pawns => _pawns;
 		public BattleMapGrid MapGrid => _mapGrid;
 		public ulong BattleId => _battleId;
@@ -84,6 +99,7 @@ namespace Battle
 			&& currentTurnPawn.IsDead == false;
 		public string BattleLogText => _battleLogLines.Count > 0 ? string.Join("\n", _battleLogLines) : "-";
 		public event System.Action<BattleActionLog> BattleActionLogApplied;
+		public event System.Action<BattlePawn, string, int> BattleStatusTickApplied;
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
@@ -400,9 +416,15 @@ namespace Battle
 			{
 					switch (info.PawnClass)
 					{
-						case Protocol.PawnClass.SuenAxeSword:
-							return pawnObject.AddComponent<SuenAxe>();
-						case Protocol.PawnClass.BeigeIce:
+					case Protocol.PawnClass.SuenAxeSword:
+						return pawnObject.AddComponent<SuenAxe>();
+					case Protocol.PawnClass.SuenParvis:
+						return pawnObject.AddComponent<SuenParvis>();
+					case Protocol.PawnClass.AlenSpear:
+						return pawnObject.AddComponent<AlenSpear>();
+					case Protocol.PawnClass.ZillianLongbow:
+						return pawnObject.AddComponent<ZillianLongbow>();
+					case Protocol.PawnClass.BeigeIce:
 						return pawnObject.AddComponent<BeigeIce>();
 					case Protocol.PawnClass.BeigeFire:
 						return pawnObject.AddComponent<BeigeFire>();
@@ -822,11 +844,21 @@ namespace Battle
 						return false;
 					}
 
+					if (IsParvisInstallSkill(skill) && _mapGrid.TryGetEquipment(targetAxial, out _, out _))
+					{
+						Debug.Log($"Parvis installation requires a tile without equipment. casterPawnId={casterPawn.PawnId}, axial={targetAxial}");
+						return false;
+					}
+
 					return true;
 				case "PICKUP_TILE":
-					if (_mapGrid.HasEquipment(targetAxial, "AXE", casterPawn.PawnId) == false)
+					if (casterPawn is SuenParvis parvis && parvis.IsParvisOff == false)
+						return false;
+
+					string pickupEquipmentKey = GetPickupEquipmentKey(casterPawn);
+					if (_mapGrid.HasEquipment(targetAxial, pickupEquipmentKey, casterPawn.PawnId) == false)
 					{
-						Debug.Log($"Skill requires the caster's axe equipment tile. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, axial={targetAxial}");
+						Debug.Log($"Skill requires the caster's {pickupEquipmentKey} equipment tile. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, axial={targetAxial}");
 						return false;
 					}
 
@@ -844,10 +876,7 @@ namespace Battle
 
 		string GetSkillTargetType(BattlePawn casterPawn, int skillSlot)
 		{
-			if (_gameData != null
-				&& casterPawn != null
-				&& casterPawn.Info != null
-				&& _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out BattleSkillDefinition skill))
+			if (TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill))
 			{
 				return skill.TargetType;
 			}
@@ -855,13 +884,29 @@ namespace Battle
 			return string.Empty;
 		}
 
-		bool TryGetSkillDefinition(BattlePawn casterPawn, int skillSlot, out BattleSkillDefinition skill)
+		public bool TryGetSkillDefinition(BattlePawn casterPawn, int skillSlot, out BattleSkillDefinition skill)
 		{
 			skill = null;
-			return _gameData != null
-				&& casterPawn != null
-				&& casterPawn.Info != null
-				&& _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out skill);
+			if (_gameData == null || casterPawn == null || casterPawn.Info == null)
+				return false;
+
+			if (casterPawn is SuenParvis parvis
+				&& parvis.TryGetActiveSkillKey(skillSlot, out string activeSkillKey))
+			{
+				return _gameData.TryGetSkill(activeSkillKey, out skill);
+			}
+
+			return _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out skill);
+		}
+
+		static bool IsParvisInstallSkill(BattleSkillDefinition skill)
+		{
+			return skill != null && string.Equals(skill.SkillKey, "SUEN_PARVIS_INSTALL", System.StringComparison.OrdinalIgnoreCase);
+		}
+
+		static string GetPickupEquipmentKey(BattlePawn casterPawn)
+		{
+			return casterPawn is SuenParvis ? "PARVIS" : "AXE";
 		}
 
 		static Protocol.BattleTileOverlayType ParseRequiredOverlayType(string value)
@@ -914,8 +959,24 @@ namespace Battle
 				// effect area and can also be clicked to confirm the same SELF packet.
 				_validTargetTiles.Add(casterPawn.Axial);
 				GetAffectedTargetTiles(casterPawn, skill, casterPawn.Axial, _affectedTargetTiles);
-				_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+				_targetPreview.ShowSkillRange(_mapGrid, _affectedTargetTiles, _validTargetTiles, _affectedTargetTiles);
 				return;
+			}
+
+			_skillRangeTiles.Clear();
+			if (skill.TargetType == "SELF" || skill.TargetType == "SELF_TOGGLE")
+			{
+				_skillRangeTiles.Add(casterPawn.Axial);
+			}
+			else
+			{
+				_mapGrid.GetKnownTileAxials(_knownTargetTiles);
+				for (int i = 0; i < _knownTargetTiles.Count; i++)
+				{
+					AxialCoord axial = _knownTargetTiles[i];
+					if (IsWithinSkillRange(casterPawn, skill, axial))
+						_skillRangeTiles.Add(axial);
+				}
 			}
 
 			if (skill.TargetType == "SELF" || skill.TargetType == "SELF_TOGGLE")
@@ -938,7 +999,7 @@ namespace Battle
 				GetAffectedTargetTiles(casterPawn, skill, hoveredAxial, _affectedTargetTiles);
 			}
 
-			_targetPreview.Show(_mapGrid, _validTargetTiles, _affectedTargetTiles);
+			_targetPreview.ShowSkillRange(_mapGrid, _skillRangeTiles, _validTargetTiles, _affectedTargetTiles);
 		}
 
 		void RefreshMovePreview()
@@ -1109,12 +1170,23 @@ namespace Battle
 				case "TILE_OR_ENEMY":
 					return targetPawn == null || targetPawn.IsMine == false;
 				case "EMPTY_TILE":
-					return targetPawn == null;
+					return targetPawn == null && (IsParvisInstallSkill(skill) == false || _mapGrid.TryGetEquipment(targetAxial, out _, out _) == false);
 				case "PICKUP_TILE":
-					return _mapGrid.HasEquipment(targetAxial, "AXE", casterPawn.PawnId);
+					return (casterPawn is SuenParvis parvis && parvis.IsParvisOff == false) == false
+						&& _mapGrid.HasEquipment(targetAxial, GetPickupEquipmentKey(casterPawn), casterPawn.PawnId);
 				default:
 					return targetPawn == null || targetPawn.IsMine == false;
 			}
+		}
+
+		bool IsWithinSkillRange(BattlePawn casterPawn, BattleSkillDefinition skill, AxialCoord targetAxial)
+		{
+			return casterPawn != null
+				&& skill != null
+				&& _mapGrid != null
+				&& _mapGrid.IsTileInBounds(targetAxial)
+				&& casterPawn.Axial.DistanceTo(targetAxial) >= skill.RangeMin
+				&& casterPawn.Axial.DistanceTo(targetAxial) <= skill.RangeMax;
 		}
 
 		void GetAffectedTargetTiles(BattlePawn casterPawn, BattleSkillDefinition skill, AxialCoord targetAxial, List<AxialCoord> destination)
@@ -1141,16 +1213,29 @@ namespace Battle
 				return;
 			}
 
-			if (skill.TargetShape != "LINE_3" || casterPawn.Axial.DistanceTo(targetAxial) <= 0)
+			int lineLength = GetTargetLineLength(skill.TargetShape);
+			if (lineLength <= 1 || casterPawn.Axial.DistanceTo(targetAxial) <= 0)
 				return;
 
 			int directionIndex = FindDirectionIndex(casterPawn.Axial, targetAxial);
+			if (directionIndex < 0)
+				return;
+
 			AxialCoord next = targetAxial;
-			for (int distance = 1; distance <= 2; distance++)
+			for (int distance = 1; distance < lineLength; distance++)
 			{
 				next = _mapGrid.GetNeighbor(next, directionIndex);
 				AddAffectedTile(next, destination);
 			}
+		}
+
+		static int GetTargetLineLength(string targetShape)
+		{
+			if (string.Equals(targetShape, "LINE_2", System.StringComparison.OrdinalIgnoreCase))
+				return 2;
+			if (string.Equals(targetShape, "LINE_3", System.StringComparison.OrdinalIgnoreCase))
+				return 3;
+			return 0;
 		}
 
 		static bool IsSelfCenteredAdjacentSkill(BattleSkillDefinition skill)
@@ -1326,6 +1411,7 @@ namespace Battle
 
 			List<BattleActionLog> moveLogs = CopyBattleActionLogs(packet.Logs);
 			List<BattlePawnDelta> movePawnDeltas = CopyBattlePawnDeltas(packet.PawnDeltas);
+			ApplyPawnTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove);
 
 			_isAnimatingMove = true;
 			RefreshTurnIndicators();
@@ -1378,16 +1464,12 @@ namespace Battle
 			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
 			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
-
-			if (packet.CasterPawnId != 0 && _pawns.TryGetValue(packet.CasterPawnId, out BattlePawn casterPawn))
-			{
-				// BattlePawnDelta intentionally has no axial field. Teleport is the one
-				// skill response whose server-authoritative target axial is the caster's
-				// new position, so apply it only after a successful server response.
-				if (IsOverlayTeleport(casterPawn, packet.SkillSlot) && packet.TargetAxial != null)
-					casterPawn.SetAxial(ToBattleAxial(packet.TargetAxial));
-
-			}
+			ApplyPawnTurnState(
+				packet.CasterPawnId,
+				packet.RemainingAp,
+				packet.CanMove,
+				packet.UsedSubActionThisTurn,
+				packet.UsedUltimate);
 
 			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.Logs, packet.PawnDeltas);
 
@@ -1401,9 +1483,7 @@ namespace Battle
 			if (casterPawn == null)
 				return;
 
-			if (_gameData != null
-				&& casterPawn.Info != null
-				&& _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out BattleSkillDefinition skill)
+			if (TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill)
 				&& _gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view)
 				&& string.IsNullOrWhiteSpace(view.AnimTrigger) == false)
 			{
@@ -1436,45 +1516,50 @@ namespace Battle
 			List<BattlePawnDelta> finalPawnDeltas)
 		{
 			_isPlayingSkillActionSequence = true;
-			if (_pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn))
-				TriggerSkillAnimation(casterPawn, skillSlot);
-
-			// Primary-action logs are resolved with the initiating skill. Counter logs
-			// are kept in their packet order and receive their own 0.5 s presentation.
+			bool didPresentInitiatingSkill = false;
 			for (int i = 0; i < orderedLogs.Count; i++)
 			{
-				BattleActionLog primaryLog = orderedLogs[i];
-				if (primaryLog.IsCounter == false && primaryLog.AttackerPawnId == casterPawnId)
-				{
-					PlayMeleeAttackPresentation(primaryLog);
-					break;
-				}
-			}
-
-			for (int i = 0; i < orderedLogs.Count; i++)
-			{
-				if (orderedLogs[i].IsCounter == false)
-				{
-					ApplyCombatLogPresentation(orderedLogs[i]);
-					AppendBattleLog(orderedLogs[i]);
-				}
-			}
-
-			yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
-
-			for (int i = 0; i < orderedLogs.Count; i++)
-			{
-				BattleActionLog counterLog = orderedLogs[i];
-				if (counterLog.IsCounter == false)
+				BattleActionLog log = orderedLogs[i];
+				if (log == null)
 					continue;
 
-				if (_pawns.TryGetValue(counterLog.AttackerPawnId, out BattlePawn counterPawn))
-					counterPawn.TriggerSkill("Skill1");
+				if (log.IsCounter)
+				{
+					if (_pawns.TryGetValue(log.AttackerPawnId, out BattlePawn counterPawn))
+						counterPawn.TriggerSkill("Skill1");
 
-				PlayMeleeAttackPresentation(counterLog);
+					PlayMeleeAttackPresentation(log);
+				}
+				else if (log.AttackerPawnId == casterPawnId)
+				{
+					if (didPresentInitiatingSkill == false
+						&& _pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn))
+					{
+						TriggerSkillAnimation(casterPawn, skillSlot);
+						didPresentInitiatingSkill = true;
+					}
 
-				ApplyCombatLogPresentation(counterLog);
-				AppendBattleLog(counterLog);
+					PlayMeleeAttackPresentation(log);
+				}
+				else if (IsZocReactionLog(log))
+				{
+					// Sentinel's interrupt is delivered in the skill result as a normal
+					// zoc action, not as a counter. Present it on its own log beat.
+					TriggerZocReactionPresentation(log);
+				}
+				else
+				{
+					TriggerLoggedAttackPresentation(log);
+				}
+
+				ApplyCombatLogPresentation(log);
+				AppendBattleLog(log);
+				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+			}
+
+			if (didPresentInitiatingSkill == false && _pawns.TryGetValue(casterPawnId, out BattlePawn noLogCasterPawn))
+			{
+				TriggerSkillAnimation(noLogCasterPawn, skillSlot);
 				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
 			}
 
@@ -1620,18 +1705,11 @@ namespace Battle
 		{
 			if (log == null
 				|| _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn attackerPawn) == false
-				|| attackerPawn.IsMelee == false
+				|| (attackerPawn.IsMelee == false && (attackerPawn is SuenParvis == false || log.SkillSlot != 4))
 				|| _pawns.TryGetValue(log.DefenderPawnId, out BattlePawn defenderPawn) == false)
 				return;
 
 			attackerPawn.PlayMeleeAttackPresentation(defenderPawn.transform.position);
-		}
-
-		bool IsOverlayTeleport(BattlePawn casterPawn, int skillSlot)
-		{
-			return TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill)
-				&& skill.TargetType == "EMPTY_TILE"
-				&& ParseRequiredOverlayType(skill.RequiredOverlayType) != Protocol.BattleTileOverlayType.None;
 		}
 
 		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)
@@ -1659,7 +1737,17 @@ namespace Battle
 			ClearFireWallTargeting();
 			_actionMode = BattleActionMode.Move;
 
+			List<StatusTickPresentation> turnStartTicks = CollectTurnStartStatusTicks(packet.NextTurnPawnId, packet.PawnDeltas);
 			ApplyPawnDeltas(packet.PawnDeltas);
+			PresentStatusTicks(turnStartTicks);
+			// End-turn responses describe the pawn which is about to receive the turn.
+			// Servers may omit pawn_deltas when only this compact turn state changed.
+			ApplyPawnTurnState(
+				packet.NextTurnPawnId,
+				packet.RemainingAp,
+				packet.CanMove,
+				packet.UsedSubActionThisTurn,
+				packet.UsedUltimate);
 			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			AppendBattleLogs(packet.Logs);
 
@@ -1722,6 +1810,55 @@ namespace Battle
 			{
 				AppendBattleLog(log);
 			}
+		}
+
+		List<StatusTickPresentation> CollectTurnStartStatusTicks(ulong nextTurnPawnId, IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			List<StatusTickPresentation> result = new List<StatusTickPresentation>();
+			if (nextTurnPawnId == 0 || pawnDeltas == null
+				|| _pawns.TryGetValue(nextTurnPawnId, out BattlePawn nextPawn) == false
+				|| nextPawn == null
+				|| nextPawn.Statuses.ContainsKey("BLEED") == false)
+			{
+				return result;
+			}
+
+			foreach (BattlePawnDelta delta in pawnDeltas)
+			{
+				if (delta == null || delta.PawnId != nextTurnPawnId)
+					continue;
+
+				int damage = nextPawn.Hp - delta.Hp;
+				if (damage > 0)
+					result.Add(new StatusTickPresentation(nextTurnPawnId, "BLEED", damage));
+				break;
+			}
+
+			return result;
+		}
+
+		void PresentStatusTicks(IEnumerable<StatusTickPresentation> ticks)
+		{
+			if (ticks == null)
+				return;
+
+			foreach (StatusTickPresentation tick in ticks)
+			{
+				if (_pawns.TryGetValue(tick.PawnId, out BattlePawn pawn) && pawn != null)
+					BattleStatusTickApplied?.Invoke(pawn, tick.StatusKey, tick.Amount);
+			}
+		}
+
+		void ApplyPawnTurnState(ulong pawnId, int remainingAp, bool canMove)
+		{
+			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawn pawn) && pawn != null)
+				pawn.ApplyTurnState(remainingAp, canMove);
+		}
+
+		void ApplyPawnTurnState(ulong pawnId, int remainingAp, bool canMove, bool usedSubActionThisTurn, bool usedUltimate)
+		{
+			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawn pawn) && pawn != null)
+				pawn.ApplyTurnState(remainingAp, canMove, usedSubActionThisTurn, usedUltimate);
 		}
 
 		void AppendBattleLog(BattleActionLog log)

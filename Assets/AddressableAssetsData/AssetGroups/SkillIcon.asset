@@ -15,6 +15,90 @@ MonoBehaviour:
   m_GroupName: SkillIcon
   m_GUID: a3b1bbdddc13a364f9cb3a04985b0adf
   m_SerializeEntries:
+  - m_GUID: 1d2a91b011f7e824cb0489f5f2fd1095
+    m_Address: icon_zillian_longbow_passive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fefc49dc48b362e4db20b18b47235ea8
+    m_Address: icon_zillian_longbow_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e028645d97663dd4685ae08b72637328
+    m_Address: icon_zillian_longbow_skill2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 006c0a3d86c21c84e946d5ea4232ce96
+    m_Address: icon_zillian_longbow_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c5a7d9f478404b43a378d70d4cf08da
+    m_Address: icon_zillian_longbow_skill4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2189433cfb5803744b01ff01ea96d279
+    m_Address: icon_zillian_longbow_ulti
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0559c2ae462fb3d47aff0c77e558168d
+    m_Address: icon_zillian_longbow_sub
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f1cbabd2bfe9c84483c05b384c6f99d
+    m_Address: icon_alen_spear_passive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07948e1f49feaf04aaccfd08ae944c71
+    m_Address: icon_alen_spear_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 272a4953997df114fa791113a3408179
+    m_Address: icon_alen_spear_skill2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62aa3098995112d40ae24be996a39806
+    m_Address: icon_alen_spear_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ae00025a4fede5499b82853200b6b63
+    m_Address: icon_alen_spear_skill4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d7ac93203b60ff45a8f61d9f2cf96a9
+    m_Address: icon_alen_spear_ulti
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ab5a9d77136a5e49bdb28f8f6ca075b
+    m_Address: icon_alen_spear_sub
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 24909a3a464978e479a6dcde56dfea1a
     m_Address: icon_suen_axeoff_skill1
     m_ReadOnly: 0

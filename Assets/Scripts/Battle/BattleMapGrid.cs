@@ -212,6 +212,11 @@ namespace Battle
 			if (_serverTileStates.TryGetValue(axial, out BattleTileState tileState) == false)
 				return false;
 
+			// A deployed Parvis is terrain equipment: players cannot move or be pushed
+			// through it. The server remains authoritative for every final path result.
+			if (string.Equals(tileState.EquipmentKey, "PARVIS", System.StringComparison.OrdinalIgnoreCase))
+				return false;
+
 			switch (tileState.TileType)
 			{
 				case Protocol.BattleTileType.Normal:
@@ -313,7 +318,9 @@ namespace Battle
 
 		void UpdateEquipmentMarker(AxialCoord axial, string equipmentKey)
 		{
-			if (string.Equals(equipmentKey, "AXE", System.StringComparison.OrdinalIgnoreCase) == false)
+			bool isAxe = string.Equals(equipmentKey, "AXE", System.StringComparison.OrdinalIgnoreCase);
+			bool isParvis = string.Equals(equipmentKey, "PARVIS", System.StringComparison.OrdinalIgnoreCase);
+			if (isAxe == false && isParvis == false)
 			{
 				if (_equipmentMarkers.TryGetValue(axial, out TextMesh existing))
 				{
@@ -326,17 +333,15 @@ namespace Battle
 
 			if (_equipmentMarkers.TryGetValue(axial, out TextMesh marker) == false || marker == null)
 			{
-				GameObject markerObject = new GameObject("Equipment_Axe");
+				GameObject markerObject = new GameObject(isParvis ? "Equipment_Parvis" : "Equipment_Axe");
 				markerObject.transform.SetParent(transform, false);
 				CreateEquipmentMarkerPlate(markerObject.transform);
 				marker = markerObject.AddComponent<TextMesh>();
-				marker.text = "AXE";
 				marker.anchor = TextAnchor.MiddleCenter;
 				marker.alignment = TextAlignment.Center;
 				marker.characterSize = 0.12f;
 				marker.fontSize = 42;
 				marker.fontStyle = FontStyle.Bold;
-				marker.color = new Color(1f, 0.78f, 0.28f, 1f);
 				GameRoot.ApplyWorldTextFont(marker);
 				MeshRenderer renderer = marker.GetComponent<MeshRenderer>();
 				if (renderer != null)
@@ -345,6 +350,11 @@ namespace Battle
 				_equipmentMarkers[axial] = marker;
 			}
 
+			marker.gameObject.name = isParvis ? "Equipment_Parvis" : "Equipment_Axe";
+			marker.text = isParvis ? "PARVIS" : "AXE";
+			marker.color = isParvis
+				? new Color(0.52f, 0.80f, 1f, 1f)
+				: new Color(1f, 0.78f, 0.28f, 1f);
 			marker.transform.position = AxialToWorldCenter(axial, -0.06f) + Vector3.up * 0.12f;
 			marker.gameObject.SetActive(true);
 		}

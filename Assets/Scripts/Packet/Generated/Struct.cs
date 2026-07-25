@@ -60,7 +60,7 @@ namespace Protocol {
             "FyABKAUSKAoFYXVyYXMYGCADKAsyGS5Qcm90b2NvbC5CYXR0bGVBdXJhU3Rh",
             "dGUSIwobdXNlZF9ub3JtYWxfc2tpbGxfdGhpc190dXJuGBkgASgIEhkKEWlz",
             "X2FjdGlvbl9ibG9ja2VkGBogASgIEiQKHHpvY19yZWFjdGlvbnNfdXNlZF90",
-            "aGlzX3R1cm4YGyABKAVKBAgOEA9KBAgPEBAivAQKD0JhdHRsZVBhd25EZWx0",
+            "aGlzX3R1cm4YGyABKAVKBAgOEA9KBAgPEBAi9QQKD0JhdHRsZVBhd25EZWx0",
             "YRIPCgdwYXduX2lkGAEgASgEEgoKAmhwGAIgASgFEg0KBWFybW9yGAMgASgF",
             "EhIKCmN1cnJlbnRfYXAYBCABKAUSEAoIY2FuX21vdmUYBSABKAgSIQoZdXNl",
             "ZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgGIAEoCBIVCg11c2VkX3VsdGltYXRl",
@@ -73,14 +73,15 @@ namespace Protocol {
             "BRIoCgVhdXJhcxgQIAMoCzIZLlByb3RvY29sLkJhdHRsZUF1cmFTdGF0ZRIj",
             "Cht1c2VkX25vcm1hbF9za2lsbF90aGlzX3R1cm4YESABKAgSGQoRaXNfYWN0",
             "aW9uX2Jsb2NrZWQYEiABKAgSJAocem9jX3JlYWN0aW9uc191c2VkX3RoaXNf",
-            "dHVybhgTIAEoBUoECAoQCyKvAgoPQmF0dGxlQWN0aW9uTG9nEhgKEGF0dGFj",
-            "a2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5kZXJfcGF3bl9pZBgCIAEoBBIS",
-            "Cgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlvbl90eXBlGAQgASgJEg4KBmRh",
-            "bWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgGIAEoCBIRCglpc19ldmFkZWQY",
-            "ByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIaChJpc19wZXJmZWN0X2d1YXJk",
-            "ZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEoCBIQCghocF9hZnRlchgLIAEo",
-            "BRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5pc19iYWNrX2F0dGFjaxgNIAEo",
-            "CEoECA4QD2IGcHJvdG8z"));
+            "dHVybhgTIAEoBRISCgptb3ZlX3JhbmdlGBQgASgFEiMKBWF4aWFsGBUgASgL",
+            "MhQuUHJvdG9jb2wuQXhpYWxDb29yZEoECAoQCyKvAgoPQmF0dGxlQWN0aW9u",
+            "TG9nEhgKEGF0dGFja2VyX3Bhd25faWQYASABKAQSGAoQZGVmZW5kZXJfcGF3",
+            "bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgFEhMKC2FjdGlvbl90eXBl",
+            "GAQgASgJEg4KBmRhbWFnZRgFIAEoBRITCgtpc19jcml0aWNhbBgGIAEoCBIR",
+            "Cglpc19ldmFkZWQYByABKAgSEgoKaXNfZ3VhcmRlZBgIIAEoCBIaChJpc19w",
+            "ZXJmZWN0X2d1YXJkZWQYCSABKAgSEgoKaXNfY291bnRlchgKIAEoCBIQCgho",
+            "cF9hZnRlchgLIAEoBRITCgthcm1vcl9hZnRlchgMIAEoBRIWCg5pc19iYWNr",
+            "X2F0dGFjaxgNIAEoCEoECA4QD2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -93,7 +94,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleAuraState), global::Protocol.BattleAuraState.Parser, new[]{ "SourceSkillKey", "Radius" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleTileInfo), global::Protocol.BattleTileInfo.Parser, new[]{ "Axial", "TileType", "OverlayType", "EquipmentKey", "EquipmentOwnerPawnId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnInfo), global::Protocol.BattlePawnInfo.Parser, new[]{ "PawnId", "OwnerId", "PawnClass", "Axial", "Hp", "MaxHp", "MoveRange", "Armor", "MaxArmor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Role", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras", "UsedNormalSkillThisTurn", "IsActionBlocked", "ZocReactionsUsedThisTurn" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras", "UsedNormalSkillThisTurn", "IsActionBlocked", "ZocReactionsUsedThisTurn" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattlePawnDelta), global::Protocol.BattlePawnDelta.Parser, new[]{ "PawnId", "Hp", "Armor", "CurrentAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "IsDead", "FacingDirection", "Resources", "Barriers", "Statuses", "ShieldCurrent", "ShieldMax", "Auras", "UsedNormalSkillThisTurn", "IsActionBlocked", "ZocReactionsUsedThisTurn", "MoveRange", "Axial" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.BattleActionLog), global::Protocol.BattleActionLog.Parser, new[]{ "AttackerPawnId", "DefenderPawnId", "SkillSlot", "ActionType", "Damage", "IsCritical", "IsEvaded", "IsGuarded", "IsPerfectGuarded", "IsCounter", "HpAfter", "ArmorAfter", "IsBackAttack" }, null, null, null, null)
           }));
     }
@@ -3391,6 +3392,8 @@ namespace Protocol {
       usedNormalSkillThisTurn_ = other.usedNormalSkillThisTurn_;
       isActionBlocked_ = other.isActionBlocked_;
       zocReactionsUsedThisTurn_ = other.zocReactionsUsedThisTurn_;
+      moveRange_ = other.moveRange_;
+      axial_ = other.axial_ != null ? other.axial_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3612,6 +3615,30 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "move_range" field.</summary>
+    public const int MoveRangeFieldNumber = 20;
+    private int moveRange_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MoveRange {
+      get { return moveRange_; }
+      set {
+        moveRange_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "axial" field.</summary>
+    public const int AxialFieldNumber = 21;
+    private global::Protocol.AxialCoord axial_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.AxialCoord Axial {
+      get { return axial_; }
+      set {
+        axial_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3645,6 +3672,8 @@ namespace Protocol {
       if (UsedNormalSkillThisTurn != other.UsedNormalSkillThisTurn) return false;
       if (IsActionBlocked != other.IsActionBlocked) return false;
       if (ZocReactionsUsedThisTurn != other.ZocReactionsUsedThisTurn) return false;
+      if (MoveRange != other.MoveRange) return false;
+      if (!object.Equals(Axial, other.Axial)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3670,6 +3699,8 @@ namespace Protocol {
       if (UsedNormalSkillThisTurn != false) hash ^= UsedNormalSkillThisTurn.GetHashCode();
       if (IsActionBlocked != false) hash ^= IsActionBlocked.GetHashCode();
       if (ZocReactionsUsedThisTurn != 0) hash ^= ZocReactionsUsedThisTurn.GetHashCode();
+      if (MoveRange != 0) hash ^= MoveRange.GetHashCode();
+      if (axial_ != null) hash ^= Axial.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3748,6 +3779,14 @@ namespace Protocol {
         output.WriteRawTag(152, 1);
         output.WriteInt32(ZocReactionsUsedThisTurn);
       }
+      if (MoveRange != 0) {
+        output.WriteRawTag(160, 1);
+        output.WriteInt32(MoveRange);
+      }
+      if (axial_ != null) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(Axial);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3818,6 +3857,14 @@ namespace Protocol {
         output.WriteRawTag(152, 1);
         output.WriteInt32(ZocReactionsUsedThisTurn);
       }
+      if (MoveRange != 0) {
+        output.WriteRawTag(160, 1);
+        output.WriteInt32(MoveRange);
+      }
+      if (axial_ != null) {
+        output.WriteRawTag(170, 1);
+        output.WriteMessage(Axial);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3873,6 +3920,12 @@ namespace Protocol {
       }
       if (ZocReactionsUsedThisTurn != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(ZocReactionsUsedThisTurn);
+      }
+      if (MoveRange != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(MoveRange);
+      }
+      if (axial_ != null) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Axial);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3931,6 +3984,15 @@ namespace Protocol {
       }
       if (other.ZocReactionsUsedThisTurn != 0) {
         ZocReactionsUsedThisTurn = other.ZocReactionsUsedThisTurn;
+      }
+      if (other.MoveRange != 0) {
+        MoveRange = other.MoveRange;
+      }
+      if (other.axial_ != null) {
+        if (axial_ == null) {
+          Axial = new global::Protocol.AxialCoord();
+        }
+        Axial.MergeFrom(other.Axial);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4019,6 +4081,17 @@ namespace Protocol {
             ZocReactionsUsedThisTurn = input.ReadInt32();
             break;
           }
+          case 160: {
+            MoveRange = input.ReadInt32();
+            break;
+          }
+          case 170: {
+            if (axial_ == null) {
+              Axial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(Axial);
+            break;
+          }
         }
       }
     #endif
@@ -4104,6 +4177,17 @@ namespace Protocol {
           }
           case 152: {
             ZocReactionsUsedThisTurn = input.ReadInt32();
+            break;
+          }
+          case 160: {
+            MoveRange = input.ReadInt32();
+            break;
+          }
+          case 170: {
+            if (axial_ == null) {
+              Axial = new global::Protocol.AxialCoord();
+            }
+            input.ReadMessage(Axial);
             break;
           }
         }

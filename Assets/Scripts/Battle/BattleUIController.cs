@@ -148,13 +148,19 @@ namespace Battle
 			UnbindObjectManager();
 			_objectManager = objectManager;
 			if (_objectManager != null)
+			{
 				_objectManager.BattleActionLogApplied += OnBattleActionLogApplied;
+				_objectManager.BattleStatusTickApplied += OnBattleStatusTickApplied;
+			}
 		}
 
 		void UnbindObjectManager()
 		{
 			if (_objectManager != null)
+			{
 				_objectManager.BattleActionLogApplied -= OnBattleActionLogApplied;
+				_objectManager.BattleStatusTickApplied -= OnBattleStatusTickApplied;
+			}
 
 			_objectManager = null;
 		}
@@ -445,6 +451,36 @@ namespace Battle
 			_pendingBattleActionLogs.Enqueue(log);
 			if (_battleActionLogPlayback == null)
 				_battleActionLogPlayback = StartCoroutine(PlayBattleActionLogs());
+		}
+
+		void OnBattleStatusTickApplied(BattlePawn pawn, string statusKey, int amount)
+		{
+			if (pawn == null || amount <= 0 || _uiInstance == null || string.Equals(statusKey, "BLEED", System.StringComparison.OrdinalIgnoreCase) == false)
+				return;
+
+			Camera camera = Camera.main;
+			if (camera == null)
+				return;
+
+			GameObject textObject = new GameObject("BattleStatusTickNumber");
+			textObject.layer = _uiInstance.layer;
+			textObject.transform.SetParent(_uiInstance.transform, false);
+			RectTransform rect = textObject.AddComponent<RectTransform>();
+			rect.sizeDelta = new Vector2(92f, 42f);
+			rect.position = camera.WorldToScreenPoint(pawn.transform.position + Vector3.up * 0.82f);
+
+			Text text = textObject.AddComponent<Text>();
+			text.font = GameRoot.UiFont;
+			text.fontSize = 16;
+			text.fontStyle = FontStyle.Bold;
+			text.color = new Color(0.72f, 0.16f, 0.18f, 1f);
+			text.text = $"BLEED\n-{amount}";
+			text.alignment = TextAnchor.MiddleCenter;
+			text.horizontalOverflow = HorizontalWrapMode.Overflow;
+			text.verticalOverflow = VerticalWrapMode.Overflow;
+			text.raycastTarget = false;
+
+			StartCoroutine(AnimateDamageNumber(rect, text, text.color));
 		}
 
 		IEnumerator PlayBattleActionLogs()
@@ -749,10 +785,6 @@ namespace Battle
 
 		void RefreshActionSlotData(BattlePawn currentTurnPawn)
 		{
-			Protocol.PawnClass pawnClass = currentTurnPawn != null && currentTurnPawn.Info != null
-				? currentTurnPawn.Info.PawnClass
-				: Protocol.PawnClass.None;
-
 			for (int i = 0; i < SlotBindings.Length; i++)
 			{
 				ActionSlotBinding binding = SlotBindings[i];
@@ -765,9 +797,7 @@ namespace Battle
 					label = "Move";
 					tooltip = "Move\nMove to a reachable tile.";
 				}
-				else if (_gameData != null
-					&& pawnClass != Protocol.PawnClass.None
-					&& _gameData.TryGetSkill(pawnClass, binding.ActionSlot, out BattleSkillDefinition skill))
+				else if (TryGetUiSkillDefinition(currentTurnPawn, binding.ActionSlot, out BattleSkillDefinition skill))
 				{
 					label = BuildSkillDisplayName(skill);
 					tooltip = BuildSkillTooltip(skill, label);
@@ -781,6 +811,27 @@ namespace Battle
 						label = suenName;
 						tooltip = BuildSkillTooltip(skill, label);
 						iconKey = suenIconKey;
+					}
+					else if (currentTurnPawn is AlenSpear alenSpear
+						&& alenSpear.TryGetSkillPresentation(skill.ActionSlot, out string alenName, out string alenIconKey))
+					{
+						label = alenName;
+						tooltip = BuildSkillTooltip(skill, label);
+						iconKey = alenIconKey;
+					}
+					else if (currentTurnPawn is ZillianLongbow zillianLongbow
+						&& zillianLongbow.TryGetSkillPresentation(skill.ActionSlot, out string zillianName, out string zillianIconKey))
+					{
+						label = zillianName;
+						tooltip = BuildSkillTooltip(skill, label);
+						iconKey = zillianIconKey;
+					}
+					else if (currentTurnPawn is SuenParvis suenParvis
+						&& suenParvis.TryGetSkillPresentation(skill.ActionSlot, out string parvisName, out string parvisIconKey))
+					{
+						label = parvisName;
+						tooltip = BuildSkillTooltip(skill, label);
+						iconKey = parvisIconKey;
 					}
 				}
 
@@ -801,6 +852,25 @@ namespace Battle
 			}
 
 			return HumanizeKey(skill.SkillKey);
+		}
+
+		// The UI owns a separately loaded GameData repository. Do not ask the battle
+		// manager for it here: its asynchronous load can complete after the UI and
+		// would temporarily clear every icon key. Parvis is the one class whose
+		// active skill is selected by a server status rather than by slot alone.
+		bool TryGetUiSkillDefinition(BattlePawn pawn, int actionSlot, out BattleSkillDefinition skill)
+		{
+			skill = null;
+			if (_gameData == null || pawn == null || pawn.Info == null)
+				return false;
+
+			if (pawn is SuenParvis parvis
+				&& parvis.TryGetActiveSkillKey(actionSlot, out string activeSkillKey))
+			{
+				return _gameData.TryGetSkill(activeSkillKey, out skill);
+			}
+
+			return _gameData.TryGetSkill(pawn.Info.PawnClass, actionSlot, out skill);
 		}
 
 		string BuildSkillTooltip(BattleSkillDefinition skill, string displayName = null)
@@ -1038,6 +1108,10 @@ namespace Battle
 			{
 				BattlePawn.StatusState status = statuses[keys[i]];
 				string displayName = SuenAxe.GetStatusDisplayName(status.StatusKey);
+					if (string.Equals(displayName, status.StatusKey, System.StringComparison.Ordinal))
+						displayName = AlenSpear.GetStatusDisplayName(status.StatusKey);
+					if (string.Equals(displayName, status.StatusKey, System.StringComparison.Ordinal))
+						displayName = SuenParvis.GetStatusDisplayName(status.StatusKey);
 				values.Add($"{displayName} x{status.Stacks} T{status.RemainingOwnerTurns}");
 			}
 
@@ -1050,6 +1124,11 @@ namespace Battle
 				return true;
 
 			if (pawn.IsActionBlocked)
+				return false;
+
+			if (binding.Mode == BattleActionMode.SubAction
+				&& pawn is SuenParvis parvis
+				&& parvis.IsParvisOff == false)
 				return false;
 
 			switch (binding.Mode)
@@ -1077,9 +1156,7 @@ namespace Battle
 			if (pawn == null)
 				return false;
 
-			if (_gameData != null
-				&& pawn.Info != null
-				&& _gameData.TryGetSkill(pawn.Info.PawnClass, binding.ActionSlot, out BattleSkillDefinition skill))
+			if (TryGetUiSkillDefinition(pawn, binding.ActionSlot, out BattleSkillDefinition skill))
 			{
 				return pawn.CurrentAp >= skill.ApCost;
 			}
@@ -1773,6 +1850,14 @@ namespace Battle
 				if (string.IsNullOrWhiteSpace(suenLabel) == false)
 					return suenLabel;
 
+				string alenLabel = AlenSpear.GetStatusIconLabel(statusKey);
+				if (string.IsNullOrWhiteSpace(alenLabel) == false)
+					return alenLabel;
+
+				string parvisLabel = SuenParvis.GetStatusIconLabel(statusKey);
+				if (string.IsNullOrWhiteSpace(parvisLabel) == false)
+					return parvisLabel;
+
 				if (statusKey.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "EMP";
 				if (statusKey.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
@@ -1781,6 +1866,14 @@ namespace Battle
 					return "DMG";
 				if (statusKey.IndexOf("DIZZY", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "DIZ";
+				if (statusKey.IndexOf("BLEED", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "BLE";
+				if (statusKey.IndexOf("STUN", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "STN";
+				if (statusKey.IndexOf("FROSTBITE", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "FRB";
+				if (statusKey.IndexOf("ACCURACY", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return "ACC";
 
 				string compact = statusKey.Replace("_", string.Empty).ToUpperInvariant();
 				return compact.Length <= 3 ? compact : compact.Substring(0, 3);
@@ -1802,14 +1895,31 @@ namespace Battle
 					return new Color(0.86f, 0.63f, 0.24f, 0.96f);
 				}
 
+				if (SuenParvis.GetStatusIconLabel(key) != null)
+				{
+					if (key.IndexOf("YABAWI", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.35f, 0.75f, 0.88f, 0.96f);
+					return new Color(0.42f, 0.58f, 0.78f, 0.96f);
+				}
+
 				if (key.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(1f, 0.73f, 0.22f, 0.96f);
 				if (key.IndexOf("IGNORE_COLD_BACKLASH", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.42f, 0.9f, 1f, 0.96f);
 				if (key.IndexOf("THAWING_POTION_DAMAGE_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.72f, 0.43f, 0.27f, 0.96f);
+				if (key.IndexOf("ALEN_SPEAR_SENTINEL", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.38f, 0.74f, 0.45f, 0.96f);
+				if (key.IndexOf("ALEN_SPEAR_CHARGE_COMMAND_MOVE", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.94f, 0.62f, 0.2f, 0.96f);
 				if (key.IndexOf("DIZZY", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.9f, 0.78f, 0.22f, 0.96f);
+				if (key.IndexOf("STUN", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.96f, 0.68f, 0.2f, 0.96f);
+				if (key.IndexOf("BLEED", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.72f, 0.16f, 0.18f, 0.96f);
+				if (key.IndexOf("ACCURACY", System.StringComparison.OrdinalIgnoreCase) >= 0)
+					return new Color(0.68f, 0.36f, 0.25f, 0.96f);
 				if (key.IndexOf("COLD", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FROST", System.StringComparison.OrdinalIgnoreCase) >= 0
 					|| key.IndexOf("FREEZE", System.StringComparison.OrdinalIgnoreCase) >= 0)

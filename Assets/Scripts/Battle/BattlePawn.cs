@@ -318,10 +318,18 @@ namespace Battle
 				return;
 
 			EnsureInfo();
+			bool hasAxialDelta = delta.Axial != null;
+			AxialCoord targetAxial = hasAxialDelta ? new AxialCoord(delta.Axial.Q, delta.Axial.R) : Axial;
+			bool hasMoved = hasAxialDelta && Axial.Equals(targetAxial) == false;
 			Info.Hp = delta.Hp;
 			Info.Armor = delta.Armor;
 			Info.CurrentAp = delta.CurrentAp;
 			Info.CanMove = delta.CanMove;
+			// Proto scalar fields have no presence bit. Older/partial pawn deltas omit
+			// move_range as 0, which must not erase the range from the entry snapshot.
+			// A real zero-move state is represented by CanMove on the server contract.
+			if (delta.MoveRange > 0)
+				Info.MoveRange = delta.MoveRange;
 			Info.UsedNormalSkillThisTurn = delta.UsedNormalSkillThisTurn;
 			Info.UsedSubActionThisTurn = delta.UsedSubActionThisTurn;
 			Info.UsedUltimate = delta.UsedUltimate;
@@ -335,6 +343,13 @@ namespace Battle
 			ReplaceInfoStateCollections(delta.Resources, delta.Barriers, delta.Statuses, delta.Auras);
 
 			ApplyFacingDirection(FacingDirection);
+			// Position changes, including knockback and teleport, are delivered in the
+			// authoritative pawn delta. Keep the old axial until MoveToAxial starts so
+			// every server-driven displacement receives the normal movement animation.
+			if (hasMoved)
+				MoveToAxial(targetAxial);
+			else if (hasAxialDelta)
+				SetAxialState(targetAxial);
 			RefreshStatusWorldUi();
 			ApplyDeadVisualState();
 			OnPawnStateChanged();

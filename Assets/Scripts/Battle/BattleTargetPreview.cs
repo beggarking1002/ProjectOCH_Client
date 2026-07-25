@@ -9,6 +9,7 @@ namespace Battle
 	{
 		// Keep tile targeting above the map but below pawn rings (19) and pawn sprites (20).
 		const int SortingOrder = 18;
+		static readonly Color SkillRangeColor = new Color(0.35f, 0.72f, 1f, 0.32f);
 		static readonly Color ValidTargetColor = new Color(0.25f, 1f, 0.48f, 0.65f);
 		static readonly Color AffectedTileColor = new Color(1f, 0.64f, 0.18f, 0.95f);
 		static readonly Color ZocTileColor = new Color(1f, 0.8f, 0.18f, 0.7f);
@@ -40,6 +41,33 @@ namespace Battle
 					DrawHex(_outlines[index++], mapGrid, affectedTiles[i], AffectedTileColor, 1f);
 			}
 
+			for (; index < _outlines.Count; index++)
+				_outlines[index].enabled = false;
+		}
+
+		// Skill range is intentionally drawn separately from valid targets. A spell can
+		// reach an empty tile but still require an enemy, ally, or FIRE overlay there.
+		// Showing both lets players read the distance rule before a target exists.
+		public void ShowSkillRange(
+			BattleMapGrid mapGrid,
+			IReadOnlyList<AxialCoord> rangeTiles,
+			IReadOnlyList<AxialCoord> validTargets,
+			IReadOnlyList<AxialCoord> affectedTiles)
+		{
+			if (mapGrid == null)
+			{
+				Hide();
+				return;
+			}
+
+			int required = (rangeTiles?.Count ?? 0)
+				+ (validTargets?.Count ?? 0)
+				+ (affectedTiles?.Count ?? 0);
+			EnsureOutlineCount(required);
+			int index = 0;
+			DrawTiles(mapGrid, rangeTiles, SkillRangeColor, 0.64f, ref index);
+			DrawTiles(mapGrid, validTargets, ValidTargetColor, 0.72f, ref index);
+			DrawTiles(mapGrid, affectedTiles, AffectedTileColor, 1f, ref index);
 			for (; index < _outlines.Count; index++)
 				_outlines[index].enabled = false;
 		}
