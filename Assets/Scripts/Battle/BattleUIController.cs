@@ -278,12 +278,18 @@ namespace Battle
 
 				_actionButtons[i] = button;
 				_actionImages[i] = image;
-				// The authored slot image is the icon itself.  Class-specific skill
-				// sprites replace its dummy sprite instead of being layered on top.
-				_actionIconImages[i] = image;
-				_defaultActionSprites[i] = image != null ? image.sprite : null;
-				_defaultActionPreserveAspects[i] = image != null && image.preserveAspect;
-				HideLegacyActionIcon(slot);
+				// GothicUI uses the slot root as a permanent decorative frame. Skill art
+				// is therefore rendered in a dedicated child instead of replacing it.
+				Image iconImage = FindOrCreateActionIcon(slot);
+				_actionIconImages[i] = iconImage;
+				_defaultActionSprites[i] = null;
+				_defaultActionPreserveAspects[i] = true;
+				if (iconImage != null)
+				{
+					iconImage.sprite = null;
+					iconImage.enabled = false;
+				}
+				HideLegacyActionDecoration(slot);
 				HideActionSlotLabel(slot);
 				_actionTexts[i] = null;
 				_normalColors[i] = image != null ? image.color : Color.white;
@@ -1006,11 +1012,11 @@ namespace Battle
 			iconImage.preserveAspect = true;
 		}
 
-		static void HideLegacyActionIcon(Transform slot)
+		static void HideLegacyActionDecoration(Transform slot)
 		{
-			Transform legacyIcon = slot != null ? slot.Find("Icon") : null;
-			if (legacyIcon != null)
-				legacyIcon.gameObject.SetActive(false);
+			Transform legacyDecoration = slot != null ? slot.Find("Image") : null;
+			if (legacyDecoration != null)
+				legacyDecoration.gameObject.SetActive(false);
 		}
 
 		static void HideActionSlotLabel(Transform slot)
@@ -1356,8 +1362,8 @@ namespace Battle
 				image = iconObject.AddComponent<Image>();
 			}
 
-			rect.anchorMin = new Vector2(0.14f, 0.34f);
-			rect.anchorMax = new Vector2(0.86f, 0.92f);
+			rect.anchorMin = new Vector2(0.15f, 0.15f);
+			rect.anchorMax = new Vector2(0.85f, 0.85f);
 			rect.offsetMin = Vector2.zero;
 			rect.offsetMax = Vector2.zero;
 			rect.localScale = Vector3.one;

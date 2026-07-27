@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8dc824714de3e1c4eb85c4176a9622a4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/AnimationUI/Smoke.controller
+  uploadId: 862014

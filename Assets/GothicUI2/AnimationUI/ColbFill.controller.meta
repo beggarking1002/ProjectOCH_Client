@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b05051b88ba47114d8715f44e8282027
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/AnimationUI/ColbFill.controller
+  uploadId: 862014

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 73174e19f0f985c48aa8191c491a94eb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/AnimationUI/Craft.controller
+  uploadId: 862014

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a61821656e1ba544c94200d233769460
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/AnimationUI/SmokeMove.anim
+  uploadId: 862014

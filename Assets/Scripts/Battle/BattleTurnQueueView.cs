@@ -383,7 +383,15 @@ namespace Battle
 			{
 				PawnId = pawnId;
 				int requestVersion = ++_spriteRequestVersion;
-				if (_portraitImage == null || string.IsNullOrWhiteSpace(portraitKey))
+				if (_portraitImage == null)
+					return;
+
+				// The prefab's old placeholder art differs by slot. Never show that art
+				// while Addressables is resolving a real pawn portrait; the decorative
+				// child frame remains visible as the common loading/empty state.
+				_portraitImage.sprite = null;
+				_portraitImage.enabled = false;
+				if (string.IsNullOrWhiteSpace(portraitKey))
 					return;
 
 				_ = LoadSpriteAsync(portraitKey, requestVersion);
@@ -392,8 +400,11 @@ namespace Battle
 			async System.Threading.Tasks.Task LoadSpriteAsync(string portraitKey, int requestVersion)
 			{
 				Sprite sprite = await BattlePortraitSpriteCache.LoadAsync(portraitKey);
-				if (requestVersion == _spriteRequestVersion && sprite != null && _portraitImage != null)
-					_portraitImage.sprite = sprite;
+				if (requestVersion != _spriteRequestVersion || _portraitImage == null)
+					return;
+
+				_portraitImage.sprite = sprite;
+				_portraitImage.enabled = sprite != null;
 			}
 
 			public void SetPosition(Vector2 position) => Root.anchoredPosition = position;

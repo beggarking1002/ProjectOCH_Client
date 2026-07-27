@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: faf5be8e31d99ef4fa05de9cc7118589
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/AnimationUI/LoadingC.controller
+  uploadId: 862014

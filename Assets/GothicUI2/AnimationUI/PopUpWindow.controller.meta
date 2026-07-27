@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 109f86011c9663d43b398d2b7c4e547a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/AnimationUI/PopUpWindow.controller
+  uploadId: 862014

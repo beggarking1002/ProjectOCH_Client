@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: 673f7df3cb3264c4ca56fd2d10e8ed58
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Georgia
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f506bc66a84faf24583835b64f6f49b9, type: 3}
+  - {fileID: 12800000, guid: e77588da24faf444b85c1889b794817f, type: 3}
+  - {fileID: 12800000, guid: 47775ec497959be4eaa2368e8fcab907, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306359
+  packageName: Gothic UI 2
+  packageVersion: 1.0
+  assetPath: Assets/GothicUI2/Fonts/georgia.ttf
+  uploadId: 862014
