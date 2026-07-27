@@ -2,6 +2,8 @@ using App;
 using Protocol;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,10 +14,16 @@ namespace Scenes
 		const string TitleSceneName = "TitleScene";
 		const string FieldSceneName = "FieldScene";
 		const string GameStartButtonName = "GameStartButton";
+		const string TitleBackgroundName = "TitleBackground";
+		const string TitleBackgroundAddress = "TitleSceneBackground";
 
 		static TitleSceneFlow _instance;
 
 		Button _gameStartButton;
+		Image _titleBackground;
+		AsyncOperationHandle<Sprite> _titleBackgroundHandle;
+		bool _hasTitleBackgroundHandle;
+		int _titleBackgroundLoadVersion;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		static void Bootstrap()
@@ -43,6 +51,7 @@ namespace Scenes
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 			PacketHandler.Instance.EnterGameReceived -= OnEnterGameReceived;
 			UnbindGameStartButton();
+			ReleaseTitleBackground();
 		}
 
 		void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -54,11 +63,13 @@ namespace Scenes
 			}
 
 			UnbindGameStartButton();
+			ReleaseTitleBackground();
 		}
 
 		void BindGameStartButton(Scene scene)
 		{
 			UnbindGameStartButton();
+			LoadTitleBackgroundAsync(scene);
 
 			_gameStartButton = FindButton(scene, GameStartButtonName);
 			if (_gameStartButton == null)
@@ -68,6 +79,66 @@ namespace Scenes
 			}
 
 			_gameStartButton.onClick.AddListener(OnGameStartClicked);
+		}
+
+		async void LoadTitleBackgroundAsync(Scene scene)
+		{
+			if (_titleBackground != null || scene.name != TitleSceneName)
+				return;
+
+			Canvas canvas = FindCanvas(scene);
+			if (canvas == null)
+			{
+				Debug.LogWarning($"{nameof(TitleSceneFlow)} could not find a Canvas in {TitleSceneName}.");
+				return;
+			}
+
+			GameObject backgroundObject = new GameObject(TitleBackgroundName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(AspectRatioFitter));
+			backgroundObject.transform.SetParent(canvas.transform, false);
+			backgroundObject.transform.SetAsFirstSibling();
+			RectTransform rect = backgroundObject.GetComponent<RectTransform>();
+			rect.anchorMin = Vector2.zero;
+			rect.anchorMax = Vector2.one;
+			rect.offsetMin = Vector2.zero;
+			rect.offsetMax = Vector2.zero;
+
+			_titleBackground = backgroundObject.GetComponent<Image>();
+			_titleBackground.raycastTarget = false;
+			AspectRatioFitter fitter = backgroundObject.GetComponent<AspectRatioFitter>();
+			fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+			fitter.aspectRatio = 1672f / 941f;
+
+			int loadVersion = ++_titleBackgroundLoadVersion;
+			AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(TitleBackgroundAddress);
+			_titleBackgroundHandle = handle;
+			_hasTitleBackgroundHandle = true;
+			await handle.Task;
+
+			if (loadVersion != _titleBackgroundLoadVersion || scene.isLoaded == false || SceneManager.GetActiveScene().name != TitleSceneName)
+				return;
+
+			if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null && _titleBackground != null)
+			{
+				_titleBackground.sprite = handle.Result;
+				_titleBackground.enabled = true;
+				return;
+			}
+
+			Debug.LogWarning($"Failed to load title background addressable: {TitleBackgroundAddress}");
+			ReleaseTitleBackground();
+		}
+
+		void ReleaseTitleBackground()
+		{
+			_titleBackgroundLoadVersion++;
+			if (_hasTitleBackgroundHandle && _titleBackgroundHandle.IsValid())
+				Addressables.Release(_titleBackgroundHandle);
+
+			_hasTitleBackgroundHandle = false;
+			if (_titleBackground != null)
+				Destroy(_titleBackground.gameObject);
+
+			_titleBackground = null;
 		}
 
 		void UnbindGameStartButton()
@@ -127,6 +198,19 @@ namespace Scenes
 					if (buttons[j].name == buttonName)
 						return buttons[j];
 				}
+			}
+
+			return null;
+		}
+
+		static Canvas FindCanvas(Scene scene)
+		{
+			GameObject[] roots = scene.GetRootGameObjects();
+			for (int i = 0; i < roots.Length; i++)
+			{
+				Canvas canvas = roots[i].GetComponentInChildren<Canvas>(true);
+				if (canvas != null)
+					return canvas;
 			}
 
 			return null;

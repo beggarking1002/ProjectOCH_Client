@@ -14,6 +14,27 @@ using UnityEngine.InputSystem;
 
 namespace Battle
 {
+	public enum BattleTurnQueueUpdateKind
+	{
+		Initialize,
+		Shift,
+		Resync,
+	}
+
+	public sealed class BattleTurnQueueUpdate
+	{
+		public readonly IReadOnlyList<ulong> PawnIds;
+		public readonly BattleTurnQueueUpdateKind Kind;
+		public readonly IReadOnlyCollection<ulong> DeadPawnIds;
+
+		public BattleTurnQueueUpdate(IReadOnlyList<ulong> pawnIds, BattleTurnQueueUpdateKind kind, IReadOnlyCollection<ulong> deadPawnIds)
+		{
+			PawnIds = pawnIds;
+			Kind = kind;
+			DeadPawnIds = deadPawnIds;
+		}
+	}
+
 	[DisallowMultipleComponent]
 	public sealed class BattleObjectManager : MonoBehaviour
 	{
@@ -41,6 +62,7 @@ namespace Battle
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnVisualHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 		readonly HashSet<ulong> _localPawnIds = new HashSet<ulong>();
+		readonly List<ulong> _upcomingTurnPawnIds = new List<ulong>(8);
 		readonly Queue<string> _battleLogLines = new Queue<string>();
 		readonly List<AxialCoord> _knownTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _skillRangeTiles = new List<AxialCoord>();
@@ -98,8 +120,11 @@ namespace Battle
 			&& currentTurnPawn != null
 			&& currentTurnPawn.IsDead == false;
 		public string BattleLogText => _battleLogLines.Count > 0 ? string.Join("\n", _battleLogLines) : "-";
+		public IReadOnlyList<ulong> UpcomingTurnPawnIds => _upcomingTurnPawnIds;
 		public event System.Action<BattleActionLog> BattleActionLogApplied;
 		public event System.Action<BattlePawn, string, int> BattleStatusTickApplied;
+		public event System.Action<BattleTurnQueueUpdate> TurnQueueUpdated;
+		public event System.Action<ulong> BattlePawnDied;
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
@@ -299,6 +324,7 @@ namespace Battle
 
 			ReleasePawns();
 			_localPawnIds.Clear();
+			_upcomingTurnPawnIds.Clear();
 			_battleLogLines.Clear();
 			_battleId = packet.BattleId;
 			// A new battle owns an independent version sequence. A duplicate enter packet for
@@ -314,6 +340,7 @@ namespace Battle
 			foreach (BattlePawnInfo pawnInfo in packet.EnemyPawns)
 				await SpawnPawnAsync(pawnInfo.PawnId, false, ToBattleAxial(pawnInfo.Axial), pawnInfo);
 
+			ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Initialize, null);
 			RefreshTurnIndicators();
 			Debug.Log($"Spawned battle pawns from server. battleId={_battleId}, battleStateVersion={_battleStateVersion}, currentTurnPawnId={_currentTurnPawnId}, allied={packet.AlliedPawns.Count}, enemy={packet.EnemyPawns.Count}");
 		}
@@ -1412,6 +1439,8 @@ namespace Battle
 			List<BattleActionLog> moveLogs = CopyBattleActionLogs(packet.Logs);
 			List<BattlePawnDelta> movePawnDeltas = CopyBattlePawnDeltas(packet.PawnDeltas);
 			ApplyPawnTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove);
+			if (packet.TurnQueueResynced)
+				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
 
 			_isAnimatingMove = true;
 			RefreshTurnIndicators();
@@ -1472,6 +1501,8 @@ namespace Battle
 				packet.UsedUltimate);
 
 			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.Logs, packet.PawnDeltas);
+			if (packet.TurnQueueResynced)
+				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
@@ -1483,6 +1514,9 @@ namespace Battle
 			if (casterPawn == null)
 				return;
 
+			if (ShouldSkipSkillAnimation(casterPawn, skillSlot))
+				return;
+
 			if (TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill)
 				&& _gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view)
 				&& string.IsNullOrWhiteSpace(view.AnimTrigger) == false)
@@ -1492,6 +1526,13 @@ namespace Battle
 			}
 
 			casterPawn.TriggerSkill(skillSlot);
+		}
+
+		static bool ShouldSkipSkillAnimation(BattlePawn casterPawn, int skillSlot)
+		{
+			// Parvis install/first-slot action and pickup are equipment interactions;
+			// they intentionally resolve without a character skill gesture.
+			return casterPawn is SuenParvis && (skillSlot == 2 || skillSlot == 7);
 		}
 
 		void QueueSkillActionSequence(
@@ -1559,8 +1600,11 @@ namespace Battle
 
 			if (didPresentInitiatingSkill == false && _pawns.TryGetValue(casterPawnId, out BattlePawn noLogCasterPawn))
 			{
-				TriggerSkillAnimation(noLogCasterPawn, skillSlot);
-				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+				if (ShouldSkipSkillAnimation(noLogCasterPawn, skillSlot) == false)
+				{
+					TriggerSkillAnimation(noLogCasterPawn, skillSlot);
+					yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+				}
 			}
 
 			ApplyPawnDeltas(finalPawnDeltas);
@@ -1687,6 +1731,77 @@ namespace Battle
 			return result;
 		}
 
+		static List<ulong> CollectDeadPawnIds(IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			List<ulong> deadPawnIds = new List<ulong>();
+			if (pawnDeltas == null)
+				return deadPawnIds;
+
+			foreach (BattlePawnDelta delta in pawnDeltas)
+			{
+				if (delta != null && delta.IsDead && delta.PawnId != 0)
+					deadPawnIds.Add(delta.PawnId);
+			}
+
+			return deadPawnIds;
+		}
+
+		void ApplyTurnQueueSnapshot(
+			IEnumerable<ulong> pawnIds,
+			BattleTurnQueueUpdateKind kind,
+			IReadOnlyCollection<ulong> deadPawnIds)
+		{
+			if (pawnIds == null)
+				return;
+
+			_upcomingTurnPawnIds.Clear();
+			foreach (ulong pawnId in pawnIds)
+			{
+				_upcomingTurnPawnIds.Add(pawnId);
+				if (_upcomingTurnPawnIds.Count == 8)
+					break;
+			}
+
+			if (_upcomingTurnPawnIds.Count == 0)
+			{
+				Debug.LogWarning($"Received an empty upcoming turn queue. source={kind}");
+				return;
+			}
+
+			if (_upcomingTurnPawnIds.Count != 8)
+				Debug.LogWarning($"Expected an 8-slot upcoming turn queue, but received {_upcomingTurnPawnIds.Count}. source={kind}");
+
+			if (kind == BattleTurnQueueUpdateKind.Initialize
+				&& _currentTurnPawnId != 0
+				&& _upcomingTurnPawnIds[0] != _currentTurnPawnId)
+			{
+				Debug.LogWarning($"Turn queue current pawn mismatch. queue[0]={_upcomingTurnPawnIds[0]}, currentTurnPawnId={_currentTurnPawnId}");
+			}
+
+			TurnQueueUpdated?.Invoke(new BattleTurnQueueUpdate(
+				new List<ulong>(_upcomingTurnPawnIds),
+				kind,
+				deadPawnIds ?? new List<ulong>()));
+		}
+
+		void ApplyTurnQueueShift(ulong enteringTurnPawnId)
+		{
+			// The server only sends the entering pawn for the ordinary one-step rotation.
+			// Do not invent a queue when no authoritative 8-slot base snapshot exists.
+			if (enteringTurnPawnId == 0 || _upcomingTurnPawnIds.Count != 8)
+			{
+				Debug.LogWarning($"Cannot shift the turn queue. entering={enteringTurnPawnId}, localCount={_upcomingTurnPawnIds.Count}");
+				return;
+			}
+
+			_upcomingTurnPawnIds.RemoveAt(0);
+			_upcomingTurnPawnIds.Add(enteringTurnPawnId);
+			TurnQueueUpdated?.Invoke(new BattleTurnQueueUpdate(
+				new List<ulong>(_upcomingTurnPawnIds),
+				BattleTurnQueueUpdateKind.Shift,
+				new List<ulong>()));
+		}
+
 		void ApplyCombatLogPresentation(BattleActionLog log)
 		{
 			if (log == null || log.DefenderPawnId == 0)
@@ -1750,6 +1865,10 @@ namespace Battle
 				packet.UsedUltimate);
 			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			AppendBattleLogs(packet.Logs);
+			if (packet.TurnQueueResynced)
+				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
+			else
+				ApplyTurnQueueShift(packet.EnteringTurnPawnId);
 
 			_currentTurnPawnId = packet.NextTurnPawnId;
 			RefreshTurnIndicators();
@@ -1768,6 +1887,7 @@ namespace Battle
 			}
 
 			ApplyPawnDead(packet.PawnId, packet.KillerPawnId);
+			BattlePawnDied?.Invoke(packet.PawnId);
 			RefreshTurnIndicators();
 			Debug.Log($"Applied S_BATTLE_PAWN_DEAD. battleId={_battleId}, pawnId={packet.PawnId}, killerPawnId={packet.KillerPawnId}");
 		}

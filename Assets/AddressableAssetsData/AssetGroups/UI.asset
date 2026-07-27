@@ -57,6 +57,60 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc7e4ba519e00db4499e1bd4755a75bc
+    m_Address: TitleSceneBackground
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed5edf3e2452b4c42a3aae8a07f81cb6
+    m_Address: portrait_alen
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 743198e6012d89143878839114e41e44
+    m_Address: portrait_arno
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5028f09c63fbd6b4fa5f2b9a91b40a5c
+    m_Address: portrait_beige
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acb5da92c3495f24fa3c1a2bb58ef1ad
+    m_Address: portrait_maret
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90eac21a4b5a84048b6dc153cb8044b5
+    m_Address: portrait_odo
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa5aaa6613674a94ea60635382ddb096
+    m_Address: portrait_sera
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d4ba3f2907a03a4ca0bfe3ef65a434b
+    m_Address: portrait_suen
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fafcc5f2e42ff71439375690912feb37
+    m_Address: portrait_zillian
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
   m_SchemaSet:

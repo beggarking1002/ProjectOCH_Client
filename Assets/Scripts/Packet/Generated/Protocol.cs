@@ -36,65 +36,70 @@ namespace Protocol {
             "MhMuUHJvdG9jb2wuVmVjMkZpeGVkEiMKBnRhcmdldBgDIAEoCzITLlByb3Rv",
             "Y29sLlZlYzJGaXhlZBITCgtkdXJhdGlvbl9tcxgEIAEoDSIVCgZDX0NIQVQS",
             "CwoDbXNnGAEgASgJIicKBlNfQ0hBVBIQCghwbGF5ZXJJZBgBIAEoBBILCgNt",
-            "c2cYAiABKAkiEAoOQ19FTlRFUl9CQVRUTEUimAIKDlNfRU5URVJfQkFUVExF",
+            "c2cYAiABKAkiEAoOQ19FTlRFUl9CQVRUTEUiuAIKDlNfRU5URVJfQkFUVExF",
             "Eg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg4KBm1hcF9p",
             "ZBgDIAEoCRIuCgxhbGxpZWRfcGF3bnMYBCADKAsyGC5Qcm90b2NvbC5CYXR0",
             "bGVQYXduSW5mbxItCgtlbmVteV9wYXducxgFIAMoCzIYLlByb3RvY29sLkJh",
             "dHRsZVBhd25JbmZvEhwKFGN1cnJlbnRfdHVybl9wYXduX2lkGAYgASgEEg4K",
             "BnJlYXNvbhgHIAEoCRIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgIIAEoBBIn",
-            "CgV0aWxlcxgJIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvIlkKDUNf",
-            "QkFUVExFX01PVkUSEQoJYmF0dGxlX2lkGAEgASgEEg8KB3Bhd25faWQYAiAB",
-            "KAQSJAoGdGFyZ2V0GAMgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZCKFAwoN",
-            "U19CQVRUTEVfTU9WRRIPCgdzdWNjZXNzGAEgASgIEhEKCWJhdHRsZV9pZBgC",
-            "IAEoBBIPCgdwYXduX2lkGAMgASgEEiMKBXN0YXJ0GAQgASgLMhQuUHJvdG9j",
-            "b2wuQXhpYWxDb29yZBIkCgZ0YXJnZXQYBSABKAsyFC5Qcm90b2NvbC5BeGlh",
-            "bENvb3JkEhkKEW5leHRfdHVybl9wYXduX2lkGAYgASgEEioKBnJlc3VsdBgH",
-            "IAEoDjIaLlByb3RvY29sLkJhdHRsZU1vdmVSZXN1bHQSDgoGcmVhc29uGAgg",
-            "ASgJEhQKDHJlbWFpbmluZ19hcBgJIAEoBRIQCghjYW5fbW92ZRgKIAEoCBIu",
-            "CgtwYXduX2RlbHRhcxgLIAMoCzIZLlByb3RvY29sLkJhdHRsZVBhd25EZWx0",
-            "YRInCgRsb2dzGAwgAygLMhkuUHJvdG9jb2wuQmF0dGxlQWN0aW9uTG9nEhwK",
-            "FGJhdHRsZV9zdGF0ZV92ZXJzaW9uGA0gASgEIscBCg5DX0JBVFRMRV9TS0lM",
-            "TBIRCgliYXR0bGVfaWQYASABKAQSFgoOY2FzdGVyX3Bhd25faWQYAiABKAQS",
-            "EgoKc2tpbGxfc2xvdBgDIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgEIAEoBBIq",
-            "Cgx0YXJnZXRfYXhpYWwYBSABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEjIK",
-            "FGxpbmVfZGlyZWN0aW9uX2F4aWFsGAYgASgLMhQuUHJvdG9jb2wuQXhpYWxD",
-            "b29yZCKQBAoOU19CQVRUTEVfU0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIRCgli",
-            "YXR0bGVfaWQYAiABKAQSFgoOY2FzdGVyX3Bhd25faWQYAyABKAQSEgoKc2tp",
-            "bGxfc2xvdBgEIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0YXJn",
-            "ZXRfYXhpYWwYBiABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEg4KBmRhbWFn",
-            "ZRgHIAEoBRIRCgl0YXJnZXRfaHAYCCABKAUSGQoRbmV4dF90dXJuX3Bhd25f",
-            "aWQYCSABKAQSDgoGcmVhc29uGAogASgJEhQKDHJlbWFpbmluZ19hcBgLIAEo",
-            "BRIQCghjYW5fbW92ZRgMIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190",
-            "dXJuGA0gASgIEhUKDXVzZWRfdWx0aW1hdGUYDiABKAgSFAoMdGFyZ2V0X2Fy",
-            "bW9yGA8gASgFEi4KC3Bhd25fZGVsdGFzGBAgAygLMhkuUHJvdG9jb2wuQmF0",
-            "dGxlUGF3bkRlbHRhEicKBGxvZ3MYESADKAsyGS5Qcm90b2NvbC5CYXR0bGVB",
-            "Y3Rpb25Mb2cSHAoUYmF0dGxlX3N0YXRlX3ZlcnNpb24YEiABKAQSLQoLdGls",
-            "ZV9kZWx0YXMYEyADKAsyGC5Qcm90b2NvbC5CYXR0bGVUaWxlSW5mbyI3ChFD",
-            "X0JBVFRMRV9FTkRfVFVSThIRCgliYXR0bGVfaWQYASABKAQSDwoHcGF3bl9p",
-            "ZBgCIAEoBCL7AgoRU19CQVRUTEVfRU5EX1RVUk4SDwoHc3VjY2VzcxgBIAEo",
-            "CBIRCgliYXR0bGVfaWQYAiABKAQSDwoHcGF3bl9pZBgDIAEoBBIZChFuZXh0",
-            "X3R1cm5fcGF3bl9pZBgEIAEoBBIOCgZyZWFzb24YBSABKAkSFAoMcmVtYWlu",
-            "aW5nX2FwGAYgASgFEhAKCGNhbl9tb3ZlGAcgASgIEiEKGXVzZWRfc3ViX2Fj",
-            "dGlvbl90aGlzX3R1cm4YCCABKAgSFQoNdXNlZF91bHRpbWF0ZRgJIAEoCBIu",
-            "CgtwYXduX2RlbHRhcxgKIAMoCzIZLlByb3RvY29sLkJhdHRsZVBhd25EZWx0",
-            "YRInCgRsb2dzGAsgAygLMhkuUHJvdG9jb2wuQmF0dGxlQWN0aW9uTG9nEhwK",
-            "FGJhdHRsZV9zdGF0ZV92ZXJzaW9uGAwgASgEEi0KC3RpbGVfZGVsdGFzGA0g",
-            "AygLMhguUHJvdG9jb2wuQmF0dGxlVGlsZUluZm8iKwoPQ19CQVRUTEVfSU5W",
-            "SVRFEhgKEHRhcmdldF9wbGF5ZXJfaWQYASABKAQicQoXU19CQVRUTEVfSU5W",
-            "SVRFX1JFUVVFU1QSDwoHc3VjY2VzcxgBIAEoCBIbChNyZXF1ZXN0ZXJfcGxh",
-            "eWVyX2lkGAIgASgEEhgKEHRhcmdldF9wbGF5ZXJfaWQYAyABKAQSDgoGcmVh",
-            "c29uGAQgASgJIjcKGFNfQkFUVExFX0lOVklURV9SRUNFSVZFRBIbChNyZXF1",
-            "ZXN0ZXJfcGxheWVyX2lkGAEgASgEIkcKGENfQkFUVExFX0lOVklURV9SRVNQ",
-            "T05TRRIbChNyZXF1ZXN0ZXJfcGxheWVyX2lkGAEgASgEEg4KBmFjY2VwdBgC",
-            "IAEoCCJxChZTX0JBVFRMRV9JTlZJVEVfUkVTVUxUEhAKCGFjY2VwdGVkGAEg",
-            "ASgIEhsKE3JlcXVlc3Rlcl9wbGF5ZXJfaWQYAiABKAQSGAoQdGFyZ2V0X3Bs",
-            "YXllcl9pZBgDIAEoBBIOCgZyZWFzb24YBCABKAkiUAoSU19CQVRUTEVfUEFX",
-            "Tl9ERUFEEhEKCWJhdHRsZV9pZBgBIAEoBBIPCgdwYXduX2lkGAIgASgEEhYK",
-            "DmtpbGxlcl9wYXduX2lkGAMgASgEIjUKD1NfQkFUVExFX1JFU1VMVBIRCgli",
-            "YXR0bGVfaWQYASABKAQSDwoHdmljdG9yeRgCIAEoCCIoChNDX0JBVFRMRV9S",
-            "RVNVTFRfQUNLEhEKCWJhdHRsZV9pZBgBIAEoBCJJChNTX0JBVFRMRV9SRVNV",
-            "TFRfQUNLEg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg4K",
-            "BnJlYXNvbhgDIAEoCWIGcHJvdG8z"));
+            "CgV0aWxlcxgJIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvEh4KFnVw",
+            "Y29taW5nX3R1cm5fcGF3bl9pZHMYCiADKAQiWQoNQ19CQVRUTEVfTU9WRRIR",
+            "CgliYXR0bGVfaWQYASABKAQSDwoHcGF3bl9pZBgCIAEoBBIkCgZ0YXJnZXQY",
+            "AyABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkIsIDCg1TX0JBVFRMRV9NT1ZF",
+            "Eg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg8KB3Bhd25f",
+            "aWQYAyABKAQSIwoFc3RhcnQYBCABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3Jk",
+            "EiQKBnRhcmdldBgFIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSGQoRbmV4",
+            "dF90dXJuX3Bhd25faWQYBiABKAQSKgoGcmVzdWx0GAcgASgOMhouUHJvdG9j",
+            "b2wuQmF0dGxlTW92ZVJlc3VsdBIOCgZyZWFzb24YCCABKAkSFAoMcmVtYWlu",
+            "aW5nX2FwGAkgASgFEhAKCGNhbl9tb3ZlGAogASgIEi4KC3Bhd25fZGVsdGFz",
+            "GAsgAygLMhkuUHJvdG9jb2wuQmF0dGxlUGF3bkRlbHRhEicKBGxvZ3MYDCAD",
+            "KAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rpb25Mb2cSHAoUYmF0dGxlX3N0YXRl",
+            "X3ZlcnNpb24YDSABKAQSGwoTdHVybl9xdWV1ZV9yZXN5bmNlZBgOIAEoCBIe",
+            "ChZ1cGNvbWluZ190dXJuX3Bhd25faWRzGA8gAygEIscBCg5DX0JBVFRMRV9T",
+            "S0lMTBIRCgliYXR0bGVfaWQYASABKAQSFgoOY2FzdGVyX3Bhd25faWQYAiAB",
+            "KAQSEgoKc2tpbGxfc2xvdBgDIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgEIAEo",
+            "BBIqCgx0YXJnZXRfYXhpYWwYBSABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3Jk",
+            "EjIKFGxpbmVfZGlyZWN0aW9uX2F4aWFsGAYgASgLMhQuUHJvdG9jb2wuQXhp",
+            "YWxDb29yZCLNBAoOU19CQVRUTEVfU0tJTEwSDwoHc3VjY2VzcxgBIAEoCBIR",
+            "CgliYXR0bGVfaWQYAiABKAQSFgoOY2FzdGVyX3Bhd25faWQYAyABKAQSEgoK",
+            "c2tpbGxfc2xvdBgEIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgFIAEoBBIqCgx0",
+            "YXJnZXRfYXhpYWwYBiABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEg4KBmRh",
+            "bWFnZRgHIAEoBRIRCgl0YXJnZXRfaHAYCCABKAUSGQoRbmV4dF90dXJuX3Bh",
+            "d25faWQYCSABKAQSDgoGcmVhc29uGAogASgJEhQKDHJlbWFpbmluZ19hcBgL",
+            "IAEoBRIQCghjYW5fbW92ZRgMIAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhp",
+            "c190dXJuGA0gASgIEhUKDXVzZWRfdWx0aW1hdGUYDiABKAgSFAoMdGFyZ2V0",
+            "X2FybW9yGA8gASgFEi4KC3Bhd25fZGVsdGFzGBAgAygLMhkuUHJvdG9jb2wu",
+            "QmF0dGxlUGF3bkRlbHRhEicKBGxvZ3MYESADKAsyGS5Qcm90b2NvbC5CYXR0",
+            "bGVBY3Rpb25Mb2cSHAoUYmF0dGxlX3N0YXRlX3ZlcnNpb24YEiABKAQSLQoL",
+            "dGlsZV9kZWx0YXMYEyADKAsyGC5Qcm90b2NvbC5CYXR0bGVUaWxlSW5mbxIb",
+            "ChN0dXJuX3F1ZXVlX3Jlc3luY2VkGBQgASgIEh4KFnVwY29taW5nX3R1cm5f",
+            "cGF3bl9pZHMYFSADKAQiNwoRQ19CQVRUTEVfRU5EX1RVUk4SEQoJYmF0dGxl",
+            "X2lkGAEgASgEEg8KB3Bhd25faWQYAiABKAQi1wMKEVNfQkFUVExFX0VORF9U",
+            "VVJOEg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg8KB3Bh",
+            "d25faWQYAyABKAQSGQoRbmV4dF90dXJuX3Bhd25faWQYBCABKAQSDgoGcmVh",
+            "c29uGAUgASgJEhQKDHJlbWFpbmluZ19hcBgGIAEoBRIQCghjYW5fbW92ZRgH",
+            "IAEoCBIhChl1c2VkX3N1Yl9hY3Rpb25fdGhpc190dXJuGAggASgIEhUKDXVz",
+            "ZWRfdWx0aW1hdGUYCSABKAgSLgoLcGF3bl9kZWx0YXMYCiADKAsyGS5Qcm90",
+            "b2NvbC5CYXR0bGVQYXduRGVsdGESJwoEbG9ncxgLIAMoCzIZLlByb3RvY29s",
+            "LkJhdHRsZUFjdGlvbkxvZxIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgMIAEo",
+            "BBItCgt0aWxlX2RlbHRhcxgNIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJ",
+            "bmZvEh0KFWVudGVyaW5nX3R1cm5fcGF3bl9pZBgOIAEoBBIbChN0dXJuX3F1",
+            "ZXVlX3Jlc3luY2VkGA8gASgIEh4KFnVwY29taW5nX3R1cm5fcGF3bl9pZHMY",
+            "ECADKAQiKwoPQ19CQVRUTEVfSU5WSVRFEhgKEHRhcmdldF9wbGF5ZXJfaWQY",
+            "ASABKAQicQoXU19CQVRUTEVfSU5WSVRFX1JFUVVFU1QSDwoHc3VjY2VzcxgB",
+            "IAEoCBIbChNyZXF1ZXN0ZXJfcGxheWVyX2lkGAIgASgEEhgKEHRhcmdldF9w",
+            "bGF5ZXJfaWQYAyABKAQSDgoGcmVhc29uGAQgASgJIjcKGFNfQkFUVExFX0lO",
+            "VklURV9SRUNFSVZFRBIbChNyZXF1ZXN0ZXJfcGxheWVyX2lkGAEgASgEIkcK",
+            "GENfQkFUVExFX0lOVklURV9SRVNQT05TRRIbChNyZXF1ZXN0ZXJfcGxheWVy",
+            "X2lkGAEgASgEEg4KBmFjY2VwdBgCIAEoCCJxChZTX0JBVFRMRV9JTlZJVEVf",
+            "UkVTVUxUEhAKCGFjY2VwdGVkGAEgASgIEhsKE3JlcXVlc3Rlcl9wbGF5ZXJf",
+            "aWQYAiABKAQSGAoQdGFyZ2V0X3BsYXllcl9pZBgDIAEoBBIOCgZyZWFzb24Y",
+            "BCABKAkiUAoSU19CQVRUTEVfUEFXTl9ERUFEEhEKCWJhdHRsZV9pZBgBIAEo",
+            "BBIPCgdwYXduX2lkGAIgASgEEhYKDmtpbGxlcl9wYXduX2lkGAMgASgEIjUK",
+            "D1NfQkFUVExFX1JFU1VMVBIRCgliYXR0bGVfaWQYASABKAQSDwoHdmljdG9y",
+            "eRgCIAEoCCIoChNDX0JBVFRMRV9SRVNVTFRfQUNLEhEKCWJhdHRsZV9pZBgB",
+            "IAEoBCJJChNTX0JBVFRMRV9SRVNVTFRfQUNLEg8KB3N1Y2Nlc3MYASABKAgS",
+            "EQoJYmF0dGxlX2lkGAIgASgEEg4KBnJlYXNvbhgDIAEoCWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -111,13 +116,13 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CHAT), global::Protocol.C_CHAT.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CHAT), global::Protocol.S_CHAT.Parser, new[]{ "PlayerId", "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER_BATTLE), global::Protocol.C_ENTER_BATTLE.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason", "BattleStateVersion", "Tiles" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason", "BattleStateVersion", "Tiles", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_MOVE), global::Protocol.C_BATTLE_MOVE.Parser, new[]{ "BattleId", "PawnId", "Target" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "RemainingAp", "CanMove", "PawnDeltas", "Logs", "BattleStateVersion" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "RemainingAp", "CanMove", "PawnDeltas", "Logs", "BattleStateVersion", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "LineDirectionAxial" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_END_TURN), global::Protocol.C_BATTLE_END_TURN.Parser, new[]{ "BattleId", "PawnId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas", "EnteringTurnPawnId", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_INVITE), global::Protocol.C_BATTLE_INVITE.Parser, new[]{ "TargetPlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_REQUEST), global::Protocol.S_BATTLE_INVITE_REQUEST.Parser, new[]{ "Success", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_RECEIVED), global::Protocol.S_BATTLE_INVITE_RECEIVED.Parser, new[]{ "RequesterPlayerId" }, null, null, null, null),
@@ -2686,6 +2691,7 @@ namespace Protocol {
       reason_ = other.reason_;
       battleStateVersion_ = other.battleStateVersion_;
       tiles_ = other.tiles_.Clone();
+      upcomingTurnPawnIds_ = other.upcomingTurnPawnIds_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2800,6 +2806,17 @@ namespace Protocol {
       get { return tiles_; }
     }
 
+    /// <summary>Field number for the "upcoming_turn_pawn_ids" field.</summary>
+    public const int UpcomingTurnPawnIdsFieldNumber = 10;
+    private static readonly pb::FieldCodec<ulong> _repeated_upcomingTurnPawnIds_codec
+        = pb::FieldCodec.ForUInt64(82);
+    private readonly pbc::RepeatedField<ulong> upcomingTurnPawnIds_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<ulong> UpcomingTurnPawnIds {
+      get { return upcomingTurnPawnIds_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2824,6 +2841,7 @@ namespace Protocol {
       if (Reason != other.Reason) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
       if(!tiles_.Equals(other.tiles_)) return false;
+      if(!upcomingTurnPawnIds_.Equals(other.upcomingTurnPawnIds_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2840,6 +2858,7 @@ namespace Protocol {
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
       hash ^= tiles_.GetHashCode();
+      hash ^= upcomingTurnPawnIds_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2885,6 +2904,7 @@ namespace Protocol {
         output.WriteUInt64(BattleStateVersion);
       }
       tiles_.WriteTo(output, _repeated_tiles_codec);
+      upcomingTurnPawnIds_.WriteTo(output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2922,6 +2942,7 @@ namespace Protocol {
         output.WriteUInt64(BattleStateVersion);
       }
       tiles_.WriteTo(ref output, _repeated_tiles_codec);
+      upcomingTurnPawnIds_.WriteTo(ref output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2953,6 +2974,7 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
       size += tiles_.CalculateSize(_repeated_tiles_codec);
+      size += upcomingTurnPawnIds_.CalculateSize(_repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2986,6 +3008,7 @@ namespace Protocol {
         BattleStateVersion = other.BattleStateVersion;
       }
       tiles_.Add(other.tiles_);
+      upcomingTurnPawnIds_.Add(other.upcomingTurnPawnIds_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3037,6 +3060,11 @@ namespace Protocol {
             tiles_.AddEntriesFrom(input, _repeated_tiles_codec);
             break;
           }
+          case 82:
+          case 80: {
+            upcomingTurnPawnIds_.AddEntriesFrom(input, _repeated_upcomingTurnPawnIds_codec);
+            break;
+          }
         }
       }
     #endif
@@ -3086,6 +3114,11 @@ namespace Protocol {
           }
           case 74: {
             tiles_.AddEntriesFrom(ref input, _repeated_tiles_codec);
+            break;
+          }
+          case 82:
+          case 80: {
+            upcomingTurnPawnIds_.AddEntriesFrom(ref input, _repeated_upcomingTurnPawnIds_codec);
             break;
           }
         }
@@ -3414,6 +3447,8 @@ namespace Protocol {
       pawnDeltas_ = other.pawnDeltas_.Clone();
       logs_ = other.logs_.Clone();
       battleStateVersion_ = other.battleStateVersion_;
+      turnQueueResynced_ = other.turnQueueResynced_;
+      upcomingTurnPawnIds_ = other.upcomingTurnPawnIds_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3577,6 +3612,29 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "turn_queue_resynced" field.</summary>
+    public const int TurnQueueResyncedFieldNumber = 14;
+    private bool turnQueueResynced_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool TurnQueueResynced {
+      get { return turnQueueResynced_; }
+      set {
+        turnQueueResynced_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "upcoming_turn_pawn_ids" field.</summary>
+    public const int UpcomingTurnPawnIdsFieldNumber = 15;
+    private static readonly pb::FieldCodec<ulong> _repeated_upcomingTurnPawnIds_codec
+        = pb::FieldCodec.ForUInt64(122);
+    private readonly pbc::RepeatedField<ulong> upcomingTurnPawnIds_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<ulong> UpcomingTurnPawnIds {
+      get { return upcomingTurnPawnIds_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3605,6 +3663,8 @@ namespace Protocol {
       if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
       if(!logs_.Equals(other.logs_)) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
+      if (TurnQueueResynced != other.TurnQueueResynced) return false;
+      if(!upcomingTurnPawnIds_.Equals(other.upcomingTurnPawnIds_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3625,6 +3685,8 @@ namespace Protocol {
       hash ^= pawnDeltas_.GetHashCode();
       hash ^= logs_.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
+      if (TurnQueueResynced != false) hash ^= TurnQueueResynced.GetHashCode();
+      hash ^= upcomingTurnPawnIds_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3689,6 +3751,11 @@ namespace Protocol {
         output.WriteRawTag(104);
         output.WriteUInt64(BattleStateVersion);
       }
+      if (TurnQueueResynced != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(TurnQueueResynced);
+      }
+      upcomingTurnPawnIds_.WriteTo(output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3745,6 +3812,11 @@ namespace Protocol {
         output.WriteRawTag(104);
         output.WriteUInt64(BattleStateVersion);
       }
+      if (TurnQueueResynced != false) {
+        output.WriteRawTag(112);
+        output.WriteBool(TurnQueueResynced);
+      }
+      upcomingTurnPawnIds_.WriteTo(ref output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3790,6 +3862,10 @@ namespace Protocol {
       if (BattleStateVersion != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
+      if (TurnQueueResynced != false) {
+        size += 1 + 1;
+      }
+      size += upcomingTurnPawnIds_.CalculateSize(_repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3843,6 +3919,10 @@ namespace Protocol {
       if (other.BattleStateVersion != 0UL) {
         BattleStateVersion = other.BattleStateVersion;
       }
+      if (other.TurnQueueResynced != false) {
+        TurnQueueResynced = other.TurnQueueResynced;
+      }
+      upcomingTurnPawnIds_.Add(other.upcomingTurnPawnIds_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3916,6 +3996,15 @@ namespace Protocol {
             BattleStateVersion = input.ReadUInt64();
             break;
           }
+          case 112: {
+            TurnQueueResynced = input.ReadBool();
+            break;
+          }
+          case 122:
+          case 120: {
+            upcomingTurnPawnIds_.AddEntriesFrom(input, _repeated_upcomingTurnPawnIds_codec);
+            break;
+          }
         }
       }
     #endif
@@ -3987,6 +4076,15 @@ namespace Protocol {
           }
           case 104: {
             BattleStateVersion = input.ReadUInt64();
+            break;
+          }
+          case 112: {
+            TurnQueueResynced = input.ReadBool();
+            break;
+          }
+          case 122:
+          case 120: {
+            upcomingTurnPawnIds_.AddEntriesFrom(ref input, _repeated_upcomingTurnPawnIds_codec);
             break;
           }
         }
@@ -4441,6 +4539,8 @@ namespace Protocol {
       logs_ = other.logs_.Clone();
       battleStateVersion_ = other.battleStateVersion_;
       tileDeltas_ = other.tileDeltas_.Clone();
+      turnQueueResynced_ = other.turnQueueResynced_;
+      upcomingTurnPawnIds_ = other.upcomingTurnPawnIds_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -4675,6 +4775,29 @@ namespace Protocol {
       get { return tileDeltas_; }
     }
 
+    /// <summary>Field number for the "turn_queue_resynced" field.</summary>
+    public const int TurnQueueResyncedFieldNumber = 20;
+    private bool turnQueueResynced_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool TurnQueueResynced {
+      get { return turnQueueResynced_; }
+      set {
+        turnQueueResynced_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "upcoming_turn_pawn_ids" field.</summary>
+    public const int UpcomingTurnPawnIdsFieldNumber = 21;
+    private static readonly pb::FieldCodec<ulong> _repeated_upcomingTurnPawnIds_codec
+        = pb::FieldCodec.ForUInt64(170);
+    private readonly pbc::RepeatedField<ulong> upcomingTurnPawnIds_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<ulong> UpcomingTurnPawnIds {
+      get { return upcomingTurnPawnIds_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -4709,6 +4832,8 @@ namespace Protocol {
       if(!logs_.Equals(other.logs_)) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
       if(!tileDeltas_.Equals(other.tileDeltas_)) return false;
+      if (TurnQueueResynced != other.TurnQueueResynced) return false;
+      if(!upcomingTurnPawnIds_.Equals(other.upcomingTurnPawnIds_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4735,6 +4860,8 @@ namespace Protocol {
       hash ^= logs_.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
       hash ^= tileDeltas_.GetHashCode();
+      if (TurnQueueResynced != false) hash ^= TurnQueueResynced.GetHashCode();
+      hash ^= upcomingTurnPawnIds_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4820,6 +4947,11 @@ namespace Protocol {
         output.WriteUInt64(BattleStateVersion);
       }
       tileDeltas_.WriteTo(output, _repeated_tileDeltas_codec);
+      if (TurnQueueResynced != false) {
+        output.WriteRawTag(160, 1);
+        output.WriteBool(TurnQueueResynced);
+      }
+      upcomingTurnPawnIds_.WriteTo(output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4897,6 +5029,11 @@ namespace Protocol {
         output.WriteUInt64(BattleStateVersion);
       }
       tileDeltas_.WriteTo(ref output, _repeated_tileDeltas_codec);
+      if (TurnQueueResynced != false) {
+        output.WriteRawTag(160, 1);
+        output.WriteBool(TurnQueueResynced);
+      }
+      upcomingTurnPawnIds_.WriteTo(ref output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4958,6 +5095,10 @@ namespace Protocol {
         size += 2 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
       size += tileDeltas_.CalculateSize(_repeated_tileDeltas_codec);
+      if (TurnQueueResynced != false) {
+        size += 2 + 1;
+      }
+      size += upcomingTurnPawnIds_.CalculateSize(_repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5024,6 +5165,10 @@ namespace Protocol {
         BattleStateVersion = other.BattleStateVersion;
       }
       tileDeltas_.Add(other.tileDeltas_);
+      if (other.TurnQueueResynced != false) {
+        TurnQueueResynced = other.TurnQueueResynced;
+      }
+      upcomingTurnPawnIds_.Add(other.upcomingTurnPawnIds_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5118,6 +5263,15 @@ namespace Protocol {
             tileDeltas_.AddEntriesFrom(input, _repeated_tileDeltas_codec);
             break;
           }
+          case 160: {
+            TurnQueueResynced = input.ReadBool();
+            break;
+          }
+          case 170:
+          case 168: {
+            upcomingTurnPawnIds_.AddEntriesFrom(input, _repeated_upcomingTurnPawnIds_codec);
+            break;
+          }
         }
       }
     #endif
@@ -5210,6 +5364,15 @@ namespace Protocol {
           }
           case 154: {
             tileDeltas_.AddEntriesFrom(ref input, _repeated_tileDeltas_codec);
+            break;
+          }
+          case 160: {
+            TurnQueueResynced = input.ReadBool();
+            break;
+          }
+          case 170:
+          case 168: {
+            upcomingTurnPawnIds_.AddEntriesFrom(ref input, _repeated_upcomingTurnPawnIds_codec);
             break;
           }
         }
@@ -5492,6 +5655,9 @@ namespace Protocol {
       logs_ = other.logs_.Clone();
       battleStateVersion_ = other.battleStateVersion_;
       tileDeltas_ = other.tileDeltas_.Clone();
+      enteringTurnPawnId_ = other.enteringTurnPawnId_;
+      turnQueueResynced_ = other.turnQueueResynced_;
+      upcomingTurnPawnIds_ = other.upcomingTurnPawnIds_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5654,6 +5820,41 @@ namespace Protocol {
       get { return tileDeltas_; }
     }
 
+    /// <summary>Field number for the "entering_turn_pawn_id" field.</summary>
+    public const int EnteringTurnPawnIdFieldNumber = 14;
+    private ulong enteringTurnPawnId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong EnteringTurnPawnId {
+      get { return enteringTurnPawnId_; }
+      set {
+        enteringTurnPawnId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "turn_queue_resynced" field.</summary>
+    public const int TurnQueueResyncedFieldNumber = 15;
+    private bool turnQueueResynced_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool TurnQueueResynced {
+      get { return turnQueueResynced_; }
+      set {
+        turnQueueResynced_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "upcoming_turn_pawn_ids" field.</summary>
+    public const int UpcomingTurnPawnIdsFieldNumber = 16;
+    private static readonly pb::FieldCodec<ulong> _repeated_upcomingTurnPawnIds_codec
+        = pb::FieldCodec.ForUInt64(130);
+    private readonly pbc::RepeatedField<ulong> upcomingTurnPawnIds_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<ulong> UpcomingTurnPawnIds {
+      get { return upcomingTurnPawnIds_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -5682,6 +5883,9 @@ namespace Protocol {
       if(!logs_.Equals(other.logs_)) return false;
       if (BattleStateVersion != other.BattleStateVersion) return false;
       if(!tileDeltas_.Equals(other.tileDeltas_)) return false;
+      if (EnteringTurnPawnId != other.EnteringTurnPawnId) return false;
+      if (TurnQueueResynced != other.TurnQueueResynced) return false;
+      if(!upcomingTurnPawnIds_.Equals(other.upcomingTurnPawnIds_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5702,6 +5906,9 @@ namespace Protocol {
       hash ^= logs_.GetHashCode();
       if (BattleStateVersion != 0UL) hash ^= BattleStateVersion.GetHashCode();
       hash ^= tileDeltas_.GetHashCode();
+      if (EnteringTurnPawnId != 0UL) hash ^= EnteringTurnPawnId.GetHashCode();
+      if (TurnQueueResynced != false) hash ^= TurnQueueResynced.GetHashCode();
+      hash ^= upcomingTurnPawnIds_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5763,6 +5970,15 @@ namespace Protocol {
         output.WriteUInt64(BattleStateVersion);
       }
       tileDeltas_.WriteTo(output, _repeated_tileDeltas_codec);
+      if (EnteringTurnPawnId != 0UL) {
+        output.WriteRawTag(112);
+        output.WriteUInt64(EnteringTurnPawnId);
+      }
+      if (TurnQueueResynced != false) {
+        output.WriteRawTag(120);
+        output.WriteBool(TurnQueueResynced);
+      }
+      upcomingTurnPawnIds_.WriteTo(output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5816,6 +6032,15 @@ namespace Protocol {
         output.WriteUInt64(BattleStateVersion);
       }
       tileDeltas_.WriteTo(ref output, _repeated_tileDeltas_codec);
+      if (EnteringTurnPawnId != 0UL) {
+        output.WriteRawTag(112);
+        output.WriteUInt64(EnteringTurnPawnId);
+      }
+      if (TurnQueueResynced != false) {
+        output.WriteRawTag(120);
+        output.WriteBool(TurnQueueResynced);
+      }
+      upcomingTurnPawnIds_.WriteTo(ref output, _repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5859,6 +6084,13 @@ namespace Protocol {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleStateVersion);
       }
       size += tileDeltas_.CalculateSize(_repeated_tileDeltas_codec);
+      if (EnteringTurnPawnId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(EnteringTurnPawnId);
+      }
+      if (TurnQueueResynced != false) {
+        size += 1 + 1;
+      }
+      size += upcomingTurnPawnIds_.CalculateSize(_repeated_upcomingTurnPawnIds_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5904,6 +6136,13 @@ namespace Protocol {
         BattleStateVersion = other.BattleStateVersion;
       }
       tileDeltas_.Add(other.tileDeltas_);
+      if (other.EnteringTurnPawnId != 0UL) {
+        EnteringTurnPawnId = other.EnteringTurnPawnId;
+      }
+      if (other.TurnQueueResynced != false) {
+        TurnQueueResynced = other.TurnQueueResynced;
+      }
+      upcomingTurnPawnIds_.Add(other.upcomingTurnPawnIds_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -5971,6 +6210,19 @@ namespace Protocol {
             tileDeltas_.AddEntriesFrom(input, _repeated_tileDeltas_codec);
             break;
           }
+          case 112: {
+            EnteringTurnPawnId = input.ReadUInt64();
+            break;
+          }
+          case 120: {
+            TurnQueueResynced = input.ReadBool();
+            break;
+          }
+          case 130:
+          case 128: {
+            upcomingTurnPawnIds_.AddEntriesFrom(input, _repeated_upcomingTurnPawnIds_codec);
+            break;
+          }
         }
       }
     #endif
@@ -6036,6 +6288,19 @@ namespace Protocol {
           }
           case 106: {
             tileDeltas_.AddEntriesFrom(ref input, _repeated_tileDeltas_codec);
+            break;
+          }
+          case 112: {
+            EnteringTurnPawnId = input.ReadUInt64();
+            break;
+          }
+          case 120: {
+            TurnQueueResynced = input.ReadBool();
+            break;
+          }
+          case 130:
+          case 128: {
+            upcomingTurnPawnIds_.AddEntriesFrom(ref input, _repeated_upcomingTurnPawnIds_codec);
             break;
           }
         }

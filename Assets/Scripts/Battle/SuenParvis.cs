@@ -8,8 +8,12 @@ namespace Battle
 	public sealed class SuenParvis : Suen
 	{
 		static readonly int ParvisOnHash = Animator.StringToHash("ParvisOn");
+		static readonly int ParvisOnIdleHash = Animator.StringToHash("Base Layer.Suen_ParvisOn_Idle");
+		static readonly int ParvisOffIdleHash = Animator.StringToHash("Base Layer.Suen_ParvisOff_Idle2");
 
 		Animator _animator;
+		bool _hasAppliedParvisState;
+		bool _lastParvisOffState;
 
 		public const string ParvisOffStatusKey = "SUEN_PARVIS_OFF";
 
@@ -39,7 +43,20 @@ namespace Battle
 				if (parameter.type != AnimatorControllerParameterType.Bool || parameter.nameHash != ParvisOnHash)
 					continue;
 
-				_animator.SetBool(ParvisOnHash, IsParvisOff == false);
+				// The supplied controller's parameter is wired inversely: true takes
+				// ParvisOn Idle to ParvisOff Idle, while false returns to ParvisOn.
+				bool isParvisOff = IsParvisOff;
+				bool stateChanged = _hasAppliedParvisState == false || _lastParvisOffState != isParvisOff;
+				_animator.SetBool(ParvisOnHash, isParvisOff);
+				if (stateChanged)
+				{
+					int idleHash = isParvisOff ? ParvisOffIdleHash : ParvisOnIdleHash;
+					if (_animator.HasState(0, idleHash))
+						_animator.Play(idleHash, 0, 0f);
+				}
+
+				_hasAppliedParvisState = true;
+				_lastParvisOffState = isParvisOff;
 				return;
 			}
 

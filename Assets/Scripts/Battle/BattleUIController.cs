@@ -60,6 +60,7 @@ namespace Battle
 		Text _tileInfoText;
 		PawnPanelView _selectedPawnPanel;
 		PawnPanelView _enemyPawnPanel;
+		BattleTurnQueueView _turnQueueView;
 		GameObject _uiInstance;
 		GameObject _resultOverlay;
 		Text _resultTitleText;
@@ -101,6 +102,7 @@ namespace Battle
 
 		void OnDestroy()
 		{
+			_turnQueueView?.Dispose();
 			UnbindObjectManager();
 			UnsubscribeNetwork();
 			if (_resultCoroutine != null)
@@ -151,6 +153,8 @@ namespace Battle
 			{
 				_objectManager.BattleActionLogApplied += OnBattleActionLogApplied;
 				_objectManager.BattleStatusTickApplied += OnBattleStatusTickApplied;
+				_objectManager.TurnQueueUpdated += OnTurnQueueUpdated;
+				_objectManager.BattlePawnDied += OnBattlePawnDied;
 			}
 		}
 
@@ -160,6 +164,8 @@ namespace Battle
 			{
 				_objectManager.BattleActionLogApplied -= OnBattleActionLogApplied;
 				_objectManager.BattleStatusTickApplied -= OnBattleStatusTickApplied;
+				_objectManager.TurnQueueUpdated -= OnTurnQueueUpdated;
+				_objectManager.BattlePawnDied -= OnBattlePawnDied;
 			}
 
 			_objectManager = null;
@@ -232,6 +238,7 @@ namespace Battle
 			BindActionSlots(_uiInstance.transform);
 			BindTurnExit(_uiInstance.transform);
 			BindStatePanels(_uiInstance.transform);
+			BindTurnQueue(_uiInstance.transform);
 			BindOrLoadResultOverlay();
 			_bound = true;
 			Refresh();
@@ -293,6 +300,48 @@ namespace Battle
 			_gameData = await BattleGameDataRepository.LoadAsync();
 			_isLoadingGameData = false;
 			Refresh();
+		}
+
+		void BindTurnQueue(Transform root)
+		{
+			Transform turnQueue = FindDeepChild(root, "TurnQueue");
+			if (turnQueue == null)
+			{
+				Debug.LogWarning("Missing TurnQueue in BattleSceneUI.");
+				return;
+			}
+
+			_turnQueueView?.Dispose();
+			_turnQueueView = new BattleTurnQueueView(this, turnQueue, ResolvePawnClassForPortrait);
+			if (_objectManager != null && _objectManager.UpcomingTurnPawnIds.Count > 0)
+			{
+				_turnQueueView.Apply(new BattleTurnQueueUpdate(
+					_objectManager.UpcomingTurnPawnIds,
+					BattleTurnQueueUpdateKind.Initialize,
+					new List<ulong>()));
+			}
+		}
+
+		PawnClass ResolvePawnClassForPortrait(ulong pawnId)
+		{
+			if (_objectManager != null
+				&& _objectManager.TryGetPawn(pawnId, out BattlePawn pawn)
+				&& pawn.Info != null)
+			{
+				return pawn.Info.PawnClass;
+			}
+
+			return PawnClass.None;
+		}
+
+		void OnTurnQueueUpdated(BattleTurnQueueUpdate update)
+		{
+			_turnQueueView?.Apply(update);
+		}
+
+		void OnBattlePawnDied(ulong pawnId)
+		{
+			_turnQueueView?.MarkPawnDead(pawnId);
 		}
 
 		void BindTurnExit(Transform root)
