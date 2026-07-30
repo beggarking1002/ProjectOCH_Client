@@ -61,6 +61,8 @@ namespace Battle
 		PawnPanelView _selectedPawnPanel;
 		PawnPanelView _enemyPawnPanel;
 		BattleTurnQueueView _turnQueueView;
+		Image _currentTurnPortraitImage;
+		Image _classMarkImage;
 		GameObject _uiInstance;
 		GameObject _resultOverlay;
 		Text _resultTitleText;
@@ -80,6 +82,8 @@ namespace Battle
 		bool _battleResultAckSent;
 		int _hoveredActionSlotIndex = -1;
 		int _selectedActionSlotIndex = -1;
+		ulong _currentPortraitPawnId;
+		int _currentPortraitRequestVersion;
 
 		public async void Initialize(BattleObjectManager objectManager)
 		{
@@ -236,6 +240,7 @@ namespace Battle
 
 			_uiInstance.transform.localScale = Vector3.one;
 			BindActionSlots(_uiInstance.transform);
+			BindActionBarDisplayFrames(_uiInstance.transform);
 			BindTurnExit(_uiInstance.transform);
 			BindStatePanels(_uiInstance.transform);
 			BindTurnQueue(_uiInstance.transform);
@@ -297,6 +302,69 @@ namespace Battle
 			}
 		}
 
+		void BindActionBarDisplayFrames(Transform root)
+		{
+			Transform actionPanel = FindDeepChild(root, "ActionPanel");
+			if (actionPanel == null)
+				return;
+
+			Sprite frameSprite = _actionImages.Length > 0 && _actionImages[0] != null
+				? _actionImages[0].sprite
+				: null;
+			_currentTurnPortraitImage = CreateOrGetActionBarDisplayFrame(actionPanel, "CurrentTurnPortrait", frameSprite, true);
+			_classMarkImage = CreateOrGetActionBarDisplayFrame(actionPanel, "ClassMark", frameSprite, false);
+			_currentPortraitPawnId = 0;
+			_currentPortraitRequestVersion++;
+		}
+
+		static Image CreateOrGetActionBarDisplayFrame(Transform actionPanel, string frameName, Sprite frameSprite, bool placeFirst)
+		{
+			Transform frame = actionPanel.Find(frameName);
+			if (frame == null)
+			{
+				GameObject frameObject = new GameObject(frameName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(LayoutElement));
+				frameObject.transform.SetParent(actionPanel, false);
+				frame = frameObject.transform;
+			}
+
+			RectTransform frameRect = frame as RectTransform;
+			frameRect.sizeDelta = new Vector2(60f, 68f);
+			Image frameImage = frame.GetComponent<Image>();
+			frameImage.sprite = frameSprite;
+			frameImage.type = Image.Type.Simple;
+			frameImage.raycastTarget = false;
+
+			LayoutElement layout = frame.GetComponent<LayoutElement>();
+			layout.ignoreLayout = false;
+			layout.preferredWidth = 60f;
+			layout.preferredHeight = 68f;
+
+			Transform iconTransform = frame.Find("Icon");
+			if (iconTransform == null)
+			{
+				GameObject iconObject = new GameObject("Icon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+				iconObject.transform.SetParent(frame, false);
+				iconTransform = iconObject.transform;
+			}
+
+			RectTransform iconRect = iconTransform as RectTransform;
+			iconRect.anchorMin = new Vector2(0.15f, 0.12f);
+			iconRect.anchorMax = new Vector2(0.85f, 0.88f);
+			iconRect.offsetMin = Vector2.zero;
+			iconRect.offsetMax = Vector2.zero;
+			Image iconImage = iconTransform.GetComponent<Image>();
+			iconImage.preserveAspect = true;
+			iconImage.raycastTarget = false;
+			iconImage.enabled = false;
+
+			if (placeFirst)
+				frame.SetSiblingIndex(0);
+			else
+				frame.SetAsLastSibling();
+
+			return iconImage;
+		}
+
 		async Task LoadGameDataAsync()
 		{
 			if (_isLoadingGameData)
@@ -317,14 +385,25 @@ namespace Battle
 				return;
 			}
 
-			_turnQueueView?.Dispose();
-			_turnQueueView = new BattleTurnQueueView(this, turnQueue, ResolvePawnClassForPortrait);
-			if (_objectManager != null && _objectManager.UpcomingTurnPawnIds.Count > 0)
+			// The queue is presentation-only. A bad portrait asset must never prevent the
+			// battle scene from finishing its transition (especially in the B-key debug flow).
+			try
 			{
-				_turnQueueView.Apply(new BattleTurnQueueUpdate(
-					_objectManager.UpcomingTurnPawnIds,
-					BattleTurnQueueUpdateKind.Initialize,
-					new List<ulong>()));
+				_turnQueueView?.Dispose();
+				_turnQueueView = new BattleTurnQueueView(this, turnQueue, ResolvePawnClassForPortrait);
+				if (_objectManager != null && _objectManager.UpcomingTurnPawnIds.Count > 0)
+				{
+					_turnQueueView.Apply(new BattleTurnQueueUpdate(
+						_objectManager.UpcomingTurnPawnIds,
+						BattleTurnQueueUpdateKind.Initialize,
+						new List<ulong>()));
+				}
+			}
+			catch (System.Exception exception)
+			{
+				_turnQueueView = null;
+				turnQueue.gameObject.SetActive(false);
+				Debug.LogWarning($"Turn queue was disabled because it failed to initialize. Battle entry will continue. {exception.Message}");
 			}
 		}
 
@@ -893,6 +972,58 @@ namespace Battle
 				_actionTooltips[i] = tooltip;
 				SetActionText(i, label);
 				SetActionIcon(i, iconKey);
+			}
+
+			RefreshCurrentTurnPortrait(currentTurnPawn);
+		}
+
+		void RefreshCurrentTurnPortrait(BattlePawn pawn)
+		{
+			if (_currentTurnPortraitImage == null)
+				return;
+
+			ulong pawnId = pawn != null ? pawn.PawnId : 0;
+			if (_currentPortraitPawnId == pawnId)
+				return;
+
+			_currentPortraitPawnId = pawnId;
+			int requestVersion = ++_currentPortraitRequestVersion;
+			_currentTurnPortraitImage.sprite = null;
+			_currentTurnPortraitImage.enabled = false;
+			if (pawn == null || pawn.Info == null)
+				return;
+
+			string portraitKey = GetPortraitKey(pawn.Info.PawnClass);
+			if (string.IsNullOrWhiteSpace(portraitKey) == false)
+				_ = LoadCurrentTurnPortraitAsync(portraitKey, requestVersion);
+		}
+
+		async Task LoadCurrentTurnPortraitAsync(string portraitKey, int requestVersion)
+		{
+			Sprite portrait = await BattlePortraitSpriteCache.LoadAsync(portraitKey);
+			if (_currentTurnPortraitImage == null || requestVersion != _currentPortraitRequestVersion)
+				return;
+
+			_currentTurnPortraitImage.sprite = portrait;
+			_currentTurnPortraitImage.enabled = portrait != null;
+		}
+
+		static string GetPortraitKey(PawnClass pawnClass)
+		{
+			switch (pawnClass)
+			{
+				case PawnClass.SuenAxeSword:
+				case PawnClass.SuenParvis: return "portrait_suen";
+				case PawnClass.BeigeFire:
+				case PawnClass.BeigeIce: return "portrait_beige";
+				case PawnClass.ZillianLongbow:
+				case PawnClass.ZillianMace: return "portrait_zillian";
+				case PawnClass.AlenSpear:
+				case PawnClass.AlenSwordShield: return "portrait_alen";
+				case PawnClass.SeraNecromancer:
+				case PawnClass.SeraWarlock: return "portrait_sera";
+				case PawnClass.DarkhandSword: return "portrait_odo";
+				default: return string.Empty;
 			}
 		}
 

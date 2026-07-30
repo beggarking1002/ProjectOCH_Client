@@ -11,8 +11,8 @@ using Debug = UnityEngine.Debug;
 
 internal static class MultiplayerBuildAndRun
 {
-    private const int WindowWidth = 960;
-    private const int WindowHeight = 540;
+    private const int WindowWidth = 1980;
+    private const int WindowHeight = 1080;
 
     private static readonly List<Process> Processes = new();
 
@@ -96,7 +96,7 @@ internal static class MultiplayerBuildAndRun
         PlayerSettings.defaultScreenWidth = WindowWidth;
         PlayerSettings.defaultScreenHeight = WindowHeight;
         PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
-        PlayerSettings.resizableWindow = true;
+        PlayerSettings.resizableWindow = false;
         PlayerSettings.runInBackground = true;
 
         if (BuildAddressables() == false)

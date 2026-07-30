@@ -1,44 +1,38 @@
-# Project OCH Client — 세션 시작 가이드
+# Project OCH Client 문서 시작 가이드
 
-> 새 Codex 세션에서는 이 문서부터 읽고, 이어서 아래 링크의 문서를 순서대로 읽는다.
+> 기준일: 2026-07-29. 이 폴더는 Obsidian Vault로 열 수 있는 클라이언트 기술 문서다.
 
-## 문서 지도
+## 문서 순서
 
-1. [01_Architecture.md](01_Architecture.md) — 실행 흐름, 장면, 런타임 구성
-2. [02_Gameplay_Protocol_Data.md](02_Gameplay_Protocol_Data.md) — 필드/전투 동작, 서버 패킷, 게임 데이터
-3. [03_Current_Status_Workflow.md](03_Current_Status_Workflow.md) — 현재 구현 상태, 검증 방법, 작업 규칙
+1. [01_Architecture.md](01_Architecture.md): 런타임, 씬, 모듈, 스레드 경계
+2. [02_Gameplay_Protocol_Data.md](02_Gameplay_Protocol_Data.md): 필드/전투 규칙, 패킷, CSV 계약
+3. [03_Current_Status_Workflow.md](03_Current_Status_Workflow.md): 구현 현황, 검증 절차, 남은 작업
 
-## 프로젝트 한 줄 설명
+## 프로젝트 한눈에 보기
 
-Unity 6로 제작 중인 2D 멀티플레이어 전술 게임 클라이언트다. 필드에서 다른 플레이어에게 전투를 신청하고, 서버가 권위(authoritative)를 갖는 턴제 헥스 전투를 진행한다.
+- Unity `6000.3.9f1`, URP 2D 기반의 2D 멀티플레이 턴제 전술 게임 클라이언트다.
+- 기본 실행 씬은 `TitleScene`이며, 흐름은 `TitleScene → FieldScene → BattleScene → FieldScene`이다.
+- 게임 서버 기본 주소는 `127.0.0.1:7777`이다. 이 저장소에는 서버 구현이 포함되지 않는다.
+- 서버가 전투 및 필드 상태의 최종 권위다. 클라이언트의 거리/타일 검사는 입력 UX를 위한 보조 검증이다.
+- 맵, Pawn 시각 프리팹, UI, 타일, 스킬 아이콘, CSV는 Addressables로 로드한다.
 
-## 작업 전 반드시 확인할 것
+## 빠른 진입점
 
-- Unity 버전: `6000.3.9f1`
-- 기본 실행 장면: `TitleScene`
-- 서버 기본 주소: `127.0.0.1:7777`
-- 현재 작업 트리에는 **커밋되지 않은 전투 UI / GameData / 스킬 아이콘 / Addressables / Pawn 프리팹 변경**이 있다. 기존 변경을 덮어쓰거나 되돌리지 않는다.
-- `Assets/Scripts/Packet/Generated/`의 Protobuf 생성 코드는 직접 수정하지 않는다. 프로토콜 변경은 서버 원본 `.proto` 및 생성 절차에서 처리해야 한다.
-
-## 빠른 코드 진입점
-
-| 관심사 | 첫 파일 |
+| 관심사 | 시작 파일 |
 | --- | --- |
-| 앱 부트스트랩 / 서비스 | `Assets/Scripts/App/GameRoot.cs` |
-| 네트워크 송수신 | `Assets/Scripts/Services/Network/NetworkService.cs` |
-| 장면 전환 | `Assets/Scripts/Scenes/TitleSceneFlow.cs`, `BattleSceneFlow.cs` |
-| 필드 플레이어 | `Assets/Scripts/Field/FieldObjectManager.cs` |
-| 전투 상태 반영 / 입력 | `Assets/Scripts/Battle/BattleObjectManager.cs` |
-| 전투 맵 / 좌표 변환 / 타일 Overlay | `Assets/Scripts/Battle/BattleMapGrid.cs` |
-| 전투 Pawn 공통 상태 / 팀 링 | `Assets/Scripts/Battle/BattlePawn.cs` |
-| Beige Ice 고유 Aura | `Assets/Scripts/Battle/BeigeIce.cs` |
-| 전투 UI | `Assets/Scripts/Battle/BattleUIController.cs` |
+| 부트스트랩/전역 서비스 | `Assets/Scripts/App/GameRoot.cs` |
+| 네트워크 서비스 | `Assets/Scripts/Services/Network/NetworkService.cs` |
+| 씬 흐름 | `Assets/Scripts/Scenes/TitleSceneFlow.cs`, `BattleSceneFlow.cs` |
+| 필드 객체/초대 | `Assets/Scripts/Field/FieldObjectManager.cs`, `FieldBattleInviteUI.cs` |
+| 전투 상태/입력 | `Assets/Scripts/Battle/BattleObjectManager.cs` |
+| 전투 맵/좌표 | `Assets/Scripts/Battle/BattleMapGrid.cs` |
+| Pawn 공통 상태/표현 | `Assets/Scripts/Battle/BattlePawn.cs` |
+| 전투 UI/턴 큐/결과 | `Assets/Scripts/Battle/BattleUIController.cs`, `BattleTurnQueueView.cs` |
 | CSV GameData | `Assets/Scripts/Battle/BattleGameDataRepository.cs` |
 
-## 현재 개발 원칙
+## 작업 전 주의사항
 
-- 전투의 판정과 상태 전이는 서버가 최종 결정한다.
-- 클라이언트 검증은 잘못된 입력을 줄이기 위한 UX 보조일 뿐, 보안 또는 최종 판정이 아니다.
-- 런타임 콘텐츠는 Addressables 주소로 로드한다. 새 런타임 에셋을 추가하면 Addressables 등록과 빌드 반영까지 확인한다.
-- Battle 프로토콜의 좌표는 순수 axial이다. Unity Tilemap cell 좌표를 패킷에 직접 사용하지 않는다.
-- 기능을 수정하면 가능한 한 C# 빌드와 Unity Play Mode 흐름을 모두 확인한다.
+- `Assets/Scripts/Packet/Generated/`는 Protobuf 생성 코드다. `.proto` 원본과 생성 절차 없이 직접 수정하지 않는다.
+- 전투 좌표는 서버의 pure axial 좌표다. Unity Tilemap cell 좌표와 혼용하지 말고 `BattleMapGrid` 변환 함수를 사용한다.
+- Addressables 주소/프리팹/CSV를 변경하면 Unity Editor에서 Addressables 콘텐츠 빌드와 Play Mode 검증까지 수행한다.
+- 문서가 바뀌는 구조/계약을 다루는 작업이면 이 Vault도 같은 변경에서 갱신한다.

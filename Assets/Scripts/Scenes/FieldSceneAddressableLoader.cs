@@ -1,16 +1,17 @@
+using System.Collections;
+using Field;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
-using Field;
-using System.Collections;
 
 namespace Scenes
 {
 	public sealed class FieldSceneAddressableLoader : MonoBehaviour
 	{
 		const string FieldSceneName = "FieldScene";
-		const string FieldMapAddress = "Field_001";
+		const string FieldWalkMapAddress = "Field_001_WalkMap";
+		const string FieldLogicRootName = "@FieldLogic";
 		const string WorldMapAddress = "WorldMapRoot";
 		const string FieldPawnAddress = "Pawn_Beige_Fire";
 		const int WorldMapSortingOrderOffset = 1;
@@ -18,10 +19,11 @@ namespace Scenes
 
 		static FieldSceneAddressableLoader _instance;
 
-		AsyncOperationHandle<GameObject> _fieldMapHandle;
+		AsyncOperationHandle<TextAsset> _walkMapHandle;
 		AsyncOperationHandle<GameObject> _worldMapHandle;
+		GameObject _fieldLogicRoot;
 		FieldObjectManager _objectManager;
-		bool _hasFieldMapHandle;
+		bool _hasWalkMapHandle;
 		bool _hasWorldMapHandle;
 		bool _isLoading;
 		bool _isLocalPawnReady;
@@ -47,7 +49,7 @@ namespace Scenes
 
 			Scene activeScene = SceneManager.GetActiveScene();
 			if (activeScene.isLoaded && activeScene.name == FieldSceneName)
-				LoadFieldMap();
+				LoadFieldSceneContent();
 		}
 
 		void OnDisable()
@@ -61,7 +63,7 @@ namespace Scenes
 		{
 			if (scene.name == FieldSceneName)
 			{
-				LoadFieldMap();
+				LoadFieldSceneContent();
 				return;
 			}
 
@@ -75,9 +77,9 @@ namespace Scenes
 				ReleaseFieldSceneAddressables();
 		}
 
-		async void LoadFieldMap()
+		async void LoadFieldSceneContent()
 		{
-			if (_isLoading || _hasFieldMapHandle)
+			if (_isLoading || _hasWalkMapHandle)
 				return;
 
 			_isLoading = true;
@@ -94,52 +96,51 @@ namespace Scenes
 			}
 			StartCoroutine(FieldReadyTimeout(version));
 
-			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldMapAddress);
-			_fieldMapHandle = handle;
-			_hasFieldMapHandle = true;
-
+			AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(FieldWalkMapAddress);
+			_walkMapHandle = handle;
+			_hasWalkMapHandle = true;
 			await handle.Task;
-
 			_isLoading = false;
 
 			if (version != _loadVersion || SceneManager.GetActiveScene().name != FieldSceneName)
 			{
-				ReleaseHandle(handle);
+				ReleaseWalkMapHandle(handle);
 				return;
 			}
 
-			if (handle.Status != AsyncOperationStatus.Succeeded)
+			if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
 			{
-				Debug.LogError($"Failed to load addressable map: {FieldMapAddress}");
-				ReleaseHandle(handle);
+				Debug.LogError($"Failed to load field walk map JSON: {FieldWalkMapAddress}");
+				ReleaseWalkMapHandle(handle);
 				SceneTransitionOverlay.Hide();
 				return;
 			}
 
-			GameObject fieldMap = handle.Result;
-			fieldMap.name = FieldMapAddress;
-			FieldMapWalkArea walkArea = fieldMap.GetComponent<FieldMapWalkArea>();
-			if (walkArea == null)
-				walkArea = fieldMap.AddComponent<FieldMapWalkArea>();
+			_fieldLogicRoot = new GameObject(FieldLogicRootName);
+			SceneManager.MoveGameObjectToScene(_fieldLogicRoot, SceneManager.GetActiveScene());
+			FieldMapWalkArea walkArea = _fieldLogicRoot.AddComponent<FieldMapWalkArea>();
+			if (walkArea.Initialize(handle.Result.text) == false)
+			{
+				Debug.LogError($"Failed to initialize field walk map JSON: {FieldWalkMapAddress}");
+				Destroy(_fieldLogicRoot);
+				_fieldLogicRoot = null;
+				ReleaseWalkMapHandle(handle);
+				SceneTransitionOverlay.Hide();
+				return;
+			}
 
-			walkArea.InitializeIfNeeded();
-			SceneManager.MoveGameObjectToScene(fieldMap, SceneManager.GetActiveScene());
-			Debug.Log($"Loaded addressable map: {FieldMapAddress}");
-
-			FieldObjectManager objectManager = fieldMap.GetComponent<FieldObjectManager>();
-			if (objectManager == null)
-				objectManager = fieldMap.AddComponent<FieldObjectManager>();
-
+			Debug.Log($"Loaded field walk map JSON: {walkArea.MapId}. Tilemap prefab is not instantiated.");
+			FieldObjectManager objectManager = _fieldLogicRoot.AddComponent<FieldObjectManager>();
 			_objectManager = objectManager;
 			_objectManager.LocalPawnReady -= OnLocalPawnReady;
 			_objectManager.LocalPawnReady += OnLocalPawnReady;
 			objectManager.Initialize(walkArea, FieldPawnAddress);
 			_isLocalPawnReady = objectManager.IsLocalPawnReady;
 			TryCompleteFieldSceneTransition();
-			LoadWorldMap(fieldMap, version);
+			LoadWorldMap(_fieldLogicRoot.transform, version);
 		}
 
-		async void LoadWorldMap(GameObject fieldMap, int version)
+		async void LoadWorldMap(Transform logicRoot, int version)
 		{
 			if (_hasWorldMapHandle)
 				return;
@@ -148,7 +149,6 @@ namespace Scenes
 			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(WorldMapAddress);
 			_worldMapHandle = handle;
 			_hasWorldMapHandle = true;
-
 			await handle.Task;
 
 			if (version != _loadVersion || SceneManager.GetActiveScene().name != FieldSceneName)
@@ -168,9 +168,8 @@ namespace Scenes
 
 			GameObject worldMap = handle.Result;
 			worldMap.name = WorldMapAddress;
-			worldMap.transform.position = fieldMap.transform.position;
-			worldMap.transform.rotation = fieldMap.transform.rotation;
-
+			worldMap.transform.position = logicRoot.position;
+			worldMap.transform.rotation = logicRoot.rotation;
 			ApplyWorldMapSorting(worldMap);
 			SceneManager.MoveGameObjectToScene(worldMap, SceneManager.GetActiveScene());
 			Debug.Log($"Loaded addressable world map: {WorldMapAddress}");
@@ -187,15 +186,19 @@ namespace Scenes
 			_fieldSceneTransitionCompleted = false;
 			UnsubscribeObjectManagerReady();
 
-			if (_hasFieldMapHandle && _fieldMapHandle.IsValid())
-				Addressables.ReleaseInstance(_fieldMapHandle);
+			if (_fieldLogicRoot != null)
+				Destroy(_fieldLogicRoot);
+
+			if (_hasWalkMapHandle && _walkMapHandle.IsValid())
+				Addressables.Release(_walkMapHandle);
 
 			if (_hasWorldMapHandle && _worldMapHandle.IsValid())
 				Addressables.ReleaseInstance(_worldMapHandle);
 
-			_hasFieldMapHandle = false;
+			_fieldLogicRoot = null;
+			_hasWalkMapHandle = false;
 			_hasWorldMapHandle = false;
-			_fieldMapHandle = default;
+			_walkMapHandle = default;
 			_worldMapHandle = default;
 		}
 
@@ -238,15 +241,15 @@ namespace Scenes
 			_objectManager = null;
 		}
 
-		void ReleaseHandle(AsyncOperationHandle<GameObject> handle)
+		void ReleaseWalkMapHandle(AsyncOperationHandle<TextAsset> handle)
 		{
 			if (handle.IsValid())
-				Addressables.ReleaseInstance(handle);
+				Addressables.Release(handle);
 
-			if (_hasFieldMapHandle && _fieldMapHandle.Equals(handle))
+			if (_hasWalkMapHandle && _walkMapHandle.Equals(handle))
 			{
-				_hasFieldMapHandle = false;
-				_fieldMapHandle = default;
+				_hasWalkMapHandle = false;
+				_walkMapHandle = default;
 			}
 		}
 

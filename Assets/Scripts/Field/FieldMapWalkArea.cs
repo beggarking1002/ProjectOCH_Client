@@ -1,93 +1,149 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Field
 {
 	[DisallowMultipleComponent]
 	public sealed class FieldMapWalkArea : MonoBehaviour
 	{
-		[SerializeField] Grid grid;
-		[SerializeField] Tilemap groundTilemap;
-		[SerializeField] Tilemap blockTilemap;
-		[SerializeField] bool useBlockTilemap;
+		readonly HashSet<Vector2Int> _walkableCells = new HashSet<Vector2Int>();
+
+		FieldWalkMapData _data;
 
 		public Transform PlaneTransform => transform;
+		public bool IsInitialized => _data != null && _walkableCells.Count > 0;
+		public string MapId => _data?.map_id;
 
-		void Awake()
+		public bool Initialize(string json)
 		{
-			InitializeIfNeeded();
-		}
-
-		void OnValidate()
-		{
-			InitializeIfNeeded();
-		}
-
-		public void InitializeIfNeeded()
-		{
-			if (grid == null)
-				grid = GetComponent<Grid>();
-
-			if (groundTilemap == null)
+			if (string.IsNullOrWhiteSpace(json))
 			{
-				Transform ground = transform.Find("Ground_Tilemap");
-				if (ground != null)
-					groundTilemap = ground.GetComponent<Tilemap>();
+				Debug.LogError($"{nameof(FieldMapWalkArea)} received an empty walk map JSON.");
+				return false;
 			}
 
-			if (blockTilemap == null)
-				blockTilemap = FindChildTilemap("Block_Tilemap", "Prop_Tilemap");
+			FieldWalkMapData data = JsonUtility.FromJson<FieldWalkMapData>(json);
+			return Initialize(data);
+		}
+
+		public bool Initialize(FieldWalkMapData data)
+		{
+			_walkableCells.Clear();
+			_data = null;
+
+			if (data == null || data.fixed_point_scale <= 0 || data.cell_size.x <= 0f || data.cell_size.y <= 0f)
+			{
+				Debug.LogError($"{nameof(FieldMapWalkArea)} received invalid walk map metadata.");
+				return false;
+			}
+
+			if (data.walkable_ranges != null)
+			{
+				for (int i = 0; i < data.walkable_ranges.Count; i++)
+				{
+					FieldWalkMapRange range = data.walkable_ranges[i];
+					if (range.x_min > range.x_max)
+						continue;
+
+					for (int x = range.x_min; x <= range.x_max; x++)
+						_walkableCells.Add(new Vector2Int(x, range.y));
+				}
+			}
+
+			if (_walkableCells.Count == 0)
+			{
+				Debug.LogError($"{nameof(FieldMapWalkArea)} map '{data.map_id}' has no walkable cells.");
+				return false;
+			}
+
+			_data = data;
+			return true;
 		}
 
 		public Vector3 GetDefaultSpawnPosition(float z)
 		{
-			EnsureGrid();
+			EnsureInitialized();
 
-			Vector3 position = grid.GetCellCenterWorld(Vector3Int.zero);
-			position.z = z;
-			return position;
+			Vector2Int spawnCell = new Vector2Int(0, 0);
+			if (_walkableCells.Contains(spawnCell) == false)
+				spawnCell = GetNearestWalkableCell(Vector2Int.zero);
+
+			return CellToWorld(spawnCell, z);
 		}
 
 		public bool IsWalkable(Vector3 worldPosition)
 		{
-			EnsureGrid();
-			Vector3Int cell = grid.WorldToCell(worldPosition);
+			if (IsInitialized == false)
+				return false;
 
-			return HasGroundTile(cell) && (useBlockTilemap == false || HasBlockTile(cell) == false);
+			return _walkableCells.Contains(WorldToNearestCell(worldPosition));
 		}
 
-		bool HasGroundTile(Vector3Int cell)
+		Vector3 CellToWorld(Vector2Int cell, float z)
 		{
-			return groundTilemap != null && groundTilemap.HasTile(cell);
+			float x = _data.origin_world.x + (cell.x + GetOddRowOffset(cell.y)) * _data.cell_size.x;
+			float y = _data.origin_world.y + cell.y * _data.cell_size.y * 0.75f;
+			return new Vector3(x, y, z);
 		}
 
-		bool HasBlockTile(Vector3Int cell)
+		Vector2Int WorldToNearestCell(Vector3 worldPosition)
 		{
-			return blockTilemap != null && blockTilemap.HasTile(cell);
-		}
+			float rowStep = _data.cell_size.y * 0.75f;
+			int estimatedRow = Mathf.RoundToInt((worldPosition.y - _data.origin_world.y) / rowStep);
+			int estimatedColumn = Mathf.RoundToInt(
+				(worldPosition.x - _data.origin_world.x) / _data.cell_size.x - GetOddRowOffset(estimatedRow));
 
-		Tilemap FindChildTilemap(params string[] names)
-		{
-			for (int i = 0; i < names.Length; i++)
+			Vector2Int nearestCell = new Vector2Int(estimatedColumn, estimatedRow);
+			float nearestDistance = float.MaxValue;
+			for (int y = estimatedRow - 1; y <= estimatedRow + 1; y++)
 			{
-				Transform child = transform.Find(names[i]);
-				if (child == null)
-					continue;
+				for (int x = estimatedColumn - 1; x <= estimatedColumn + 1; x++)
+				{
+					Vector2Int candidate = new Vector2Int(x, y);
+					float distance = (CellToWorld(candidate, worldPosition.z) - worldPosition).sqrMagnitude;
+					if (distance >= nearestDistance)
+						continue;
 
-				Tilemap tilemap = child.GetComponent<Tilemap>();
-				if (tilemap != null)
-					return tilemap;
+					nearestDistance = distance;
+					nearestCell = candidate;
+				}
 			}
 
-			return null;
+			return nearestCell;
 		}
 
-		void EnsureGrid()
+		Vector2Int GetNearestWalkableCell(Vector2Int origin)
 		{
-			InitializeIfNeeded();
+			Vector2Int result = default;
+			int nearestDistance = int.MaxValue;
+			foreach (Vector2Int candidate in _walkableCells)
+			{
+				int distance = Mathf.Abs(candidate.x - origin.x) + Mathf.Abs(candidate.y - origin.y);
+				if (distance > nearestDistance || (distance == nearestDistance && CompareCell(candidate, result) >= 0))
+					continue;
 
-			if (grid == null)
-				throw new MissingComponentException($"{nameof(FieldMapWalkArea)} requires a Grid component.");
+				nearestDistance = distance;
+				result = candidate;
+			}
+
+			return result;
+		}
+
+		static int CompareCell(Vector2Int left, Vector2Int right)
+		{
+			int byY = left.y.CompareTo(right.y);
+			return byY != 0 ? byY : left.x.CompareTo(right.x);
+		}
+
+		static float GetOddRowOffset(int row)
+		{
+			return (row & 1) == 0 ? 0f : 0.5f;
+		}
+
+		void EnsureInitialized()
+		{
+			if (IsInitialized == false)
+				throw new MissingReferenceException($"{nameof(FieldMapWalkArea)} requires a loaded walk map JSON.");
 		}
 	}
 }

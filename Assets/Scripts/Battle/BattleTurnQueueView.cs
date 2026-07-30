@@ -433,24 +433,52 @@ namespace Battle
 	static class BattlePortraitSpriteCache
 	{
 		static readonly Dictionary<string, Sprite> Sprites = new Dictionary<string, Sprite>();
+		static readonly Dictionary<string, System.Threading.Tasks.Task<Sprite>> PendingLoads = new Dictionary<string, System.Threading.Tasks.Task<Sprite>>();
+		static readonly HashSet<string> FailedAddresses = new HashSet<string>();
 
-		public static async System.Threading.Tasks.Task<Sprite> LoadAsync(string address)
+		public static System.Threading.Tasks.Task<Sprite> LoadAsync(string address)
 		{
 			if (Sprites.TryGetValue(address, out Sprite sprite))
-				return sprite;
+				return System.Threading.Tasks.Task.FromResult(sprite);
+			if (FailedAddresses.Contains(address))
+				return System.Threading.Tasks.Task.FromResult<Sprite>(null);
+			if (PendingLoads.TryGetValue(address, out System.Threading.Tasks.Task<Sprite> pendingLoad))
+				return pendingLoad;
 
-			AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(address);
-			await handle.Task;
-			if (handle.Status == AsyncOperationStatus.Succeeded)
+			System.Threading.Tasks.Task<Sprite> loadTask = LoadNewAsync(address);
+			PendingLoads[address] = loadTask;
+			return loadTask;
+		}
+
+		static async System.Threading.Tasks.Task<Sprite> LoadNewAsync(string address)
+		{
+			AsyncOperationHandle<Sprite> handle = default;
+			try
 			{
-				Sprites[address] = handle.Result;
-				return handle.Result;
-			}
+				handle = Addressables.LoadAssetAsync<Sprite>(address);
+				await handle.Task;
+				if (handle.Status == AsyncOperationStatus.Succeeded)
+				{
+					Sprites[address] = handle.Result;
+					return handle.Result;
+				}
 
-			Debug.LogWarning($"Failed to load battle portrait address '{address}'.");
-			if (handle.IsValid())
-				Addressables.Release(handle);
-			return null;
+				FailedAddresses.Add(address);
+				Debug.LogWarning($"Failed to load battle portrait address '{address}'. The battle will continue without that portrait.");
+				return null;
+			}
+			catch (Exception exception)
+			{
+				FailedAddresses.Add(address);
+				Debug.LogWarning($"Battle portrait load failed for '{address}', but battle entry will continue. {exception.Message}");
+				return null;
+			}
+			finally
+			{
+				PendingLoads.Remove(address);
+				if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
+					Addressables.Release(handle);
+			}
 		}
 	}
 }

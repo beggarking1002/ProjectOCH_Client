@@ -246,24 +246,17 @@ namespace Battle
 				return;
 
 			InitializeIfNeeded();
-			bool canRedrawGround = normalGroundTile != null && waterGroundTile != null;
-			if (canRedrawGround == false)
-			{
-				// The base terrain is authored in the map prefab. This fallback also keeps
-				// an older Addressables bundle from making the map disappear while its
-				// serialized TileBase references are refreshed by the next content build.
-				Debug.LogWarning($"{nameof(BattleMapGrid)} is using the authored Ground_Tilemap because the loaded map does not contain NORMAL/WATER Tile references. Rebuild Addressables content before making a player build.");
-			}
 
+			// The walkmap JSON describes the server-authoritative valid-cell set, not
+			// every authored ground or prop cell. Keep the prefab's static terrain so
+			// non-walkable cells (such as the ground beneath trees) remain visible.
 			_serverTileStates.Clear();
 			ClearEquipmentMarkers();
-			if (canRedrawGround)
-				groundTilemap?.ClearAllTiles();
 
 			combatOverlayTilemap?.ClearAllTiles();
 
 			for (int i = 0; i < tileSnapshot.Count; i++)
-				ApplyTileState(tileSnapshot[i], updateGroundVisual: canRedrawGround);
+				ApplyTileState(tileSnapshot[i], updateGroundVisual: false);
 
 			_hasServerTileSnapshot = true;
 		}

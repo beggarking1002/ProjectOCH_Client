@@ -67,11 +67,14 @@ namespace Battle
 		readonly List<AxialCoord> _knownTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _skillRangeTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _validTargetTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _reachableMoveTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _affectedTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _zocTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _zocAttackerTiles = new List<AxialCoord>();
 		readonly HashSet<AxialCoord> _zocFrontier = new HashSet<AxialCoord>();
 		readonly HashSet<AxialCoord> _zocNextFrontier = new HashSet<AxialCoord>();
+		readonly Queue<MoveSearchNode> _moveSearchQueue = new Queue<MoveSearchNode>();
+		readonly HashSet<AxialCoord> _moveSearchVisited = new HashSet<AxialCoord>();
 
 		BattleMapGrid _mapGrid;
 		BattleGameDataRepository _gameData;
@@ -103,6 +106,18 @@ namespace Battle
 				PawnId = pawnId;
 				StatusKey = statusKey;
 				Amount = amount;
+			}
+		}
+
+		readonly struct MoveSearchNode
+		{
+			public readonly AxialCoord Axial;
+			public readonly int Steps;
+
+			public MoveSearchNode(AxialCoord axial, int steps)
+			{
+				Axial = axial;
+				Steps = steps;
 			}
 		}
 
@@ -608,12 +623,6 @@ namespace Battle
 				return;
 			}
 
-			if (_mapGrid.IsWalkable(axial) == false)
-			{
-				Debug.Log($"Clicked blocked battle tile. axial={axial}");
-				return;
-			}
-
 			if (TryGetControllablePawnId(out ulong movingPawnId) == false)
 			{
 				Debug.Log($"No controllable battle pawn. currentTurnPawnId={_currentTurnPawnId}, battleId={_battleId}");
@@ -622,6 +631,12 @@ namespace Battle
 
 			if (_pawns.TryGetValue(movingPawnId, out BattlePawn myPawn) == false)
 				return;
+
+			if (IsReachableMoveTarget(myPawn, axial) == false)
+			{
+				Debug.Log($"Clicked unreachable battle tile. pawnId={movingPawnId}, axial={axial}");
+				return;
+			}
 
 			if (_battleId != 0 && GameRoot.Instance != null)
 			{
@@ -1045,24 +1060,55 @@ namespace Battle
 			_affectedTargetTiles.Clear();
 			_zocTiles.Clear();
 			_zocAttackerTiles.Clear();
-			_mapGrid.GetKnownTileAxials(_knownTargetTiles);
-			for (int i = 0; i < _knownTargetTiles.Count; i++)
-			{
-				AxialCoord axial = _knownTargetTiles[i];
-				int distance = movingPawn.Axial.DistanceTo(axial);
-				if (distance <= 0 || distance > movingPawn.MoveRange)
-					continue;
-
-				if (_mapGrid.IsWalkable(axial) == false || FindPawnIdAtAxial(axial) != 0)
-					continue;
-
-				_validTargetTiles.Add(axial);
-			}
+			BuildReachableMoveTiles(movingPawn, _validTargetTiles);
 
 			if (TryGetPointerAxial(out AxialCoord hoveredAxial) && _validTargetTiles.Contains(hoveredAxial))
 				CollectMoveZocPreview(movingPawn);
 
 			_targetPreview.ShowMoveWithZoc(_mapGrid, _validTargetTiles, _zocTiles, _zocAttackerTiles);
+		}
+
+		bool IsReachableMoveTarget(BattlePawn movingPawn, AxialCoord targetAxial)
+		{
+			BuildReachableMoveTiles(movingPawn, _reachableMoveTiles);
+			return _reachableMoveTiles.Contains(targetAxial);
+		}
+
+		// Uses the same blocked-tile and occupant rules as the movement preview. This
+		// intentionally searches paths rather than axial distance, so a pawn cannot
+		// select a tile behind an obstacle or another pawn.
+		void BuildReachableMoveTiles(BattlePawn movingPawn, List<AxialCoord> reachableTiles)
+		{
+			reachableTiles.Clear();
+			_moveSearchQueue.Clear();
+			_moveSearchVisited.Clear();
+
+			if (_mapGrid == null || movingPawn == null || movingPawn.IsDead || movingPawn.CanMove == false || movingPawn.MoveRange <= 0)
+				return;
+
+			_moveSearchVisited.Add(movingPawn.Axial);
+			_moveSearchQueue.Enqueue(new MoveSearchNode(movingPawn.Axial, 0));
+
+			while (_moveSearchQueue.Count > 0)
+			{
+				MoveSearchNode current = _moveSearchQueue.Dequeue();
+				if (current.Steps >= movingPawn.MoveRange)
+					continue;
+
+				for (int direction = 0; direction < 6; direction++)
+				{
+					AxialCoord next = _mapGrid.GetNeighbor(current.Axial, direction);
+					if (_moveSearchVisited.Add(next) == false)
+						continue;
+
+					// A blocked or occupied tile is not a destination and cannot be passed through.
+					if (_mapGrid.IsWalkable(next) == false || FindPawnIdAtAxial(next) != 0)
+						continue;
+
+					reachableTiles.Add(next);
+					_moveSearchQueue.Enqueue(new MoveSearchNode(next, current.Steps + 1));
+				}
+			}
 		}
 
 		void CollectMoveZocPreview(BattlePawn movingPawn)

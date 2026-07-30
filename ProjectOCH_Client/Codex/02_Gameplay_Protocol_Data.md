@@ -1,118 +1,84 @@
-# 게임플레이, 전투, 데이터 계약
+# 게임플레이, 패킷, 데이터 계약
 
-> 패킷 계약, 스킬 슬롯, CSV 컬럼 또는 서버-클라이언트 책임이 바뀌면 이 문서를 갱신한다.
+> 기준일: 2026-07-29. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
 
 ## 필드
 
-- `FieldObjectManager`가 `S_ENTER_GAME`, `S_SPAWN`, `S_DESPAWN`, `S_MOVE`를 구독해 Pawn을 생성·제거·이동시킨다.
-- `FieldPawnController`는 로컬 Pawn의 클릭 이동을 `C_MOVE`로 보낸다. 클라이언트 타일 판정은 UX 보조이며 서버가 최종 판정한다.
-- 다른 플레이어 Pawn 클릭은 `FieldBattleInviteUI`를 열고 전투 초대 패킷을 보낸다.
-- `B` 키의 `C_ENTER_BATTLE`은 개발/디버그 진입 경로다.
+- `S_ENTER_GAME`, `S_SPAWN`, `S_DESPAWN`, `S_MOVE`는 `FieldObjectManager`가 구독해 필드 Pawn을 생성, 제거, 이동시킨다.
+- `Field_001_WalkMap` JSON의 압축 walkable range는 로컬 클릭 프리뷰와 기본 spawn 위치에만 사용한다. `WorldMapRoot`는 시각 표현만 담당하며, 필드 Tilemap 프리팹은 런타임에 로드하지 않는다.
+- 로컬 Pawn 클릭 이동은 `C_MOVE`를 전송하며, 서버의 `S_MOVE`로 모든 클라이언트가 실제 이동을 반영한다.
+- 다른 플레이어 Pawn을 클릭하면 `FieldBattleInviteUI`가 확인 창을 표시한다. `C_BATTLE_INVITE`와 `C_BATTLE_INVITE_RESPONSE`의 결과가 수락되면 서버가 `S_ENTER_BATTLE`을 전송한다.
+- `B` 키의 `C_ENTER_BATTLE`은 개발/디버그 진입 경로다. 실사용 멀티플레이 검증과 구분한다.
 
 ## 전투 요청과 응답
 
-`BattleObjectManager`가 전투 입력과 서버 응답의 최종 상태 반영을 맡는다.
-
-| 흐름 | 요청 | 응답에서 할 일 |
+| 동작 | 클라이언트 요청 | 서버 응답에서 적용할 상태 |
 | --- | --- | --- |
-| 입장 | `C_ENTER_BATTLE` | `S_ENTER_BATTLE` 스냅샷으로 기존 Pawn을 제거·재생성하고 전체 타일을 초기화 |
-| 이동 | `C_BATTLE_MOVE` | `S_BATTLE_MOVE.pawn_deltas`로 모든 변경 Pawn을 갱신, 위치·Facing·턴 전환 반영 |
-| 스킬 | `C_BATTLE_SKILL` | `S_BATTLE_SKILL.pawn_deltas`, `tile_deltas`, logs를 모두 반영 |
-| 턴 종료 | `C_BATTLE_END_TURN` | `S_BATTLE_END_TURN.pawn_deltas`, `tile_deltas`, logs를 모두 반영 |
-| 사망 / 결과 | - | `S_BATTLE_PAWN_DEAD`, `S_BATTLE_RESULT` 처리 후 결과 ACK |
+| 입장 | `C_ENTER_BATTLE` 또는 초대 수락 | `S_ENTER_BATTLE` snapshot, 전투 맵, 아군/적 Pawn, 턴 큐 |
+| 이동 | `C_BATTLE_MOVE` | 이동, AP/이동 가능 여부, reaction log, Pawn delta, 다음 턴 |
+| 스킬 | `C_BATTLE_SKILL` | Pawn delta, tile delta, action log, 턴/행동 상태 |
+| 턴 종료 | `C_BATTLE_END_TURN` | Pawn/tile delta, 로그, 다음 턴/턴 큐 |
+| 사망 | 없음 | `S_BATTLE_PAWN_DEAD`로 Pawn 사망 표현 |
+| 결과 | 없음 | `S_BATTLE_RESULT` 후 결과 UI, `C_BATTLE_RESULT_ACK` |
+| 복귀 | `C_BATTLE_RESULT_ACK` | `S_BATTLE_RESULT_ACK` 성공 시 FieldScene |
 
-### 스킬 대상 계약
+클라이언트는 성공 응답의 `battle_state_version`만 새 버전으로 적용한다. 과거 또는 중복 버전은 무시한다. 로그는 애니메이션/표시용이며, HP·방어막·상태 등의 최종 값은 언제나 `BattlePawnInfo`/`BattlePawnDelta`에서 얻는다.
 
-- 요청의 권위 있는 대상은 항상 `target_axial`이다.
-- Pawn 클릭은 해당 Pawn의 axial, Self/SELF_TOGGLE은 caster axial, `TILE_OR_ENEMY`는 빈 타일 axial을 보낸다.
-- 호환용 `target_pawn_id`는 클라이언트가 `0`으로 보내고 서버가 axial에서 실제 Pawn을 찾는다.
-- 응답의 `target_pawn_id == 0`은 빈 타일 결과다. 대상 Pawn을 찾아서 HP를 직접 바꾸지 않는다.
-- 클라이언트의 대상 검사와 사거리 표시는 입력 UX 보조다. 최종 대상·피해·사망·AP는 서버 응답을 따른다.
-- `EMPTY_TILE`은 Pawn이 없는 타일만 대상으로 삼는다. `RequiredOverlayType=FIRE`는 해당 타일이 FIRE Overlay인 경우에만 유효하다.
-- `TargetShape=RADIUS_1`은 선택 타일과 인접 6칸, `LINE_3`은 서버와 같은 axial 방향으로 선택 타일에서 이어지는 3칸을 프리뷰로 표시한다.
-- Overlay Teleport은 `S_BATTLE_SKILL.target_axial`이 서버가 확정한 caster의 새 위치다. `BattlePawnDelta`에는 axial이 없으므로, 성공 응답에서만 이 좌표를 Pawn Transform과 내부 axial에 함께 반영한다.
-- 전투 맵 프리뷰는 모든 클래스의 `BattleSkill` 사거리와 대상 계약을 공통으로 표시한다. 이동 모드에서는 현재 Pawn의 `MoveRange` 안에서 서버 타일 상태·Prop·점유를 통과하는 빈 칸을 표시한다.
+## 전투 입력과 미리보기
 
-## 상태 스냅샷과 버전
+- 이동 모드는 가중치 없는 BFS로 `MoveRange` 안의 도달 가능한 타일을 계산하고, 지형/Prop/현재 점유 상태를 반영한다.
+- ZOC 범위 및 반응 가능 타일도 미리보기로 표시한다. 최종 이동 가능성과 반응은 서버가 판단한다.
+- 스킬 미리보기는 `RangeMin/RangeMax`, 대상 종류, `TargetShape`(`RADIUS_1`, `LINE_3` 등), overlay 조건을 기반으로 한다.
+- Fire Wall 계열 `LINE_3`은 시작 타일과 인접 방향 타일을 순서대로 고르는 2단계 입력이다.
+- 스킬 요청의 권위 있는 대상은 `target_axial`이다. `target_pawn_id`는 클라이언트가 0으로 보내고 서버가 axial에서 실제 Pawn을 찾는다.
+- 서버 응답 중 `target_pawn_id == 0`은 타일 전용 결과일 수 있다. 이 경우에도 HP를 직접 계산하지 않고 delta만 적용한다.
 
-`BattlePawnInfo`는 입장 전체 상태, `BattlePawnDelta`는 이동·스킬·턴 종료의 최신 상태다. **로그로 수치를 계산하지 않고 Delta를 최종 상태로 적용한다.**
+## 맵과 타일
 
-| 상태 | 클라이언트 보관 / UI 규칙 |
-| --- | --- |
-| 기본 | HP, Armor, AP, 이동 가능, 행동 사용 여부, 사망, Facing |
-| Resource | `BattleResourceType → value/max_value`. 목록이 비면 자원 UI를 숨긴다. Beige Ice만 COLD 게이지 사용 |
-| Barrier | armor는 기본 장갑, barriers는 ID별 임시 보호막. 보호 바는 재계산하지 않고 `shield_current/shield_max` 사용 |
-| Status | `status_key → stacks/remaining_owner_turns` |
-| Aura | `source_skill_key → radius` |
+- `BattleTileInfo`는 axial 좌표, 정적 `tile_type`(NORMAL/WATER), 동적 `overlay_type`(NONE/ICE/FIRE)를 보관한다.
+- 입장 snapshot은 Ground 및 CombatOverlay를 초기화한다. 이후 `tile_deltas`는 CombatOverlay만 변경한다.
+- 기본 규칙은 NORMAL은 이동 가능, WATER는 ICE일 때만 이동 가능이며, Prop은 별도 이동 차단 요소다. 서버가 최종 판정한다.
 
-- `Resources`, `Barriers`, `Statuses`, `Auras`는 모두 **부분 병합이 아닌 전체 교체 스냅샷**이다. 빈 배열은 기존 상태를 비운다.
-- `S_BATTLE_SKILL`과 `S_BATTLE_END_TURN`의 `pawn_deltas`는 caster/primary target만 가정하지 말고 전부 순회한다. 강화 실드·우박·Aura는 여러 Pawn을 바꿀 수 있다.
-- `battle_state_version`은 성공 패킷에 대해 단조 증가한다. 현재 버전보다 큰 경우만 상태와 연출을 적용한다. 낮은 버전은 과거 패킷, 같은 버전은 중복 패킷으로 무시한다.
-- `BattleActionLog`는 피해 숫자·애니메이션용이다. HP·보호막·자원·상태의 최종 수치는 항상 Pawn Delta다.
+## Pawn 상태
 
-## 타일 동기화와 이동 규칙
+`BattlePawn`은 다음 상태를 유지한다.
 
-- `BattleTileInfo` = `axial`, 원본 `tile_type`(NORMAL/WATER), 동적 `overlay_type`(NONE/ICE/FIRE).
-- `S_ENTER_BATTLE.tiles`는 전투 맵 전체 스냅샷이다.
-- 스킬·턴 종료의 `tile_deltas`는 변경 타일만 전달하며 Ground/Prop을 바꾸지 않고 `CombatOverlay_Tilemap`만 갱신한다.
-- 이동 표현 규칙: `NORMAL + NONE/ICE/FIRE` 가능, `WATER + NONE/FIRE` 불가, `WATER + ICE` 가능. Prop은 별도로 이동을 막는다.
+- 기본: HP, Armor, Shield, AP, MoveRange, 이동/행동 가능 여부, 현재 턴, 사망, 방향
+- 전체 교체 snapshot: Resources, Barriers, Statuses, Auras
+- 표현: 클래스별 animator/VFX, 팀 링, 월드 상태 UI, 피격/스킬/사망 애니메이션
 
-## 스킬 슬롯 계약
+Resources/Barriers/Statuses/Auras는 부분 병합이 아니라 전달된 배열 전체로 교체한다. 빈 배열은 기존 상태를 비운다.
 
-| UI 노드 | `BattleActionMode` | slot | 용도 |
-| --- | --- | ---: | --- |
-| `ActionSlot_01` | `Passive` | 1 | 패시브 표시 전용 |
-| `ActionSlot_02` | `Skill1` | 2 | 일반 스킬 1 |
-| `ActionSlot_03` | `Skill2` | 3 | 일반 스킬 2 |
-| `ActionSlot_04` | `Skill3` | 4 | 일반 스킬 3 |
-| `ActionSlot_05` | `Skill4` | 5 | 일반 스킬 4 |
-| `ActionSlot_06` | `Ultimate` | 6 | 궁극기 |
-| `ActionSlot_07` | `SubAction` | 7 | 보조 행동 |
-| `ActionSlot_08` | `Move` | 8 | 이동 모드 |
+## 현재 데이터 클래스와 표현
 
-턴 종료는 `TurnExit` 버튼이며 스킬 슬롯이 아니다. 궁극기는 `UsedUltimate`, 보조 행동은 `UsedSubActionThisTurn`으로 UI에서 비활성화한다.
+CSV `ClassKey.csv`에는 Beige Ice/Fire, Suen Axe/Parvis, Alen Shield/Spear, Zillian Longbow/Mace가 정의돼 있다. 현재 전용 클라이언트 표현은 Beige Ice/Fire, Suen Axe, Suen Parvis, Alen Spear, Zillian Longbow에 연결돼 있으며, 나머지는 공통 fallback 표현을 사용한다.
 
-스킬 슬롯의 루트 Image는 기본 더미가 아니라 클래스 스킬 아이콘으로 직접 교체된다. 아이콘 위에 별도 `Icon` 오브젝트를 겹치거나 스킬 이름 `Label`을 표시하지 않는다. 상세 이름·설명은 툴팁이 담당한다.
+- `SuenAxe`: `SUEN_AXE_AXE_OFF` 상태로 장비 animator와 슬롯 아이콘/이름을 변경한다.
+- `SuenParvis`: `SUEN_PARVIS_OFF` 상태에 따라 같은 슬롯의 활성 스킬 key와 animator 상태를 전환한다.
+- `AlenSpear`: Sentinel/Charge Command 관련 상태 라벨과 아이콘을 제공한다.
+- `ZillianLongbow`: 슬롯별 아이콘/명칭과 longbow animator 제스처를 제공한다.
+- `BeigeIce`: Aura 상태에 따른 주변 VFX와 COLD/상태 UI를 표현한다.
 
-## Beige Ice 현재 스킬 계약
+## 전투 UI
 
-| slot | 스킬 | 대상 | 서버 권위 결과 / 클라이언트 표현 |
-| ---: | --- | --- | --- |
-| 1 | 냉기 축적 | Passive | COLD 최대치·감소·역류 규칙 |
-| 2 | 아이스 볼트 | 적 단일 | 피해와 COLD +1 Delta |
-| 3 | 아이스 실드 | 아군 단일 | Barrier / Shield Delta, 강화 시 인접 추가 대상 가능 |
-| 4 | 우박 | 타일 또는 적 | 빈 타일 ICE Overlay, 물은 인접 6칸 ICE, 적 타일은 동상; 강화 시 삼각 3칸 가능 |
-| 5 | 폭풍의 중심 | Self Toggle | `BEIGE_ICE_STORM_CENTER` Aura. Pawn 부착형 반경 VFX, Aura tick은 로그와 모든 Pawn Delta로 반영 |
-| 6 | 차가운 노력가 | Self | 3 owner turns 면역 `IMM`과 강화 `EMP`; 강화 Aura는 서버가 radius 2를 전송 |
-| 7 | 해동 포션 | Self | COLD를 floor(절반)으로 감소, `DMG` 상태 2 owner turns, 턴당 1회 |
+- 8개 행동 슬롯: passive(1), skill 1~4(2~5), ultimate(6), sub action(7), move(8)
+- `TurnQueue`는 서버의 upcoming turn snapshot/resync를 초상화 순서와 애니메이션으로 표현한다.
+- 현재 턴 Pawn의 초상화, 양쪽 Pawn 상태 패널, HP/Shield/Resource/Morale bar, 상태 아이콘, 툴팁을 제공한다.
+- `S_BATTLE_RESULT` 수신 후 약 2초 뒤 결과 오버레이를 표시하고, 확인 버튼이 ACK를 한 번만 전송한다.
 
-강화/포션의 실제 피해 배율, 추가 대상, 대상 모양, 지속시간은 서버와 Delta가 권위 있다. 현재 클라이언트에는 스킬별 범위 미리보기는 없으며 Aura VFX만 서버 Aura radius를 직접 표현한다.
-
-## GameData와 아이콘
-
-`BattleGameDataRepository`는 Addressables CSV를 우선 로드하고, 에디터에서는 `Assets/GameData` fallback을 사용한다.
+## CSV GameData
 
 | 파일 | 책임 |
 | --- | --- |
-| `ClassKey.csv` | `PawnClass`와 클래스 키 매핑 |
-| `PawnTemplate.csv` | Pawn 기본 전투 템플릿 |
-| `BattleSkill.csv` | 슬롯, AP, 사거리, 대상 유형 |
-| `BattleSkillEffect.csv` | 효과 정의 |
-| `BattleSkillEffectParam.csv` | 효과별 파라미터·상태 키·강화 modifier |
-| `BattleSkillView.csv` | 아이콘 키, 애니메이션 트리거, VFX/SFX 키 |
-| `DisplayText.csv` | 툴팁 이름·짧은 설명·상세 설명 |
-| `EnumDef.csv` | 표기용 enum / 상태 키 정의 |
+| `ClassKey.csv` | 클래스 key와 `PawnClass` 매핑 |
+| `PawnTemplate.csv` | Pawn 역할 및 기본 능력치 |
+| `BattleSkill.csv` | 슬롯, AP, 사거리, 대상/형태/overlay 요구 조건 |
+| `BattleSkillEffect.csv` | 효과 그룹과 실행 순서 |
+| `BattleSkillEffectParam.csv` | 효과 파라미터/상태 modifier |
+| `BattleSkillView.csv` | 애니메이션 trigger, VFX/SFX, 아이콘 주소 |
+| `BattleZoc.csv` | ZOC 범위, 전방 arc, 반응 제한/트리거 |
+| `DisplayText.csv` | 다국어 표시 텍스트 |
+| `EnumDef.csv` | enum/상태 정의 |
+| `BattleConfig.csv`, `BattleMapTile.csv` | 전투 설정과 맵 타일 원본 |
 
-`SkillIcon` Addressables 그룹에는 Beige Ice의 `icon_beige_ice_passive`, `skill1`~`skill4`, `ulti`, `sub` 주소가 등록돼 있다. 새 아이콘 또는 CSV를 플레이어 빌드에 반영하려면 Addressables 콘텐츠 빌드가 필요하다.
-
-`BattleSkill.csv`의 `TargetShape`, `RequiredOverlayType`은 서버 데이터 계약과 동기화한다. 현재 Beige Fire는 HEAT 자원을 사용하며 Fireball(단일), Explosion(`RADIUS_1`), Fire Wall(`LINE_3` + FIRE), Teleport(`EMPTY_TILE` + FIRE), Ambitious, Cooling Potion을 제공한다.
-
-## 핵심 패킷
-
-| 흐름 | 클라이언트 → 서버 | 서버 → 클라이언트 |
-| --- | --- | --- |
-| 입장 | `C_LOGIN`, `C_ENTER_GAME` | `S_LOGIN`, `S_ENTER_GAME`, `S_SPAWN` |
-| 필드 | `C_MOVE`, `C_CHAT` | `S_MOVE`, `S_DESPAWN`, `S_CHAT` |
-| 초대 | `C_BATTLE_INVITE`, `C_BATTLE_INVITE_RESPONSE` | 초대 요청/수신/결과 |
-| 전투 | `C_ENTER_BATTLE`, `C_BATTLE_MOVE`, `C_BATTLE_SKILL`, `C_BATTLE_END_TURN` | 입장, 이동, 스킬, 턴 종료, 사망, 결과 |
-| 전투 종료 | `C_BATTLE_RESULT_ACK` | `S_BATTLE_RESULT_ACK` |
+`BattleGameDataRepository`는 런타임에서 Addressables CSV를 우선 사용하고, 에디터 환경에서는 `Assets/GameData`를 fallback으로 사용한다.
