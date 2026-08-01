@@ -69,8 +69,8 @@ namespace Battle
 			switch (actionSlot)
 			{
 				case 1: skillKey = "SUEN_PARVIS_MAN_IN_HELL"; return true;
-				case 2: skillKey = IsParvisOff ? "SUEN_PARVIS_STAND_SHOT_OFF" : "SUEN_PARVIS_INSTALL"; return true;
-				case 3: skillKey = IsParvisOff ? "SUEN_PARVIS_SIT_SHOT" : "SUEN_PARVIS_STAND_SHOT_ON"; return true;
+				case 2: skillKey = IsParvisOff ? "SUEN_PARVIS_SIT_SHOT" : "SUEN_PARVIS_INSTALL"; return true;
+				case 3: skillKey = IsParvisOff ? "SUEN_PARVIS_STAND_SHOT_OFF" : "SUEN_PARVIS_STAND_SHOT_ON"; return true;
 				case 4: skillKey = "SUEN_PARVIS_POINT_BLANK"; return true;
 				case 5: skillKey = IsParvisOff ? "SUEN_PARVIS_ROLL_SHOT" : "SUEN_PARVIS_YABAWI"; return true;
 				case 6: skillKey = "SUEN_PARVIS_DARK_HAND"; return true;
@@ -85,13 +85,22 @@ namespace Battle
 			iconKey = null;
 			switch (actionSlot)
 			{
-				case 1: displayName = "Man in Hell"; return true;
-				case 2: displayName = IsParvisOff ? "Stand Shot" : "Install Parvis"; return true;
-				case 3: displayName = IsParvisOff ? "Sit Shot" : "Stand Shot"; return true;
-				case 4: displayName = "Point Blank"; return true;
-				case 5: displayName = IsParvisOff ? "Roll Shot" : "Yabawi"; return true;
-				case 6: displayName = "Dark Hand"; return true;
-				case 7: displayName = "Pickup Parvis"; return true;
+				case 1: displayName = "Man in Hell"; iconKey = "icon_suen_parvis_passive"; return true;
+				case 2:
+					displayName = IsParvisOff ? "Sit Shot" : "Install Parvis";
+					iconKey = IsParvisOff ? "icon_suen_parvis_skill2" : "icon_suen_parvis_on_skill1";
+					return true;
+				case 3:
+					displayName = "Stand Shot";
+					iconKey = IsParvisOff ? "icon_suen_parvis_off_skill1" : "icon_suen_parvis_on_skill1";
+					return true;
+				case 4: displayName = "Point Blank"; iconKey = "icon_suen_parvis_skill3"; return true;
+				case 5:
+					displayName = IsParvisOff ? "Roll Shot" : "Yabawi";
+					iconKey = IsParvisOff ? "icon_suen_parvis_off_skill4" : "icon_suen_parvis_on_skill4";
+					return true;
+				case 6: displayName = "Dark Hand"; iconKey = "icon_suen_parvis_ulti"; return true;
+				case 7: displayName = "Pickup Parvis"; iconKey = "icon_suen_parvis_sub"; return true;
 				default: return false;
 			}
 		}

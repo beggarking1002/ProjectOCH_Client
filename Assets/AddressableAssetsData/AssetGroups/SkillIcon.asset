@@ -189,6 +189,60 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdfd9a53f75dbba468195e8cc66db731
+    m_Address: icon_suen_parvis_passive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 807ece9184bd6cf4389f6457166436e0
+    m_Address: icon_suen_parvis_off_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fdc1c3d25465944ea94d70210d8a816
+    m_Address: icon_suen_parvis_on_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8cff117394b2ab4cb56e06b03c900b7
+    m_Address: icon_suen_parvis_skill2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 985d9b041a9736b479812636824bf7a3
+    m_Address: icon_suen_parvis_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50b4d8d55e597864a8a50448ab3145bd
+    m_Address: icon_suen_parvis_off_skill4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d129c0f5ed709446b9232597d66431c
+    m_Address: icon_suen_parvis_on_skill4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 424d7db1695831745adffd8967b1473d
+    m_Address: icon_suen_parvis_ulti
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5434708531994ac4e9c8cdd7ada45838
+    m_Address: icon_suen_parvis_sub
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 194451487dcafd7408dc79e8f0b14ed4
     m_Address: icon_beige_ice_skill3
     m_ReadOnly: 0

@@ -1578,9 +1578,10 @@ namespace Battle
 
 		static bool ShouldSkipSkillAnimation(BattlePawn casterPawn, int skillSlot)
 		{
-			// Parvis install/first-slot action and pickup are equipment interactions;
-			// they intentionally resolve without a character skill gesture.
-			return casterPawn is SuenParvis && (skillSlot == 2 || skillSlot == 7);
+			// Only installation and pickup are equipment interactions. When Parvis is
+			// installed, slot 2 changes to Sit Shot and must play its Skill2 gesture.
+			return casterPawn is SuenParvis parvis
+				&& ((skillSlot == 2 && parvis.IsParvisOff == false) || skillSlot == 7);
 		}
 
 		void QueueSkillActionSequence(
