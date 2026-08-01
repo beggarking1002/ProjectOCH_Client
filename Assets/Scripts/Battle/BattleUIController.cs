@@ -953,6 +953,13 @@ namespace Battle
 						tooltip = BuildSkillTooltip(skill, label);
 						iconKey = alenIconKey;
 					}
+					else if (currentTurnPawn is AlenSwordShield alenSwordShield
+						&& alenSwordShield.TryGetSkillPresentation(skill.ActionSlot, out string shieldName, out string shieldIconKey))
+					{
+						label = shieldName;
+						tooltip = BuildSkillTooltip(skill, label);
+						iconKey = shieldIconKey;
+					}
 					else if (currentTurnPawn is ZillianLongbow zillianLongbow
 						&& zillianLongbow.TryGetSkillPresentation(skill.ActionSlot, out string zillianName, out string zillianIconKey))
 					{
@@ -1296,6 +1303,8 @@ namespace Battle
 				string displayName = SuenAxe.GetStatusDisplayName(status.StatusKey);
 					if (string.Equals(displayName, status.StatusKey, System.StringComparison.Ordinal))
 						displayName = AlenSpear.GetStatusDisplayName(status.StatusKey);
+					if (string.Equals(displayName, status.StatusKey, System.StringComparison.Ordinal))
+						displayName = AlenSwordShield.GetStatusDisplayName(status.StatusKey);
 					if (string.Equals(displayName, status.StatusKey, System.StringComparison.Ordinal))
 						displayName = SuenParvis.GetStatusDisplayName(status.StatusKey);
 				values.Add($"{displayName} x{status.Stacks} T{status.RemainingOwnerTurns}");
@@ -2040,6 +2049,10 @@ namespace Battle
 				if (string.IsNullOrWhiteSpace(alenLabel) == false)
 					return alenLabel;
 
+				string alenShieldLabel = AlenSwordShield.GetStatusIconLabel(statusKey);
+				if (string.IsNullOrWhiteSpace(alenShieldLabel) == false)
+					return alenShieldLabel;
+
 				string parvisLabel = SuenParvis.GetStatusIconLabel(statusKey);
 				if (string.IsNullOrWhiteSpace(parvisLabel) == false)
 					return parvisLabel;
@@ -2086,6 +2099,17 @@ namespace Battle
 					if (key.IndexOf("YABAWI", System.StringComparison.OrdinalIgnoreCase) >= 0)
 						return new Color(0.35f, 0.75f, 0.88f, 0.96f);
 					return new Color(0.42f, 0.58f, 0.78f, 0.96f);
+				}
+
+				if (AlenSwordShield.GetStatusIconLabel(key) != null)
+				{
+					if (key.IndexOf("TAUNT", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.83f, 0.36f, 0.24f, 0.96f);
+					if (key.IndexOf("DUEL", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.78f, 0.48f, 0.82f, 0.96f);
+					if (key.IndexOf("RESPONSIBILITY", System.StringComparison.OrdinalIgnoreCase) >= 0)
+						return new Color(0.32f, 0.64f, 0.9f, 0.96f);
+					return new Color(0.42f, 0.62f, 0.88f, 0.96f);
 				}
 
 				if (key.IndexOf("COLD_HARD_WORKER_EMPOWERED", System.StringComparison.OrdinalIgnoreCase) >= 0)

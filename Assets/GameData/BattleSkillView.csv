@@ -28,6 +28,13 @@ ALEN_SPEAR_LIONHEART_3,,,,icon_alen_spear_skill3
 ALEN_SPEAR_SENTINEL,,,,icon_alen_spear_skill4
 ALEN_SPEAR_CHARGE_COMMAND,,,,icon_alen_spear_ulti
 ALEN_SPEAR_MORALE_BOOST,,,,icon_alen_spear_sub
+ALEN_SHIELD_CARBAS_WILL,,,,icon_alen_shield_passive
+ALEN_SHIELD_EFFORT,Skill1,,,icon_alen_shield_skill1
+ALEN_SHIELD_STANCE,Skill2,,,icon_alen_shield_skill2
+ALEN_SHIELD_RESPONSIBILITY,Skill2,,,icon_alen_shield_skill3
+ALEN_SHIELD_PRIDE,Skill1,,,icon_alen_shield_skill4
+ALEN_SHIELD_DUEL_MASTER,Skill2,,,icon_alen_shield_ulti
+ALEN_SHIELD_MORALE_BOOST,Skill2,,,icon_alen_shield_sub
 ZILLIAN_LONGBOW_SAINTLY_BURDEN,,,,icon_zillian_longbow_passive
 ZILLIAN_LONGBOW_BASIC_ARCHERY,Skill1,,,icon_zillian_longbow_skill1
 ZILLIAN_LONGBOW_ROUGH_HEALING,Skill1,,,icon_zillian_longbow_skill2

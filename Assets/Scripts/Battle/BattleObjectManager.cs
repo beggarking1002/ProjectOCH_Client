@@ -464,6 +464,8 @@ namespace Battle
 						return pawnObject.AddComponent<SuenParvis>();
 					case Protocol.PawnClass.AlenSpear:
 						return pawnObject.AddComponent<AlenSpear>();
+					case Protocol.PawnClass.AlenSwordShield:
+						return pawnObject.AddComponent<AlenSwordShield>();
 					case Protocol.PawnClass.ZillianLongbow:
 						return pawnObject.AddComponent<ZillianLongbow>();
 					case Protocol.PawnClass.BeigeIce:

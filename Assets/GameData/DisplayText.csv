@@ -21,3 +21,24 @@ SKILL,BEIGE_ICE_COLD_HARD_WORKER,DESC,"3턴간 냉기 중첩으로 받는 피해
 SKILL,BEIGE_ICE_THAWING_POTION,NAME,해동 포션,,보조행동 표시 이름
 SKILL,BEIGE_ICE_THAWING_POTION,SHORT,"냉기 절반 제거, 공격력 감소",,보조행동 짧은 설명
 SKILL,BEIGE_ICE_THAWING_POTION,DESC,현재 쌓인 냉기를 절반 제거합니다. 사용한 턴과 다음 턴 동안 공격력이 10% 감소합니다.,,보조행동 상세 설명
+SKILL,ALEN_SHIELD_CARBAS_WILL,NAME,카르바스 가문의 의지,,패시브 표시 이름
+SKILL,ALEN_SHIELD_CARBAS_WILL,SHORT,사기 감소량 70% 경감,,패시브 짧은 설명
+SKILL,ALEN_SHIELD_CARBAS_WILL,DESC,사기가 감소할 때 감소량의 30%만 적용됩니다.,,패시브 상세 설명
+SKILL,ALEN_SHIELD_EFFORT,NAME,노력,,스킬 표시 이름
+SKILL,ALEN_SHIELD_EFFORT,SHORT,인접 적 대상 검 공격,,스킬 짧은 설명
+SKILL,ALEN_SHIELD_EFFORT,DESC,인접한 적 하나를 검으로 공격하는 기본 공격입니다.,,스킬 상세 설명
+SKILL,ALEN_SHIELD_STANCE,NAME,황실 기사단식 방패술/카르바스식 방검술,,스킬 표시 이름
+SKILL,ALEN_SHIELD_STANCE,SHORT,반격 태세와 피해 경감 태세 전환,,스킬 짧은 설명
+SKILL,ALEN_SHIELD_STANCE,DESC,카르바스식 방패술에서는 피격 시 반격하고 황실 기사단식 방패술에서는 반격하지 않는 대신 받는 피해를 경감합니다.,,스킬 상세 설명
+SKILL,ALEN_SHIELD_RESPONSIBILITY,NAME,책임감,,스킬 표시 이름
+SKILL,ALEN_SHIELD_RESPONSIBILITY,SHORT,아군과 위치 교환 후 대신 피격,,스킬 짧은 설명
+SKILL,ALEN_SHIELD_RESPONSIBILITY,DESC,인접한 아군 하나와 위치를 교환합니다. 이후 3턴 동안 인접 아군이 피격될 때 대신 맞고 방어력이 증가합니다.,,스킬 상세 설명
+SKILL,ALEN_SHIELD_PRIDE,NAME,자존심,,스킬 표시 이름
+SKILL,ALEN_SHIELD_PRIDE,SHORT,최대 2칸 돌진 및 인접 적 도발,,스킬 짧은 설명
+SKILL,ALEN_SHIELD_PRIDE,DESC,최대 2칸 돌진합니다. 적과 충돌하면 밀어내고 알렌은 그 적이 있던 타일로 전진합니다. 충돌 지점 뒤가 막혀 있으면 양쪽에 어지러움을 부여합니다. 이후 인접 적을 도발합니다.,,스킬 상세 설명
+SKILL,ALEN_SHIELD_DUEL_MASTER,NAME,결투의 대가,,궁극기 표시 이름
+SKILL,ALEN_SHIELD_DUEL_MASTER,SHORT,4턴간 방어력 일부를 근력으로 전환,,궁극기 짧은 설명
+SKILL,ALEN_SHIELD_DUEL_MASTER,DESC,4턴 동안 방어력의 50%를 근력으로 전환하는 자기 강화 궁극기입니다.,,궁극기 상세 설명
+SKILL,ALEN_SHIELD_MORALE_BOOST,NAME,사기진작,,보조행동 표시 이름
+SKILL,ALEN_SHIELD_MORALE_BOOST,SHORT,3타일 내 아군 한 명의 사기 회복,,보조행동 짧은 설명
+SKILL,ALEN_SHIELD_MORALE_BOOST,DESC,3타일 안의 아군 한 명의 사기를 회복합니다.,,보조행동 상세 설명

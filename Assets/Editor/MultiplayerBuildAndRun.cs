@@ -11,8 +11,10 @@ using Debug = UnityEngine.Debug;
 
 internal static class MultiplayerBuildAndRun
 {
-    private const int WindowWidth = 1980;
-    private const int WindowHeight = 1080;
+    // Two 960x540 windowed clients fit side-by-side on a 1080p monitor for
+    // multiplayer smoke tests, including their title bars and desktop margin.
+    private const int WindowWidth = 960;
+    private const int WindowHeight = 540;
 
     private static readonly List<Process> Processes = new();
 
