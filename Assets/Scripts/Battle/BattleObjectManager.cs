@@ -87,6 +87,7 @@ namespace Battle
 		bool _missingCameraLogged;
 		bool _isAnimatingMove;
 		bool _isPlayingSkillActionSequence;
+		bool _isAwaitingOptionalPositionSwap;
 		Coroutine _skillActionSequenceCoroutine;
 		Coroutine _moveReactionSequenceCoroutine;
 		bool _isLoadingGameData;
@@ -128,7 +129,7 @@ namespace Battle
 		public ulong CurrentTurnPawnId => _currentTurnPawnId;
 		public BattleActionMode ActionMode => _actionMode;
 		public bool IsAnimatingMove => _isAnimatingMove;
-		public bool IsInteractionLocked => _isAnimatingMove || _isPlayingSkillActionSequence || _actionMode == BattleActionMode.WaitingServer;
+		public bool IsInteractionLocked => _isAnimatingMove || _isPlayingSkillActionSequence || _isAwaitingOptionalPositionSwap || _actionMode == BattleActionMode.WaitingServer;
 		public bool IsCurrentTurnLocal => _currentTurnPawnId != 0
 			&& _localPawnIds.Contains(_currentTurnPawnId)
 			&& _pawns.TryGetValue(_currentTurnPawnId, out BattlePawn currentTurnPawn)
@@ -140,6 +141,7 @@ namespace Battle
 		public event System.Action<BattlePawn, string, int> BattleStatusTickApplied;
 		public event System.Action<BattleTurnQueueUpdate> TurnQueueUpdated;
 		public event System.Action<ulong> BattlePawnDied;
+		public event System.Action<System.Action<bool>> OptionalPositionSwapChoiceRequested;
 
 		public void Initialize(BattleMapGrid mapGrid, string pawnAddress)
 		{
@@ -468,6 +470,8 @@ namespace Battle
 						return pawnObject.AddComponent<AlenSwordShield>();
 					case Protocol.PawnClass.ZillianLongbow:
 						return pawnObject.AddComponent<ZillianLongbow>();
+					case Protocol.PawnClass.ZillianMace:
+						return pawnObject.AddComponent<ZillianMace>();
 					case Protocol.PawnClass.BeigeIce:
 						return pawnObject.AddComponent<BeigeIce>();
 					case Protocol.PawnClass.BeigeFire:
@@ -704,24 +708,76 @@ namespace Battle
 
 			if (_battleId != 0 && GameRoot.Instance != null)
 			{
+				if (IsZillianMaceOptionalSwapSkill(casterPawn, skillSlot))
+				{
+					RequestOptionalPositionSwapChoice(casterPawnId, skillSlot, targetAxial, resolvedTargetPawnId);
+					return;
+				}
+
 				// The server resolves the target Pawn from target_axial. The legacy
 				// target_pawn_id field is intentionally sent as zero by NetworkService.
-				bool sent = GameRoot.Instance.Network.SendBattleSkill(_battleId, casterPawnId, skillSlot, targetAxial.Q, targetAxial.R);
-				if (sent)
-				{
-					_actionMode = BattleActionMode.WaitingServer;
-					Debug.Log($"Sent C_BATTLE_SKILL. battleId={_battleId}, casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId=0, axial={targetAxial}, locallyResolvedPawnId={resolvedTargetPawnId}");
-				}
-				else
-				{
-					Debug.LogWarning($"Failed to send C_BATTLE_SKILL. {GameRoot.Instance.Network.LastError}");
-				}
+				SendBattleSkillRequest(casterPawnId, skillSlot, targetAxial, resolvedTargetPawnId, false);
 
 				return;
 			}
 
 			Debug.Log($"Skill debug selected. casterPawnId={casterPawnId}, skillSlot={skillSlot}, resolvedTargetPawnId={resolvedTargetPawnId}, axial={targetAxial}");
 			_actionMode = BattleActionMode.Move;
+		}
+
+		static bool IsZillianMaceOptionalSwapSkill(BattlePawn casterPawn, int skillSlot)
+		{
+			return casterPawn is ZillianMace && skillSlot == 7;
+		}
+
+		void RequestOptionalPositionSwapChoice(ulong casterPawnId, int skillSlot, AxialCoord targetAxial, ulong resolvedTargetPawnId)
+		{
+			if (_isAwaitingOptionalPositionSwap)
+				return;
+
+			_isAwaitingOptionalPositionSwap = true;
+			System.Action<bool> resolveChoice = requestSwap =>
+			{
+				if (_isAwaitingOptionalPositionSwap == false)
+					return;
+
+				_isAwaitingOptionalPositionSwap = false;
+				SendBattleSkillRequest(casterPawnId, skillSlot, targetAxial, resolvedTargetPawnId, requestSwap);
+			};
+
+			if (OptionalPositionSwapChoiceRequested != null)
+			{
+				OptionalPositionSwapChoiceRequested.Invoke(resolveChoice);
+				return;
+			}
+
+			Debug.LogWarning("Optional position-swap UI is unavailable. Sending the skill without a swap request.");
+			resolveChoice(false);
+		}
+
+		void SendBattleSkillRequest(ulong casterPawnId, int skillSlot, AxialCoord targetAxial, ulong resolvedTargetPawnId, bool requestOptionalPositionSwap)
+		{
+			if (_battleId == 0 || GameRoot.Instance == null)
+				return;
+
+			bool sent = GameRoot.Instance.Network.SendBattleSkill(
+				_battleId,
+				casterPawnId,
+				skillSlot,
+				targetAxial.Q,
+				targetAxial.R,
+				null,
+				null,
+				requestOptionalPositionSwap);
+			if (sent)
+			{
+				_actionMode = BattleActionMode.WaitingServer;
+				Debug.Log($"Sent C_BATTLE_SKILL. battleId={_battleId}, casterPawnId={casterPawnId}, skillSlot={skillSlot}, targetPawnId=0, axial={targetAxial}, locallyResolvedPawnId={resolvedTargetPawnId}, requestOptionalPositionSwap={requestOptionalPositionSwap}");
+			}
+			else
+			{
+				Debug.LogWarning($"Failed to send C_BATTLE_SKILL. {GameRoot.Instance.Network.LastError}");
+			}
 		}
 
 		void HandleFireWallInput(ulong casterPawnId, BattlePawn casterPawn, int skillSlot, AxialCoord clickedAxial)
@@ -1657,8 +1713,43 @@ namespace Battle
 			}
 
 			ApplyPawnDeltas(finalPawnDeltas);
+			PresentZillianMaceStunSuccess(casterPawnId, skillSlot, finalPawnDeltas);
 			_isPlayingSkillActionSequence = false;
 			_skillActionSequenceCoroutine = null;
+		}
+
+		void PresentZillianMaceStunSuccess(ulong casterPawnId, int skillSlot, IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			if (skillSlot != 3
+				|| _pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn) == false
+				|| casterPawn is ZillianMace == false
+				|| pawnDeltas == null)
+			{
+				return;
+			}
+
+			foreach (BattlePawnDelta delta in pawnDeltas)
+			{
+				if (delta == null || DeltaContainsStun(delta) == false)
+					continue;
+
+				if (_pawns.TryGetValue(delta.PawnId, out BattlePawn stunnedPawn) && stunnedPawn != null)
+					stunnedPawn.PlayControlSuccessPresentation("STUN!");
+			}
+		}
+
+		static bool DeltaContainsStun(BattlePawnDelta delta)
+		{
+			if (delta?.Statuses == null)
+				return false;
+
+			foreach (BattleStatusState status in delta.Statuses)
+			{
+				if (status != null && string.Equals(status.StatusKey, "STUN", System.StringComparison.OrdinalIgnoreCase))
+					return true;
+			}
+
+			return false;
 		}
 
 		IEnumerator PlayMoveReactionSequence(

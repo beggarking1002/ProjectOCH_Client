@@ -227,7 +227,7 @@ namespace Networking
 			});
 		}
 
-		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r, int? lineDirectionQ = null, int? lineDirectionR = null)
+		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r, int? lineDirectionQ = null, int? lineDirectionR = null, bool requestOptionalPositionSwap = false)
 		{
 			Protocol.C_BATTLE_SKILL packet = new Protocol.C_BATTLE_SKILL
 			{
@@ -249,6 +249,9 @@ namespace Networking
 					R = lineDirectionR.Value,
 				};
 			}
+
+			if (requestOptionalPositionSwap)
+				packet.RequestOptionalPositionSwap = true;
 
 			return Send(packet);
 		}

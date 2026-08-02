@@ -95,9 +95,9 @@ namespace Networking
 			return Network?.SendBattleMove(battleId, pawnId, q, r) == true;
 		}
 
-		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r, int? lineDirectionQ = null, int? lineDirectionR = null)
+		public bool SendBattleSkill(ulong battleId, ulong casterPawnId, int skillSlot, int q, int r, int? lineDirectionQ = null, int? lineDirectionR = null, bool requestOptionalPositionSwap = false)
 		{
-			return Network?.SendBattleSkill(battleId, casterPawnId, skillSlot, q, r, lineDirectionQ, lineDirectionR) == true;
+			return Network?.SendBattleSkill(battleId, casterPawnId, skillSlot, q, r, lineDirectionQ, lineDirectionR, requestOptionalPositionSwap) == true;
 		}
 
 		public bool SendBattleEndTurn(ulong battleId, ulong pawnId)

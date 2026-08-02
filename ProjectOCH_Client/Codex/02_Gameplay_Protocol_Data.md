@@ -1,6 +1,6 @@
 # 게임플레이, 패킷, 데이터 계약
 
-> 기준일: 2026-07-29. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
+> 기준일: 2026-08-02. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
 
 ## 필드
 
@@ -30,6 +30,7 @@
 - ZOC 범위 및 반응 가능 타일도 미리보기로 표시한다. 최종 이동 가능성과 반응은 서버가 판단한다.
 - 스킬 미리보기는 `RangeMin/RangeMax`, 대상 종류, `TargetShape`(`RADIUS_1`, `LINE_3` 등), overlay 조건을 기반으로 한다.
 - Fire Wall 계열 `LINE_3`은 시작 타일과 인접 방향 타일을 순서대로 고르는 2단계 입력이다.
+- Zillian Mace 슬롯 7은 인접 아군을 고른 뒤 위치 교환 여부를 확인한다. 교환을 고르면 `C_BATTLE_SKILL.request_optional_position_swap=true`를 전송하고, 회복만 고르면 해당 필드를 전송하지 않는다.
 - 스킬 요청의 권위 있는 대상은 `target_axial`이다. `target_pawn_id`는 클라이언트가 0으로 보내고 서버가 axial에서 실제 Pawn을 찾는다.
 - 서버 응답 중 `target_pawn_id == 0`은 타일 전용 결과일 수 있다. 이 경우에도 HP를 직접 계산하지 않고 delta만 적용한다.
 
@@ -51,13 +52,14 @@ Resources/Barriers/Statuses/Auras는 부분 병합이 아니라 전달된 배열
 
 ## 현재 데이터 클래스와 표현
 
-CSV `ClassKey.csv`에는 Beige Ice/Fire, Suen Axe/Parvis, Alen Shield/Spear, Zillian Longbow/Mace가 정의돼 있다. 현재 전용 클라이언트 표현은 Beige Ice/Fire, Suen Axe, Suen Parvis, Alen Shield/Spear, Zillian Longbow에 연결돼 있으며, 나머지는 공통 fallback 표현을 사용한다.
+CSV `ClassKey.csv`에는 Beige Ice/Fire, Suen Axe/Parvis, Alen Shield/Spear, Zillian Longbow/Mace가 정의돼 있다. 현재 전용 클라이언트 표현은 Beige Ice/Fire, Suen Axe, Suen Parvis, Alen Shield/Spear, Zillian Longbow/Mace에 연결돼 있으며, 나머지는 공통 fallback 표현을 사용한다.
 
 - `SuenAxe`: `SUEN_AXE_AXE_OFF` 상태로 장비 animator와 슬롯 아이콘/이름을 변경한다.
 - `SuenParvis`: `SUEN_PARVIS_OFF` 상태에 따라 슬롯 2는 Install Parvis/Sit Shot으로 전환하고, 슬롯 3은 항상 Stand Shot을 유지하며 animator 상태를 전환한다.
 - `AlenSpear`: Sentinel/Charge Command 관련 상태 라벨과 아이콘을 제공한다.
 - `AlenSwordShield`: 카르바스/황실 방패술, 책임감, 도발, 결투의 대가 자기 강화 상태 라벨과 아이콘을 제공하며, 자존심 성공 시 서버가 보낸 caster 위치 delta로 적의 이전 타일까지 전진을 표현한다.
 - `ZillianLongbow`: 슬롯별 아이콘/명칭과 longbow animator 제스처를 제공한다.
+- `ZillianMace`: 근접 단일 공격, 1~4칸 `RADIUS_1` 실명, 인접 아군 회복, 전체 보호막, 선택 위치 교환을 서버의 모든 Pawn delta로 표현한다. 슬롯 3은 서버 delta에 `STUN`이 있을 때만 제어 성공 연출과 행동 불가 상태를 표시하며, 어지러움은 별도 누적 상태로 표시하지 않는다.
 - `BeigeIce`: Aura 상태에 따른 주변 VFX와 COLD/상태 UI를 표현한다.
 
 ## 전투 UI

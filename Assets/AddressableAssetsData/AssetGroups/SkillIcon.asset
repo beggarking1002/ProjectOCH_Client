@@ -57,6 +57,48 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9e7e99a69ab477ab8276682f0c660f8
+    m_Address: icon_zillian_mace_passive
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d353ab443754dafa1741defb281a0f7
+    m_Address: icon_zillian_mace_skill1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67520f5d028841039ace31f8cfd2f893
+    m_Address: icon_zillian_mace_skill2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d261523735d48dd8bdeb2273f2a80d2
+    m_Address: icon_zillian_mace_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7583aec9dcd439cb489c4c1bac38427
+    m_Address: icon_zillian_mace_skill4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1cd54fa0c2f456da3f9291328c75700
+    m_Address: icon_zillian_mace_ulti
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec60da17e5124daa81b592c20a91f0bb
+    m_Address: icon_zillian_mace_sub
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f1cbabd2bfe9c84483c05b384c6f99d
     m_Address: icon_alen_spear_passive
     m_ReadOnly: 0

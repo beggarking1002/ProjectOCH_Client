@@ -42,6 +42,13 @@ ZILLIAN_LONGBOW_CLUBBING,Skill2,,,icon_zillian_longbow_skill3
 ZILLIAN_LONGBOW_WANT_TO_LIVE,Skill1,,,icon_zillian_longbow_skill4
 ZILLIAN_LONGBOW_GET_UP,Skill1,,,icon_zillian_longbow_ulti
 ZILLIAN_LONGBOW_GO_HOME,Skill1,,,icon_zillian_longbow_sub
+ZILLIAN_MACE_SAINTLY_BURDEN,,,,icon_zillian_mace_passive
+ZILLIAN_MACE_BASIC_BATTING,Skill1,,,icon_zillian_mace_skill1
+ZILLIAN_MACE_GO_AWAY,Skill1,,,icon_zillian_mace_skill2
+ZILLIAN_MACE_DAZZLING_GLARE,Skill2,,,icon_zillian_mace_skill3
+ZILLIAN_MACE_UNWANTED_POWER,Skill2,,,icon_zillian_mace_skill4
+ZILLIAN_MACE_NO_ONE_DIE,Skill2,,,icon_zillian_mace_ulti
+ZILLIAN_MACE_I_WANT_TO_GO_HOME,Skill2,,,icon_zillian_mace_sub
 SUEN_PARVIS_MAN_IN_HELL,,,,icon_suen_parvis_passive
 SUEN_PARVIS_INSTALL,Skill1,,,icon_suen_parvis_on_skill1
 SUEN_PARVIS_STAND_SHOT_OFF,Skill1,,,icon_suen_parvis_off_skill1

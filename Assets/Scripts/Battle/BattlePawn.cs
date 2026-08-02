@@ -418,6 +418,29 @@ namespace Battle
 			PlayCombatPresentation(direction, MeleePresentationDurationSeconds, MeleePresentationDistance, MeleePresentationHopHeight, false);
 		}
 
+		public void PlayControlSuccessPresentation(string message)
+		{
+			if (IsDead || string.IsNullOrWhiteSpace(message))
+				return;
+
+			GameObject marker = new GameObject("ControlSuccess");
+			marker.transform.SetParent(transform, false);
+			marker.transform.localPosition = new Vector3(0f, GetStatusWorldUiHeight() + 0.28f, 0f);
+			TextMesh text = marker.AddComponent<TextMesh>();
+			text.text = message;
+			text.anchor = TextAnchor.MiddleCenter;
+			text.alignment = TextAlignment.Center;
+			text.characterSize = 0.15f;
+			text.fontSize = 34;
+			text.color = new Color(1f, 0.78f, 0.2f, 1f);
+			GameRoot.ApplyWorldTextFont(text);
+			MeshRenderer renderer = marker.GetComponent<MeshRenderer>();
+			if (renderer != null)
+				renderer.sortingOrder = TurnIndicatorSortingOrder + 1;
+
+			Destroy(marker, 0.65f);
+		}
+
 		void PlayCombatPresentation(Vector3 direction, float duration, float distance, float hopHeight, bool useReturnHop)
 		{
 			if (IsDead)

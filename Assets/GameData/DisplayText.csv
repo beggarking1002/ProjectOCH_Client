@@ -42,3 +42,24 @@ SKILL,ALEN_SHIELD_DUEL_MASTER,DESC,4턴 동안 방어력의 50%를 근력으로 
 SKILL,ALEN_SHIELD_MORALE_BOOST,NAME,사기진작,,보조행동 표시 이름
 SKILL,ALEN_SHIELD_MORALE_BOOST,SHORT,3타일 내 아군 한 명의 사기 회복,,보조행동 짧은 설명
 SKILL,ALEN_SHIELD_MORALE_BOOST,DESC,3타일 안의 아군 한 명의 사기를 회복합니다.,,보조행동 상세 설명
+SKILL,ZILLIAN_MACE_SAINTLY_BURDEN,NAME,내가 성녀라니,,패시브 표시 이름
+SKILL,ZILLIAN_MACE_SAINTLY_BURDEN,SHORT,메이스 질리언의 패시브,,패시브 짧은 설명
+SKILL,ZILLIAN_MACE_SAINTLY_BURDEN,DESC,메이스를 든 질리언의 고유 패시브입니다.,,패시브 상세 설명
+SKILL,ZILLIAN_MACE_BASIC_BATTING,NAME,기초 빠따질,,스킬 표시 이름
+SKILL,ZILLIAN_MACE_BASIC_BATTING,SHORT,인접 적 단일 공격,,스킬 짧은 설명
+SKILL,ZILLIAN_MACE_BASIC_BATTING,DESC,인접한 적 하나를 메이스로 공격합니다.,,스킬 상세 설명
+SKILL,ZILLIAN_MACE_GO_AWAY,NAME,오지마!,,스킬 표시 이름
+SKILL,ZILLIAN_MACE_GO_AWAY,SHORT,인접 적 공격 후 스턴 판정,,스킬 짧은 설명
+SKILL,ZILLIAN_MACE_GO_AWAY,DESC,인접한 적 하나를 공격합니다. 서버가 명중 후 어지러움 기반 스턴을 즉시 판정하며, 성공했을 때만 STUN 상태가 적용됩니다.,,스킬 상세 설명
+SKILL,ZILLIAN_MACE_DAZZLING_GLARE,NAME,눈부신 눈부심,,스킬 표시 이름
+SKILL,ZILLIAN_MACE_DAZZLING_GLARE,SHORT,1~4칸 중심 반경 1 실명,,스킬 짧은 설명
+SKILL,ZILLIAN_MACE_DAZZLING_GLARE,DESC,1~4칸 거리의 타일 또는 적을 중심으로 반경 1칸의 적에게 2턴간 명중률 -30% 실명을 부여합니다.,,스킬 상세 설명
+SKILL,ZILLIAN_MACE_UNWANTED_POWER,NAME,원하지 않은 권능,,스킬 표시 이름
+SKILL,ZILLIAN_MACE_UNWANTED_POWER,SHORT,인접 아군 전체 회복,,스킬 짧은 설명
+SKILL,ZILLIAN_MACE_UNWANTED_POWER,DESC,자신을 제외한 인접 아군 전체를 회복합니다.,,스킬 상세 설명
+SKILL,ZILLIAN_MACE_NO_ONE_DIE,NAME,아무도 죽지마!,,궁극기 표시 이름
+SKILL,ZILLIAN_MACE_NO_ONE_DIE,SHORT,자신의 체력 절반 소모 후 아군 전체 보호막,,궁극기 짧은 설명
+SKILL,ZILLIAN_MACE_NO_ONE_DIE,DESC,현재 체력의 절반을 소모하고 아군 전체에게 보호막을 부여합니다.,,궁극기 상세 설명
+SKILL,ZILLIAN_MACE_I_WANT_TO_GO_HOME,NAME,나 돌아갈래,,보조행동 표시 이름
+SKILL,ZILLIAN_MACE_I_WANT_TO_GO_HOME,SHORT,인접 아군 회복·정화, 위치 교환 선택,,보조행동 짧은 설명
+SKILL,ZILLIAN_MACE_I_WANT_TO_GO_HOME,DESC,인접한 아군 하나를 회복하고 해로운 상태를 정화합니다. 이후 위치를 교환할지 선택할 수 있습니다.,,보조행동 상세 설명

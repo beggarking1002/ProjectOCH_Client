@@ -65,7 +65,9 @@ namespace Battle
 		Image _classMarkImage;
 		GameObject _uiInstance;
 		GameObject _resultOverlay;
+		GameObject _optionalPositionSwapPrompt;
 		Text _resultTitleText;
+		System.Action<bool> _optionalPositionSwapChoice;
 		Button _resultOkButton;
 		AsyncOperationHandle<GameObject> _uiHandle;
 		AsyncOperationHandle<GameObject> _resultUiHandle;
@@ -159,6 +161,7 @@ namespace Battle
 				_objectManager.BattleStatusTickApplied += OnBattleStatusTickApplied;
 				_objectManager.TurnQueueUpdated += OnTurnQueueUpdated;
 				_objectManager.BattlePawnDied += OnBattlePawnDied;
+				_objectManager.OptionalPositionSwapChoiceRequested += OnOptionalPositionSwapChoiceRequested;
 			}
 		}
 
@@ -170,6 +173,7 @@ namespace Battle
 				_objectManager.BattleStatusTickApplied -= OnBattleStatusTickApplied;
 				_objectManager.TurnQueueUpdated -= OnTurnQueueUpdated;
 				_objectManager.BattlePawnDied -= OnBattlePawnDied;
+				_objectManager.OptionalPositionSwapChoiceRequested -= OnOptionalPositionSwapChoiceRequested;
 			}
 
 			_objectManager = null;
@@ -243,6 +247,7 @@ namespace Battle
 			BindActionBarDisplayFrames(_uiInstance.transform);
 			BindTurnExit(_uiInstance.transform);
 			BindStatePanels(_uiInstance.transform);
+			EnsureOptionalPositionSwapPrompt(_uiInstance.transform);
 			BindTurnQueue(_uiInstance.transform);
 			BindOrLoadResultOverlay();
 			_bound = true;
@@ -459,6 +464,110 @@ namespace Battle
 			_tileInfoText = CreateOrGetPanelText(root, "TileInfo", "TileInfo_StateText", 13);
 			_selectedPawnPanel = CreateOrGetPawnPanelView(root, "Left_SelectedPawnPanel", "SelectedPawn_StateText", "SelectedPawn_StatusBars", 13);
 			_enemyPawnPanel = CreateOrGetPawnPanelView(root, "Right_EnemyPawnPanel", "EnemyPawn_StateText", "EnemyPawn_StatusBars", 13);
+		}
+
+		void EnsureOptionalPositionSwapPrompt(Transform root)
+		{
+			if (_optionalPositionSwapPrompt != null || root == null)
+				return;
+
+			GameObject overlay = new GameObject("OptionalPositionSwapPrompt", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+			overlay.transform.SetParent(root, false);
+			RectTransform overlayRect = overlay.GetComponent<RectTransform>();
+			overlayRect.anchorMin = Vector2.zero;
+			overlayRect.anchorMax = Vector2.one;
+			overlayRect.offsetMin = Vector2.zero;
+			overlayRect.offsetMax = Vector2.zero;
+			Image overlayImage = overlay.GetComponent<Image>();
+			overlayImage.color = new Color(0f, 0f, 0f, 0.7f);
+
+			GameObject panel = new GameObject("Panel", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+			panel.transform.SetParent(overlay.transform, false);
+			RectTransform panelRect = panel.GetComponent<RectTransform>();
+			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+			panelRect.pivot = new Vector2(0.5f, 0.5f);
+			panelRect.sizeDelta = new Vector2(400f, 180f);
+			panel.GetComponent<Image>().color = new Color(0.12f, 0.15f, 0.22f, 0.98f);
+
+			CreateSwapPromptText(panel.transform);
+			CreateSwapPromptButton(panel.transform, "SwapButton", "위치 교환", new Vector2(-92f, -52f), () => ResolveOptionalPositionSwapChoice(true));
+			CreateSwapPromptButton(panel.transform, "StayButton", "회복만", new Vector2(92f, -52f), () => ResolveOptionalPositionSwapChoice(false));
+
+			_optionalPositionSwapPrompt = overlay;
+			_optionalPositionSwapPrompt.SetActive(false);
+		}
+
+		static void CreateSwapPromptText(Transform parent)
+		{
+			GameObject textObject = new GameObject("Message", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+			textObject.transform.SetParent(parent, false);
+			RectTransform rect = textObject.GetComponent<RectTransform>();
+			rect.anchorMin = new Vector2(0f, 0.45f);
+			rect.anchorMax = new Vector2(1f, 1f);
+			rect.offsetMin = new Vector2(20f, 8f);
+			rect.offsetMax = new Vector2(-20f, -12f);
+			Text text = textObject.GetComponent<Text>();
+			text.font = GameRoot.UiFont;
+			text.fontSize = 19;
+			text.color = Color.white;
+			text.alignment = TextAnchor.MiddleCenter;
+			text.text = "나 돌아갈래\n회복·정화 후 대상 아군과 위치를 교환할까요?";
+			text.raycastTarget = false;
+		}
+
+		static void CreateSwapPromptButton(Transform parent, string name, string label, Vector2 anchoredPosition, UnityEngine.Events.UnityAction onClick)
+		{
+			GameObject buttonObject = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+			buttonObject.transform.SetParent(parent, false);
+			RectTransform rect = buttonObject.GetComponent<RectTransform>();
+			rect.anchorMin = new Vector2(0.5f, 0.5f);
+			rect.anchorMax = new Vector2(0.5f, 0.5f);
+			rect.pivot = new Vector2(0.5f, 0.5f);
+			rect.sizeDelta = new Vector2(155f, 42f);
+			rect.anchoredPosition = anchoredPosition;
+			Image image = buttonObject.GetComponent<Image>();
+			image.color = new Color(0.28f, 0.48f, 0.78f, 1f);
+			Button button = buttonObject.GetComponent<Button>();
+			button.targetGraphic = image;
+			button.onClick.AddListener(onClick);
+
+			GameObject textObject = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+			textObject.transform.SetParent(buttonObject.transform, false);
+			RectTransform textRect = textObject.GetComponent<RectTransform>();
+			textRect.anchorMin = Vector2.zero;
+			textRect.anchorMax = Vector2.one;
+			textRect.offsetMin = Vector2.zero;
+			textRect.offsetMax = Vector2.zero;
+			Text text = textObject.GetComponent<Text>();
+			text.font = GameRoot.UiFont;
+			text.fontSize = 16;
+			text.color = Color.white;
+			text.alignment = TextAnchor.MiddleCenter;
+			text.text = label;
+			text.raycastTarget = false;
+		}
+
+		void OnOptionalPositionSwapChoiceRequested(System.Action<bool> resolveChoice)
+		{
+			EnsureOptionalPositionSwapPrompt(_uiInstance != null ? _uiInstance.transform : null);
+			if (_optionalPositionSwapPrompt == null)
+			{
+				resolveChoice?.Invoke(false);
+				return;
+			}
+
+			_optionalPositionSwapChoice = resolveChoice;
+			_optionalPositionSwapPrompt.SetActive(true);
+		}
+
+		void ResolveOptionalPositionSwapChoice(bool requestSwap)
+		{
+			System.Action<bool> resolveChoice = _optionalPositionSwapChoice;
+			_optionalPositionSwapChoice = null;
+			if (_optionalPositionSwapPrompt != null)
+				_optionalPositionSwapPrompt.SetActive(false);
+			resolveChoice?.Invoke(requestSwap);
 		}
 
 		void OnActionSlotClicked(int slotIndex)
@@ -966,6 +1075,13 @@ namespace Battle
 						label = zillianName;
 						tooltip = BuildSkillTooltip(skill, label);
 						iconKey = zillianIconKey;
+					}
+					else if (currentTurnPawn is ZillianMace zillianMace
+						&& zillianMace.TryGetSkillPresentation(skill.ActionSlot, out string maceName, out string maceIconKey))
+					{
+						label = maceName;
+						tooltip = BuildSkillTooltip(skill, label);
+						iconKey = maceIconKey;
 					}
 					else if (currentTurnPawn is SuenParvis suenParvis
 						&& suenParvis.TryGetSkillPresentation(skill.ActionSlot, out string parvisName, out string parvisIconKey))
@@ -2063,8 +2179,6 @@ namespace Battle
 					return "IMM";
 				if (statusKey.IndexOf("THAWING_POTION_DAMAGE_DOWN", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "DMG";
-				if (statusKey.IndexOf("DIZZY", System.StringComparison.OrdinalIgnoreCase) >= 0)
-					return "DIZ";
 				if (statusKey.IndexOf("BLEED", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return "BLE";
 				if (statusKey.IndexOf("STUN", System.StringComparison.OrdinalIgnoreCase) >= 0)
@@ -2122,8 +2236,6 @@ namespace Battle
 					return new Color(0.38f, 0.74f, 0.45f, 0.96f);
 				if (key.IndexOf("ALEN_SPEAR_CHARGE_COMMAND_MOVE", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.94f, 0.62f, 0.2f, 0.96f);
-				if (key.IndexOf("DIZZY", System.StringComparison.OrdinalIgnoreCase) >= 0)
-					return new Color(0.9f, 0.78f, 0.22f, 0.96f);
 				if (key.IndexOf("STUN", System.StringComparison.OrdinalIgnoreCase) >= 0)
 					return new Color(0.96f, 0.68f, 0.2f, 0.96f);
 				if (key.IndexOf("BLEED", System.StringComparison.OrdinalIgnoreCase) >= 0)
