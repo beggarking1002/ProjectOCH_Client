@@ -25,6 +25,8 @@ namespace Battle
 		const float MeleePresentationDistance = 0.18f;
 		const float MeleePresentationHopHeight = 0.035f;
 		const string VisualRootName = "visual";
+		const string ProjectileOriginName = "ProjectileOrigin";
+		const float FallbackProjectileOriginHeight = 0.55f;
 		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
 		const string DefaultSkillTrigger = "Skill1";
 
@@ -32,6 +34,7 @@ namespace Battle
 		Transform _visualRoot;
 		SpriteRenderer _spriteRenderer;
 		Animator _animator;
+		Transform _projectileOrigin;
 		PawnStatusWorldUI _statusWorldUi;
 		PawnTeamRing _teamRing;
 		GameObject _turnIndicator;
@@ -91,6 +94,7 @@ namespace Battle
 			_visualRoot = FindVisualRoot();
 			_spriteRenderer = FindVisualSpriteRenderer();
 			_animator = FindVisualAnimator();
+			_projectileOrigin = FindProjectileOrigin();
 			_statusWorldUi = GetComponentInChildren<PawnStatusWorldUI>(true);
 			_teamRing = GetComponentInChildren<PawnTeamRing>(true);
 		}
@@ -130,6 +134,7 @@ namespace Battle
 			_visualRoot = FindVisualRoot();
 			_spriteRenderer = FindVisualSpriteRenderer();
 			_animator = FindVisualAnimator();
+			_projectileOrigin = FindProjectileOrigin();
 
 			if (_spriteRenderer != null)
 			{
@@ -416,6 +421,16 @@ namespace Battle
 				direction = FacingDirection == Protocol.BattleFacingDirection.Left ? Vector3.left : Vector3.right;
 
 			PlayCombatPresentation(direction, MeleePresentationDurationSeconds, MeleePresentationDistance, MeleePresentationHopHeight, false);
+		}
+
+		public Vector3 GetProjectileOriginWorldPosition()
+		{
+			if (_projectileOrigin == null)
+				_projectileOrigin = FindProjectileOrigin();
+
+			return _projectileOrigin != null
+				? _projectileOrigin.position
+				: transform.position + Vector3.up * FallbackProjectileOriginHeight;
 		}
 
 		public void PlayControlSuccessPresentation(string message)
@@ -844,6 +859,19 @@ namespace Battle
 					continue;
 
 				return renderer;
+			}
+
+			return null;
+		}
+
+		Transform FindProjectileOrigin()
+		{
+			Transform[] transforms = GetComponentsInChildren<Transform>(true);
+			for (int i = 0; i < transforms.Length; i++)
+			{
+				Transform candidate = transforms[i];
+				if (candidate != null && candidate.name == ProjectileOriginName)
+					return candidate;
 			}
 
 			return null;

@@ -74,7 +74,12 @@ namespace Battle
 				case 4: skillKey = "SUEN_PARVIS_POINT_BLANK"; return true;
 				case 5: skillKey = IsParvisOff ? "SUEN_PARVIS_ROLL_SHOT" : "SUEN_PARVIS_YABAWI"; return true;
 				case 6: skillKey = "SUEN_PARVIS_DARK_HAND"; return true;
-				case 7: skillKey = "SUEN_PARVIS_PICKUP"; return true;
+				case 7:
+					if (IsParvisOff == false)
+						return false;
+
+					skillKey = "SUEN_PARVIS_PICKUP";
+					return true;
 				default: return false;
 			}
 		}
@@ -88,11 +93,11 @@ namespace Battle
 				case 1: displayName = "Man in Hell"; iconKey = "icon_suen_parvis_passive"; return true;
 				case 2:
 					displayName = IsParvisOff ? "Sit Shot" : "Install Parvis";
-					iconKey = IsParvisOff ? "icon_suen_parvis_skill2" : "icon_suen_parvis_on_skill1";
+					iconKey = IsParvisOff ? "icon_suen_parvis_off_skill1" : "icon_suen_parvis_on_skill1";
 					return true;
 				case 3:
 					displayName = "Stand Shot";
-					iconKey = IsParvisOff ? "icon_suen_parvis_off_skill1" : "icon_suen_parvis_on_skill1";
+					iconKey = "icon_suen_parvis_skill2";
 					return true;
 				case 4: displayName = "Point Blank"; iconKey = "icon_suen_parvis_skill3"; return true;
 				case 5:
@@ -100,7 +105,13 @@ namespace Battle
 					iconKey = IsParvisOff ? "icon_suen_parvis_off_skill4" : "icon_suen_parvis_on_skill4";
 					return true;
 				case 6: displayName = "Dark Hand"; iconKey = "icon_suen_parvis_ulti"; return true;
-				case 7: displayName = "Pickup Parvis"; iconKey = "icon_suen_parvis_sub"; return true;
+				case 7:
+					if (IsParvisOff == false)
+						return false;
+
+					displayName = "Pickup Parvis";
+					iconKey = "icon_suen_parvis_sub";
+					return true;
 				default: return false;
 			}
 		}

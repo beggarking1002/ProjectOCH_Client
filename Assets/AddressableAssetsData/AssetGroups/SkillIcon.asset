@@ -99,6 +99,36 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd296473d7cd66a4f89a43e0442b0f38
+    m_Address: projectile_arrow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a63013e235894fa41af5dbd55b2d7401
+    m_Address: projectile_dark_arrow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 060845d3105c98c40859b52dae59ea24
+    m_Address: projectile_fireball
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35c61794dbebd084896e12c4e60da699
+    m_Address: projectile_iceball
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 130d376bf86acbd438008086f7bc6074
+    m_Address: projectile_throwing_axe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f1cbabd2bfe9c84483c05b384c6f99d
     m_Address: icon_alen_spear_passive
     m_ReadOnly: 0

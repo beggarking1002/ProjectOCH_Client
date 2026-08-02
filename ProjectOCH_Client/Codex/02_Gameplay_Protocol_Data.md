@@ -1,6 +1,6 @@
 # 게임플레이, 패킷, 데이터 계약
 
-> 기준일: 2026-08-02. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
+> 기준일: 2026-08-03. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
 
 ## 필드
 
@@ -78,10 +78,12 @@ CSV `ClassKey.csv`에는 Beige Ice/Fire, Suen Axe/Parvis, Alen Shield/Spear, Zil
 | `BattleSkill.csv` | 슬롯, AP, 사거리, 대상/형태/overlay 요구 조건 |
 | `BattleSkillEffect.csv` | 효과 그룹과 실행 순서 |
 | `BattleSkillEffectParam.csv` | 효과 파라미터/상태 modifier |
-| `BattleSkillView.csv` | 애니메이션 trigger, VFX/SFX, 아이콘 주소 |
+| `BattleSkillView.csv` | 애니메이션 trigger, VFX/SFX, 아이콘 주소, 발사체 키 |
 | `BattleZoc.csv` | ZOC 범위, 전방 arc, 반응 제한/트리거 |
 | `DisplayText.csv` | 다국어 표시 텍스트 |
 | `EnumDef.csv` | enum/상태 정의 |
 | `BattleConfig.csv`, `BattleMapTile.csv` | 전투 설정과 맵 타일 원본 |
 
 `BattleGameDataRepository`는 런타임에서 Addressables CSV를 우선 사용하고, 에디터 환경에서는 `Assets/GameData`를 fallback으로 사용한다.
+
+`BattleSkillView.ProjectileKey`가 비어 있지 않은 스킬은 서버 `BattleActionLog` 순서에 따라 공격자에서 대상 Pawn(또는 `target_axial`)까지 발사체를 재생한다. 피해·회피·상태·사망은 발사체가 아닌 서버 로그와 `pawn_deltas`만으로 판정한다.

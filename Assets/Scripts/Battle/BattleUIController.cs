@@ -1173,10 +1173,17 @@ namespace Battle
 			if (_gameData == null || pawn == null || pawn.Info == null)
 				return false;
 
-			if (pawn is SuenParvis parvis
-				&& parvis.TryGetActiveSkillKey(actionSlot, out string activeSkillKey))
+			if (pawn is SuenAxe suenAxe
+				&& actionSlot == 7
+				&& suenAxe.IsAxeOff == false)
+				return false;
+
+			if (pawn is SuenParvis parvis)
 			{
-				return _gameData.TryGetSkill(activeSkillKey, out skill);
+				if (parvis.TryGetActiveSkillKey(actionSlot, out string activeSkillKey))
+					return _gameData.TryGetSkill(activeSkillKey, out skill);
+
+				return false;
 			}
 
 			return _gameData.TryGetSkill(pawn.Info.PawnClass, actionSlot, out skill);
@@ -1435,6 +1442,11 @@ namespace Battle
 				return true;
 
 			if (pawn.IsActionBlocked)
+				return false;
+
+			if (binding.Mode == BattleActionMode.SubAction
+				&& pawn is SuenAxe suenAxe
+				&& suenAxe.IsAxeOff == false)
 				return false;
 
 			if (binding.Mode == BattleActionMode.SubAction

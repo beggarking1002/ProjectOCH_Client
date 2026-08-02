@@ -1,6 +1,6 @@
 # 현재 상태와 작업 워크플로
 
-> 기준일: 2026-08-02
+> 기준일: 2026-08-03
 
 ## 구현된 범위
 
@@ -19,6 +19,7 @@
 - 이동 반응, 일반 스킬, ZOC 반응, 사망, 상태 tick을 순서 있는 프레젠테이션으로 표현한다.
 - 턴 큐 초상화, 현재 턴 초상화, Pawn 상태 패널/상태 아이콘, 행동 툴팁, 결과 오버레이와 ACK 복귀 흐름이 구현돼 있다.
 - Suen Axe/Parvis, Alen Shield/Spear, Zillian Longbow/Mace의 상태 기반 슬롯/애니메이션 표현이 추가돼 있다.
+- `BattleSkillView.ProjectileKey`가 설정된 스킬은 Addressables Sprite 발사체를 서버 로그 순서에 맞춰 재생한다.
 
 ## 아직 검증 또는 보완이 필요한 항목
 

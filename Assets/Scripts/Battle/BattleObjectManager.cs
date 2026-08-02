@@ -92,6 +92,7 @@ namespace Battle
 		Coroutine _moveReactionSequenceCoroutine;
 		bool _isLoadingGameData;
 		BattleTargetPreview _targetPreview;
+		BattleProjectilePresenter _projectilePresenter;
 		bool _hasFireWallStartTarget;
 		ulong _fireWallCasterPawnId;
 		AxialCoord _fireWallStartAxial;
@@ -150,6 +151,7 @@ namespace Battle
 			_targetPreview = _mapGrid != null
 				? _mapGrid.GetComponent<BattleTargetPreview>() ?? _mapGrid.gameObject.AddComponent<BattleTargetPreview>()
 				: null;
+			_projectilePresenter = GetComponent<BattleProjectilePresenter>() ?? gameObject.AddComponent<BattleProjectilePresenter>();
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
@@ -990,10 +992,23 @@ namespace Battle
 			if (_gameData == null || casterPawn == null || casterPawn.Info == null)
 				return false;
 
-			if (casterPawn is SuenParvis parvis
-				&& parvis.TryGetActiveSkillKey(skillSlot, out string activeSkillKey))
+			if (casterPawn is SuenAxe suenAxe
+				&& skillSlot == 7
+				&& suenAxe.IsAxeOff == false)
 			{
-				return _gameData.TryGetSkill(activeSkillKey, out skill);
+				// Pickup is valid only after throwing the axe. Keep the client from
+				// resolving the static slot-7 CSV row while the axe is equipped.
+				return false;
+			}
+
+			if (casterPawn is SuenParvis parvis)
+			{
+				if (parvis.TryGetActiveSkillKey(skillSlot, out string activeSkillKey))
+					return _gameData.TryGetSkill(activeSkillKey, out skill);
+
+				// Slot 7 is intentionally unavailable while Parvis is equipped. Do not
+				// fall back to the static CSV row, which represents pickup only.
+				return false;
 			}
 
 			return _gameData.TryGetSkill(casterPawn.Info.PawnClass, skillSlot, out skill);
@@ -1604,7 +1619,7 @@ namespace Battle
 				packet.UsedSubActionThisTurn,
 				packet.UsedUltimate);
 
-			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.Logs, packet.PawnDeltas);
+			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.TargetAxial, packet.Logs, packet.PawnDeltas);
 			if (packet.TurnQueueResynced)
 				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
 
@@ -1643,6 +1658,7 @@ namespace Battle
 		void QueueSkillActionSequence(
 			ulong casterPawnId,
 			int skillSlot,
+			Protocol.AxialCoord targetAxial,
 			IEnumerable<BattleActionLog> logs,
 			IEnumerable<BattlePawnDelta> pawnDeltas)
 		{
@@ -1652,12 +1668,13 @@ namespace Battle
 			List<BattleActionLog> orderedLogs = CopyBattleActionLogs(logs);
 			List<BattlePawnDelta> finalPawnDeltas = CopyBattlePawnDeltas(pawnDeltas);
 
-			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, orderedLogs, finalPawnDeltas));
+			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, targetAxial, orderedLogs, finalPawnDeltas));
 		}
 
 		IEnumerator PlaySkillActionSequence(
 			ulong casterPawnId,
 			int skillSlot,
+			Protocol.AxialCoord targetAxial,
 			List<BattleActionLog> orderedLogs,
 			List<BattlePawnDelta> finalPawnDeltas)
 		{
@@ -1674,7 +1691,6 @@ namespace Battle
 					if (_pawns.TryGetValue(log.AttackerPawnId, out BattlePawn counterPawn))
 						counterPawn.TriggerSkill("Skill1");
 
-					PlayMeleeAttackPresentation(log);
 				}
 				else if (log.AttackerPawnId == casterPawnId)
 				{
@@ -1685,7 +1701,6 @@ namespace Battle
 						didPresentInitiatingSkill = true;
 					}
 
-					PlayMeleeAttackPresentation(log);
 				}
 				else if (IsZocReactionLog(log))
 				{
@@ -1698,6 +1713,7 @@ namespace Battle
 					TriggerLoggedAttackPresentation(log);
 				}
 
+				yield return PlayAttackPresentation(log, log.AttackerPawnId == casterPawnId ? skillSlot : 0, null);
 				ApplyCombatLogPresentation(log);
 				AppendBattleLog(log);
 				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
@@ -1708,6 +1724,7 @@ namespace Battle
 				if (ShouldSkipSkillAnimation(noLogCasterPawn, skillSlot) == false)
 				{
 					TriggerSkillAnimation(noLogCasterPawn, skillSlot);
+					yield return PlaySkillProjectilePresentation(noLogCasterPawn, skillSlot, targetAxial);
 					yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
 				}
 			}
@@ -1770,13 +1787,13 @@ namespace Battle
 				else if (log.IsCounter && _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn counterPawn))
 				{
 					counterPawn.TriggerSkill("Skill1");
-					PlayMeleeAttackPresentation(log);
 				}
 				else
 				{
 					TriggerLoggedAttackPresentation(log);
 				}
 
+				yield return PlayAttackPresentation(log, 0, null);
 				ApplyCombatLogPresentation(log);
 				AppendBattleLog(log);
 				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
@@ -1811,7 +1828,6 @@ namespace Battle
 			else
 				attackerPawn.TriggerSkill("Skill1");
 
-			PlayMeleeAttackPresentation(log);
 		}
 
 		void TriggerLoggedAttackPresentation(BattleActionLog log)
@@ -1824,7 +1840,6 @@ namespace Battle
 			else
 				attackerPawn.TriggerSkill("Skill1");
 
-			PlayMeleeAttackPresentation(log);
 		}
 
 		static bool IsZocReactionLog(BattleActionLog log)
@@ -1965,6 +1980,84 @@ namespace Battle
 				return;
 
 			attackerPawn.PlayMeleeAttackPresentation(defenderPawn.transform.position);
+		}
+
+		IEnumerator PlayAttackPresentation(BattleActionLog log, int fallbackSkillSlot, Protocol.AxialCoord fallbackTargetAxial)
+		{
+			if (log == null
+				|| _pawns.TryGetValue(log.AttackerPawnId, out BattlePawn attackerPawn) == false
+				|| attackerPawn == null)
+			{
+				yield break;
+			}
+
+			int skillSlot = log.SkillSlot > 0 ? log.SkillSlot : fallbackSkillSlot;
+			if (TryGetProjectileKey(attackerPawn, skillSlot, out string projectileKey)
+				&& TryGetProjectileTargetWorldPosition(log.DefenderPawnId, fallbackTargetAxial, out Vector3 targetWorldPosition)
+				&& _projectilePresenter != null)
+			{
+				yield return _projectilePresenter.Play(projectileKey, attackerPawn.GetProjectileOriginWorldPosition(), targetWorldPosition);
+				yield break;
+			}
+
+			PlayMeleeAttackPresentation(log);
+		}
+
+		IEnumerator PlaySkillProjectilePresentation(BattlePawn casterPawn, int skillSlot, Protocol.AxialCoord targetAxial)
+		{
+			if (casterPawn == null
+				|| TryGetProjectileKey(casterPawn, skillSlot, out string projectileKey) == false
+				|| TryGetProjectileTargetWorldPosition(0, targetAxial, out Vector3 targetWorldPosition) == false
+				|| _projectilePresenter == null)
+			{
+				yield break;
+			}
+
+			yield return _projectilePresenter.Play(projectileKey, casterPawn.GetProjectileOriginWorldPosition(), targetWorldPosition);
+		}
+
+		bool TryGetProjectileKey(BattlePawn casterPawn, int skillSlot, out string projectileKey)
+		{
+			projectileKey = null;
+			if (casterPawn == null
+				|| skillSlot <= 0
+				|| TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill) == false
+				|| _gameData == null
+				|| _gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view) == false
+				|| string.IsNullOrWhiteSpace(view.ProjectileKey))
+			{
+				return false;
+			}
+
+			projectileKey = view.ProjectileKey;
+			return true;
+		}
+
+		bool TryGetProjectileTargetWorldPosition(ulong targetPawnId, Protocol.AxialCoord targetAxial, out Vector3 targetWorldPosition)
+		{
+			if (targetPawnId != 0
+				&& _pawns.TryGetValue(targetPawnId, out BattlePawn targetPawn)
+				&& targetPawn != null)
+			{
+				targetWorldPosition = targetPawn.transform.position;
+				return true;
+			}
+
+			if (targetAxial != null && _mapGrid != null)
+			{
+				AxialCoord battleAxial = new AxialCoord(targetAxial.Q, targetAxial.R);
+				if (_mapGrid.IsTileInBounds(battleAxial) == false)
+				{
+					targetWorldPosition = default;
+					return false;
+				}
+
+				targetWorldPosition = _mapGrid.AxialToWorldCenter(battleAxial);
+				return true;
+			}
+
+			targetWorldPosition = default;
+			return false;
 		}
 
 		void OnBattleEndTurnReceived(S_BATTLE_END_TURN packet)

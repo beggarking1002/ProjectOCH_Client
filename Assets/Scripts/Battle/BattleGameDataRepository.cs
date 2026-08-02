@@ -325,7 +325,8 @@ namespace Battle
 					row.Get("AnimTrigger"),
 					row.Get("VfxKey"),
 					row.Get("SfxKey"),
-					row.Get("IconKey"));
+					row.Get("IconKey"),
+					row.Get("ProjectileKey"));
 			}
 		}
 
@@ -838,14 +839,16 @@ namespace Battle
 		public readonly string VfxKey;
 		public readonly string SfxKey;
 		public readonly string IconKey;
+		public readonly string ProjectileKey;
 
-		public BattleSkillViewDefinition(string skillKey, string animTrigger, string vfxKey, string sfxKey, string iconKey)
+		public BattleSkillViewDefinition(string skillKey, string animTrigger, string vfxKey, string sfxKey, string iconKey, string projectileKey)
 		{
 			SkillKey = skillKey;
 			AnimTrigger = animTrigger;
 			VfxKey = vfxKey;
 			SfxKey = sfxKey;
 			IconKey = iconKey;
+			ProjectileKey = projectileKey;
 		}
 	}
 
