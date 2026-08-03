@@ -263,14 +263,9 @@ namespace Battle
 
 		void UpdateFacingForMove(Vector3 targetWorldPosition)
 		{
-			// Network pawns always follow the server-facing value. Direction inferred from
-			// movement is reserved for local debug pawns that have no BattlePawnInfo.
-			if (Info != null)
-			{
-				ApplyFacingDirection(FacingDirection);
-				return;
-			}
-
+			// Face the destination before the movement animation begins. The server's
+			// facing value remains authoritative for combat/ZOC; this is presentation
+			// only and prevents a visible turn after the pawn has already arrived.
 			UpdateSpriteDirectionFromTarget(targetWorldPosition);
 		}
 
@@ -285,9 +280,13 @@ namespace Battle
 			switch (direction)
 			{
 				case Protocol.BattleFacingDirection.Left:
+				case Protocol.BattleFacingDirection.QNegRPos:
+				case Protocol.BattleFacingDirection.RNeg:
 					_spriteRenderer.flipX = true;
 					return true;
 				case Protocol.BattleFacingDirection.Right:
+				case Protocol.BattleFacingDirection.QPosRNeg:
+				case Protocol.BattleFacingDirection.RPos:
 					_spriteRenderer.flipX = false;
 					return true;
 				default:
