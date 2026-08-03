@@ -747,7 +747,11 @@ namespace Battle
 			Triggers = triggers ?? string.Empty;
 		}
 
-		public bool TriggersOnLeaveZone => Triggers.IndexOf("LEAVE_ZONE", StringComparison.OrdinalIgnoreCase) >= 0;
+		// Current server data expresses an opportunity attack as ENEMY_MOVE_IN_ZONE:
+		// an enemy moves while occupying this pawn's ZoC. LEAVE_ZONE remains accepted
+		// for older data sets which used that terminology.
+		public bool TriggersOnEnemyMove => Triggers.IndexOf("ENEMY_MOVE_IN_ZONE", StringComparison.OrdinalIgnoreCase) >= 0
+			|| Triggers.IndexOf("LEAVE_ZONE", StringComparison.OrdinalIgnoreCase) >= 0;
 	}
 
 	public sealed class BattleSkillDefinition

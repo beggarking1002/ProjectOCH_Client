@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using App;
 using UnityEngine;
 
 namespace Battle
@@ -16,10 +17,12 @@ namespace Battle
 		static readonly Color ZocAttackerColor = new Color(1f, 0.22f, 0.2f, 0.98f);
 
 		readonly List<LineRenderer> _outlines = new List<LineRenderer>();
+		readonly List<TextMesh> _zocAttackerMarkers = new List<TextMesh>();
 		Material _material;
 
 		public void Show(BattleMapGrid mapGrid, IReadOnlyList<AxialCoord> validTargets, IReadOnlyList<AxialCoord> affectedTiles)
 		{
+			HideZocAttackerMarkers();
 			if (mapGrid == null)
 			{
 				Hide();
@@ -54,6 +57,7 @@ namespace Battle
 			IReadOnlyList<AxialCoord> validTargets,
 			IReadOnlyList<AxialCoord> affectedTiles)
 		{
+			HideZocAttackerMarkers();
 			if (mapGrid == null)
 			{
 				Hide();
@@ -94,6 +98,7 @@ namespace Battle
 			DrawTiles(mapGrid, validTargets, ValidTargetColor, 0.72f, ref index);
 			DrawTiles(mapGrid, zocTiles, ZocTileColor, 0.88f, ref index);
 			DrawTiles(mapGrid, zocAttackerTiles, ZocAttackerColor, 1f, ref index);
+			DrawZocAttackerMarkers(mapGrid, zocAttackerTiles);
 			for (; index < _outlines.Count; index++)
 				_outlines[index].enabled = false;
 		}
@@ -102,6 +107,8 @@ namespace Battle
 		{
 			for (int i = 0; i < _outlines.Count; i++)
 				_outlines[i].enabled = false;
+
+			HideZocAttackerMarkers();
 		}
 
 		void OnDestroy()
@@ -127,6 +134,49 @@ namespace Battle
 				outline.material = GetMaterial();
 				_outlines.Add(outline);
 			}
+		}
+
+		void DrawZocAttackerMarkers(BattleMapGrid mapGrid, IReadOnlyList<AxialCoord> attackerTiles)
+		{
+			int markerCount = attackerTiles?.Count ?? 0;
+			EnsureZocAttackerMarkerCount(markerCount);
+			for (int i = 0; i < markerCount; i++)
+			{
+				TextMesh marker = _zocAttackerMarkers[i];
+				Vector3 position = mapGrid.AxialToWorldCenter(attackerTiles[i], -0.15f);
+				marker.transform.position = position + Vector3.up * 1.05f;
+				marker.gameObject.SetActive(true);
+			}
+
+			for (int i = markerCount; i < _zocAttackerMarkers.Count; i++)
+				_zocAttackerMarkers[i].gameObject.SetActive(false);
+		}
+
+		void EnsureZocAttackerMarkerCount(int count)
+		{
+			while (_zocAttackerMarkers.Count < count)
+			{
+				GameObject markerObject = new GameObject("ZocReactionAttackerMarker");
+				markerObject.transform.SetParent(transform, false);
+				TextMesh marker = markerObject.AddComponent<TextMesh>();
+				marker.text = "!";
+				marker.fontSize = 42;
+				marker.characterSize = 0.13f;
+				marker.fontStyle = FontStyle.Bold;
+				marker.alignment = TextAlignment.Center;
+				marker.anchor = TextAnchor.MiddleCenter;
+				GameRoot.ApplyWorldTextFont(marker);
+				marker.color = ZocAttackerColor;
+				MeshRenderer renderer = marker.GetComponent<MeshRenderer>();
+				renderer.sortingOrder = SortingOrder + 30;
+				_zocAttackerMarkers.Add(marker);
+			}
+		}
+
+		void HideZocAttackerMarkers()
+		{
+			for (int i = 0; i < _zocAttackerMarkers.Count; i++)
+				_zocAttackerMarkers[i].gameObject.SetActive(false);
 		}
 
 		Material GetMaterial()

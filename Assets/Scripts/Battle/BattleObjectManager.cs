@@ -69,7 +69,7 @@ namespace Battle
 		readonly List<AxialCoord> _validTargetTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _reachableMoveTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _affectedTargetTiles = new List<AxialCoord>();
-		readonly List<AxialCoord> _zocTiles = new List<AxialCoord>();
+		readonly List<AxialCoord> _hoveredZocTiles = new List<AxialCoord>();
 		readonly List<AxialCoord> _zocAttackerTiles = new List<AxialCoord>();
 		readonly HashSet<AxialCoord> _zocFrontier = new HashSet<AxialCoord>();
 		readonly HashSet<AxialCoord> _zocNextFrontier = new HashSet<AxialCoord>();
@@ -1131,14 +1131,18 @@ namespace Battle
 
 			_validTargetTiles.Clear();
 			_affectedTargetTiles.Clear();
-			_zocTiles.Clear();
+			_hoveredZocTiles.Clear();
 			_zocAttackerTiles.Clear();
 			BuildReachableMoveTiles(movingPawn, _validTargetTiles);
 
-			if (TryGetPointerAxial(out AxialCoord hoveredAxial) && _validTargetTiles.Contains(hoveredAxial))
-				CollectMoveZocPreview(movingPawn);
+			// Leaving an enemy ZoC triggers from the mover's current tile, not from a
+			// particular destination. Show the threatened attackers as soon as movement
+			// mode is available so the warning is visible before the cursor moves.
+			CollectMoveZocPreview(movingPawn);
+			if (TryGetPointerAxial(out AxialCoord hoveredAxial))
+				CollectHoveredZocRangePreview(movingPawn, hoveredAxial, _hoveredZocTiles);
 
-			_targetPreview.ShowMoveWithZoc(_mapGrid, _validTargetTiles, _zocTiles, _zocAttackerTiles);
+			_targetPreview.ShowMoveWithZoc(_mapGrid, _validTargetTiles, _hoveredZocTiles, _zocAttackerTiles);
 		}
 
 		bool IsReachableMoveTarget(BattlePawn movingPawn, AxialCoord targetAxial)
@@ -1201,7 +1205,7 @@ namespace Battle
 					|| potentialAttacker.Info == null
 					|| _gameData.TryGetZocProfile(potentialAttacker.Info.PawnClass, out BattleZocDefinition profile) == false
 					|| profile.Enabled == false
-					|| profile.TriggersOnLeaveZone == false
+					|| profile.TriggersOnEnemyMove == false
 					|| profile.ReactionLimitPerTurn <= 0
 					|| potentialAttacker.ZocReactionsUsedThisTurn >= profile.ReactionLimitPerTurn)
 				{
@@ -1213,9 +1217,27 @@ namespace Battle
 					continue;
 
 				AddAffectedTile(potentialAttacker.Axial, _zocAttackerTiles);
-				for (int i = 0; i < _affectedTargetTiles.Count; i++)
-					AddAffectedTile(_affectedTargetTiles[i], _zocTiles);
 			}
+		}
+
+		void CollectHoveredZocRangePreview(BattlePawn movingPawn, AxialCoord hoveredAxial, List<AxialCoord> destination)
+		{
+			destination.Clear();
+			if (movingPawn == null || _zocAttackerTiles.Contains(hoveredAxial) == false)
+				return;
+
+			ulong attackerPawnId = FindPawnIdAtAxial(hoveredAxial);
+			if (attackerPawnId == 0
+				|| _pawns.TryGetValue(attackerPawnId, out BattlePawn attackerPawn) == false
+				|| attackerPawn == null
+				|| attackerPawn.Info == null
+				|| _gameData == null
+				|| _gameData.TryGetZocProfile(attackerPawn.Info.PawnClass, out BattleZocDefinition profile) == false)
+			{
+				return;
+			}
+
+			GetZocTiles(attackerPawn, profile, destination);
 		}
 
 		void GetZocTiles(BattlePawn pawn, BattleZocDefinition profile, List<AxialCoord> destination)
