@@ -1579,7 +1579,6 @@ namespace Battle
 
 			List<BattleActionLog> moveLogs = CopyBattleActionLogs(packet.Logs);
 			List<BattlePawnDelta> movePawnDeltas = CopyBattlePawnDeltas(packet.PawnDeltas);
-			ApplyPawnTurnState(packet.PawnId, packet.RemainingAp, packet.CanMove);
 			if (packet.TurnQueueResynced)
 				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
 
@@ -1634,13 +1633,6 @@ namespace Battle
 			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
 			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
-			ApplyPawnTurnState(
-				packet.CasterPawnId,
-				packet.RemainingAp,
-				packet.CanMove,
-				packet.UsedSubActionThisTurn,
-				packet.UsedUltimate);
-
 			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.TargetAxial, packet.Logs, packet.PawnDeltas);
 			if (packet.TurnQueueResynced)
 				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
@@ -2110,14 +2102,6 @@ namespace Battle
 			List<StatusTickPresentation> turnStartTicks = CollectTurnStartStatusTicks(packet.NextTurnPawnId, packet.PawnDeltas);
 			ApplyPawnDeltas(packet.PawnDeltas);
 			PresentStatusTicks(turnStartTicks);
-			// End-turn responses describe the pawn which is about to receive the turn.
-			// Servers may omit pawn_deltas when only this compact turn state changed.
-			ApplyPawnTurnState(
-				packet.NextTurnPawnId,
-				packet.RemainingAp,
-				packet.CanMove,
-				packet.UsedSubActionThisTurn,
-				packet.UsedUltimate);
 			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
 			AppendBattleLogs(packet.Logs);
 			if (packet.TurnQueueResynced)
@@ -2222,18 +2206,6 @@ namespace Battle
 				if (_pawns.TryGetValue(tick.PawnId, out BattlePawn pawn) && pawn != null)
 					BattleStatusTickApplied?.Invoke(pawn, tick.StatusKey, tick.Amount);
 			}
-		}
-
-		void ApplyPawnTurnState(ulong pawnId, int remainingAp, bool canMove)
-		{
-			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawn pawn) && pawn != null)
-				pawn.ApplyTurnState(remainingAp, canMove);
-		}
-
-		void ApplyPawnTurnState(ulong pawnId, int remainingAp, bool canMove, bool usedSubActionThisTurn, bool usedUltimate)
-		{
-			if (pawnId != 0 && _pawns.TryGetValue(pawnId, out BattlePawn pawn) && pawn != null)
-				pawn.ApplyTurnState(remainingAp, canMove, usedSubActionThisTurn, usedUltimate);
 		}
 
 		void AppendBattleLog(BattleActionLog log)

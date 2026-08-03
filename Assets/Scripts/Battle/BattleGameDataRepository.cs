@@ -243,7 +243,6 @@ namespace Battle
 					_classKeyToPawnClass.TryGetValue(classKey, out PawnClass pawnClass) ? pawnClass : PawnClass.None,
 					row.Get("SkillCategory"),
 					row.GetInt("ActionSlot"),
-					row.GetInt("ApCost"),
 					row.GetInt("RangeMin"),
 					row.GetInt("RangeMax"),
 					row.Get("TargetType"),
@@ -761,7 +760,6 @@ namespace Battle
 		public readonly PawnClass PawnClass;
 		public readonly string SkillCategory;
 		public readonly int ActionSlot;
-		public readonly int ApCost;
 		public readonly int RangeMin;
 		public readonly int RangeMax;
 		public readonly string TargetType;
@@ -775,7 +773,6 @@ namespace Battle
 			PawnClass pawnClass,
 			string skillCategory,
 			int actionSlot,
-			int apCost,
 			int rangeMin,
 			int rangeMax,
 			string targetType,
@@ -788,7 +785,6 @@ namespace Battle
 			PawnClass = pawnClass;
 			SkillCategory = skillCategory;
 			ActionSlot = actionSlot;
-			ApCost = apCost;
 			RangeMin = rangeMin;
 			RangeMax = rangeMax;
 			TargetType = targetType;

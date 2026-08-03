@@ -987,15 +987,13 @@ namespace Battle
 			if (_objectManager.BattleId == 0)
 				ownership = "Debug";
 
-			string ap = "-";
 			string canMove = "-";
 			if (TryGetCurrentTurnPawn(out BattlePawn pawn))
 			{
-				ap = pawn.CurrentAp.ToString();
 				canMove = pawn.CanMove ? "Yes" : "No";
 			}
 
-			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}\nMoving: {(_objectManager.IsAnimatingMove ? "Yes" : "No")}\nAP: {ap}\nMove: {canMove}\nLog:\n{_objectManager.BattleLogText}";
+			return $"Turn\nPawn: {_objectManager.CurrentTurnPawnId}\nSide: {ownership}\nMode: {_objectManager.ActionMode}\nMoving: {(_objectManager.IsAnimatingMove ? "Yes" : "No")}\nMove: {canMove}\nLog:\n{_objectManager.BattleLogText}";
 		}
 
 		string BuildTileInfoText(bool hasHoveredTile, AxialCoord axial)
@@ -1207,7 +1205,7 @@ namespace Battle
 			string range = skill.RangeMin == skill.RangeMax
 				? skill.RangeMax.ToString()
 				: $"{skill.RangeMin}-{skill.RangeMax}";
-			string tooltip = $"{name}\nSlot: {skill.ActionSlot} / AP: {skill.ApCost} / Range: {range}\nTarget: {skill.TargetType}";
+			string tooltip = $"{name}\nSlot: {skill.ActionSlot} / Range: {range}\nTarget: {skill.TargetType}";
 			if (string.IsNullOrWhiteSpace(skill.TargetShape) == false)
 				tooltip += $" / Shape: {skill.TargetShape}";
 			if (string.IsNullOrWhiteSpace(skill.RequiredOverlayType) == false)
@@ -1364,7 +1362,7 @@ namespace Battle
 		static string BuildPawnText(string title, BattlePawn pawn)
 		{
 			if (pawn == null)
-				return $"{title}\nPawn: -\nAxial: -\nHP: -\nArmor: -\nAP: -";
+				return $"{title}\nPawn: -\nAxial: -\nHP: -\nArmor: -";
 
 			string side = pawn.IsMine ? "Mine" : "Enemy";
 			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
@@ -1378,7 +1376,7 @@ namespace Battle
 				: "-";
 			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
 			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.IsActionBlocked ? "ActionBlocked" : "ActionReady")}, {(pawn.UsedNormalSkillThisTurn ? "NormalUsed" : "NormalReady")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nMorale: {morale}\nStatus: {FormatStatuses(pawn.Statuses)}\nAP: {pawn.CurrentAp}\nState: {flags}";
+			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nMorale: {morale}\nStatus: {FormatStatuses(pawn.Statuses)}\nState: {flags}";
 		}
 
 		static bool TryGetPrimaryResource(BattlePawn pawn, out string name, out BattlePawn.ResourceState state, out Color color)
@@ -1472,19 +1470,6 @@ namespace Battle
 				default:
 					return true;
 			}
-		}
-
-		bool HasEnoughAp(ActionSlotBinding binding, BattlePawn pawn)
-		{
-			if (pawn == null)
-				return false;
-
-			if (TryGetUiSkillDefinition(pawn, binding.ActionSlot, out BattleSkillDefinition skill))
-			{
-				return pawn.CurrentAp >= skill.ApCost;
-			}
-
-			return pawn.CurrentAp > 0;
 		}
 
 		bool TryGetCurrentTurnPawn(out BattlePawn pawn)

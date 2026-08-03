@@ -1,6 +1,6 @@
 # 게임플레이, 패킷, 데이터 계약
 
-> 기준일: 2026-08-03. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
+> 기준일: 2026-08-04. 서버가 권위 있는 상태를 결정하고, 클라이언트는 수신 snapshot/delta를 표현한다.
 
 ## 필드
 
@@ -15,7 +15,7 @@
 | 동작 | 클라이언트 요청 | 서버 응답에서 적용할 상태 |
 | --- | --- | --- |
 | 입장 | `C_ENTER_BATTLE` 또는 초대 수락 | `S_ENTER_BATTLE` snapshot, 전투 맵, 아군/적 Pawn, 턴 큐 |
-| 이동 | `C_BATTLE_MOVE` | 이동, AP/이동 가능 여부, reaction log, Pawn delta, 다음 턴 |
+| 이동 | `C_BATTLE_MOVE` | 이동, reaction log, Pawn delta, 다음 턴 |
 | 스킬 | `C_BATTLE_SKILL` | Pawn delta, tile delta, action log, 턴/행동 상태 |
 | 턴 종료 | `C_BATTLE_END_TURN` | Pawn/tile delta, 로그, 다음 턴/턴 큐 |
 | 사망 | 없음 | `S_BATTLE_PAWN_DEAD`로 Pawn 사망 표현 |
@@ -33,6 +33,7 @@
 - Zillian Mace 슬롯 7은 인접 아군을 고른 뒤 위치 교환 여부를 확인한다. 교환을 고르면 `C_BATTLE_SKILL.request_optional_position_swap=true`를 전송하고, 회복만 고르면 해당 필드를 전송하지 않는다.
 - 스킬 요청의 권위 있는 대상은 `target_axial`이다. `target_pawn_id`는 클라이언트가 0으로 보내고 서버가 axial에서 실제 Pawn을 찾는다.
 - 서버 응답 중 `target_pawn_id == 0`은 타일 전용 결과일 수 있다. 이 경우에도 HP를 직접 계산하지 않고 delta만 적용한다.
+- 행동은 AP가 아니라 `pawn_deltas`의 최종 턴 상태로 판단한다. 이동은 `can_move`, 일반 스킬(2~5)은 `used_normal_skill_this_turn == false`, 궁극기(6)는 `used_ultimate == false`, 보조행동(7)은 `used_sub_action_this_turn == false`일 때 사용할 수 있다. `is_action_blocked_this_turn`이면 모든 능동 행동을 막는다.
 
 ## 맵과 타일
 
@@ -44,7 +45,7 @@
 
 `BattlePawn`은 다음 상태를 유지한다.
 
-- 기본: HP, Armor, Shield, AP, MoveRange, 이동/행동 가능 여부, 현재 턴, 사망, 방향
+- 기본: HP, Armor, Shield, MoveRange, 이동/행동 가능 여부, 현재 턴, 사망, 방향
 - 전체 교체 snapshot: Resources, Barriers, Statuses, Auras
 - 표현: 클래스별 animator/VFX, 팀 링, 월드 상태 UI, 피격/스킬/사망 애니메이션
 
@@ -75,7 +76,7 @@ CSV `ClassKey.csv`에는 Beige Ice/Fire, Suen Axe/Parvis, Alen Shield/Spear, Zil
 | --- | --- |
 | `ClassKey.csv` | 클래스 key와 `PawnClass` 매핑 |
 | `PawnTemplate.csv` | Pawn 역할 및 기본 능력치 |
-| `BattleSkill.csv` | 슬롯, AP, 사거리, 대상/형태/overlay 요구 조건 |
+| `BattleSkill.csv` | 슬롯, 사거리, 대상/형태/overlay 요구 조건 |
 | `BattleSkillEffect.csv` | 효과 그룹과 실행 순서 |
 | `BattleSkillEffectParam.csv` | 효과 파라미터/상태 modifier |
 | `BattleSkillView.csv` | 애니메이션 trigger, VFX/SFX, 아이콘 주소, 발사체 키 |

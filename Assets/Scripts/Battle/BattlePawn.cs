@@ -57,7 +57,6 @@ namespace Battle
 		// Shield is the server-authoritative UI aggregate: armor + every temporary barrier.
 		public int ShieldCurrent => Info != null ? Info.ShieldCurrent : 0;
 		public int ShieldMax => Info != null ? Info.ShieldMax : 0;
-		public int CurrentAp => Info != null ? Info.CurrentAp : 2;
 		public int MoveRange => Info != null ? Info.MoveRange : 0;
 		public bool CanMove => Info == null || Info.CanMove;
 		public bool UsedNormalSkillThisTurn => Info != null && Info.UsedNormalSkillThisTurn;
@@ -327,7 +326,6 @@ namespace Battle
 			bool hasMoved = hasAxialDelta && Axial.Equals(targetAxial) == false;
 			Info.Hp = delta.Hp;
 			Info.Armor = delta.Armor;
-			Info.CurrentAp = delta.CurrentAp;
 			Info.CanMove = delta.CanMove;
 			// Proto scalar fields have no presence bit. Older/partial pawn deltas omit
 			// move_range as 0, which must not erase the range from the entry snapshot.
@@ -357,22 +355,6 @@ namespace Battle
 			RefreshStatusWorldUi();
 			ApplyDeadVisualState();
 			OnPawnStateChanged();
-		}
-
-		public void ApplyTurnState(int currentAp, bool canMove, bool usedSubActionThisTurn, bool usedUltimate)
-		{
-			EnsureInfo();
-			Info.CurrentAp = currentAp;
-			Info.CanMove = canMove;
-			Info.UsedSubActionThisTurn = usedSubActionThisTurn;
-			Info.UsedUltimate = usedUltimate;
-		}
-
-		public void ApplyTurnState(int currentAp, bool canMove)
-		{
-			EnsureInfo();
-			Info.CurrentAp = currentAp;
-			Info.CanMove = canMove;
 		}
 
 		public void ApplyArmor(int armor)
@@ -517,7 +499,6 @@ namespace Battle
 		{
 			EnsureInfo();
 			Info.Hp = 0;
-			Info.CurrentAp = 0;
 			Info.CanMove = false;
 			Info.IsDead = true;
 			SetTurnIndicatorVisible(false);
@@ -695,7 +676,6 @@ namespace Battle
 				Axial = new Protocol.AxialCoord { Q = Axial.Q, R = Axial.R },
 				Hp = 0,
 				MaxHp = 0,
-				CurrentAp = 2,
 				CanMove = true,
 				Role = Protocol.BattlePawnRole.Melee,
 			};

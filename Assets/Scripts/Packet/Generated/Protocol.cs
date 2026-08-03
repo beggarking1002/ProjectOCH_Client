@@ -45,62 +45,61 @@ namespace Protocol {
             "CgV0aWxlcxgJIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvEh4KFnVw",
             "Y29taW5nX3R1cm5fcGF3bl9pZHMYCiADKAQiWQoNQ19CQVRUTEVfTU9WRRIR",
             "CgliYXR0bGVfaWQYASABKAQSDwoHcGF3bl9pZBgCIAEoBBIkCgZ0YXJnZXQY",
-            "AyABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkIsIDCg1TX0JBVFRMRV9NT1ZF",
+            "AyABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkIqwDCg1TX0JBVFRMRV9NT1ZF",
             "Eg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0dGxlX2lkGAIgASgEEg8KB3Bhd25f",
             "aWQYAyABKAQSIwoFc3RhcnQYBCABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3Jk",
             "EiQKBnRhcmdldBgFIAEoCzIULlByb3RvY29sLkF4aWFsQ29vcmQSGQoRbmV4",
             "dF90dXJuX3Bhd25faWQYBiABKAQSKgoGcmVzdWx0GAcgASgOMhouUHJvdG9j",
-            "b2wuQmF0dGxlTW92ZVJlc3VsdBIOCgZyZWFzb24YCCABKAkSFAoMcmVtYWlu",
-            "aW5nX2FwGAkgASgFEhAKCGNhbl9tb3ZlGAogASgIEi4KC3Bhd25fZGVsdGFz",
-            "GAsgAygLMhkuUHJvdG9jb2wuQmF0dGxlUGF3bkRlbHRhEicKBGxvZ3MYDCAD",
-            "KAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rpb25Mb2cSHAoUYmF0dGxlX3N0YXRl",
-            "X3ZlcnNpb24YDSABKAQSGwoTdHVybl9xdWV1ZV9yZXN5bmNlZBgOIAEoCBIe",
-            "ChZ1cGNvbWluZ190dXJuX3Bhd25faWRzGA8gAygEIu8BCg5DX0JBVFRMRV9T",
-            "S0lMTBIRCgliYXR0bGVfaWQYASABKAQSFgoOY2FzdGVyX3Bhd25faWQYAiAB",
-            "KAQSEgoKc2tpbGxfc2xvdBgDIAEoBRIWCg50YXJnZXRfcGF3bl9pZBgEIAEo",
-            "BBIqCgx0YXJnZXRfYXhpYWwYBSABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3Jk",
-            "EjIKFGxpbmVfZGlyZWN0aW9uX2F4aWFsGAYgASgLMhQuUHJvdG9jb2wuQXhp",
-            "YWxDb29yZBImCh5yZXF1ZXN0X29wdGlvbmFsX3Bvc2l0aW9uX3N3YXAYByAB",
-            "KAgizQQKDlNfQkFUVExFX1NLSUxMEg8KB3N1Y2Nlc3MYASABKAgSEQoJYmF0",
-            "dGxlX2lkGAIgASgEEhYKDmNhc3Rlcl9wYXduX2lkGAMgASgEEhIKCnNraWxs",
-            "X3Nsb3QYBCABKAUSFgoOdGFyZ2V0X3Bhd25faWQYBSABKAQSKgoMdGFyZ2V0",
-            "X2F4aWFsGAYgASgLMhQuUHJvdG9jb2wuQXhpYWxDb29yZBIOCgZkYW1hZ2UY",
-            "ByABKAUSEQoJdGFyZ2V0X2hwGAggASgFEhkKEW5leHRfdHVybl9wYXduX2lk",
-            "GAkgASgEEg4KBnJlYXNvbhgKIAEoCRIUCgxyZW1haW5pbmdfYXAYCyABKAUS",
-            "EAoIY2FuX21vdmUYDCABKAgSIQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVy",
-            "bhgNIAEoCBIVCg11c2VkX3VsdGltYXRlGA4gASgIEhQKDHRhcmdldF9hcm1v",
-            "chgPIAEoBRIuCgtwYXduX2RlbHRhcxgQIAMoCzIZLlByb3RvY29sLkJhdHRs",
-            "ZVBhd25EZWx0YRInCgRsb2dzGBEgAygLMhkuUHJvdG9jb2wuQmF0dGxlQWN0",
-            "aW9uTG9nEhwKFGJhdHRsZV9zdGF0ZV92ZXJzaW9uGBIgASgEEi0KC3RpbGVf",
-            "ZGVsdGFzGBMgAygLMhguUHJvdG9jb2wuQmF0dGxlVGlsZUluZm8SGwoTdHVy",
-            "bl9xdWV1ZV9yZXN5bmNlZBgUIAEoCBIeChZ1cGNvbWluZ190dXJuX3Bhd25f",
-            "aWRzGBUgAygEIjcKEUNfQkFUVExFX0VORF9UVVJOEhEKCWJhdHRsZV9pZBgB",
-            "IAEoBBIPCgdwYXduX2lkGAIgASgEItcDChFTX0JBVFRMRV9FTkRfVFVSThIP",
-            "CgdzdWNjZXNzGAEgASgIEhEKCWJhdHRsZV9pZBgCIAEoBBIPCgdwYXduX2lk",
-            "GAMgASgEEhkKEW5leHRfdHVybl9wYXduX2lkGAQgASgEEg4KBnJlYXNvbhgF",
-            "IAEoCRIUCgxyZW1haW5pbmdfYXAYBiABKAUSEAoIY2FuX21vdmUYByABKAgS",
-            "IQoZdXNlZF9zdWJfYWN0aW9uX3RoaXNfdHVybhgIIAEoCBIVCg11c2VkX3Vs",
-            "dGltYXRlGAkgASgIEi4KC3Bhd25fZGVsdGFzGAogAygLMhkuUHJvdG9jb2wu",
-            "QmF0dGxlUGF3bkRlbHRhEicKBGxvZ3MYCyADKAsyGS5Qcm90b2NvbC5CYXR0",
-            "bGVBY3Rpb25Mb2cSHAoUYmF0dGxlX3N0YXRlX3ZlcnNpb24YDCABKAQSLQoL",
-            "dGlsZV9kZWx0YXMYDSADKAsyGC5Qcm90b2NvbC5CYXR0bGVUaWxlSW5mbxId",
-            "ChVlbnRlcmluZ190dXJuX3Bhd25faWQYDiABKAQSGwoTdHVybl9xdWV1ZV9y",
-            "ZXN5bmNlZBgPIAEoCBIeChZ1cGNvbWluZ190dXJuX3Bhd25faWRzGBAgAygE",
-            "IisKD0NfQkFUVExFX0lOVklURRIYChB0YXJnZXRfcGxheWVyX2lkGAEgASgE",
-            "InEKF1NfQkFUVExFX0lOVklURV9SRVFVRVNUEg8KB3N1Y2Nlc3MYASABKAgS",
-            "GwoTcmVxdWVzdGVyX3BsYXllcl9pZBgCIAEoBBIYChB0YXJnZXRfcGxheWVy",
-            "X2lkGAMgASgEEg4KBnJlYXNvbhgEIAEoCSI3ChhTX0JBVFRMRV9JTlZJVEVf",
-            "UkVDRUlWRUQSGwoTcmVxdWVzdGVyX3BsYXllcl9pZBgBIAEoBCJHChhDX0JB",
-            "VFRMRV9JTlZJVEVfUkVTUE9OU0USGwoTcmVxdWVzdGVyX3BsYXllcl9pZBgB",
-            "IAEoBBIOCgZhY2NlcHQYAiABKAgicQoWU19CQVRUTEVfSU5WSVRFX1JFU1VM",
-            "VBIQCghhY2NlcHRlZBgBIAEoCBIbChNyZXF1ZXN0ZXJfcGxheWVyX2lkGAIg",
-            "ASgEEhgKEHRhcmdldF9wbGF5ZXJfaWQYAyABKAQSDgoGcmVhc29uGAQgASgJ",
-            "IlAKElNfQkFUVExFX1BBV05fREVBRBIRCgliYXR0bGVfaWQYASABKAQSDwoH",
-            "cGF3bl9pZBgCIAEoBBIWCg5raWxsZXJfcGF3bl9pZBgDIAEoBCI1Cg9TX0JB",
-            "VFRMRV9SRVNVTFQSEQoJYmF0dGxlX2lkGAEgASgEEg8KB3ZpY3RvcnkYAiAB",
-            "KAgiKAoTQ19CQVRUTEVfUkVTVUxUX0FDSxIRCgliYXR0bGVfaWQYASABKAQi",
-            "SQoTU19CQVRUTEVfUkVTVUxUX0FDSxIPCgdzdWNjZXNzGAEgASgIEhEKCWJh",
-            "dHRsZV9pZBgCIAEoBBIOCgZyZWFzb24YAyABKAliBnByb3RvMw=="));
+            "b2wuQmF0dGxlTW92ZVJlc3VsdBIOCgZyZWFzb24YCCABKAkSEAoIY2FuX21v",
+            "dmUYCiABKAgSLgoLcGF3bl9kZWx0YXMYCyADKAsyGS5Qcm90b2NvbC5CYXR0",
+            "bGVQYXduRGVsdGESJwoEbG9ncxgMIAMoCzIZLlByb3RvY29sLkJhdHRsZUFj",
+            "dGlvbkxvZxIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgNIAEoBBIbChN0dXJu",
+            "X3F1ZXVlX3Jlc3luY2VkGA4gASgIEh4KFnVwY29taW5nX3R1cm5fcGF3bl9p",
+            "ZHMYDyADKAQi7wEKDkNfQkFUVExFX1NLSUxMEhEKCWJhdHRsZV9pZBgBIAEo",
+            "BBIWCg5jYXN0ZXJfcGF3bl9pZBgCIAEoBBISCgpza2lsbF9zbG90GAMgASgF",
+            "EhYKDnRhcmdldF9wYXduX2lkGAQgASgEEioKDHRhcmdldF9heGlhbBgFIAEo",
+            "CzIULlByb3RvY29sLkF4aWFsQ29vcmQSMgoUbGluZV9kaXJlY3Rpb25fYXhp",
+            "YWwYBiABKAsyFC5Qcm90b2NvbC5BeGlhbENvb3JkEiYKHnJlcXVlc3Rfb3B0",
+            "aW9uYWxfcG9zaXRpb25fc3dhcBgHIAEoCCK3BAoOU19CQVRUTEVfU0tJTEwS",
+            "DwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVfaWQYAiABKAQSFgoOY2FzdGVy",
+            "X3Bhd25faWQYAyABKAQSEgoKc2tpbGxfc2xvdBgEIAEoBRIWCg50YXJnZXRf",
+            "cGF3bl9pZBgFIAEoBBIqCgx0YXJnZXRfYXhpYWwYBiABKAsyFC5Qcm90b2Nv",
+            "bC5BeGlhbENvb3JkEg4KBmRhbWFnZRgHIAEoBRIRCgl0YXJnZXRfaHAYCCAB",
+            "KAUSGQoRbmV4dF90dXJuX3Bhd25faWQYCSABKAQSDgoGcmVhc29uGAogASgJ",
+            "EhAKCGNhbl9tb3ZlGAwgASgIEiEKGXVzZWRfc3ViX2FjdGlvbl90aGlzX3R1",
+            "cm4YDSABKAgSFQoNdXNlZF91bHRpbWF0ZRgOIAEoCBIUCgx0YXJnZXRfYXJt",
+            "b3IYDyABKAUSLgoLcGF3bl9kZWx0YXMYECADKAsyGS5Qcm90b2NvbC5CYXR0",
+            "bGVQYXduRGVsdGESJwoEbG9ncxgRIAMoCzIZLlByb3RvY29sLkJhdHRsZUFj",
+            "dGlvbkxvZxIcChRiYXR0bGVfc3RhdGVfdmVyc2lvbhgSIAEoBBItCgt0aWxl",
+            "X2RlbHRhcxgTIAMoCzIYLlByb3RvY29sLkJhdHRsZVRpbGVJbmZvEhsKE3R1",
+            "cm5fcXVldWVfcmVzeW5jZWQYFCABKAgSHgoWdXBjb21pbmdfdHVybl9wYXdu",
+            "X2lkcxgVIAMoBCI3ChFDX0JBVFRMRV9FTkRfVFVSThIRCgliYXR0bGVfaWQY",
+            "ASABKAQSDwoHcGF3bl9pZBgCIAEoBCLBAwoRU19CQVRUTEVfRU5EX1RVUk4S",
+            "DwoHc3VjY2VzcxgBIAEoCBIRCgliYXR0bGVfaWQYAiABKAQSDwoHcGF3bl9p",
+            "ZBgDIAEoBBIZChFuZXh0X3R1cm5fcGF3bl9pZBgEIAEoBBIOCgZyZWFzb24Y",
+            "BSABKAkSEAoIY2FuX21vdmUYByABKAgSIQoZdXNlZF9zdWJfYWN0aW9uX3Ro",
+            "aXNfdHVybhgIIAEoCBIVCg11c2VkX3VsdGltYXRlGAkgASgIEi4KC3Bhd25f",
+            "ZGVsdGFzGAogAygLMhkuUHJvdG9jb2wuQmF0dGxlUGF3bkRlbHRhEicKBGxv",
+            "Z3MYCyADKAsyGS5Qcm90b2NvbC5CYXR0bGVBY3Rpb25Mb2cSHAoUYmF0dGxl",
+            "X3N0YXRlX3ZlcnNpb24YDCABKAQSLQoLdGlsZV9kZWx0YXMYDSADKAsyGC5Q",
+            "cm90b2NvbC5CYXR0bGVUaWxlSW5mbxIdChVlbnRlcmluZ190dXJuX3Bhd25f",
+            "aWQYDiABKAQSGwoTdHVybl9xdWV1ZV9yZXN5bmNlZBgPIAEoCBIeChZ1cGNv",
+            "bWluZ190dXJuX3Bhd25faWRzGBAgAygEIisKD0NfQkFUVExFX0lOVklURRIY",
+            "ChB0YXJnZXRfcGxheWVyX2lkGAEgASgEInEKF1NfQkFUVExFX0lOVklURV9S",
+            "RVFVRVNUEg8KB3N1Y2Nlc3MYASABKAgSGwoTcmVxdWVzdGVyX3BsYXllcl9p",
+            "ZBgCIAEoBBIYChB0YXJnZXRfcGxheWVyX2lkGAMgASgEEg4KBnJlYXNvbhgE",
+            "IAEoCSI3ChhTX0JBVFRMRV9JTlZJVEVfUkVDRUlWRUQSGwoTcmVxdWVzdGVy",
+            "X3BsYXllcl9pZBgBIAEoBCJHChhDX0JBVFRMRV9JTlZJVEVfUkVTUE9OU0US",
+            "GwoTcmVxdWVzdGVyX3BsYXllcl9pZBgBIAEoBBIOCgZhY2NlcHQYAiABKAgi",
+            "cQoWU19CQVRUTEVfSU5WSVRFX1JFU1VMVBIQCghhY2NlcHRlZBgBIAEoCBIb",
+            "ChNyZXF1ZXN0ZXJfcGxheWVyX2lkGAIgASgEEhgKEHRhcmdldF9wbGF5ZXJf",
+            "aWQYAyABKAQSDgoGcmVhc29uGAQgASgJIlAKElNfQkFUVExFX1BBV05fREVB",
+            "RBIRCgliYXR0bGVfaWQYASABKAQSDwoHcGF3bl9pZBgCIAEoBBIWCg5raWxs",
+            "ZXJfcGF3bl9pZBgDIAEoBCI1Cg9TX0JBVFRMRV9SRVNVTFQSEQoJYmF0dGxl",
+            "X2lkGAEgASgEEg8KB3ZpY3RvcnkYAiABKAgiKAoTQ19CQVRUTEVfUkVTVUxU",
+            "X0FDSxIRCgliYXR0bGVfaWQYASABKAQiSQoTU19CQVRUTEVfUkVTVUxUX0FD",
+            "SxIPCgdzdWNjZXNzGAEgASgIEhEKCWJhdHRsZV9pZBgCIAEoBBIOCgZyZWFz",
+            "b24YAyABKAliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -119,11 +118,11 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER_BATTLE), global::Protocol.C_ENTER_BATTLE.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_BATTLE), global::Protocol.S_ENTER_BATTLE.Parser, new[]{ "Success", "BattleId", "MapId", "AlliedPawns", "EnemyPawns", "CurrentTurnPawnId", "Reason", "BattleStateVersion", "Tiles", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_MOVE), global::Protocol.C_BATTLE_MOVE.Parser, new[]{ "BattleId", "PawnId", "Target" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "RemainingAp", "CanMove", "PawnDeltas", "Logs", "BattleStateVersion", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_MOVE), global::Protocol.S_BATTLE_MOVE.Parser, new[]{ "Success", "BattleId", "PawnId", "Start", "Target", "NextTurnPawnId", "Result", "Reason", "CanMove", "PawnDeltas", "Logs", "BattleStateVersion", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_SKILL), global::Protocol.C_BATTLE_SKILL.Parser, new[]{ "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "LineDirectionAxial", "RequestOptionalPositionSwap" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_SKILL), global::Protocol.S_BATTLE_SKILL.Parser, new[]{ "Success", "BattleId", "CasterPawnId", "SkillSlot", "TargetPawnId", "TargetAxial", "Damage", "TargetHp", "NextTurnPawnId", "Reason", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "TargetArmor", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_END_TURN), global::Protocol.C_BATTLE_END_TURN.Parser, new[]{ "BattleId", "PawnId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "RemainingAp", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas", "EnteringTurnPawnId", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_END_TURN), global::Protocol.S_BATTLE_END_TURN.Parser, new[]{ "Success", "BattleId", "PawnId", "NextTurnPawnId", "Reason", "CanMove", "UsedSubActionThisTurn", "UsedUltimate", "PawnDeltas", "Logs", "BattleStateVersion", "TileDeltas", "EnteringTurnPawnId", "TurnQueueResynced", "UpcomingTurnPawnIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_BATTLE_INVITE), global::Protocol.C_BATTLE_INVITE.Parser, new[]{ "TargetPlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_REQUEST), global::Protocol.S_BATTLE_INVITE_REQUEST.Parser, new[]{ "Success", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_INVITE_RECEIVED), global::Protocol.S_BATTLE_INVITE_RECEIVED.Parser, new[]{ "RequesterPlayerId" }, null, null, null, null),
@@ -3443,7 +3442,6 @@ namespace Protocol {
       nextTurnPawnId_ = other.nextTurnPawnId_;
       result_ = other.result_;
       reason_ = other.reason_;
-      remainingAp_ = other.remainingAp_;
       canMove_ = other.canMove_;
       pawnDeltas_ = other.pawnDeltas_.Clone();
       logs_ = other.logs_.Clone();
@@ -3555,18 +3553,6 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "remaining_ap" field.</summary>
-    public const int RemainingApFieldNumber = 9;
-    private int remainingAp_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int RemainingAp {
-      get { return remainingAp_; }
-      set {
-        remainingAp_ = value;
-      }
-    }
-
     /// <summary>Field number for the "can_move" field.</summary>
     public const int CanMoveFieldNumber = 10;
     private bool canMove_;
@@ -3659,7 +3645,6 @@ namespace Protocol {
       if (NextTurnPawnId != other.NextTurnPawnId) return false;
       if (Result != other.Result) return false;
       if (Reason != other.Reason) return false;
-      if (RemainingAp != other.RemainingAp) return false;
       if (CanMove != other.CanMove) return false;
       if(!pawnDeltas_.Equals(other.pawnDeltas_)) return false;
       if(!logs_.Equals(other.logs_)) return false;
@@ -3681,7 +3666,6 @@ namespace Protocol {
       if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
       if (Result != global::Protocol.BattleMoveResult.None) hash ^= Result.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
-      if (RemainingAp != 0) hash ^= RemainingAp.GetHashCode();
       if (CanMove != false) hash ^= CanMove.GetHashCode();
       hash ^= pawnDeltas_.GetHashCode();
       hash ^= logs_.GetHashCode();
@@ -3737,10 +3721,6 @@ namespace Protocol {
       if (Reason.Length != 0) {
         output.WriteRawTag(66);
         output.WriteString(Reason);
-      }
-      if (RemainingAp != 0) {
-        output.WriteRawTag(72);
-        output.WriteInt32(RemainingAp);
       }
       if (CanMove != false) {
         output.WriteRawTag(80);
@@ -3799,10 +3779,6 @@ namespace Protocol {
         output.WriteRawTag(66);
         output.WriteString(Reason);
       }
-      if (RemainingAp != 0) {
-        output.WriteRawTag(72);
-        output.WriteInt32(RemainingAp);
-      }
       if (CanMove != false) {
         output.WriteRawTag(80);
         output.WriteBool(CanMove);
@@ -3851,9 +3827,6 @@ namespace Protocol {
       }
       if (Reason.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
-      }
-      if (RemainingAp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingAp);
       }
       if (CanMove != false) {
         size += 1 + 1;
@@ -3908,9 +3881,6 @@ namespace Protocol {
       }
       if (other.Reason.Length != 0) {
         Reason = other.Reason;
-      }
-      if (other.RemainingAp != 0) {
-        RemainingAp = other.RemainingAp;
       }
       if (other.CanMove != false) {
         CanMove = other.CanMove;
@@ -3975,10 +3945,6 @@ namespace Protocol {
           }
           case 66: {
             Reason = input.ReadString();
-            break;
-          }
-          case 72: {
-            RemainingAp = input.ReadInt32();
             break;
           }
           case 80: {
@@ -4057,10 +4023,6 @@ namespace Protocol {
           }
           case 66: {
             Reason = input.ReadString();
-            break;
-          }
-          case 72: {
-            RemainingAp = input.ReadInt32();
             break;
           }
           case 80: {
@@ -4568,7 +4530,6 @@ namespace Protocol {
       targetHp_ = other.targetHp_;
       nextTurnPawnId_ = other.nextTurnPawnId_;
       reason_ = other.reason_;
-      remainingAp_ = other.remainingAp_;
       canMove_ = other.canMove_;
       usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
       usedUltimate_ = other.usedUltimate_;
@@ -4705,18 +4666,6 @@ namespace Protocol {
       get { return reason_; }
       set {
         reason_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "remaining_ap" field.</summary>
-    public const int RemainingApFieldNumber = 11;
-    private int remainingAp_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int RemainingAp {
-      get { return remainingAp_; }
-      set {
-        remainingAp_ = value;
       }
     }
 
@@ -4861,7 +4810,6 @@ namespace Protocol {
       if (TargetHp != other.TargetHp) return false;
       if (NextTurnPawnId != other.NextTurnPawnId) return false;
       if (Reason != other.Reason) return false;
-      if (RemainingAp != other.RemainingAp) return false;
       if (CanMove != other.CanMove) return false;
       if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
       if (UsedUltimate != other.UsedUltimate) return false;
@@ -4889,7 +4837,6 @@ namespace Protocol {
       if (TargetHp != 0) hash ^= TargetHp.GetHashCode();
       if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
-      if (RemainingAp != 0) hash ^= RemainingAp.GetHashCode();
       if (CanMove != false) hash ^= CanMove.GetHashCode();
       if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
       if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
@@ -4957,10 +4904,6 @@ namespace Protocol {
       if (Reason.Length != 0) {
         output.WriteRawTag(82);
         output.WriteString(Reason);
-      }
-      if (RemainingAp != 0) {
-        output.WriteRawTag(88);
-        output.WriteInt32(RemainingAp);
       }
       if (CanMove != false) {
         output.WriteRawTag(96);
@@ -5040,10 +4983,6 @@ namespace Protocol {
         output.WriteRawTag(82);
         output.WriteString(Reason);
       }
-      if (RemainingAp != 0) {
-        output.WriteRawTag(88);
-        output.WriteInt32(RemainingAp);
-      }
       if (CanMove != false) {
         output.WriteRawTag(96);
         output.WriteBool(CanMove);
@@ -5112,9 +5051,6 @@ namespace Protocol {
       if (Reason.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
       }
-      if (RemainingAp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingAp);
-      }
       if (CanMove != false) {
         size += 1 + 1;
       }
@@ -5181,9 +5117,6 @@ namespace Protocol {
       }
       if (other.Reason.Length != 0) {
         Reason = other.Reason;
-      }
-      if (other.RemainingAp != 0) {
-        RemainingAp = other.RemainingAp;
       }
       if (other.CanMove != false) {
         CanMove = other.CanMove;
@@ -5263,10 +5196,6 @@ namespace Protocol {
           }
           case 82: {
             Reason = input.ReadString();
-            break;
-          }
-          case 88: {
-            RemainingAp = input.ReadInt32();
             break;
           }
           case 96: {
@@ -5366,10 +5295,6 @@ namespace Protocol {
           }
           case 82: {
             Reason = input.ReadString();
-            break;
-          }
-          case 88: {
-            RemainingAp = input.ReadInt32();
             break;
           }
           case 96: {
@@ -5685,7 +5610,6 @@ namespace Protocol {
       pawnId_ = other.pawnId_;
       nextTurnPawnId_ = other.nextTurnPawnId_;
       reason_ = other.reason_;
-      remainingAp_ = other.remainingAp_;
       canMove_ = other.canMove_;
       usedSubActionThisTurn_ = other.usedSubActionThisTurn_;
       usedUltimate_ = other.usedUltimate_;
@@ -5762,18 +5686,6 @@ namespace Protocol {
       get { return reason_; }
       set {
         reason_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "remaining_ap" field.</summary>
-    public const int RemainingApFieldNumber = 6;
-    private int remainingAp_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int RemainingAp {
-      get { return remainingAp_; }
-      set {
-        remainingAp_ = value;
       }
     }
 
@@ -5913,7 +5825,6 @@ namespace Protocol {
       if (PawnId != other.PawnId) return false;
       if (NextTurnPawnId != other.NextTurnPawnId) return false;
       if (Reason != other.Reason) return false;
-      if (RemainingAp != other.RemainingAp) return false;
       if (CanMove != other.CanMove) return false;
       if (UsedSubActionThisTurn != other.UsedSubActionThisTurn) return false;
       if (UsedUltimate != other.UsedUltimate) return false;
@@ -5936,7 +5847,6 @@ namespace Protocol {
       if (PawnId != 0UL) hash ^= PawnId.GetHashCode();
       if (NextTurnPawnId != 0UL) hash ^= NextTurnPawnId.GetHashCode();
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
-      if (RemainingAp != 0) hash ^= RemainingAp.GetHashCode();
       if (CanMove != false) hash ^= CanMove.GetHashCode();
       if (UsedSubActionThisTurn != false) hash ^= UsedSubActionThisTurn.GetHashCode();
       if (UsedUltimate != false) hash ^= UsedUltimate.GetHashCode();
@@ -5984,10 +5894,6 @@ namespace Protocol {
       if (Reason.Length != 0) {
         output.WriteRawTag(42);
         output.WriteString(Reason);
-      }
-      if (RemainingAp != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(RemainingAp);
       }
       if (CanMove != false) {
         output.WriteRawTag(56);
@@ -6047,10 +5953,6 @@ namespace Protocol {
         output.WriteRawTag(42);
         output.WriteString(Reason);
       }
-      if (RemainingAp != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(RemainingAp);
-      }
       if (CanMove != false) {
         output.WriteRawTag(56);
         output.WriteBool(CanMove);
@@ -6104,9 +6006,6 @@ namespace Protocol {
       if (Reason.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
       }
-      if (RemainingAp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RemainingAp);
-      }
       if (CanMove != false) {
         size += 1 + 1;
       }
@@ -6155,9 +6054,6 @@ namespace Protocol {
       }
       if (other.Reason.Length != 0) {
         Reason = other.Reason;
-      }
-      if (other.RemainingAp != 0) {
-        RemainingAp = other.RemainingAp;
       }
       if (other.CanMove != false) {
         CanMove = other.CanMove;
@@ -6214,10 +6110,6 @@ namespace Protocol {
           }
           case 42: {
             Reason = input.ReadString();
-            break;
-          }
-          case 48: {
-            RemainingAp = input.ReadInt32();
             break;
           }
           case 56: {
@@ -6294,10 +6186,6 @@ namespace Protocol {
           }
           case 42: {
             Reason = input.ReadString();
-            break;
-          }
-          case 48: {
-            RemainingAp = input.ReadInt32();
             break;
           }
           case 56: {
