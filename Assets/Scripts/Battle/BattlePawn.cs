@@ -357,6 +357,19 @@ namespace Battle
 			OnPawnStateChanged();
 		}
 
+		// Skill results can contain several sequential attacks (main attack, counter,
+		// and ZOC reaction). Apply the authoritative facing before their presentation,
+		// while ApplyDelta still commits the complete final state afterwards.
+		public void ApplyFacingDirectionFromDelta(Protocol.BattlePawnDelta delta)
+		{
+			if (delta == null || delta.PawnId != PawnId)
+				return;
+
+			EnsureInfo();
+			Info.FacingDirection = delta.FacingDirection;
+			ApplyFacingDirection(delta.FacingDirection);
+		}
+
 		public void ApplyArmor(int armor)
 		{
 			EnsureInfo();

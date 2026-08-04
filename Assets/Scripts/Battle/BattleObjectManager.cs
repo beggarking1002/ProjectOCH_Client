@@ -1689,6 +1689,10 @@ namespace Battle
 
 			List<BattleActionLog> orderedLogs = CopyBattleActionLogs(logs);
 			List<BattlePawnDelta> finalPawnDeltas = CopyBattlePawnDeltas(pawnDeltas);
+			// The server supplies facing_direction for every attacker in the final
+			// snapshot. Commit it before presentation so attacks, counters, ZOC
+			// reactions, and evaded attacks all face their intended target.
+			ApplyPawnFacingDirections(finalPawnDeltas);
 
 			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, targetAxial, orderedLogs, finalPawnDeltas));
 		}
@@ -2243,6 +2247,21 @@ namespace Battle
 			foreach (BattleActionLog log in logs)
 			{
 				AppendBattleLog(log);
+			}
+		}
+
+		void ApplyPawnFacingDirections(IEnumerable<BattlePawnDelta> pawnDeltas)
+		{
+			if (pawnDeltas == null)
+				return;
+
+			foreach (BattlePawnDelta delta in pawnDeltas)
+			{
+				if (delta == null || delta.PawnId == 0)
+					continue;
+
+				if (_pawns.TryGetValue(delta.PawnId, out BattlePawn pawn))
+					pawn.ApplyFacingDirectionFromDelta(delta);
 			}
 		}
 
