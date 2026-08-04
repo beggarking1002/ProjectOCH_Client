@@ -1,0 +1,3991 @@
+fileFormatVersion: 2
+guid: 45757fba3fb612b4a8ee8186198f5ac5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1380338115032081041
+    second: Beige_Ice_Skill4_Effect_0
+  - first:
+      213: 689545462821451044
+    second: Beige_Ice_Skill4_Effect_1
+  - first:
+      213: -5422528646851248180
+    second: Beige_Ice_Skill4_Effect_2
+  - first:
+      213: -5377410541707009458
+    second: Beige_Ice_Skill4_Effect_3
+  - first:
+      213: -7005202366296017324
+    second: Beige_Ice_Skill4_Effect_4
+  - first:
+      213: 1572009153978632497
+    second: Beige_Ice_Skill4_Effect_5
+  - first:
+      213: -8641109313852098593
+    second: Beige_Ice_Skill4_Effect_6
+  - first:
+      213: 6015970917135795026
+    second: Beige_Ice_Skill4_Effect_7
+  - first:
+      213: 17373620941879654
+    second: Beige_Ice_Skill4_Effect_8
+  - first:
+      213: 8750106537007682929
+    second: Beige_Ice_Skill4_Effect_9
+  - first:
+      213: -6233613050559723520
+    second: Beige_Ice_Skill4_Effect_10
+  - first:
+      213: 7414692219242636116
+    second: Beige_Ice_Skill4_Effect_11
+  - first:
+      213: -7359148958365701744
+    second: Beige_Ice_Skill4_Effect_12
+  - first:
+      213: 5183524637899586801
+    second: Beige_Ice_Skill4_Effect_13
+  - first:
+      213: -5505134174937143018
+    second: Beige_Ice_Skill4_Effect_14
+  - first:
+      213: -5355210082875192833
+    second: Beige_Ice_Skill4_Effect_15
+  - first:
+      213: -317610131761181484
+    second: Beige_Ice_Skill4_Effect_16
+  - first:
+      213: -365070865811369673
+    second: Beige_Ice_Skill4_Effect_17
+  - first:
+      213: 5266120016602081068
+    second: Beige_Ice_Skill4_Effect_18
+  - first:
+      213: -2956004620643865824
+    second: Beige_Ice_Skill4_Effect_19
+  - first:
+      213: 5093398307343775510
+    second: Beige_Ice_Skill4_Effect_20
+  - first:
+      213: -4744049702526393146
+    second: Beige_Ice_Skill4_Effect_21
+  - first:
+      213: 838710153230550091
+    second: Beige_Ice_Skill4_Effect_22
+  - first:
+      213: -4449371110750351826
+    second: Beige_Ice_Skill4_Effect_23
+  - first:
+      213: -9052466679356566168
+    second: Beige_Ice_Skill4_Effect_24
+  - first:
+      213: -5622406534215175272
+    second: Beige_Ice_Skill4_Effect_25
+  - first:
+      213: -7310805876648807031
+    second: Beige_Ice_Skill4_Effect_26
+  - first:
+      213: -431170324233443472
+    second: Beige_Ice_Skill4_Effect_27
+  - first:
+      213: -2480900448185034128
+    second: Beige_Ice_Skill4_Effect_28
+  - first:
+      213: -8764202893568821052
+    second: Beige_Ice_Skill4_Effect_29
+  - first:
+      213: 925518436828072224
+    second: Beige_Ice_Skill4_Effect_30
+  - first:
+      213: -7489167288091819643
+    second: Beige_Ice_Skill4_Effect_31
+  - first:
+      213: 4797619846741892946
+    second: Beige_Ice_Skill4_Effect_32
+  - first:
+      213: 180925189659113808
+    second: Beige_Ice_Skill4_Effect_33
+  - first:
+      213: 6075390466160974434
+    second: Beige_Ice_Skill4_Effect_34
+  - first:
+      213: -3148604073513085655
+    second: Beige_Ice_Skill4_Effect_35
+  - first:
+      213: -3940770047156989727
+    second: Beige_Ice_Skill4_Effect_36
+  - first:
+      213: 5822585582705512132
+    second: Beige_Ice_Skill4_Effect_37
+  - first:
+      213: -7490343513138179776
+    second: Beige_Ice_Skill4_Effect_38
+  - first:
+      213: -4631521376484312930
+    second: Beige_Ice_Skill4_Effect_39
+  - first:
+      213: -7316686518920354192
+    second: Beige_Ice_Skill4_Effect_40
+  - first:
+      213: -9177655237678197824
+    second: Beige_Ice_Skill4_Effect_41
+  - first:
+      213: 8679309646698967485
+    second: Beige_Ice_Skill4_Effect_42
+  - first:
+      213: 1082481170617271813
+    second: Beige_Ice_Skill4_Effect_43
+  - first:
+      213: 4220821789913227405
+    second: Beige_Ice_Skill4_Effect_44
+  - first:
+      213: -88517273743997708
+    second: Beige_Ice_Skill4_Effect_45
+  - first:
+      213: 4970199194877636036
+    second: Beige_Ice_Skill4_Effect_46
+  - first:
+      213: 5438595349819005581
+    second: Beige_Ice_Skill4_Effect_47
+  - first:
+      213: -5272240096064531343
+    second: Beige_Ice_Skill4_Effect_48
+  - first:
+      213: -575498170449355409
+    second: Beige_Ice_Skill4_Effect_49
+  - first:
+      213: -2539446015344620389
+    second: Beige_Ice_Skill4_Effect_50
+  - first:
+      213: -8064609722487738995
+    second: Beige_Ice_Skill4_Effect_51
+  - first:
+      213: 2274888360227188707
+    second: Beige_Ice_Skill4_Effect_52
+  - first:
+      213: -3637303889464633273
+    second: Beige_Ice_Skill4_Effect_53
+  - first:
+      213: 7316742330891810346
+    second: Beige_Ice_Skill4_Effect_54
+  - first:
+      213: -2390808204500287307
+    second: Beige_Ice_Skill4_Effect_55
+  - first:
+      213: 7307085857455291636
+    second: Beige_Ice_Skill4_Effect_56
+  - first:
+      213: 469412007880744922
+    second: Beige_Ice_Skill4_Effect_57
+  - first:
+      213: 4071344913528129746
+    second: Beige_Ice_Skill4_Effect_58
+  - first:
+      213: -3044416299908363548
+    second: Beige_Ice_Skill4_Effect_59
+  - first:
+      213: -4132879433388970579
+    second: Beige_Ice_Skill4_Effect_60
+  - first:
+      213: 799637522308649047
+    second: Beige_Ice_Skill4_Effect_61
+  - first:
+      213: 2834781522208188506
+    second: Beige_Ice_Skill4_Effect_62
+  - first:
+      213: 5571786687970929582
+    second: Beige_Ice_Skill4_Effect_63
+  - first:
+      213: -9133410594763871702
+    second: Beige_Ice_Skill4_Effect_64
+  - first:
+      213: -1351958154059578890
+    second: Beige_Ice_Skill4_Effect_65
+  - first:
+      213: -6238278678404499683
+    second: Beige_Ice_Skill4_Effect_66
+  - first:
+      213: -8103408575637508811
+    second: Beige_Ice_Skill4_Effect_67
+  - first:
+      213: 5527685752497487225
+    second: Beige_Ice_Skill4_Effect_68
+  - first:
+      213: 4398458001430072474
+    second: Beige_Ice_Skill4_Effect_69
+  - first:
+      213: 2488692162994401282
+    second: Beige_Ice_Skill4_Effect_70
+  - first:
+      213: -4244929879978722450
+    second: Beige_Ice_Skill4_Effect_71
+  - first:
+      213: 3822440748039351418
+    second: Beige_Ice_Skill4_Effect_72
+  - first:
+      213: -1444081461297822200
+    second: Beige_Ice_Skill4_Effect_73
+  - first:
+      213: 7355884257390839888
+    second: Beige_Ice_Skill4_Effect_74
+  - first:
+      213: -4761219461127375030
+    second: Beige_Ice_Skill4_Effect_75
+  - first:
+      213: -9215722110965591491
+    second: Beige_Ice_Skill4_Effect_76
+  - first:
+      213: 6156350300222870200
+    second: Beige_Ice_Skill4_Effect_77
+  - first:
+      213: -5790347419207821520
+    second: Beige_Ice_Skill4_Effect_78
+  - first:
+      213: -4928219787635517384
+    second: Beige_Ice_Skill4_Effect_79
+  - first:
+      213: -633582049727582575
+    second: Beige_Ice_Skill4_Effect_80
+  - first:
+      213: -5494150331587361622
+    second: Beige_Ice_Skill4_Effect_81
+  - first:
+      213: -6730893116713481184
+    second: Beige_Ice_Skill4_Effect_82
+  - first:
+      213: -280499006627357241
+    second: Beige_Ice_Skill4_Effect_83
+  - first:
+      213: -8447436739622511287
+    second: Beige_Ice_Skill4_Effect_84
+  - first:
+      213: -5809149957885292751
+    second: Beige_Ice_Skill4_Effect_85
+  - first:
+      213: 277843422239279601
+    second: Beige_Ice_Skill4_Effect_86
+  - first:
+      213: -2651695490718302535
+    second: Beige_Ice_Skill4_Effect_87
+  - first:
+      213: -5636123584142710164
+    second: Beige_Ice_Skill4_Effect_88
+  - first:
+      213: -4169855559899277968
+    second: Beige_Ice_Skill4_Effect_89
+  - first:
+      213: -5810673873410822079
+    second: Beige_Ice_Skill4_Effect_90
+  - first:
+      213: -182284929268319441
+    second: Beige_Ice_Skill4_Effect_91
+  - first:
+      213: -5986851402661648956
+    second: Beige_Ice_Skill4_Effect_92
+  - first:
+      213: 30670422348942775
+    second: Beige_Ice_Skill4_Effect_93
+  - first:
+      213: 7177130195995742492
+    second: Beige_Ice_Skill4_Effect_94
+  - first:
+      213: 6961694964015705574
+    second: Beige_Ice_Skill4_Effect_95
+  - first:
+      213: -2142102279527620773
+    second: Beige_Ice_Skill4_Effect_96
+  - first:
+      213: -6600108354565261334
+    second: Beige_Ice_Skill4_Effect_97
+  - first:
+      213: 8230556223229479451
+    second: Beige_Ice_Skill4_Effect_98
+  - first:
+      213: 603489622902584788
+    second: Beige_Ice_Skill4_Effect_99
+  - first:
+      213: 5855766254716108041
+    second: Beige_Ice_Skill4_Effect_100
+  - first:
+      213: -6642345029202642018
+    second: Beige_Ice_Skill4_Effect_101
+  - first:
+      213: 8519827951528087436
+    second: Beige_Ice_Skill4_Effect_102
+  - first:
+      213: -6427532951119974959
+    second: Beige_Ice_Skill4_Effect_103
+  - first:
+      213: -7338561086711585212
+    second: Beige_Ice_Skill4_Effect_104
+  - first:
+      213: 4933121873850730247
+    second: Beige_Ice_Skill4_Effect_105
+  - first:
+      213: 7126187701802280996
+    second: Beige_Ice_Skill4_Effect_106
+  - first:
+      213: -8924947766763929977
+    second: Beige_Ice_Skill4_Effect_107
+  - first:
+      213: -266377063572508844
+    second: Beige_Ice_Skill4_Effect_108
+  - first:
+      213: -6154990109652590365
+    second: Beige_Ice_Skill4_Effect_109
+  - first:
+      213: 6280463371346242887
+    second: Beige_Ice_Skill4_Effect_110
+  - first:
+      213: 2433631271993637382
+    second: Beige_Ice_Skill4_Effect_111
+  - first:
+      213: -2347702565998349262
+    second: Beige_Ice_Skill4_Effect_112
+  - first:
+      213: 6391620879926982060
+    second: Beige_Ice_Skill4_Effect_113
+  - first:
+      213: 2828966788809633875
+    second: Beige_Ice_Skill4_Effect_114
+  - first:
+      213: 5211021842644112158
+    second: Beige_Ice_Skill4_Effect_115
+  - first:
+      213: -3744467051720173968
+    second: Beige_Ice_Skill4_Effect_116
+  - first:
+      213: 7118389826597543051
+    second: Beige_Ice_Skill4_Effect_117
+  - first:
+      213: -6395245861972543940
+    second: Beige_Ice_Skill4_Effect_118
+  - first:
+      213: -8949095982290910862
+    second: Beige_Ice_Skill4_Effect_119
+  - first:
+      213: 5758357493831560886
+    second: Beige_Ice_Skill4_Effect_120
+  - first:
+      213: -8842809583841424131
+    second: Beige_Ice_Skill4_Effect_121
+  - first:
+      213: -3702898841287253459
+    second: Beige_Ice_Skill4_Effect_122
+  - first:
+      213: 7735298470720433749
+    second: Beige_Ice_Skill4_Effect_123
+  - first:
+      213: -3718200561093647890
+    second: Beige_Ice_Skill4_Effect_124
+  - first:
+      213: 8391253072168073152
+    second: Beige_Ice_Skill4_Effect_125
+  - first:
+      213: 299940712592047215
+    second: Beige_Ice_Skill4_Effect_126
+  - first:
+      213: 8636124631545412562
+    second: Beige_Ice_Skill4_Effect_127
+  - first:
+      213: -3477904192684224179
+    second: Beige_Ice_Skill4_Effect_128
+  - first:
+      213: -5922897465758144475
+    second: Beige_Ice_Skill4_Effect_129
+  - first:
+      213: 6604412673773514284
+    second: Beige_Ice_Skill4_Effect_130
+  - first:
+      213: 8151940077011709548
+    second: Beige_Ice_Skill4_Effect_131
+  - first:
+      213: -6756323346017918414
+    second: Beige_Ice_Skill4_Effect_132
+  - first:
+      213: -3691261079864230298
+    second: Beige_Ice_Skill4_Effect_133
+  - first:
+      213: -2037871776780913467
+    second: Beige_Ice_Skill4_Effect_134
+  - first:
+      213: -3535177231719769820
+    second: Beige_Ice_Skill4_Effect_135
+  - first:
+      213: 8398659288249779211
+    second: Beige_Ice_Skill4_Effect_136
+  - first:
+      213: 3336443302637525091
+    second: Beige_Ice_Skill4_Effect_137
+  - first:
+      213: 7334817086380604292
+    second: Beige_Ice_Skill4_Effect_138
+  - first:
+      213: -5274885075212734655
+    second: Beige_Ice_Skill4_Effect_139
+  - first:
+      213: -2144659858448291974
+    second: Beige_Ice_Skill4_Effect_140
+  - first:
+      213: -2924971714779548345
+    second: Beige_Ice_Skill4_Effect_141
+  - first:
+      213: -248991321066082847
+    second: Beige_Ice_Skill4_Effect_142
+  - first:
+      213: 1372285926185251661
+    second: Beige_Ice_Skill4_Effect_143
+  - first:
+      213: -6626545250843571615
+    second: Beige_Ice_Skill4_Effect_144
+  - first:
+      213: 9023545950034816940
+    second: Beige_Ice_Skill4_Effect_145
+  - first:
+      213: -1318886239487492465
+    second: Beige_Ice_Skill4_Effect_146
+  - first:
+      213: 1253942115340242221
+    second: Beige_Ice_Skill4_Effect_147
+  - first:
+      213: -4513411054690342875
+    second: Beige_Ice_Skill4_Effect_148
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_0
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1466
+        width: 16
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d94973ccd08dce0800000000000000
+      internalID: -1380338115032081041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_1
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 1501
+        width: 23
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42574ffe1f1c19900800000000000000
+      internalID: 689545462821451044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_2
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1473
+        width: 17
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccf3d0cecee4fb4b0800000000000000
+      internalID: -5422528646851248180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_3
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 1495
+        width: 23
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e42ec126a999f55b0800000000000000
+      internalID: -5377410541707009458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1481
+        width: 20
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4563331209588ce90800000000000000
+      internalID: -7005202366296017324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_5
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 1488
+        width: 37
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1390f862ff5e0d510800000000000000
+      internalID: 1572009153978632497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_6
+      rect:
+        serializedVersion: 2
+        x: 1598
+        y: 1490
+        width: 19
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd7b6829cdc941880800000000000000
+      internalID: -8641109313852098593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_7
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 1507
+        width: 18
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 253c5f6dca50d7350800000000000000
+      internalID: 6015970917135795026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_8
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 1497
+        width: 32
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669f3b85739bd3000800000000000000
+      internalID: 17373620941879654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_9
+      rect:
+        serializedVersion: 2
+        x: 2157
+        y: 1484
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1759a2d098f9e6970800000000000000
+      internalID: 8750106537007682929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_10
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1479
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 008062625f1cd79a0800000000000000
+      internalID: -6233613050559723520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_11
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 1242
+        width: 472
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4536fc6e94746e660800000000000000
+      internalID: 7414692219242636116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_12
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 1477
+        width: 37
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0992d67430d0fd990800000000000000
+      internalID: -7359148958365701744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_13
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 1484
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc7d76d1349fe740800000000000000
+      internalID: 5183524637899586801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_14
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 1241
+        width: 473
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6192206a2a5d993b0800000000000000
+      internalID: -5505134174937143018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_15
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1481
+        width: 38
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff942a08dc87ea5b0800000000000000
+      internalID: -5355210082875192833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_16
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 1474
+        width: 26
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dc4f47944f979bf0800000000000000
+      internalID: -317610131761181484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1426
+        width: 12
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73118755bf10feaf0800000000000000
+      internalID: -365070865811369673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_18
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 1449
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2724260144051940800000000000000
+      internalID: 5266120016602081068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_19
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 1434
+        width: 11
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02beb1885792af6d0800000000000000
+      internalID: -2956004620643865824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_20
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 1442
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6173dc846c26fa640800000000000000
+      internalID: 5093398307343775510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_21
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1444
+        width: 10
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c4ed1c3eefb92eb0800000000000000
+      internalID: -4744049702526393146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_22
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 1242
+        width: 475
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4402d0d072b3ab00800000000000000
+      internalID: 838710153230550091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_23
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 1454
+        width: 9
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2e07dd6c88a042c0800000000000000
+      internalID: -4449371110750351826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_24
+      rect:
+        serializedVersion: 2
+        x: 1689
+        y: 1245
+        width: 478
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86554e3648d2f5280800000000000000
+      internalID: -9052466679356566168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_25
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1344
+        width: 45
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 893f441cb0339f1b0800000000000000
+      internalID: -5622406534215175272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_26
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 1398
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985728c1accca8a90800000000000000
+      internalID: -7310805876648807031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_27
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 1351
+        width: 42
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0772062efdc240af0800000000000000
+      internalID: -431170324233443472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_28
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 1393
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07ad2decf22129dd0800000000000000
+      internalID: -2480900448185034128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_29
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 1358
+        width: 38
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c8316d27eb4f5680800000000000000
+      internalID: -8764202893568821052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_30
+      rect:
+        serializedVersion: 2
+        x: 1660
+        y: 1366
+        width: 34
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029463c5d1a18dc00800000000000000
+      internalID: 925518436828072224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_31
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 1336
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 581cfc1e702211890800000000000000
+      internalID: -7489167288091819643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_32
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 1341
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25f1a6ce4d1949240800000000000000
+      internalID: 4797619846741892946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_33
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1327
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0593d8c5086c28200800000000000000
+      internalID: 180925189659113808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_34
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 1332
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26ad15fa07f105450800000000000000
+      internalID: 6075390466160974434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_35
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 1234
+        width: 50
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92597e3f649ed44d0800000000000000
+      internalID: -3148604073513085655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_36
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 1232
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e055bd65829f49c0800000000000000
+      internalID: -3940770047156989727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_37
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 1235
+        width: 51
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ce0973fcbafdc050800000000000000
+      internalID: 5822585582705512132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_38
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 1230
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0415fb5a244fc0890800000000000000
+      internalID: -7490343513138179776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_39
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1237
+        width: 53
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e983601d8d789bfb0800000000000000
+      internalID: -4631521376484312930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_40
+      rect:
+        serializedVersion: 2
+        x: 1815
+        y: 1239
+        width: 61
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 076ecd26068e57a90800000000000000
+      internalID: -7316686518920354192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_41
+      rect:
+        serializedVersion: 2
+        x: 1452
+        y: 1228
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c31037cf2b62a080800000000000000
+      internalID: -9177655237678197824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_42
+      rect:
+        serializedVersion: 2
+        x: 1994
+        y: 1226
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db1fc13832a137870800000000000000
+      internalID: 8679309646698967485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_43
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 1188
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50601b2b3eeb50f00800000000000000
+      internalID: 1082481170617271813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_44
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 1179
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d80a1081e0f539a30800000000000000
+      internalID: 4220821789913227405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_45
+      rect:
+        serializedVersion: 2
+        x: 2081
+        y: 1172
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f4c00e220685cef0800000000000000
+      internalID: -88517273743997708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_46
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 848
+        width: 482
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cd2d91a5d1b9f440800000000000000
+      internalID: 4970199194877636036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_47
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 1119
+        width: 25
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a9d0fd7a5c97b40800000000000000
+      internalID: 5438595349819005581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_48
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 1094
+        width: 29
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 174908fe09d35d6b0800000000000000
+      internalID: -5272240096064531343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_49
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1063
+        width: 26
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6d9a7d867b6308f0800000000000000
+      internalID: -575498170449355409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_50
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 991
+        width: 21
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9c4a19bd4312ccd0800000000000000
+      internalID: -2539446015344620389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_51
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 1006
+        width: 15
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8de4fe7f20c41090800000000000000
+      internalID: -8064609722487738995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_52
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 847
+        width: 499
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ef230729e6029f10800000000000000
+      internalID: 2274888360227188707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_53
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 1014
+        width: 13
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74850504263b58dc0800000000000000
+      internalID: -3637303889464633273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_54
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 846
+        width: 500
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26bed9526a4a8560800000000000000
+      internalID: 7316742330891810346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_55
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 1024
+        width: 10
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0cba4ea9422ded0800000000000000
+      internalID: -2390808204500287307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_56
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 846
+        width: 506
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fc37ec6fdbf76560800000000000000
+      internalID: 7307085857455291636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_57
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 953
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adfd80febbfa38600800000000000000
+      internalID: 469412007880744922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_58
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 845
+        width: 53
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d800f0c0a2508830800000000000000
+      internalID: 4071344913528129746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_59
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 839
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ea8d87518f00c5d0800000000000000
+      internalID: -3044416299908363548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_60
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 835
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dad25516d0015a6c0800000000000000
+      internalID: -4132879433388970579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_61
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 825
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 750d7420712e81b00800000000000000
+      internalID: 799637522308649047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_62
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 824
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a586f0f66ca275720800000000000000
+      internalID: 2834781522208188506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_63
+      rect:
+        serializedVersion: 2
+        x: 1396
+        y: 824
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eabe1ccd876f25d40800000000000000
+      internalID: 5571786687970929582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_64
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 832
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a6f47747b9f3180800000000000000
+      internalID: -9133410594763871702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_65
+      rect:
+        serializedVersion: 2
+        x: 1939
+        y: 824
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f1061cc831ec3de0800000000000000
+      internalID: -1351958154059578890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_66
+      rect:
+        serializedVersion: 2
+        x: 1990
+        y: 831
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d177ec3089e2d69a0800000000000000
+      internalID: -6238278678404499683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_67
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 769
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53da54b85d8ea8f80800000000000000
+      internalID: -8103408575637508811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_68
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 755
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97db99ba7e846bc40800000000000000
+      internalID: 5527685752497487225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_69
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 752
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9cc6be8f367a0d30800000000000000
+      internalID: 4398458001430072474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_70
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 744
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 200749a265c998220800000000000000
+      internalID: 2488692162994401282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_71
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 654
+        width: 25
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6b3d67c3caf615c0800000000000000
+      internalID: -4244929879978722450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_72
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 712
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c2dd1bb990c0530800000000000000
+      internalID: 3822440748039351418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_73
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 608
+        width: 32
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 806cd90ef8795fbe0800000000000000
+      internalID: -1444081461297822200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_74
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 714
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0584baa42c9551660800000000000000
+      internalID: 7355884257390839888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_75
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 604
+        width: 35
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4773d94020ccedb0800000000000000
+      internalID: -4761219461127375030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_76
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 443
+        width: 481
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32de2b219d2b1080800000000000000
+      internalID: -9215722110965591491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_77
+      rect:
+        serializedVersion: 2
+        x: 1746
+        y: 721
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b257a5faffbf6550800000000000000
+      internalID: 6156350300222870200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_78
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 595
+        width: 44
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 037940863bd84afa0800000000000000
+      internalID: -5790347419207821520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_79
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 629
+        width: 10
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8381fe6c6327b9bb0800000000000000
+      internalID: -4928219787635517384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_80
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 446
+        width: 506
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19e6ced8b701537f0800000000000000
+      internalID: -633582049727582575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_81
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 644
+        width: 10
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa40427f16bd0c3b0800000000000000
+      internalID: -5494150331587361622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_82
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 447
+        width: 484
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ccb254f501792a0800000000000000
+      internalID: -6730893116713481184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_83
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 648
+        width: 9
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cd502eb3a77b1cf0800000000000000
+      internalID: -280499006627357241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_84
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 447
+        width: 484
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94d5730ba0da4ca80800000000000000
+      internalID: -8447436739622511287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_85
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 555
+        width: 45
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f854934e0c16fa0800000000000000
+      internalID: -5809149957885292751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_86
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 571
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f940c5de191bd300800000000000000
+      internalID: 277843422239279601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_87
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 559
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9befa3f1009433bd0800000000000000
+      internalID: -2651695490718302535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_88
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 567
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ae8f0367778c1b0800000000000000
+      internalID: -5636123584142710164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_89
+      rect:
+        serializedVersion: 2
+        x: 1661
+        y: 567
+        width: 37
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 075148b0672b126c0800000000000000
+      internalID: -4169855559899277968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_90
+      rect:
+        serializedVersion: 2
+        x: 2169
+        y: 559
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14074bdf5e65c5fa0800000000000000
+      internalID: -5810673873410822079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_91
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 510
+        width: 65
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2bfd0792d4687df0800000000000000
+      internalID: -182284929268319441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_92
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 512
+        width: 65
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5ad457e5e6aeca0800000000000000
+      internalID: -5986851402661648956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_93
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 519
+        width: 58
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bd483d2696fc6000800000000000000
+      internalID: 30670422348942775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_94
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 445
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c115e0f13e94a9360800000000000000
+      internalID: 7177130195995742492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_95
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 443
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ed28c46fa8ec9060800000000000000
+      internalID: 6961694964015705574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_96
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 442
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5f933c7359b542e0800000000000000
+      internalID: -2142102279527620773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_97
+      rect:
+        serializedVersion: 2
+        x: 2003
+        y: 441
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae7bc0f9b64b764a0800000000000000
+      internalID: -6600108354565261334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_98
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 425
+        width: 19
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a4975174fc83270800000000000000
+      internalID: 8230556223229479451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_99
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 430
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d53eb65d96006800800000000000000
+      internalID: 603489622902584788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_100
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 425
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90db21c226cd34150800000000000000
+      internalID: 5855766254716108041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_101
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 428
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9b7bca7366a1d3a0800000000000000
+      internalID: -6642345029202642018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_102
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 426
+        width: 30
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8f8646c1628c3670800000000000000
+      internalID: 8519827951528087436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_103
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 427
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd2062e5d0dcc6a0800000000000000
+      internalID: -6427532951119974959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_104
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 427
+        width: 35
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4462d00b291382a90800000000000000
+      internalID: -7338561086711585212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_105
+      rect:
+        serializedVersion: 2
+        x: 1959
+        y: 426
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 707059c1538f57440800000000000000
+      internalID: 4933121873850730247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_106
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 335
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 428aea865fd45e260800000000000000
+      internalID: 7126187701802280996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_107
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 325
+        width: 30
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78ebe13ea47342480800000000000000
+      internalID: -8924947766763929977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_108
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 316
+        width: 30
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45fe275d873ad4cf0800000000000000
+      internalID: -266377063572508844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_109
+      rect:
+        serializedVersion: 2
+        x: 2132
+        y: 302
+        width: 28
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e06d161b15159aa0800000000000000
+      internalID: -6154990109652590365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_110
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 50
+        width: 480
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74de1f13920b82750800000000000000
+      internalID: 6280463371346242887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_111
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 51
+        width: 479
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a76797fbef5c120800000000000000
+      internalID: 2433631271993637382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_112
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 242
+        width: 17
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 234356374f84b6fd0800000000000000
+      internalID: -2347702565998349262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_113
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 52
+        width: 467
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca57407735993b850800000000000000
+      internalID: 6391620879926982060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_114
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 279
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35030605e42824720800000000000000
+      internalID: 2828966788809633875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_115
+      rect:
+        serializedVersion: 2
+        x: 1696
+        y: 49
+        width: 471
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e139a97b1c4415840800000000000000
+      internalID: 5211021842644112158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_116
+      rect:
+        serializedVersion: 2
+        x: 1698
+        y: 262
+        width: 18
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07690153e0bf80cc0800000000000000
+      internalID: -3744467051720173968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_117
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 220
+        width: 14
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8cd91b15d999c260800000000000000
+      internalID: 7118389826597543051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_118
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 250
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c36f6d1a5c58f37a0800000000000000
+      internalID: -6395245861972543940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_119
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 227
+        width: 7
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271cca25e9c6ec380800000000000000
+      internalID: -8949095982290910862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_120
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 194
+        width: 23
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bee98da1abc9ef40800000000000000
+      internalID: 5758357493831560886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_121
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 221
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfc46b2e887084580800000000000000
+      internalID: -8842809583841424131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_122
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 207
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d222ed56f19ac9cc0800000000000000
+      internalID: -3702898841287253459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_123
+      rect:
+        serializedVersion: 2
+        x: 1626
+        y: 213
+        width: 8
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55ee9eac9fc495b60800000000000000
+      internalID: 7735298470720433749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_124
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 177
+        width: 31
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee1ea502a4c466cc0800000000000000
+      internalID: -3718200561093647890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_125
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 200
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c7bbfad538b37470800000000000000
+      internalID: 8391253072168073152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_126
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 143
+        width: 44
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6cf9bb2d7a992400800000000000000
+      internalID: 299940712592047215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_127
+      rect:
+        serializedVersion: 2
+        x: 1678
+        y: 190
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dbf343a89da9d770800000000000000
+      internalID: 8636124631545412562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_128
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 123
+        width: 60
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41173040900cbfc0800000000000000
+      internalID: -3477904192684224179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_129
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 150
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 528ac60c224adcda0800000000000000
+      internalID: -5922897465758144475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_130
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 128
+        width: 56
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2eab5ac55697ab50800000000000000
+      internalID: 6604412673773514284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_131
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 133
+        width: 54
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ead882f42812170800000000000000
+      internalID: 8151940077011709548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_132
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 120
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2326cec96b7bc32a0800000000000000
+      internalID: -6756323346017918414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_133
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 127
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66eb771ea9106ccc0800000000000000
+      internalID: -3691261079864230298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_134
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 40
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4fd278a6608b3e0800000000000000
+      internalID: -2037871776780913467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_135
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 46
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4295b45b90780fec0800000000000000
+      internalID: -3535177231719769820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_136
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 40
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b04c9a9ef180e8470800000000000000
+      internalID: 8398659288249779211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_137
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 41
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 368d0faa18d6d4e20800000000000000
+      internalID: 3336443302637525091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_138
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 43
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48b7e2e47418ac560800000000000000
+      internalID: 7334817086380604292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_139
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 39
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14f6fecb8f7dbc6b0800000000000000
+      internalID: -5274885075212734655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_140
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 38
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a77662db833ac32e0800000000000000
+      internalID: -2144659858448291974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_141
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 23
+        width: 67
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 745ff7af8b96867d0800000000000000
+      internalID: -2924971714779548345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_142
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 42
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed63b376b76b8cf0800000000000000
+      internalID: -248991321066082847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_143
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 28
+        width: 41
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d433a8877c65b0310800000000000000
+      internalID: 1372285926185251661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_144
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 26
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16aca6b0438c904a0800000000000000
+      internalID: -6626545250843571615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_145
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 29
+        width: 43
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf6d369b331a3d70800000000000000
+      internalID: 9023545950034816940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_146
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 26
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8e7234f3ff52bde0800000000000000
+      internalID: -1318886239487492465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_147
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 31
+        width: 48
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2dc1c1d5b5e66110800000000000000
+      internalID: 1253942115340242221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Beige_Ice_Skill4_Effect_148
+      rect:
+        serializedVersion: 2
+        x: 2020
+        y: 33
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5286cdf0f842d51c0800000000000000
+      internalID: -4513411054690342875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Beige_Ice_Skill4_Effect_0: -1380338115032081041
+      Beige_Ice_Skill4_Effect_1: 689545462821451044
+      Beige_Ice_Skill4_Effect_10: -6233613050559723520
+      Beige_Ice_Skill4_Effect_100: 5855766254716108041
+      Beige_Ice_Skill4_Effect_101: -6642345029202642018
+      Beige_Ice_Skill4_Effect_102: 8519827951528087436
+      Beige_Ice_Skill4_Effect_103: -6427532951119974959
+      Beige_Ice_Skill4_Effect_104: -7338561086711585212
+      Beige_Ice_Skill4_Effect_105: 4933121873850730247
+      Beige_Ice_Skill4_Effect_106: 7126187701802280996
+      Beige_Ice_Skill4_Effect_107: -8924947766763929977
+      Beige_Ice_Skill4_Effect_108: -266377063572508844
+      Beige_Ice_Skill4_Effect_109: -6154990109652590365
+      Beige_Ice_Skill4_Effect_11: 7414692219242636116
+      Beige_Ice_Skill4_Effect_110: 6280463371346242887
+      Beige_Ice_Skill4_Effect_111: 2433631271993637382
+      Beige_Ice_Skill4_Effect_112: -2347702565998349262
+      Beige_Ice_Skill4_Effect_113: 6391620879926982060
+      Beige_Ice_Skill4_Effect_114: 2828966788809633875
+      Beige_Ice_Skill4_Effect_115: 5211021842644112158
+      Beige_Ice_Skill4_Effect_116: -3744467051720173968
+      Beige_Ice_Skill4_Effect_117: 7118389826597543051
+      Beige_Ice_Skill4_Effect_118: -6395245861972543940
+      Beige_Ice_Skill4_Effect_119: -8949095982290910862
+      Beige_Ice_Skill4_Effect_12: -7359148958365701744
+      Beige_Ice_Skill4_Effect_120: 5758357493831560886
+      Beige_Ice_Skill4_Effect_121: -8842809583841424131
+      Beige_Ice_Skill4_Effect_122: -3702898841287253459
+      Beige_Ice_Skill4_Effect_123: 7735298470720433749
+      Beige_Ice_Skill4_Effect_124: -3718200561093647890
+      Beige_Ice_Skill4_Effect_125: 8391253072168073152
+      Beige_Ice_Skill4_Effect_126: 299940712592047215
+      Beige_Ice_Skill4_Effect_127: 8636124631545412562
+      Beige_Ice_Skill4_Effect_128: -3477904192684224179
+      Beige_Ice_Skill4_Effect_129: -5922897465758144475
+      Beige_Ice_Skill4_Effect_13: 5183524637899586801
+      Beige_Ice_Skill4_Effect_130: 6604412673773514284
+      Beige_Ice_Skill4_Effect_131: 8151940077011709548
+      Beige_Ice_Skill4_Effect_132: -6756323346017918414
+      Beige_Ice_Skill4_Effect_133: -3691261079864230298
+      Beige_Ice_Skill4_Effect_134: -2037871776780913467
+      Beige_Ice_Skill4_Effect_135: -3535177231719769820
+      Beige_Ice_Skill4_Effect_136: 8398659288249779211
+      Beige_Ice_Skill4_Effect_137: 3336443302637525091
+      Beige_Ice_Skill4_Effect_138: 7334817086380604292
+      Beige_Ice_Skill4_Effect_139: -5274885075212734655
+      Beige_Ice_Skill4_Effect_14: -5505134174937143018
+      Beige_Ice_Skill4_Effect_140: -2144659858448291974
+      Beige_Ice_Skill4_Effect_141: -2924971714779548345
+      Beige_Ice_Skill4_Effect_142: -248991321066082847
+      Beige_Ice_Skill4_Effect_143: 1372285926185251661
+      Beige_Ice_Skill4_Effect_144: -6626545250843571615
+      Beige_Ice_Skill4_Effect_145: 9023545950034816940
+      Beige_Ice_Skill4_Effect_146: -1318886239487492465
+      Beige_Ice_Skill4_Effect_147: 1253942115340242221
+      Beige_Ice_Skill4_Effect_148: -4513411054690342875
+      Beige_Ice_Skill4_Effect_15: -5355210082875192833
+      Beige_Ice_Skill4_Effect_16: -317610131761181484
+      Beige_Ice_Skill4_Effect_17: -365070865811369673
+      Beige_Ice_Skill4_Effect_18: 5266120016602081068
+      Beige_Ice_Skill4_Effect_19: -2956004620643865824
+      Beige_Ice_Skill4_Effect_2: -5422528646851248180
+      Beige_Ice_Skill4_Effect_20: 5093398307343775510
+      Beige_Ice_Skill4_Effect_21: -4744049702526393146
+      Beige_Ice_Skill4_Effect_22: 838710153230550091
+      Beige_Ice_Skill4_Effect_23: -4449371110750351826
+      Beige_Ice_Skill4_Effect_24: -9052466679356566168
+      Beige_Ice_Skill4_Effect_25: -5622406534215175272
+      Beige_Ice_Skill4_Effect_26: -7310805876648807031
+      Beige_Ice_Skill4_Effect_27: -431170324233443472
+      Beige_Ice_Skill4_Effect_28: -2480900448185034128
+      Beige_Ice_Skill4_Effect_29: -8764202893568821052
+      Beige_Ice_Skill4_Effect_3: -5377410541707009458
+      Beige_Ice_Skill4_Effect_30: 925518436828072224
+      Beige_Ice_Skill4_Effect_31: -7489167288091819643
+      Beige_Ice_Skill4_Effect_32: 4797619846741892946
+      Beige_Ice_Skill4_Effect_33: 180925189659113808
+      Beige_Ice_Skill4_Effect_34: 6075390466160974434
+      Beige_Ice_Skill4_Effect_35: -3148604073513085655
+      Beige_Ice_Skill4_Effect_36: -3940770047156989727
+      Beige_Ice_Skill4_Effect_37: 5822585582705512132
+      Beige_Ice_Skill4_Effect_38: -7490343513138179776
+      Beige_Ice_Skill4_Effect_39: -4631521376484312930
+      Beige_Ice_Skill4_Effect_4: -7005202366296017324
+      Beige_Ice_Skill4_Effect_40: -7316686518920354192
+      Beige_Ice_Skill4_Effect_41: -9177655237678197824
+      Beige_Ice_Skill4_Effect_42: 8679309646698967485
+      Beige_Ice_Skill4_Effect_43: 1082481170617271813
+      Beige_Ice_Skill4_Effect_44: 4220821789913227405
+      Beige_Ice_Skill4_Effect_45: -88517273743997708
+      Beige_Ice_Skill4_Effect_46: 4970199194877636036
+      Beige_Ice_Skill4_Effect_47: 5438595349819005581
+      Beige_Ice_Skill4_Effect_48: -5272240096064531343
+      Beige_Ice_Skill4_Effect_49: -575498170449355409
+      Beige_Ice_Skill4_Effect_5: 1572009153978632497
+      Beige_Ice_Skill4_Effect_50: -2539446015344620389
+      Beige_Ice_Skill4_Effect_51: -8064609722487738995
+      Beige_Ice_Skill4_Effect_52: 2274888360227188707
+      Beige_Ice_Skill4_Effect_53: -3637303889464633273
+      Beige_Ice_Skill4_Effect_54: 7316742330891810346
+      Beige_Ice_Skill4_Effect_55: -2390808204500287307
+      Beige_Ice_Skill4_Effect_56: 7307085857455291636
+      Beige_Ice_Skill4_Effect_57: 469412007880744922
+      Beige_Ice_Skill4_Effect_58: 4071344913528129746
+      Beige_Ice_Skill4_Effect_59: -3044416299908363548
+      Beige_Ice_Skill4_Effect_6: -8641109313852098593
+      Beige_Ice_Skill4_Effect_60: -4132879433388970579
+      Beige_Ice_Skill4_Effect_61: 799637522308649047
+      Beige_Ice_Skill4_Effect_62: 2834781522208188506
+      Beige_Ice_Skill4_Effect_63: 5571786687970929582
+      Beige_Ice_Skill4_Effect_64: -9133410594763871702
+      Beige_Ice_Skill4_Effect_65: -1351958154059578890
+      Beige_Ice_Skill4_Effect_66: -6238278678404499683
+      Beige_Ice_Skill4_Effect_67: -8103408575637508811
+      Beige_Ice_Skill4_Effect_68: 5527685752497487225
+      Beige_Ice_Skill4_Effect_69: 4398458001430072474
+      Beige_Ice_Skill4_Effect_7: 6015970917135795026
+      Beige_Ice_Skill4_Effect_70: 2488692162994401282
+      Beige_Ice_Skill4_Effect_71: -4244929879978722450
+      Beige_Ice_Skill4_Effect_72: 3822440748039351418
+      Beige_Ice_Skill4_Effect_73: -1444081461297822200
+      Beige_Ice_Skill4_Effect_74: 7355884257390839888
+      Beige_Ice_Skill4_Effect_75: -4761219461127375030
+      Beige_Ice_Skill4_Effect_76: -9215722110965591491
+      Beige_Ice_Skill4_Effect_77: 6156350300222870200
+      Beige_Ice_Skill4_Effect_78: -5790347419207821520
+      Beige_Ice_Skill4_Effect_79: -4928219787635517384
+      Beige_Ice_Skill4_Effect_8: 17373620941879654
+      Beige_Ice_Skill4_Effect_80: -633582049727582575
+      Beige_Ice_Skill4_Effect_81: -5494150331587361622
+      Beige_Ice_Skill4_Effect_82: -6730893116713481184
+      Beige_Ice_Skill4_Effect_83: -280499006627357241
+      Beige_Ice_Skill4_Effect_84: -8447436739622511287
+      Beige_Ice_Skill4_Effect_85: -5809149957885292751
+      Beige_Ice_Skill4_Effect_86: 277843422239279601
+      Beige_Ice_Skill4_Effect_87: -2651695490718302535
+      Beige_Ice_Skill4_Effect_88: -5636123584142710164
+      Beige_Ice_Skill4_Effect_89: -4169855559899277968
+      Beige_Ice_Skill4_Effect_9: 8750106537007682929
+      Beige_Ice_Skill4_Effect_90: -5810673873410822079
+      Beige_Ice_Skill4_Effect_91: -182284929268319441
+      Beige_Ice_Skill4_Effect_92: -5986851402661648956
+      Beige_Ice_Skill4_Effect_93: 30670422348942775
+      Beige_Ice_Skill4_Effect_94: 7177130195995742492
+      Beige_Ice_Skill4_Effect_95: 6961694964015705574
+      Beige_Ice_Skill4_Effect_96: -2142102279527620773
+      Beige_Ice_Skill4_Effect_97: -6600108354565261334
+      Beige_Ice_Skill4_Effect_98: 8230556223229479451
+      Beige_Ice_Skill4_Effect_99: 603489622902584788
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

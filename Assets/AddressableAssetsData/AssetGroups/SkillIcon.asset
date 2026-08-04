@@ -129,6 +129,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45757fba3fb612b4a8ee8186198f5ac5
+    m_Address: effect_beige_ice_storm_center
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8f1cbabd2bfe9c84483c05b384c6f99d
     m_Address: icon_alen_spear_passive
     m_ReadOnly: 0

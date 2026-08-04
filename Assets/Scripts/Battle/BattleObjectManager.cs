@@ -93,6 +93,7 @@ namespace Battle
 		bool _isLoadingGameData;
 		BattleTargetPreview _targetPreview;
 		BattleProjectilePresenter _projectilePresenter;
+		BattleSpriteEffectPresenter _skillEffectPresenter;
 		bool _hasFireWallStartTarget;
 		ulong _fireWallCasterPawnId;
 		AxialCoord _fireWallStartAxial;
@@ -152,6 +153,7 @@ namespace Battle
 				? _mapGrid.GetComponent<BattleTargetPreview>() ?? _mapGrid.gameObject.AddComponent<BattleTargetPreview>()
 				: null;
 			_projectilePresenter = GetComponent<BattleProjectilePresenter>() ?? gameObject.AddComponent<BattleProjectilePresenter>();
+			_skillEffectPresenter = GetComponent<BattleSpriteEffectPresenter>() ?? gameObject.AddComponent<BattleSpriteEffectPresenter>();
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
@@ -871,7 +873,13 @@ namespace Battle
 				targetAxial = casterPawn.Axial;
 			}
 			else if (targetType == "SELF" || targetType == "SELF_TOGGLE")
-				targetAxial = casterPawn.Axial;
+			{
+				if (targetAxial.Equals(casterPawn.Axial) == false)
+				{
+					Debug.Log($"Self skill must target the caster tile. casterPawnId={casterPawn.PawnId}, skillSlot={skillSlot}, selected={targetAxial}, self={casterPawn.Axial}");
+					return false;
+				}
+			}
 
 			if (_mapGrid.IsTileInBounds(targetAxial) == false)
 			{
@@ -1305,8 +1313,8 @@ namespace Battle
 				return _mapGrid.IsTileInBounds(targetAxial)
 					&& casterPawn.Axial.DistanceTo(targetAxial) <= 1;
 
-			if (targetType == "SELF" || targetType == "SELF_TOGGLE")
-				targetAxial = casterPawn.Axial;
+			if ((targetType == "SELF" || targetType == "SELF_TOGGLE") && targetAxial.Equals(casterPawn.Axial) == false)
+				return false;
 
 			if (_mapGrid.IsTileInBounds(targetAxial) == false)
 				return false;
@@ -2006,6 +2014,13 @@ namespace Battle
 			}
 
 			int skillSlot = log.SkillSlot > 0 ? log.SkillSlot : fallbackSkillSlot;
+			if (TryGetSkillVfxKey(attackerPawn, skillSlot, out string vfxKey)
+				&& TryGetProjectileTargetWorldPosition(log.DefenderPawnId, fallbackTargetAxial, out Vector3 effectWorldPosition)
+				&& _skillEffectPresenter != null)
+			{
+				yield return _skillEffectPresenter.Play(vfxKey, effectWorldPosition, GetSkillVfxScaleOverride(attackerPawn, skillSlot));
+			}
+
 			if (TryGetProjectileKey(attackerPawn, skillSlot, out string projectileKey)
 				&& TryGetProjectileTargetWorldPosition(log.DefenderPawnId, fallbackTargetAxial, out Vector3 targetWorldPosition)
 				&& _projectilePresenter != null)
@@ -2019,15 +2034,75 @@ namespace Battle
 
 		IEnumerator PlaySkillProjectilePresentation(BattlePawn casterPawn, int skillSlot, Protocol.AxialCoord targetAxial)
 		{
-			if (casterPawn == null
-				|| TryGetProjectileKey(casterPawn, skillSlot, out string projectileKey) == false
-				|| TryGetProjectileTargetWorldPosition(0, targetAxial, out Vector3 targetWorldPosition) == false
-				|| _projectilePresenter == null)
+			if (casterPawn == null)
 			{
 				yield break;
 			}
 
-			yield return _projectilePresenter.Play(projectileKey, casterPawn.GetProjectileOriginWorldPosition(), targetWorldPosition);
+			bool hasTargetWorldPosition = TryGetProjectileTargetWorldPosition(0, targetAxial, out Vector3 targetWorldPosition);
+			if (hasTargetWorldPosition == false)
+				targetWorldPosition = casterPawn.transform.position;
+
+			if (TryGetSkillVfxKey(casterPawn, skillSlot, out string vfxKey) && _skillEffectPresenter != null)
+				yield return _skillEffectPresenter.Play(vfxKey, targetWorldPosition, GetSkillVfxScaleOverride(casterPawn, skillSlot));
+
+			if (hasTargetWorldPosition
+				&& TryGetProjectileKey(casterPawn, skillSlot, out string projectileKey)
+				&& _projectilePresenter != null)
+				yield return _projectilePresenter.Play(projectileKey, casterPawn.GetProjectileOriginWorldPosition(), targetWorldPosition);
+		}
+
+		bool TryGetSkillVfxKey(BattlePawn casterPawn, int skillSlot, out string vfxKey)
+		{
+			vfxKey = null;
+			if (casterPawn == null
+				|| skillSlot <= 0
+				|| TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill) == false
+				|| _gameData == null
+				|| _gameData.TryGetSkillView(skill.SkillKey, out BattleSkillViewDefinition view) == false
+				|| string.IsNullOrWhiteSpace(view.VfxKey))
+			{
+				return false;
+			}
+
+			vfxKey = view.VfxKey;
+			return true;
+		}
+
+		Vector2? GetSkillVfxScaleOverride(BattlePawn casterPawn, int skillSlot)
+		{
+			if (casterPawn == null
+				|| _mapGrid == null
+				|| TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill) == false
+				|| string.Equals(skill.SkillKey, "BEIGE_ICE_COLD_HARD_WORKER", System.StringComparison.OrdinalIgnoreCase) == false)
+			{
+				return null;
+			}
+
+			const int radius = 2;
+			const float sourceFrameWidth = 5.52f; // 2208 / 4 pixels at 100 PPU.
+			const float sourceFrameHeight = 4f; // 1600 / 4 pixels at 100 PPU.
+			const float rangeOverhang = 1.2f;
+			float minX = float.MaxValue;
+			float maxX = float.MinValue;
+			float minY = float.MaxValue;
+			float maxY = float.MinValue;
+			for (int direction = 0; direction < 6; direction++)
+			{
+				AxialCoord edge = casterPawn.Axial;
+				for (int step = 0; step < radius; step++)
+					edge = _mapGrid.GetNeighbor(edge, direction);
+
+				Vector3 point = _mapGrid.AxialToWorldCenter(edge);
+				minX = Mathf.Min(minX, point.x);
+				maxX = Mathf.Max(maxX, point.x);
+				minY = Mathf.Min(minY, point.y);
+				maxY = Mathf.Max(maxY, point.y);
+			}
+
+			return new Vector2(
+				((maxX - minX) / sourceFrameWidth) * rangeOverhang,
+				((maxY - minY) / sourceFrameHeight) * rangeOverhang);
 		}
 
 		bool TryGetProjectileKey(BattlePawn casterPawn, int skillSlot, out string projectileKey)

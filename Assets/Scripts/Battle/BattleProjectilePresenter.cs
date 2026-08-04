@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -202,6 +203,210 @@ namespace Battle
 			return Styles.TryGetValue(projectileKey, out ProjectileStyle style)
 				? style
 				: new ProjectileStyle(7f, 0.8f);
+		}
+	}
+
+	[DisallowMultipleComponent]
+	public sealed class BattleSpriteEffectPresenter : MonoBehaviour
+	{
+		const int EffectSortingOrder = 43;
+
+		readonly struct SpriteEffectStyle
+		{
+			public readonly int Columns;
+			public readonly int Rows;
+			public readonly float FrameSeconds;
+			public readonly float Scale;
+
+			public SpriteEffectStyle(int columns, int rows, float frameSeconds, float scale)
+			{
+				Columns = columns;
+				Rows = rows;
+				FrameSeconds = frameSeconds;
+				Scale = scale;
+			}
+		}
+
+		static readonly Dictionary<string, SpriteEffectStyle> Styles = new Dictionary<string, SpriteEffectStyle>(StringComparer.OrdinalIgnoreCase)
+		{
+			// Beige_Ice_Skill4_Effect.png is a 2208x1600, 4x4 animation sheet.
+			{ "beige_ice_storm_center", new SpriteEffectStyle(4, 4, 0.055f, 0.36f) },
+			{ "beige_ice_cold_hard_worker", new SpriteEffectStyle(4, 4, 0.055f, 0.36f) },
+		};
+
+		readonly Dictionary<string, Sprite[]> _framesByKey = new Dictionary<string, Sprite[]>(StringComparer.OrdinalIgnoreCase);
+		readonly Dictionary<string, AsyncOperationHandle<Texture2D>> _textureHandles = new Dictionary<string, AsyncOperationHandle<Texture2D>>(StringComparer.OrdinalIgnoreCase);
+		readonly Stack<SpriteRenderer> _availableRenderers = new Stack<SpriteRenderer>();
+		readonly List<SpriteRenderer> _activeRenderers = new List<SpriteRenderer>();
+
+		public IEnumerator Play(string effectKey, Vector3 worldPosition, Vector2? scaleOverride = null)
+		{
+			if (string.IsNullOrWhiteSpace(effectKey))
+				yield break;
+
+			Sprite[] frames = null;
+			yield return LoadFrames(effectKey, loadedFrames => frames = loadedFrames);
+			if (frames == null || frames.Length == 0)
+				yield break;
+
+			SpriteEffectStyle style = GetStyle(effectKey);
+			SpriteRenderer renderer = RentRenderer();
+			worldPosition.z = -0.12f;
+			renderer.transform.position = worldPosition;
+			renderer.transform.rotation = Quaternion.identity;
+			Vector2 scale = scaleOverride ?? Vector2.one * style.Scale;
+			renderer.transform.localScale = new Vector3(scale.x, scale.y, 1f);
+			renderer.gameObject.SetActive(true);
+
+			for (int i = 0; i < frames.Length; i++)
+			{
+				renderer.sprite = frames[i];
+				yield return new WaitForSecondsRealtime(style.FrameSeconds);
+			}
+
+			ReturnRenderer(renderer);
+		}
+
+		public void Clear()
+		{
+			for (int i = _activeRenderers.Count - 1; i >= 0; i--)
+			{
+				SpriteRenderer renderer = _activeRenderers[i];
+				if (renderer == null)
+					continue;
+
+				renderer.sprite = null;
+				renderer.gameObject.SetActive(false);
+				_availableRenderers.Push(renderer);
+			}
+
+			_activeRenderers.Clear();
+		}
+
+		void OnDestroy()
+		{
+			Clear();
+			foreach (AsyncOperationHandle<Texture2D> handle in _textureHandles.Values)
+			{
+				if (handle.IsValid())
+					Addressables.Release(handle);
+			}
+
+			_textureHandles.Clear();
+			foreach (Sprite[] frames in _framesByKey.Values)
+			{
+				if (frames == null)
+					continue;
+
+				foreach (Sprite frame in frames)
+				{
+					if (frame != null)
+						Destroy(frame);
+				}
+			}
+
+			_framesByKey.Clear();
+		}
+
+		IEnumerator LoadFrames(string effectKey, Action<Sprite[]> onLoaded)
+		{
+			if (_framesByKey.TryGetValue(effectKey, out Sprite[] cachedFrames))
+			{
+				onLoaded?.Invoke(cachedFrames);
+				yield break;
+			}
+
+			Texture2D texture = null;
+			string address = GetAddress(effectKey);
+			AsyncOperationHandle<Texture2D> handle = Addressables.LoadAssetAsync<Texture2D>(address);
+			while (handle.IsDone == false)
+				yield return null;
+
+			if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null)
+			{
+				texture = handle.Result;
+				_textureHandles[effectKey] = handle;
+			}
+			else
+			{
+				if (handle.IsValid())
+					Addressables.Release(handle);
+
+#if UNITY_EDITOR
+				texture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/@Resources/Art/SkillEffect/Beige_Ice_Skill4_Effect.png");
+#endif
+			}
+
+			if (texture == null)
+			{
+				Debug.LogWarning($"Failed to load battle sprite effect. effectKey={effectKey}, address={address}");
+				yield break;
+			}
+
+			Sprite[] frames = CreateFrames(texture, GetStyle(effectKey));
+			_framesByKey[effectKey] = frames;
+			onLoaded?.Invoke(frames);
+		}
+
+		static Sprite[] CreateFrames(Texture2D texture, SpriteEffectStyle style)
+		{
+			int frameWidth = texture.width / style.Columns;
+			int frameHeight = texture.height / style.Rows;
+			List<Sprite> frames = new List<Sprite>(style.Columns * style.Rows);
+			for (int row = 0; row < style.Rows; row++)
+			{
+				for (int column = 0; column < style.Columns; column++)
+				{
+					Rect rect = new Rect(column * frameWidth, texture.height - ((row + 1) * frameHeight), frameWidth, frameHeight);
+					frames.Add(Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f), 100f));
+				}
+			}
+
+			return frames.ToArray();
+		}
+
+		SpriteRenderer RentRenderer()
+		{
+			SpriteRenderer renderer = _availableRenderers.Count > 0 ? _availableRenderers.Pop() : CreateRenderer();
+			_activeRenderers.Add(renderer);
+			return renderer;
+		}
+
+		SpriteRenderer CreateRenderer()
+		{
+			GameObject effectObject = new GameObject("BattleSpriteEffect", typeof(SpriteRenderer));
+			effectObject.transform.SetParent(transform, false);
+			SpriteRenderer renderer = effectObject.GetComponent<SpriteRenderer>();
+			renderer.sortingOrder = EffectSortingOrder;
+			effectObject.SetActive(false);
+			return renderer;
+		}
+
+		void ReturnRenderer(SpriteRenderer renderer)
+		{
+			if (renderer == null)
+				return;
+
+			_activeRenderers.Remove(renderer);
+			renderer.sprite = null;
+			renderer.gameObject.SetActive(false);
+			_availableRenderers.Push(renderer);
+		}
+
+		static SpriteEffectStyle GetStyle(string effectKey)
+		{
+			return Styles.TryGetValue(effectKey, out SpriteEffectStyle style)
+				? style
+				: new SpriteEffectStyle(1, 1, 0.1f, 1f);
+		}
+
+		static string GetAddress(string effectKey)
+		{
+			// The ultimate deliberately reuses Storm Center's source animation at a
+			// larger, one-shot radius rather than duplicating its texture asset.
+			return string.Equals(effectKey, "beige_ice_cold_hard_worker", StringComparison.OrdinalIgnoreCase)
+				? "effect_beige_ice_storm_center"
+				: $"effect_{effectKey}";
 		}
 	}
 }
