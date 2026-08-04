@@ -7,14 +7,14 @@
 - `S_ENTER_GAME`, `S_SPAWN`, `S_DESPAWN`, `S_MOVE`는 `FieldObjectManager`가 구독해 필드 Pawn을 생성, 제거, 이동시킨다.
 - `Field_001_WalkMap` JSON의 압축 walkable range는 로컬 클릭 프리뷰와 기본 spawn 위치에만 사용한다. `WorldMapRoot`는 시각 표현만 담당하며, 필드 Tilemap 프리팹은 런타임에 로드하지 않는다.
 - 로컬 Pawn 클릭 이동은 `C_MOVE`를 전송하며, 서버의 `S_MOVE`로 모든 클라이언트가 실제 이동을 반영한다.
-- 다른 플레이어 Pawn을 클릭하면 `FieldBattleInviteUI`가 확인 창을 표시한다. `C_BATTLE_INVITE`와 `C_BATTLE_INVITE_RESPONSE`의 결과가 수락되면 서버가 `S_ENTER_BATTLE`을 전송한다.
+- 다른 플레이어 Pawn을 클릭하면 `FieldBattleInviteUI`가 확인 창을 표시한다. 초대 수락 뒤 `S_BATTLE_CLASS_SELECTION_START`를 받으면 `FieldBattleClassSelectionUI`가 서버 제공 클래스 선택지를 열며, 수엔·베이지·알렌·질리언에서 각각 하나씩 확정해 `C_BATTLE_CLASS_SELECTION`을 전송한다. 양쪽 선택이 잠긴 뒤에만 서버의 `S_DESPAWN`, `S_ENTER_BATTLE` 전환을 처리한다.
 - `B` 키의 `C_ENTER_BATTLE`은 개발/디버그 진입 경로다. 실사용 멀티플레이 검증과 구분한다.
 
 ## 전투 요청과 응답
 
 | 동작 | 클라이언트 요청 | 서버 응답에서 적용할 상태 |
 | --- | --- | --- |
-| 입장 | `C_ENTER_BATTLE` 또는 초대 수락 | `S_ENTER_BATTLE` snapshot, 전투 맵, 아군/적 Pawn, 턴 큐 |
+| 입장 | `C_ENTER_BATTLE` 또는 초대 수락 후 `C_BATTLE_CLASS_SELECTION` | 클래스 선택 시작/결과를 먼저 처리한 뒤 `S_ENTER_BATTLE` snapshot, 전투 맵, 아군/적 Pawn, 턴 큐 |
 | 이동 | `C_BATTLE_MOVE` | 이동, reaction log, Pawn delta, 다음 턴 |
 | 스킬 | `C_BATTLE_SKILL` | Pawn delta, tile delta, action log, 턴/행동 상태 |
 | 턴 종료 | `C_BATTLE_END_TURN` | Pawn/tile delta, 로그, 다음 턴/턴 큐 |

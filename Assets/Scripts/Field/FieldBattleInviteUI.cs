@@ -173,6 +173,13 @@ namespace Field
 				Hide();
 		}
 
+		void OnBattleClassSelectionStartReceived(S_BATTLE_CLASS_SELECTION_START packet)
+		{
+			// Invite acceptance now proceeds through class selection, not battle entry.
+			if (packet != null)
+				Hide();
+		}
+
 		bool IsMyObjectId(ulong objectId)
 		{
 			return GameRoot.Instance != null
@@ -189,6 +196,7 @@ namespace Field
 			GameRoot.Instance.Network.BattleInviteRequestReceived += OnBattleInviteRequestReceived;
 			GameRoot.Instance.Network.BattleInviteReceived += OnBattleInviteReceived;
 			GameRoot.Instance.Network.BattleInviteResultReceived += OnBattleInviteResultReceived;
+			GameRoot.Instance.Network.BattleClassSelectionStartReceived += OnBattleClassSelectionStartReceived;
 			_subscribed = true;
 		}
 
@@ -199,6 +207,7 @@ namespace Field
 				GameRoot.Instance.Network.BattleInviteRequestReceived -= OnBattleInviteRequestReceived;
 				GameRoot.Instance.Network.BattleInviteReceived -= OnBattleInviteReceived;
 				GameRoot.Instance.Network.BattleInviteResultReceived -= OnBattleInviteResultReceived;
+				GameRoot.Instance.Network.BattleClassSelectionStartReceived -= OnBattleClassSelectionStartReceived;
 			}
 
 			_subscribed = false;
@@ -403,7 +412,7 @@ namespace Field
 			return null;
 		}
 
-		static void EnsureEventSystem()
+		internal static void EnsureEventSystem()
 		{
 			if (EventSystem.current != null)
 				return;

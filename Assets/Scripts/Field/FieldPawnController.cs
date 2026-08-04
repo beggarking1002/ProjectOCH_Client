@@ -72,7 +72,7 @@ namespace Field
 			if (IsMine == false || _walkArea == null || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
-			if (FieldPointerInputBlocker.IsConsumedThisFrame || FieldBattleInviteUI.IsBlockingInput || IsPointerOverUi())
+			if (FieldPointerInputBlocker.IsConsumedThisFrame || FieldBattleInviteUI.IsBlockingInput || FieldBattleClassSelectionUI.IsBlockingInput || IsPointerOverUi())
 				return;
 
 			Camera camera = Camera.main;

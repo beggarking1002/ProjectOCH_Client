@@ -26,6 +26,8 @@ public sealed class PacketHandler
 	public event Action<S_BATTLE_INVITE_REQUEST> BattleInviteRequestReceived;
 	public event Action<S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
 	public event Action<S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
+	public event Action<S_BATTLE_CLASS_SELECTION_START> BattleClassSelectionStartReceived;
+	public event Action<S_BATTLE_CLASS_SELECTION_RESULT> BattleClassSelectionResultReceived;
 	public event Action<S_BATTLE_PAWN_DEAD> BattlePawnDeadReceived;
 	public event Action<S_BATTLE_RESULT> BattleResultReceived;
 	public event Action<S_BATTLE_RESULT_ACK> BattleResultAckReceived;
@@ -112,6 +114,18 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_BATTLE_INVITE_RESULTHandler");
 		Instance.EnqueuePacket(packet as S_BATTLE_INVITE_RESULT, Instance.BattleInviteResultReceived);
+	}
+
+	public static void S_BATTLE_CLASS_SELECTION_STARTHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_CLASS_SELECTION_STARTHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_CLASS_SELECTION_START, Instance.BattleClassSelectionStartReceived);
+	}
+
+	public static void S_BATTLE_CLASS_SELECTION_RESULTHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_BATTLE_CLASS_SELECTION_RESULTHandler");
+		Instance.EnqueuePacket(packet as S_BATTLE_CLASS_SELECTION_RESULT, Instance.BattleClassSelectionResultReceived);
 	}
 
 	public static void S_BATTLE_PAWN_DEADHandler(PacketSession session, IMessage packet)

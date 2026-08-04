@@ -29,6 +29,8 @@ namespace Networking
 		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
+		public Protocol.S_BATTLE_CLASS_SELECTION_START LastBattleClassSelectionStart { get; private set; }
+		public Protocol.S_BATTLE_CLASS_SELECTION_RESULT LastBattleClassSelectionResult { get; private set; }
 		public Protocol.S_BATTLE_END_TURN LastBattleEndTurn { get; private set; }
 		public Protocol.S_BATTLE_PAWN_DEAD LastBattlePawnDead { get; private set; }
 		public Protocol.S_BATTLE_RESULT LastBattleResult { get; private set; }
@@ -56,6 +58,8 @@ namespace Networking
 		public event Action<Protocol.S_BATTLE_INVITE_REQUEST> BattleInviteRequestReceived;
 		public event Action<Protocol.S_BATTLE_INVITE_RECEIVED> BattleInviteReceived;
 		public event Action<Protocol.S_BATTLE_INVITE_RESULT> BattleInviteResultReceived;
+		public event Action<Protocol.S_BATTLE_CLASS_SELECTION_START> BattleClassSelectionStartReceived;
+		public event Action<Protocol.S_BATTLE_CLASS_SELECTION_RESULT> BattleClassSelectionResultReceived;
 		public event Action<Protocol.S_BATTLE_PAWN_DEAD> BattlePawnDeadReceived;
 		public event Action<Protocol.S_BATTLE_RESULT> BattleResultReceived;
 		public event Action<Protocol.S_BATTLE_RESULT_ACK> BattleResultAckReceived;
@@ -79,6 +83,8 @@ namespace Networking
 			PacketHandler.Instance.BattleInviteRequestReceived += OnBattleInviteRequestReceived;
 			PacketHandler.Instance.BattleInviteReceived += OnBattleInviteReceived;
 			PacketHandler.Instance.BattleInviteResultReceived += OnBattleInviteResultReceived;
+			PacketHandler.Instance.BattleClassSelectionStartReceived += OnBattleClassSelectionStartReceived;
+			PacketHandler.Instance.BattleClassSelectionResultReceived += OnBattleClassSelectionResultReceived;
 			PacketHandler.Instance.BattlePawnDeadReceived += OnBattlePawnDeadReceived;
 			PacketHandler.Instance.BattleResultReceived += OnBattleResultReceived;
 			PacketHandler.Instance.BattleResultAckReceived += OnBattleResultAckReceived;
@@ -114,6 +120,8 @@ namespace Networking
 				PacketHandler.Instance.BattleInviteRequestReceived -= OnBattleInviteRequestReceived;
 				PacketHandler.Instance.BattleInviteReceived -= OnBattleInviteReceived;
 				PacketHandler.Instance.BattleInviteResultReceived -= OnBattleInviteResultReceived;
+				PacketHandler.Instance.BattleClassSelectionStartReceived -= OnBattleClassSelectionStartReceived;
+				PacketHandler.Instance.BattleClassSelectionResultReceived -= OnBattleClassSelectionResultReceived;
 				PacketHandler.Instance.BattlePawnDeadReceived -= OnBattlePawnDeadReceived;
 				PacketHandler.Instance.BattleResultReceived -= OnBattleResultReceived;
 				PacketHandler.Instance.BattleResultAckReceived -= OnBattleResultAckReceived;
@@ -138,6 +146,8 @@ namespace Networking
 			LastBattleInviteRequest = null;
 			LastBattleInviteReceived = null;
 			LastBattleInviteResult = null;
+			LastBattleClassSelectionStart = null;
+			LastBattleClassSelectionResult = null;
 			LastBattleEndTurn = null;
 			LastBattlePawnDead = null;
 			LastBattleResult = null;
@@ -215,6 +225,19 @@ namespace Networking
 				RequesterPlayerId = requesterPlayerId,
 				Accept = accept,
 			});
+		}
+
+		public bool SendBattleClassSelection(IList<Protocol.PawnClass> selectedPawnClasses)
+		{
+			if (selectedPawnClasses == null || selectedPawnClasses.Count != 4)
+			{
+				LastError = "Exactly four pawn classes must be selected.";
+				return false;
+			}
+
+			Protocol.C_BATTLE_CLASS_SELECTION packet = new Protocol.C_BATTLE_CLASS_SELECTION();
+			packet.SelectedPawnClasses.Add(selectedPawnClasses);
+			return Send(packet);
 		}
 
 		public bool SendBattleMove(ulong battleId, ulong pawnId, int q, int r)
@@ -321,6 +344,9 @@ namespace Networking
 					break;
 				case Protocol.C_BATTLE_INVITE_RESPONSE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_INVITE_RESPONSE);
+					break;
+				case Protocol.C_BATTLE_CLASS_SELECTION pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_CLASS_SELECTION);
 					break;
 				case Protocol.C_BATTLE_RESULT_ACK pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_RESULT_ACK);
@@ -542,6 +568,35 @@ namespace Networking
 				Debug.Log($"S_BATTLE_INVITE_RESULT declined. requesterPlayerId={pkt.RequesterPlayerId}, targetPlayerId={pkt.TargetPlayerId}, reason={pkt.Reason}");
 
 			BattleInviteResultReceived?.Invoke(pkt);
+		}
+
+		void OnBattleClassSelectionStartReceived(Protocol.S_BATTLE_CLASS_SELECTION_START pkt)
+		{
+			LastBattleClassSelectionStart = pkt;
+			if (pkt == null)
+				return;
+
+			Debug.Log($"S_BATTLE_CLASS_SELECTION_START. requesterPlayerId={pkt.RequesterPlayerId}, targetPlayerId={pkt.TargetPlayerId}");
+			BattleClassSelectionStartReceived?.Invoke(pkt);
+		}
+
+		void OnBattleClassSelectionResultReceived(Protocol.S_BATTLE_CLASS_SELECTION_RESULT pkt)
+		{
+			LastBattleClassSelectionResult = pkt;
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+			{
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Battle class selection was rejected." : pkt.Reason;
+				Debug.LogWarning($"S_BATTLE_CLASS_SELECTION_RESULT failed. reason={LastError}");
+			}
+			else
+			{
+				Debug.Log($"S_BATTLE_CLASS_SELECTION_RESULT success. waitingForOpponent={pkt.WaitingForOpponent}");
+			}
+
+			BattleClassSelectionResultReceived?.Invoke(pkt);
 		}
 
 		void OnBattlePawnDeadReceived(Protocol.S_BATTLE_PAWN_DEAD pkt)

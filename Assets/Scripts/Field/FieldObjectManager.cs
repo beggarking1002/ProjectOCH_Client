@@ -26,6 +26,7 @@ namespace Field
 		bool _battleEnterRequested;
 		ulong _myObjectId;
 		FieldBattleInviteUI _battleInviteUi;
+		FieldBattleClassSelectionUI _battleClassSelectionUi;
 
 		public ulong MyObjectId => _myObjectId;
 		public FieldPawnController MyPawn => _myObjectId != 0 && _pawns.TryGetValue(_myObjectId, out FieldPawnController pawn) ? pawn : null;
@@ -50,6 +51,7 @@ namespace Field
 				SpawnFallbackLocalPawn();
 
 			EnsureBattleInviteUi();
+			EnsureBattleClassSelectionUi();
 			SpawnKnownPlayers();
 		}
 
@@ -76,9 +78,19 @@ namespace Field
 				_battleInviteUi = gameObject.AddComponent<FieldBattleInviteUI>();
 		}
 
+		void EnsureBattleClassSelectionUi()
+		{
+			if (_battleClassSelectionUi != null)
+				return;
+
+			_battleClassSelectionUi = GetComponent<FieldBattleClassSelectionUI>();
+			if (_battleClassSelectionUi == null)
+				_battleClassSelectionUi = gameObject.AddComponent<FieldBattleClassSelectionUI>();
+		}
+
 		void HandleBattleInviteClickInput()
 		{
-			if (_battleInviteUi == null || FieldBattleInviteUI.IsBlockingInput || TryGetPointerDown(out Vector2 screenPosition) == false)
+			if (_battleInviteUi == null || FieldBattleInviteUI.IsBlockingInput || FieldBattleClassSelectionUI.IsBlockingInput || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
 			if (IsPointerOverUi())

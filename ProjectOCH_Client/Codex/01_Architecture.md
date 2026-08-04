@@ -23,8 +23,8 @@ TitleScene
 
 FieldScene
   ├─ Field_001_WalkMap JSON / WorldMapRoot / Field Pawn Addressables
-  ├─ 다른 Pawn 클릭 → 전투 초대 UI → 초대/수락 패킷
-  └─ S_ENTER_BATTLE → BattleScene
+  ├─ 다른 Pawn 클릭 → 전투 초대 UI → 초대/수락 패킷 → 클래스 선택 UI
+	└─ 양측 선택 잠금 → S_ENTER_BATTLE → BattleScene
 
 BattleScene
   ├─ BattleField_001 / PawnBase + 클래스별 visual / BattleSceneUI Addressables

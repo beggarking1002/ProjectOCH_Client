@@ -35,6 +35,9 @@ public enum MsgId : ushort
     S_BATTLE_RESULT = 1026,
     C_BATTLE_RESULT_ACK = 1027,
     S_BATTLE_RESULT_ACK = 1028,
+    S_BATTLE_CLASS_SELECTION_START = 1029,
+    C_BATTLE_CLASS_SELECTION = 1030,
+    S_BATTLE_CLASS_SELECTION_RESULT = 1031,
 }
 
 class PacketManager
@@ -92,6 +95,10 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_BATTLE_RESULT, PacketHandler.S_BATTLE_RESULTHandler);
         _onRecv.Add((ushort)MsgId.S_BATTLE_RESULT_ACK, MakePacket<S_BATTLE_RESULT_ACK>);
         _handler.Add((ushort)MsgId.S_BATTLE_RESULT_ACK, PacketHandler.S_BATTLE_RESULT_ACKHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_CLASS_SELECTION_START, MakePacket<S_BATTLE_CLASS_SELECTION_START>);
+        _handler.Add((ushort)MsgId.S_BATTLE_CLASS_SELECTION_START, PacketHandler.S_BATTLE_CLASS_SELECTION_STARTHandler);
+        _onRecv.Add((ushort)MsgId.S_BATTLE_CLASS_SELECTION_RESULT, MakePacket<S_BATTLE_CLASS_SELECTION_RESULT>);
+        _handler.Add((ushort)MsgId.S_BATTLE_CLASS_SELECTION_RESULT, PacketHandler.S_BATTLE_CLASS_SELECTION_RESULTHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
