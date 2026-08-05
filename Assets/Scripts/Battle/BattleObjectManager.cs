@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using App;
+using Field;
 using Protocol;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -149,6 +150,7 @@ namespace Battle
 		{
 			_mapGrid = mapGrid;
 			_fallbackPawnAddress = pawnAddress;
+			EnsureBattleCameraController();
 			_targetPreview = _mapGrid != null
 				? _mapGrid.GetComponent<BattleTargetPreview>() ?? _mapGrid.gameObject.AddComponent<BattleTargetPreview>()
 				: null;
@@ -165,6 +167,19 @@ namespace Battle
 			PacketHandler.Instance.BattlePawnDeadReceived += OnBattlePawnDeadReceived;
 
 			_ = LoadGameDataAsync();
+		}
+
+		static void EnsureBattleCameraController()
+		{
+			Camera camera = Camera.main;
+			if (camera == null)
+				return;
+
+			CameraController controller = camera.GetComponent<CameraController>();
+			if (controller == null)
+				controller = camera.gameObject.AddComponent<CameraController>();
+
+			controller.ConfigureFreePan();
 		}
 
 		async Task LoadGameDataAsync()
