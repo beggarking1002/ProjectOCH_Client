@@ -75,9 +75,7 @@ namespace Battle
 					return true;
 				case 5:
 					displayName = "혼자 크는 남자";
-				// The delivered axe/sword set has no dedicated slot-5 art yet.
-				// Reuse the shared skill art rather than leaving the button blank.
-				iconKey = "icon_suen_axe_skill3";
+				iconKey = "icon_suen_axe_skill4";
 					return true;
 				case 6:
 					displayName = "최후의 생존자";

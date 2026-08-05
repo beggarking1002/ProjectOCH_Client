@@ -1037,6 +1037,7 @@ namespace Battle
 				{
 					label = "Move";
 					tooltip = "Move\nMove to a reachable tile.";
+					iconKey = "icon_walk";
 				}
 				else if (TryGetUiSkillDefinition(currentTurnPawn, binding.ActionSlot, out BattleSkillDefinition skill))
 				{

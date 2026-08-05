@@ -302,7 +302,7 @@ namespace Field
 		{
 			GameObject go = Create(name, parent, typeof(Text));
 			Text text = go.GetComponent<Text>();
-			text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 			text.fontSize = fontSize;
 			text.alignment = alignment;
 			text.color = Color.white;

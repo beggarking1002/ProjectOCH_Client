@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: SkillIcon
   m_GUID: a3b1bbdddc13a364f9cb3a04985b0adf
   m_SerializeEntries:
+  - m_GUID: 1cd938030cab0f348a5e8d4cf44fb1ea
+    m_Address: icon_walk
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d2a91b011f7e824cb0489f5f2fd1095
     m_Address: icon_zillian_longbow_passive
     m_ReadOnly: 0
@@ -251,6 +257,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e1693ab8697f1d4face079b32dd666f
     m_Address: icon_suen_axe_skill3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a25730009e3f7747a4eb54cd6d15383
+    m_Address: icon_suen_axe_skill4
     m_ReadOnly: 0
     m_SerializedLabels:
     - SkillIcon
