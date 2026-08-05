@@ -12,20 +12,13 @@ namespace Field
 		[SerializeField] Vector3 offset = new Vector3(0f, 0f, -10f);
 		[SerializeField] float followSpeed = 8f;
 		[SerializeField] bool findFieldPawnOnStart = true;
-		[Header("Edge Scroll")]
-		[SerializeField] bool edgeScrollEnabled = true;
-		[SerializeField, Min(1f)] float edgeScrollPixels = 64f;
-		[SerializeField, Min(0f)] float edgeScrollSpeed = 7f;
+		[Header("Keyboard Pan")]
+		[SerializeField] bool keyboardPanEnabled = true;
+		[SerializeField, Min(0f)] float keyboardPanSpeed = 7f;
 
 		Vector3 _manualPanOffset;
-		Camera _camera;
 
 		public Transform Target => target;
-
-		void Awake()
-		{
-			_camera = GetComponent<Camera>();
-		}
 
 		void Start()
 		{
@@ -39,15 +32,15 @@ namespace Field
 				if (findFieldPawnOnStart)
 					FindFieldPawnTarget();
 
-			Vector3 edgeScrollDelta = GetEdgeScrollDelta();
+			Vector3 keyboardPanDelta = GetKeyboardPanDelta();
 			if (target == null)
 			{
 				// Battle cameras have no follow target: pan their transform directly.
-				transform.position += edgeScrollDelta;
+				transform.position += keyboardPanDelta;
 				return;
 			}
 
-			_manualPanOffset += edgeScrollDelta;
+			_manualPanOffset += keyboardPanDelta;
 			Vector3 targetPosition = target.position + offset + _manualPanOffset;
 			transform.position = Vector3.Lerp(
 				transform.position,
@@ -83,49 +76,42 @@ namespace Field
 			_manualPanOffset = Vector3.zero;
 		}
 
-		Vector3 GetEdgeScrollDelta()
+		Vector3 GetKeyboardPanDelta()
 		{
-			if (edgeScrollEnabled == false || Application.isFocused == false || TryGetPointerPosition(out Vector2 pointerPosition) == false)
+			if (keyboardPanEnabled == false || Application.isFocused == false)
 				return Vector3.zero;
 
-			Rect cameraPixels = _camera != null
-				? _camera.pixelRect
-				: new Rect(0f, 0f, Screen.width, Screen.height);
-			float threshold = Mathf.Min(edgeScrollPixels, Mathf.Min(cameraPixels.width, cameraPixels.height) * 0.5f);
 			Vector2 direction = Vector2.zero;
-			if (pointerPosition.x <= cameraPixels.xMin + threshold)
-				direction.x = -1f;
-			else if (pointerPosition.x >= cameraPixels.xMax - threshold)
-				direction.x = 1f;
 
-			if (pointerPosition.y <= cameraPixels.yMin + threshold)
-				direction.y = -1f;
-			else if (pointerPosition.y >= cameraPixels.yMax - threshold)
-				direction.y = 1f;
+#if ENABLE_INPUT_SYSTEM
+			Keyboard keyboard = Keyboard.current;
+			if (keyboard == null)
+				return Vector3.zero;
+
+			if (keyboard.aKey.isPressed)
+				direction.x -= 1f;
+			if (keyboard.dKey.isPressed)
+				direction.x += 1f;
+			if (keyboard.sKey.isPressed)
+				direction.y -= 1f;
+			if (keyboard.wKey.isPressed)
+				direction.y += 1f;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			if (Input.GetKey(KeyCode.A))
+				direction.x -= 1f;
+			if (Input.GetKey(KeyCode.D))
+				direction.x += 1f;
+			if (Input.GetKey(KeyCode.S))
+				direction.y -= 1f;
+			if (Input.GetKey(KeyCode.W))
+				direction.y += 1f;
+#endif
 
 			if (direction == Vector2.zero)
 				return Vector3.zero;
 
 			direction.Normalize();
-			return (Vector3)(direction * edgeScrollSpeed * Time.deltaTime);
-		}
-
-		static bool TryGetPointerPosition(out Vector2 screenPosition)
-		{
-#if ENABLE_INPUT_SYSTEM
-			Mouse mouse = Mouse.current;
-			if (mouse != null)
-			{
-				screenPosition = mouse.position.ReadValue();
-				return true;
-			}
-#elif ENABLE_LEGACY_INPUT_MANAGER
-			screenPosition = Input.mousePosition;
-			return true;
-#endif
-
-			screenPosition = default;
-			return false;
+			return (Vector3)(direction * keyboardPanSpeed * Time.deltaTime);
 		}
 
 		void FindFieldPawnTarget()
