@@ -60,6 +60,7 @@ namespace Battle
 		Text _tileInfoText;
 		PawnPanelView _selectedPawnPanel;
 		PawnPanelView _enemyPawnPanel;
+		HoverPawnInfoView _hoverPawnInfo;
 		BattleTurnQueueView _turnQueueView;
 		Image _currentTurnPortraitImage;
 		Image _classMarkImage;
@@ -464,6 +465,7 @@ namespace Battle
 			_tileInfoText = CreateOrGetPanelText(root, "TileInfo", "TileInfo_StateText", 13);
 			_selectedPawnPanel = CreateOrGetPawnPanelView(root, "Left_SelectedPawnPanel", "SelectedPawn_StateText", "SelectedPawn_StatusBars", 13);
 			_enemyPawnPanel = CreateOrGetPawnPanelView(root, "Right_EnemyPawnPanel", "EnemyPawn_StateText", "EnemyPawn_StatusBars", 13);
+			_hoverPawnInfo = CreateOrGetHoverPawnInfo(root);
 		}
 
 		void EnsureOptionalPositionSwapPrompt(Transform root)
@@ -959,6 +961,8 @@ namespace Battle
 			bool hasHoveredTile = TryGetHoveredAxial(out hoveredAxial);
 			BattlePawn selectedPawn = TryGetCurrentTurnPawn(out BattlePawn currentTurnPawn) ? currentTurnPawn : null;
 			BattlePawn hoveredPawn = null;
+			if (hasHoveredTile)
+				_objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out hoveredPawn);
 
 			if (_tileInfoText != null)
 			{
@@ -973,12 +977,11 @@ namespace Battle
 
 			if (_enemyPawnPanel != null)
 			{
-				BattlePawn enemyPawn = null;
-				if (hasHoveredTile && _objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out hoveredPawn) && hoveredPawn.IsMine == false)
-					enemyPawn = hoveredPawn;
-
-				_enemyPawnPanel.SetPawn("Target", enemyPawn);
+				_enemyPawnPanel.SetPawn("Target", hoveredPawn != null && hoveredPawn.IsMine == false ? hoveredPawn : null);
 			}
+
+			if (_hoverPawnInfo != null)
+				_hoverPawnInfo.SetPawn(IsPointerOverUi() ? null : hoveredPawn);
 		}
 
 		string BuildTurnText()
@@ -1538,6 +1541,11 @@ namespace Battle
 				&& screenPosition.y <= camera.pixelHeight;
 		}
 
+		static bool IsPointerOverUi()
+		{
+			return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+		}
+
 		static Text CreateOrGetPanelText(Transform root, string panelName, string textName, int fontSize)
 		{
 			Transform panel = FindDeepChild(root, panelName);
@@ -1931,6 +1939,181 @@ namespace Battle
 #else
 			eventSystem.AddComponent<StandaloneInputModule>();
 #endif
+		}
+
+		static HoverPawnInfoView CreateOrGetHoverPawnInfo(Transform root)
+		{
+			if (root == null)
+				return null;
+
+			Transform existing = root.Find("HoverPawnInfo");
+			GameObject panelObject;
+			RectTransform panelRect;
+			Image background;
+			if (existing != null)
+			{
+				panelObject = existing.gameObject;
+				panelRect = panelObject.GetComponent<RectTransform>();
+				background = panelObject.GetComponent<Image>();
+			}
+			else
+			{
+				panelObject = new GameObject("HoverPawnInfo", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Outline));
+				panelObject.layer = root.gameObject.layer;
+				panelObject.transform.SetParent(root, false);
+				panelRect = panelObject.GetComponent<RectTransform>();
+				background = panelObject.GetComponent<Image>();
+				Outline outline = panelObject.GetComponent<Outline>();
+				outline.effectColor = new Color(0.72f, 0.59f, 0.31f, 0.78f);
+				outline.effectDistance = new Vector2(1f, -1f);
+			}
+
+			if (panelRect == null || background == null)
+				return null;
+
+			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+			panelRect.pivot = Vector2.zero;
+			panelRect.sizeDelta = new Vector2(255f, 188f);
+			background.color = new Color(0.10f, 0.075f, 0.035f, 0.94f);
+			background.raycastTarget = false;
+			panelObject.transform.SetAsLastSibling();
+
+			Text title = CreateOrGetHoverPawnText(panelObject.transform, "Title", 16, TextAnchor.MiddleLeft);
+			RectTransform titleRect = title.rectTransform;
+			titleRect.anchorMin = new Vector2(0f, 0.75f);
+			titleRect.anchorMax = new Vector2(1f, 1f);
+			titleRect.offsetMin = new Vector2(12f, 2f);
+			titleRect.offsetMax = new Vector2(-12f, -6f);
+			title.color = new Color(0.97f, 0.84f, 0.48f, 1f);
+
+			Text body = CreateOrGetHoverPawnText(panelObject.transform, "Body", 12, TextAnchor.UpperLeft);
+			RectTransform bodyRect = body.rectTransform;
+			bodyRect.anchorMin = Vector2.zero;
+			bodyRect.anchorMax = new Vector2(1f, 0.76f);
+			bodyRect.offsetMin = new Vector2(12f, 10f);
+			bodyRect.offsetMax = new Vector2(-12f, -2f);
+			body.color = new Color(0.92f, 0.90f, 0.82f, 1f);
+
+			panelObject.SetActive(false);
+			return new HoverPawnInfoView(panelObject, panelRect, root as RectTransform, title, body);
+		}
+
+		static Text CreateOrGetHoverPawnText(Transform parent, string name, int fontSize, TextAnchor alignment)
+		{
+			Transform existing = parent.Find(name);
+			Text text = existing != null ? existing.GetComponent<Text>() : null;
+			if (text == null)
+			{
+				GameObject textObject = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+				textObject.layer = parent.gameObject.layer;
+				textObject.transform.SetParent(parent, false);
+				text = textObject.GetComponent<Text>();
+			}
+
+			text.font = GameRoot.UiFont;
+			text.fontSize = fontSize;
+			text.alignment = alignment;
+			text.horizontalOverflow = HorizontalWrapMode.Wrap;
+			text.verticalOverflow = VerticalWrapMode.Truncate;
+			text.raycastTarget = false;
+			return text;
+		}
+
+		sealed class HoverPawnInfoView
+		{
+			readonly GameObject _root;
+			readonly RectTransform _rect;
+			readonly RectTransform _canvasRect;
+			readonly Text _title;
+			readonly Text _body;
+
+			public HoverPawnInfoView(GameObject root, RectTransform rect, RectTransform canvasRect, Text title, Text body)
+			{
+				_root = root;
+				_rect = rect;
+				_canvasRect = canvasRect;
+				_title = title;
+				_body = body;
+			}
+
+			public void SetPawn(BattlePawn pawn)
+			{
+				if (pawn == null || _root == null || _rect == null || _canvasRect == null)
+				{
+					SetVisible(false);
+					return;
+				}
+
+				Camera camera = Camera.main;
+				if (camera == null)
+				{
+					SetVisible(false);
+					return;
+				}
+
+				Vector3 screenPosition = camera.WorldToScreenPoint(pawn.transform.position + Vector3.up * 1.2f);
+				if (screenPosition.z <= 0f
+					|| RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvasRect, screenPosition, null, out Vector2 localPosition) == false)
+				{
+					SetVisible(false);
+					return;
+				}
+
+				if (_title != null)
+				{
+					string side = pawn.IsMine ? "ALLY" : "ENEMY";
+					string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "PAWN";
+					_title.text = $"{side} · {FormatIdentifier(pawnClass)}";
+				}
+
+				if (_body != null)
+					_body.text = BuildInfoText(pawn);
+
+				PositionNearPawn(localPosition);
+				SetVisible(true);
+			}
+
+			void PositionNearPawn(Vector2 pawnPosition)
+			{
+				Vector2 size = _rect.rect.size;
+				Rect canvasBounds = _canvasRect.rect;
+				const float margin = 10f;
+				const float actionBarClearance = 100f;
+				float minX = canvasBounds.xMin + margin;
+				float maxX = canvasBounds.xMax - size.x - margin;
+				float minY = canvasBounds.yMin + actionBarClearance;
+				float maxY = canvasBounds.yMax - size.y - margin;
+				_rect.anchoredPosition = new Vector2(
+					Mathf.Clamp(pawnPosition.x + 24f, minX, maxX),
+					Mathf.Clamp(pawnPosition.y + 18f, minY, maxY));
+			}
+
+			void SetVisible(bool visible)
+			{
+				if (_root != null && _root.activeSelf != visible)
+					_root.SetActive(visible);
+			}
+
+			static string BuildInfoText(BattlePawn pawn)
+			{
+				string hp = FormatValue(pawn.Hp, pawn.MaxHp);
+				string armor = FormatValue(pawn.Armor, pawn.MaxArmor);
+				string shield = FormatValue(pawn.ShieldCurrent, pawn.ShieldMax);
+				string resource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resourceState, out _)
+					? $"{resourceName}: {FormatValue(resourceState.Value, resourceState.MaxValue)}"
+					: "Resource: -";
+				string morale = TryGetMoraleResource(pawn, out BattlePawn.ResourceState moraleState)
+					? $"Morale: {FormatValue(moraleState.Value, moraleState.MaxValue)}"
+					: "Morale: -";
+				string state = pawn.IsActionBlocked ? "Action blocked" : pawn.IsMine && pawn.CanMove == false ? "Movement used" : "Ready";
+				return $"{pawn.Role}  ·  {pawn.Axial}\nHP: {hp}\nArmor: {armor}    Shield: {shield}\n{resource}\n{morale}\nState: {state}\nStatus: {FormatStatuses(pawn.Statuses)}";
+			}
+
+			static string FormatIdentifier(string value)
+			{
+				return string.IsNullOrWhiteSpace(value) ? "PAWN" : value.Replace('_', ' ');
+			}
 		}
 
 		sealed class PawnPanelView

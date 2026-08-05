@@ -36,6 +36,7 @@ namespace Field
 		bool _subscribed;
 		bool _waiting;
 		bool _locked;
+		bool _isDebugBattleSelection;
 
 		public static bool IsBlockingInput => _instance != null && _instance._overlayRoot != null && _instance._overlayRoot.activeSelf;
 
@@ -93,6 +94,7 @@ namespace Field
 			_buttons.Clear();
 			_waiting = false;
 			_locked = false;
+			_isDebugBattleSelection = packet.TargetPlayerId == 0;
 			ClearOptions();
 			CreateOptions(ClassGroup.Suen, "수엔", packet.SuenOptions);
 			CreateOptions(ClassGroup.Beige, "베이지", packet.BeigeOptions);
@@ -116,6 +118,12 @@ namespace Field
 			}
 			else
 			{
+				if (_isDebugBattleSelection)
+				{
+					Hide();
+					return;
+				}
+
 				_waiting = packet.WaitingForOpponent;
 				_locked = packet.WaitingForOpponent == false;
 				_status.text = _waiting
@@ -192,6 +200,7 @@ namespace Field
 
 		void Hide()
 		{
+			_isDebugBattleSelection = false;
 			if (_overlayRoot != null)
 				_overlayRoot.SetActive(false);
 		}
