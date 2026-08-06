@@ -410,88 +410,61 @@ namespace Battle
 		}
 	}
 
-	// A lightweight, code-driven burst for server-reported fire-overlay damage.
-	// It intentionally has no attacker or skill dependency: the tile itself is
-	// the damage source.
 	[DisallowMultipleComponent]
 	public sealed class BattleFireTileEffectPresenter : MonoBehaviour
 	{
-		const int FlameSortingOrder = 30;
-		const float DurationSeconds = 0.42f;
-		static Sprite _flameSprite;
+		const string FireTileDamageEffectAddress = "Effect_FireTileDamage";
+		GameObject _prefab;
+		AsyncOperationHandle<GameObject> _prefabHandle;
+		bool _isLoading;
+
+		public void Preload()
+		{
+			if (_prefab != null || _isLoading)
+				return;
+
+			StartCoroutine(LoadPrefab());
+		}
 
 		public void Play(Vector3 worldPosition)
 		{
-			StartCoroutine(PlayRoutine(worldPosition));
-		}
-
-		IEnumerator PlayRoutine(Vector3 worldPosition)
-		{
-			GameObject root = new GameObject("FireTileDamageEffect");
-			root.transform.SetParent(transform, false);
-			root.transform.position = worldPosition + Vector3.up * 0.1f;
-
-			const int flameCount = 6;
-			SpriteRenderer[] flames = new SpriteRenderer[flameCount];
-			Vector3[] starts = new Vector3[flameCount];
-			Color[] colors = new Color[flameCount];
-			for (int i = 0; i < flameCount; i++)
+			if (_prefab == null)
 			{
-				float angle = i * Mathf.PI * 2f / flameCount;
-				float radius = i % 2 == 0 ? 0.28f : 0.14f;
-				starts[i] = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius * 0.45f, 0f);
-				colors[i] = i % 2 == 0
-					? new Color(1f, 0.24f, 0.04f, 0.9f)
-					: new Color(1f, 0.78f, 0.12f, 0.95f);
-
-				GameObject flameObject = new GameObject($"FireBurst_{i}", typeof(SpriteRenderer));
-				flameObject.transform.SetParent(root.transform, false);
-				flameObject.transform.localPosition = starts[i];
-				flameObject.transform.localRotation = Quaternion.Euler(0f, 0f, i * 60f + 45f);
-				flameObject.transform.localScale = new Vector3(0.22f, 0.34f, 1f);
-				SpriteRenderer renderer = flameObject.GetComponent<SpriteRenderer>();
-				renderer.sprite = GetFlameSprite();
-				renderer.color = colors[i];
-				renderer.sortingOrder = FlameSortingOrder;
-				flames[i] = renderer;
+				Preload();
+				BattleFireTileDamageEffect.PlayFallback(transform, worldPosition);
+				return;
 			}
 
-			float elapsed = 0f;
-			while (elapsed < DurationSeconds)
-			{
-				elapsed += Time.unscaledDeltaTime;
-				float ratio = Mathf.Clamp01(elapsed / DurationSeconds);
-				for (int i = 0; i < flames.Length; i++)
-				{
-					SpriteRenderer flame = flames[i];
-					if (flame == null)
-						continue;
+			GameObject instance = Instantiate(_prefab, worldPosition, Quaternion.identity, transform);
+			BattleFireTileDamageEffect effect = instance.GetComponent<BattleFireTileDamageEffect>();
+			if (effect != null)
+				effect.Play();
+			else
+				Destroy(instance);
+		}
 
-					flame.transform.localPosition = starts[i] + Vector3.up * (0.45f * ratio);
-					flame.transform.localScale = Vector3.Lerp(new Vector3(0.22f, 0.34f, 1f), new Vector3(0.05f, 0.52f, 1f), ratio);
-					Color color = colors[i];
-					color.a *= 1f - ratio;
-					flame.color = color;
-				}
-
+		IEnumerator LoadPrefab()
+		{
+			_isLoading = true;
+			_prefabHandle = Addressables.LoadAssetAsync<GameObject>(FireTileDamageEffectAddress);
+			while (_prefabHandle.IsDone == false)
 				yield return null;
+
+			if (_prefabHandle.Status == AsyncOperationStatus.Succeeded)
+				_prefab = _prefabHandle.Result;
+			else if (_prefabHandle.IsValid())
+			{
+				Addressables.Release(_prefabHandle);
+				Debug.LogWarning($"Failed to load fire-tile damage effect prefab. address={FireTileDamageEffectAddress}");
 			}
 
-			Destroy(root);
+			_isLoading = false;
 		}
 
-		static Sprite GetFlameSprite()
+		void OnDestroy()
 		{
-			if (_flameSprite != null)
-				return _flameSprite;
-
-			Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-			texture.SetPixels(new[] { Color.white, Color.white, Color.white, Color.white });
-			texture.Apply(false, true);
-			texture.hideFlags = HideFlags.HideAndDontSave;
-			_flameSprite = Sprite.Create(texture, new Rect(0f, 0f, 2f, 2f), new Vector2(0.5f, 0.5f), 2f);
-			_flameSprite.hideFlags = HideFlags.HideAndDontSave;
-			return _flameSprite;
+			if (_prefabHandle.IsValid())
+				Addressables.Release(_prefabHandle);
 		}
 	}
 }

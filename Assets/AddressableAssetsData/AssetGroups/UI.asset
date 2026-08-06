@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 13e676e0aeaaafc4d878556badfecc3e
   m_SerializeEntries:
+  - m_GUID: 6cc405ffd37c4210bbc14a1e25e562b9
+    m_Address: Effect_FireTileDamage
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 47f2a526258f4da48aa13b2b78ee2ac1
     m_Address: Cursor
     m_ReadOnly: 0

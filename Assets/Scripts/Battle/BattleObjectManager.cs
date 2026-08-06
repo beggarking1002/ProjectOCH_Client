@@ -158,6 +158,7 @@ namespace Battle
 			_projectilePresenter = GetComponent<BattleProjectilePresenter>() ?? gameObject.AddComponent<BattleProjectilePresenter>();
 			_skillEffectPresenter = GetComponent<BattleSpriteEffectPresenter>() ?? gameObject.AddComponent<BattleSpriteEffectPresenter>();
 			_fireTileEffectPresenter = GetComponent<BattleFireTileEffectPresenter>() ?? gameObject.AddComponent<BattleFireTileEffectPresenter>();
+			_fireTileEffectPresenter.Preload();
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
