@@ -15,10 +15,23 @@ namespace Field
 		[Header("Keyboard Pan")]
 		[SerializeField] bool keyboardPanEnabled = true;
 		[SerializeField, Min(0f)] float keyboardPanSpeed = 7f;
+		[Header("Zoom")]
+		[SerializeField] bool zoomEnabled = true;
+		[SerializeField, Min(0.01f)] float zoomStepPerWheelNotch = 0.8f;
+		[SerializeField, Min(0.01f)] float minOrthographicSize = 3f;
+		[SerializeField, Min(0.01f)] float maxOrthographicSize = 12f;
+		[SerializeField, Min(1f)] float minPerspectiveFieldOfView = 20f;
+		[SerializeField, Min(1f)] float maxPerspectiveFieldOfView = 70f;
 
 		Vector3 _manualPanOffset;
+		Camera _camera;
 
 		public Transform Target => target;
+
+		void Awake()
+		{
+			_camera = GetComponent<Camera>();
+		}
 
 		void Start()
 		{
@@ -31,6 +44,10 @@ namespace Field
 			if (target == null)
 				if (findFieldPawnOnStart)
 					FindFieldPawnTarget();
+
+			if (WasFocusKeyPressed())
+				FocusTarget();
+			ApplyZoomInput();
 
 			Vector3 keyboardPanDelta = GetKeyboardPanDelta();
 			if (target == null)
@@ -67,6 +84,23 @@ namespace Field
 		public void ResetManualPan()
 		{
 			_manualPanOffset = Vector3.zero;
+		}
+
+		public void FocusTarget()
+		{
+			if (target == null && findFieldPawnOnStart)
+				FindFieldPawnTarget();
+
+			FocusOn(target);
+		}
+
+		public void FocusOn(Transform focusTarget)
+		{
+			if (focusTarget == null)
+				return;
+
+			_manualPanOffset = Vector3.zero;
+			transform.position = focusTarget.position + offset;
 		}
 
 		public void ConfigureFreePan()
@@ -112,6 +146,46 @@ namespace Field
 
 			direction.Normalize();
 			return (Vector3)(direction * keyboardPanSpeed * Time.deltaTime);
+		}
+
+		void ApplyZoomInput()
+		{
+			if (zoomEnabled == false || Application.isFocused == false || _camera == null)
+				return;
+
+			float scrollY = GetMouseScrollY();
+			if (Mathf.Approximately(scrollY, 0f))
+				return;
+
+			float zoomDelta = Mathf.Clamp(scrollY / 120f, -3f, 3f) * zoomStepPerWheelNotch;
+			if (_camera.orthographic)
+				_camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - zoomDelta, minOrthographicSize, maxOrthographicSize);
+			else
+				_camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView - zoomDelta, minPerspectiveFieldOfView, maxPerspectiveFieldOfView);
+		}
+
+		static bool WasFocusKeyPressed()
+		{
+#if ENABLE_INPUT_SYSTEM
+			Keyboard keyboard = Keyboard.current;
+			return keyboard != null && keyboard.spaceKey.wasPressedThisFrame;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			return Input.GetKeyDown(KeyCode.Space);
+#else
+			return false;
+#endif
+		}
+
+		static float GetMouseScrollY()
+		{
+#if ENABLE_INPUT_SYSTEM
+			Mouse mouse = Mouse.current;
+			return mouse != null ? mouse.scroll.ReadValue().y : 0f;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			return Input.mouseScrollDelta.y * 120f;
+#else
+			return 0f;
+#endif
 		}
 
 		void FindFieldPawnTarget()

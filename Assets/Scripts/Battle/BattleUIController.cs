@@ -396,7 +396,7 @@ namespace Battle
 			try
 			{
 				_turnQueueView?.Dispose();
-				_turnQueueView = new BattleTurnQueueView(this, turnQueue, ResolvePawnClassForPortrait);
+				_turnQueueView = new BattleTurnQueueView(this, turnQueue, ResolvePawnClassForPortrait, ResolvePawnIsMineForPortrait);
 				if (_objectManager != null && _objectManager.UpcomingTurnPawnIds.Count > 0)
 				{
 					_turnQueueView.Apply(new BattleTurnQueueUpdate(
@@ -423,6 +423,14 @@ namespace Battle
 			}
 
 			return PawnClass.None;
+		}
+
+		bool? ResolvePawnIsMineForPortrait(ulong pawnId)
+		{
+			if (_objectManager != null && _objectManager.TryGetPawn(pawnId, out BattlePawn pawn))
+				return pawn.IsMine;
+
+			return null;
 		}
 
 		void OnTurnQueueUpdated(BattleTurnQueueUpdate update)

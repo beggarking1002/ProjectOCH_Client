@@ -315,7 +315,7 @@ namespace Battle
 			RefreshStatusWorldUi();
 		}
 
-		public void ApplyDelta(Protocol.BattlePawnDelta delta)
+		public void ApplyDelta(Protocol.BattlePawnDelta delta, bool snapPosition = false)
 		{
 			if (delta == null || delta.PawnId != PawnId)
 				return;
@@ -345,11 +345,15 @@ namespace Battle
 			ReplaceInfoStateCollections(delta.Resources, delta.Barriers, delta.Statuses, delta.Auras);
 
 			ApplyFacingDirection(FacingDirection);
-			// Position changes, including knockback and teleport, are delivered in the
-			// authoritative pawn delta. Keep the old axial until MoveToAxial starts so
-			// every server-driven displacement receives the normal movement animation.
+			// Position changes are normally presented as a movement. Teleport skills opt
+			// into a snap so their authoritative position change is instantaneous.
 			if (hasMoved)
-				MoveToAxial(targetAxial);
+			{
+				if (snapPosition)
+					SetAxial(targetAxial);
+				else
+					MoveToAxial(targetAxial);
+			}
 			else if (hasAxialDelta)
 				SetAxialState(targetAxial);
 			RefreshStatusWorldUi();

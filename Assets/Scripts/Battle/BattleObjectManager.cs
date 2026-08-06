@@ -299,8 +299,36 @@ namespace Battle
 
 		void Update()
 		{
+			HandleCameraFocusInput();
 			HandleMouseInput();
 			RefreshTargetPreview();
+		}
+
+		void HandleCameraFocusInput()
+		{
+			if (WasCameraFocusKeyPressed() == false
+				|| _currentTurnPawnId == 0
+				|| _pawns.TryGetValue(_currentTurnPawnId, out BattlePawn currentTurnPawn) == false
+				|| currentTurnPawn == null)
+			{
+				return;
+			}
+
+			Camera camera = Camera.main;
+			CameraController controller = camera != null ? camera.GetComponent<CameraController>() : null;
+			controller?.FocusOn(currentTurnPawn.transform);
+		}
+
+		static bool WasCameraFocusKeyPressed()
+		{
+#if ENABLE_INPUT_SYSTEM
+			Keyboard keyboard = Keyboard.current;
+			return keyboard != null && keyboard.spaceKey.wasPressedThisFrame;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			return Input.GetKeyDown(KeyCode.Space);
+#else
+			return false;
+#endif
 		}
 
 		void OnDestroy()
@@ -1770,7 +1798,8 @@ namespace Battle
 				}
 			}
 
-			ApplyPawnDeltas(finalPawnDeltas);
+			ulong instantMovePawnId = IsBeigeFireTeleport(casterPawnId, skillSlot) ? casterPawnId : 0;
+			ApplyPawnDeltas(finalPawnDeltas, instantMovePawnId);
 			PresentZillianMaceStunSuccess(casterPawnId, skillSlot, finalPawnDeltas);
 			_isPlayingSkillActionSequence = false;
 			_skillActionSequenceCoroutine = null;
@@ -2239,7 +2268,14 @@ namespace Battle
 			pawn.ApplyDead(killerPawnId);
 		}
 
-		void ApplyPawnDeltas(IEnumerable<BattlePawnDelta> pawnDeltas)
+		bool IsBeigeFireTeleport(ulong casterPawnId, int skillSlot)
+		{
+			return skillSlot == 5
+				&& _pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn)
+				&& casterPawn is BeigeFire;
+		}
+
+		void ApplyPawnDeltas(IEnumerable<BattlePawnDelta> pawnDeltas, ulong instantMovePawnId = 0)
 		{
 			if (pawnDeltas == null)
 				return;
@@ -2250,7 +2286,7 @@ namespace Battle
 					continue;
 
 				if (_pawns.TryGetValue(delta.PawnId, out BattlePawn pawn))
-					pawn.ApplyDelta(delta);
+					pawn.ApplyDelta(delta, delta.PawnId == instantMovePawnId);
 			}
 		}
 

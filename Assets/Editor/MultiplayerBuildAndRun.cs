@@ -98,7 +98,7 @@ internal static class MultiplayerBuildAndRun
         PlayerSettings.defaultScreenWidth = WindowWidth;
         PlayerSettings.defaultScreenHeight = WindowHeight;
         PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
-        PlayerSettings.resizableWindow = false;
+        PlayerSettings.resizableWindow = true;
         PlayerSettings.runInBackground = true;
 
         if (BuildAddressables() == false)

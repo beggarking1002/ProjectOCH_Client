@@ -26,16 +26,18 @@ namespace Battle
 		readonly MonoBehaviour _host;
 		readonly Transform _root;
 		readonly Func<ulong, PawnClass> _pawnClassResolver;
+		readonly Func<ulong, bool?> _pawnTeamResolver;
 		readonly List<PortraitSlot> _slots = new List<PortraitSlot>(QueueSize);
 		readonly HashSet<ulong> _knownDeadPawnIds = new HashSet<ulong>();
 		readonly List<GameObject> _activeGhosts = new List<GameObject>();
 		Coroutine _animation;
 
-		public BattleTurnQueueView(MonoBehaviour host, Transform root, Func<ulong, PawnClass> pawnClassResolver)
+		public BattleTurnQueueView(MonoBehaviour host, Transform root, Func<ulong, PawnClass> pawnClassResolver, Func<ulong, bool?> pawnTeamResolver)
 		{
 			_host = host;
 			_root = root;
 			_pawnClassResolver = pawnClassResolver;
+			_pawnTeamResolver = pawnTeamResolver;
 			ConfigureSlots();
 		}
 
@@ -106,7 +108,7 @@ namespace Battle
 				bool exists = i < pawnIds.Count && pawnIds[i] != 0;
 				_slots[i].Root.gameObject.SetActive(exists);
 				if (exists)
-					_slots[i].SetPawn(pawnIds[i], ResolvePortraitKey(pawnIds[i]));
+					_slots[i].SetPawn(pawnIds[i], ResolvePortraitKey(pawnIds[i]), ResolveIsMine(pawnIds[i]));
 
 				_slots[i].SetPosition(GetSlotPosition(i));
 				_slots[i].SetAlpha(1f);
@@ -124,7 +126,7 @@ namespace Battle
 
 			_slots.RemoveAt(0);
 			_slots.Add(leaving);
-			leaving.SetPawn(snapshot[QueueSize - 1], ResolvePortraitKey(snapshot[QueueSize - 1]));
+			leaving.SetPawn(snapshot[QueueSize - 1], ResolvePortraitKey(snapshot[QueueSize - 1]), ResolveIsMine(snapshot[QueueSize - 1]));
 			leaving.Root.gameObject.SetActive(true);
 			Vector2 enteringPosition = GetSlotPosition(QueueSize - 1) + new Vector2(PortraitWidth + PortraitSpacing, 0f);
 			leaving.SetPosition(enteringPosition);
@@ -183,7 +185,7 @@ namespace Battle
 					slot = reusableSlots[0];
 					reusableSlots.RemoveAt(0);
 					nextSlots[i] = slot;
-					slot.SetPawn(targetPawnId, ResolvePortraitKey(targetPawnId));
+					slot.SetPawn(targetPawnId, ResolvePortraitKey(targetPawnId), ResolveIsMine(targetPawnId));
 					slot.Root.gameObject.SetActive(targetPawnId != 0);
 					Vector2 enteringPosition = GetSlotPosition(QueueSize - 1) + new Vector2(PortraitWidth + PortraitSpacing, 0f);
 					slot.SetPosition(enteringPosition);
@@ -315,6 +317,11 @@ namespace Battle
 			}
 		}
 
+		bool? ResolveIsMine(ulong pawnId)
+		{
+			return _pawnTeamResolver != null ? _pawnTeamResolver(pawnId) : null;
+		}
+
 		static Transform FindDeepChild(Transform parent, string childName)
 		{
 			if (parent == null)
@@ -335,6 +342,7 @@ namespace Battle
 		sealed class PortraitSlot
 		{
 			readonly Image _portraitImage;
+			readonly List<Image> _frameImages = new List<Image>();
 			readonly CanvasGroup _canvasGroup;
 			int _spriteRequestVersion;
 
@@ -348,6 +356,11 @@ namespace Battle
 				_portraitImage = transform.GetComponent<Image>();
 				_canvasGroup = transform.GetComponent<CanvasGroup>() ?? transform.gameObject.AddComponent<CanvasGroup>();
 				_canvasGroup.blocksRaycasts = false;
+				foreach (Image image in transform.GetComponentsInChildren<Image>(true))
+				{
+					if (image != null && image != _portraitImage)
+						_frameImages.Add(image);
+				}
 			}
 
 			public void Configure(float width, float height)
@@ -379,9 +392,10 @@ namespace Battle
 				}
 			}
 
-			public void SetPawn(ulong pawnId, string portraitKey)
+			public void SetPawn(ulong pawnId, string portraitKey, bool? isMine)
 			{
 				PawnId = pawnId;
+				SetTeamBorderColor(isMine);
 				int requestVersion = ++_spriteRequestVersion;
 				if (_portraitImage == null)
 					return;
@@ -395,6 +409,18 @@ namespace Battle
 					return;
 
 				_ = LoadSpriteAsync(portraitKey, requestVersion);
+			}
+
+			void SetTeamBorderColor(bool? isMine)
+			{
+				Color color = isMine.HasValue
+					? isMine.Value ? new Color(0.20f, 0.62f, 1f, 1f) : new Color(0.94f, 0.23f, 0.20f, 1f)
+					: new Color(0.78f, 0.67f, 0.40f, 1f);
+				foreach (Image frame in _frameImages)
+				{
+					if (frame != null)
+						frame.color = color;
+				}
 			}
 
 			async System.Threading.Tasks.Task LoadSpriteAsync(string portraitKey, int requestVersion)
