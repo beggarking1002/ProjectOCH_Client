@@ -58,8 +58,6 @@ namespace Battle
 		Color _turnExitNormalColor = Color.white;
 		Text _turnPanelText;
 		Text _tileInfoText;
-		PawnPanelView _selectedPawnPanel;
-		PawnPanelView _enemyPawnPanel;
 		HoverPawnInfoView _hoverPawnInfo;
 		BattleTurnQueueView _turnQueueView;
 		Image _currentTurnPortraitImage;
@@ -471,8 +469,6 @@ namespace Battle
 		{
 			_turnPanelText = CreateOrGetPanelText(root, "TurnPanel", "TurnPanel_StateText", 14);
 			_tileInfoText = CreateOrGetPanelText(root, "TileInfo", "TileInfo_StateText", 13);
-			_selectedPawnPanel = CreateOrGetPawnPanelView(root, "Left_SelectedPawnPanel", "SelectedPawn_StateText", "SelectedPawn_StatusBars", 13);
-			_enemyPawnPanel = CreateOrGetPawnPanelView(root, "Right_EnemyPawnPanel", "EnemyPawn_StateText", "EnemyPawn_StatusBars", 13);
 			_hoverPawnInfo = CreateOrGetHoverPawnInfo(root);
 		}
 
@@ -967,7 +963,6 @@ namespace Battle
 
 			AxialCoord hoveredAxial = default;
 			bool hasHoveredTile = TryGetHoveredAxial(out hoveredAxial);
-			BattlePawn selectedPawn = TryGetCurrentTurnPawn(out BattlePawn currentTurnPawn) ? currentTurnPawn : null;
 			BattlePawn hoveredPawn = null;
 			if (hasHoveredTile)
 				_objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out hoveredPawn);
@@ -978,14 +973,6 @@ namespace Battle
 				_tileInfoText.text = string.IsNullOrWhiteSpace(actionTooltip)
 					? BuildTileInfoText(hasHoveredTile, hoveredAxial)
 					: actionTooltip;
-			}
-
-			if (_selectedPawnPanel != null)
-				_selectedPawnPanel.SetPawn("Selected", selectedPawn);
-
-			if (_enemyPawnPanel != null)
-			{
-				_enemyPawnPanel.SetPawn("Target", hoveredPawn != null && hoveredPawn.IsMine == false ? hoveredPawn : null);
 			}
 
 			if (_hoverPawnInfo != null)
@@ -1371,26 +1358,6 @@ namespace Battle
 			return string.Join(" ", parts);
 		}
 
-		static string BuildPawnText(string title, BattlePawn pawn)
-		{
-			if (pawn == null)
-				return $"{title}\nPawn: -\nAxial: -\nHP: -\nArmor: -";
-
-			string side = pawn.IsMine ? "Mine" : "Enemy";
-			string hp = pawn.MaxHp > 0 ? $"{pawn.Hp}/{pawn.MaxHp}" : pawn.Hp.ToString();
-			string armor = pawn.MaxArmor > 0 ? $"{pawn.Armor}/{pawn.MaxArmor}" : pawn.Armor.ToString();
-			string shield = pawn.ShieldMax > 0 ? $"{pawn.ShieldCurrent}/{pawn.ShieldMax}" : pawn.ShieldCurrent.ToString();
-			string resource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resourceState, out _)
-				? $"{resourceName} {FormatValue(resourceState.Value, resourceState.MaxValue)}"
-				: "-";
-			string morale = TryGetMoraleResource(pawn, out BattlePawn.ResourceState moraleState)
-				? FormatValue(moraleState.Value, moraleState.MaxValue)
-				: "-";
-			string pawnClass = pawn.Info != null ? pawn.Info.PawnClass.ToString() : "Debug";
-			string flags = $"{(pawn.CanMove ? "Move" : "NoMove")}, {(pawn.IsActionBlocked ? "ActionBlocked" : "ActionReady")}, {(pawn.UsedNormalSkillThisTurn ? "NormalUsed" : "NormalReady")}, {(pawn.UsedSubActionThisTurn ? "SubUsed" : "SubReady")}, {(pawn.UsedUltimate ? "UltUsed" : "UltReady")}";
-			return $"{title}\nPawn: {pawn.PawnId}\nSide: {side}\nClass: {pawnClass}\nRole: {pawn.Role}\nAxial: {pawn.Axial}\nFacing: {pawn.FacingDirection}\nHP: {hp}\nShield: {shield}\nArmor: {armor}\nResource: {resource}\nMorale: {morale}\nStatus: {FormatStatuses(pawn.Statuses)}\nState: {flags}";
-		}
-
 		static bool TryGetPrimaryResource(BattlePawn pawn, out string name, out BattlePawn.ResourceState state, out Color color)
 		{
 			name = string.Empty;
@@ -1687,194 +1654,6 @@ namespace Battle
 			return text;
 		}
 
-		static PawnPanelView CreateOrGetPawnPanelView(Transform root, string panelName, string textName, string barsName, int fontSize)
-		{
-			Transform panel = FindDeepChild(root, panelName);
-			if (panel == null)
-			{
-				Debug.LogWarning($"Missing battle UI panel: {panelName}");
-				return null;
-			}
-
-			Text text = CreateOrGetPanelText(panel, textName, fontSize, new Vector2(8f, 122f), new Vector2(-8f, -6f));
-			Transform bars = panel.Find(barsName);
-			RectTransform barsRect;
-			if (bars != null)
-			{
-				barsRect = bars.GetComponent<RectTransform>();
-				if (barsRect == null)
-					barsRect = bars.gameObject.AddComponent<RectTransform>();
-			}
-			else
-			{
-				GameObject barsObject = new GameObject(barsName);
-				barsObject.transform.SetParent(panel, false);
-				barsRect = barsObject.AddComponent<RectTransform>();
-			}
-
-			barsRect.anchorMin = new Vector2(0f, 0f);
-			barsRect.anchorMax = new Vector2(1f, 0f);
-			barsRect.pivot = new Vector2(0.5f, 0f);
-			barsRect.offsetMin = new Vector2(8f, 8f);
-			barsRect.offsetMax = new Vector2(-8f, 116f);
-
-			PanelBarView hpBar = CreateOrGetPanelBar(barsRect, "HpBar", 88f, new Color(0.82f, 0.18f, 0.16f, 1f), true);
-			PanelBarView shieldBar = CreateOrGetPanelBar(barsRect, "ArmorBar", 68f, new Color(0.35f, 0.68f, 1f, 1f), true);
-			PanelBarView resourceBar = CreateOrGetPanelBar(barsRect, "ResourceBar", 48f, new Color(0.34f, 0.88f, 1f, 1f), false);
-			PanelBarView moraleBar = CreateOrGetPanelBar(barsRect, "MoraleBar", 28f, new Color(0.95f, 0.73f, 0.22f, 1f), false);
-			StatusIconStripView statusIcons = CreateOrGetStatusIconStrip(barsRect);
-			return new PawnPanelView(text, hpBar, shieldBar, resourceBar, moraleBar, statusIcons);
-		}
-
-		static StatusIconStripView CreateOrGetStatusIconStrip(RectTransform parent)
-		{
-			Transform existing = parent.Find("StatusIcons");
-			RectTransform rect;
-			if (existing != null)
-			{
-				rect = existing.GetComponent<RectTransform>();
-				if (rect == null)
-					rect = existing.gameObject.AddComponent<RectTransform>();
-			}
-			else
-			{
-				GameObject iconsObject = new GameObject("StatusIcons");
-				iconsObject.layer = parent.gameObject.layer;
-				iconsObject.transform.SetParent(parent, false);
-				rect = iconsObject.AddComponent<RectTransform>();
-			}
-
-			rect.anchorMin = new Vector2(0f, 0f);
-			rect.anchorMax = new Vector2(1f, 0f);
-			rect.pivot = new Vector2(0.5f, 0f);
-			rect.offsetMin = new Vector2(0f, 2f);
-			rect.offsetMax = new Vector2(0f, 24f);
-			return new StatusIconStripView(rect);
-		}
-
-		static PanelBarView CreateOrGetPanelBar(RectTransform parent, string name, float bottom, Color fillColor, bool preserveExistingStyle)
-		{
-			Transform existing = parent.Find(name);
-			RectTransform trackRect;
-			Image trackImage;
-			bool createdTrack = existing == null;
-			bool createdTrackImage = false;
-			if (existing != null)
-			{
-				trackRect = existing.GetComponent<RectTransform>();
-				if (trackRect == null)
-					trackRect = existing.gameObject.AddComponent<RectTransform>();
-
-				trackImage = existing.GetComponent<Image>();
-				if (trackImage == null)
-				{
-					trackImage = existing.gameObject.AddComponent<Image>();
-					createdTrackImage = true;
-				}
-			}
-			else
-			{
-				GameObject trackObject = new GameObject(name);
-				trackObject.transform.SetParent(parent, false);
-				trackRect = trackObject.AddComponent<RectTransform>();
-				trackImage = trackObject.AddComponent<Image>();
-			}
-
-			trackRect.anchorMin = new Vector2(0f, 0f);
-			trackRect.anchorMax = new Vector2(1f, 0f);
-			trackRect.pivot = new Vector2(0.5f, 0f);
-			trackRect.offsetMin = new Vector2(0f, bottom);
-			trackRect.offsetMax = new Vector2(0f, bottom + 12f);
-			if (createdTrack || createdTrackImage || preserveExistingStyle == false)
-				trackImage.color = new Color(0.02f, 0.025f, 0.03f, 0.78f);
-
-			trackImage.raycastTarget = false;
-
-			Transform fill = existing != null ? existing.Find("Fill") : null;
-			RectTransform fillRect;
-			Image fillImage;
-			bool createdFill = fill == null;
-			bool createdFillImage = false;
-			if (fill != null)
-			{
-				fillRect = fill.GetComponent<RectTransform>();
-				if (fillRect == null)
-					fillRect = fill.gameObject.AddComponent<RectTransform>();
-
-				fillImage = fill.GetComponent<Image>();
-				if (fillImage == null)
-				{
-					fillImage = fill.gameObject.AddComponent<Image>();
-					createdFillImage = true;
-				}
-			}
-			else
-			{
-				GameObject fillObject = new GameObject("Fill");
-				fillObject.transform.SetParent(trackRect, false);
-				fillRect = fillObject.AddComponent<RectTransform>();
-				fillImage = fillObject.AddComponent<Image>();
-			}
-
-			fillRect.anchorMin = new Vector2(0f, 0f);
-			fillRect.anchorMax = new Vector2(1f, 1f);
-			fillRect.offsetMin = new Vector2(1f, 1f);
-			fillRect.offsetMax = new Vector2(-1f, -1f);
-			if (createdFill || createdFillImage || preserveExistingStyle == false)
-				fillImage.color = fillColor;
-
-			fillImage.raycastTarget = false;
-			Text valueText = CreateOrGetBarText(trackRect, "ValueText");
-			return new PanelBarView(trackRect.gameObject, fillImage, valueText);
-		}
-
-		static Text CreateOrGetBarText(RectTransform parent, string name)
-		{
-			Transform existing = parent.Find(name);
-			Text text = existing != null ? existing.GetComponent<Text>() : null;
-			RectTransform rect;
-			if (text != null)
-			{
-				rect = text.GetComponent<RectTransform>();
-				if (rect == null)
-					rect = text.gameObject.AddComponent<RectTransform>();
-			}
-			else
-			{
-				GameObject textObject = existing != null ? existing.gameObject : new GameObject(name);
-				textObject.transform.SetParent(parent, false);
-				rect = textObject.GetComponent<RectTransform>();
-				if (rect == null)
-					rect = textObject.AddComponent<RectTransform>();
-
-				text = textObject.GetComponent<Text>();
-				if (text == null)
-					text = textObject.AddComponent<Text>();
-			}
-
-			rect.anchorMin = Vector2.zero;
-			rect.anchorMax = Vector2.one;
-			rect.offsetMin = Vector2.zero;
-			rect.offsetMax = Vector2.zero;
-
-			text.font = GameRoot.UiFont;
-			text.fontSize = 10;
-			text.color = Color.white;
-			text.alignment = TextAnchor.MiddleCenter;
-			text.horizontalOverflow = HorizontalWrapMode.Overflow;
-			text.verticalOverflow = VerticalWrapMode.Truncate;
-			text.raycastTarget = false;
-			return text;
-		}
-
-		static float GetRatio(int value, int maxValue)
-		{
-			if (maxValue <= 0)
-				return value > 0 ? 1f : 0f;
-
-			return Mathf.Clamp01((float)value / maxValue);
-		}
-
 		static string FormatValue(int value, int maxValue)
 		{
 			return maxValue > 0 ? $"{value}/{maxValue}" : value.ToString();
@@ -2121,104 +1900,6 @@ namespace Battle
 			static string FormatIdentifier(string value)
 			{
 				return string.IsNullOrWhiteSpace(value) ? "PAWN" : value.Replace('_', ' ');
-			}
-		}
-
-		sealed class PawnPanelView
-		{
-			readonly Text _text;
-			readonly PanelBarView _hpBar;
-			readonly PanelBarView _shieldBar;
-			readonly PanelBarView _resourceBar;
-			readonly PanelBarView _moraleBar;
-			readonly StatusIconStripView _statusIcons;
-
-			public PawnPanelView(Text text, PanelBarView hpBar, PanelBarView shieldBar, PanelBarView resourceBar, PanelBarView moraleBar, StatusIconStripView statusIcons)
-			{
-				_text = text;
-				_hpBar = hpBar;
-				_shieldBar = shieldBar;
-				_resourceBar = resourceBar;
-				_moraleBar = moraleBar;
-				_statusIcons = statusIcons;
-			}
-
-			public void SetPawn(string title, BattlePawn pawn)
-			{
-				if (_text != null)
-					_text.text = BuildPawnText(title, pawn);
-
-				if (pawn == null)
-				{
-					_hpBar.Set(0f, "HP -");
-					_shieldBar.SetVisible(false);
-					_resourceBar.SetVisible(false);
-					_moraleBar.SetVisible(false);
-					_statusIcons.SetStatuses(null);
-					return;
-				}
-
-				_hpBar.Set(GetRatio(pawn.Hp, pawn.MaxHp), $"HP {FormatValue(pawn.Hp, pawn.MaxHp)}");
-				bool hasShield = pawn.ShieldCurrent > 0 || pawn.ShieldMax > 0;
-				_shieldBar.SetVisible(hasShield);
-				if (hasShield)
-					_shieldBar.Set(GetRatio(pawn.ShieldCurrent, pawn.ShieldMax), $"Shield {FormatValue(pawn.ShieldCurrent, pawn.ShieldMax)}");
-
-				bool hasResource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resource, out Color resourceColor);
-				_resourceBar.SetVisible(hasResource);
-				if (hasResource)
-					_resourceBar.Set(GetRatio(resource.Value, resource.MaxValue), $"{resourceName} {FormatValue(resource.Value, resource.MaxValue)}", resourceColor);
-
-				bool hasMorale = TryGetMoraleResource(pawn, out BattlePawn.ResourceState morale);
-				_moraleBar.SetVisible(hasMorale);
-				if (hasMorale)
-					_moraleBar.Set(GetRatio(morale.Value, morale.MaxValue), $"MORALE {FormatValue(morale.Value, morale.MaxValue)}", new Color(0.95f, 0.73f, 0.22f, 1f));
-
-				_statusIcons.SetStatuses(pawn.Statuses);
-			}
-		}
-
-		sealed class PanelBarView
-		{
-			readonly GameObject _root;
-			readonly Image _fill;
-			readonly Text _valueText;
-
-			public PanelBarView(GameObject root, Image fill, Text valueText)
-			{
-				_root = root;
-				_fill = fill;
-				_valueText = valueText;
-			}
-
-			public void Set(float ratio, string text)
-			{
-				SetVisible(true);
-				SetFill(_fill, ratio);
-				if (_valueText != null)
-					_valueText.text = text;
-			}
-
-			public void Set(float ratio, string text, Color color)
-			{
-				Set(ratio, text);
-				if (_fill != null)
-					_fill.color = color;
-			}
-
-			public void SetVisible(bool visible)
-			{
-				if (_root != null && _root.activeSelf != visible)
-					_root.SetActive(visible);
-			}
-
-			static void SetFill(Image fill, float ratio)
-			{
-				if (fill == null)
-					return;
-
-				RectTransform rect = fill.rectTransform;
-				rect.anchorMax = new Vector2(Mathf.Clamp01(ratio), 1f);
 			}
 		}
 
