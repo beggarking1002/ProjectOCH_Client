@@ -762,12 +762,16 @@ namespace Battle
 			if (showEvade == false && showDamage == false)
 				return;
 
+			bool isFireTileDamage = log.AttackerPawnId == 0
+				&& string.Equals(log.ActionType, "fire_tile", System.StringComparison.OrdinalIgnoreCase);
+
 			Camera camera = Camera.main;
 			if (camera == null)
 				return;
 
 			string value = showEvade
 				? "EVADE"
+				: isFireTileDamage ? $"FIRE\n-{log.Damage}"
 				: log.Damage > 0 ? $"-{log.Damage}" : $"+{-log.Damage}";
 			if (log.IsCounter)
 				value += "\nCOUNTER";
@@ -782,6 +786,7 @@ namespace Battle
 
 			Color color = showEvade
 				? new Color(0.82f, 0.86f, 0.92f, 1f)
+				: isFireTileDamage ? new Color(1f, 0.56f, 0.14f, 1f)
 				: log.IsCritical ? new Color(1f, 0.83f, 0.2f, 1f)
 				: log.IsGuarded || log.IsPerfectGuarded ? new Color(0.42f, 0.74f, 1f, 1f)
 				: new Color(1f, 0.34f, 0.3f, 1f);

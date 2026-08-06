@@ -95,6 +95,7 @@ namespace Battle
 		BattleTargetPreview _targetPreview;
 		BattleProjectilePresenter _projectilePresenter;
 		BattleSpriteEffectPresenter _skillEffectPresenter;
+		BattleFireTileEffectPresenter _fireTileEffectPresenter;
 		bool _hasFireWallStartTarget;
 		ulong _fireWallCasterPawnId;
 		AxialCoord _fireWallStartAxial;
@@ -156,6 +157,7 @@ namespace Battle
 				: null;
 			_projectilePresenter = GetComponent<BattleProjectilePresenter>() ?? gameObject.AddComponent<BattleProjectilePresenter>();
 			_skillEffectPresenter = GetComponent<BattleSpriteEffectPresenter>() ?? gameObject.AddComponent<BattleSpriteEffectPresenter>();
+			_fireTileEffectPresenter = GetComponent<BattleFireTileEffectPresenter>() ?? gameObject.AddComponent<BattleFireTileEffectPresenter>();
 
 			PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
@@ -1625,6 +1627,25 @@ namespace Battle
 				return;
 
 			AxialCoord targetAxial = packet.Target != null ? ToBattleAxial(packet.Target) : pawn.Axial;
+			if (packet.Start != null)
+			{
+				AxialCoord startAxial = ToBattleAxial(packet.Start);
+				if (pawn.Axial.Equals(startAxial) == false)
+					pawn.SetAxial(startAxial);
+			}
+
+			List<AxialCoord> movePath = new List<AxialCoord>();
+			foreach (Protocol.AxialCoord pathStep in packet.Path)
+			{
+				if (pathStep != null)
+					movePath.Add(ToBattleAxial(pathStep));
+			}
+
+			// Older servers do not populate path. Preserve their direct start-to-target
+			// presentation until every server has upgraded.
+			if (movePath.Count == 0)
+				movePath.Add(targetAxial);
+
 			ulong nextTurnPawnId = packet.NextTurnPawnId;
 			ulong appliedStateVersion = _battleStateVersion;
 
@@ -1635,29 +1656,13 @@ namespace Battle
 
 			_isAnimatingMove = true;
 			RefreshTurnIndicators();
-			pawn.MoveToAxial(targetAxial, () =>
-			{
-				_isAnimatingMove = false;
-				if (_battleStateVersion != appliedStateVersion)
-				{
-					RefreshTurnIndicators();
-					return;
-				}
-
-				if (moveLogs.Count > 0)
-				{
-					_isPlayingSkillActionSequence = true;
-					_moveReactionSequenceCoroutine = StartCoroutine(PlayMoveReactionSequence(
-						moveLogs,
-						movePawnDeltas,
-						nextTurnPawnId,
-						appliedStateVersion));
-					return;
-				}
-
-				ApplyPawnDeltas(movePawnDeltas);
-				CompleteMoveResult(nextTurnPawnId);
-			});
+			_moveReactionSequenceCoroutine = StartCoroutine(PlayMovePathAndResolveSequence(
+				pawn,
+				movePath,
+				moveLogs,
+				movePawnDeltas,
+				nextTurnPawnId,
+				appliedStateVersion));
 
 			Debug.Log($"Applied S_BATTLE_MOVE. pawnId={packet.PawnId}, target={targetAxial}, battleStateVersion={_battleStateVersion}, nextTurnPawnId={nextTurnPawnId}");
 		}
@@ -1714,8 +1719,14 @@ namespace Battle
 
 		static bool ShouldSkipSkillAnimation(BattlePawn casterPawn, int skillSlot)
 		{
-			// Only installation and pickup are equipment interactions. When Parvis is
-			// installed, slot 2 changes to Sit Shot and must play its Skill2 gesture.
+			// Equipment interactions do not have a cast gesture. In particular, Axe
+			// pickup must apply its status delta right away so the held-axe sprite
+			// changes without the generic skill presentation delay.
+			if (casterPawn is SuenAxe && skillSlot == 7)
+				return true;
+
+			// When Parvis is installed, slot 2 changes to Sit Shot and must still
+			// play its Skill2 gesture.
 			return casterPawn is SuenParvis parvis
 				&& ((skillSlot == 2 && parvis.IsParvisOff == false) || skillSlot == 7);
 		}
@@ -1749,11 +1760,20 @@ namespace Battle
 		{
 			_isPlayingSkillActionSequence = true;
 			bool didPresentInitiatingSkill = false;
+			List<BattleActionLog> fireTileLogs = new List<BattleActionLog>();
 			for (int i = 0; i < orderedLogs.Count; i++)
 			{
 				BattleActionLog log = orderedLogs[i];
 				if (log == null)
 					continue;
+
+				// Environment damage must be presented after the final pawn deltas: a
+				// charge, push, teleport, or swap may have changed the defender's tile.
+				if (IsFireTileDamageLog(log))
+				{
+					fireTileLogs.Add(log);
+					continue;
+				}
 
 				if (log.IsCounter)
 				{
@@ -1801,6 +1821,7 @@ namespace Battle
 			ulong instantMovePawnId = IsBeigeFireTeleport(casterPawnId, skillSlot) ? casterPawnId : 0;
 			ApplyPawnDeltas(finalPawnDeltas, instantMovePawnId);
 			PresentZillianMaceStunSuccess(casterPawnId, skillSlot, finalPawnDeltas);
+			yield return PresentFireTileDamageSequence(fireTileLogs);
 			_isPlayingSkillActionSequence = false;
 			_skillActionSequenceCoroutine = null;
 		}
@@ -1839,17 +1860,92 @@ namespace Battle
 			return false;
 		}
 
+		IEnumerator PlayMovePathAndResolveSequence(
+			BattlePawn movingPawn,
+			IReadOnlyList<AxialCoord> path,
+			List<BattleActionLog> moveLogs,
+			List<BattlePawnDelta> finalPawnDeltas,
+			ulong nextTurnPawnId,
+			ulong appliedStateVersion)
+		{
+			Queue<BattleActionLog> fireTileLogs = new Queue<BattleActionLog>();
+			List<BattleActionLog> reactionLogs = new List<BattleActionLog>();
+			for (int i = 0; i < moveLogs.Count; i++)
+			{
+				BattleActionLog log = moveLogs[i];
+				if (IsFireTileDamageLog(log))
+					fireTileLogs.Enqueue(log);
+				else
+					reactionLogs.Add(log);
+			}
+
+			for (int i = 0; i < path.Count; i++)
+			{
+				bool stepCompleted = false;
+				AxialCoord step = path[i];
+				movingPawn.MoveToAxial(step, () => stepCompleted = true);
+				while (stepCompleted == false)
+					yield return null;
+
+				// The server supplies one fire_tile log per damaging landing. Use the
+				// replicated overlay only to align that log with the matching path step;
+				// damage values remain entirely server-authoritative.
+				if (fireTileLogs.Count > 0
+					&& _mapGrid != null
+					&& _mapGrid.HasOverlay(step, Protocol.BattleTileOverlayType.Fire))
+				{
+					PresentFireTileDamage(fireTileLogs.Dequeue());
+				}
+			}
+
+			// A stale/missing local overlay must never suppress a server-confirmed
+			// environment hit. Present any unmatched logs at the final landed tile.
+			while (fireTileLogs.Count > 0)
+			{
+				PresentFireTileDamage(fireTileLogs.Dequeue());
+				yield return new WaitForSecondsRealtime(0.1f);
+			}
+
+			_isAnimatingMove = false;
+			if (_battleStateVersion != appliedStateVersion)
+			{
+				RefreshTurnIndicators();
+				_moveReactionSequenceCoroutine = null;
+				yield break;
+			}
+
+			if (reactionLogs.Count > 0)
+			{
+				_isPlayingSkillActionSequence = true;
+				yield return PlayMoveReactionSequence(reactionLogs, finalPawnDeltas, nextTurnPawnId, appliedStateVersion);
+			}
+			else
+			{
+				ApplyPawnDeltas(finalPawnDeltas);
+				CompleteMoveResult(nextTurnPawnId);
+			}
+
+			_moveReactionSequenceCoroutine = null;
+		}
+
 		IEnumerator PlayMoveReactionSequence(
 			List<BattleActionLog> orderedLogs,
 			List<BattlePawnDelta> finalPawnDeltas,
 			ulong nextTurnPawnId,
 			ulong appliedStateVersion)
 		{
+			List<BattleActionLog> fireTileLogs = new List<BattleActionLog>();
 			for (int i = 0; i < orderedLogs.Count; i++)
 			{
 				BattleActionLog log = orderedLogs[i];
 				if (log == null)
 					continue;
+
+				if (IsFireTileDamageLog(log))
+				{
+					fireTileLogs.Add(log);
+					continue;
+				}
 
 				bool isZocReaction = IsZocReactionLog(log) || (i == 0 && log.IsCounter == false);
 				if (isZocReaction)
@@ -1872,11 +1968,11 @@ namespace Battle
 			if (_battleStateVersion == appliedStateVersion)
 			{
 				ApplyPawnDeltas(finalPawnDeltas);
+				yield return PresentFireTileDamageSequence(fireTileLogs);
 				CompleteMoveResult(nextTurnPawnId);
 			}
 
 			_isPlayingSkillActionSequence = false;
-			_moveReactionSequenceCoroutine = null;
 		}
 
 		void TriggerZocReactionPresentation(BattleActionLog log)
@@ -1917,6 +2013,40 @@ namespace Battle
 			return log != null
 				&& string.IsNullOrWhiteSpace(log.ActionType) == false
 				&& log.ActionType.IndexOf("ZOC", System.StringComparison.OrdinalIgnoreCase) >= 0;
+		}
+
+		static bool IsFireTileDamageLog(BattleActionLog log)
+		{
+			return log != null
+				&& log.AttackerPawnId == 0
+				&& string.Equals(log.ActionType, "fire_tile", System.StringComparison.OrdinalIgnoreCase);
+		}
+
+		IEnumerator PresentFireTileDamageSequence(IEnumerable<BattleActionLog> fireTileLogs)
+		{
+			if (fireTileLogs == null)
+				yield break;
+
+			foreach (BattleActionLog log in fireTileLogs)
+			{
+				if (log == null)
+					continue;
+
+				PresentFireTileDamage(log);
+				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
+			}
+		}
+
+		void PresentFireTileDamage(BattleActionLog log)
+		{
+			if (IsFireTileDamageLog(log) == false)
+				return;
+
+			if (_pawns.TryGetValue(log.DefenderPawnId, out BattlePawn defenderPawn) && defenderPawn != null)
+				_fireTileEffectPresenter?.Play(defenderPawn.transform.position);
+
+			ApplyCombatLogPresentation(log);
+			AppendBattleLog(log);
 		}
 
 		void CompleteMoveResult(ulong nextTurnPawnId)
@@ -2372,6 +2502,9 @@ namespace Battle
 
 		static string FormatBattleLog(BattleActionLog log)
 		{
+			if (IsFireTileDamageLog(log))
+				return $"FIRE TILE: ->{log.DefenderPawnId} dmg={log.Damage} hp={log.HpAfter} armor={log.ArmorAfter}";
+
 			string action = string.IsNullOrWhiteSpace(log.ActionType) ? $"Skill{log.SkillSlot}" : log.ActionType;
 			string flags = "";
 			if (log.IsCritical)
