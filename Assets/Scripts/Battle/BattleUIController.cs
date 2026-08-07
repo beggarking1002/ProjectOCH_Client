@@ -26,6 +26,8 @@ namespace Battle
 		const string BattleUiAddress = "BattleSceneUI";
 		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
 		const string BattleResultUiAddress = "BattleResultUI";
+		const string StatIconAddress = "StatIcon";
+		const string StatIconEditorPath = "Assets/@Resources/Art/UI/StatIcon.png";
 		const float BattleResultDelaySeconds = 2f;
 
 		static readonly ActionSlotBinding[] SlotBindings =
@@ -40,6 +42,17 @@ namespace Battle
 			new ActionSlotBinding("ActionSlot_08", BattleActionMode.Move, 8, false),
 		};
 
+		// StatIcon.png has intentional horizontal padding and non-uniform gaps. These
+		// are the exact rects stored by its Unity sprite importer, in row-major order.
+		static readonly Rect[] StatIconRects =
+		{
+			new Rect(152f, 861f, 193f, 205f), new Rect(394f, 861f, 194f, 205f), new Rect(634f, 861f, 189f, 205f), new Rect(867f, 861f, 189f, 206f), new Rect(1104f, 861f, 190f, 205f),
+			new Rect(152f, 650f, 193f, 206f), new Rect(395f, 649f, 192f, 207f), new Rect(634f, 649f, 189f, 207f), new Rect(867f, 649f, 189f, 207f), new Rect(1104f, 649f, 190f, 207f),
+			new Rect(152f, 438f, 193f, 206f), new Rect(395f, 438f, 192f, 206f), new Rect(634f, 438f, 189f, 206f), new Rect(867f, 438f, 189f, 206f), new Rect(1104f, 438f, 190f, 206f),
+			new Rect(152f, 227f, 193f, 207f), new Rect(395f, 227f, 193f, 207f), new Rect(634f, 227f, 189f, 207f), new Rect(867f, 226f, 188f, 208f), new Rect(1104f, 226f, 190f, 207f),
+			new Rect(152f, 15f, 193f, 206f), new Rect(395f, 15f, 192f, 207f), new Rect(634f, 15f, 189f, 207f), new Rect(867f, 15f, 188f, 206f), new Rect(1104f, 15f, 190f, 206f),
+		};
+
 		readonly Button[] _actionButtons = new Button[SlotBindings.Length];
 		readonly Image[] _actionImages = new Image[SlotBindings.Length];
 		readonly Image[] _actionIconImages = new Image[SlotBindings.Length];
@@ -50,6 +63,7 @@ namespace Battle
 		readonly string[] _actionTooltips = new string[SlotBindings.Length];
 		readonly Color[] _normalColors = new Color[SlotBindings.Length];
 		readonly Queue<BattleActionLog> _pendingBattleActionLogs = new Queue<BattleActionLog>();
+		readonly Sprite[] _statIconSprites = new Sprite[25];
 
 		BattleObjectManager _objectManager;
 		BattleGameDataRepository _gameData;
@@ -70,11 +84,14 @@ namespace Battle
 		Button _resultOkButton;
 		AsyncOperationHandle<GameObject> _uiHandle;
 		AsyncOperationHandle<GameObject> _resultUiHandle;
+		AsyncOperationHandle<Texture2D> _statIconTextureHandle;
 		Coroutine _resultCoroutine;
 		Coroutine _battleActionLogPlayback;
 		ulong _battleResultId;
 		bool _hasUiHandle;
 		bool _hasResultUiHandle;
+		bool _hasStatIconTextureHandle;
+		bool _isLoadingStatIcons;
 		bool _isBinding;
 		bool _isLoadingGameData;
 		bool _isLoadingResultOverlay;
@@ -97,7 +114,83 @@ namespace Battle
 			EnsureEventSystem();
 			SubscribeNetwork();
 			await BindOrLoadUiAsync();
+			_ = LoadStatIconAtlasAsync();
 			await LoadGameDataAsync();
+		}
+
+		async Task LoadStatIconAtlasAsync()
+		{
+			if (_isLoadingStatIcons || _hasStatIconTextureHandle)
+				return;
+
+			_isLoadingStatIcons = true;
+			Texture2D texture = null;
+			AsyncOperationHandle<Texture2D> handle = Addressables.LoadAssetAsync<Texture2D>(StatIconAddress);
+			await handle.Task;
+
+			if (this == null)
+			{
+				if (handle.IsValid())
+					Addressables.Release(handle);
+				return;
+			}
+
+			if (handle.Status == AsyncOperationStatus.Succeeded)
+			{
+				_statIconTextureHandle = handle;
+				_hasStatIconTextureHandle = true;
+				texture = handle.Result;
+			}
+			else if (handle.IsValid())
+			{
+				Addressables.Release(handle);
+			}
+
+#if UNITY_EDITOR
+			if (texture == null)
+				texture = AssetDatabase.LoadAssetAtPath<Texture2D>(StatIconEditorPath);
+#endif
+
+			if (texture != null)
+				CreateStatIconSprites(texture);
+			else
+				Debug.LogWarning($"Unable to load stat icon atlas '{StatIconAddress}'.");
+
+			_isLoadingStatIcons = false;
+			_hoverPawnInfo?.RefreshIcons();
+		}
+
+		void CreateStatIconSprites(Texture2D texture)
+		{
+			for (int index = 0; index < _statIconSprites.Length; index++)
+			{
+				if (_statIconSprites[index] != null)
+					Destroy(_statIconSprites[index]);
+
+				_statIconSprites[index] = Sprite.Create(texture, StatIconRects[index], new Vector2(0.5f, 0.5f), 100f);
+			}
+		}
+
+		Sprite GetStatIconSprite(StatIcon icon)
+		{
+			int index = (int)icon;
+			return index >= 0 && index < _statIconSprites.Length ? _statIconSprites[index] : null;
+		}
+
+		void ReleaseStatIconAtlas()
+		{
+			for (int index = 0; index < _statIconSprites.Length; index++)
+			{
+				if (_statIconSprites[index] != null)
+					Destroy(_statIconSprites[index]);
+				_statIconSprites[index] = null;
+			}
+
+			if (_hasStatIconTextureHandle && _statIconTextureHandle.IsValid())
+				Addressables.Release(_statIconTextureHandle);
+
+			_hasStatIconTextureHandle = false;
+			_statIconTextureHandle = default;
 		}
 
 		void Update()
@@ -115,6 +208,7 @@ namespace Battle
 			if (_battleActionLogPlayback != null)
 				StopCoroutine(_battleActionLogPlayback);
 
+			ReleaseStatIconAtlas();
 			ReleaseResultOverlayHandle();
 
 			if (_hasUiHandle && _uiHandle.IsValid())
@@ -1733,7 +1827,7 @@ namespace Battle
 #endif
 		}
 
-		static HoverPawnInfoView CreateOrGetHoverPawnInfo(Transform root)
+		HoverPawnInfoView CreateOrGetHoverPawnInfo(Transform root)
 		{
 			if (root == null)
 				return null;
@@ -1766,29 +1860,44 @@ namespace Battle
 			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
 			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
 			panelRect.pivot = Vector2.zero;
-			panelRect.sizeDelta = new Vector2(255f, 188f);
+			panelRect.sizeDelta = new Vector2(286f, 250f);
 			background.color = new Color(0.10f, 0.075f, 0.035f, 0.94f);
 			background.raycastTarget = false;
 			panelObject.transform.SetAsLastSibling();
 
 			Text title = CreateOrGetHoverPawnText(panelObject.transform, "Title", 16, TextAnchor.MiddleLeft);
 			RectTransform titleRect = title.rectTransform;
-			titleRect.anchorMin = new Vector2(0f, 0.75f);
+			titleRect.anchorMin = new Vector2(0f, 0.84f);
 			titleRect.anchorMax = new Vector2(1f, 1f);
 			titleRect.offsetMin = new Vector2(12f, 2f);
 			titleRect.offsetMax = new Vector2(-12f, -6f);
 			title.color = new Color(0.97f, 0.84f, 0.48f, 1f);
 
+			Transform statsRoot = panelObject.transform.Find("Stats");
+			if (statsRoot == null)
+			{
+				GameObject statsObject = new GameObject("Stats", typeof(RectTransform));
+				statsObject.layer = panelObject.layer;
+				statsObject.transform.SetParent(panelObject.transform, false);
+				statsRoot = statsObject.transform;
+			}
+
+			RectTransform statsRect = statsRoot as RectTransform;
+			statsRect.anchorMin = new Vector2(0f, 0.30f);
+			statsRect.anchorMax = new Vector2(1f, 0.84f);
+			statsRect.offsetMin = new Vector2(10f, 0f);
+			statsRect.offsetMax = new Vector2(-10f, -2f);
+
 			Text body = CreateOrGetHoverPawnText(panelObject.transform, "Body", 12, TextAnchor.UpperLeft);
 			RectTransform bodyRect = body.rectTransform;
 			bodyRect.anchorMin = Vector2.zero;
-			bodyRect.anchorMax = new Vector2(1f, 0.76f);
+			bodyRect.anchorMax = new Vector2(1f, 0.30f);
 			bodyRect.offsetMin = new Vector2(12f, 10f);
 			bodyRect.offsetMax = new Vector2(-12f, -2f);
 			body.color = new Color(0.92f, 0.90f, 0.82f, 1f);
 
 			panelObject.SetActive(false);
-			return new HoverPawnInfoView(panelObject, panelRect, root as RectTransform, title, body);
+			return new HoverPawnInfoView(panelObject, panelRect, root as RectTransform, title, body, statsRect, GetStatIconSprite);
 		}
 
 		static Text CreateOrGetHoverPawnText(Transform parent, string name, int fontSize, TextAnchor alignment)
@@ -1819,14 +1928,17 @@ namespace Battle
 			readonly RectTransform _canvasRect;
 			readonly Text _title;
 			readonly Text _body;
+			readonly HoverStatGridView _stats;
+			BattlePawn _lastPawn;
 
-			public HoverPawnInfoView(GameObject root, RectTransform rect, RectTransform canvasRect, Text title, Text body)
+			public HoverPawnInfoView(GameObject root, RectTransform rect, RectTransform canvasRect, Text title, Text body, RectTransform statsRoot, System.Func<StatIcon, Sprite> iconResolver)
 			{
 				_root = root;
 				_rect = rect;
 				_canvasRect = canvasRect;
 				_title = title;
 				_body = body;
+				_stats = new HoverStatGridView(statsRoot, iconResolver);
 			}
 
 			public void SetPawn(BattlePawn pawn)
@@ -1836,6 +1948,8 @@ namespace Battle
 					SetVisible(false);
 					return;
 				}
+
+				_lastPawn = pawn;
 
 				Camera camera = Camera.main;
 				if (camera == null)
@@ -1861,9 +1975,16 @@ namespace Battle
 
 				if (_body != null)
 					_body.text = BuildInfoText(pawn);
+				_stats.SetPawn(pawn);
 
 				PositionNearPawn(localPosition);
 				SetVisible(true);
+			}
+
+			public void RefreshIcons()
+			{
+				if (_lastPawn != null)
+					_stats.SetPawn(_lastPawn);
 			}
 
 			void PositionNearPawn(Vector2 pawnPosition)
@@ -1889,22 +2010,155 @@ namespace Battle
 
 			static string BuildInfoText(BattlePawn pawn)
 			{
-				string hp = FormatValue(pawn.Hp, pawn.MaxHp);
-				string armor = FormatValue(pawn.Armor, pawn.MaxArmor);
-				string shield = FormatValue(pawn.ShieldCurrent, pawn.ShieldMax);
 				string resource = TryGetPrimaryResource(pawn, out string resourceName, out BattlePawn.ResourceState resourceState, out _)
 					? $"{resourceName}: {FormatValue(resourceState.Value, resourceState.MaxValue)}"
 					: "Resource: -";
-				string morale = TryGetMoraleResource(pawn, out BattlePawn.ResourceState moraleState)
-					? $"Morale: {FormatValue(moraleState.Value, moraleState.MaxValue)}"
-					: "Morale: -";
 				string state = pawn.IsActionBlocked ? "Action blocked" : pawn.IsMine && pawn.CanMove == false ? "Movement used" : "Ready";
-				return $"{pawn.Role}  ·  {pawn.Axial}\nHP: {hp}\nArmor: {armor}    Shield: {shield}\n{resource}\n{morale}\nState: {state}\nStatus: {FormatStatuses(pawn.Statuses)}";
+				return $"{pawn.Role}  ·  {pawn.Axial}\n{resource}  ·  {state}";
 			}
 
 			static string FormatIdentifier(string value)
 			{
 				return string.IsNullOrWhiteSpace(value) ? "PAWN" : value.Replace('_', ' ');
+			}
+		}
+
+		enum StatIcon
+		{
+			Strength = 0, Dexterity = 1, SpellPower = 2, Defense = 3, Focus = 4,
+			Curse = 5, Hp = 6, Damage = 7, Accuracy = 8, Critical = 9,
+			Morale = 10, Evasion = 11, DamageReduction = 12, MoveRange = 13, AttackRange = 14,
+			TurnOrder = 15, ArmorShield = 16, SkillShield = 17, Bleed = 18, Poison = 19,
+			Burn = 20, Frostbite = 21, Stun = 22, Willpower = 23, Empty = 24,
+		}
+
+		sealed class HoverStatGridView
+		{
+			readonly RectTransform _root;
+			readonly System.Func<StatIcon, Sprite> _iconResolver;
+			readonly List<HoverStatEntry> _entries = new List<HoverStatEntry>();
+			readonly List<HoverStatData> _values = new List<HoverStatData>();
+
+			public HoverStatGridView(RectTransform root, System.Func<StatIcon, Sprite> iconResolver)
+			{
+				_root = root;
+				_iconResolver = iconResolver;
+			}
+
+			public void SetPawn(BattlePawn pawn)
+			{
+				if (_root == null || pawn == null)
+					return;
+
+				_values.Clear();
+				_values.Add(new HoverStatData(StatIcon.Hp, FormatValue(pawn.Hp, pawn.MaxHp)));
+				_values.Add(new HoverStatData(StatIcon.ArmorShield, FormatValue(pawn.Armor, pawn.MaxArmor)));
+				_values.Add(new HoverStatData(StatIcon.SkillShield, pawn.TotalBarrierValue.ToString()));
+				if (TryGetMoraleResource(pawn, out BattlePawn.ResourceState morale))
+					_values.Add(new HoverStatData(StatIcon.Morale, FormatValue(morale.Value, morale.MaxValue)));
+				_values.Add(new HoverStatData(StatIcon.MoveRange, pawn.CanMove ? pawn.MoveRange.ToString() : "0"));
+
+				if (pawn.Statuses != null)
+				{
+					List<string> keys = new List<string>(pawn.Statuses.Keys);
+					keys.Sort(System.StringComparer.Ordinal);
+					for (int index = 0; index < keys.Count; index++)
+					{
+						BattlePawn.StatusState status = pawn.Statuses[keys[index]];
+						if (TryGetStatusIcon(status.StatusKey, out StatIcon icon))
+							_values.Add(new HoverStatData(icon, $"x{status.Stacks} T{status.RemainingOwnerTurns}"));
+					}
+				}
+
+				while (_entries.Count < _values.Count)
+					_entries.Add(CreateEntry(_root, _entries.Count));
+
+				for (int index = 0; index < _entries.Count; index++)
+				{
+					bool visible = index < _values.Count;
+					_entries[index].SetVisible(visible);
+					if (visible)
+						_entries[index].Set(_values[index], _iconResolver != null ? _iconResolver(_values[index].Icon) : null, index, _values.Count);
+				}
+			}
+
+			static bool TryGetStatusIcon(string statusKey, out StatIcon icon)
+			{
+				switch (statusKey?.ToUpperInvariant())
+				{
+					case "BLEED": icon = StatIcon.Bleed; return true;
+					case "POISON": icon = StatIcon.Poison; return true;
+					case "BURN": case "BURNING": icon = StatIcon.Burn; return true;
+					case "FROST": case "FROSTBITE": icon = StatIcon.Frostbite; return true;
+					case "STUN": icon = StatIcon.Stun; return true;
+					default: icon = StatIcon.Empty; return false;
+				}
+			}
+
+			static HoverStatEntry CreateEntry(RectTransform parent, int index)
+			{
+				GameObject entryObject = new GameObject($"Stat_{index}", typeof(RectTransform));
+				entryObject.layer = parent.gameObject.layer;
+				entryObject.transform.SetParent(parent, false);
+				RectTransform entryRect = entryObject.GetComponent<RectTransform>();
+
+				GameObject iconObject = new GameObject("Icon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+				iconObject.layer = entryObject.layer;
+				iconObject.transform.SetParent(entryObject.transform, false);
+				Image icon = iconObject.GetComponent<Image>();
+				icon.raycastTarget = false;
+				icon.preserveAspect = true;
+				icon.rectTransform.anchorMin = new Vector2(0f, 0.15f);
+				icon.rectTransform.anchorMax = new Vector2(0f, 0.85f);
+				icon.rectTransform.sizeDelta = new Vector2(25f, 25f);
+				icon.rectTransform.anchoredPosition = new Vector2(13f, 0f);
+
+				Text value = CreateOrGetHoverPawnText(entryObject.transform, "Value", 11, TextAnchor.MiddleLeft);
+				value.rectTransform.anchorMin = new Vector2(0f, 0f);
+				value.rectTransform.anchorMax = Vector2.one;
+				value.rectTransform.offsetMin = new Vector2(29f, 0f);
+				value.rectTransform.offsetMax = Vector2.zero;
+				value.color = new Color(0.96f, 0.92f, 0.78f, 1f);
+				return new HoverStatEntry(entryObject, entryRect, icon, value);
+			}
+		}
+
+		readonly struct HoverStatData
+		{
+			public readonly StatIcon Icon;
+			public readonly string Value;
+			public HoverStatData(StatIcon icon, string value) { Icon = icon; Value = value; }
+		}
+
+		sealed class HoverStatEntry
+		{
+			readonly GameObject _root;
+			readonly RectTransform _rect;
+			readonly Image _icon;
+			readonly Text _value;
+			public HoverStatEntry(GameObject root, RectTransform rect, Image icon, Text value) { _root = root; _rect = rect; _icon = icon; _value = value; }
+
+			public void Set(HoverStatData data, Sprite sprite, int index, int count)
+			{
+				const int columns = 3;
+				int rows = Mathf.CeilToInt(count / (float)columns);
+				int column = index % columns;
+				int row = index / columns;
+				float width = 1f / columns;
+				float height = 1f / Mathf.Max(1, rows);
+				_rect.anchorMin = new Vector2(column * width, 1f - ((row + 1) * height));
+				_rect.anchorMax = new Vector2((column + 1) * width, 1f - (row * height));
+				_rect.offsetMin = new Vector2(1f, 1f);
+				_rect.offsetMax = new Vector2(-1f, -1f);
+				_icon.sprite = sprite;
+				_icon.enabled = sprite != null;
+				_value.text = data.Value;
+			}
+
+			public void SetVisible(bool visible)
+			{
+				if (_root != null && _root.activeSelf != visible)
+					_root.SetActive(visible);
 			}
 		}
 

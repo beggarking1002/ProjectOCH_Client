@@ -15,8 +15,10 @@ internal static class AddressablesProjectSetup
     private const string GameDataLabel = "GameData";
     private const string SkillIconLabel = "SkillIcon";
     private const string BattleUiAddress = "BattleSceneUI";
+    private const string StatIconAddress = "StatIcon";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
     private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+    private const string StatIconPath = "Assets/@Resources/Art/UI/StatIcon.png";
     private static readonly string[] GameDataCsvPaths =
     {
         "Assets/GameData/ClassKey.csv",
@@ -79,6 +81,7 @@ internal static class AddressablesProjectSetup
         ConfigureDefaultRemoteLoadPath(settings);
         ConfigureRemoteCatalogPaths(settings);
         RegisterUiAddressable(settings, BattleUiPrefabPath, BattleUiAddress);
+        RegisterUiAddressable(settings, StatIconPath, StatIconAddress);
         RegisterGameDataAddressables(settings);
         RegisterSkillIconAddressables(settings);
 
@@ -114,6 +117,7 @@ internal static class AddressablesProjectSetup
             || string.IsNullOrWhiteSpace(remoteLoadPath)
             || remoteLoadPath == "<undefined>"
             || IsMissingAddressable(settings, BattleUiPrefabPath)
+            || IsMissingAddressable(settings, StatIconPath)
             || IsMissingAnyAddressable(settings, GameDataCsvPaths)
             || IsMissingAnySkillIconAddressable(settings);
     }
