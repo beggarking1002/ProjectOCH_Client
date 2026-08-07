@@ -24,6 +24,9 @@ namespace Battle
 		const float MeleePresentationDurationSeconds = 0.42f;
 		const float MeleePresentationDistance = 0.18f;
 		const float MeleePresentationHopHeight = 0.035f;
+		const float DamageFlashOnSeconds = 0.075f;
+		const float DamageFlashOffSeconds = 0.055f;
+		const int DamageFlashCount = 2;
 		const string VisualRootName = "visual";
 		const string ProjectileOriginName = "ProjectileOrigin";
 		const float FallbackProjectileOriginHeight = 0.55f;
@@ -40,7 +43,9 @@ namespace Battle
 		GameObject _turnIndicator;
 		Coroutine _moveCoroutine;
 		Coroutine _combatPresentationCoroutine;
+		Coroutine _damageFlashCoroutine;
 		Vector3 _combatPresentationBaseLocalPosition;
+		Color _baseSpriteColor = Color.white;
 		readonly Dictionary<Protocol.BattleResourceType, ResourceState> _resources = new Dictionary<Protocol.BattleResourceType, ResourceState>();
 		readonly Dictionary<ulong, BarrierState> _barriers = new Dictionary<ulong, BarrierState>();
 		readonly Dictionary<string, StatusState> _statuses = new Dictionary<string, StatusState>(StringComparer.Ordinal);
@@ -114,6 +119,15 @@ namespace Battle
 					_visualRoot.localPosition = _combatPresentationBaseLocalPosition;
 			}
 
+			if (_damageFlashCoroutine != null)
+			{
+				StopCoroutine(_damageFlashCoroutine);
+				_damageFlashCoroutine = null;
+			}
+
+			if (_spriteRenderer != null)
+				_spriteRenderer.color = _baseSpriteColor;
+
 			SetMoving(false);
 			OnPawnDisabled();
 		}
@@ -139,6 +153,7 @@ namespace Battle
 			{
 				_spriteRenderer.sortingOrder = DefaultSortingOrder;
 				_spriteRenderer.color = tint;
+				_baseSpriteColor = tint;
 			}
 
 			EnsureTurnIndicator();
@@ -311,7 +326,9 @@ namespace Battle
 		public void ApplyHp(int hp)
 		{
 			EnsureInfo();
+			int hpBefore = Info.Hp;
 			Info.Hp = hp;
+			TriggerDamageFlashIfNeeded(hpBefore, hp, Info.Armor, Info.Armor);
 			RefreshStatusWorldUi();
 		}
 
@@ -321,11 +338,14 @@ namespace Battle
 				return;
 
 			EnsureInfo();
+			int hpBefore = Info.Hp;
+			int armorBefore = Info.Armor;
 			bool hasAxialDelta = delta.Axial != null;
 			AxialCoord targetAxial = hasAxialDelta ? new AxialCoord(delta.Axial.Q, delta.Axial.R) : Axial;
 			bool hasMoved = hasAxialDelta && Axial.Equals(targetAxial) == false;
 			Info.Hp = delta.Hp;
 			Info.Armor = delta.Armor;
+			TriggerDamageFlashIfNeeded(hpBefore, delta.Hp, armorBefore, delta.Armor);
 			Info.CanMove = delta.CanMove;
 			// Proto scalar fields have no presence bit. Older/partial pawn deltas omit
 			// move_range as 0, which must not erase the range from the entry snapshot.
@@ -387,9 +407,12 @@ namespace Battle
 		public void ApplyCombatLogPresentation(int hpAfter, int armorAfter)
 		{
 			EnsureInfo();
+			int hpBefore = Info.Hp;
+			int armorBefore = Info.Armor;
 			int armorDelta = armorAfter - Info.Armor;
 			Info.Hp = hpAfter;
 			Info.Armor = armorAfter;
+			TriggerDamageFlashIfNeeded(hpBefore, hpAfter, armorBefore, armorAfter);
 			// ShieldCurrent is the value used by the world/panel shield bar. Armor is
 			// part of that aggregate, so reflect every log's ArmorAfter immediately
 			// instead of waiting for the final pawn delta.
@@ -397,6 +420,49 @@ namespace Battle
 				Info.ShieldCurrent = Mathf.Clamp(Info.ShieldCurrent + armorDelta, 0, Info.ShieldMax);
 
 			RefreshStatusWorldUi();
+		}
+
+		void TriggerDamageFlashIfNeeded(int hpBefore, int hpAfter, int armorBefore, int armorAfter)
+		{
+			if (hpAfter >= hpBefore && armorAfter >= armorBefore)
+				return;
+
+			if (_spriteRenderer == null)
+				_spriteRenderer = FindVisualSpriteRenderer();
+
+			if (_spriteRenderer == null || gameObject.activeInHierarchy == false)
+				return;
+
+			if (_damageFlashCoroutine != null)
+			{
+				StopCoroutine(_damageFlashCoroutine);
+				_spriteRenderer.color = _baseSpriteColor;
+			}
+
+			_damageFlashCoroutine = StartCoroutine(PlayDamageFlashRoutine());
+		}
+
+		IEnumerator PlayDamageFlashRoutine()
+		{
+			Color flashColor = new Color(1f, 0.10f, 0.10f, _baseSpriteColor.a);
+			for (int index = 0; index < DamageFlashCount; index++)
+			{
+				if (_spriteRenderer == null)
+					break;
+
+				_spriteRenderer.color = flashColor;
+				yield return new WaitForSecondsRealtime(DamageFlashOnSeconds);
+				if (_spriteRenderer == null)
+					break;
+
+				_spriteRenderer.color = _baseSpriteColor;
+				yield return new WaitForSecondsRealtime(DamageFlashOffSeconds);
+			}
+
+			if (_spriteRenderer != null)
+				_spriteRenderer.color = _baseSpriteColor;
+
+			_damageFlashCoroutine = null;
 		}
 
 		public void PlayEvadePresentation(Vector3 attackerWorldPosition)
