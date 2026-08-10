@@ -409,15 +409,12 @@ namespace Battle
 			EnsureInfo();
 			int hpBefore = Info.Hp;
 			int armorBefore = Info.Armor;
-			int armorDelta = armorAfter - Info.Armor;
 			Info.Hp = hpAfter;
 			Info.Armor = armorAfter;
 			TriggerDamageFlashIfNeeded(hpBefore, hpAfter, armorBefore, armorAfter);
-			// ShieldCurrent is the value used by the world/panel shield bar. Armor is
-			// part of that aggregate, so reflect every log's ArmorAfter immediately
-			// instead of waiting for the final pawn delta.
-			if (Info.ShieldMax > 0)
-				Info.ShieldCurrent = Mathf.Clamp(Info.ShieldCurrent + armorDelta, 0, Info.ShieldMax);
+			// Action logs do not carry shield values. Do not infer the aggregate from
+			// armor changes: shield_current and shield_max are server-authoritative and
+			// are committed only from S_ENTER_BATTLE / BattlePawnDelta.
 
 			RefreshStatusWorldUi();
 		}

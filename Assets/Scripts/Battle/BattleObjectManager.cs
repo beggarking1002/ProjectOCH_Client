@@ -90,6 +90,7 @@ namespace Battle
 		bool _isPlayingSkillActionSequence;
 		bool _isAwaitingOptionalPositionSwap;
 		Coroutine _skillActionSequenceCoroutine;
+		readonly Dictionary<ulong, ulong> _deferredPawnDeaths = new Dictionary<ulong, ulong>();
 		Coroutine _moveReactionSequenceCoroutine;
 		bool _isLoadingGameData;
 		BattleTargetPreview _targetPreview;
@@ -1749,6 +1750,10 @@ namespace Battle
 			// reactions, and evaded attacks all face their intended target.
 			ApplyPawnFacingDirections(finalPawnDeltas);
 
+			// Death packets can arrive in the same network frame as this result. Mark
+			// the presentation as active before the coroutine gets its first update so
+			// a lethal final state never hides a pawn ahead of the exchange animation.
+			_isPlayingSkillActionSequence = true;
 			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, targetAxial, orderedLogs, finalPawnDeltas));
 		}
 
@@ -1823,6 +1828,7 @@ namespace Battle
 			ApplyPawnDeltas(finalPawnDeltas, instantMovePawnId);
 			PresentZillianMaceStunSuccess(casterPawnId, skillSlot, finalPawnDeltas);
 			yield return PresentFireTileDamageSequence(fireTileLogs);
+			ApplyDeferredPawnDeaths();
 			_isPlayingSkillActionSequence = false;
 			_skillActionSequenceCoroutine = null;
 		}
@@ -2379,6 +2385,13 @@ namespace Battle
 				return;
 			}
 
+			if (_isPlayingSkillActionSequence)
+			{
+				_deferredPawnDeaths[packet.PawnId] = packet.KillerPawnId;
+				Debug.Log($"Deferred S_BATTLE_PAWN_DEAD until combat presentation ends. battleId={_battleId}, pawnId={packet.PawnId}, killerPawnId={packet.KillerPawnId}");
+				return;
+			}
+
 			ApplyPawnDead(packet.PawnId, packet.KillerPawnId);
 			BattlePawnDied?.Invoke(packet.PawnId);
 			RefreshTurnIndicators();
@@ -2397,6 +2410,21 @@ namespace Battle
 			}
 
 			pawn.ApplyDead(killerPawnId);
+		}
+
+		void ApplyDeferredPawnDeaths()
+		{
+			if (_deferredPawnDeaths.Count == 0)
+				return;
+
+			foreach (KeyValuePair<ulong, ulong> death in _deferredPawnDeaths)
+			{
+				ApplyPawnDead(death.Key, death.Value);
+				BattlePawnDied?.Invoke(death.Key);
+			}
+
+			_deferredPawnDeaths.Clear();
+			RefreshTurnIndicators();
 		}
 
 		bool IsBeigeFireTeleport(ulong casterPawnId, int skillSlot)
