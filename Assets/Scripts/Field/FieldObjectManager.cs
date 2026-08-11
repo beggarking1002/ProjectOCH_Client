@@ -353,8 +353,13 @@ namespace Field
 				return;
 			}
 
-			bool isMine = packet.ObjectId == _myObjectId;
-			pawn.ApplyServerMove(start, target, packet.DurationMs, snapToStart: isMine == false);
+			// An already spawned remote pawn can still be interpolating toward the
+			// previous server target. Snapping it to this packet's start would visibly
+			// skip that remaining segment on every rapid C_MOVE. Both local and remote
+			// pawns therefore continue from their displayed position at the server's
+			// intended speed. A pawn first seen through S_MOVE is initialized at start
+			// in SpawnPawnForMove below.
+			pawn.ApplyServerMove(start, target, packet.DurationMs, snapToStart: false);
 		}
 
 		async void SpawnOrUpdatePawn(ObjectInfo info, bool isMine)

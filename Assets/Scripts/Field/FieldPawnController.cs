@@ -180,6 +180,21 @@ namespace Field
 			_targetWorldPosition = targetWorldPosition;
 			_serverMoveElapsed = 0f;
 			_serverMoveDuration = durationMs / 1000f;
+			if (snapToStart == false && _serverMoveDuration > 0f)
+			{
+				// The server immediately commits each click. With rapid clicks, its next
+				// start position can therefore be the previous *target* while this local
+				// pawn is still visibly travelling there. Preserve the server's intended
+				// world-units-per-second, but derive the duration from our actual visual
+				// start so restarting the interpolation never produces a speed burst.
+				float serverDistance = Vector3.Distance(startWorldPosition, targetWorldPosition);
+				float visualDistance = Vector3.Distance(_serverMoveStartPosition, _targetWorldPosition);
+				if (serverDistance > arriveDistance && visualDistance > arriveDistance)
+				{
+					float serverSpeed = serverDistance / _serverMoveDuration;
+					_serverMoveDuration = visualDistance / serverSpeed;
+				}
+			}
 			_useServerMoveDuration = _serverMoveDuration > 0f;
 
 			UpdateSpriteDirection(_targetWorldPosition);
