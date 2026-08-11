@@ -1,5 +1,12 @@
 namespace Battle
 {
+	public enum BattleCursorHint
+	{
+		Default,
+		Attack,
+		Assist,
+	}
+
 	public enum BattleActionMode
 	{
 		Move,

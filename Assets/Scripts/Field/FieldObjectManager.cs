@@ -139,6 +139,12 @@ namespace Field
 			return targetPawn != null;
 		}
 
+		// Shared by the global cursor so enemy players are consistently marked in FieldScene.
+		public bool IsPointerOverRemotePawn(Vector2 screenPosition)
+		{
+			return TryGetRemotePawnAt(screenPosition, out _);
+		}
+
 		static float GetClickRadius(FieldPawnController pawn)
 		{
 			Renderer renderer = pawn.GetComponentInChildren<Renderer>();

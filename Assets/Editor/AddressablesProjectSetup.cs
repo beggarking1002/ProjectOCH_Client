@@ -16,9 +16,15 @@ internal static class AddressablesProjectSetup
     private const string SkillIconLabel = "SkillIcon";
     private const string BattleUiAddress = "BattleSceneUI";
     private const string StatIconAddress = "StatIcon";
+    private const string HandCursorAddress = "Cursor_Hand";
+    private const string AttackCursorAddress = "Cursor_Attack";
+    private const string LootCursorAddress = "Cursor_Loot";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
     private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
     private const string StatIconPath = "Assets/@Resources/Art/UI/StatIcon.png";
+    private const string HandCursorPath = "Assets/@Resources/Art/UI/Cursor/Hand.png";
+    private const string AttackCursorPath = "Assets/@Resources/Art/UI/Cursor/Attack.png";
+    private const string LootCursorPath = "Assets/@Resources/Art/UI/Cursor/Loot.png";
     private static readonly string[] GameDataCsvPaths =
     {
         "Assets/GameData/ClassKey.csv",
@@ -82,6 +88,9 @@ internal static class AddressablesProjectSetup
         ConfigureRemoteCatalogPaths(settings);
         RegisterUiAddressable(settings, BattleUiPrefabPath, BattleUiAddress);
         RegisterUiAddressable(settings, StatIconPath, StatIconAddress);
+        RegisterUiAddressable(settings, HandCursorPath, HandCursorAddress);
+        RegisterUiAddressable(settings, AttackCursorPath, AttackCursorAddress);
+        RegisterUiAddressable(settings, LootCursorPath, LootCursorAddress);
         RegisterGameDataAddressables(settings);
         RegisterSkillIconAddressables(settings);
 
@@ -118,6 +127,9 @@ internal static class AddressablesProjectSetup
             || remoteLoadPath == "<undefined>"
             || IsMissingAddressable(settings, BattleUiPrefabPath)
             || IsMissingAddressable(settings, StatIconPath)
+            || IsMissingAddressable(settings, HandCursorPath)
+            || IsMissingAddressable(settings, AttackCursorPath)
+            || IsMissingAddressable(settings, LootCursorPath)
             || IsMissingAnyAddressable(settings, GameDataCsvPaths)
             || IsMissingAnySkillIconAddressable(settings);
     }

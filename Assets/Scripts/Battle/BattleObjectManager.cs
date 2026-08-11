@@ -308,6 +308,79 @@ namespace Battle
 			RefreshTargetPreview();
 		}
 
+		// Shared by the global cursor so battle enemies are marked without adding colliders
+		// solely for pointer detection.
+		public bool TryGetPawnAtScreenPosition(Vector2 screenPosition, out BattlePawn pawn)
+		{
+			pawn = null;
+			if (TryGetAxialAtScreenPosition(screenPosition, out AxialCoord axial) == false)
+				return false;
+
+			return TryGetPawnAtAxial(axial, out _, out pawn);
+		}
+
+		public BattleCursorHint GetCursorHint(Vector2 screenPosition)
+		{
+			if (TryGetAxialAtScreenPosition(screenPosition, out AxialCoord axial) == false
+				|| _mapGrid.IsTileInBounds(axial) == false)
+			{
+				return BattleCursorHint.Default;
+			}
+
+			if (TryGetPawnAtAxial(axial, out _, out BattlePawn hoveredPawn) == false)
+				return BattleCursorHint.Default;
+
+			if (_actionMode == BattleActionMode.Move || IsInteractionLocked)
+				return BattleCursorHint.Default;
+
+			int skillSlot = GetSkillSlot(_actionMode);
+			if (skillSlot <= 0
+				|| TryGetControllablePawnId(out ulong casterPawnId) == false
+				|| TryGetPawn(casterPawnId, out BattlePawn casterPawn) == false
+				|| TryGetSkillDefinition(casterPawn, skillSlot, out BattleSkillDefinition skill) == false)
+			{
+				return BattleCursorHint.Default;
+			}
+
+			string targetType = skill.TargetType ?? string.Empty;
+			if (targetType.IndexOf("ENEMY", System.StringComparison.OrdinalIgnoreCase) >= 0 && hoveredPawn.IsMine == false)
+				return BattleCursorHint.Attack;
+
+			if (targetType.IndexOf("ALLY", System.StringComparison.OrdinalIgnoreCase) >= 0 && hoveredPawn.IsMine)
+				return BattleCursorHint.Assist;
+
+			if (targetType.StartsWith("SELF", System.StringComparison.OrdinalIgnoreCase)
+				&& hoveredPawn.PawnId == casterPawnId)
+			{
+				return BattleCursorHint.Assist;
+			}
+
+			return BattleCursorHint.Default;
+		}
+
+		bool TryGetAxialAtScreenPosition(Vector2 screenPosition, out AxialCoord axial)
+		{
+			axial = default;
+			if (_mapGrid == null)
+				return false;
+
+			Camera camera = Camera.main;
+			if (camera == null
+				|| screenPosition.x < 0f || screenPosition.y < 0f
+				|| screenPosition.x > camera.pixelWidth || screenPosition.y > camera.pixelHeight)
+			{
+				return false;
+			}
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _mapGrid.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			axial = _mapGrid.WorldToAxial(ray.GetPoint(enter));
+			return true;
+		}
+
 		void HandleCameraFocusInput()
 		{
 			if (WasCameraFocusKeyPressed() == false

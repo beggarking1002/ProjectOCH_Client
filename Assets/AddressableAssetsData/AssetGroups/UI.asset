@@ -33,6 +33,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0839d13ffa801449a71e90573c6330e
+    m_Address: Cursor_Hand
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc52467da72f13e44b03a6a11779beb4
+    m_Address: Cursor_Attack
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fe197a9e8809224ca417ba2007f213f
+    m_Address: Cursor_Loot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 588cc2bc16077d44982345ddd49803fa
     m_Address: PawnStatusWorldUI
     m_ReadOnly: 0

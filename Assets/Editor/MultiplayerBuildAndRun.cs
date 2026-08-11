@@ -122,8 +122,26 @@ internal static class MultiplayerBuildAndRun
             return null;
         }
 
+        UpdateBuildTimestamp(exePath);
         Debug.Log($"Client build succeeded: {exePath}");
         return exePath;
+    }
+
+    private static void UpdateBuildTimestamp(string exePath)
+    {
+        if (File.Exists(exePath) == false)
+            return;
+
+        try
+        {
+            // Unity can reuse an unchanged native player executable. Touch it so
+            // Explorer always shows when this build operation last completed.
+            File.SetLastWriteTimeUtc(exePath, System.DateTime.UtcNow);
+        }
+        catch (System.Exception exception)
+        {
+            Debug.LogWarning($"Client build succeeded, but could not update executable timestamp: {exception.Message}");
+        }
     }
 
     private static bool BuildAddressables()
@@ -180,17 +198,23 @@ internal static class MultiplayerBuildAndRun
     private static string GetBuildExePath()
     {
         string projectName = GetProjectName();
-        return Path.Combine("Builds", "Win64", projectName, $"{projectName}.exe");
+        return Path.Combine(GetProjectRoot(), "Builds", "Win64", projectName, $"{projectName}.exe");
     }
 
     private static string GetPlayerLogDirectory()
     {
-        return Path.Combine("Builds", "Win64", "Logs");
+        return Path.Combine(GetProjectRoot(), "Builds", "Win64", "Logs");
     }
 
     private static string GetProjectName()
     {
         return new DirectoryInfo(Application.dataPath).Parent?.Name ?? Application.productName;
+    }
+
+    private static string GetProjectRoot()
+    {
+        return new DirectoryInfo(Application.dataPath).Parent?.FullName
+            ?? Directory.GetCurrentDirectory();
     }
 
     private static string[] GetEnabledScenePaths()
