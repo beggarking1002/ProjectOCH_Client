@@ -145,6 +145,28 @@ namespace Field
 			return TryGetRemotePawnAt(screenPosition, out _);
 		}
 
+		public bool TryGetMoveCursorWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)
+		{
+			worldPosition = default;
+			// Cursor feedback follows the tile under the pointer, not the pawn's
+			// current movement state.  A click can start an in-flight move, but that
+			// must not temporarily turn every valid destination back into the hand.
+			if (_walkArea == null || _walkArea.IsInitialized == false || MyPawn == null)
+				return false;
+
+			Camera camera = Camera.main;
+			if (camera == null || IsValidScreenPosition(camera, screenPosition) == false)
+				return false;
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _walkArea.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			worldPosition = ray.GetPoint(enter);
+			return _walkArea.IsWalkable(worldPosition);
+		}
+
 		static float GetClickRadius(FieldPawnController pawn)
 		{
 			Renderer renderer = pawn.GetComponentInChildren<Renderer>();

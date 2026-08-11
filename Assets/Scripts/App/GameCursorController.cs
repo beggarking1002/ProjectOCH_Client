@@ -19,6 +19,7 @@ namespace App
 		const string HandCursorAddress = "Cursor_Hand";
 		const string AttackCursorAddress = "Cursor_Attack";
 		const string LootCursorAddress = "Cursor_Loot";
+		const string MoveCursorAddress = "Cursor";
 		// This is deliberately above every gameplay/UI canvas, including field invites.
 		const int CursorSortingOrder = 32766;
 		static readonly Vector2 HandCursorSize = new(54f, 65f);
@@ -28,11 +29,14 @@ namespace App
 		AsyncOperationHandle<Sprite> _handCursorHandle;
 		AsyncOperationHandle<Sprite> _attackCursorHandle;
 		AsyncOperationHandle<Sprite> _lootCursorHandle;
+		AsyncOperationHandle<GameObject> _moveCursorHandle;
 		Canvas _cursorCanvas;
 		Image _handCursorImage;
+		GameObject _moveCursorInstance;
 		bool _hasHandCursorHandle;
 		bool _hasAttackCursorHandle;
 		bool _hasLootCursorHandle;
+		bool _hasMoveCursorHandle;
 		BattleObjectManager _battleObjectManager;
 		FieldObjectManager _fieldObjectManager;
 
@@ -56,6 +60,8 @@ namespace App
 			_hasAttackCursorHandle = true;
 			_lootCursorHandle = Addressables.LoadAssetAsync<Sprite>(LootCursorAddress);
 			_hasLootCursorHandle = true;
+			_moveCursorHandle = Addressables.InstantiateAsync(MoveCursorAddress);
+			_hasMoveCursorHandle = true;
 			await _handCursorHandle.Task;
 
 			if (this == null)
@@ -78,6 +84,22 @@ namespace App
 
 			await _attackCursorHandle.Task;
 			await _lootCursorHandle.Task;
+			await _moveCursorHandle.Task;
+			if (this == null)
+			{
+				ReleaseHandCursor();
+				return;
+			}
+
+			if (_moveCursorHandle.Status == AsyncOperationStatus.Succeeded && _moveCursorHandle.Result != null)
+			{
+				_moveCursorInstance = _moveCursorHandle.Result;
+				_moveCursorInstance.name = "@MoveCursor";
+				_moveCursorInstance.transform.SetParent(transform, true);
+				_moveCursorInstance.SetActive(false);
+				foreach (ParticleSystemRenderer renderer in _moveCursorInstance.GetComponentsInChildren<ParticleSystemRenderer>(true))
+					renderer.sortingOrder = Mathf.Max(renderer.sortingOrder, 1000);
+			}
 		}
 
 		void LateUpdate()
@@ -104,6 +126,7 @@ namespace App
 			if (Application.isFocused == false)
 			{
 				_handCursorImage.enabled = false;
+				SetMoveCursorVisible(false, default);
 				SetSystemCursorVisible(true);
 				return;
 			}
@@ -111,13 +134,22 @@ namespace App
 			if (!TryGetPointerPosition(out Vector2 screenPosition))
 				return;
 
-			UpdateCursorAppearance(screenPosition);
-			_handCursorImage.enabled = true;
+			bool usingMoveCursor = UpdateCursorAppearance(screenPosition);
+			_handCursorImage.enabled = usingMoveCursor == false;
 			SetSystemCursorVisible(false);
 		}
 
-		void UpdateCursorAppearance(Vector2 screenPosition)
+		bool UpdateCursorAppearance(Vector2 screenPosition)
 		{
+			if (_moveCursorInstance != null
+				&& IsPointerOverUi() == false
+				&& TryGetMoveCursorWorldPosition(screenPosition, out Vector3 moveCursorPosition))
+			{
+				SetMoveCursorVisible(true, moveCursorPosition);
+				return true;
+			}
+
+			SetMoveCursorVisible(false, default);
 			BattleCursorHint battleHint = GetBattleCursorHint(screenPosition);
 
 			bool useAttackCursor = battleHint == BattleCursorHint.Attack
@@ -137,6 +169,7 @@ namespace App
 			}
 
 			_handCursorImage.rectTransform.anchoredPosition = screenPosition;
+			return false;
 		}
 
 		BattleCursorHint GetBattleCursorHint(Vector2 screenPosition)
@@ -155,6 +188,35 @@ namespace App
 				_fieldObjectManager = FindFirstObjectByType<FieldObjectManager>();
 
 			return _fieldObjectManager != null && _fieldObjectManager.IsPointerOverRemotePawn(screenPosition);
+		}
+
+		bool TryGetMoveCursorWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)
+		{
+			worldPosition = default;
+			if (_battleObjectManager == null)
+				_battleObjectManager = FindFirstObjectByType<BattleObjectManager>();
+
+			if (_battleObjectManager != null && _battleObjectManager.TryGetMoveCursorWorldPosition(screenPosition, out worldPosition))
+				return true;
+
+			if (_fieldObjectManager == null)
+				_fieldObjectManager = FindFirstObjectByType<FieldObjectManager>();
+
+			return _fieldObjectManager != null
+				&& IsPointerOverFieldEnemyPawn(screenPosition) == false
+				&& _fieldObjectManager.TryGetMoveCursorWorldPosition(screenPosition, out worldPosition);
+		}
+
+		void SetMoveCursorVisible(bool visible, Vector3 worldPosition)
+		{
+			if (_moveCursorInstance == null)
+				return;
+
+			if (visible)
+				_moveCursorInstance.transform.position = worldPosition;
+
+			if (_moveCursorInstance.activeSelf != visible)
+				_moveCursorInstance.SetActive(visible);
 		}
 
 		static bool IsPointerOverUi()
@@ -222,6 +284,13 @@ namespace App
 
 			_hasLootCursorHandle = false;
 			_lootCursorHandle = default;
+
+			if (_hasMoveCursorHandle && _moveCursorHandle.IsValid())
+				Addressables.ReleaseInstance(_moveCursorHandle);
+
+			_hasMoveCursorHandle = false;
+			_moveCursorHandle = default;
+			_moveCursorInstance = null;
 
 		}
 

@@ -19,12 +19,16 @@ internal static class AddressablesProjectSetup
     private const string HandCursorAddress = "Cursor_Hand";
     private const string AttackCursorAddress = "Cursor_Attack";
     private const string LootCursorAddress = "Cursor_Loot";
+    private const string EmbeddedAxeMarkerPrefabAddress = "Equipment/SuenEmbeddedAxe";
+    private const string ParvisMarkerPrefabAddress = "Equipment/SuenParvis";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
     private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
     private const string StatIconPath = "Assets/@Resources/Art/UI/StatIcon.png";
     private const string HandCursorPath = "Assets/@Resources/Art/UI/Cursor/Hand.png";
     private const string AttackCursorPath = "Assets/@Resources/Art/UI/Cursor/Attack.png";
     private const string LootCursorPath = "Assets/@Resources/Art/UI/Cursor/Loot.png";
+    private const string EmbeddedAxeMarkerPrefabPath = "Assets/@Resources/Prefab/Equipment/SuenEmbeddedAxe.prefab";
+    private const string ParvisMarkerPrefabPath = "Assets/@Resources/Prefab/Equipment/SuenParvis.prefab";
     private static readonly string[] GameDataCsvPaths =
     {
         "Assets/GameData/ClassKey.csv",
@@ -91,6 +95,8 @@ internal static class AddressablesProjectSetup
         RegisterUiAddressable(settings, HandCursorPath, HandCursorAddress);
         RegisterUiAddressable(settings, AttackCursorPath, AttackCursorAddress);
         RegisterUiAddressable(settings, LootCursorPath, LootCursorAddress);
+        RegisterUiAddressable(settings, EmbeddedAxeMarkerPrefabPath, EmbeddedAxeMarkerPrefabAddress);
+        RegisterUiAddressable(settings, ParvisMarkerPrefabPath, ParvisMarkerPrefabAddress);
         RegisterGameDataAddressables(settings);
         RegisterSkillIconAddressables(settings);
 
@@ -130,6 +136,8 @@ internal static class AddressablesProjectSetup
             || IsMissingAddressable(settings, HandCursorPath)
             || IsMissingAddressable(settings, AttackCursorPath)
             || IsMissingAddressable(settings, LootCursorPath)
+            || IsMissingAddressable(settings, EmbeddedAxeMarkerPrefabPath)
+            || IsMissingAddressable(settings, ParvisMarkerPrefabPath)
             || IsMissingAnyAddressable(settings, GameDataCsvPaths)
             || IsMissingAnySkillIconAddressable(settings);
     }

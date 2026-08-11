@@ -23,15 +23,22 @@ namespace Battle
 		[SerializeField] TileBase fireOverlayTile;
 		[SerializeField] bool useBlockTilemap = true;
 		readonly Dictionary<AxialCoord, BattleTileState> _serverTileStates = new Dictionary<AxialCoord, BattleTileState>();
-		readonly Dictionary<AxialCoord, TextMesh> _equipmentMarkers = new Dictionary<AxialCoord, TextMesh>();
-		static Sprite _equipmentMarkerPlateSprite;
+		readonly Dictionary<AxialCoord, GameObject> _equipmentMarkers = new Dictionary<AxialCoord, GameObject>();
 		readonly List<AsyncOperationHandle<TileBase>> _loadedTileHandles = new List<AsyncOperationHandle<TileBase>>();
+		AsyncOperationHandle<GameObject> _embeddedAxeMarkerPrefabHandle;
+		AsyncOperationHandle<GameObject> _parvisMarkerPrefabHandle;
+		GameObject _embeddedAxeMarkerPrefab;
+		GameObject _parvisMarkerPrefab;
+		bool _hasEmbeddedAxeMarkerHandle;
+		bool _hasParvisMarkerHandle;
 		bool _hasServerTileSnapshot;
 
 		const string NormalGroundTileAddress = "Tile/grass";
 		const string WaterGroundTileAddress = "Tile/water";
 		const string IceOverlayTileAddress = "Tile/ice";
 		const string FireOverlayTileAddress = "Tile/fire";
+		const string EmbeddedAxeMarkerPrefabAddress = "Equipment/SuenEmbeddedAxe";
+		const string ParvisMarkerPrefabAddress = "Equipment/SuenParvis";
 
 		public Transform PlaneTransform => transform;
 		public Grid Grid => grid;
@@ -57,6 +64,14 @@ namespace Battle
 			}
 
 			_loadedTileHandles.Clear();
+
+			if (_hasEmbeddedAxeMarkerHandle && _embeddedAxeMarkerPrefabHandle.IsValid())
+				Addressables.Release(_embeddedAxeMarkerPrefabHandle);
+			if (_hasParvisMarkerHandle && _parvisMarkerPrefabHandle.IsValid())
+				Addressables.Release(_parvisMarkerPrefabHandle);
+
+			_hasEmbeddedAxeMarkerHandle = false;
+			_hasParvisMarkerHandle = false;
 		}
 
 		public void InitializeIfNeeded()
@@ -94,6 +109,17 @@ namespace Battle
 
 			if (fireOverlayTile == null)
 				fireOverlayTile = await LoadTileAsync(FireOverlayTileAddress);
+
+			if (_embeddedAxeMarkerPrefab == null)
+				_embeddedAxeMarkerPrefab = await LoadEquipmentMarkerPrefabAsync(EmbeddedAxeMarkerPrefabAddress, isAxe: true);
+
+			if (_parvisMarkerPrefab == null)
+				_parvisMarkerPrefab = await LoadEquipmentMarkerPrefabAsync(ParvisMarkerPrefabAddress, isAxe: false);
+
+			// A tile snapshot can arrive before Addressables finish loading. Refresh
+			// its equipment now that the prefab assets are available.
+			foreach (KeyValuePair<AxialCoord, BattleTileState> pair in _serverTileStates)
+				UpdateEquipmentMarker(pair.Key, pair.Value.EquipmentKey);
 		}
 
 		public AxialCoord WorldToAxial(Vector3 worldPosition)
@@ -315,79 +341,78 @@ namespace Battle
 			bool isParvis = string.Equals(equipmentKey, "PARVIS", System.StringComparison.OrdinalIgnoreCase);
 			if (isAxe == false && isParvis == false)
 			{
-				if (_equipmentMarkers.TryGetValue(axial, out TextMesh existing))
+				if (_equipmentMarkers.TryGetValue(axial, out GameObject existing))
 				{
-					Destroy(existing.gameObject);
+					Destroy(existing);
 					_equipmentMarkers.Remove(axial);
 				}
 
 				return;
 			}
 
-			if (_equipmentMarkers.TryGetValue(axial, out TextMesh marker) == false || marker == null)
+			GameObject markerPrefab = isParvis ? _parvisMarkerPrefab : _embeddedAxeMarkerPrefab;
+			if (markerPrefab == null)
 			{
-				GameObject markerObject = new GameObject(isParvis ? "Equipment_Parvis" : "Equipment_Axe");
-				markerObject.transform.SetParent(transform, false);
-				CreateEquipmentMarkerPlate(markerObject.transform);
-				marker = markerObject.AddComponent<TextMesh>();
-				marker.anchor = TextAnchor.MiddleCenter;
-				marker.alignment = TextAlignment.Center;
-				marker.characterSize = 0.12f;
-				marker.fontSize = 42;
-				marker.fontStyle = FontStyle.Bold;
-				GameRoot.ApplyWorldTextFont(marker);
-				MeshRenderer renderer = marker.GetComponent<MeshRenderer>();
-				if (renderer != null)
-					renderer.sortingOrder = 19;
+				Debug.LogWarning($"Equipment marker prefab is not loaded. equipment={equipmentKey}, axial={axial}");
+				return;
+			}
 
+			string markerName = isParvis ? "Equipment_Parvis" : "Equipment_Axe";
+			if (_equipmentMarkers.TryGetValue(axial, out GameObject marker)
+				&& (marker == null || marker.name != markerName))
+			{
+				if (marker != null)
+					Destroy(marker);
+				_equipmentMarkers.Remove(axial);
+				marker = null;
+			}
+
+			if (marker == null)
+			{
+				// The anchor owns the server tile coordinate. The visual prefab remains
+				// its child, so its authored local Position and Scale stay adjustable in
+				// the prefab Inspector instead of being overwritten by this map update.
+				marker = new GameObject(markerName);
+				marker.transform.SetParent(transform, false);
+				Instantiate(markerPrefab, marker.transform, false);
 				_equipmentMarkers[axial] = marker;
 			}
 
-			marker.gameObject.name = isParvis ? "Equipment_Parvis" : "Equipment_Axe";
-			marker.text = isParvis ? "PARVIS" : "AXE";
-			marker.color = isParvis
-				? new Color(0.52f, 0.80f, 1f, 1f)
-				: new Color(1f, 0.78f, 0.28f, 1f);
-			marker.transform.position = AxialToWorldCenter(axial, -0.06f) + Vector3.up * 0.12f;
-			marker.gameObject.SetActive(true);
+			marker.name = markerName;
+			// Scale is intentionally owned by the prefab, so visual tuning is an
+			// Inspector-only change and does not require a code change.
+			marker.transform.position = AxialToWorldCenter(axial, -0.06f);
+			marker.SetActive(true);
 		}
 
-		static void CreateEquipmentMarkerPlate(Transform parent)
+		async Task<GameObject> LoadEquipmentMarkerPrefabAsync(string address, bool isAxe)
 		{
-			GameObject plateObject = new GameObject("Plate");
-			plateObject.transform.SetParent(parent, false);
-			plateObject.transform.localScale = new Vector3(0.55f, 0.26f, 1f);
-			SpriteRenderer plate = plateObject.AddComponent<SpriteRenderer>();
-			plate.sprite = GetEquipmentMarkerPlateSprite();
-			plate.color = new Color(0.12f, 0.075f, 0.025f, 0.9f);
-			plate.sortingOrder = 18;
-		}
-
-		static Sprite GetEquipmentMarkerPlateSprite()
-		{
-			if (_equipmentMarkerPlateSprite != null)
-				return _equipmentMarkerPlateSprite;
-
-			Texture2D texture = new Texture2D(1, 1, TextureFormat.RGBA32, false)
+			AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(address);
+			if (isAxe)
 			{
-				name = "Runtime_EquipmentMarkerPlate",
-				filterMode = FilterMode.Point,
-				wrapMode = TextureWrapMode.Clamp,
-				hideFlags = HideFlags.DontSave,
-			};
-			texture.SetPixel(0, 0, Color.white);
-			texture.Apply();
-			_equipmentMarkerPlateSprite = Sprite.Create(texture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
-			_equipmentMarkerPlateSprite.name = "Runtime_EquipmentMarkerPlate";
-			return _equipmentMarkerPlateSprite;
+				_embeddedAxeMarkerPrefabHandle = handle;
+				_hasEmbeddedAxeMarkerHandle = true;
+			}
+			else
+			{
+				_parvisMarkerPrefabHandle = handle;
+				_hasParvisMarkerHandle = true;
+			}
+
+			await handle.Task;
+			if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null)
+				return handle.Result;
+
+			Debug.LogWarning($"Failed to load equipment marker prefab. address={address}");
+			return null;
 		}
 
 		void ClearEquipmentMarkers()
 		{
-			foreach (TextMesh marker in _equipmentMarkers.Values)
+			foreach (GameObject marker in _equipmentMarkers.Values)
 			{
 				if (marker != null)
-					Destroy(marker.gameObject);
+					Destroy(marker);
 			}
 
 			_equipmentMarkers.Clear();

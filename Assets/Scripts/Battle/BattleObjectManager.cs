@@ -358,6 +358,33 @@ namespace Battle
 			return BattleCursorHint.Default;
 		}
 
+		// The world cursor follows the pointer continuously, but is visible only when
+		// the same path search used by an actual move accepts the hovered tile.
+		public bool TryGetMoveCursorWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)
+		{
+			worldPosition = default;
+			if (_actionMode != BattleActionMode.Move || IsInteractionLocked
+				|| TryGetAxialAtScreenPosition(screenPosition, out AxialCoord axial) == false
+				|| TryGetControllablePawnId(out ulong pawnId) == false
+				|| TryGetPawn(pawnId, out BattlePawn pawn) == false
+				|| IsReachableMoveTarget(pawn, axial) == false)
+			{
+				return false;
+			}
+
+			Camera camera = Camera.main;
+			if (camera == null)
+				return false;
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _mapGrid.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			worldPosition = ray.GetPoint(enter);
+			return true;
+		}
+
 		bool TryGetAxialAtScreenPosition(Vector2 screenPosition, out AxialCoord axial)
 		{
 			axial = default;
@@ -1761,10 +1788,19 @@ namespace Battle
 			ClearFireWallTargeting();
 			_actionMode = BattleActionMode.Move;
 
-			_mapGrid?.ApplyTileDeltas(packet.TileDeltas);
+			List<Protocol.BattleTileInfo> tileDeltas = CopyBattleTileDeltas(packet.TileDeltas);
+			bool deferThrownAxeLanding = ShouldDeferThrownAxeLanding(packet.CasterPawnId, packet.SkillSlot, tileDeltas);
+			if (deferThrownAxeLanding == false)
+				_mapGrid?.ApplyTileDeltas(tileDeltas);
 			// target_pawn_id == 0 means a tile-only result. Pawn state always comes from
 			// pawn_deltas, so no target Pawn lookup or direct HP update is performed here.
-			QueueSkillActionSequence(packet.CasterPawnId, packet.SkillSlot, packet.TargetAxial, packet.Logs, packet.PawnDeltas);
+			QueueSkillActionSequence(
+				packet.CasterPawnId,
+				packet.SkillSlot,
+				packet.TargetAxial,
+				packet.Logs,
+				packet.PawnDeltas,
+				deferThrownAxeLanding ? tileDeltas : null);
 			if (packet.TurnQueueResynced)
 				ApplyTurnQueueSnapshot(packet.UpcomingTurnPawnIds, BattleTurnQueueUpdateKind.Resync, CollectDeadPawnIds(packet.PawnDeltas));
 
@@ -1811,13 +1847,15 @@ namespace Battle
 			int skillSlot,
 			Protocol.AxialCoord targetAxial,
 			IEnumerable<BattleActionLog> logs,
-			IEnumerable<BattlePawnDelta> pawnDeltas)
+			IEnumerable<BattlePawnDelta> pawnDeltas,
+			IEnumerable<Protocol.BattleTileInfo> deferredTileDeltas = null)
 		{
 			if (_skillActionSequenceCoroutine != null)
 				StopCoroutine(_skillActionSequenceCoroutine);
 
 			List<BattleActionLog> orderedLogs = CopyBattleActionLogs(logs);
 			List<BattlePawnDelta> finalPawnDeltas = CopyBattlePawnDeltas(pawnDeltas);
+			List<Protocol.BattleTileInfo> delayedTiles = CopyBattleTileDeltas(deferredTileDeltas);
 			// The server supplies facing_direction for every attacker in the final
 			// snapshot. Commit it before presentation so attacks, counters, ZOC
 			// reactions, and evaded attacks all face their intended target.
@@ -1827,7 +1865,7 @@ namespace Battle
 			// the presentation as active before the coroutine gets its first update so
 			// a lethal final state never hides a pawn ahead of the exchange animation.
 			_isPlayingSkillActionSequence = true;
-			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, targetAxial, orderedLogs, finalPawnDeltas));
+			_skillActionSequenceCoroutine = StartCoroutine(PlaySkillActionSequence(casterPawnId, skillSlot, targetAxial, orderedLogs, finalPawnDeltas, delayedTiles));
 		}
 
 		IEnumerator PlaySkillActionSequence(
@@ -1835,10 +1873,12 @@ namespace Battle
 			int skillSlot,
 			Protocol.AxialCoord targetAxial,
 			List<BattleActionLog> orderedLogs,
-			List<BattlePawnDelta> finalPawnDeltas)
+			List<BattlePawnDelta> finalPawnDeltas,
+			List<Protocol.BattleTileInfo> delayedTileDeltas)
 		{
 			_isPlayingSkillActionSequence = true;
 			bool didPresentInitiatingSkill = false;
+			bool didApplyDelayedTiles = false;
 			List<BattleActionLog> fireTileLogs = new List<BattleActionLog>();
 			for (int i = 0; i < orderedLogs.Count; i++)
 			{
@@ -1882,6 +1922,16 @@ namespace Battle
 				}
 
 				yield return PlayAttackPresentation(log, log.AttackerPawnId == casterPawnId ? skillSlot : 0, null);
+				// Weapon Technique's tile delta contains the thrown axe. Apply it only
+				// after the projectile completes its flight, so the ground axe appears
+				// at the moment it reaches the target rather than at cast start.
+				if (didApplyDelayedTiles == false
+					&& delayedTileDeltas.Count > 0
+					&& log.AttackerPawnId == casterPawnId)
+				{
+					_mapGrid?.ApplyTileDeltas(delayedTileDeltas);
+					didApplyDelayedTiles = true;
+				}
 				ApplyCombatLogPresentation(log);
 				AppendBattleLog(log);
 				yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
@@ -1893,9 +1943,17 @@ namespace Battle
 				{
 					TriggerSkillAnimation(noLogCasterPawn, skillSlot);
 					yield return PlaySkillProjectilePresentation(noLogCasterPawn, skillSlot, targetAxial);
+					if (didApplyDelayedTiles == false && delayedTileDeltas.Count > 0)
+					{
+						_mapGrid?.ApplyTileDeltas(delayedTileDeltas);
+						didApplyDelayedTiles = true;
+					}
 					yield return new WaitForSecondsRealtime(SkillActionPresentationSeconds);
 				}
 			}
+
+			if (didApplyDelayedTiles == false && delayedTileDeltas.Count > 0)
+				_mapGrid?.ApplyTileDeltas(delayedTileDeltas);
 
 			ulong instantMovePawnId = IsBeigeFireTeleport(casterPawnId, skillSlot) ? casterPawnId : 0;
 			ApplyPawnDeltas(finalPawnDeltas, instantMovePawnId);
@@ -2164,6 +2222,47 @@ namespace Battle
 			}
 
 			return result;
+		}
+
+		static List<Protocol.BattleTileInfo> CopyBattleTileDeltas(IEnumerable<Protocol.BattleTileInfo> tileDeltas)
+		{
+			List<Protocol.BattleTileInfo> result = new List<Protocol.BattleTileInfo>();
+			if (tileDeltas == null)
+				return result;
+
+			foreach (Protocol.BattleTileInfo tileDelta in tileDeltas)
+			{
+				if (tileDelta != null)
+					result.Add(tileDelta.Clone());
+			}
+
+			return result;
+		}
+
+		bool ShouldDeferThrownAxeLanding(
+			ulong casterPawnId,
+			int skillSlot,
+			IEnumerable<Protocol.BattleTileInfo> tileDeltas)
+		{
+			if (tileDeltas == null
+				|| _pawns.TryGetValue(casterPawnId, out BattlePawn casterPawn) == false
+				|| casterPawn is SuenAxe == false
+				|| TryGetProjectileKey(casterPawn, skillSlot, out string projectileKey) == false
+				|| string.Equals(projectileKey, "throwing_axe", System.StringComparison.OrdinalIgnoreCase) == false)
+			{
+				return false;
+			}
+
+			foreach (Protocol.BattleTileInfo tileDelta in tileDeltas)
+			{
+				if (tileDelta != null
+					&& string.Equals(tileDelta.EquipmentKey, "AXE", System.StringComparison.OrdinalIgnoreCase))
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		static List<ulong> CollectDeadPawnIds(IEnumerable<BattlePawnDelta> pawnDeltas)

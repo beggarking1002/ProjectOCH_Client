@@ -51,6 +51,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b06db0e20bc3d2445803ec687427bb3f
+    m_Address: Tile/suen_embedded_axe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebcf81aafb9b9af4e91b59aa46196cdc
+    m_Address: Tile/suen_parvis
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87b3cdb8e8d049d4a9cef8cd73d852f1
+    m_Address: Equipment/SuenEmbeddedAxe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ff3b6d40c2e46c7a69eb7f74c9669fb
+    m_Address: Equipment/SuenParvis
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 588cc2bc16077d44982345ddd49803fa
     m_Address: PawnStatusWorldUI
     m_ReadOnly: 0
