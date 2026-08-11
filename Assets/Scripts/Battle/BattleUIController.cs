@@ -2043,6 +2043,23 @@ namespace Battle
 			{
 				_root = root;
 				_iconResolver = iconResolver;
+				if (_root == null)
+					return;
+
+				// Stat slots are authored in HoverPawnInfo.prefab. Reuse those serialized
+				// UI objects before creating any overflow entries for future status types.
+				for (int index = 0; ; index++)
+				{
+					Transform slot = _root.Find($"Stat_{index}");
+					if (slot == null)
+						break;
+
+					HoverStatEntry entry = TryGetPrefabEntry(slot);
+					if (entry == null)
+						break;
+
+					_entries.Add(entry);
+				}
 			}
 
 			public void SetPawn(BattlePawn pawn)
@@ -2120,6 +2137,19 @@ namespace Battle
 				value.rectTransform.offsetMax = Vector2.zero;
 				value.color = new Color(0.96f, 0.92f, 0.78f, 1f);
 				return new HoverStatEntry(entryObject, entryRect, icon, value);
+			}
+
+			static HoverStatEntry TryGetPrefabEntry(Transform slot)
+			{
+				if (slot == null)
+					return null;
+
+				RectTransform rect = slot as RectTransform;
+				Image icon = slot.Find("Icon")?.GetComponent<Image>();
+				Text value = slot.Find("Value")?.GetComponent<Text>();
+				return rect != null && icon != null && value != null
+					? new HoverStatEntry(slot.gameObject, rect, icon, value)
+					: null;
 			}
 		}
 
