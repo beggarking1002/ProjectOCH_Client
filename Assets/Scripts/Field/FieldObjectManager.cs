@@ -346,10 +346,11 @@ namespace Field
 				? FieldPositionCodec.ToWorld(packet.Start, z)
 				: GetPawnPositionOrDefault(packet.ObjectId, z);
 			Vector3 target = FieldPositionCodec.ToWorld(packet.Target, z);
+			List<Vector3> path = BuildMovePath(packet, target, z);
 
 			if (_pawns.TryGetValue(packet.ObjectId, out FieldPawnController pawn) == false)
 			{
-				SpawnPawnForMove(packet, start, target);
+				SpawnPawnForMove(packet, start, target, path);
 				return;
 			}
 
@@ -359,7 +360,25 @@ namespace Field
 			// pawns therefore continue from their displayed position at the server's
 			// intended speed. A pawn first seen through S_MOVE is initialized at start
 			// in SpawnPawnForMove below.
-			pawn.ApplyServerMove(start, target, packet.DurationMs, snapToStart: false);
+			pawn.ApplyServerMove(start, target, path, packet.DurationMs, snapToStart: false);
+		}
+
+		static List<Vector3> BuildMovePath(S_MOVE packet, Vector3 target, float z)
+		{
+			List<Vector3> path = new List<Vector3>();
+			if (packet.Path != null)
+			{
+				for (int i = 0; i < packet.Path.Count; i++)
+				{
+					Vec2Fixed waypoint = packet.Path[i];
+					if (waypoint != null)
+						path.Add(FieldPositionCodec.ToWorld(waypoint, z));
+				}
+			}
+
+			if (path.Count == 0 || Vector3.Distance(path[path.Count - 1], target) > 0.01f)
+				path.Add(target);
+			return path;
 		}
 
 		async void SpawnOrUpdatePawn(ObjectInfo info, bool isMine)
@@ -420,7 +439,7 @@ namespace Field
 			}
 		}
 
-		async void SpawnPawnForMove(S_MOVE packet, Vector3 start, Vector3 target)
+		async void SpawnPawnForMove(S_MOVE packet, Vector3 start, Vector3 target, List<Vector3> path)
 		{
 			bool isMine = packet.ObjectId == _myObjectId;
 			ObjectInfo info = new ObjectInfo
@@ -434,7 +453,7 @@ namespace Field
 			if (_destroyed || _pawns.TryGetValue(packet.ObjectId, out FieldPawnController pawn) == false)
 				return;
 
-			pawn.ApplyServerMove(start, target, packet.DurationMs, snapToStart: isMine == false);
+			pawn.ApplyServerMove(start, target, path, packet.DurationMs, snapToStart: false);
 		}
 
 		async System.Threading.Tasks.Task SpawnOrUpdatePawnAsync(ObjectInfo info, bool isMine)

@@ -382,7 +382,19 @@ namespace Battle
 			// Scale is intentionally owned by the prefab, so visual tuning is an
 			// Inspector-only change and does not require a code change.
 			marker.transform.position = AxialToWorldCenter(axial, -0.06f);
+			SetEquipmentMarkerSortingOrder(marker, isAxe);
 			marker.SetActive(true);
+		}
+
+		static void SetEquipmentMarkerSortingOrder(GameObject marker, bool isAxe)
+		{
+			if (marker == null)
+				return;
+
+			int offsetFromPawn = isAxe ? 1 : -1;
+			int sortingOrder = BattlePawn.GetWorldSortingOrder(marker.transform.position.y) + offsetFromPawn;
+			foreach (SpriteRenderer renderer in marker.GetComponentsInChildren<SpriteRenderer>(true))
+				renderer.sortingOrder = sortingOrder;
 		}
 
 		async Task<GameObject> LoadEquipmentMarkerPrefabAsync(string address, bool isAxe)

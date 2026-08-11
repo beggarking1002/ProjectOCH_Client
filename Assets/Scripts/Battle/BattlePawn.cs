@@ -10,6 +10,7 @@ namespace Battle
 	public class BattlePawn : MonoBehaviour
 	{
 		const int DefaultSortingOrder = 20;
+		const float SortingOrderPerWorldYUnit = 2f;
 		const int TurnIndicatorSortingOrder = 41;
 		const float StatusWorldUiMargin = 0.18f;
 		const float TurnIndicatorMargin = 0.52f;
@@ -103,6 +104,27 @@ namespace Battle
 			_teamRing = GetComponentInChildren<PawnTeamRing>(true);
 		}
 
+		void LateUpdate()
+		{
+			RefreshVisualSortingOrder();
+		}
+
+		// Sprites on lower world-Y positions are nearer to the camera in this
+		// top-down board, so they must render after higher-positioned pawns.
+		public static int GetWorldSortingOrder(float worldY)
+		{
+			return DefaultSortingOrder - Mathf.RoundToInt(worldY * SortingOrderPerWorldYUnit);
+		}
+
+		void RefreshVisualSortingOrder()
+		{
+			if (_spriteRenderer == null)
+				_spriteRenderer = FindVisualSpriteRenderer();
+
+			if (_spriteRenderer != null)
+				_spriteRenderer.sortingOrder = GetWorldSortingOrder(transform.position.y);
+		}
+
 		protected virtual void OnDisable()
 		{
 			if (_moveCoroutine != null)
@@ -151,7 +173,7 @@ namespace Battle
 
 			if (_spriteRenderer != null)
 			{
-				_spriteRenderer.sortingOrder = DefaultSortingOrder;
+				_spriteRenderer.sortingOrder = GetWorldSortingOrder(transform.position.y);
 				_spriteRenderer.color = tint;
 				_baseSpriteColor = tint;
 			}

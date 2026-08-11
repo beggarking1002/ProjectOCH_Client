@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using App;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +12,11 @@ namespace Field
 	public sealed class FieldPawnController : MonoBehaviour
 	{
 		static readonly int IsMovingHash = Animator.StringToHash("isMoving");
-		const int DefaultSortingOrder = 20;
+		// Field_001 spans roughly world-Y -15..15. Keep the whole dynamic depth
+		// range above the world-map renderers (0..4), then sort only pawns within
+		// that safe foreground band.
+		const int DefaultSortingOrder = 60;
+		const float SortingOrderPerWorldYUnit = 2f;
 
 		[SerializeField] float moveSpeed = 4f;
 		[SerializeField] float arriveDistance = 0.01f;
@@ -28,6 +33,8 @@ namespace Field
 		bool _useServerMoveDuration;
 		float _serverMoveElapsed;
 		float _serverMoveDuration;
+		float _serverMovePathLength;
+		readonly List<Vector3> _serverMovePath = new List<Vector3>();
 
 		public ulong ObjectId { get; private set; }
 		public bool IsMine { get; private set; } = true;
@@ -45,6 +52,7 @@ namespace Field
 		{
 			HandleMouseInput();
 			UpdateMovement();
+			ApplyRenderSettings();
 		}
 
 		public void Initialize(FieldMapWalkArea walkArea, Vector3 startWorldPosition, ulong objectId = 0, bool isMine = true)
@@ -64,7 +72,7 @@ namespace Field
 				_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
 			if (_spriteRenderer != null)
-				_spriteRenderer.sortingOrder = DefaultSortingOrder;
+				_spriteRenderer.sortingOrder = DefaultSortingOrder - Mathf.RoundToInt(transform.position.y * SortingOrderPerWorldYUnit);
 		}
 
 		void HandleMouseInput()
@@ -168,37 +176,120 @@ namespace Field
 			_targetWorldPosition = worldPosition;
 			transform.position = worldPosition;
 			_useServerMoveDuration = false;
+			_serverMovePath.Clear();
+			_serverMovePathLength = 0f;
 			SetMoving(false);
 		}
 
-		public void ApplyServerMove(Vector3 startWorldPosition, Vector3 targetWorldPosition, uint durationMs, bool snapToStart)
+		public void ApplyServerMove(Vector3 startWorldPosition, Vector3 targetWorldPosition, IList<Vector3> serverPath, uint durationMs, bool snapToStart)
 		{
 			if (snapToStart)
 				transform.position = startWorldPosition;
 
+			List<Vector3> nextPath = new List<Vector3>();
+			bool appendToActiveRoute = snapToStart == false && _isMoving && _useServerMoveDuration &&
+				Vector3.Distance(startWorldPosition, _targetWorldPosition) <= arriveDistance;
+			if (appendToActiveRoute)
+				AppendRemainingPath(nextPath);
+
+			AppendPath(nextPath, serverPath, targetWorldPosition);
 			_serverMoveStartPosition = transform.position;
-			_targetWorldPosition = targetWorldPosition;
+			_serverMovePath.Clear();
+			_serverMovePath.AddRange(nextPath);
+			_targetWorldPosition = _serverMovePath.Count > 0 ? _serverMovePath[_serverMovePath.Count - 1] : targetWorldPosition;
+			_serverMovePathLength = GetPathLength(_serverMoveStartPosition, _serverMovePath);
 			_serverMoveElapsed = 0f;
 			_serverMoveDuration = durationMs / 1000f;
-			if (snapToStart == false && _serverMoveDuration > 0f)
+			if (_serverMoveDuration > 0f)
 			{
-				// The server immediately commits each click. With rapid clicks, its next
-				// start position can therefore be the previous *target* while this local
-				// pawn is still visibly travelling there. Preserve the server's intended
-				// world-units-per-second, but derive the duration from our actual visual
-				// start so restarting the interpolation never produces a speed burst.
-				float serverDistance = Vector3.Distance(startWorldPosition, targetWorldPosition);
-				float visualDistance = Vector3.Distance(_serverMoveStartPosition, _targetWorldPosition);
-				if (serverDistance > arriveDistance && visualDistance > arriveDistance)
+				float serverPathLength = GetPathLength(startWorldPosition, serverPath);
+				if (serverPathLength > arriveDistance && _serverMovePathLength > arriveDistance)
 				{
-					float serverSpeed = serverDistance / _serverMoveDuration;
-					_serverMoveDuration = visualDistance / serverSpeed;
+					float serverSpeed = serverPathLength / _serverMoveDuration;
+					_serverMoveDuration = _serverMovePathLength / serverSpeed;
 				}
 			}
 			_useServerMoveDuration = _serverMoveDuration > 0f;
 
 			UpdateSpriteDirection(_targetWorldPosition);
-			SetMoving(Vector3.Distance(transform.position, _targetWorldPosition) > arriveDistance);
+			SetMoving(_serverMovePathLength > arriveDistance);
+		}
+
+		void AppendRemainingPath(List<Vector3> destination)
+		{
+			float travelledDistance = _serverMoveDuration > 0f
+				? _serverMovePathLength * Mathf.Clamp01(_serverMoveElapsed / _serverMoveDuration)
+				: 0f;
+			Vector3 segmentStart = _serverMoveStartPosition;
+			for (int i = 0; i < _serverMovePath.Count; i++)
+			{
+				Vector3 waypoint = _serverMovePath[i];
+				float segmentLength = Vector3.Distance(segmentStart, waypoint);
+				if (travelledDistance <= segmentLength)
+				{
+					destination.Add(waypoint);
+					for (int remainingIndex = i + 1; remainingIndex < _serverMovePath.Count; remainingIndex++)
+						destination.Add(_serverMovePath[remainingIndex]);
+					return;
+				}
+
+				travelledDistance -= segmentLength;
+				segmentStart = waypoint;
+			}
+		}
+
+		void AppendPath(List<Vector3> destination, IList<Vector3> serverPath, Vector3 targetWorldPosition)
+		{
+			if (serverPath != null)
+			{
+				for (int i = 0; i < serverPath.Count; i++)
+				{
+					Vector3 previous = destination.Count > 0 ? destination[destination.Count - 1] : transform.position;
+					if (Vector3.Distance(previous, serverPath[i]) > arriveDistance)
+						destination.Add(serverPath[i]);
+				}
+			}
+
+			Vector3 finalPrevious = destination.Count > 0 ? destination[destination.Count - 1] : transform.position;
+			if (Vector3.Distance(finalPrevious, targetWorldPosition) > arriveDistance)
+				destination.Add(targetWorldPosition);
+		}
+
+		static float GetPathLength(Vector3 start, IList<Vector3> path)
+		{
+			float length = 0f;
+			Vector3 previous = start;
+			if (path == null)
+				return length;
+
+			for (int i = 0; i < path.Count; i++)
+			{
+				length += Vector3.Distance(previous, path[i]);
+				previous = path[i];
+			}
+
+			return length;
+		}
+
+		void ApplyPathPosition(float travelledDistance)
+		{
+			Vector3 segmentStart = _serverMoveStartPosition;
+			for (int i = 0; i < _serverMovePath.Count; i++)
+			{
+				Vector3 waypoint = _serverMovePath[i];
+				float segmentLength = Vector3.Distance(segmentStart, waypoint);
+				if (travelledDistance <= segmentLength || i == _serverMovePath.Count - 1)
+				{
+					float segmentT = segmentLength <= 0f ? 1f : Mathf.Clamp01(travelledDistance / segmentLength);
+					transform.position = Vector3.Lerp(segmentStart, waypoint, segmentT);
+					return;
+				}
+
+				travelledDistance -= segmentLength;
+				segmentStart = waypoint;
+			}
+
+			transform.position = _targetWorldPosition;
 		}
 
 		void UpdateMovement()
@@ -210,7 +301,7 @@ namespace Field
 			{
 				_serverMoveElapsed += Time.deltaTime;
 				float t = Mathf.Clamp01(_serverMoveElapsed / _serverMoveDuration);
-				transform.position = Vector3.Lerp(_serverMoveStartPosition, _targetWorldPosition, t);
+				ApplyPathPosition(_serverMovePathLength * t);
 			}
 			else
 			{
@@ -225,6 +316,8 @@ namespace Field
 
 			transform.position = _targetWorldPosition;
 			_useServerMoveDuration = false;
+			_serverMovePath.Clear();
+			_serverMovePathLength = 0f;
 			SetMoving(false);
 		}
 
