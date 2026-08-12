@@ -71,10 +71,10 @@ namespace Battle
 		Image _turnExitImage;
 		Color _turnExitNormalColor = Color.white;
 		Text _turnPanelText;
-		Text _tileInfoText;
 		HoverPawnInfoView _hoverPawnInfo;
 		BattleTurnQueueView _turnQueueView;
 		Transform _currentTurnPortraitFrame;
+		Transform _currentTurnEmblemFrame;
 		Transform _classMarkFrame;
 		GameObject _uiInstance;
 		GameObject _resultOverlay;
@@ -401,13 +401,11 @@ namespace Battle
 		void BindActionBarDisplayFrames(Transform root)
 		{
 			Transform actionPanel = FindDeepChild(root, "ActionPanel");
-			if (actionPanel == null)
-				return;
-
-			_currentTurnPortraitFrame = actionPanel.Find("CurrentTurnPortrait");
-			_classMarkFrame = actionPanel.Find("ClassMark");
-			if (_currentTurnPortraitFrame == null || _classMarkFrame == null)
-				Debug.LogWarning("BattleSceneUI ActionPanel requires CurrentTurnPortrait and ClassMark prefab children.");
+			_currentTurnPortraitFrame = FindDeepChild(root, "CurrentTurnPortrait");
+			_currentTurnEmblemFrame = actionPanel != null ? actionPanel.Find("CurrentTurnEmblem") : null;
+			_classMarkFrame = actionPanel != null ? actionPanel.Find("ClassMark") : null;
+			if (_currentTurnPortraitFrame == null || _currentTurnEmblemFrame == null || _classMarkFrame == null)
+				Debug.LogWarning("BattleSceneUI requires a CurrentTurnPortrait root child plus CurrentTurnEmblem and ClassMark ActionPanel children.");
 		}
 
 		async Task LoadGameDataAsync()
@@ -509,7 +507,6 @@ namespace Battle
 		void BindStatePanels(Transform root)
 		{
 			_turnPanelText = CreateOrGetPanelText(root, "TurnPanel", "TurnPanel_StateText", 14);
-			_tileInfoText = CreateOrGetPanelText(root, "TileInfo", "TileInfo_StateText", 13);
 			_hoverPawnInfo = CreateOrGetHoverPawnInfo(root);
 		}
 
@@ -1013,14 +1010,6 @@ namespace Battle
 			if (hasHoveredTile)
 				_objectManager.TryGetPawnAtAxial(hoveredAxial, out _, out hoveredPawn);
 
-			if (_tileInfoText != null)
-			{
-				string actionTooltip = BuildActiveActionTooltip();
-				_tileInfoText.text = string.IsNullOrWhiteSpace(actionTooltip)
-					? BuildTileInfoText(hasHoveredTile, hoveredAxial)
-					: actionTooltip;
-			}
-
 			if (_hoverPawnInfo != null)
 				_hoverPawnInfo.SetPawn(IsPointerOverUi() ? null : hoveredPawn);
 		}
@@ -1141,6 +1130,7 @@ namespace Battle
 			}
 
 			RefreshCurrentTurnPortrait(currentTurnPawn);
+			RefreshCurrentTurnEmblem(currentTurnPawn);
 			RefreshCurrentTurnSubclassEmblem(currentTurnPawn);
 		}
 
@@ -1178,6 +1168,24 @@ namespace Battle
 			}
 
 			_currentTurnPortraitFrame.gameObject.SetActive(hasPortrait);
+		}
+
+		void RefreshCurrentTurnEmblem(BattlePawn pawn)
+		{
+			if (_currentTurnEmblemFrame == null)
+				return;
+
+			string emblemName = GetPortraitPrefabChildName(pawn != null && pawn.Info != null ? pawn.Info.PawnClass : PawnClass.None);
+			bool hasEmblem = false;
+			for (int index = 0; index < _currentTurnEmblemFrame.childCount; index++)
+			{
+				Transform emblem = _currentTurnEmblemFrame.GetChild(index);
+				bool selected = emblem.name == emblemName;
+				emblem.gameObject.SetActive(selected);
+				hasEmblem |= selected;
+			}
+
+			_currentTurnEmblemFrame.gameObject.SetActive(hasEmblem);
 		}
 
 		static string GetPortraitPrefabChildName(PawnClass pawnClass)
@@ -1788,6 +1796,7 @@ namespace Battle
 				return null;
 
 			Transform existing = root.Find("HoverPawnInfo");
+			bool hasAuthoredPrefab = existing != null;
 			GameObject panelObject;
 			RectTransform panelRect;
 			Image background;
@@ -1812,21 +1821,28 @@ namespace Battle
 			if (panelRect == null || background == null)
 				return null;
 
-			panelRect.anchorMin = new Vector2(0.5f, 0.5f);
-			panelRect.anchorMax = new Vector2(0.5f, 0.5f);
-			panelRect.pivot = Vector2.zero;
-			panelRect.sizeDelta = new Vector2(286f, 250f);
-			background.color = new Color(0.10f, 0.075f, 0.035f, 0.94f);
+			if (hasAuthoredPrefab == false)
+			{
+				panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+				panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+				panelRect.pivot = Vector2.zero;
+				panelRect.sizeDelta = new Vector2(286f, 220f);
+				background.color = new Color(0.20f, 0.15f, 0.075f, 1f);
+			}
+
 			background.raycastTarget = false;
 			panelObject.transform.SetAsLastSibling();
 
 			Text title = CreateOrGetHoverPawnText(panelObject.transform, "Title", 16, TextAnchor.MiddleLeft);
 			RectTransform titleRect = title.rectTransform;
-			titleRect.anchorMin = new Vector2(0f, 0.84f);
-			titleRect.anchorMax = new Vector2(1f, 1f);
-			titleRect.offsetMin = new Vector2(12f, 2f);
-			titleRect.offsetMax = new Vector2(-12f, -6f);
-			title.color = new Color(0.97f, 0.84f, 0.48f, 1f);
+			if (hasAuthoredPrefab == false)
+			{
+				titleRect.anchorMin = new Vector2(0f, 0.84f);
+				titleRect.anchorMax = new Vector2(1f, 1f);
+				titleRect.offsetMin = new Vector2(12f, 2f);
+				titleRect.offsetMax = new Vector2(-12f, -6f);
+				title.color = new Color(0.97f, 0.84f, 0.48f, 1f);
+			}
 
 			Transform statsRoot = panelObject.transform.Find("Stats");
 			if (statsRoot == null)
@@ -1838,18 +1854,24 @@ namespace Battle
 			}
 
 			RectTransform statsRect = statsRoot as RectTransform;
-			statsRect.anchorMin = new Vector2(0f, 0.30f);
-			statsRect.anchorMax = new Vector2(1f, 0.84f);
-			statsRect.offsetMin = new Vector2(10f, 0f);
-			statsRect.offsetMax = new Vector2(-10f, -2f);
+			if (hasAuthoredPrefab == false)
+			{
+				statsRect.anchorMin = new Vector2(0f, 0.30f);
+				statsRect.anchorMax = new Vector2(1f, 0.84f);
+				statsRect.offsetMin = new Vector2(10f, 0f);
+				statsRect.offsetMax = new Vector2(-10f, -2f);
+			}
 
 			Text body = CreateOrGetHoverPawnText(panelObject.transform, "Body", 12, TextAnchor.UpperLeft);
 			RectTransform bodyRect = body.rectTransform;
-			bodyRect.anchorMin = Vector2.zero;
-			bodyRect.anchorMax = new Vector2(1f, 0.30f);
-			bodyRect.offsetMin = new Vector2(12f, 10f);
-			bodyRect.offsetMax = new Vector2(-12f, -2f);
-			body.color = new Color(0.92f, 0.90f, 0.82f, 1f);
+			if (hasAuthoredPrefab == false)
+			{
+				bodyRect.anchorMin = Vector2.zero;
+				bodyRect.anchorMax = new Vector2(1f, 0.30f);
+				bodyRect.offsetMin = new Vector2(12f, 10f);
+				bodyRect.offsetMax = new Vector2(-12f, -2f);
+				body.color = new Color(0.92f, 0.90f, 0.82f, 1f);
+			}
 
 			panelObject.SetActive(false);
 			return new HoverPawnInfoView(panelObject, panelRect, root as RectTransform, title, body, statsRect, GetStatIconSprite);

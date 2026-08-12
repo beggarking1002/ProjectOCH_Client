@@ -46,6 +46,7 @@ namespace Battle
 		PawnStatusWorldUI _statusWorldUi;
 		PawnTeamRing _teamRing;
 		GameObject _turnIndicator;
+		SpriteRenderer _turnIndicatorRenderer;
 		Coroutine _moveCoroutine;
 		Coroutine _combatPresentationCoroutine;
 		Coroutine _damageFlashCoroutine;
@@ -106,11 +107,14 @@ namespace Battle
 			_projectileOrigin = FindProjectileOrigin();
 			_statusWorldUi = GetComponentInChildren<PawnStatusWorldUI>(true);
 			_teamRing = GetComponentInChildren<PawnTeamRing>(true);
+			_turnIndicator = transform.Find("TurnIndicator")?.gameObject;
+			_turnIndicatorRenderer = _turnIndicator != null ? _turnIndicator.GetComponent<SpriteRenderer>() : null;
 		}
 
 		void LateUpdate()
 		{
 			RefreshVisualSortingOrder();
+			RefreshTurnIndicatorPresentation();
 		}
 
 		// Sprites on lower world-Y positions are nearer to the camera in this
@@ -779,7 +783,8 @@ namespace Battle
 		public void SetTurnIndicatorVisible(bool visible)
 		{
 			EnsureTurnIndicator();
-			_turnIndicator.SetActive(visible && IsDead == false);
+			if (_turnIndicator != null)
+				_turnIndicator.SetActive(visible && IsDead == false);
 		}
 
 		void EnsureInfo()
@@ -838,25 +843,39 @@ namespace Battle
 
 		void EnsureTurnIndicator()
 		{
-			if (_turnIndicator != null)
+			if (_turnIndicator == null)
+				_turnIndicator = transform.Find("TurnIndicator")?.gameObject;
+
+			if (_turnIndicator == null)
+			{
+				Debug.LogWarning($"{nameof(BattlePawn)} requires a TurnIndicator child prefab. pawnId={PawnId}, name={name}");
+				return;
+			}
+
+			if (_turnIndicatorRenderer == null)
+				_turnIndicatorRenderer = _turnIndicator.GetComponent<SpriteRenderer>();
+
+			_turnIndicator.transform.localPosition = new Vector3(0f, GetTurnIndicatorHeight(), 0f);
+			if (_turnIndicatorRenderer != null)
+				_turnIndicatorRenderer.sortingOrder = TurnIndicatorSortingOrder;
+		}
+
+		void RefreshTurnIndicatorPresentation()
+		{
+			if (_turnIndicator == null || _turnIndicator.activeInHierarchy == false)
 				return;
 
-			_turnIndicator = new GameObject("TurnIndicator");
-			_turnIndicator.transform.SetParent(transform, false);
 			_turnIndicator.transform.localPosition = new Vector3(0f, GetTurnIndicatorHeight(), 0f);
+			if (_turnIndicatorRenderer == null)
+				_turnIndicatorRenderer = _turnIndicator.GetComponent<SpriteRenderer>();
+			if (_turnIndicatorRenderer == null)
+				return;
 
-			TextMesh textMesh = _turnIndicator.AddComponent<TextMesh>();
-			textMesh.text = "TURN";
-			textMesh.anchor = TextAnchor.MiddleCenter;
-			textMesh.alignment = TextAlignment.Center;
-			textMesh.characterSize = 0.16f;
-			textMesh.fontSize = 32;
-			GameRoot.ApplyWorldTextFont(textMesh);
-			textMesh.color = Color.yellow;
-
-			MeshRenderer renderer = _turnIndicator.GetComponent<MeshRenderer>();
-			if (renderer != null)
-				renderer.sortingOrder = TurnIndicatorSortingOrder;
+			float pulse = (Mathf.Sin(Time.unscaledTime * 6f) + 1f) * 0.5f;
+			Color color = _turnIndicatorRenderer.color;
+			color.a = Mathf.Lerp(0.35f, 1f, pulse);
+			_turnIndicatorRenderer.color = color;
+			_turnIndicatorRenderer.sortingOrder = TurnIndicatorSortingOrder;
 		}
 
 		void EnsureStatusWorldUi()
