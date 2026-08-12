@@ -482,10 +482,10 @@ namespace Battle
 
 		void BindTurnExit(Transform root)
 		{
-			Transform turnExit = FindDeepChild(root, "TurnExit");
+			Transform turnExit = FindDeepChild(root, "ActionSlot_09");
 			if (turnExit == null)
 			{
-				Debug.LogWarning("Missing battle UI button: TurnExit");
+				Debug.LogWarning("Missing battle UI button: ActionSlot_09 (TurnExit)");
 				return;
 			}
 
