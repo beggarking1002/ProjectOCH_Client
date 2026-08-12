@@ -187,11 +187,6 @@ namespace Field
 				transform.position = startWorldPosition;
 
 			List<Vector3> nextPath = new List<Vector3>();
-			bool appendToActiveRoute = snapToStart == false && _isMoving && _useServerMoveDuration &&
-				Vector3.Distance(startWorldPosition, _targetWorldPosition) <= arriveDistance;
-			if (appendToActiveRoute)
-				AppendRemainingPath(nextPath);
-
 			AppendPath(nextPath, serverPath, targetWorldPosition);
 			_serverMoveStartPosition = transform.position;
 			_serverMovePath.Clear();
@@ -213,29 +208,6 @@ namespace Field
 
 			UpdateSpriteDirection(_targetWorldPosition);
 			SetMoving(_serverMovePathLength > arriveDistance);
-		}
-
-		void AppendRemainingPath(List<Vector3> destination)
-		{
-			float travelledDistance = _serverMoveDuration > 0f
-				? _serverMovePathLength * Mathf.Clamp01(_serverMoveElapsed / _serverMoveDuration)
-				: 0f;
-			Vector3 segmentStart = _serverMoveStartPosition;
-			for (int i = 0; i < _serverMovePath.Count; i++)
-			{
-				Vector3 waypoint = _serverMovePath[i];
-				float segmentLength = Vector3.Distance(segmentStart, waypoint);
-				if (travelledDistance <= segmentLength)
-				{
-					destination.Add(waypoint);
-					for (int remainingIndex = i + 1; remainingIndex < _serverMovePath.Count; remainingIndex++)
-						destination.Add(_serverMovePath[remainingIndex]);
-					return;
-				}
-
-				travelledDistance -= segmentLength;
-				segmentStart = waypoint;
-			}
 		}
 
 		void AppendPath(List<Vector3> destination, IList<Vector3> serverPath, Vector3 targetWorldPosition)

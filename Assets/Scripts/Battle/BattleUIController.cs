@@ -74,7 +74,7 @@ namespace Battle
 		Text _tileInfoText;
 		HoverPawnInfoView _hoverPawnInfo;
 		BattleTurnQueueView _turnQueueView;
-		Image _currentTurnPortraitImage;
+		Transform _currentTurnPortraitFrame;
 		Transform _classMarkFrame;
 		GameObject _uiInstance;
 		GameObject _resultOverlay;
@@ -100,8 +100,6 @@ namespace Battle
 		bool _battleResultAckSent;
 		int _hoveredActionSlotIndex = -1;
 		int _selectedActionSlotIndex = -1;
-		ulong _currentPortraitPawnId;
-		int _currentPortraitRequestVersion;
 
 		public async void Initialize(BattleObjectManager objectManager)
 		{
@@ -406,87 +404,10 @@ namespace Battle
 			if (actionPanel == null)
 				return;
 
-			Sprite frameSprite = _actionImages.Length > 0 && _actionImages[0] != null
-				? _actionImages[0].sprite
-				: null;
-			_currentTurnPortraitImage = CreateOrGetActionBarDisplayFrame(actionPanel, "CurrentTurnPortrait", frameSprite, true);
-			_classMarkFrame = FindOrCreateClassMarkFrame(actionPanel, frameSprite);
-			_currentPortraitPawnId = 0;
-			_currentPortraitRequestVersion++;
-		}
-
-		static Image CreateOrGetActionBarDisplayFrame(Transform actionPanel, string frameName, Sprite frameSprite, bool placeFirst)
-		{
-			Transform frame = actionPanel.Find(frameName);
-			if (frame == null)
-			{
-				GameObject frameObject = new GameObject(frameName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(LayoutElement));
-				frameObject.transform.SetParent(actionPanel, false);
-				frame = frameObject.transform;
-			}
-
-			RectTransform frameRect = frame as RectTransform;
-			frameRect.sizeDelta = new Vector2(60f, 68f);
-			Image frameImage = frame.GetComponent<Image>();
-			frameImage.sprite = frameSprite;
-			frameImage.type = Image.Type.Simple;
-			frameImage.raycastTarget = false;
-
-			LayoutElement layout = frame.GetComponent<LayoutElement>();
-			layout.ignoreLayout = false;
-			layout.preferredWidth = 60f;
-			layout.preferredHeight = 68f;
-
-			Transform iconTransform = frame.Find("Icon");
-			if (iconTransform == null)
-			{
-				GameObject iconObject = new GameObject("Icon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-				iconObject.transform.SetParent(frame, false);
-				iconTransform = iconObject.transform;
-			}
-
-			RectTransform iconRect = iconTransform as RectTransform;
-			iconRect.anchorMin = new Vector2(0.07f, 0.07f);
-			iconRect.anchorMax = new Vector2(0.93f, 0.93f);
-			iconRect.offsetMin = Vector2.zero;
-			iconRect.offsetMax = Vector2.zero;
-			Image iconImage = iconTransform.GetComponent<Image>();
-			iconImage.preserveAspect = true;
-			iconImage.raycastTarget = false;
-			iconImage.enabled = false;
-
-			if (placeFirst)
-				frame.SetSiblingIndex(0);
-			else
-				frame.SetAsLastSibling();
-
-			return iconImage;
-		}
-
-		static Transform FindOrCreateClassMarkFrame(Transform actionPanel, Sprite frameSprite)
-		{
-			Transform frame = actionPanel.Find("ClassMark");
-			if (frame == null)
-			{
-				GameObject frameObject = new GameObject("ClassMark", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(LayoutElement));
-				frameObject.transform.SetParent(actionPanel, false);
-				frame = frameObject.transform;
-			}
-
-			RectTransform frameRect = frame as RectTransform;
-			frameRect.sizeDelta = new Vector2(64f, 68f);
-			Image frameImage = frame.GetComponent<Image>();
-			if (frameSprite != null)
-				frameImage.sprite = frameSprite;
-			frameImage.type = Image.Type.Sliced;
-			frameImage.enabled = frameImage.sprite != null;
-			frameImage.raycastTarget = false;
-			LayoutElement layout = frame.GetComponent<LayoutElement>();
-			layout.ignoreLayout = false;
-			layout.preferredWidth = 64f;
-			layout.preferredHeight = 68f;
-			frame.SetAsLastSibling();
-			return frame;
+			_currentTurnPortraitFrame = actionPanel.Find("CurrentTurnPortrait");
+			_classMarkFrame = actionPanel.Find("ClassMark");
+			if (_currentTurnPortraitFrame == null || _classMarkFrame == null)
+				Debug.LogWarning("BattleSceneUI ActionPanel requires CurrentTurnPortrait and ClassMark prefab children.");
 		}
 
 		async Task LoadGameDataAsync()
@@ -1243,50 +1164,37 @@ namespace Battle
 
 		void RefreshCurrentTurnPortrait(BattlePawn pawn)
 		{
-			if (_currentTurnPortraitImage == null)
+			if (_currentTurnPortraitFrame == null)
 				return;
 
-			ulong pawnId = pawn != null ? pawn.PawnId : 0;
-			if (_currentPortraitPawnId == pawnId)
-				return;
+			string portraitName = GetPortraitPrefabChildName(pawn != null && pawn.Info != null ? pawn.Info.PawnClass : PawnClass.None);
+			bool hasPortrait = false;
+			for (int index = 0; index < _currentTurnPortraitFrame.childCount; index++)
+			{
+				Transform portrait = _currentTurnPortraitFrame.GetChild(index);
+				bool selected = portrait.name == portraitName;
+				portrait.gameObject.SetActive(selected);
+				hasPortrait |= selected;
+			}
 
-			_currentPortraitPawnId = pawnId;
-			int requestVersion = ++_currentPortraitRequestVersion;
-			_currentTurnPortraitImage.sprite = null;
-			_currentTurnPortraitImage.enabled = false;
-			if (pawn == null || pawn.Info == null)
-				return;
-
-			string portraitKey = GetPortraitKey(pawn.Info.PawnClass);
-			if (string.IsNullOrWhiteSpace(portraitKey) == false)
-				_ = LoadCurrentTurnPortraitAsync(portraitKey, requestVersion);
+			_currentTurnPortraitFrame.gameObject.SetActive(hasPortrait);
 		}
 
-		async Task LoadCurrentTurnPortraitAsync(string portraitKey, int requestVersion)
-		{
-			Sprite portrait = await BattlePortraitSpriteCache.LoadAsync(portraitKey);
-			if (_currentTurnPortraitImage == null || requestVersion != _currentPortraitRequestVersion)
-				return;
-
-			_currentTurnPortraitImage.sprite = portrait;
-			_currentTurnPortraitImage.enabled = portrait != null;
-		}
-
-		static string GetPortraitKey(PawnClass pawnClass)
+		static string GetPortraitPrefabChildName(PawnClass pawnClass)
 		{
 			switch (pawnClass)
 			{
 				case PawnClass.SuenAxeSword:
-				case PawnClass.SuenParvis: return "portrait_suen";
+				case PawnClass.SuenParvis: return "Suen";
 				case PawnClass.BeigeFire:
-				case PawnClass.BeigeIce: return "portrait_beige";
+				case PawnClass.BeigeIce: return "Beige";
 				case PawnClass.ZillianLongbow:
-				case PawnClass.ZillianMace: return "portrait_zillian";
+				case PawnClass.ZillianMace: return "Zillian";
 				case PawnClass.AlenSpear:
-				case PawnClass.AlenSwordShield: return "portrait_alen";
+				case PawnClass.AlenSwordShield: return "Alen";
 				case PawnClass.SeraNecromancer:
-				case PawnClass.SeraWarlock: return "portrait_sera";
-				case PawnClass.DarkhandSword: return "portrait_odo";
+				case PawnClass.SeraWarlock: return "Sera";
+				case PawnClass.DarkhandSword: return "Odo";
 				default: return string.Empty;
 			}
 		}

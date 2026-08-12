@@ -346,13 +346,18 @@ namespace Field
 				? FieldPositionCodec.ToWorld(packet.Start, z)
 				: GetPawnPositionOrDefault(packet.ObjectId, z);
 			Vector3 target = FieldPositionCodec.ToWorld(packet.Target, z);
-			List<Vector3> path = BuildMovePath(packet, target, z);
+			List<Vector3> path = BuildMovePath(packet, start, target, z, useVisualStart: false);
 
 			if (_pawns.TryGetValue(packet.ObjectId, out FieldPawnController pawn) == false)
 			{
 				SpawnPawnForMove(packet, start, target, path);
 				return;
 			}
+
+			// The server's start is its previously committed target. For a newly
+			// received command, route from the pawn's displayed position instead so
+			// changing direction replaces the in-flight route immediately.
+			path = BuildMovePath(packet, pawn.transform.position, target, z, useVisualStart: true);
 
 			// An already spawned remote pawn can still be interpolating toward the
 			// previous server target. Snapping it to this packet's start would visibly
@@ -363,9 +368,12 @@ namespace Field
 			pawn.ApplyServerMove(start, target, path, packet.DurationMs, snapToStart: false);
 		}
 
-		static List<Vector3> BuildMovePath(S_MOVE packet, Vector3 target, float z)
+		List<Vector3> BuildMovePath(S_MOVE packet, Vector3 start, Vector3 target, float z, bool useVisualStart)
 		{
 			List<Vector3> path = new List<Vector3>();
+			if (useVisualStart && _walkArea != null && _walkArea.TryFindPath(start, target, path))
+				return path;
+
 			if (packet.Path != null)
 			{
 				for (int i = 0; i < packet.Path.Count; i++)

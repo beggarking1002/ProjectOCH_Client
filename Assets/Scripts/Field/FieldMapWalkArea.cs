@@ -79,6 +79,100 @@ namespace Field
 			return _walkableCells.Contains(WorldToNearestCell(worldPosition));
 		}
 
+		// The server remains authoritative for the destination. This local route is
+		// only used to immediately replace an in-flight visual route when a newer
+		// S_MOVE arrives, so a pawn never has to finish its previous path first.
+		public bool TryFindPath(Vector3 startWorldPosition, Vector3 targetWorldPosition, List<Vector3> outPath)
+		{
+			outPath?.Clear();
+			if (outPath == null || IsInitialized == false)
+				return false;
+
+			Vector2Int start = WorldToNearestCell(startWorldPosition);
+			Vector2Int target = WorldToNearestCell(targetWorldPosition);
+			if (_walkableCells.Contains(start) == false || _walkableCells.Contains(target) == false)
+				return false;
+			if (start == target)
+			{
+				outPath.Add(targetWorldPosition);
+				return true;
+			}
+
+			Queue<Vector2Int> open = new Queue<Vector2Int>();
+			Dictionary<Vector2Int, Vector2Int> predecessors = new Dictionary<Vector2Int, Vector2Int>();
+			HashSet<Vector2Int> visited = new HashSet<Vector2Int> { start };
+			open.Enqueue(start);
+			while (open.Count > 0 && visited.Contains(target) == false)
+			{
+				Vector2Int current = open.Dequeue();
+				foreach (Vector2Int neighbor in GetNeighbors(current))
+				{
+					if (_walkableCells.Contains(neighbor) == false || visited.Add(neighbor) == false)
+						continue;
+
+					predecessors[neighbor] = current;
+					open.Enqueue(neighbor);
+					if (neighbor == target)
+						break;
+				}
+			}
+
+			if (visited.Contains(target) == false)
+				return false;
+
+			List<Vector3> rawPath = new List<Vector3>();
+			for (Vector2Int current = target; current != start; current = predecessors[current])
+				rawPath.Add(CellToWorld(current, startWorldPosition.z));
+			rawPath.Reverse();
+			if (rawPath.Count > 0)
+				rawPath.RemoveAt(rawPath.Count - 1);
+			rawPath.Add(targetWorldPosition);
+
+			Vector3 routeStart = startWorldPosition;
+			for (int currentIndex = 0; currentIndex < rawPath.Count;)
+			{
+				int nextIndex = currentIndex;
+				for (int candidateIndex = rawPath.Count - 1; candidateIndex >= currentIndex; candidateIndex--)
+				{
+					if (HasWalkableLineOfSight(routeStart, rawPath[candidateIndex]))
+					{
+						nextIndex = candidateIndex;
+						break;
+					}
+				}
+
+				outPath.Add(rawPath[nextIndex]);
+				routeStart = rawPath[nextIndex];
+				currentIndex = nextIndex + 1;
+			}
+
+			return true;
+		}
+
+		IEnumerable<Vector2Int> GetNeighbors(Vector2Int cell)
+		{
+			int diagonalX = (cell.y & 1) == 0 ? cell.x - 1 : cell.x + 1;
+			yield return new Vector2Int(cell.x - 1, cell.y);
+			yield return new Vector2Int(cell.x + 1, cell.y);
+			yield return new Vector2Int(cell.x, cell.y - 1);
+			yield return new Vector2Int(diagonalX, cell.y - 1);
+			yield return new Vector2Int(cell.x, cell.y + 1);
+			yield return new Vector2Int(diagonalX, cell.y + 1);
+		}
+
+		bool HasWalkableLineOfSight(Vector3 from, Vector3 to)
+		{
+			int sampleCount = Mathf.Max(1, Mathf.CeilToInt(Vector2.Distance(from, to) * 10f));
+			for (int sampleIndex = 0; sampleIndex <= sampleCount; sampleIndex++)
+			{
+				Vector3 sample = Vector3.Lerp(from, to, sampleIndex / (float)sampleCount);
+				if (IsWalkable(sample) == false)
+					return false;
+			}
+
+			return true;
+		}
+
 		Vector3 CellToWorld(Vector2Int cell, float z)
 		{
 			float x = _data.origin_world.x + (cell.x + GetOddRowOffset(cell.y)) * _data.cell_size.x;
