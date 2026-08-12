@@ -4150,7 +4150,7 @@ RectTransform:
   - {fileID: 236214124420426456}
   - {fileID: 7790762089656044488}
   - {fileID: 858424524321336873}
-  - {fileID: 4638206892368921336}
+  - {fileID: 3194037515322101335}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5052,7 +5052,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!1001 &97882972239069052
+--- !u!1001 &7878617234367509459
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5149,8 +5149,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e82804130498aee4e8a71a3cdfca9181, type: 3}
---- !u!224 &4638206892368921336 stripped
+--- !u!224 &3194037515322101335 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4685424298862935428, guid: e82804130498aee4e8a71a3cdfca9181, type: 3}
-  m_PrefabInstance: {fileID: 97882972239069052}
+  m_PrefabInstance: {fileID: 7878617234367509459}
   m_PrefabAsset: {fileID: 0}
