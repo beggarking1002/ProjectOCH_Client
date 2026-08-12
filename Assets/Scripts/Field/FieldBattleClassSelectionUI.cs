@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using App;
 using Protocol;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Field
@@ -9,6 +12,7 @@ namespace Field
 	[DisallowMultipleComponent]
 	public sealed class FieldBattleClassSelectionUI : MonoBehaviour
 	{
+		const string BattleClassSelectionUiAddress = "FieldBattleClassSelectionUI";
 		enum ClassGroup { Suen, Beige, Alen, Zillian }
 
 		sealed class OptionButton
@@ -20,9 +24,12 @@ namespace Field
 		}
 
 		const int CanvasSortingOrder = 1250;
-		static readonly Color NormalColor = new Color(0.14f, 0.18f, 0.26f, 0.96f);
-		static readonly Color SelectedColor = new Color(0.16f, 0.49f, 0.70f, 0.98f);
-		static readonly Color DisabledColor = new Color(0.12f, 0.12f, 0.12f, 0.84f);
+		static readonly Color PanelColor = new Color(0.10f, 0.075f, 0.035f, 0.97f);
+		static readonly Color Gold = new Color(0.97f, 0.84f, 0.48f, 1f);
+		static readonly Color Cream = new Color(0.92f, 0.90f, 0.82f, 1f);
+		static readonly Color NormalColor = new Color(0.18f, 0.125f, 0.055f, 0.96f);
+		static readonly Color SelectedColor = new Color(0.42f, 0.29f, 0.10f, 0.98f);
+		static readonly Color DisabledColor = new Color(0.08f, 0.06f, 0.03f, 0.84f);
 		static FieldBattleClassSelectionUI _instance;
 
 		readonly Dictionary<ClassGroup, PawnClass> _selected = new Dictionary<ClassGroup, PawnClass>();
@@ -37,6 +44,11 @@ namespace Field
 		bool _waiting;
 		bool _locked;
 		bool _isDebugBattleSelection;
+		AsyncOperationHandle<GameObject> _uiHandle;
+		bool _hasUiHandle;
+		bool _isBinding;
+		bool _bound;
+		S_BATTLE_CLASS_SELECTION_START _pendingStart;
 
 		public static bool IsBlockingInput => _instance != null && _instance._overlayRoot != null && _instance._overlayRoot.activeSelf;
 
@@ -44,8 +56,7 @@ namespace Field
 		{
 			_instance = this;
 			FieldBattleInviteUI.EnsureEventSystem();
-			BuildUi();
-			Hide();
+			BindOrLoadUi();
 		}
 
 		void OnEnable() => TrySubscribe();
@@ -59,6 +70,13 @@ namespace Field
 		{
 			if (_instance == this)
 				_instance = null;
+
+			if (_hasUiHandle && _uiHandle.IsValid())
+			{
+				Addressables.ReleaseInstance(_uiHandle);
+				_hasUiHandle = false;
+				_uiHandle = default;
+			}
 		}
 
 		void TrySubscribe()
@@ -90,6 +108,16 @@ namespace Field
 			if (packet == null)
 				return;
 
+			_pendingStart = packet;
+			if (_bound == false)
+				return;
+
+			ShowStart(packet);
+		}
+
+		void ShowStart(S_BATTLE_CLASS_SELECTION_START packet)
+		{
+
 			_selected.Clear();
 			_buttons.Clear();
 			_waiting = false;
@@ -107,7 +135,7 @@ namespace Field
 
 		void OnResult(S_BATTLE_CLASS_SELECTION_RESULT packet)
 		{
-			if (packet == null || _overlayRoot.activeSelf == false)
+			if (packet == null || _bound == false || _overlayRoot.activeSelf == false)
 				return;
 
 			if (packet.Success == false)
@@ -205,7 +233,64 @@ namespace Field
 				_overlayRoot.SetActive(false);
 		}
 
-		void BuildUi()
+		async void BindOrLoadUi()
+		{
+			if (_isBinding || _bound)
+				return;
+
+			_isBinding = true;
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(BattleClassSelectionUiAddress);
+			await handle.Task;
+			if (this == null || _bound)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				return;
+			}
+
+			if (handle.Status != AsyncOperationStatus.Succeeded)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				Debug.LogError($"Failed to load addressable UI prefab: {BattleClassSelectionUiAddress}");
+				_isBinding = false;
+				return;
+			}
+
+			_uiHandle = handle;
+			_hasUiHandle = true;
+			BindUi(handle.Result);
+			_isBinding = false;
+		}
+
+		void BindUi(GameObject uiObject)
+		{
+			FieldBattleClassSelectionView view = uiObject != null ? uiObject.GetComponent<FieldBattleClassSelectionView>() : null;
+			if (view == null || view.Canvas == null || view.Panel == null || view.Status == null || view.Options == null || view.Submit == null || view.SubmitText == null)
+			{
+				Debug.LogError($"Addressable UI prefab '{BattleClassSelectionUiAddress}' requires FieldBattleClassSelectionView with all prefab references assigned.");
+				return;
+			}
+
+			_overlayRoot = uiObject;
+			_overlayRoot.name = "Canvas_FieldBattleClassSelectionUI";
+			SceneManager.MoveGameObjectToScene(_overlayRoot, gameObject.scene);
+			view.Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+			view.Canvas.sortingOrder = CanvasSortingOrder;
+			_options = view.Options;
+			_status = view.Status;
+			_submit = view.Submit;
+			_submitText = view.SubmitText;
+			_submit.onClick.RemoveAllListeners();
+			_submit.onClick.AddListener(Submit);
+			GameRoot.ApplyUiFont(_overlayRoot);
+			_bound = true;
+			Hide();
+			if (_pendingStart != null)
+				ShowStart(_pendingStart);
+		}
+
+		void BuildFallback()
 		{
 			_overlayRoot = Create("Canvas_FieldBattleClassSelectionUI", transform, typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
 			Canvas canvas = _overlayRoot.GetComponent<Canvas>();
@@ -217,13 +302,16 @@ namespace Field
 
 			GameObject dimmer = Create("Dimmer", _overlayRoot.transform, typeof(Image));
 			Stretch(dimmer.GetComponent<RectTransform>());
-			dimmer.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.56f);
-			_panel = Create("Panel", dimmer.transform, typeof(Image), typeof(VerticalLayoutGroup));
+			dimmer.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.62f);
+			_panel = Create("Panel", dimmer.transform, typeof(Image), typeof(Outline), typeof(VerticalLayoutGroup));
 			RectTransform rect = _panel.GetComponent<RectTransform>();
 			rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
 			rect.pivot = new Vector2(0.5f, 0.5f);
 			rect.sizeDelta = new Vector2(780f, 550f);
-			_panel.GetComponent<Image>().color = new Color(0.06f, 0.08f, 0.12f, 0.98f);
+			_panel.GetComponent<Image>().color = PanelColor;
+			Outline outline = _panel.GetComponent<Outline>();
+			outline.effectColor = new Color(0.72f, 0.59f, 0.31f, 0.9f);
+			outline.effectDistance = new Vector2(2f, -2f);
 			VerticalLayoutGroup layout = _panel.GetComponent<VerticalLayoutGroup>();
 			layout.padding = new RectOffset(32, 32, 24, 24);
 			layout.spacing = 12;
@@ -233,10 +321,11 @@ namespace Field
 			layout.childForceExpandHeight = false;
 
 			Text title = Text("Title", _panel.transform, 30, TextAnchor.MiddleCenter);
+			title.color = Gold;
 			title.text = "PvP 클래스 선택";
 			Layout(title.gameObject, 52f);
 			_status = Text("Status", _panel.transform, 18, TextAnchor.MiddleCenter);
-			_status.color = new Color(0.84f, 0.88f, 0.95f);
+			_status.color = Cream;
 			Layout(_status.gameObject, 46f);
 			GameObject optionsRoot = Create("Options", _panel.transform, typeof(HorizontalLayoutGroup));
 			HorizontalLayoutGroup optionsLayout = optionsRoot.GetComponent<HorizontalLayoutGroup>();
@@ -314,7 +403,7 @@ namespace Field
 			text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 			text.fontSize = fontSize;
 			text.alignment = alignment;
-			text.color = Color.white;
+			text.color = Cream;
 			return text;
 		}
 
@@ -327,6 +416,7 @@ namespace Field
 			button.targetGraphic = image;
 			button.onClick.AddListener(onClick);
 			labelText = Text("Text", go.transform, 20, TextAnchor.MiddleCenter);
+			labelText.color = Gold;
 			labelText.text = label;
 			Stretch(labelText.rectTransform);
 			return button;

@@ -8,7 +8,10 @@ internal static class HoverPawnInfoPrefabSetup
 {
     const string HoverPrefabPath = "Assets/@Resources/Prefab/UI/HoverPawnInfo.prefab";
     const string BattlePrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+	const string StatIconPath = "Assets/@Resources/Art/UI/StatIcon.png";
+	const string PanelFramePath = "Assets/@Resources/Art/UI/UI_3.png";
     const int SlotCount = 10;
+	static readonly int[] DefaultStatIconIndices = { 6, 16, 17, 10, 13, 18, 19, 20, 21, 22 };
 
     [InitializeOnLoadMethod]
     static void SetupOnReload()
@@ -51,7 +54,9 @@ internal static class HoverPawnInfoPrefabSetup
         panel.anchorMin = panel.anchorMax = new Vector2(0.5f, 0.5f);
         panel.pivot = Vector2.zero;
         panel.sizeDelta = new Vector2(286f, 250f);
-        background.color = new Color(0.10f, 0.075f, 0.035f, 0.94f);
+		background.sprite = FindSprite(PanelFramePath, "UI_3_0");
+		background.type = Image.Type.Sliced;
+		background.color = Color.white;
         background.raycastTarget = false;
         outline.effectColor = new Color(0.72f, 0.59f, 0.31f, 0.78f);
         outline.effectDistance = new Vector2(1f, -1f);
@@ -94,7 +99,8 @@ internal static class HoverPawnInfoPrefabSetup
         Image icon = iconRect.GetComponent<Image>() ?? iconRect.gameObject.AddComponent<Image>();
         if (iconRect.GetComponent<CanvasRenderer>() == null)
             iconRect.gameObject.AddComponent<CanvasRenderer>();
-        icon.enabled = false;
+		icon.sprite = FindSprite(StatIconPath, $"StatIcon_{DefaultStatIconIndices[index]}");
+		icon.enabled = icon.sprite != null;
         icon.raycastTarget = false;
         icon.preserveAspect = true;
         iconRect.anchorMin = new Vector2(0f, 0.15f);
@@ -136,6 +142,17 @@ internal static class HoverPawnInfoPrefabSetup
         childObject.transform.SetParent(parent, false);
         return childObject.GetComponent<RectTransform>();
     }
+
+	static Sprite FindSprite(string path, string spriteName)
+	{
+		Object[] assets = AssetDatabase.LoadAllAssetsAtPath(path);
+		for (int index = 0; index < assets.Length; index++)
+		{
+			if (assets[index] is Sprite sprite && sprite.name == spriteName)
+				return sprite;
+		}
+		return null;
+	}
 
     static void AttachToBattleUi(GameObject hoverPrefab)
     {

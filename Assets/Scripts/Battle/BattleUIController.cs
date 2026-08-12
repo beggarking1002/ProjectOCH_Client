@@ -2095,7 +2095,12 @@ namespace Battle
 					bool visible = index < _values.Count;
 					_entries[index].SetVisible(visible);
 					if (visible)
-						_entries[index].Set(_values[index], _iconResolver != null ? _iconResolver(_values[index].Icon) : null, index, _values.Count);
+					{
+						// The five core stat icons are authored and serialized in HoverPawnInfo.prefab.
+						// Only variable status slots (and future overflow slots) need a runtime icon.
+						Sprite sprite = index < 5 ? null : _iconResolver != null ? _iconResolver(_values[index].Icon) : null;
+						_entries[index].Set(_values[index], sprite, index, _values.Count);
+					}
 				}
 			}
 
@@ -2180,8 +2185,9 @@ namespace Battle
 				_rect.anchorMax = new Vector2((column + 1) * width, 1f - (row * height));
 				_rect.offsetMin = new Vector2(1f, 1f);
 				_rect.offsetMax = new Vector2(-1f, -1f);
-				_icon.sprite = sprite;
-				_icon.enabled = sprite != null;
+				if (sprite != null)
+					_icon.sprite = sprite;
+				_icon.enabled = _icon.sprite != null;
 				_value.text = data.Value;
 			}
 
