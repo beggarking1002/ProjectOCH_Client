@@ -414,7 +414,7 @@ namespace Battle
 			void SetTeamBorderColor(bool? isMine)
 			{
 				Color color = isMine.HasValue
-					? isMine.Value ? new Color(0.20f, 0.62f, 1f, 1f) : new Color(0.94f, 0.23f, 0.20f, 1f)
+					? isMine.Value ? new Color(PawnTeamRing.AllyColor.r, PawnTeamRing.AllyColor.g, PawnTeamRing.AllyColor.b, 1f) : new Color(0.94f, 0.23f, 0.20f, 1f)
 					: new Color(0.78f, 0.67f, 0.40f, 1f);
 				foreach (Image frame in _frameImages)
 				{

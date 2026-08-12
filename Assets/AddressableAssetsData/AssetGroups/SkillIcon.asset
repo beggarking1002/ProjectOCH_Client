@@ -183,7 +183,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a8b5750c9c6a0e6488aa18e899eac158
+  - m_GUID: adcf17c7b7050474eac013705859f949
     m_Address: icon_alen_shield_passive
     m_ReadOnly: 0
     m_SerializedLabels:

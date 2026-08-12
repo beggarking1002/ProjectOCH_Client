@@ -112,12 +112,12 @@ namespace Field
 			_locked = false;
 			_isDebugBattleSelection = packet.TargetPlayerId == 0;
 			ClearOptions();
-			CreateOptions(ClassGroup.Suen, "SUEN", packet.SuenOptions);
-			CreateOptions(ClassGroup.Beige, "BEIGE", packet.BeigeOptions);
-			CreateOptions(ClassGroup.Alen, "ALEN", packet.AlenOptions);
-			CreateOptions(ClassGroup.Zillian, "ZILLIAN", packet.ZillianOptions);
+			CreateOptions(ClassGroup.Suen, "\uC2A4\uC5D4", packet.SuenOptions);
+			CreateOptions(ClassGroup.Beige, "\uBCA0\uC774\uC9C0", packet.BeigeOptions);
+			CreateOptions(ClassGroup.Alen, "\uC54C\uB80C", packet.AlenOptions);
+			CreateOptions(ClassGroup.Zillian, "\uC9C8\uB9AC\uC5B8", packet.ZillianOptions);
 			_overlayRoot.SetActive(true);
-			_status.text = "Choose one class from each group.";
+			_status.text = "\uAC01 \uC601\uC6C5\uC758 \uD074\uB798\uC2A4\uB97C \uD558\uB098\uC529 \uC120\uD0DD\uD558\uC138\uC694.";
 			Refresh();
 		}
 
@@ -130,7 +130,7 @@ namespace Field
 			{
 				_waiting = false;
 				_locked = false;
-				_status.text = string.IsNullOrWhiteSpace(packet.Reason) ? "Selection was rejected. Please try again." : packet.Reason;
+				_status.text = string.IsNullOrWhiteSpace(packet.Reason) ? "\uC120\uD0DD\uC774 \uAC70\uBD80\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uB2E4\uC2DC \uC2DC\uB3C4\uD558\uC138\uC694." : packet.Reason;
 			}
 			else if (_isDebugBattleSelection)
 			{
@@ -141,7 +141,7 @@ namespace Field
 			{
 				_waiting = packet.WaitingForOpponent;
 				_locked = packet.WaitingForOpponent == false;
-				_status.text = _waiting ? "Selection sent. Waiting for the opponent..." : "Both selections are complete. Preparing battle...";
+				_status.text = _waiting ? "\uC120\uD0DD\uC744 \uC804\uC1A1\uD588\uC2B5\uB2C8\uB2E4. \uC0C1\uB300\uC758 \uC120\uD0DD\uC744 \uAE30\uB2E4\uB9AC\uB294 \uC911\uC785\uB2C8\uB2E4..." : "\uC591\uCABD \uC120\uD0DD\uC774 \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uC804\uD22C\uB97C \uC900\uBE44\uD558\uB294 \uC911\uC785\uB2C8\uB2E4...";
 			}
 			Refresh();
 		}
@@ -164,7 +164,7 @@ namespace Field
 				return;
 
 			_selected[group] = pawnClass;
-			_status.text = "Choose one class from each group.";
+			_status.text = "\uAC01 \uC601\uC6C5\uC758 \uD074\uB798\uC2A4\uB97C \uD558\uB098\uC529 \uC120\uD0DD\uD558\uC138\uC694.";
 			Refresh();
 		}
 
@@ -180,12 +180,12 @@ namespace Field
 			};
 			if (GameRoot.Instance.Network.SendBattleClassSelection(classes) == false)
 			{
-				_status.text = string.IsNullOrWhiteSpace(GameRoot.Instance.Network.LastError) ? "Failed to send selection." : GameRoot.Instance.Network.LastError;
+				_status.text = string.IsNullOrWhiteSpace(GameRoot.Instance.Network.LastError) ? "\uC120\uD0DD \uC804\uC1A1\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4." : GameRoot.Instance.Network.LastError;
 				Refresh();
 				return;
 			}
 
-			_status.text = "Sending selection...";
+			_status.text = "\uC120\uD0DD\uC744 \uC804\uC1A1\uD558\uB294 \uC911\uC785\uB2C8\uB2E4...";
 			_submit.interactable = false;
 		}
 
@@ -206,7 +206,7 @@ namespace Field
 				option.Button.interactable = disabled == false;
 			}
 			_submit.interactable = disabled == false && HasAllSelections();
-			_submitText.text = disabled ? "SELECTION COMPLETE" : "CONFIRM";
+			_submitText.text = disabled ? "\uC120\uD0DD \uC644\uB8CC" : "\uC120\uD0DD \uD655\uC815";
 		}
 
 		void Hide()

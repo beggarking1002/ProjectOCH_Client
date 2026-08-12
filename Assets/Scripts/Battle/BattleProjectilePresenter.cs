@@ -14,7 +14,7 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class BattleProjectilePresenter : MonoBehaviour
 	{
-		const int ProjectileSortingOrder = 45;
+		const int ProjectileSortingOrder = 260;
 		const float MinimumFlightSeconds = 0.14f;
 		const float MaximumFlightSeconds = 0.56f;
 		const float TargetVerticalOffset = 0.14f;
@@ -209,7 +209,7 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class BattleSpriteEffectPresenter : MonoBehaviour
 	{
-		const int EffectSortingOrder = 43;
+		const int EffectSortingOrder = 260;
 
 		readonly struct SpriteEffectStyle
 		{

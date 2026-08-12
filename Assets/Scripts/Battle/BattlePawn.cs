@@ -9,9 +9,13 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public class BattlePawn : MonoBehaviour
 	{
-		const int DefaultSortingOrder = 20;
+		// World rendering is intentionally divided into broad bands. This prevents a
+		// high-Y pawn from being covered by a fixed-order targeting outline or team ring.
+		const int DefaultSortingOrder = 200;
+		const int MinPawnSpriteSortingOrder = 160;
+		const int MaxPawnSpriteSortingOrder = 240;
 		const float SortingOrderPerWorldYUnit = 2f;
-		const int TurnIndicatorSortingOrder = 41;
+		const int TurnIndicatorSortingOrder = 303;
 		const float StatusWorldUiMargin = 0.18f;
 		const float TurnIndicatorMargin = 0.52f;
 		const float MoveSecondsPerTile = 0.28f;
@@ -113,7 +117,10 @@ namespace Battle
 		// top-down board, so they must render after higher-positioned pawns.
 		public static int GetWorldSortingOrder(float worldY)
 		{
-			return DefaultSortingOrder - Mathf.RoundToInt(worldY * SortingOrderPerWorldYUnit);
+			return Mathf.Clamp(
+				DefaultSortingOrder - Mathf.RoundToInt(worldY * SortingOrderPerWorldYUnit),
+				MinPawnSpriteSortingOrder,
+				MaxPawnSpriteSortingOrder);
 		}
 
 		void RefreshVisualSortingOrder()
@@ -121,8 +128,16 @@ namespace Battle
 			if (_spriteRenderer == null)
 				_spriteRenderer = FindVisualSpriteRenderer();
 
-			if (_spriteRenderer != null)
-				_spriteRenderer.sortingOrder = GetWorldSortingOrder(transform.position.y);
+			int sortingOrder = GetWorldSortingOrder(transform.position.y);
+			if (_visualRoot != null)
+			{
+				foreach (SpriteRenderer renderer in _visualRoot.GetComponentsInChildren<SpriteRenderer>(true))
+					renderer.sortingOrder = sortingOrder;
+			}
+			else if (_spriteRenderer != null)
+			{
+				_spriteRenderer.sortingOrder = sortingOrder;
+			}
 		}
 
 		protected virtual void OnDisable()

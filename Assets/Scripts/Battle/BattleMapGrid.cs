@@ -391,8 +391,10 @@ namespace Battle
 			if (marker == null)
 				return;
 
-			int offsetFromPawn = isAxe ? 1 : -1;
-			int sortingOrder = BattlePawn.GetWorldSortingOrder(marker.transform.position.y) + offsetFromPawn;
+			_ = isAxe;
+			// Ground equipment belongs to the tile layer. It must never draw over a
+			// pawn's ring or sprite when both occupy the same hex.
+			const int sortingOrder = 20;
 			foreach (SpriteRenderer renderer in marker.GetComponentsInChildren<SpriteRenderer>(true))
 				renderer.sortingOrder = sortingOrder;
 		}

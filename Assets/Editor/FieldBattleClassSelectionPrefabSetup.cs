@@ -33,23 +33,23 @@ internal static class FieldBattleClassSelectionPrefabSetup
 	static readonly Color NormalColor = new Color(0.18f, 0.125f, 0.055f, 0.96f);
 	static readonly OptionDefinition[] SuenOptions =
 	{
-		new OptionDefinition(PawnClass.SuenAxeSword, "AXE SWORD", SubclassEmblemPath + "Emblem_Suen_AxeSword.png"),
-		new OptionDefinition(PawnClass.SuenParvis, "PARVIS", SubclassEmblemPath + "Emblem_Suen_Parvis.png"),
+		new OptionDefinition(PawnClass.SuenAxeSword, "\uC591\uC190 \uB3C4\uB07C\uAC80", SubclassEmblemPath + "Emblem_Suen_AxeSword.png"),
+		new OptionDefinition(PawnClass.SuenParvis, "\uD30C\uB974\uBE44\uC2A4", SubclassEmblemPath + "Emblem_Suen_Parvis.png"),
 	};
 	static readonly OptionDefinition[] BeigeOptions =
 	{
-		new OptionDefinition(PawnClass.BeigeIce, "ICE", SubclassEmblemPath + "Emblem_Beige_Ice.png"),
-		new OptionDefinition(PawnClass.BeigeFire, "FIRE", SubclassEmblemPath + "Emblem_Beige_Fire.png"),
+		new OptionDefinition(PawnClass.BeigeIce, "\uC5BC\uC74C", SubclassEmblemPath + "Emblem_Beige_Ice.png"),
+		new OptionDefinition(PawnClass.BeigeFire, "\uBD88", SubclassEmblemPath + "Emblem_Beige_Fire.png"),
 	};
 	static readonly OptionDefinition[] AlenOptions =
 	{
-		new OptionDefinition(PawnClass.AlenSpear, "SPEAR", SubclassEmblemPath + "Emblem_Alen_Spear.png"),
-		new OptionDefinition(PawnClass.AlenSwordShield, "SWORD & SHIELD", SubclassEmblemPath + "Emblem_Alen_SwordShield.png"),
+		new OptionDefinition(PawnClass.AlenSpear, "\uCC3D", SubclassEmblemPath + "Emblem_Alen_Spear.png"),
+		new OptionDefinition(PawnClass.AlenSwordShield, "\uAC80\uBC29\uD328", SubclassEmblemPath + "Emblem_Alen_SwordShield.png"),
 	};
 	static readonly OptionDefinition[] ZillianOptions =
 	{
-		new OptionDefinition(PawnClass.ZillianLongbow, "LONGBOW", SubclassEmblemPath + "Emblem_Zillian_Longbow.png"),
-		new OptionDefinition(PawnClass.ZillianMace, "MACE", SubclassEmblemPath + "Emblem_Zillian_Mace.png"),
+		new OptionDefinition(PawnClass.ZillianLongbow, "\uB871\uBCF4\uC6B0", SubclassEmblemPath + "Emblem_Zillian_Longbow.png"),
+		new OptionDefinition(PawnClass.ZillianMace, "\uBA54\uC774\uC2A4", SubclassEmblemPath + "Emblem_Zillian_Mace.png"),
 	};
 
 	[InitializeOnLoadMethod]
@@ -121,10 +121,10 @@ internal static class FieldBattleClassSelectionPrefabSetup
 		panelLayout.childForceExpandHeight = false;
 
 		Text title = Text("Title", panel.transform, 30, TextAnchor.MiddleCenter, Gold);
-		title.text = "PVP CLASS SELECTION";
+		title.text = "\uC804\uD22C \uD074\uB798\uC2A4 \uC120\uD0DD";
 		Layout(title.gameObject, 52f);
 		Text status = Text("Status", panel.transform, 18, TextAnchor.MiddleCenter, Cream);
-		status.text = "Choose one class from each group.";
+		status.text = "\uAC01 \uC601\uC6C5\uC758 \uD074\uB798\uC2A4\uB97C \uD558\uB098\uC529 \uC120\uD0DD\uD558\uC138\uC694.";
 		Layout(status.gameObject, 42f);
 		GameObject options = Create("Options", panel.transform, typeof(HorizontalLayoutGroup));
 		HorizontalLayoutGroup optionsLayout = options.GetComponent<HorizontalLayoutGroup>();
@@ -133,12 +133,12 @@ internal static class FieldBattleClassSelectionPrefabSetup
 		optionsLayout.childControlHeight = true;
 		optionsLayout.childForceExpandWidth = true;
 		optionsLayout.childForceExpandHeight = false;
-		CreateColumn("SuenColumn", "SUEN", EmblemPath + "Emblem_Suen.png", SuenOptions, options.transform);
-		CreateColumn("BeigeColumn", "BEIGE", EmblemPath + "Emblem_Beige.png", BeigeOptions, options.transform);
-		CreateColumn("AlenColumn", "ALEN", EmblemPath + "Emblem_Alen.png", AlenOptions, options.transform);
-		CreateColumn("ZillianColumn", "ZILLIAN", EmblemPath + "Emblem_Zillian.png", ZillianOptions, options.transform);
+		CreateColumn("SuenColumn", "\uC2A4\uC5D4", EmblemPath + "Emblem_Suen.png", SuenOptions, options.transform);
+		CreateColumn("BeigeColumn", "\uBCA0\uC774\uC9C0", EmblemPath + "Emblem_Beige.png", BeigeOptions, options.transform);
+		CreateColumn("AlenColumn", "\uC54C\uB80C", EmblemPath + "Emblem_Alen.png", AlenOptions, options.transform);
+		CreateColumn("ZillianColumn", "\uC9C8\uB9AC\uC5B8", EmblemPath + "Emblem_Zillian.png", ZillianOptions, options.transform);
 		Layout(options, 352f);
-		Button submit = Button("Submit", panel.transform, "CONFIRM", out Text submitText);
+		Button submit = Button("Submit", panel.transform, "\uC120\uD0DD \uD655\uC815", out Text submitText);
 		Layout(submit.gameObject, 58f);
 
 		view.Configure(canvas, panel, status, options.transform, submit, submitText);
@@ -193,13 +193,6 @@ internal static class FieldBattleClassSelectionPrefabSetup
 		emblemRect.offsetMin = Vector2.zero;
 		emblemRect.offsetMax = Vector2.zero;
 
-		Text text = Text("Text", card.transform, 15, TextAnchor.MiddleCenter, Cream);
-		text.text = definition.Label;
-		RectTransform textRect = text.rectTransform;
-		textRect.anchorMin = new Vector2(0.06f, 0.04f);
-		textRect.anchorMax = new Vector2(0.94f, 0.28f);
-		textRect.offsetMin = Vector2.zero;
-		textRect.offsetMax = Vector2.zero;
 	}
 
 	static void RegisterAddressable()

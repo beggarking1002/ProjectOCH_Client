@@ -75,7 +75,7 @@ namespace Battle
 		HoverPawnInfoView _hoverPawnInfo;
 		BattleTurnQueueView _turnQueueView;
 		Image _currentTurnPortraitImage;
-		Image _classMarkImage;
+		Transform _classMarkFrame;
 		GameObject _uiInstance;
 		GameObject _resultOverlay;
 		GameObject _optionalPositionSwapPrompt;
@@ -410,7 +410,7 @@ namespace Battle
 				? _actionImages[0].sprite
 				: null;
 			_currentTurnPortraitImage = CreateOrGetActionBarDisplayFrame(actionPanel, "CurrentTurnPortrait", frameSprite, true);
-			_classMarkImage = CreateOrGetActionBarDisplayFrame(actionPanel, "ClassMark", frameSprite, false);
+			_classMarkFrame = FindOrCreateClassMarkFrame(actionPanel, frameSprite);
 			_currentPortraitPawnId = 0;
 			_currentPortraitRequestVersion++;
 		}
@@ -446,8 +446,8 @@ namespace Battle
 			}
 
 			RectTransform iconRect = iconTransform as RectTransform;
-			iconRect.anchorMin = new Vector2(0.15f, 0.12f);
-			iconRect.anchorMax = new Vector2(0.85f, 0.88f);
+			iconRect.anchorMin = new Vector2(0.07f, 0.07f);
+			iconRect.anchorMax = new Vector2(0.93f, 0.93f);
 			iconRect.offsetMin = Vector2.zero;
 			iconRect.offsetMax = Vector2.zero;
 			Image iconImage = iconTransform.GetComponent<Image>();
@@ -461,6 +461,32 @@ namespace Battle
 				frame.SetAsLastSibling();
 
 			return iconImage;
+		}
+
+		static Transform FindOrCreateClassMarkFrame(Transform actionPanel, Sprite frameSprite)
+		{
+			Transform frame = actionPanel.Find("ClassMark");
+			if (frame == null)
+			{
+				GameObject frameObject = new GameObject("ClassMark", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(LayoutElement));
+				frameObject.transform.SetParent(actionPanel, false);
+				frame = frameObject.transform;
+			}
+
+			RectTransform frameRect = frame as RectTransform;
+			frameRect.sizeDelta = new Vector2(64f, 68f);
+			Image frameImage = frame.GetComponent<Image>();
+			if (frameSprite != null)
+				frameImage.sprite = frameSprite;
+			frameImage.type = Image.Type.Sliced;
+			frameImage.enabled = frameImage.sprite != null;
+			frameImage.raycastTarget = false;
+			LayoutElement layout = frame.GetComponent<LayoutElement>();
+			layout.ignoreLayout = false;
+			layout.preferredWidth = 64f;
+			layout.preferredHeight = 68f;
+			frame.SetAsLastSibling();
+			return frame;
 		}
 
 		async Task LoadGameDataAsync()
@@ -1194,6 +1220,25 @@ namespace Battle
 			}
 
 			RefreshCurrentTurnPortrait(currentTurnPawn);
+			RefreshCurrentTurnSubclassEmblem(currentTurnPawn);
+		}
+
+		void RefreshCurrentTurnSubclassEmblem(BattlePawn pawn)
+		{
+			if (_classMarkFrame == null)
+				return;
+
+			string pawnClassName = pawn != null && pawn.Info != null ? pawn.Info.PawnClass.ToString() : string.Empty;
+			bool hasEmblem = false;
+			for (int index = 0; index < _classMarkFrame.childCount; index++)
+			{
+				Transform emblem = _classMarkFrame.GetChild(index);
+				bool selected = emblem.name == pawnClassName;
+				emblem.gameObject.SetActive(selected);
+				hasEmblem |= selected;
+			}
+
+			_classMarkFrame.gameObject.SetActive(hasEmblem);
 		}
 
 		void RefreshCurrentTurnPortrait(BattlePawn pawn)
@@ -1698,8 +1743,10 @@ namespace Battle
 				image = iconObject.AddComponent<Image>();
 			}
 
-			rect.anchorMin = new Vector2(0.15f, 0.15f);
-			rect.anchorMax = new Vector2(0.85f, 0.85f);
+			// Keep only a thin breathing room for the gold frame. The skill art should
+			// read as the primary content of each action slot, not as a small badge.
+			rect.anchorMin = new Vector2(0.07f, 0.07f);
+			rect.anchorMax = new Vector2(0.93f, 0.93f);
 			rect.offsetMin = Vector2.zero;
 			rect.offsetMax = Vector2.zero;
 			rect.localScale = Vector3.one;

@@ -9,9 +9,10 @@ namespace Battle
 		const float RadiusX = 0.46f;
 		const float RadiusY = 0.2f;
 		const float LineWidth = 0.055f;
-		const int SortingOrder = 19;
+		// Ring band: above tile/range indicators (10), below every pawn sprite (160+).
+		const int SortingOrder = 100;
 
-		static readonly Color AllyColor = new Color(0.15f, 0.52f, 1f, 0.92f);
+		public static readonly Color AllyColor = new Color(0.15f, 0.52f, 1f, 0.92f);
 		static readonly Color EnemyColor = new Color(1f, 0.16f, 0.13f, 0.92f);
 
 		LineRenderer _lineRenderer;

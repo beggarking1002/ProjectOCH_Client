@@ -6,9 +6,10 @@ namespace Battle
 	[DisallowMultipleComponent]
 	public sealed class PawnStatusWorldUI : MonoBehaviour
 	{
-		const int BackgroundSortingOrder = 38;
-		const int FillSortingOrder = 39;
-		const int TextSortingOrder = 40;
+		// Status band: always above every pawn sprite (160-240).
+		const int BackgroundSortingOrder = 300;
+		const int FillSortingOrder = 301;
+		const int TextSortingOrder = 302;
 		const float BarWidth = 0.9f;
 		const float BarHeight = 0.12f;
 		const float TrackPadding = 0.018f;
