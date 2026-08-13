@@ -1,0 +1,700 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &990100000000000001
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000002}
+  - component: {fileID: 990100000000000003}
+  - component: {fileID: 990100000000000004}
+  - component: {fileID: 990100000000000005}
+  - component: {fileID: 990100000000000006}
+  m_Layer: 5
+  m_Name: FieldVillageQuestUI
+  m_IsActive: 1
+--- !u!224 &990100000000000002
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 990100000000000012}
+  - {fileID: 990100000000000022}
+  m_Father: {fileID: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &990100000000000003
+Canvas:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000001}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_OverrideSorting: 1
+  m_SortingOrder: 1275
+  m_TargetDisplay: 0
+--- !u!114 &990100000000000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000001}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_UiScaleMode: 1
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_ReferencePixelsPerUnit: 100
+--- !u!114 &990100000000000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000001}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &990100000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000001}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 1f34824e5b1942f49ed1518e47e57f33, type: 3}
+  questButtons:
+  - {fileID: 990100000000000075}
+  - {fileID: 990100000000000085}
+  - {fileID: 990100000000000095}
+  backButton: {fileID: 990100000000000105}
+  statusText: {fileID: 990100000000000035}
+--- !u!1 &990100000000000011
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000012}
+  - component: {fileID: 990100000000000013}
+  - component: {fileID: 990100000000000014}
+  m_Layer: 5
+  m_Name: Dimmer
+  m_IsActive: 1
+--- !u!224 &990100000000000012
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000002}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000011}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000011}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.72}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+--- !u!1 &990100000000000021
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000022}
+  - component: {fileID: 990100000000000023}
+  - component: {fileID: 990100000000000024}
+  m_Layer: 5
+  m_Name: QuestWindow
+  m_IsActive: 1
+--- !u!224 &990100000000000022
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 990100000000000032}
+  - {fileID: 990100000000000042}
+  - {fileID: 990100000000000072}
+  - {fileID: 990100000000000082}
+  - {fileID: 990100000000000092}
+  - {fileID: 990100000000000102}
+  m_Father: {fileID: 990100000000000002}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1280, y: 720}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000023
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000021}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000021}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: dc3450995ce835d43b435520c5af8f9e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+--- !u!1 &990100000000000031
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000032}
+  - component: {fileID: 990100000000000033}
+  - component: {fileID: 990100000000000034}
+  m_Layer: 5
+  m_Name: Title
+  m_IsActive: 1
+--- !u!224 &990100000000000032
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000022}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -58}
+  m_SizeDelta: {x: 900, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000033
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000031}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000031}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 0.97, g: 0.84, b: 0.48, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 32
+    m_FontStyle: 1
+    m_Alignment: 4
+  m_Text: "\uD018\uC2A4\uD2B8 \uAC8C\uC2DC\uD310"
+--- !u!1 &990100000000000041
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000042}
+  - component: {fileID: 990100000000000043}
+  - component: {fileID: 990100000000000035}
+  m_Layer: 5
+  m_Name: StatusText
+  m_IsActive: 1
+--- !u!224 &990100000000000042
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000022}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -105}
+  m_SizeDelta: {x: 850, y: 36}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000043
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000041}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000041}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 0.82, g: 0.78, b: 0.68, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_Alignment: 4
+  m_Text: "\uD018\uC2A4\uD2B8\uB294 \uD558\uB098\uB9CC \uC218\uC8FC\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+--- !u!1 &990100000000000071
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000072}
+  - component: {fileID: 990100000000000073}
+  - component: {fileID: 990100000000000074}
+  - component: {fileID: 990100000000000075}
+  m_Layer: 5
+  m_Name: QuestDifficulty_1
+  m_IsActive: 1
+--- !u!224 &990100000000000072
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 990100000000000112}
+  m_Father: {fileID: 990100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -365, y: 10}
+  m_SizeDelta: {x: 310, y: 360}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000073
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000071}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000071}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 0.42, g: 0.31, b: 0.16, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: f0066b2bb65f7a14abda1edf1dc12984, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+--- !u!114 &990100000000000075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000071}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Navigation:
+    m_Mode: 3
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.84, b: 0.52, a: 1}
+    m_PressedColor: {r: 0.72, g: 0.58, b: 0.3, a: 1}
+    m_SelectedColor: {r: 1, g: 0.84, b: 0.52, a: 1}
+    m_DisabledColor: {r: 0.35, g: 0.35, b: 0.35, a: 0.65}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 990100000000000074}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &990100000000000081
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000082}
+  - component: {fileID: 990100000000000083}
+  - component: {fileID: 990100000000000084}
+  - component: {fileID: 990100000000000085}
+  m_Layer: 5
+  m_Name: QuestDifficulty_2
+  m_IsActive: 1
+--- !u!224 &990100000000000082
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 990100000000000122}
+  m_Father: {fileID: 990100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 310, y: 360}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000083
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000081}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000081}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 0.38, g: 0.24, b: 0.12, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: f0066b2bb65f7a14abda1edf1dc12984, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+--- !u!114 &990100000000000085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000081}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Navigation:
+    m_Mode: 3
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.76, b: 0.36, a: 1}
+    m_PressedColor: {r: 0.68, g: 0.44, b: 0.22, a: 1}
+    m_SelectedColor: {r: 1, g: 0.76, b: 0.36, a: 1}
+    m_DisabledColor: {r: 0.35, g: 0.35, b: 0.35, a: 0.65}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 990100000000000084}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &990100000000000091
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000092}
+  - component: {fileID: 990100000000000093}
+  - component: {fileID: 990100000000000094}
+  - component: {fileID: 990100000000000095}
+  m_Layer: 5
+  m_Name: QuestDifficulty_3
+  m_IsActive: 1
+--- !u!224 &990100000000000092
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 990100000000000132}
+  m_Father: {fileID: 990100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 365, y: 10}
+  m_SizeDelta: {x: 310, y: 360}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000093
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000091}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000091}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 0.31, g: 0.13, b: 0.1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: f0066b2bb65f7a14abda1edf1dc12984, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+--- !u!114 &990100000000000095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000091}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Navigation:
+    m_Mode: 3
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.56, b: 0.38, a: 1}
+    m_PressedColor: {r: 0.62, g: 0.3, b: 0.22, a: 1}
+    m_SelectedColor: {r: 1, g: 0.56, b: 0.38, a: 1}
+    m_DisabledColor: {r: 0.35, g: 0.35, b: 0.35, a: 0.65}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 990100000000000094}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &990100000000000101
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000102}
+  - component: {fileID: 990100000000000103}
+  - component: {fileID: 990100000000000104}
+  - component: {fileID: 990100000000000105}
+  m_Layer: 5
+  m_Name: BackButton
+  m_IsActive: 1
+--- !u!224 &990100000000000102
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000101}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 990100000000000142}
+  m_Father: {fileID: 990100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 48}
+  m_SizeDelta: {x: 280, y: 66}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000103
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000101}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000101}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: decb5d447e5aed14f95a1c311059fedc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+--- !u!114 &990100000000000105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000101}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Navigation:
+    m_Mode: 3
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.78, g: 0.78, b: 0.78, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.4, g: 0.4, b: 0.4, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 990100000000000104}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &990100000000000111
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000112}
+  - component: {fileID: 990100000000000113}
+  - component: {fileID: 990100000000000114}
+  m_Layer: 5
+  m_Name: Label
+  m_IsActive: 1
+--- !u!224 &990100000000000112
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000072}
+  m_AnchorMin: {x: 0.08, y: 0.08}
+  m_AnchorMax: {x: 0.92, y: 0.92}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000113
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000111}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000111}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 0.96, g: 0.84, b: 0.52, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 26
+    m_FontStyle: 1
+    m_Alignment: 4
+  m_Text: "\uB09C\uC774\uB3C4 1\n\n\uC804\uD22C 1\uD68C \uC2B9\uB9AC\n\n\uC218\uC8FC\uD558\uAE30"
+--- !u!1 &990100000000000121
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000122}
+  - component: {fileID: 990100000000000123}
+  - component: {fileID: 990100000000000124}
+  m_Layer: 5
+  m_Name: Label
+  m_IsActive: 1
+--- !u!224 &990100000000000122
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000082}
+  m_AnchorMin: {x: 0.08, y: 0.08}
+  m_AnchorMax: {x: 0.92, y: 0.92}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000123
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000121}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000121}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 1, g: 0.7, b: 0.32, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 26
+    m_FontStyle: 1
+    m_Alignment: 4
+  m_Text: "\uB09C\uC774\uB3C4 2\n\n\uC804\uD22C 1\uD68C \uC2B9\uB9AC\n\n\uC218\uC8FC\uD558\uAE30"
+--- !u!1 &990100000000000131
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000132}
+  - component: {fileID: 990100000000000133}
+  - component: {fileID: 990100000000000134}
+  m_Layer: 5
+  m_Name: Label
+  m_IsActive: 1
+--- !u!224 &990100000000000132
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000092}
+  m_AnchorMin: {x: 0.08, y: 0.08}
+  m_AnchorMax: {x: 0.92, y: 0.92}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000133
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000131}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000131}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 1, g: 0.47, b: 0.32, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 26
+    m_FontStyle: 1
+    m_Alignment: 4
+  m_Text: "\uB09C\uC774\uB3C4 3\n\n\uC804\uD22C 1\uD68C \uC2B9\uB9AC\n\n\uC218\uC8FC\uD558\uAE30"
+--- !u!1 &990100000000000141
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990100000000000142}
+  - component: {fileID: 990100000000000143}
+  - component: {fileID: 990100000000000144}
+  m_Layer: 5
+  m_Name: Label
+  m_IsActive: 1
+--- !u!224 &990100000000000142
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000141}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990100000000000102}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &990100000000000143
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000141}
+  m_CullTransparentMesh: 1
+--- !u!114 &990100000000000144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 990100000000000141}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 1, g: 0.85, b: 0.55, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 25
+    m_FontStyle: 1
+    m_Alignment: 4
+  m_Text: "\uB3CC\uC544\uAC00\uAE30"

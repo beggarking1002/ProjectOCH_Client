@@ -69,6 +69,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5396b3a27cf540c98ed7f38cbb5a9c91
+    m_Address: FieldVillageQuestUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 53da1428fda7abb488f3a6fa92352aa6
     m_Address: Village/village4
     m_ReadOnly: 0

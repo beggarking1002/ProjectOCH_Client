@@ -9,6 +9,7 @@ namespace Field
 	public sealed class FieldVillageUI : MonoBehaviour
 	{
 		const string FieldVillageShopUiAddress = "FieldVillageShopUI";
+		const string FieldVillageQuestUiAddress = "FieldVillageQuestUI";
 		static readonly string[] PreviewArtworkAddresses =
 		{
 			"Village/village1", "Village/village2", "Village/village3", "Village/village4", "Village/village5",
@@ -17,21 +18,26 @@ namespace Field
 
 		[SerializeField] Image townArtwork;
 		[SerializeField] Button shopTabButton;
+		[SerializeField] Button questTabButton;
 
 		AsyncOperationHandle<Sprite> _artworkHandle;
 		bool _hasArtworkHandle;
 		int _artworkLoadVersion;
 		bool _isShopOpening;
+		bool _isQuestOpening;
+		bool _hasAcceptedQuest;
 
 		void OnEnable()
 		{
 			shopTabButton?.onClick.AddListener(OpenShop);
+			questTabButton?.onClick.AddListener(OpenQuest);
 			ShowRandomArtwork();
 		}
 
 		void OnDisable()
 		{
 			shopTabButton?.onClick.RemoveListener(OpenShop);
+			questTabButton?.onClick.RemoveListener(OpenQuest);
 			ReleaseArtwork();
 		}
 
@@ -61,6 +67,39 @@ namespace Field
 
 			shopUi.Show(this);
 			gameObject.SetActive(false);
+		}
+
+		async void OpenQuest()
+		{
+			if (_isQuestOpening)
+				return;
+
+			_isQuestOpening = true;
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldVillageQuestUiAddress);
+			await handle.Task;
+			_isQuestOpening = false;
+			if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+			{
+				Debug.LogError($"Failed to load village quest UI: {FieldVillageQuestUiAddress}");
+				if (handle.IsValid())
+					Addressables.Release(handle);
+				return;
+			}
+
+			FieldVillageQuestUI questUi = handle.Result.GetComponent<FieldVillageQuestUI>();
+			if (questUi == null)
+			{
+				Addressables.ReleaseInstance(handle.Result);
+				return;
+			}
+
+			questUi.Show(this, _hasAcceptedQuest);
+			gameObject.SetActive(false);
+		}
+
+		public void MarkQuestAccepted()
+		{
+			_hasAcceptedQuest = true;
 		}
 
 		public void ShowRandomArtwork()
