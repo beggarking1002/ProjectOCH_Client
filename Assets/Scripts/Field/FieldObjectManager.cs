@@ -6,6 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -16,6 +17,9 @@ namespace Field
 	[DisallowMultipleComponent]
 	public sealed class FieldObjectManager : MonoBehaviour
 	{
+		const string FieldVillageUiAddress = "FieldVillageUI";
+		const string PlayerInventoryUiAddress = "PlayerInventoryUI";
+
 		readonly Dictionary<ulong, FieldPawnController> _pawns = new Dictionary<ulong, FieldPawnController>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
 
@@ -27,6 +31,14 @@ namespace Field
 		ulong _myObjectId;
 		FieldBattleInviteUI _battleInviteUi;
 		FieldBattleClassSelectionUI _battleClassSelectionUi;
+		AsyncOperationHandle<GameObject> _fieldVillageUiHandle;
+		GameObject _fieldVillageUi;
+		bool _hasFieldVillageUiHandle;
+		bool _isFieldVillageUiLoading;
+		AsyncOperationHandle<GameObject> _playerInventoryUiHandle;
+		GameObject _playerInventoryUi;
+		bool _hasPlayerInventoryUiHandle;
+		bool _isPlayerInventoryUiLoading;
 
 		public ulong MyObjectId => _myObjectId;
 		public FieldPawnController MyPawn => _myObjectId != 0 && _pawns.TryGetValue(_myObjectId, out FieldPawnController pawn) ? pawn : null;
@@ -60,12 +72,118 @@ namespace Field
 			_destroyed = true;
 			UnsubscribeNetwork();
 			ReleasePawns();
+			ReleaseFieldVillageUi();
+			ReleasePlayerInventoryUi();
 		}
 
 		void Update()
 		{
 			HandleBattleInviteClickInput();
 			HandleBattleEnterDebugInput();
+			HandleFieldVillageUiDebugInput();
+			HandlePlayerInventoryUiDebugInput();
+		}
+
+		async void HandleFieldVillageUiDebugInput()
+		{
+			if (WasFieldVillageUiToggleKeyPressed() == false || _isFieldVillageUiLoading)
+				return;
+
+			if (_fieldVillageUi != null)
+			{
+				_fieldVillageUi.SetActive(_fieldVillageUi.activeSelf == false);
+				return;
+			}
+
+			_isFieldVillageUiLoading = true;
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldVillageUiAddress);
+			_fieldVillageUiHandle = handle;
+			_hasFieldVillageUiHandle = true;
+			await handle.Task;
+			_isFieldVillageUiLoading = false;
+
+			if (_destroyed || handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+			{
+				if (_destroyed == false)
+					Debug.LogError($"Failed to load field village UI: {FieldVillageUiAddress}");
+				ReleaseFieldVillageUi();
+				return;
+			}
+
+			_fieldVillageUi = handle.Result;
+			Button leaveButton = _fieldVillageUi.transform.Find("Window/LeaveButton")?.GetComponent<Button>();
+			if (leaveButton != null)
+				leaveButton.onClick.AddListener(HideFieldVillageUi);
+
+			Debug.Log("Field village UI preview opened. Press F7 to toggle it.");
+		}
+
+		void HideFieldVillageUi()
+		{
+			if (_fieldVillageUi != null)
+				_fieldVillageUi.SetActive(false);
+		}
+
+		void ReleaseFieldVillageUi()
+		{
+			if (_hasFieldVillageUiHandle && _fieldVillageUiHandle.IsValid())
+				Addressables.ReleaseInstance(_fieldVillageUiHandle);
+
+			_fieldVillageUi = null;
+			_fieldVillageUiHandle = default;
+			_hasFieldVillageUiHandle = false;
+			_isFieldVillageUiLoading = false;
+		}
+
+		async void HandlePlayerInventoryUiDebugInput()
+		{
+			if (WasPlayerInventoryUiToggleKeyPressed() == false || _isPlayerInventoryUiLoading)
+				return;
+
+			if (_playerInventoryUi != null)
+			{
+				_playerInventoryUi.SetActive(_playerInventoryUi.activeSelf == false);
+				return;
+			}
+
+			_isPlayerInventoryUiLoading = true;
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(PlayerInventoryUiAddress);
+			_playerInventoryUiHandle = handle;
+			_hasPlayerInventoryUiHandle = true;
+			await handle.Task;
+			_isPlayerInventoryUiLoading = false;
+
+			if (_destroyed || handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+			{
+				if (_destroyed == false)
+					Debug.LogError($"Failed to load player inventory UI: {PlayerInventoryUiAddress}");
+				ReleasePlayerInventoryUi();
+				return;
+			}
+
+			_playerInventoryUi = handle.Result;
+			Button closeButton = _playerInventoryUi.transform.Find("Window/CloseButton")?.GetComponent<Button>();
+			if (closeButton != null)
+				closeButton.onClick.AddListener(HidePlayerInventoryUi);
+
+			Debug.Log("Player inventory UI preview opened. Press F8 to toggle it.");
+		}
+
+		void HidePlayerInventoryUi()
+		{
+			if (_playerInventoryUi != null)
+				_playerInventoryUi.SetActive(false);
+		}
+
+		void ReleasePlayerInventoryUi()
+		{
+			if (_hasPlayerInventoryUiHandle && _playerInventoryUiHandle.IsValid())
+				Addressables.ReleaseInstance(_playerInventoryUiHandle);
+
+			_playerInventoryUi = null;
+			_playerInventoryUiHandle = default;
+			_hasPlayerInventoryUiHandle = false;
+			_isPlayerInventoryUiLoading = false;
 		}
 
 		void EnsureBattleInviteUi()
@@ -233,6 +351,30 @@ namespace Field
 			return keyboard != null && keyboard.bKey.wasPressedThisFrame;
 #elif ENABLE_LEGACY_INPUT_MANAGER
 			return Input.GetKeyDown(KeyCode.B);
+#else
+			return false;
+#endif
+		}
+
+		static bool WasFieldVillageUiToggleKeyPressed()
+		{
+#if ENABLE_INPUT_SYSTEM
+			Keyboard keyboard = Keyboard.current;
+			return keyboard != null && keyboard.f7Key.wasPressedThisFrame;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			return Input.GetKeyDown(KeyCode.F7);
+#else
+			return false;
+#endif
+		}
+
+		static bool WasPlayerInventoryUiToggleKeyPressed()
+		{
+#if ENABLE_INPUT_SYSTEM
+			Keyboard keyboard = Keyboard.current;
+			return keyboard != null && keyboard.f8Key.wasPressedThisFrame;
+#elif ENABLE_LEGACY_INPUT_MANAGER
+			return Input.GetKeyDown(KeyCode.F8);
 #else
 			return false;
 #endif

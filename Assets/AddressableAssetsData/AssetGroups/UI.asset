@@ -15,6 +15,36 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 13e676e0aeaaafc4d878556badfecc3e
   m_SerializeEntries:
+  - m_GUID: 0862703334af72a4bb0c5246c5ee8a44
+    m_Address: Village/village2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21807880d52ba464bb25455a7ece240a
+    m_Address: Village/village7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21c86237430e4c46a244a31e8f8745da
+    m_Address: PlayerInventoryUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2dcc695f03546c244947ac847b211596
+    m_Address: Village/village5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3790bab37a9c1884897a008b3112cb93
+    m_Address: Village/village6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4312130524917a449b22a6719689a5dd
     m_Address: StatIcon
     m_ReadOnly: 0
@@ -33,8 +63,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53da1428fda7abb488f3a6fa92352aa6
+    m_Address: Village/village4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 588cc2bc16077d44982345ddd49803fa
     m_Address: PawnStatusWorldUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c3e704b5f33b7041baf853d7e9099bf
+    m_Address: Village/village1
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
@@ -57,8 +99,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b31f7acc4f8308448647469b3e3957e
+    m_Address: Village/village3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6cc405ffd37c4210bbc14a1e25e562b9
     m_Address: Effect_FireTileDamage
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72a69075156c5684b8749a259b0ac3dc
+    m_Address: Village/village8
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
@@ -93,6 +147,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a382639c2e141aa41a8a63c6d1ea7ccd
+    m_Address: Village/village10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aa5aaa6613674a94ea60635382ddb096
     m_Address: portrait_sera
     m_ReadOnly: 0
@@ -111,6 +171,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af4eff07e9a0f774081c9a96337520d0
+    m_Address: Village/village9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b06db0e20bc3d2445803ec687427bb3f
     m_Address: Tile/suen_embedded_axe
     m_ReadOnly: 0
@@ -119,6 +185,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b28ad33b19a04da3a38e2ae4bcf46fd0
     m_Address: BattleResultUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b49e4d69beee4dd0b50dc2aecfa78354
+    m_Address: FieldVillageUI
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
