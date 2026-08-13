@@ -13,7 +13,7 @@ namespace Scenes
 		const string FieldWalkMapAddress = "Field_001_WalkMap";
 		const string FieldLogicRootName = "@FieldLogic";
 		const string WorldMapAddress = "WorldMapRoot";
-		const string FieldSceneUiAddress = "FieldSceneUI";
+		const string FieldSceneUiAddress = "FieldSceneHUD";
 		const string FieldPawnAddress = "Pawn_Beige_Fire";
 		const int WorldMapSortingOrderOffset = 1;
 		const float FieldReadyTimeoutSeconds = 5f;

@@ -23,8 +23,8 @@ namespace Battle
 	public sealed class BattleUIController : MonoBehaviour
 	{
 		const string BattleUiName = "Canvas_BattleUI";
-		const string BattleUiAddress = "BattleSceneUI";
-		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+		const string BattleUiAddress = "BattleSceneHUD";
+		const string BattleUiEditorPath = "Assets/@Resources/Prefab/UI/BattleSceneHUD.prefab";
 		const string BattleResultUiAddress = "BattleResultUI";
 		const string StatIconAddress = "StatIcon";
 		const string StatIconEditorPath = "Assets/@Resources/Art/UI/StatIcon.png";
@@ -405,7 +405,7 @@ namespace Battle
 			_currentTurnEmblemFrame = actionPanel != null ? actionPanel.Find("CurrentTurnEmblem") : null;
 			_classMarkFrame = actionPanel != null ? actionPanel.Find("ClassMark") : null;
 			if (_currentTurnPortraitFrame == null || _currentTurnEmblemFrame == null || _classMarkFrame == null)
-				Debug.LogWarning("BattleSceneUI requires a CurrentTurnPortrait root child plus CurrentTurnEmblem and ClassMark ActionPanel children.");
+				Debug.LogWarning("BattleSceneHUD requires a CurrentTurnPortrait root child plus CurrentTurnEmblem and ClassMark ActionPanel children.");
 		}
 
 		async Task LoadGameDataAsync()
@@ -424,7 +424,7 @@ namespace Battle
 			Transform turnQueue = FindDeepChild(root, "TurnQueue");
 			if (turnQueue == null)
 			{
-				Debug.LogWarning("Missing TurnQueue in BattleSceneUI.");
+				Debug.LogWarning("Missing TurnQueue in BattleSceneHUD.");
 				return;
 			}
 

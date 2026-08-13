@@ -1,0 +1,493 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &980100000000000001
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000002}
+  - component: {fileID: 980100000000000003}
+  - component: {fileID: 980100000000000004}
+  - component: {fileID: 980100000000000005}
+  - component: {fileID: 980100000000000006}
+  m_Layer: 5
+  m_Name: FieldVillageShopUI
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!224 &980100000000000002
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 980100000000000012}
+  - {fileID: 980100000000000022}
+  m_Father: {fileID: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &980100000000000003
+Canvas:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000001}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_SortingOrder: 1270
+  m_TargetDisplay: 0
+--- !u!114 &980100000000000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000001}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_UiScaleMode: 1
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_ReferencePixelsPerUnit: 100
+--- !u!114 &980100000000000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000001}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &980100000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000001}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 82ce2f71d21b4a3f91e12d3b29e73c69, type: 3}
+  backButton: {fileID: 980100000000000075}
+--- !u!1 &980100000000000011
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000012}
+  - component: {fileID: 980100000000000013}
+  - component: {fileID: 980100000000000014}
+  m_Layer: 5
+  m_Name: Dimmer
+  m_IsActive: 1
+--- !u!224 &980100000000000012
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980100000000000002}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000011}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000011}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.72}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &980100000000000021
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000022}
+  - component: {fileID: 980100000000000023}
+  - component: {fileID: 980100000000000024}
+  m_Layer: 5
+  m_Name: ShopWindow
+  m_IsActive: 1
+--- !u!224 &980100000000000022
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 980100000000000032}
+  - {fileID: 980100000000000042}
+  - {fileID: 980100000000000052}
+  - {fileID: 980100000000000062}
+  - {fileID: 980100000000000072}
+  m_Father: {fileID: 980100000000000002}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1420, y: 820}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000023
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000021}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000021}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: dc3450995ce835d43b435520c5af8f9e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &980100000000000031
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000032}
+  - component: {fileID: 980100000000000033}
+  - component: {fileID: 980100000000000034}
+  m_Layer: 5
+  m_Name: Header
+  m_IsActive: 1
+--- !u!224 &980100000000000032
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980100000000000022}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -58}
+  m_SizeDelta: {x: 900, y: 74}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000033
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000031}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000031}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 0.97, g: 0.84, b: 0.48, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 30
+    m_FontStyle: 1
+    m_Alignment: 4
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+  m_Text: 상점  ·  상품 목록                         내 인벤토리
+--- !u!1 &980100000000000041
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000042}
+  - component: {fileID: 980100000000000043}
+  - component: {fileID: 980100000000000044}
+  m_Layer: 5
+  m_Name: ShopStockGrid
+  m_IsActive: 1
+--- !u!224 &980100000000000042
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -390, y: 20}
+  m_SizeDelta: {x: 500, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000043
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000041}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000041}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: b3ed713c923a3724e9b52777538c7e84, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &980100000000000051
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000052}
+  - component: {fileID: 980100000000000053}
+  - component: {fileID: 980100000000000054}
+  m_Layer: 5
+  m_Name: PlayerInventoryGrid
+  m_IsActive: 1
+--- !u!224 &980100000000000052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 390, y: 20}
+  m_SizeDelta: {x: 500, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000053
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000051}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000051}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: b3ed713c923a3724e9b52777538c7e84, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &980100000000000061
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000062}
+  - component: {fileID: 980100000000000063}
+  - component: {fileID: 980100000000000064}
+  m_Layer: 5
+  m_Name: TradePanel
+  m_IsActive: 1
+--- !u!224 &980100000000000062
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000061}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 20}
+  m_SizeDelta: {x: 92, y: 174}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000063
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000061}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000061}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 0.66, g: 0.48, b: 0.22, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: 50d984b514267ef44bb2bfb5dd22cf2c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &980100000000000071
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000072}
+  - component: {fileID: 980100000000000073}
+  - component: {fileID: 980100000000000074}
+  - component: {fileID: 980100000000000075}
+  m_Layer: 5
+  m_Name: BackButton
+  m_IsActive: 1
+--- !u!224 &980100000000000072
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 980100000000000082}
+  m_Father: {fileID: 980100000000000022}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 48}
+  m_SizeDelta: {x: 280, y: 66}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000073
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000071}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000071}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_Sprite: {fileID: 21300000, guid: decb5d447e5aed14f95a1c311059fedc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &980100000000000075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000071}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Navigation:
+    m_Mode: 3
+  m_Transition: 2
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: 0bd77039eb0000644937e55505360747, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: a41410e3db035ed4080c5dade4f02b96, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 0bd77039eb0000644937e55505360747, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 777db782fe8030b40a9bdbe49ab44805, type: 3}
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 980100000000000074}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &980100000000000081
+GameObject:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980100000000000082}
+  - component: {fileID: 980100000000000083}
+  - component: {fileID: 980100000000000084}
+  m_Layer: 5
+  m_Name: Label
+  m_IsActive: 1
+--- !u!224 &980100000000000082
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980100000000000072}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &980100000000000083
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000081}
+  m_CullTransparentMesh: 1
+--- !u!114 &980100000000000084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 980100000000000081}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Color: {r: 1, g: 0.85, b: 0.55, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 25
+    m_FontStyle: 1
+    m_Alignment: 4
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+  m_Text: 돌아가기

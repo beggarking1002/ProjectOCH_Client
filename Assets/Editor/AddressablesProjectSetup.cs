@@ -14,7 +14,7 @@ internal static class AddressablesProjectSetup
     private const string UiLabel = "UI";
     private const string GameDataLabel = "GameData";
     private const string SkillIconLabel = "SkillIcon";
-    private const string BattleUiAddress = "BattleSceneUI";
+    private const string BattleUiAddress = "BattleSceneHUD";
     private const string StatIconAddress = "StatIcon";
     private const string HandCursorAddress = "Cursor_Hand";
     private const string AttackCursorAddress = "Cursor_Attack";
@@ -22,7 +22,7 @@ internal static class AddressablesProjectSetup
     private const string EmbeddedAxeMarkerPrefabAddress = "Equipment/SuenEmbeddedAxe";
     private const string ParvisMarkerPrefabAddress = "Equipment/SuenParvis";
     private const string DefaultRemoteLoadPath = "http://localhost/[BuildTarget]";
-    private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneUI.prefab";
+    private const string BattleUiPrefabPath = "Assets/@Resources/Prefab/UI/BattleSceneHUD.prefab";
     private const string StatIconPath = "Assets/@Resources/Art/UI/StatIcon.png";
     private const string HandCursorPath = "Assets/@Resources/Art/UI/Cursor/Hand.png";
     private const string AttackCursorPath = "Assets/@Resources/Art/UI/Cursor/Attack.png";

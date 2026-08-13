@@ -27,7 +27,7 @@ FieldScene
 	└─ 양측 선택 잠금 → S_ENTER_BATTLE → BattleScene
 
 BattleScene
-  ├─ BattleField_001 / PawnBase + 클래스별 visual / BattleSceneUI Addressables
+  ├─ BattleField_001 / PawnBase + 클래스별 visual / BattleSceneHUD Addressables
   ├─ C_BATTLE_MOVE / C_BATTLE_SKILL / C_BATTLE_END_TURN
   └─ S_BATTLE_RESULT → 결과 UI → C_BATTLE_RESULT_ACK → FieldScene
 ```
@@ -76,7 +76,7 @@ Portfolio/                 포트폴리오 문서 산출물
 | --- | --- |
 | Maps | `WorldMapRoot`, `BattleField_001` |
 | Pawn | `PawnBase`와 클래스별 visual Pawn |
-| UI | `BattleSceneUI`, `BattleResultUI`, `FieldBattleInviteUI`, `SceneTransitionOverlay`, 폰트/초상화 |
+| UI | `BattleSceneHUD`, `BattleResultUI`, `FieldBattleInviteUI`, `SceneTransitionOverlay`, 폰트/초상화 |
 | Tile | `Tile/grass`, `Tile/water`, `Tile/ice`, `Tile/fire` 등 |
 | SkillIcon | 클래스별 passive/skill/ultimate/sub 아이콘 |
 | GameData | 클래스, Pawn, 스킬, 효과, ZOC, 문구 CSV, `Field_001_WalkMap` JSON |

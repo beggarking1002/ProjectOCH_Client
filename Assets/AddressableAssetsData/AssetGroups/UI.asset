@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 13e676e0aeaaafc4d878556badfecc3e
   m_SerializeEntries:
+  - m_GUID: 07d5f15b8d5d4cbb9a830b9f095e8a56
+    m_Address: FieldVillageShopUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0862703334af72a4bb0c5246c5ee8a44
     m_Address: Village/village2
     m_ReadOnly: 0
@@ -202,7 +208,7 @@ MonoBehaviour:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c2a94b2f48c54cebb683ca495e559a6f
-    m_Address: FieldSceneUI
+    m_Address: FieldSceneHUD
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
@@ -250,7 +256,7 @@ MonoBehaviour:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb86b06d79d9ce345ba2692fb6f3db66
-    m_Address: BattleSceneUI
+    m_Address: BattleSceneHUD
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI

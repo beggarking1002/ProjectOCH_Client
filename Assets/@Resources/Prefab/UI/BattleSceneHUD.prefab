@@ -4891,7 +4891,7 @@ GameObject:
   - component: {fileID: 5750283724838229143}
   - component: {fileID: 7035410223797834343}
   m_Layer: 5
-  m_Name: BattleSceneUI
+  m_Name: BattleSceneHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
