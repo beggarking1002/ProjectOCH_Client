@@ -201,6 +201,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2a94b2f48c54cebb683ca495e559a6f
+    m_Address: FieldSceneUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d0c9e4b5a08b4a719842fa39ef08cda1
     m_Address: SceneTransitionOverlay
     m_ReadOnly: 0

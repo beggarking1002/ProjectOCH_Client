@@ -13,6 +13,7 @@ namespace Scenes
 		const string FieldWalkMapAddress = "Field_001_WalkMap";
 		const string FieldLogicRootName = "@FieldLogic";
 		const string WorldMapAddress = "WorldMapRoot";
+		const string FieldSceneUiAddress = "FieldSceneUI";
 		const string FieldPawnAddress = "Pawn_Beige_Fire";
 		const int WorldMapSortingOrderOffset = 1;
 		const float FieldReadyTimeoutSeconds = 5f;
@@ -21,10 +22,12 @@ namespace Scenes
 
 		AsyncOperationHandle<TextAsset> _walkMapHandle;
 		AsyncOperationHandle<GameObject> _worldMapHandle;
+		AsyncOperationHandle<GameObject> _fieldSceneUiHandle;
 		GameObject _fieldLogicRoot;
 		FieldObjectManager _objectManager;
 		bool _hasWalkMapHandle;
 		bool _hasWorldMapHandle;
+		bool _hasFieldSceneUiHandle;
 		bool _isLoading;
 		bool _isLocalPawnReady;
 		bool _isWorldMapReady;
@@ -138,6 +141,33 @@ namespace Scenes
 			_isLocalPawnReady = objectManager.IsLocalPawnReady;
 			TryCompleteFieldSceneTransition();
 			LoadWorldMap(_fieldLogicRoot.transform, version);
+			LoadFieldSceneUi(version);
+		}
+
+		async void LoadFieldSceneUi(int version)
+		{
+			if (_hasFieldSceneUiHandle)
+				return;
+
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldSceneUiAddress);
+			_fieldSceneUiHandle = handle;
+			_hasFieldSceneUiHandle = true;
+			await handle.Task;
+
+			if (version != _loadVersion || SceneManager.GetActiveScene().name != FieldSceneName)
+			{
+				ReleaseFieldSceneUiHandle(handle);
+				return;
+			}
+
+			if (handle.Status != AsyncOperationStatus.Succeeded)
+			{
+				Debug.LogError($"Failed to load field scene UI: {FieldSceneUiAddress}");
+				ReleaseFieldSceneUiHandle(handle);
+				return;
+			}
+
+			SceneManager.MoveGameObjectToScene(handle.Result, SceneManager.GetActiveScene());
 		}
 
 		async void LoadWorldMap(Transform logicRoot, int version)
@@ -195,11 +225,16 @@ namespace Scenes
 			if (_hasWorldMapHandle && _worldMapHandle.IsValid())
 				Addressables.ReleaseInstance(_worldMapHandle);
 
+			if (_hasFieldSceneUiHandle && _fieldSceneUiHandle.IsValid())
+				Addressables.ReleaseInstance(_fieldSceneUiHandle);
+
 			_fieldLogicRoot = null;
 			_hasWalkMapHandle = false;
 			_hasWorldMapHandle = false;
+			_hasFieldSceneUiHandle = false;
 			_walkMapHandle = default;
 			_worldMapHandle = default;
+			_fieldSceneUiHandle = default;
 		}
 
 		void OnLocalPawnReady(FieldObjectManager objectManager)
@@ -262,6 +297,18 @@ namespace Scenes
 			{
 				_hasWorldMapHandle = false;
 				_worldMapHandle = default;
+			}
+		}
+
+		void ReleaseFieldSceneUiHandle(AsyncOperationHandle<GameObject> handle)
+		{
+			if (handle.IsValid())
+				Addressables.ReleaseInstance(handle);
+
+			if (_hasFieldSceneUiHandle && _fieldSceneUiHandle.Equals(handle))
+			{
+				_hasFieldSceneUiHandle = false;
+				_fieldSceneUiHandle = default;
 			}
 		}
 
