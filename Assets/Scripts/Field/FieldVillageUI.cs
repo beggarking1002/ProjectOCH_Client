@@ -19,6 +19,8 @@ namespace Field
 		[SerializeField] Image townArtwork;
 		[SerializeField] Button shopTabButton;
 		[SerializeField] Button questTabButton;
+		[SerializeField] Text villageNameText;
+		[SerializeField] Text villageDescriptionText;
 
 		AsyncOperationHandle<Sprite> _artworkHandle;
 		bool _hasArtworkHandle;
@@ -26,6 +28,17 @@ namespace Field
 		bool _isShopOpening;
 		bool _isQuestOpening;
 		bool _hasAcceptedQuest;
+
+		public void ShowVillage(FieldVillageDefinition village)
+		{
+			if (villageNameText != null)
+				villageNameText.text = village.Name;
+			if (villageDescriptionText != null)
+				villageDescriptionText.text = village.Description;
+
+			if (string.IsNullOrWhiteSpace(village.ArtworkAddress) == false)
+				ShowArtwork(village.ArtworkAddress);
+		}
 
 		void OnEnable()
 		{

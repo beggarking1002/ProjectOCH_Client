@@ -181,13 +181,13 @@ namespace Field
 			SetMoving(false);
 		}
 
-		public void ApplyServerMove(Vector3 startWorldPosition, Vector3 targetWorldPosition, IList<Vector3> serverPath, uint durationMs, bool snapToStart)
+		public void ApplyServerMove(Vector3 startWorldPosition, Vector3 targetWorldPosition, IList<Vector3> visualPath, uint durationMs, bool snapToStart, float authoritativePathLength)
 		{
 			if (snapToStart)
 				transform.position = startWorldPosition;
 
 			List<Vector3> nextPath = new List<Vector3>();
-			AppendPath(nextPath, serverPath, targetWorldPosition);
+			AppendPath(nextPath, visualPath, targetWorldPosition);
 			_serverMoveStartPosition = transform.position;
 			_serverMovePath.Clear();
 			_serverMovePath.AddRange(nextPath);
@@ -195,14 +195,13 @@ namespace Field
 			_serverMovePathLength = GetPathLength(_serverMoveStartPosition, _serverMovePath);
 			_serverMoveElapsed = 0f;
 			_serverMoveDuration = durationMs / 1000f;
-			if (_serverMoveDuration > 0f)
+			if (_serverMoveDuration > 0f && authoritativePathLength > arriveDistance && _serverMovePathLength > arriveDistance)
 			{
-				float serverPathLength = GetPathLength(startWorldPosition, serverPath);
-				if (serverPathLength > arriveDistance && _serverMovePathLength > arriveDistance)
-				{
-					float serverSpeed = serverPathLength / _serverMoveDuration;
-					_serverMoveDuration = _serverMovePathLength / serverSpeed;
-				}
+				// The server duration describes its authoritative route. The client may
+				// render a longer A* detour around blocked cells, so keep the server's
+				// speed and extend only the visual route's duration.
+				float serverSpeed = authoritativePathLength / _serverMoveDuration;
+				_serverMoveDuration = _serverMovePathLength / serverSpeed;
 			}
 			_useServerMoveDuration = _serverMoveDuration > 0f;
 

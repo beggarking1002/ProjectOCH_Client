@@ -75,6 +75,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - GameData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87b4836e00c44114a6ec7c9472a834d9
+    m_Address: Village
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: db1684fe184452849ae23072edccf8b8, type: 2}
   m_SchemaSet:

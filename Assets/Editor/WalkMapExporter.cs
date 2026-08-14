@@ -1,5 +1,7 @@
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using Field;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +17,7 @@ internal sealed class WalkMapExporter : EditorWindow
 	[SerializeField] GameObject mapPrefab;
 	[SerializeField] Tilemap groundTilemap;
 	[SerializeField] Tilemap blockTilemap;
+	[SerializeField] Tilemap villageTilemap;
 	[SerializeField] bool subtractBlockTilemap;
 	[SerializeField] string clientOutputDirectory = DefaultClientOutputDirectory;
 	[SerializeField] bool copyToServerDataDirectory;
@@ -43,10 +46,12 @@ internal sealed class WalkMapExporter : EditorWindow
 			mapId = mapPrefab.name;
 			groundTilemap = null;
 			blockTilemap = null;
+			villageTilemap = null;
 		}
 
 		groundTilemap = (Tilemap)EditorGUILayout.ObjectField("Ground Tilemap", groundTilemap, typeof(Tilemap), true);
 		blockTilemap = (Tilemap)EditorGUILayout.ObjectField("Block Tilemap", blockTilemap, typeof(Tilemap), true);
+		villageTilemap = (Tilemap)EditorGUILayout.ObjectField("Village Tilemap", villageTilemap, typeof(Tilemap), true);
 		subtractBlockTilemap = EditorGUILayout.Toggle("Subtract Block Tilemap", subtractBlockTilemap);
 
 		using (new EditorGUILayout.HorizontalScope())
@@ -75,7 +80,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		}
 
 		EditorGUILayout.HelpBox(
-			"Export rule: Ground Tilemap cells are walkable. If Subtract Block Tilemap is enabled, cells that also exist in Block/Prop Tilemap are excluded. Output is compressed by row ranges.",
+			"Export rule: Ground Tilemap cells are walkable. Village_Tilemap marker tiles are exported as server-authoritative village_areas, compressed by row ranges.",
 			MessageType.Info);
 	}
 
@@ -106,6 +111,7 @@ internal sealed class WalkMapExporter : EditorWindow
 			mapId = selected.name;
 			groundTilemap = null;
 			blockTilemap = null;
+			villageTilemap = null;
 			return;
 		}
 
@@ -136,6 +142,8 @@ internal sealed class WalkMapExporter : EditorWindow
 				groundTilemap = tilemap;
 			else if (IsBlockTilemapName(tilemap.name))
 				blockTilemap = tilemap;
+			else if (tilemap.name == "Village_Tilemap")
+				villageTilemap = tilemap;
 		}
 	}
 
@@ -151,7 +159,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		if (copyToServerDataDirectory)
 			WriteJson(serverOutputDirectory, fileName, json);
 
-		Debug.Log($"Exported walk map: {clientPath} ({data.walkable_ranges.Count} ranges)");
+		Debug.Log($"Exported walk map: {clientPath} ({data.walkable_ranges.Count} walk ranges, {data.village_areas.Count} village areas)");
 	}
 
 	ExportWalkMapData BuildDataFromCurrentSource()
@@ -161,7 +169,7 @@ internal sealed class WalkMapExporter : EditorWindow
 			if (groundTilemap == null)
 				throw new MissingReferenceException("Ground Tilemap is required.");
 
-			return BuildData(groundTilemap, subtractBlockTilemap ? blockTilemap : null);
+			return BuildData(groundTilemap, subtractBlockTilemap ? blockTilemap : null, villageTilemap);
 		}
 
 		string prefabPath = AssetDatabase.GetAssetPath(mapPrefab);
@@ -173,12 +181,13 @@ internal sealed class WalkMapExporter : EditorWindow
 		{
 			Tilemap prefabGround = null;
 			Tilemap prefabBlock = null;
-			FindTilemaps(prefabRoot, ref prefabGround, ref prefabBlock);
+			Tilemap prefabVillage = null;
+			FindTilemaps(prefabRoot, ref prefabGround, ref prefabBlock, ref prefabVillage);
 
 			if (prefabGround == null)
 				throw new MissingReferenceException($"Ground_Tilemap not found in prefab: {prefabPath}");
 
-			return BuildData(prefabGround, subtractBlockTilemap ? prefabBlock : null);
+			return BuildData(prefabGround, subtractBlockTilemap ? prefabBlock : null, prefabVillage);
 		}
 		finally
 		{
@@ -186,7 +195,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		}
 	}
 
-	ExportWalkMapData BuildData(Tilemap sourceGroundTilemap, Tilemap sourceBlockTilemap)
+	ExportWalkMapData BuildData(Tilemap sourceGroundTilemap, Tilemap sourceBlockTilemap, Tilemap sourceVillageTilemap)
 	{
 		BoundsInt bounds = sourceGroundTilemap.cellBounds;
 		ExportWalkMapData data = new ExportWalkMapData
@@ -240,7 +249,76 @@ internal sealed class WalkMapExporter : EditorWindow
 		if (data.walkable_ranges.Count == 0)
 			data.bounds = default;
 
+		BuildVillageAreas(data, sourceVillageTilemap);
+
 		return data;
+	}
+
+	static void BuildVillageAreas(ExportWalkMapData data, Tilemap sourceVillageTilemap)
+	{
+		if (sourceVillageTilemap == null)
+			return;
+
+		Dictionary<string, Dictionary<int, List<int>>> cellsByVillage = new Dictionary<string, Dictionary<int, List<int>>>();
+		BoundsInt bounds = sourceVillageTilemap.cellBounds;
+		for (int y = bounds.yMin; y < bounds.yMax; y++)
+		{
+			for (int x = bounds.xMin; x < bounds.xMax; x++)
+			{
+				FieldVillageMarkerTile marker = sourceVillageTilemap.GetTile<FieldVillageMarkerTile>(new Vector3Int(x, y, 0));
+				if (marker == null || string.IsNullOrWhiteSpace(marker.VillageId))
+					continue;
+
+				if (cellsByVillage.TryGetValue(marker.VillageId, out Dictionary<int, List<int>> rows) == false)
+				{
+					rows = new Dictionary<int, List<int>>();
+					cellsByVillage.Add(marker.VillageId, rows);
+				}
+
+				if (rows.TryGetValue(y, out List<int> cells) == false)
+				{
+					cells = new List<int>();
+					rows.Add(y, cells);
+				}
+
+				cells.Add(x);
+			}
+		}
+
+		List<string> villageIds = new List<string>(cellsByVillage.Keys);
+		villageIds.Sort(System.StringComparer.Ordinal);
+		for (int villageIndex = 0; villageIndex < villageIds.Count; villageIndex++)
+		{
+			string villageId = villageIds[villageIndex];
+			ExportVillageArea area = new ExportVillageArea { village_id = villageId };
+			Dictionary<int, List<int>> rows = cellsByVillage[villageId];
+			List<int> rowYs = new List<int>(rows.Keys);
+			rowYs.Sort();
+			for (int rowIndex = 0; rowIndex < rowYs.Count; rowIndex++)
+			{
+				int y = rowYs[rowIndex];
+				List<int> cells = rows[y];
+				cells.Sort();
+				int rangeStart = cells[0];
+				int rangeEnd = rangeStart;
+				for (int cellIndex = 1; cellIndex < cells.Count; cellIndex++)
+				{
+					int x = cells[cellIndex];
+					if (x == rangeEnd + 1)
+					{
+						rangeEnd = x;
+						continue;
+					}
+
+					area.tile_ranges.Add(new ExportRange { y = y, x_min = rangeStart, x_max = rangeEnd });
+					rangeStart = rangeEnd = x;
+				}
+
+				area.tile_ranges.Add(new ExportRange { y = y, x_min = rangeStart, x_max = rangeEnd });
+			}
+
+			data.village_areas.Add(area);
+		}
 	}
 
 	static bool IsWalkable(Tilemap sourceGroundTilemap, Tilemap sourceBlockTilemap, Vector3Int cell)
@@ -251,7 +329,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		return sourceBlockTilemap == null || sourceBlockTilemap.HasTile(cell) == false;
 	}
 
-	static void FindTilemaps(GameObject root, ref Tilemap foundGround, ref Tilemap foundProp)
+	static void FindTilemaps(GameObject root, ref Tilemap foundGround, ref Tilemap foundProp, ref Tilemap foundVillage)
 	{
 		if (root == null)
 			return;
@@ -264,6 +342,8 @@ internal sealed class WalkMapExporter : EditorWindow
 				foundGround = tilemap;
 			else if (IsBlockTilemapName(tilemap.name))
 				foundProp = tilemap;
+			else if (tilemap.name == "Village_Tilemap")
+				foundVillage = tilemap;
 		}
 	}
 
@@ -333,7 +413,15 @@ internal sealed class WalkMapExporter : EditorWindow
 		public ExportVector2 origin_world;
 		public ExportBounds bounds;
 		public System.Collections.Generic.List<ExportRange> walkable_ranges = new System.Collections.Generic.List<ExportRange>();
+		public System.Collections.Generic.List<ExportVillageArea> village_areas = new System.Collections.Generic.List<ExportVillageArea>();
 		public System.Collections.Generic.List<ExportCell> debug_walkable_cells = new System.Collections.Generic.List<ExportCell>();
+	}
+
+	[System.Serializable]
+	sealed class ExportVillageArea
+	{
+		public string village_id;
+		public List<ExportRange> tile_ranges = new List<ExportRange>();
 	}
 
 	[System.Serializable]

@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b5fac638cd49b1a20f03c7ad0b1cf0, type: 3}
+  m_Name: Village_Northwatch
+  m_Sprite: {fileID: 4525630011661128098, guid: 8b0094f7c6950d5498549c10dd4ad71f, type: 3}
+  m_Color: {r: 0.3, g: 0.65, b: 1, a: 0.5}
+  m_Flags: 1
+  m_ColliderType: 0
+  villageId: village_northwatch

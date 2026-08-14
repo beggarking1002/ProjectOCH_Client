@@ -141,7 +141,9 @@ namespace App
 
 		bool UpdateCursorAppearance(Vector2 screenPosition)
 		{
-			if (_moveCursorInstance != null
+			bool useVillageLootCursor = IsPointerOverUi() == false && IsPointerOverFieldVillage(screenPosition);
+			if (useVillageLootCursor == false
+				&& _moveCursorInstance != null
 				&& IsPointerOverUi() == false
 				&& TryGetMoveCursorWorldPosition(screenPosition, out Vector3 moveCursorPosition))
 			{
@@ -154,7 +156,7 @@ namespace App
 
 			bool useAttackCursor = battleHint == BattleCursorHint.Attack
 				|| (battleHint == BattleCursorHint.Default && IsPointerOverUi() == false && IsPointerOverFieldEnemyPawn(screenPosition));
-			bool useLootCursor = battleHint == BattleCursorHint.Assist;
+			bool useLootCursor = useVillageLootCursor || battleHint == BattleCursorHint.Assist;
 			Sprite sprite = useAttackCursor && _attackCursorHandle.Status == AsyncOperationStatus.Succeeded
 				? _attackCursorHandle.Result
 				: useLootCursor && _lootCursorHandle.Status == AsyncOperationStatus.Succeeded
@@ -188,6 +190,14 @@ namespace App
 				_fieldObjectManager = FindFirstObjectByType<FieldObjectManager>();
 
 			return _fieldObjectManager != null && _fieldObjectManager.IsPointerOverRemotePawn(screenPosition);
+		}
+
+		bool IsPointerOverFieldVillage(Vector2 screenPosition)
+		{
+			if (_fieldObjectManager == null)
+				_fieldObjectManager = FindFirstObjectByType<FieldObjectManager>();
+
+			return _fieldObjectManager != null && _fieldObjectManager.IsPointerOverVillage(screenPosition);
 		}
 
 		bool TryGetMoveCursorWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)

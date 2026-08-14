@@ -26,6 +26,7 @@ namespace Networking
 		public Protocol.S_LOGIN LastLogin { get; private set; }
 		public Protocol.S_ENTER_GAME LastEnterGame { get; private set; }
 		public Protocol.S_ENTER_BATTLE LastEnterBattle { get; private set; }
+		public Protocol.S_ENTER_VILLAGE LastEnterVillage { get; private set; }
 		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
@@ -52,6 +53,7 @@ namespace Networking
 		public event Action<Protocol.S_DESPAWN> DespawnReceived;
 		public event Action<Protocol.S_MOVE> MoveReceived;
 		public event Action<Protocol.S_ENTER_BATTLE> EnterBattleReceived;
+		public event Action<Protocol.S_ENTER_VILLAGE> EnterVillageReceived;
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
 		public event Action<Protocol.S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -77,6 +79,7 @@ namespace Networking
 			PacketHandler.Instance.DespawnReceived += OnDespawnReceived;
 			PacketHandler.Instance.MoveReceived += OnMoveReceived;
 			PacketHandler.Instance.EnterBattleReceived += OnEnterBattleReceived;
+			PacketHandler.Instance.EnterVillageReceived += OnEnterVillageReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
@@ -114,6 +117,7 @@ namespace Networking
 				PacketHandler.Instance.DespawnReceived -= OnDespawnReceived;
 				PacketHandler.Instance.MoveReceived -= OnMoveReceived;
 				PacketHandler.Instance.EnterBattleReceived -= OnEnterBattleReceived;
+				PacketHandler.Instance.EnterVillageReceived -= OnEnterVillageReceived;
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 				PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -143,6 +147,7 @@ namespace Networking
 			LastLogin = null;
 			LastEnterGame = null;
 			LastEnterBattle = null;
+			LastEnterVillage = null;
 			LastBattleInviteRequest = null;
 			LastBattleInviteReceived = null;
 			LastBattleInviteResult = null;
@@ -208,6 +213,22 @@ namespace Networking
 		public bool EnterBattle()
 		{
 			return Send(new Protocol.C_ENTER_BATTLE());
+		}
+
+		public bool EnterVillage(string mapId, int cellX, int cellY)
+		{
+			if (string.IsNullOrWhiteSpace(mapId))
+			{
+				LastError = "Map id is required to enter a village.";
+				return false;
+			}
+
+			return Send(new Protocol.C_ENTER_VILLAGE
+			{
+				MapId = mapId,
+				CellX = cellX,
+				CellY = cellY,
+			});
 		}
 
 		public bool SendBattleInvite(ulong targetPlayerId)
@@ -329,6 +350,9 @@ namespace Networking
 					break;
 				case Protocol.C_ENTER_BATTLE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_ENTER_BATTLE);
+					break;
+				case Protocol.C_ENTER_VILLAGE pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_ENTER_VILLAGE);
 					break;
 				case Protocol.C_BATTLE_MOVE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_MOVE);
@@ -487,6 +511,25 @@ namespace Networking
 			}
 
 			EnterBattleReceived?.Invoke(pkt);
+		}
+
+		void OnEnterVillageReceived(Protocol.S_ENTER_VILLAGE pkt)
+		{
+			LastEnterVillage = pkt;
+			if (pkt == null)
+				return;
+
+			if (pkt.Success == false)
+			{
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Server rejected village entry." : pkt.Reason;
+				Debug.LogWarning($"S_ENTER_VILLAGE failed. reason={LastError}");
+			}
+			else
+			{
+				Debug.Log($"S_ENTER_VILLAGE success. villageId={pkt.VillageId}");
+			}
+
+			EnterVillageReceived?.Invoke(pkt);
 		}
 
 		void OnBattleMoveReceived(Protocol.S_BATTLE_MOVE pkt)

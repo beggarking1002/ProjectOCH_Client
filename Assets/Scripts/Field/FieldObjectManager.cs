@@ -39,6 +39,10 @@ namespace Field
 		GameObject _playerInventoryUi;
 		bool _hasPlayerInventoryUiHandle;
 		bool _isPlayerInventoryUiLoading;
+		FieldVillageRepository _villageRepository;
+		bool _isVillageDataLoading;
+		bool _villageEnterRequested;
+		Vector2Int? _pendingVillageCell;
 
 		public ulong MyObjectId => _myObjectId;
 		public FieldPawnController MyPawn => _myObjectId != 0 && _pawns.TryGetValue(_myObjectId, out FieldPawnController pawn) ? pawn : null;
@@ -64,6 +68,7 @@ namespace Field
 
 			EnsureBattleInviteUi();
 			EnsureBattleClassSelectionUi();
+			LoadVillageDataAsync();
 			SpawnKnownPlayers();
 		}
 
@@ -78,22 +83,137 @@ namespace Field
 
 		void Update()
 		{
+			HandleVillageClickInput();
+			UpdatePendingVillageEntry();
 			HandleBattleInviteClickInput();
 			HandleBattleEnterDebugInput();
 			HandleFieldVillageUiDebugInput();
 			HandlePlayerInventoryUiDebugInput();
 		}
 
-		async void HandleFieldVillageUiDebugInput()
+		async void LoadVillageDataAsync()
 		{
-			if (WasFieldVillageUiToggleKeyPressed() == false || _isFieldVillageUiLoading)
+			if (_isVillageDataLoading || _villageRepository != null)
 				return;
 
-			if (_fieldVillageUi != null)
+			_isVillageDataLoading = true;
+			_villageRepository = await FieldVillageRepository.LoadAsync();
+			_isVillageDataLoading = false;
+		}
+
+		void HandleVillageClickInput()
+		{
+			if (_walkArea == null || _villageEnterRequested || TryGetPointerDown(out Vector2 screenPosition) == false)
+				return;
+			if (FieldPointerInputBlocker.IsConsumedThisFrame || FieldBattleInviteUI.IsBlockingInput || FieldBattleClassSelectionUI.IsBlockingInput || IsPointerOverUi())
+				return;
+
+			Camera camera = Camera.main;
+			if (camera == null || IsValidScreenPosition(camera, screenPosition) == false)
+				return;
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _walkArea.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return;
+
+			Vector3 worldPosition = ray.GetPoint(enter);
+			if (_walkArea.TryGetVillageAt(worldPosition, out Vector2Int cell, out _) == false)
+				return;
+
+			FieldPointerInputBlocker.ConsumeCurrentFrame();
+			ApproachOrEnterVillage(cell);
+		}
+
+		void ApproachOrEnterVillage(Vector2Int villageCell)
+		{
+			FieldPawnController pawn = MyPawn;
+			if (pawn == null || _walkArea.TryGetCell(pawn.transform.position, out Vector2Int pawnCell) == false)
 			{
-				_fieldVillageUi.SetActive(_fieldVillageUi.activeSelf == false);
+				Debug.LogWarning("Cannot approach village because the local field pawn is not ready.");
 				return;
 			}
+
+			_pendingVillageCell = villageCell;
+			if (FieldMapWalkArea.GetHexDistance(pawnCell, villageCell) <= 2)
+			{
+				UpdatePendingVillageEntry();
+				return;
+			}
+
+			if (GameRoot.Instance == null)
+			{
+				_pendingVillageCell = null;
+				Debug.LogWarning("Cannot move toward a village because GameRoot is not initialized.");
+				return;
+			}
+
+			if (_walkArea.TryGetVillageApproachCell(pawn.transform.position, villageCell, out Vector2Int approachCell) == false)
+			{
+				_pendingVillageCell = null;
+				Debug.LogWarning($"Cannot find a reachable approach tile for village cell ({villageCell.x}, {villageCell.y}).");
+				return;
+			}
+
+			Vector3 targetWorldPosition = _walkArea.GetCellCenterWorld(approachCell, pawn.transform.position.z);
+			Protocol.C_MOVE movePacket = new Protocol.C_MOVE
+			{
+				Target = FieldPositionCodec.ToFixed(targetWorldPosition),
+			};
+			if (GameRoot.Instance.Network.Send(movePacket) == false)
+			{
+				_pendingVillageCell = null;
+				Debug.LogWarning($"Failed to move toward village. {GameRoot.Instance.Network.LastError}");
+				return;
+			}
+
+			Debug.Log($"Moving toward village interaction range. villageCell=({villageCell.x}, {villageCell.y}) approachCell=({approachCell.x}, {approachCell.y})");
+		}
+
+		void UpdatePendingVillageEntry()
+		{
+			if (_pendingVillageCell.HasValue == false || _villageEnterRequested)
+				return;
+
+			FieldPawnController pawn = MyPawn;
+			if (pawn == null || _walkArea == null || _walkArea.TryGetCell(pawn.transform.position, out Vector2Int pawnCell) == false)
+				return;
+
+			Vector2Int villageCell = _pendingVillageCell.Value;
+			if (FieldMapWalkArea.GetHexDistance(pawnCell, villageCell) > 2)
+				return;
+
+			_pendingVillageCell = null;
+			RequestVillageEntry(villageCell);
+		}
+
+		void RequestVillageEntry(Vector2Int cell)
+		{
+			if (GameRoot.Instance == null)
+			{
+				Debug.LogWarning("Cannot send C_ENTER_VILLAGE because GameRoot is not initialized.");
+				return;
+			}
+
+			if (GameRoot.Instance.Network.EnterVillage(_walkArea.MapId, cell.x, cell.y) == false)
+			{
+				Debug.LogWarning($"Failed to send C_ENTER_VILLAGE. {GameRoot.Instance.Network.LastError}");
+				return;
+			}
+
+			_villageEnterRequested = true;
+			Debug.Log($"Sent C_ENTER_VILLAGE. mapId={_walkArea.MapId}, cell=({cell.x}, {cell.y})");
+		}
+
+		async void ShowFieldVillageUi(FieldVillageDefinition village)
+		{
+			if (_fieldVillageUi != null)
+			{
+				ConfigureAndShowVillageUi(village);
+				return;
+			}
+			if (_isFieldVillageUiLoading)
+				return;
 
 			_isFieldVillageUiLoading = true;
 			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldVillageUiAddress);
@@ -114,8 +234,31 @@ namespace Field
 			Button leaveButton = _fieldVillageUi.transform.Find("Window/LeaveButton")?.GetComponent<Button>();
 			if (leaveButton != null)
 				leaveButton.onClick.AddListener(HideFieldVillageUi);
+			ConfigureAndShowVillageUi(village);
+		}
 
-			Debug.Log("Field village UI preview opened. Press F7 to toggle it.");
+		void ConfigureAndShowVillageUi(FieldVillageDefinition village)
+		{
+			_fieldVillageUi.SetActive(true);
+			FieldVillageUI villageUi = _fieldVillageUi.GetComponent<FieldVillageUI>();
+			villageUi?.ShowVillage(village);
+		}
+
+		void HandleFieldVillageUiDebugInput()
+		{
+			if (WasFieldVillageUiToggleKeyPressed() == false || _isFieldVillageUiLoading)
+				return;
+
+			if (_fieldVillageUi != null)
+			{
+				_fieldVillageUi.SetActive(_fieldVillageUi.activeSelf == false);
+				return;
+			}
+
+			if (_villageRepository != null && _villageRepository.TryGetFirstVillage(out FieldVillageDefinition village))
+				ShowFieldVillageUi(village);
+			else
+				Debug.LogWarning("Village data is still loading. Try F7 again in a moment.");
 		}
 
 		void HideFieldVillageUi()
@@ -208,7 +351,7 @@ namespace Field
 
 		void HandleBattleInviteClickInput()
 		{
-			if (_battleInviteUi == null || FieldBattleInviteUI.IsBlockingInput || FieldBattleClassSelectionUI.IsBlockingInput || TryGetPointerDown(out Vector2 screenPosition) == false)
+			if (_battleInviteUi == null || FieldPointerInputBlocker.IsConsumedThisFrame || FieldBattleInviteUI.IsBlockingInput || FieldBattleClassSelectionUI.IsBlockingInput || TryGetPointerDown(out Vector2 screenPosition) == false)
 				return;
 
 			if (IsPointerOverUi())
@@ -263,6 +406,25 @@ namespace Field
 			return TryGetRemotePawnAt(screenPosition, out _);
 		}
 
+		// Shared by the global cursor. This only indicates a client-side village
+		// area; server validation still decides whether entry is allowed.
+		public bool IsPointerOverVillage(Vector2 screenPosition)
+		{
+			if (_walkArea == null || _walkArea.IsInitialized == false)
+				return false;
+
+			Camera camera = Camera.main;
+			if (camera == null || IsValidScreenPosition(camera, screenPosition) == false)
+				return false;
+
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _walkArea.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false)
+				return false;
+
+			return _walkArea.TryGetVillageAt(ray.GetPoint(enter), out _, out _);
+		}
+
 		public bool TryGetMoveCursorWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)
 		{
 			worldPosition = default;
@@ -304,6 +466,7 @@ namespace Field
 			GameRoot.Instance.Network.SpawnReceived += HandleSpawn;
 			GameRoot.Instance.Network.DespawnReceived += HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived += HandleMove;
+			GameRoot.Instance.Network.EnterVillageReceived += HandleEnterVillage;
 		}
 
 		void UnsubscribeNetwork()
@@ -315,6 +478,35 @@ namespace Field
 			GameRoot.Instance.Network.SpawnReceived -= HandleSpawn;
 			GameRoot.Instance.Network.DespawnReceived -= HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived -= HandleMove;
+			GameRoot.Instance.Network.EnterVillageReceived -= HandleEnterVillage;
+		}
+
+		void HandleEnterVillage(Protocol.S_ENTER_VILLAGE packet)
+		{
+			_villageEnterRequested = false;
+			if (packet == null || packet.Success == false)
+			{
+				string reason = packet == null || string.IsNullOrWhiteSpace(packet.Reason) ? "Server rejected village entry." : packet.Reason;
+				Debug.LogWarning($"Village entry failed: {reason}");
+				return;
+			}
+
+			if (string.IsNullOrWhiteSpace(packet.VillageId))
+			{
+				Debug.LogWarning("S_ENTER_VILLAGE succeeded without a village id.");
+				return;
+			}
+
+			string artworkAddress = string.Empty;
+			if (_villageRepository != null && _villageRepository.TryGetVillage(packet.VillageId, out FieldVillageDefinition localVillage))
+				artworkAddress = localVillage.ArtworkAddress;
+
+			FieldVillageDefinition village = new FieldVillageDefinition(
+				packet.VillageId,
+				packet.VillageName,
+				packet.VillageDescription,
+				artworkAddress);
+			ShowFieldVillageUi(village);
 		}
 
 		void HandleBattleEnterDebugInput()
@@ -488,18 +680,19 @@ namespace Field
 				? FieldPositionCodec.ToWorld(packet.Start, z)
 				: GetPawnPositionOrDefault(packet.ObjectId, z);
 			Vector3 target = FieldPositionCodec.ToWorld(packet.Target, z);
-			List<Vector3> path = BuildMovePath(packet, start, target, z, useVisualStart: false);
+			List<Vector3> authoritativePath = BuildMovePath(packet, start, target, z, useVisualStart: false);
+			float authoritativePathLength = GetPathLength(start, authoritativePath);
 
 			if (_pawns.TryGetValue(packet.ObjectId, out FieldPawnController pawn) == false)
 			{
-				SpawnPawnForMove(packet, start, target, path);
+				SpawnPawnForMove(packet, start, target, authoritativePath, authoritativePathLength);
 				return;
 			}
 
 			// The server's start is its previously committed target. For a newly
 			// received command, route from the pawn's displayed position instead so
 			// changing direction replaces the in-flight route immediately.
-			path = BuildMovePath(packet, pawn.transform.position, target, z, useVisualStart: true);
+			List<Vector3> visualPath = BuildMovePath(packet, pawn.transform.position, target, z, useVisualStart: true);
 
 			// An already spawned remote pawn can still be interpolating toward the
 			// previous server target. Snapping it to this packet's start would visibly
@@ -507,7 +700,23 @@ namespace Field
 			// pawns therefore continue from their displayed position at the server's
 			// intended speed. A pawn first seen through S_MOVE is initialized at start
 			// in SpawnPawnForMove below.
-			pawn.ApplyServerMove(start, target, path, packet.DurationMs, snapToStart: false);
+			pawn.ApplyServerMove(start, target, visualPath, packet.DurationMs, snapToStart: false, authoritativePathLength);
+		}
+
+		static float GetPathLength(Vector3 start, IList<Vector3> path)
+		{
+			float length = 0f;
+			Vector3 previous = start;
+			if (path == null)
+				return length;
+
+			for (int index = 0; index < path.Count; index++)
+			{
+				length += Vector3.Distance(previous, path[index]);
+				previous = path[index];
+			}
+
+			return length;
 		}
 
 		List<Vector3> BuildMovePath(S_MOVE packet, Vector3 start, Vector3 target, float z, bool useVisualStart)
@@ -589,7 +798,7 @@ namespace Field
 			}
 		}
 
-		async void SpawnPawnForMove(S_MOVE packet, Vector3 start, Vector3 target, List<Vector3> path)
+		async void SpawnPawnForMove(S_MOVE packet, Vector3 start, Vector3 target, List<Vector3> path, float authoritativePathLength)
 		{
 			bool isMine = packet.ObjectId == _myObjectId;
 			ObjectInfo info = new ObjectInfo
@@ -603,7 +812,7 @@ namespace Field
 			if (_destroyed || _pawns.TryGetValue(packet.ObjectId, out FieldPawnController pawn) == false)
 				return;
 
-			pawn.ApplyServerMove(start, target, path, packet.DurationMs, snapToStart: false);
+			pawn.ApplyServerMove(start, target, path, packet.DurationMs, snapToStart: false, authoritativePathLength);
 		}
 
 		async System.Threading.Tasks.Task SpawnOrUpdatePawnAsync(ObjectInfo info, bool isMine)

@@ -119,6 +119,8 @@ MonoBehaviour:
   townArtwork: {fileID: 950100000000000104}
   shopTabButton: {fileID: 950100000000000145}
   questTabButton: {fileID: 950100000000000185}
+  villageNameText: {fileID: 950100000000000044}
+  villageDescriptionText: {fileID: 950100000000000054}
 --- !u!1 &950100000000000011
 GameObject:
   m_ObjectHideFlags: 0

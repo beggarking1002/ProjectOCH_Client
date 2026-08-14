@@ -39,6 +39,7 @@ internal static class AddressablesProjectSetup
         "Assets/GameData/BattleSkillView.csv",
         "Assets/GameData/DisplayText.csv",
         "Assets/GameData/EnumDef.csv",
+        "Assets/GameData/Village.csv",
     };
     private static readonly SkillIconAsset[] SkillIconAssets =
     {

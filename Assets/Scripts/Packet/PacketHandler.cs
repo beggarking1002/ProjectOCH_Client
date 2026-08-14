@@ -20,6 +20,7 @@ public sealed class PacketHandler
 	public event Action<S_MOVE> MoveReceived;
 	public event Action<S_CHAT> ChatReceived;
 	public event Action<S_ENTER_BATTLE> EnterBattleReceived;
+	public event Action<S_ENTER_VILLAGE> EnterVillageReceived;
 	public event Action<S_BATTLE_MOVE> BattleMoveReceived;
 	public event Action<S_BATTLE_SKILL> BattleSkillReceived;
 	public event Action<S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -78,6 +79,12 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_ENTER_BATTLEHandler");
 		Instance.EnqueuePacket(packet as S_ENTER_BATTLE, Instance.EnterBattleReceived);
+	}
+
+	public static void S_ENTER_VILLAGEHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_ENTER_VILLAGEHandler");
+		Instance.EnqueuePacket(packet as S_ENTER_VILLAGE, Instance.EnterVillageReceived);
 	}
 
 	public static void S_BATTLE_MOVEHandler(PacketSession session, IMessage packet)

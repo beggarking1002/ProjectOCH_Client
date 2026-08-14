@@ -50,6 +50,26 @@ namespace Field
 				}
 			}
 
+			// Village areas are interaction targets, not traversable terrain. Remove
+			// them after expanding walkable_ranges so local input and pathfinding match
+			// the server's authoritative movement rules.
+			if (data.village_areas != null)
+			{
+				for (int areaIndex = 0; areaIndex < data.village_areas.Count; areaIndex++)
+				{
+					FieldVillageArea area = data.village_areas[areaIndex];
+					if (area?.tile_ranges == null)
+						continue;
+
+					for (int rangeIndex = 0; rangeIndex < area.tile_ranges.Count; rangeIndex++)
+					{
+						FieldWalkMapRange range = area.tile_ranges[rangeIndex];
+						for (int x = range.x_min; x <= range.x_max; x++)
+							_walkableCells.Remove(new Vector2Int(x, range.y));
+					}
+				}
+			}
+
 			if (_walkableCells.Count == 0)
 			{
 				Debug.LogError($"{nameof(FieldMapWalkArea)} map '{data.map_id}' has no walkable cells.");
@@ -77,6 +97,96 @@ namespace Field
 				return false;
 
 			return _walkableCells.Contains(WorldToNearestCell(worldPosition));
+		}
+
+		public bool TryGetCell(Vector3 worldPosition, out Vector2Int cell)
+		{
+			cell = default;
+			if (IsInitialized == false)
+				return false;
+
+			cell = WorldToNearestCell(worldPosition);
+			return true;
+		}
+
+		public Vector3 GetCellCenterWorld(Vector2Int cell, float z)
+		{
+			EnsureInitialized();
+			return CellToWorld(cell, z);
+		}
+
+		public static int GetHexDistance(Vector2Int from, Vector2Int to)
+		{
+			int fromQ = from.x - (from.y - (from.y & 1)) / 2;
+			int toQ = to.x - (to.y - (to.y & 1)) / 2;
+			int deltaQ = toQ - fromQ;
+			int deltaR = to.y - from.y;
+			return Mathf.Max(Mathf.Abs(deltaQ), Mathf.Abs(deltaR), Mathf.Abs(deltaQ + deltaR));
+		}
+
+		// This is visual/input filtering only. The server validates village entry.
+		public bool TryGetVillageAt(Vector3 worldPosition, out Vector2Int cell, out string villageId)
+		{
+			cell = default;
+			villageId = null;
+			if (IsInitialized == false || _data.village_areas == null)
+				return false;
+
+			cell = WorldToNearestCell(worldPosition);
+			for (int areaIndex = 0; areaIndex < _data.village_areas.Count; areaIndex++)
+			{
+				FieldVillageArea area = _data.village_areas[areaIndex];
+				if (area == null || string.IsNullOrWhiteSpace(area.village_id) || area.tile_ranges == null)
+					continue;
+
+				for (int rangeIndex = 0; rangeIndex < area.tile_ranges.Count; rangeIndex++)
+				{
+					FieldWalkMapRange range = area.tile_ranges[rangeIndex];
+					if (cell.y != range.y || cell.x < range.x_min || cell.x > range.x_max)
+						continue;
+
+					villageId = area.village_id;
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		// Finds a reachable non-village tile from which the server allows entry to
+		// the selected village cell (within its two-hex interaction range).
+		public bool TryGetVillageApproachCell(Vector3 startWorldPosition, Vector2Int villageCell, out Vector2Int approachCell)
+		{
+			approachCell = default;
+			if (IsInitialized == false)
+				return false;
+
+			bool found = false;
+			float bestPathLength = float.MaxValue;
+			List<Vector3> candidatePath = new List<Vector3>();
+			foreach (Vector2Int candidateCell in _walkableCells)
+			{
+				if (GetHexDistance(candidateCell, villageCell) > 2)
+					continue;
+
+				candidatePath.Clear();
+				Vector3 candidateWorldPosition = CellToWorld(candidateCell, startWorldPosition.z);
+				if (TryFindPath(startWorldPosition, candidateWorldPosition, candidatePath) == false)
+					continue;
+
+				float pathLength = GetPathLength(startWorldPosition, candidatePath);
+				if (found && (pathLength > bestPathLength ||
+					(Mathf.Approximately(pathLength, bestPathLength) && CompareCell(candidateCell, approachCell) >= 0)))
+				{
+					continue;
+				}
+
+				found = true;
+				bestPathLength = pathLength;
+				approachCell = candidateCell;
+			}
+
+			return found;
 		}
 
 		// The server remains authoritative for the destination. This local route is
@@ -171,6 +281,18 @@ namespace Field
 			}
 
 			return true;
+		}
+
+		static float GetPathLength(Vector3 start, List<Vector3> path)
+		{
+			float length = 0f;
+			Vector3 previous = start;
+			for (int index = 0; index < path.Count; index++)
+			{
+				length += Vector3.Distance(previous, path[index]);
+				previous = path[index];
+			}
+			return length;
 		}
 
 		Vector3 CellToWorld(Vector2Int cell, float z)

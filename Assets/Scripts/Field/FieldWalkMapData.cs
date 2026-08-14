@@ -12,6 +12,7 @@ namespace Field
 		public FieldWalkMapVector2 origin_world;
 		public FieldWalkMapBounds bounds;
 		public List<FieldWalkMapRange> walkable_ranges = new List<FieldWalkMapRange>();
+		public List<FieldVillageArea> village_areas = new List<FieldVillageArea>();
 		public List<FieldWalkMapCell> debug_walkable_cells = new List<FieldWalkMapCell>();
 	}
 
@@ -56,5 +57,12 @@ namespace Field
 		public int y;
 		public int x_min;
 		public int x_max;
+	}
+
+	[Serializable]
+	public sealed class FieldVillageArea
+	{
+		public string village_id;
+		public List<FieldWalkMapRange> tile_ranges = new List<FieldWalkMapRange>();
 	}
 }
