@@ -1,4 +1,5 @@
 using App;
+using Field;
 using Protocol;
 using System;
 using UnityEngine;
@@ -113,6 +114,7 @@ namespace Scenes
 
 			Debug.Log("S_ENTER_GAME success. Loading FieldScene.");
 			await SceneTransitionOverlay.ShowAsync();
+			await FieldVillageArtworkCache.PreloadAsync();
 			SceneManager.LoadScene(FieldSceneName);
 		}
 

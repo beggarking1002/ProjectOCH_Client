@@ -11,9 +11,11 @@ internal static class AddressablesProjectSetup
     private const string UiGroupName = "UI";
     private const string GameDataGroupName = "GameData";
     private const string SkillIconGroupName = "SkillIcon";
+    private const string ItemIconGroupName = "ItemIcon";
     private const string UiLabel = "UI";
     private const string GameDataLabel = "GameData";
     private const string SkillIconLabel = "SkillIcon";
+    private const string ItemIconLabel = "ItemIcon";
     private const string BattleUiAddress = "BattleSceneHUD";
     private const string StatIconAddress = "StatIcon";
     private const string HandCursorAddress = "Cursor_Hand";
@@ -40,6 +42,11 @@ internal static class AddressablesProjectSetup
         "Assets/GameData/DisplayText.csv",
         "Assets/GameData/EnumDef.csv",
         "Assets/GameData/Village.csv",
+		"Assets/GameData/Item.csv",
+		"Assets/GameData/ItemIcon.csv",
+		"Assets/GameData/VillageShopStock.csv",
+		"Assets/GameData/VillageTrade.csv",
+		"Assets/GameData/EconomyConfig.csv",
     };
     private static readonly SkillIconAsset[] SkillIconAssets =
     {
@@ -50,6 +57,20 @@ internal static class AddressablesProjectSetup
         new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Skill4.png", "icon_beige_ice_skill4"),
         new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Ulti.png", "icon_beige_ice_ulti"),
         new SkillIconAsset("Assets/@Resources/Art/SkillIcon/Beige/Beige_Ice_Sub.png", "icon_beige_ice_sub"),
+    };
+    private static readonly SkillIconAsset[] VillageArtworkAssets =
+    {
+        new SkillIconAsset("Assets/@Resources/Art/Village/eastgate.png", "Village/eastgate"),
+        new SkillIconAsset("Assets/@Resources/Art/Village/NorthWatch.png", "Village/NorthWatch"),
+        new SkillIconAsset("Assets/@Resources/Art/Village/RiverSide.png", "Village/RiverSide"),
+        new SkillIconAsset("Assets/@Resources/Art/Village/SouthPort.png", "Village/SouthPort"),
+        new SkillIconAsset("Assets/@Resources/Art/Village/WestField.png", "Village/WestField"),
+    };
+    private static readonly SkillIconAsset[] ItemIconSheets =
+    {
+        new SkillIconAsset("Assets/@Resources/Art/Item/Item1.png", "Item/Item1"),
+        new SkillIconAsset("Assets/@Resources/Art/Item/Item2.png", "Item/Item2"),
+        new SkillIconAsset("Assets/@Resources/Art/Item/Item3.png", "Item/Item3"),
     };
 
     [InitializeOnLoadMethod]
@@ -100,6 +121,8 @@ internal static class AddressablesProjectSetup
         RegisterUiAddressable(settings, ParvisMarkerPrefabPath, ParvisMarkerPrefabAddress);
         RegisterGameDataAddressables(settings);
         RegisterSkillIconAddressables(settings);
+		RegisterItemIconAddressables(settings);
+		RegisterVillageArtworkAddressables(settings);
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -139,8 +162,10 @@ internal static class AddressablesProjectSetup
             || IsMissingAddressable(settings, LootCursorPath)
             || IsMissingAddressable(settings, EmbeddedAxeMarkerPrefabPath)
             || IsMissingAddressable(settings, ParvisMarkerPrefabPath)
-            || IsMissingAnyAddressable(settings, GameDataCsvPaths)
-            || IsMissingAnySkillIconAddressable(settings);
+			|| IsMissingAnyAddressable(settings, GameDataCsvPaths)
+			|| IsMissingAnySkillIconAddressable(settings)
+			|| IsMissingAnyItemIconAddressable(settings)
+			|| IsMissingAnyVillageArtworkAddressable(settings);
     }
 
     private static void ConfigureDefaultRemoteLoadPath(AddressableAssetSettings settings)
@@ -237,6 +262,42 @@ internal static class AddressablesProjectSetup
 
         EditorUtility.SetDirty(group);
     }
+
+	private static void RegisterItemIconAddressables(AddressableAssetSettings settings)
+	{
+		AddressableAssetGroup group = GetOrCreateLocalGroup(settings, ItemIconGroupName);
+		if (group == null)
+		{
+			Debug.LogWarning("Cannot register item icon addressables without a group.");
+			return;
+		}
+
+		settings.AddLabel(ItemIconLabel, false);
+		foreach (SkillIconAsset sheet in ItemIconSheets)
+		{
+			string guid = AssetDatabase.AssetPathToGUID(sheet.Path);
+			if (string.IsNullOrWhiteSpace(guid))
+			{
+				Debug.LogWarning($"Item icon sheet not found: {sheet.Path}");
+				continue;
+			}
+
+			AddressableAssetEntry entry = settings.CreateOrMoveEntry(guid, group, false, false);
+			entry.address = sheet.Address;
+			entry.SetLabel(ItemIconLabel, true, true, false);
+		}
+
+		EditorUtility.SetDirty(group);
+	}
+
+	private static void RegisterVillageArtworkAddressables(AddressableAssetSettings settings)
+	{
+		foreach (SkillIconAsset artwork in VillageArtworkAssets)
+		{
+			EnsureSpriteImporter(artwork.Path);
+			RegisterUiAddressable(settings, artwork.Path, artwork.Address);
+		}
+	}
 
     private static void RegisterGameDataAddressables(AddressableAssetSettings settings)
     {
@@ -357,6 +418,28 @@ internal static class AddressablesProjectSetup
 
         return false;
     }
+
+	private static bool IsMissingAnyItemIconAddressable(AddressableAssetSettings settings)
+	{
+		foreach (SkillIconAsset sheet in ItemIconSheets)
+		{
+			if (IsMissingAddressable(settings, sheet.Path))
+				return true;
+		}
+
+		return false;
+	}
+
+	private static bool IsMissingAnyVillageArtworkAddressable(AddressableAssetSettings settings)
+	{
+		foreach (SkillIconAsset artwork in VillageArtworkAssets)
+		{
+			if (IsMissingAddressable(settings, artwork.Path))
+				return true;
+		}
+
+		return false;
+	}
 
     private readonly struct SkillIconAsset
     {

@@ -51,9 +51,6 @@ namespace Field
 			for (int i = 0; i < questButtons.Length; i++)
 				questButtons[i].onClick.RemoveAllListeners();
 
-			if (_villageUi != null)
-				_villageUi.gameObject.SetActive(true);
-
 			Addressables.ReleaseInstance(gameObject);
 		}
 	}

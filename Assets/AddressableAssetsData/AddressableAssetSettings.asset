@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 6c759d934672be44aac0cb2ecd95c984
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: b50cc69140e27fdc955988bc9746c06b
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: feb2b33658a7a4f4c8b366259311c54a, type: 2}
   - {fileID: 11400000, guid: 8e74e7fffb6cfd24d997ce4401a24a97, type: 2}
   - {fileID: 11400000, guid: 59e907e538210b6409e7b0a3d148df0b, type: 2}
+  - {fileID: 11400000, guid: a4fe9021d8034b9aa1f77c4f531af7b2, type: 2}
   - {fileID: 11400000, guid: d5cbd537893db4f44b54d84ed38d2cba, type: 2}
   - {fileID: 11400000, guid: 77d74a9e1f7c8de49a0b9c3c4be6a49d, type: 2}
   m_BuildSettings:
@@ -114,6 +115,7 @@ MonoBehaviour:
     - UI
     - SkillIcon
     - GameData
+    - ItemIcon
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 16e128f07c5e5ac49a61967c5342ad25, type: 2}

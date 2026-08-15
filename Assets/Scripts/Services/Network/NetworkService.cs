@@ -27,6 +27,8 @@ namespace Networking
 		public Protocol.S_ENTER_GAME LastEnterGame { get; private set; }
 		public Protocol.S_ENTER_BATTLE LastEnterBattle { get; private set; }
 		public Protocol.S_ENTER_VILLAGE LastEnterVillage { get; private set; }
+		public Protocol.S_EXPEDITION_STATE LastExpeditionState { get; private set; }
+		public Protocol.S_VILLAGE_SHOP_STATE LastVillageShopState { get; private set; }
 		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
@@ -54,6 +56,8 @@ namespace Networking
 		public event Action<Protocol.S_MOVE> MoveReceived;
 		public event Action<Protocol.S_ENTER_BATTLE> EnterBattleReceived;
 		public event Action<Protocol.S_ENTER_VILLAGE> EnterVillageReceived;
+		public event Action<Protocol.S_EXPEDITION_STATE> ExpeditionStateReceived;
+		public event Action<Protocol.S_VILLAGE_SHOP_STATE> VillageShopStateReceived;
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
 		public event Action<Protocol.S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -80,6 +84,8 @@ namespace Networking
 			PacketHandler.Instance.MoveReceived += OnMoveReceived;
 			PacketHandler.Instance.EnterBattleReceived += OnEnterBattleReceived;
 			PacketHandler.Instance.EnterVillageReceived += OnEnterVillageReceived;
+			PacketHandler.Instance.ExpeditionStateReceived += OnExpeditionStateReceived;
+			PacketHandler.Instance.VillageShopStateReceived += OnVillageShopStateReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
@@ -118,6 +124,8 @@ namespace Networking
 				PacketHandler.Instance.MoveReceived -= OnMoveReceived;
 				PacketHandler.Instance.EnterBattleReceived -= OnEnterBattleReceived;
 				PacketHandler.Instance.EnterVillageReceived -= OnEnterVillageReceived;
+				PacketHandler.Instance.ExpeditionStateReceived -= OnExpeditionStateReceived;
+				PacketHandler.Instance.VillageShopStateReceived -= OnVillageShopStateReceived;
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 				PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -148,6 +156,8 @@ namespace Networking
 			LastEnterGame = null;
 			LastEnterBattle = null;
 			LastEnterVillage = null;
+			LastExpeditionState = null;
+			LastVillageShopState = null;
 			LastBattleInviteRequest = null;
 			LastBattleInviteReceived = null;
 			LastBattleInviteResult = null;
@@ -228,6 +238,31 @@ namespace Networking
 				MapId = mapId,
 				CellX = cellX,
 				CellY = cellY,
+			});
+		}
+
+		public bool OpenVillageShop(string villageId)
+		{
+			return Send(new Protocol.C_VILLAGE_SHOP_OPEN { VillageId = villageId ?? string.Empty });
+		}
+
+		public bool BuyVillageItem(string villageId, string itemId, int quantity = 1)
+		{
+			return Send(new Protocol.C_VILLAGE_SHOP_BUY
+			{
+				VillageId = villageId ?? string.Empty,
+				ItemId = itemId ?? string.Empty,
+				Quantity = quantity,
+			});
+		}
+
+		public bool SellVillageItem(string villageId, ulong stackId, int quantity = 1)
+		{
+			return Send(new Protocol.C_VILLAGE_SHOP_SELL
+			{
+				VillageId = villageId ?? string.Empty,
+				StackId = stackId,
+				Quantity = quantity,
 			});
 		}
 
@@ -353,6 +388,15 @@ namespace Networking
 					break;
 				case Protocol.C_ENTER_VILLAGE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_ENTER_VILLAGE);
+					break;
+				case Protocol.C_VILLAGE_SHOP_OPEN pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_VILLAGE_SHOP_OPEN);
+					break;
+				case Protocol.C_VILLAGE_SHOP_BUY pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_VILLAGE_SHOP_BUY);
+					break;
+				case Protocol.C_VILLAGE_SHOP_SELL pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_VILLAGE_SHOP_SELL);
 					break;
 				case Protocol.C_BATTLE_MOVE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_MOVE);
@@ -530,6 +574,31 @@ namespace Networking
 			}
 
 			EnterVillageReceived?.Invoke(pkt);
+		}
+
+		void OnExpeditionStateReceived(Protocol.S_EXPEDITION_STATE pkt)
+		{
+			if (pkt == null)
+				return;
+			LastExpeditionState = pkt.Clone();
+			ExpeditionStateReceived?.Invoke(pkt);
+		}
+
+		void OnVillageShopStateReceived(Protocol.S_VILLAGE_SHOP_STATE pkt)
+		{
+			if (pkt == null)
+				return;
+			LastVillageShopState = pkt.Clone();
+			if (pkt.Expedition != null)
+			{
+				LastExpeditionState = pkt.Expedition.Clone();
+				ExpeditionStateReceived?.Invoke(pkt.Expedition);
+			}
+			if (pkt.Success == false)
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Village shop request failed." : pkt.Reason;
+			else
+				LastError = null;
+			VillageShopStateReceived?.Invoke(pkt);
 		}
 
 		void OnBattleMoveReceived(Protocol.S_BATTLE_MOVE pkt)

@@ -21,6 +21,8 @@ public sealed class PacketHandler
 	public event Action<S_CHAT> ChatReceived;
 	public event Action<S_ENTER_BATTLE> EnterBattleReceived;
 	public event Action<S_ENTER_VILLAGE> EnterVillageReceived;
+	public event Action<S_EXPEDITION_STATE> ExpeditionStateReceived;
+	public event Action<S_VILLAGE_SHOP_STATE> VillageShopStateReceived;
 	public event Action<S_BATTLE_MOVE> BattleMoveReceived;
 	public event Action<S_BATTLE_SKILL> BattleSkillReceived;
 	public event Action<S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -85,6 +87,18 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_ENTER_VILLAGEHandler");
 		Instance.EnqueuePacket(packet as S_ENTER_VILLAGE, Instance.EnterVillageReceived);
+	}
+
+	public static void S_EXPEDITION_STATEHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_EXPEDITION_STATEHandler");
+		Instance.EnqueuePacket(packet as S_EXPEDITION_STATE, Instance.ExpeditionStateReceived);
+	}
+
+	public static void S_VILLAGE_SHOP_STATEHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_VILLAGE_SHOP_STATEHandler");
+		Instance.EnqueuePacket(packet as S_VILLAGE_SHOP_STATE, Instance.VillageShopStateReceived);
 	}
 
 	public static void S_BATTLE_MOVEHandler(PacketSession session, IMessage packet)

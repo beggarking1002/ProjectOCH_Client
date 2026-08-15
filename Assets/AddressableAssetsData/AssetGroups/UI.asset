@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e94ed74901734e4da9f3adc2bf8d0a1
+    m_Address: Village/SouthPort
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21807880d52ba464bb25455a7ece240a
     m_Address: Village/village7
     m_ReadOnly: 0
@@ -147,6 +153,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9861f69059765f7488e06df3c3a232d1
+    m_Address: Village/RiverSide
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9d4ba3f2907a03a4ca0bfe3ef65a434b
     m_Address: portrait_suen
     m_ReadOnly: 0
@@ -225,8 +237,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da172b9bbd990ff4b9d80556f6316b23
+    m_Address: Village/WestField
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dc52467da72f13e44b03a6a11779beb4
     m_Address: Cursor_Attack
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de4986b3625c9604f8a714dec369d0c6
+    m_Address: Village/NorthWatch
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de7c9bc234869ff458dff8acefc1877c
+    m_Address: Village/eastgate
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI

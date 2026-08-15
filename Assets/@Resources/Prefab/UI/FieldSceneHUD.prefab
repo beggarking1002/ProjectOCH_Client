@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 970100000000000003}
   - component: {fileID: 970100000000000004}
   - component: {fileID: 970100000000000005}
+  - component: {fileID: 970100000000000006}
   m_Layer: 5
   m_Name: FieldSceneHUD
   m_TagString: Untagged
@@ -105,6 +106,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &970100000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970100000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61a3ceeb5d6434e9c0ddc5a9f4cd42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusText: {fileID: 970100000000000034}
+  inventoryButton: {fileID: 970100000000000065}
 --- !u!1 &970100000000000011
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +515,7 @@ GameObject:
   - component: {fileID: 970100000000000062}
   - component: {fileID: 970100000000000063}
   - component: {fileID: 970100000000000064}
+  - component: {fileID: 970100000000000065}
   m_Layer: 5
   m_Name: InventoryShortcut
   m_TagString: Untagged
@@ -565,6 +581,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &970100000000000065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970100000000000061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Navigation:
+    m_Mode: 3
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.9, b: 0.65, a: 1}
+    m_PressedColor: {r: 0.82, g: 0.68, b: 0.36, a: 1}
+    m_SelectedColor: {r: 1, g: 0.9, b: 0.65, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.45}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 970100000000000064}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &970100000000000071
 GameObject:
   m_ObjectHideFlags: 0

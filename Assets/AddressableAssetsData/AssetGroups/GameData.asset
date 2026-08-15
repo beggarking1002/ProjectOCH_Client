@@ -15,8 +15,14 @@ MonoBehaviour:
   m_GroupName: GameData
   m_GUID: ce05022e39832964da2a870109224207
   m_SerializeEntries:
-  - m_GUID: d285cfde5252668428b6239cd0b8b6e6
-    m_Address: Field_001_WalkMap
+  - m_GUID: 00d70fa550b3cd145bd213d6713df958
+    m_Address: BattleSkillView
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05f972077b004da408ec0e13ae5e398c
+    m_Address: BattleSkillEffectParam
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameData
@@ -27,14 +33,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 00d70fa550b3cd145bd213d6713df958
-    m_Address: BattleSkillView
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - GameData
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 05f972077b004da408ec0e13ae5e398c
-    m_Address: BattleSkillEffectParam
+  - m_GUID: 3b91e2d4c5f64780a123b4c5d6e7f809
+    m_Address: VillageShopStock
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameData
@@ -57,8 +57,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - GameData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87b4836e00c44114a6ec7c9472a834d9
+    m_Address: Village
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c2d4e6f1a3b4579b0c2d4e6f8a1b3c5
+    m_Address: VillageTrade
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b1d0dc6c8d53074eb5b003e68829ea1
     m_Address: PawnTemplate
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e9fa22dcb804b93b6c966769dc4c421
+    m_Address: ItemIcon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d285cfde5252668428b6239cd0b8b6e6
+    m_Address: Field_001_WalkMap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7e9f1a3b5c64728d0e2f4a6b8c1d3e5
+    m_Address: EconomyConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameData
@@ -75,8 +105,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - GameData
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87b4836e00c44114a6ec7c9472a834d9
-    m_Address: Village
+  - m_GUID: f2a8c4d9e1b34756a0c19d82e6f54310
+    m_Address: Item
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameData

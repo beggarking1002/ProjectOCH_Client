@@ -280,7 +280,14 @@ namespace Field
 
 		async void HandlePlayerInventoryUiDebugInput()
 		{
-			if (WasPlayerInventoryUiToggleKeyPressed() == false || _isPlayerInventoryUiLoading)
+			if (WasPlayerInventoryUiToggleKeyPressed() == false)
+				return;
+			TogglePlayerInventoryUi();
+		}
+
+		public async void TogglePlayerInventoryUi()
+		{
+			if (_isPlayerInventoryUiLoading)
 				return;
 
 			if (_playerInventoryUi != null)

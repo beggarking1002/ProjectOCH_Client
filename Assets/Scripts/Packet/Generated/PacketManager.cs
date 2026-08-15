@@ -40,6 +40,11 @@ public enum MsgId : ushort
     S_BATTLE_CLASS_SELECTION_RESULT = 1031,
     C_ENTER_VILLAGE = 1032,
     S_ENTER_VILLAGE = 1033,
+    S_EXPEDITION_STATE = 1034,
+    C_VILLAGE_SHOP_OPEN = 1035,
+    C_VILLAGE_SHOP_BUY = 1036,
+    C_VILLAGE_SHOP_SELL = 1037,
+    S_VILLAGE_SHOP_STATE = 1038,
 }
 
 class PacketManager
@@ -103,6 +108,10 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_BATTLE_CLASS_SELECTION_RESULT, PacketHandler.S_BATTLE_CLASS_SELECTION_RESULTHandler);
         _onRecv.Add((ushort)MsgId.S_ENTER_VILLAGE, MakePacket<S_ENTER_VILLAGE>);
         _handler.Add((ushort)MsgId.S_ENTER_VILLAGE, PacketHandler.S_ENTER_VILLAGEHandler);
+        _onRecv.Add((ushort)MsgId.S_EXPEDITION_STATE, MakePacket<S_EXPEDITION_STATE>);
+        _handler.Add((ushort)MsgId.S_EXPEDITION_STATE, PacketHandler.S_EXPEDITION_STATEHandler);
+        _onRecv.Add((ushort)MsgId.S_VILLAGE_SHOP_STATE, MakePacket<S_VILLAGE_SHOP_STATE>);
+        _handler.Add((ushort)MsgId.S_VILLAGE_SHOP_STATE, PacketHandler.S_VILLAGE_SHOP_STATEHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

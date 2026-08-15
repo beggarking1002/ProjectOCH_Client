@@ -85,8 +85,8 @@ namespace Field
 			EnsureInitialized();
 
 			Vector2Int spawnCell = new Vector2Int(0, 0);
-			if (_walkableCells.Contains(spawnCell) == false)
-				spawnCell = GetNearestWalkableCell(Vector2Int.zero);
+			if (_walkableCells.Contains(spawnCell) == false || TryGetVillageAtCell(spawnCell, out _))
+				spawnCell = GetNearestWalkableCell(Vector2Int.zero, includeVillageCells: false);
 
 			return CellToWorld(spawnCell, z);
 		}
@@ -133,6 +133,15 @@ namespace Field
 				return false;
 
 			cell = WorldToNearestCell(worldPosition);
+			return TryGetVillageAtCell(cell, out villageId);
+		}
+
+		bool TryGetVillageAtCell(Vector2Int cell, out string villageId)
+		{
+			villageId = null;
+			if (_data == null || _data.village_areas == null)
+				return false;
+
 			for (int areaIndex = 0; areaIndex < _data.village_areas.Count; areaIndex++)
 			{
 				FieldVillageArea area = _data.village_areas[areaIndex];
@@ -328,12 +337,15 @@ namespace Field
 			return nearestCell;
 		}
 
-		Vector2Int GetNearestWalkableCell(Vector2Int origin)
+		Vector2Int GetNearestWalkableCell(Vector2Int origin, bool includeVillageCells)
 		{
 			Vector2Int result = default;
 			int nearestDistance = int.MaxValue;
 			foreach (Vector2Int candidate in _walkableCells)
 			{
+				if (includeVillageCells == false && TryGetVillageAtCell(candidate, out _))
+					continue;
+
 				int distance = Mathf.Abs(candidate.x - origin.x) + Mathf.Abs(candidate.y - origin.y);
 				if (distance > nearestDistance || (distance == nearestDistance && CompareCell(candidate, result) >= 0))
 					continue;
