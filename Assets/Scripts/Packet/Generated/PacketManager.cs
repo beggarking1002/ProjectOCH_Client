@@ -53,6 +53,7 @@ public enum MsgId : ushort
     S_VILLAGE_QUEST_STATE = 1044,
     C_QUEST_TRACKER_OPEN = 1045,
     S_QUEST_TRACKER_STATE = 1046,
+    C_QUEST_ABANDON = 1047,
 }
 
 class PacketManager

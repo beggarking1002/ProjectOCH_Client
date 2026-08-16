@@ -121,6 +121,7 @@ MonoBehaviour:
   questTabButton: {fileID: 950100000000000185}
   villageNameText: {fileID: 950100000000000044}
   villageDescriptionText: {fileID: 950100000000000054}
+  fameText: {fileID: 950100000000000094}
 --- !u!1 &950100000000000011
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +761,7 @@ GameObject:
   - component: {fileID: 950100000000000093}
   - component: {fileID: 950100000000000094}
   m_Layer: 5
-  m_Name: ReputationText
+  m_Name: FameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,7 +827,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB9C8\uC744 \uD3C9\uD310  0"
+  m_Text: "\uBA85\uC131  0"
 --- !u!1 &950100000000000101
 GameObject:
   m_ObjectHideFlags: 0

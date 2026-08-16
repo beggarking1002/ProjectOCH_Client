@@ -63,9 +63,8 @@ namespace Field
 			if (resourceText != null)
 			{
 				int gold = state?.Gold ?? 0;
-				// Supply and village reputation have no authoritative packet values yet.
-				// Keep their fixed HUD positions ready for those fields.
-				resourceText.text = $"금화  {gold}                         보급품  0                         마을 평판  0";
+				int fame = state?.Fame ?? 0;
+				resourceText.text = $"금화  {gold}                         보급품  0                         명성  {fame}";
 			}
 
 			if (statusText == null)

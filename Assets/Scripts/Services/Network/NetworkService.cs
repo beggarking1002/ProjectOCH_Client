@@ -299,6 +299,11 @@ namespace Networking
 			return Send(new Protocol.C_QUEST_TRACKER_OPEN());
 		}
 
+		public bool AbandonQuest(string questId)
+		{
+			return Send(new Protocol.C_QUEST_ABANDON { QuestId = questId ?? string.Empty });
+		}
+
 		public bool AcceptQuest(string questId)
 		{
 			return Send(new Protocol.C_QUEST_ACCEPT { QuestId = questId ?? string.Empty });
@@ -449,6 +454,9 @@ namespace Networking
 					break;
 				case Protocol.C_QUEST_TRACKER_OPEN pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_TRACKER_OPEN);
+					break;
+				case Protocol.C_QUEST_ABANDON pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_ABANDON);
 					break;
 				case Protocol.C_QUEST_ACCEPT pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_ACCEPT);

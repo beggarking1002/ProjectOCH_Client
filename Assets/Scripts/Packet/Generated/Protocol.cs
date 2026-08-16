@@ -126,48 +126,52 @@ namespace Protocol {
             "ASgJEg0KBXN0b2NrGAIgASgFEhEKCW1heF9zdG9jaxgDIAEoBRIXCg91bml0",
             "X3NlbGxfcHJpY2UYBCABKAUiVQoYVmlsbGFnZVRyYWRlQnV5T2ZmZXJJbmZv",
             "EhAKCHN0YWNrX2lkGAEgASgEEg8KB2l0ZW1faWQYAiABKAkSFgoOdW5pdF9i",
-            "dXlfcHJpY2UYAyABKAUi3AEKElNfRVhQRURJVElPTl9TVEFURRIMCgRnb2xk",
+            "dXlfcHJpY2UYAyABKAUi6gEKElNfRVhQRURJVElPTl9TVEFURRIMCgRnb2xk",
             "GAEgASgFEg8KB3NhdGlldHkYAiABKAUSEwoLbWF4X3NhdGlldHkYAyABKAUS",
             "NAoJaW52ZW50b3J5GAQgAygLMiEuUHJvdG9jb2wuRXhwZWRpdGlvbkl0ZW1T",
             "dGFja0luZm8SHgoWYXV0b19jb25zdW1lZF9pdGVtX2lkcxgFIAMoCRIYChBl",
             "eHBpcmVkX2l0ZW1faWRzGAYgAygJEg4KBnRoaXJzdBgHIAEoBRISCgptYXhf",
-            "dGhpcnN0GAggASgFIikKE0NfVklMTEFHRV9TSE9QX09QRU4SEgoKdmlsbGFn",
-            "ZV9pZBgBIAEoCSJLChJDX1ZJTExBR0VfU0hPUF9CVVkSEgoKdmlsbGFnZV9p",
-            "ZBgBIAEoCRIPCgdpdGVtX2lkGAIgASgJEhAKCHF1YW50aXR5GAMgASgFIk0K",
-            "E0NfVklMTEFHRV9TSE9QX1NFTEwSEgoKdmlsbGFnZV9pZBgBIAEoCRIQCghz",
-            "dGFja19pZBgCIAEoBBIQCghxdWFudGl0eRgDIAEoBSKmAgoUU19WSUxMQUdF",
-            "X1NIT1BfU1RBVEUSDwoHc3VjY2VzcxgBIAEoCBIOCgZyZWFzb24YAiABKAkS",
-            "DgoGYWN0aW9uGAMgASgJEhIKCnZpbGxhZ2VfaWQYBCABKAkSMgoIbGlzdGlu",
-            "Z3MYBSADKAsyIC5Qcm90b2NvbC5WaWxsYWdlU2hvcExpc3RpbmdJbmZvEjAK",
-            "CmV4cGVkaXRpb24YBiABKAsyHC5Qcm90b2NvbC5TX0VYUEVESVRJT05fU1RB",
-            "VEUSJQodc3RvY2tfcmVzZXRfcmVtYWluaW5nX3NlY29uZHMYByABKA0SPAoQ",
-            "dHJhZGVfYnV5X29mZmVycxgIIAMoCzIiLlByb3RvY29sLlZpbGxhZ2VUcmFk",
-            "ZUJ1eU9mZmVySW5mbyIrChNDX1JFU0VUX1BMQVlFUl9EQVRBEhQKDGNvbmZp",
-            "cm1hdGlvbhgBIAEoCSI2ChNTX1JFU0VUX1BMQVlFUl9EQVRBEg8KB3N1Y2Nl",
-            "c3MYASABKAgSDgoGcmVhc29uGAIgASgJItYBChpRdWVzdE9iamVjdGl2ZVBy",
-            "b2dyZXNzSW5mbxIXCg9vYmplY3RpdmVfaW5kZXgYASABKA0SEwoLZGVzY3Jp",
-            "cHRpb24YAiABKAkSEAoIcHJvZ3Jlc3MYAyABKAUSFgoOcmVxdWlyZWRfY291",
-            "bnQYBCABKAUSEQoJY29tcGxldGVkGAUgASgIEhYKDm9iamVjdGl2ZV90eXBl",
-            "GAYgASgJEhsKE3RhcmdldF92aWxsYWdlX25hbWUYByABKAkSGAoQdGFyZ2V0",
-            "X2l0ZW1fbmFtZRgIIAEoCSK3AgoQVmlsbGFnZVF1ZXN0SW5mbxIQCghxdWVz",
-            "dF9pZBgBIAEoCRIUCgxkaXNwbGF5X25hbWUYAiABKAkSEwoLZGVzY3JpcHRp",
-            "b24YAyABKAkSDgoGc3RhdHVzGAQgASgJEhgKEHN0YXJ0X3ZpbGxhZ2VfaWQY",
-            "BSABKAkSHQoVY29tcGxldGlvbl92aWxsYWdlX2lkGAYgASgJEh8KF2NvbXBs",
-            "ZXRpb25fdmlsbGFnZV9uYW1lGAcgASgJEjgKCm9iamVjdGl2ZXMYCCADKAsy",
-            "JC5Qcm90b2NvbC5RdWVzdE9iamVjdGl2ZVByb2dyZXNzSW5mbxIbChNyZXdh",
-            "cmRfZGVzY3JpcHRpb25zGAkgAygJEhIKCmNhbl9hY2NlcHQYCiABKAgSEQoJ",
-            "Y2FuX2NsYWltGAsgASgIIjAKGkNfVklMTEFHRV9RVUVTVF9CT0FSRF9PUEVO",
-            "EhIKCnZpbGxhZ2VfaWQYASABKAkiIgoOQ19RVUVTVF9BQ0NFUFQSEAoIcXVl",
-            "c3RfaWQYASABKAkiKAoUQ19RVUVTVF9DTEFJTV9SRVdBUkQSEAoIcXVlc3Rf",
-            "aWQYASABKAkiugEKFVNfVklMTEFHRV9RVUVTVF9TVEFURRIPCgdzdWNjZXNz",
-            "GAEgASgIEg4KBnJlYXNvbhgCIAEoCRIOCgZhY3Rpb24YAyABKAkSEgoKdmls",
-            "bGFnZV9pZBgEIAEoCRIqCgZxdWVzdHMYBSADKAsyGi5Qcm90b2NvbC5WaWxs",
-            "YWdlUXVlc3RJbmZvEjAKCmV4cGVkaXRpb24YBiABKAsyHC5Qcm90b2NvbC5T",
-            "X0VYUEVESVRJT05fU1RBVEUiFgoUQ19RVUVTVF9UUkFDS0VSX09QRU4ilgEK",
-            "FVNfUVVFU1RfVFJBQ0tFUl9TVEFURRIPCgdzdWNjZXNzGAEgASgIEg4KBnJl",
-            "YXNvbhgCIAEoCRIqCgZxdWVzdHMYAyADKAsyGi5Qcm90b2NvbC5WaWxsYWdl",
-            "UXVlc3RJbmZvEjAKCmV4cGVkaXRpb24YBCABKAsyHC5Qcm90b2NvbC5TX0VY",
-            "UEVESVRJT05fU1RBVEViBnByb3RvMw=="));
+            "dGhpcnN0GAggASgFEgwKBGZhbWUYCSABKAUiKQoTQ19WSUxMQUdFX1NIT1Bf",
+            "T1BFThISCgp2aWxsYWdlX2lkGAEgASgJIksKEkNfVklMTEFHRV9TSE9QX0JV",
+            "WRISCgp2aWxsYWdlX2lkGAEgASgJEg8KB2l0ZW1faWQYAiABKAkSEAoIcXVh",
+            "bnRpdHkYAyABKAUiTQoTQ19WSUxMQUdFX1NIT1BfU0VMTBISCgp2aWxsYWdl",
+            "X2lkGAEgASgJEhAKCHN0YWNrX2lkGAIgASgEEhAKCHF1YW50aXR5GAMgASgF",
+            "IqYCChRTX1ZJTExBR0VfU0hPUF9TVEFURRIPCgdzdWNjZXNzGAEgASgIEg4K",
+            "BnJlYXNvbhgCIAEoCRIOCgZhY3Rpb24YAyABKAkSEgoKdmlsbGFnZV9pZBgE",
+            "IAEoCRIyCghsaXN0aW5ncxgFIAMoCzIgLlByb3RvY29sLlZpbGxhZ2VTaG9w",
+            "TGlzdGluZ0luZm8SMAoKZXhwZWRpdGlvbhgGIAEoCzIcLlByb3RvY29sLlNf",
+            "RVhQRURJVElPTl9TVEFURRIlCh1zdG9ja19yZXNldF9yZW1haW5pbmdfc2Vj",
+            "b25kcxgHIAEoDRI8ChB0cmFkZV9idXlfb2ZmZXJzGAggAygLMiIuUHJvdG9j",
+            "b2wuVmlsbGFnZVRyYWRlQnV5T2ZmZXJJbmZvIisKE0NfUkVTRVRfUExBWUVS",
+            "X0RBVEESFAoMY29uZmlybWF0aW9uGAEgASgJIjYKE1NfUkVTRVRfUExBWUVS",
+            "X0RBVEESDwoHc3VjY2VzcxgBIAEoCBIOCgZyZWFzb24YAiABKAki1gEKGlF1",
+            "ZXN0T2JqZWN0aXZlUHJvZ3Jlc3NJbmZvEhcKD29iamVjdGl2ZV9pbmRleBgB",
+            "IAEoDRITCgtkZXNjcmlwdGlvbhgCIAEoCRIQCghwcm9ncmVzcxgDIAEoBRIW",
+            "Cg5yZXF1aXJlZF9jb3VudBgEIAEoBRIRCgljb21wbGV0ZWQYBSABKAgSFgoO",
+            "b2JqZWN0aXZlX3R5cGUYBiABKAkSGwoTdGFyZ2V0X3ZpbGxhZ2VfbmFtZRgH",
+            "IAEoCRIYChB0YXJnZXRfaXRlbV9uYW1lGAggASgJIvMCChBWaWxsYWdlUXVl",
+            "c3RJbmZvEhAKCHF1ZXN0X2lkGAEgASgJEhQKDGRpc3BsYXlfbmFtZRgCIAEo",
+            "CRITCgtkZXNjcmlwdGlvbhgDIAEoCRIOCgZzdGF0dXMYBCABKAkSGAoQc3Rh",
+            "cnRfdmlsbGFnZV9pZBgFIAEoCRIdChVjb21wbGV0aW9uX3ZpbGxhZ2VfaWQY",
+            "BiABKAkSHwoXY29tcGxldGlvbl92aWxsYWdlX25hbWUYByABKAkSOAoKb2Jq",
+            "ZWN0aXZlcxgIIAMoCzIkLlByb3RvY29sLlF1ZXN0T2JqZWN0aXZlUHJvZ3Jl",
+            "c3NJbmZvEhsKE3Jld2FyZF9kZXNjcmlwdGlvbnMYCSADKAkSEgoKY2FuX2Fj",
+            "Y2VwdBgKIAEoCBIRCgljYW5fY2xhaW0YCyABKAgSHAoUYWJhbmRvbl9nb2xk",
+            "X3BlbmFsdHkYDCABKAUSHAoUYWJhbmRvbl9mYW1lX3BlbmFsdHkYDSABKAUi",
+            "MAoaQ19WSUxMQUdFX1FVRVNUX0JPQVJEX09QRU4SEgoKdmlsbGFnZV9pZBgB",
+            "IAEoCSIiCg5DX1FVRVNUX0FDQ0VQVBIQCghxdWVzdF9pZBgBIAEoCSIoChRD",
+            "X1FVRVNUX0NMQUlNX1JFV0FSRBIQCghxdWVzdF9pZBgBIAEoCSK6AQoVU19W",
+            "SUxMQUdFX1FVRVNUX1NUQVRFEg8KB3N1Y2Nlc3MYASABKAgSDgoGcmVhc29u",
+            "GAIgASgJEg4KBmFjdGlvbhgDIAEoCRISCgp2aWxsYWdlX2lkGAQgASgJEioK",
+            "BnF1ZXN0cxgFIAMoCzIaLlByb3RvY29sLlZpbGxhZ2VRdWVzdEluZm8SMAoK",
+            "ZXhwZWRpdGlvbhgGIAEoCzIcLlByb3RvY29sLlNfRVhQRURJVElPTl9TVEFU",
+            "RSIWChRDX1FVRVNUX1RSQUNLRVJfT1BFTiLSAQoVU19RVUVTVF9UUkFDS0VS",
+            "X1NUQVRFEg8KB3N1Y2Nlc3MYASABKAgSDgoGcmVhc29uGAIgASgJEioKBnF1",
+            "ZXN0cxgDIAMoCzIaLlByb3RvY29sLlZpbGxhZ2VRdWVzdEluZm8SMAoKZXhw",
+            "ZWRpdGlvbhgEIAEoCzIcLlByb3RvY29sLlNfRVhQRURJVElPTl9TVEFURRIO",
+            "CgZhY3Rpb24YBSABKAkSFAoMZ29sZF9wZW5hbHR5GAYgASgFEhQKDGZhbWVf",
+            "cGVuYWx0eRgHIAEoBSIjCg9DX1FVRVNUX0FCQU5ET04SEAoIcXVlc3RfaWQY",
+            "ASABKAliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -208,7 +212,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ExpeditionItemStackInfo), global::Protocol.ExpeditionItemStackInfo.Parser, new[]{ "StackId", "ItemId", "Quantity", "RemainingShelfLifeSeconds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.VillageShopListingInfo), global::Protocol.VillageShopListingInfo.Parser, new[]{ "ItemId", "Stock", "MaxStock", "UnitSellPrice" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.VillageTradeBuyOfferInfo), global::Protocol.VillageTradeBuyOfferInfo.Parser, new[]{ "StackId", "ItemId", "UnitBuyPrice" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_EXPEDITION_STATE), global::Protocol.S_EXPEDITION_STATE.Parser, new[]{ "Gold", "Satiety", "MaxSatiety", "Inventory", "AutoConsumedItemIds", "ExpiredItemIds", "Thirst", "MaxThirst" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_EXPEDITION_STATE), global::Protocol.S_EXPEDITION_STATE.Parser, new[]{ "Gold", "Satiety", "MaxSatiety", "Inventory", "AutoConsumedItemIds", "ExpiredItemIds", "Thirst", "MaxThirst", "Fame" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_SHOP_OPEN), global::Protocol.C_VILLAGE_SHOP_OPEN.Parser, new[]{ "VillageId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_SHOP_BUY), global::Protocol.C_VILLAGE_SHOP_BUY.Parser, new[]{ "VillageId", "ItemId", "Quantity" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_SHOP_SELL), global::Protocol.C_VILLAGE_SHOP_SELL.Parser, new[]{ "VillageId", "StackId", "Quantity" }, null, null, null, null),
@@ -216,13 +220,14 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_RESET_PLAYER_DATA), global::Protocol.C_RESET_PLAYER_DATA.Parser, new[]{ "Confirmation" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_RESET_PLAYER_DATA), global::Protocol.S_RESET_PLAYER_DATA.Parser, new[]{ "Success", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.QuestObjectiveProgressInfo), global::Protocol.QuestObjectiveProgressInfo.Parser, new[]{ "ObjectiveIndex", "Description", "Progress", "RequiredCount", "Completed", "ObjectiveType", "TargetVillageName", "TargetItemName" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.VillageQuestInfo), global::Protocol.VillageQuestInfo.Parser, new[]{ "QuestId", "DisplayName", "Description", "Status", "StartVillageId", "CompletionVillageId", "CompletionVillageName", "Objectives", "RewardDescriptions", "CanAccept", "CanClaim" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.VillageQuestInfo), global::Protocol.VillageQuestInfo.Parser, new[]{ "QuestId", "DisplayName", "Description", "Status", "StartVillageId", "CompletionVillageId", "CompletionVillageName", "Objectives", "RewardDescriptions", "CanAccept", "CanClaim", "AbandonGoldPenalty", "AbandonFamePenalty" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_QUEST_BOARD_OPEN), global::Protocol.C_VILLAGE_QUEST_BOARD_OPEN.Parser, new[]{ "VillageId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_QUEST_ACCEPT), global::Protocol.C_QUEST_ACCEPT.Parser, new[]{ "QuestId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_QUEST_CLAIM_REWARD), global::Protocol.C_QUEST_CLAIM_REWARD.Parser, new[]{ "QuestId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_VILLAGE_QUEST_STATE), global::Protocol.S_VILLAGE_QUEST_STATE.Parser, new[]{ "Success", "Reason", "Action", "VillageId", "Quests", "Expedition" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_QUEST_TRACKER_OPEN), global::Protocol.C_QUEST_TRACKER_OPEN.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_QUEST_TRACKER_STATE), global::Protocol.S_QUEST_TRACKER_STATE.Parser, new[]{ "Success", "Reason", "Quests", "Expedition" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_QUEST_TRACKER_STATE), global::Protocol.S_QUEST_TRACKER_STATE.Parser, new[]{ "Success", "Reason", "Quests", "Expedition", "Action", "GoldPenalty", "FamePenalty" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_QUEST_ABANDON), global::Protocol.C_QUEST_ABANDON.Parser, new[]{ "QuestId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -11112,6 +11117,7 @@ namespace Protocol {
       expiredItemIds_ = other.expiredItemIds_.Clone();
       thirst_ = other.thirst_;
       maxThirst_ = other.maxThirst_;
+      fame_ = other.fame_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -11214,6 +11220,18 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "fame" field.</summary>
+    public const int FameFieldNumber = 9;
+    private int fame_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Fame {
+      get { return fame_; }
+      set {
+        fame_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -11237,6 +11255,7 @@ namespace Protocol {
       if(!expiredItemIds_.Equals(other.expiredItemIds_)) return false;
       if (Thirst != other.Thirst) return false;
       if (MaxThirst != other.MaxThirst) return false;
+      if (Fame != other.Fame) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -11252,6 +11271,7 @@ namespace Protocol {
       hash ^= expiredItemIds_.GetHashCode();
       if (Thirst != 0) hash ^= Thirst.GetHashCode();
       if (MaxThirst != 0) hash ^= MaxThirst.GetHashCode();
+      if (Fame != 0) hash ^= Fame.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -11293,6 +11313,10 @@ namespace Protocol {
         output.WriteRawTag(64);
         output.WriteInt32(MaxThirst);
       }
+      if (Fame != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Fame);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11326,6 +11350,10 @@ namespace Protocol {
         output.WriteRawTag(64);
         output.WriteInt32(MaxThirst);
       }
+      if (Fame != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Fame);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -11353,6 +11381,9 @@ namespace Protocol {
       }
       if (MaxThirst != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxThirst);
+      }
+      if (Fame != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Fame);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -11383,6 +11414,9 @@ namespace Protocol {
       }
       if (other.MaxThirst != 0) {
         MaxThirst = other.MaxThirst;
+      }
+      if (other.Fame != 0) {
+        Fame = other.Fame;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -11431,6 +11465,10 @@ namespace Protocol {
             MaxThirst = input.ReadInt32();
             break;
           }
+          case 72: {
+            Fame = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -11476,6 +11514,10 @@ namespace Protocol {
           }
           case 64: {
             MaxThirst = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            Fame = input.ReadInt32();
             break;
           }
         }
@@ -13547,6 +13589,8 @@ namespace Protocol {
       rewardDescriptions_ = other.rewardDescriptions_.Clone();
       canAccept_ = other.canAccept_;
       canClaim_ = other.canClaim_;
+      abandonGoldPenalty_ = other.abandonGoldPenalty_;
+      abandonFamePenalty_ = other.abandonFamePenalty_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -13686,6 +13730,30 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "abandon_gold_penalty" field.</summary>
+    public const int AbandonGoldPenaltyFieldNumber = 12;
+    private int abandonGoldPenalty_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int AbandonGoldPenalty {
+      get { return abandonGoldPenalty_; }
+      set {
+        abandonGoldPenalty_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "abandon_fame_penalty" field.</summary>
+    public const int AbandonFamePenaltyFieldNumber = 13;
+    private int abandonFamePenalty_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int AbandonFamePenalty {
+      get { return abandonFamePenalty_; }
+      set {
+        abandonFamePenalty_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -13712,6 +13780,8 @@ namespace Protocol {
       if(!rewardDescriptions_.Equals(other.rewardDescriptions_)) return false;
       if (CanAccept != other.CanAccept) return false;
       if (CanClaim != other.CanClaim) return false;
+      if (AbandonGoldPenalty != other.AbandonGoldPenalty) return false;
+      if (AbandonFamePenalty != other.AbandonFamePenalty) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -13730,6 +13800,8 @@ namespace Protocol {
       hash ^= rewardDescriptions_.GetHashCode();
       if (CanAccept != false) hash ^= CanAccept.GetHashCode();
       if (CanClaim != false) hash ^= CanClaim.GetHashCode();
+      if (AbandonGoldPenalty != 0) hash ^= AbandonGoldPenalty.GetHashCode();
+      if (AbandonFamePenalty != 0) hash ^= AbandonFamePenalty.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -13786,6 +13858,14 @@ namespace Protocol {
         output.WriteRawTag(88);
         output.WriteBool(CanClaim);
       }
+      if (AbandonGoldPenalty != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(AbandonGoldPenalty);
+      }
+      if (AbandonFamePenalty != 0) {
+        output.WriteRawTag(104);
+        output.WriteInt32(AbandonFamePenalty);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -13834,6 +13914,14 @@ namespace Protocol {
         output.WriteRawTag(88);
         output.WriteBool(CanClaim);
       }
+      if (AbandonGoldPenalty != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(AbandonGoldPenalty);
+      }
+      if (AbandonFamePenalty != 0) {
+        output.WriteRawTag(104);
+        output.WriteInt32(AbandonFamePenalty);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -13872,6 +13960,12 @@ namespace Protocol {
       }
       if (CanClaim != false) {
         size += 1 + 1;
+      }
+      if (AbandonGoldPenalty != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(AbandonGoldPenalty);
+      }
+      if (AbandonFamePenalty != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(AbandonFamePenalty);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -13913,6 +14007,12 @@ namespace Protocol {
       }
       if (other.CanClaim != false) {
         CanClaim = other.CanClaim;
+      }
+      if (other.AbandonGoldPenalty != 0) {
+        AbandonGoldPenalty = other.AbandonGoldPenalty;
+      }
+      if (other.AbandonFamePenalty != 0) {
+        AbandonFamePenalty = other.AbandonFamePenalty;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -13973,6 +14073,14 @@ namespace Protocol {
             CanClaim = input.ReadBool();
             break;
           }
+          case 96: {
+            AbandonGoldPenalty = input.ReadInt32();
+            break;
+          }
+          case 104: {
+            AbandonFamePenalty = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -14030,6 +14138,14 @@ namespace Protocol {
           }
           case 88: {
             CanClaim = input.ReadBool();
+            break;
+          }
+          case 96: {
+            AbandonGoldPenalty = input.ReadInt32();
+            break;
+          }
+          case 104: {
+            AbandonFamePenalty = input.ReadInt32();
             break;
           }
         }
@@ -15172,6 +15288,9 @@ namespace Protocol {
       reason_ = other.reason_;
       quests_ = other.quests_.Clone();
       expedition_ = other.expedition_ != null ? other.expedition_.Clone() : null;
+      action_ = other.action_;
+      goldPenalty_ = other.goldPenalty_;
+      famePenalty_ = other.famePenalty_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -15228,6 +15347,42 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "action" field.</summary>
+    public const int ActionFieldNumber = 5;
+    private string action_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Action {
+      get { return action_; }
+      set {
+        action_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "gold_penalty" field.</summary>
+    public const int GoldPenaltyFieldNumber = 6;
+    private int goldPenalty_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int GoldPenalty {
+      get { return goldPenalty_; }
+      set {
+        goldPenalty_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "fame_penalty" field.</summary>
+    public const int FamePenaltyFieldNumber = 7;
+    private int famePenalty_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int FamePenalty {
+      get { return famePenalty_; }
+      set {
+        famePenalty_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -15247,6 +15402,9 @@ namespace Protocol {
       if (Reason != other.Reason) return false;
       if(!quests_.Equals(other.quests_)) return false;
       if (!object.Equals(Expedition, other.Expedition)) return false;
+      if (Action != other.Action) return false;
+      if (GoldPenalty != other.GoldPenalty) return false;
+      if (FamePenalty != other.FamePenalty) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -15258,6 +15416,9 @@ namespace Protocol {
       if (Reason.Length != 0) hash ^= Reason.GetHashCode();
       hash ^= quests_.GetHashCode();
       if (expedition_ != null) hash ^= Expedition.GetHashCode();
+      if (Action.Length != 0) hash ^= Action.GetHashCode();
+      if (GoldPenalty != 0) hash ^= GoldPenalty.GetHashCode();
+      if (FamePenalty != 0) hash ^= FamePenalty.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -15289,6 +15450,18 @@ namespace Protocol {
         output.WriteRawTag(34);
         output.WriteMessage(Expedition);
       }
+      if (Action.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Action);
+      }
+      if (GoldPenalty != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(GoldPenalty);
+      }
+      if (FamePenalty != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(FamePenalty);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -15312,6 +15485,18 @@ namespace Protocol {
         output.WriteRawTag(34);
         output.WriteMessage(Expedition);
       }
+      if (Action.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Action);
+      }
+      if (GoldPenalty != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(GoldPenalty);
+      }
+      if (FamePenalty != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(FamePenalty);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -15331,6 +15516,15 @@ namespace Protocol {
       size += quests_.CalculateSize(_repeated_quests_codec);
       if (expedition_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Expedition);
+      }
+      if (Action.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Action);
+      }
+      if (GoldPenalty != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GoldPenalty);
+      }
+      if (FamePenalty != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FamePenalty);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -15356,6 +15550,15 @@ namespace Protocol {
           Expedition = new global::Protocol.S_EXPEDITION_STATE();
         }
         Expedition.MergeFrom(other.Expedition);
+      }
+      if (other.Action.Length != 0) {
+        Action = other.Action;
+      }
+      if (other.GoldPenalty != 0) {
+        GoldPenalty = other.GoldPenalty;
+      }
+      if (other.FamePenalty != 0) {
+        FamePenalty = other.FamePenalty;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -15391,6 +15594,18 @@ namespace Protocol {
             input.ReadMessage(Expedition);
             break;
           }
+          case 42: {
+            Action = input.ReadString();
+            break;
+          }
+          case 48: {
+            GoldPenalty = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            FamePenalty = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -15423,6 +15638,207 @@ namespace Protocol {
               Expedition = new global::Protocol.S_EXPEDITION_STATE();
             }
             input.ReadMessage(Expedition);
+            break;
+          }
+          case 42: {
+            Action = input.ReadString();
+            break;
+          }
+          case 48: {
+            GoldPenalty = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            FamePenalty = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class C_QUEST_ABANDON : pb::IMessage<C_QUEST_ABANDON>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<C_QUEST_ABANDON> _parser = new pb::MessageParser<C_QUEST_ABANDON>(() => new C_QUEST_ABANDON());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<C_QUEST_ABANDON> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ProtocolReflection.Descriptor.MessageTypes[52]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_QUEST_ABANDON() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_QUEST_ABANDON(C_QUEST_ABANDON other) : this() {
+      questId_ = other.questId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_QUEST_ABANDON Clone() {
+      return new C_QUEST_ABANDON(this);
+    }
+
+    /// <summary>Field number for the "quest_id" field.</summary>
+    public const int QuestIdFieldNumber = 1;
+    private string questId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string QuestId {
+      get { return questId_; }
+      set {
+        questId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as C_QUEST_ABANDON);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(C_QUEST_ABANDON other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (QuestId != other.QuestId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (QuestId.Length != 0) hash ^= QuestId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (QuestId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(QuestId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (QuestId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(QuestId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (QuestId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(QuestId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(C_QUEST_ABANDON other) {
+      if (other == null) {
+        return;
+      }
+      if (other.QuestId.Length != 0) {
+        QuestId = other.QuestId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            QuestId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            QuestId = input.ReadString();
             break;
           }
         }

@@ -16,6 +16,8 @@ namespace Field
 		string _villageId;
 		bool _subscribed;
 		bool _trackerMode;
+		string _pendingAbandonQuestId;
+		float _pendingAbandonUntil;
 
 		public void Show(FieldVillageUI villageUi, string villageId)
 		{
@@ -75,7 +77,10 @@ namespace Field
 			if (packet == null || packet.Success == false || GameRoot.Instance == null)
 				return;
 			SetStatus("초기화된 의뢰 목록을 불러오는 중입니다.", false);
-			GameRoot.Instance.Network.OpenVillageQuestBoard(_villageId);
+			if (_trackerMode)
+				GameRoot.Instance.Network.OpenQuestTracker();
+			else
+				GameRoot.Instance.Network.OpenVillageQuestBoard(_villageId);
 		}
 
 		void OnQuestStateReceived(Protocol.S_VILLAGE_QUEST_STATE packet)
@@ -98,9 +103,11 @@ namespace Field
 				return;
 			if (packet.Success == false)
 			{
-				SetStatus(string.IsNullOrWhiteSpace(packet.Reason) ? "퀘스트 정보를 불러오지 못했습니다." : packet.Reason, true);
+				_pendingAbandonQuestId = null;
+				SetStatus(TrackerFailureMessage(packet.Reason), true);
 				return;
 			}
+			_pendingAbandonQuestId = null;
 
 			ClearButtons();
 			int visibleCount = Mathf.Min(questButtons != null ? questButtons.Length : 0, packet.Quests.Count);
@@ -110,16 +117,24 @@ namespace Field
 				if (button == null)
 					continue;
 				button.gameObject.SetActive(true);
-				button.interactable = false;
+				button.interactable = true;
+				Protocol.VillageQuestInfo quest = packet.Quests[index];
+				string questId = quest.QuestId;
+				int goldPenalty = quest.AbandonGoldPenalty;
+				int famePenalty = quest.AbandonFamePenalty;
+				button.onClick.AddListener(() => ConfirmAbandon(questId, goldPenalty, famePenalty));
 				Text label = button.GetComponentInChildren<Text>(true);
 				if (label != null)
 				{
-					label.text = BuildTrackerLabel(packet.Quests[index]);
+					label.text = BuildTrackerLabel(quest);
 					label.fontSize = Mathf.Min(label.fontSize, 16);
 				}
 			}
 
-			SetStatus(packet.Quests.Count == 0 ? "현재 진행 중인 퀘스트가 없습니다." : "목표를 완료한 뒤 해당 마을에서 보상을 수령하세요.", false);
+			if (packet.Action == "abandon")
+				SetStatus($"퀘스트를 포기했습니다. 위약금: {packet.GoldPenalty}G, 명성 {packet.FamePenalty}", false);
+			else
+				SetStatus(packet.Quests.Count == 0 ? "현재 진행 중인 퀘스트가 없습니다." : "퀘스트를 클릭하면 포기 위약금을 확인할 수 있습니다.", false);
 		}
 
 		void Render(Protocol.S_VILLAGE_QUEST_STATE packet)
@@ -183,7 +198,7 @@ namespace Field
 				builder.Append("\n· ").Append(ObjectiveLabel(objective)).Append(' ').Append(objective.Progress).Append('/').Append(objective.RequiredCount);
 			builder.Append("\n완료: ").Append(quest.CompletionVillageName);
 			if (quest.RewardDescriptions.Count > 0)
-				builder.Append(" · 보상 ").Append(string.Join(", ", quest.RewardDescriptions));
+				builder.Append(" · 보상 ").Append(LocalizedRewards(quest));
 			if (quest.CanAccept) builder.Append("\n클릭하여 수락");
 			else if (quest.CanClaim) builder.Append("\n클릭하여 보상 수령");
 			else if (quest.Status == "LIMIT_REACHED") builder.Append("\n동시에 진행할 수 있는 의뢰는 최대 3개입니다.");
@@ -201,8 +216,15 @@ namespace Field
 				builder.Append("\n· ").Append(ObjectiveLabel(objective)).Append(' ').Append(objective.Progress).Append('/').Append(objective.RequiredCount);
 			builder.Append("\n완료 보고: ").Append(quest.CompletionVillageName);
 			if (quest.RewardDescriptions.Count > 0)
-				builder.Append("\n보상: ").Append(string.Join(", ", quest.RewardDescriptions));
+				builder.Append("\n보상: ").Append(LocalizedRewards(quest));
+			builder.Append("\n포기 위약금: ").Append(quest.AbandonGoldPenalty).Append("G, 명성 ").Append(quest.AbandonFamePenalty);
+			builder.Append("\n클릭하여 포기");
 			return builder.ToString();
+		}
+
+		static string LocalizedRewards(Protocol.VillageQuestInfo quest)
+		{
+			return string.Join(", ", quest.RewardDescriptions).Replace("Fame +", "명성 +");
 		}
 
 		static string ObjectiveLabel(Protocol.QuestObjectiveProgressInfo objective)
@@ -243,6 +265,33 @@ namespace Field
 			SetStatus("보상을 확인하는 중입니다.", false);
 			if (GameRoot.Instance == null || !GameRoot.Instance.Network.ClaimQuestReward(questId))
 				SetStatus("보상 수령 요청을 보내지 못했습니다.", true);
+		}
+
+		void ConfirmAbandon(string questId, int goldPenalty, int famePenalty)
+		{
+			if (_pendingAbandonQuestId != questId || Time.unscaledTime > _pendingAbandonUntil)
+			{
+				_pendingAbandonQuestId = questId;
+				_pendingAbandonUntil = Time.unscaledTime + 5f;
+				SetStatus($"다시 클릭하면 퀘스트를 포기합니다. 위약금: {goldPenalty}G, 명성 {famePenalty}", true);
+				return;
+			}
+
+			_pendingAbandonQuestId = null;
+			SetStatus("퀘스트 포기를 처리하는 중입니다.", false);
+			if (GameRoot.Instance == null || !GameRoot.Instance.Network.AbandonQuest(questId))
+				SetStatus("퀘스트 포기 요청을 보내지 못했습니다.", true);
+		}
+
+		static string TrackerFailureMessage(string reason)
+		{
+			if (string.IsNullOrWhiteSpace(reason))
+				return "퀘스트 정보를 불러오지 못했습니다.";
+			if (reason.Contains("not enough gold"))
+				return "포기 위약금으로 지불할 금화가 부족합니다.";
+			if (reason.Contains("cannot be abandoned"))
+				return "현재 포기할 수 없는 퀘스트입니다.";
+			return reason;
 		}
 
 		void ClearButtons()

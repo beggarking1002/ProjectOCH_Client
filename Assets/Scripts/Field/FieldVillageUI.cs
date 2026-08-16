@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
+using App;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace Field
 		[SerializeField] Button questTabButton;
 		[SerializeField] Text villageNameText;
 		[SerializeField] Text villageDescriptionText;
+		[SerializeField] Text fameText;
 
 		Canvas _canvas;
 		AsyncOperationHandle<Sprite> _artworkHandle;
@@ -60,14 +62,27 @@ namespace Field
 		{
 			shopTabButton?.onClick.AddListener(OpenShop);
 			questTabButton?.onClick.AddListener(OpenQuest);
+			if (GameRoot.Instance != null)
+			{
+				GameRoot.Instance.Network.ExpeditionStateReceived += RenderFame;
+				RenderFame(GameRoot.Instance.Network.LastExpeditionState);
+			}
 		}
 
 		void OnDisable()
 		{
 			shopTabButton?.onClick.RemoveListener(OpenShop);
 			questTabButton?.onClick.RemoveListener(OpenQuest);
+			if (GameRoot.Instance != null)
+				GameRoot.Instance.Network.ExpeditionStateReceived -= RenderFame;
 			SetCanvasVisible(false);
 			ReleaseArtwork();
+		}
+
+		void RenderFame(Protocol.S_EXPEDITION_STATE state)
+		{
+			if (fameText != null)
+				fameText.text = $"명성  {state?.Fame ?? 0}";
 		}
 
 		async void OpenShop()
