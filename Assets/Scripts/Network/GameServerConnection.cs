@@ -75,9 +75,9 @@ namespace Networking
 			Network?.Disconnect();
 		}
 
-		public bool SendLogin()
+		public bool SendLogin(string authorizationCode = null, string codeVerifier = null, string redirectUri = null)
 		{
-			return Network?.SendLogin() == true;
+			return Network?.SendLogin(authorizationCode, codeVerifier, redirectUri) == true;
 		}
 
 		public bool EnterGame(ulong playerIndex = 0)

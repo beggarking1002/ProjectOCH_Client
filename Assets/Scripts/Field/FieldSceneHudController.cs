@@ -62,13 +62,28 @@ namespace Field
 
 			if (statusText == null)
 				return;
+
+			Protocol.S_LOGIN login = GameRoot.Instance?.Network.LastLogin;
+			Protocol.S_ENTER_GAME enterGame = GameRoot.Instance?.Network.LastEnterGame;
+			string identityText;
+			if (login != null && login.AccountId != 0)
+			{
+				string name = string.IsNullOrWhiteSpace(login.DisplayName) ? "Google 계정" : login.DisplayName;
+				identityText = $"{name}  ·  ID {login.AccountId}";
+			}
+			else
+			{
+				ulong temporaryId = enterGame?.Player?.ObjectId ?? 0;
+				identityText = temporaryId == 0 ? "개발용 계정  ·  ID -" : $"개발용 계정  ·  ID {temporaryId}";
+			}
+
 			if (state == null)
 			{
-				statusText.text = "원정 상태\n포만도  - / -\n갈증  - / -";
+				statusText.text = $"{identityText}\n포만도  - / -\n갈증  - / -";
 				return;
 			}
 
-			statusText.text = $"원정 상태\n포만도  {state.Satiety} / {state.MaxSatiety}\n갈증  {state.Thirst} / {state.MaxThirst}";
+			statusText.text = $"{identityText}\n포만도  {state.Satiety} / {state.MaxSatiety}\n갈증  {state.Thirst} / {state.MaxThirst}";
 		}
 
 		void OpenInventory()

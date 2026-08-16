@@ -19,6 +19,7 @@
 # Large/sensitive captures
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
+/Assets/StreamingAssets/GoogleAuth.json
 
 # Asset Store tools, optional
 # /[Aa]ssets/AssetStoreTools*

@@ -175,8 +175,6 @@ namespace Networking
 				OnSuccessCallback = () => EnqueueMainThread(() =>
 				{
 					SetState(GameServerConnectionState.Connected);
-					if (_verifyWithLoginPacket)
-						SendLogin();
 				}),
 				OnFailedCallback = () => EnqueueMainThread(() =>
 				{
@@ -203,9 +201,14 @@ namespace Networking
 				SetState(GameServerConnectionState.Disconnected);
 		}
 
-		public bool SendLogin()
+		public bool SendLogin(string authorizationCode = null, string codeVerifier = null, string redirectUri = null)
 		{
-			if (Send(new Protocol.C_LOGIN()) == false)
+			if (Send(new Protocol.C_LOGIN
+			{
+				GoogleAuthorizationCode = authorizationCode ?? string.Empty,
+				GoogleCodeVerifier = codeVerifier ?? string.Empty,
+				GoogleRedirectUri = redirectUri ?? string.Empty,
+			}) == false)
 			{
 				SetState(GameServerConnectionState.Failed);
 				return false;
@@ -479,12 +482,13 @@ namespace Networking
 		void OnLoginReceived(Protocol.S_LOGIN pkt)
 		{
 			LastLogin = pkt;
-			SetState(pkt.Success ? GameServerConnectionState.Verified : GameServerConnectionState.Failed);
+			// Keep the live socket reusable after an OAuth cancellation or rejection.
+			SetState(pkt.Success ? GameServerConnectionState.Verified : GameServerConnectionState.Connected);
 
 			if (pkt.Success == false)
-				LastError = "Server login verification failed.";
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Server login verification failed." : pkt.Reason;
 
-			Debug.Log($"Game server verification: success={pkt.Success}");
+			Debug.Log($"Game server verification: success={pkt.Success} accountId={pkt.AccountId} reason={pkt.Reason}");
 			LoginReceived?.Invoke(pkt);
 		}
 
