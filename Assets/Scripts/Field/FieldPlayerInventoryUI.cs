@@ -15,6 +15,7 @@ namespace Field
 		Button _resetButton;
 		Text _resetButtonText;
 		float _resetConfirmationDeadline;
+		float _resetRequestDeadline;
 		bool _resetRequestPending;
 		bool _subscribed;
 
@@ -45,7 +46,20 @@ namespace Field
 
 		void Update()
 		{
-			if (_resetRequestPending || _resetConfirmationDeadline <= 0f || Time.unscaledTime <= _resetConfirmationDeadline)
+			if (_resetRequestPending)
+			{
+				if (_resetRequestDeadline > 0f && Time.unscaledTime > _resetRequestDeadline)
+				{
+					_resetRequestPending = false;
+					_resetRequestDeadline = 0f;
+					_resetConfirmationDeadline = Time.unscaledTime + 4f;
+					if (_resetButtonText != null)
+						_resetButtonText.text = "응답 없음 · 다시 시도";
+					Debug.LogWarning("Player data reset timed out without a server response.");
+				}
+				return;
+			}
+			if (_resetConfirmationDeadline <= 0f || Time.unscaledTime <= _resetConfirmationDeadline)
 				return;
 			ResetResetButtonLabel();
 		}
@@ -155,6 +169,7 @@ namespace Field
 
 			_resetRequestPending = GameRoot.Instance.Network.ResetPlayerData();
 			_resetConfirmationDeadline = 0f;
+			_resetRequestDeadline = _resetRequestPending ? Time.unscaledTime + 10f : 0f;
 			if (_resetButtonText != null)
 				_resetButtonText.text = _resetRequestPending ? "초기화 중..." : "요청 실패";
 		}
@@ -162,9 +177,12 @@ namespace Field
 		void OnPlayerDataResetReceived(Protocol.S_RESET_PLAYER_DATA packet)
 		{
 			_resetRequestPending = false;
+			_resetRequestDeadline = 0f;
 			_resetConfirmationDeadline = Time.unscaledTime + 3f;
 			if (_resetButtonText != null)
 				_resetButtonText.text = packet != null && packet.Success ? "초기화 완료" : $"실패: {packet?.Reason}";
+			if (packet == null || packet.Success == false)
+				Debug.LogWarning($"Player data reset failed: {packet?.Reason}");
 		}
 
 		void ResetResetButtonLabel()

@@ -30,7 +30,6 @@ namespace Field
 		int _artworkLoadVersion;
 		bool _isShopOpening;
 		bool _isQuestOpening;
-		bool _hasAcceptedQuest;
 		string _currentVillageId;
 
 		void Awake()
@@ -122,12 +121,7 @@ namespace Field
 				return;
 			}
 
-			questUi.Show(this, _hasAcceptedQuest);
-		}
-
-		public void MarkQuestAccepted()
-		{
-			_hasAcceptedQuest = true;
+			questUi.Show(this, _currentVillageId);
 		}
 
 		public void ShowRandomArtwork()

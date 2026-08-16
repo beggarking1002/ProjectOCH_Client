@@ -24,6 +24,8 @@ public sealed class PacketHandler
 	public event Action<S_EXPEDITION_STATE> ExpeditionStateReceived;
 	public event Action<S_VILLAGE_SHOP_STATE> VillageShopStateReceived;
 	public event Action<S_RESET_PLAYER_DATA> PlayerDataResetReceived;
+	public event Action<S_VILLAGE_QUEST_STATE> VillageQuestStateReceived;
+	public event Action<S_QUEST_TRACKER_STATE> QuestTrackerStateReceived;
 	public event Action<S_BATTLE_MOVE> BattleMoveReceived;
 	public event Action<S_BATTLE_SKILL> BattleSkillReceived;
 	public event Action<S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -106,6 +108,18 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_RESET_PLAYER_DATAHandler");
 		Instance.EnqueuePacket(packet as S_RESET_PLAYER_DATA, Instance.PlayerDataResetReceived);
+	}
+
+	public static void S_VILLAGE_QUEST_STATEHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_VILLAGE_QUEST_STATEHandler");
+		Instance.EnqueuePacket(packet as S_VILLAGE_QUEST_STATE, Instance.VillageQuestStateReceived);
+	}
+
+	public static void S_QUEST_TRACKER_STATEHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_QUEST_TRACKER_STATEHandler");
+		Instance.EnqueuePacket(packet as S_QUEST_TRACKER_STATE, Instance.QuestTrackerStateReceived);
 	}
 
 	public static void S_BATTLE_MOVEHandler(PacketSession session, IMessage packet)

@@ -47,6 +47,12 @@ public enum MsgId : ushort
     S_VILLAGE_SHOP_STATE = 1038,
     C_RESET_PLAYER_DATA = 1039,
     S_RESET_PLAYER_DATA = 1040,
+    C_VILLAGE_QUEST_BOARD_OPEN = 1041,
+    C_QUEST_ACCEPT = 1042,
+    C_QUEST_CLAIM_REWARD = 1043,
+    S_VILLAGE_QUEST_STATE = 1044,
+    C_QUEST_TRACKER_OPEN = 1045,
+    S_QUEST_TRACKER_STATE = 1046,
 }
 
 class PacketManager
@@ -116,6 +122,10 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_VILLAGE_SHOP_STATE, PacketHandler.S_VILLAGE_SHOP_STATEHandler);
         _onRecv.Add((ushort)MsgId.S_RESET_PLAYER_DATA, MakePacket<S_RESET_PLAYER_DATA>);
         _handler.Add((ushort)MsgId.S_RESET_PLAYER_DATA, PacketHandler.S_RESET_PLAYER_DATAHandler);
+        _onRecv.Add((ushort)MsgId.S_VILLAGE_QUEST_STATE, MakePacket<S_VILLAGE_QUEST_STATE>);
+        _handler.Add((ushort)MsgId.S_VILLAGE_QUEST_STATE, PacketHandler.S_VILLAGE_QUEST_STATEHandler);
+        _onRecv.Add((ushort)MsgId.S_QUEST_TRACKER_STATE, MakePacket<S_QUEST_TRACKER_STATE>);
+        _handler.Add((ushort)MsgId.S_QUEST_TRACKER_STATE, PacketHandler.S_QUEST_TRACKER_STATEHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

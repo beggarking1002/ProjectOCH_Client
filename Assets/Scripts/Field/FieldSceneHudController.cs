@@ -1,5 +1,7 @@
 using App;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 namespace Field
@@ -7,14 +9,19 @@ namespace Field
 	[DisallowMultipleComponent]
 	public sealed class FieldSceneHudController : MonoBehaviour
 	{
+		const string FieldVillageQuestUiAddress = "FieldVillageQuestUI";
+
 		[SerializeField] Text statusText;
 		[SerializeField] Text resourceText;
 		[SerializeField] Button inventoryButton;
+		[SerializeField] Button questTrackerButton;
 		bool _subscribed;
+		bool _isQuestTrackerOpening;
 
 		void Awake()
 		{
 			inventoryButton?.onClick.AddListener(OpenInventory);
+			questTrackerButton?.onClick.AddListener(OpenQuestTracker);
 		}
 
 		void OnEnable()
@@ -31,6 +38,7 @@ namespace Field
 		void OnDestroy()
 		{
 			inventoryButton?.onClick.RemoveListener(OpenInventory);
+			questTrackerButton?.onClick.RemoveListener(OpenQuestTracker);
 			Unsubscribe();
 		}
 
@@ -89,6 +97,33 @@ namespace Field
 		void OpenInventory()
 		{
 			FindFirstObjectByType<FieldObjectManager>()?.TogglePlayerInventoryUi();
+		}
+
+		async void OpenQuestTracker()
+		{
+			if (_isQuestTrackerOpening)
+				return;
+
+			_isQuestTrackerOpening = true;
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(FieldVillageQuestUiAddress);
+			await handle.Task;
+			_isQuestTrackerOpening = false;
+			if (this == null || handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+			{
+				if (handle.IsValid())
+					Addressables.Release(handle);
+				Debug.LogError($"Failed to open quest tracker UI: {FieldVillageQuestUiAddress}");
+				return;
+			}
+
+			FieldVillageQuestUI questUi = handle.Result.GetComponent<FieldVillageQuestUI>();
+			if (questUi == null)
+			{
+				Addressables.ReleaseInstance(handle);
+				Debug.LogError("Quest tracker prefab is missing FieldVillageQuestUI.");
+				return;
+			}
+			questUi.ShowTracker();
 		}
 	}
 }

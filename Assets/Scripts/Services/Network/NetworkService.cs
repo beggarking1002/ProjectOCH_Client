@@ -30,6 +30,8 @@ namespace Networking
 		public Protocol.S_EXPEDITION_STATE LastExpeditionState { get; private set; }
 		public Protocol.S_VILLAGE_SHOP_STATE LastVillageShopState { get; private set; }
 		public Protocol.S_RESET_PLAYER_DATA LastPlayerDataReset { get; private set; }
+		public Protocol.S_VILLAGE_QUEST_STATE LastVillageQuestState { get; private set; }
+		public Protocol.S_QUEST_TRACKER_STATE LastQuestTrackerState { get; private set; }
 		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
@@ -60,6 +62,8 @@ namespace Networking
 		public event Action<Protocol.S_EXPEDITION_STATE> ExpeditionStateReceived;
 		public event Action<Protocol.S_VILLAGE_SHOP_STATE> VillageShopStateReceived;
 		public event Action<Protocol.S_RESET_PLAYER_DATA> PlayerDataResetReceived;
+		public event Action<Protocol.S_VILLAGE_QUEST_STATE> VillageQuestStateReceived;
+		public event Action<Protocol.S_QUEST_TRACKER_STATE> QuestTrackerStateReceived;
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
 		public event Action<Protocol.S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -89,6 +93,8 @@ namespace Networking
 			PacketHandler.Instance.ExpeditionStateReceived += OnExpeditionStateReceived;
 			PacketHandler.Instance.VillageShopStateReceived += OnVillageShopStateReceived;
 			PacketHandler.Instance.PlayerDataResetReceived += OnPlayerDataResetReceived;
+			PacketHandler.Instance.VillageQuestStateReceived += OnVillageQuestStateReceived;
+			PacketHandler.Instance.QuestTrackerStateReceived += OnQuestTrackerStateReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
@@ -130,6 +136,8 @@ namespace Networking
 				PacketHandler.Instance.ExpeditionStateReceived -= OnExpeditionStateReceived;
 				PacketHandler.Instance.VillageShopStateReceived -= OnVillageShopStateReceived;
 				PacketHandler.Instance.PlayerDataResetReceived -= OnPlayerDataResetReceived;
+				PacketHandler.Instance.VillageQuestStateReceived -= OnVillageQuestStateReceived;
+				PacketHandler.Instance.QuestTrackerStateReceived -= OnQuestTrackerStateReceived;
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 				PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -163,6 +171,8 @@ namespace Networking
 			LastExpeditionState = null;
 			LastVillageShopState = null;
 			LastPlayerDataReset = null;
+			LastVillageQuestState = null;
+			LastQuestTrackerState = null;
 			LastBattleInviteRequest = null;
 			LastBattleInviteReceived = null;
 			LastBattleInviteResult = null;
@@ -277,6 +287,26 @@ namespace Networking
 		public bool ResetPlayerData()
 		{
 			return Send(new Protocol.C_RESET_PLAYER_DATA { Confirmation = "RESET" });
+		}
+
+		public bool OpenVillageQuestBoard(string villageId)
+		{
+			return Send(new Protocol.C_VILLAGE_QUEST_BOARD_OPEN { VillageId = villageId ?? string.Empty });
+		}
+
+		public bool OpenQuestTracker()
+		{
+			return Send(new Protocol.C_QUEST_TRACKER_OPEN());
+		}
+
+		public bool AcceptQuest(string questId)
+		{
+			return Send(new Protocol.C_QUEST_ACCEPT { QuestId = questId ?? string.Empty });
+		}
+
+		public bool ClaimQuestReward(string questId)
+		{
+			return Send(new Protocol.C_QUEST_CLAIM_REWARD { QuestId = questId ?? string.Empty });
 		}
 
 		public bool SendBattleInvite(ulong targetPlayerId)
@@ -413,6 +443,18 @@ namespace Networking
 					break;
 				case Protocol.C_RESET_PLAYER_DATA pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_RESET_PLAYER_DATA);
+					break;
+				case Protocol.C_VILLAGE_QUEST_BOARD_OPEN pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_VILLAGE_QUEST_BOARD_OPEN);
+					break;
+				case Protocol.C_QUEST_TRACKER_OPEN pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_TRACKER_OPEN);
+					break;
+				case Protocol.C_QUEST_ACCEPT pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_ACCEPT);
+					break;
+				case Protocol.C_QUEST_CLAIM_REWARD pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_CLAIM_REWARD);
 					break;
 				case Protocol.C_BATTLE_MOVE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_BATTLE_MOVE);
@@ -623,7 +665,40 @@ namespace Networking
 			LastPlayerDataReset = pkt?.Clone();
 			if (pkt != null && pkt.Success == false)
 				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Player data reset failed." : pkt.Reason;
+			else if (pkt != null && pkt.Success)
+			{
+				LastError = null;
+				LastVillageQuestState = null;
+			}
 			PlayerDataResetReceived?.Invoke(pkt);
+		}
+
+		void OnVillageQuestStateReceived(Protocol.S_VILLAGE_QUEST_STATE pkt)
+		{
+			if (pkt == null)
+				return;
+			LastVillageQuestState = pkt.Clone();
+			if (pkt.Expedition != null)
+			{
+				LastExpeditionState = pkt.Expedition.Clone();
+				ExpeditionStateReceived?.Invoke(pkt.Expedition);
+			}
+			LastError = pkt.Success ? null : (string.IsNullOrWhiteSpace(pkt.Reason) ? "Village quest request failed." : pkt.Reason);
+			VillageQuestStateReceived?.Invoke(pkt);
+		}
+
+		void OnQuestTrackerStateReceived(Protocol.S_QUEST_TRACKER_STATE pkt)
+		{
+			if (pkt == null)
+				return;
+			LastQuestTrackerState = pkt.Clone();
+			if (pkt.Expedition != null)
+			{
+				LastExpeditionState = pkt.Expedition.Clone();
+				ExpeditionStateReceived?.Invoke(pkt.Expedition);
+			}
+			LastError = pkt.Success ? null : (string.IsNullOrWhiteSpace(pkt.Reason) ? "Quest tracker request failed." : pkt.Reason);
+			QuestTrackerStateReceived?.Invoke(pkt);
 		}
 
 		void OnBattleMoveReceived(Protocol.S_BATTLE_MOVE pkt)
