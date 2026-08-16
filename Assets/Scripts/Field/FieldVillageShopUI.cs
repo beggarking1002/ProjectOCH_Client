@@ -31,6 +31,12 @@ namespace Field
 			_repository = await FieldEconomyRepository.LoadAsync();
 			if (this == null)
 				return;
+			// Do not reveal a shop filled with empty cells while each icon streams
+			// independently. FieldObjectManager starts this in advance; awaiting it
+			// here also covers an immediately opened first shop.
+			await _repository.PreloadAllItemIconsAsync();
+			if (this == null)
+				return;
 			if (_pendingState != null)
 				Render(_pendingState);
 			if (GameRoot.Instance == null || GameRoot.Instance.Network.OpenVillageShop(_villageId) == false)
@@ -155,8 +161,8 @@ namespace Field
 			_shopStockRoot = transform.Find("ShopWindow/ShopStockGrid") as RectTransform;
 			_inventoryRoot = transform.Find("ShopWindow/PlayerInventoryGrid") as RectTransform;
 			RectTransform tradePanel = transform.Find("ShopWindow/TradePanel") as RectTransform;
-			FieldItemGridUI.Configure(_shopStockRoot);
-			FieldItemGridUI.Configure(_inventoryRoot);
+			FieldItemGridUI.Configure(_shopStockRoot, FieldItemGridUI.ArtworkColumnCount);
+			FieldItemGridUI.Configure(_inventoryRoot, FieldItemGridUI.ArtworkColumnCount);
 			if (tradePanel != null)
 			{
 				GameObject statusObject = CreateTextObject("Status", tradePanel);

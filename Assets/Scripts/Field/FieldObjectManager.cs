@@ -69,6 +69,7 @@ namespace Field
 			EnsureBattleInviteUi();
 			EnsureBattleClassSelectionUi();
 			LoadVillageDataAsync();
+			WarmItemIconsAsync();
 			SpawnKnownPlayers();
 		}
 
@@ -99,6 +100,14 @@ namespace Field
 			_isVillageDataLoading = true;
 			_villageRepository = await FieldVillageRepository.LoadAsync();
 			_isVillageDataLoading = false;
+		}
+
+		async void WarmItemIconsAsync()
+		{
+			FieldEconomyRepository repository = await FieldEconomyRepository.LoadAsync();
+			if (_destroyed || repository == null)
+				return;
+			await repository.PreloadAllItemIconsAsync();
 		}
 
 		void HandleVillageClickInput()
@@ -278,7 +287,7 @@ namespace Field
 			_isFieldVillageUiLoading = false;
 		}
 
-		async void HandlePlayerInventoryUiDebugInput()
+		void HandlePlayerInventoryUiDebugInput()
 		{
 			if (WasPlayerInventoryUiToggleKeyPressed() == false)
 				return;

@@ -51,9 +51,16 @@ namespace Field
 		readonly Dictionary<string, FieldItemDefinition> _items = new Dictionary<string, FieldItemDefinition>(StringComparer.OrdinalIgnoreCase);
 		readonly Dictionary<string, FieldItemIconDefinition> _itemIcons = new Dictionary<string, FieldItemIconDefinition>(StringComparer.OrdinalIgnoreCase);
 		static readonly Dictionary<string, Sprite> LoadedSprites = new Dictionary<string, Sprite>(StringComparer.Ordinal);
+		static readonly Dictionary<string, Task<Sprite>> LoadingSprites = new Dictionary<string, Task<Sprite>>(StringComparer.Ordinal);
 		static readonly List<AsyncOperationHandle<Sprite>> LoadedSpriteHandles = new List<AsyncOperationHandle<Sprite>>();
+		static Task<FieldEconomyRepository> _loadTask;
 
-		public static async Task<FieldEconomyRepository> LoadAsync()
+		public static Task<FieldEconomyRepository> LoadAsync()
+		{
+			return _loadTask ?? (_loadTask = LoadInternalAsync());
+		}
+
+		static async Task<FieldEconomyRepository> LoadInternalAsync()
 		{
 			FieldEconomyRepository repository = new FieldEconomyRepository();
 			string[] tables = await Task.WhenAll(LoadTextAsync(ItemTableAddress), LoadTextAsync(ItemIconTableAddress));
@@ -76,20 +83,47 @@ namespace Field
 			string address = $"{icon.SheetAddress}[{icon.SpriteName}]";
 			if (LoadedSprites.TryGetValue(address, out Sprite cached))
 				return cached;
+			if (LoadingSprites.TryGetValue(address, out Task<Sprite> loading))
+				return await loading;
 
-			AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(address);
-			await handle.Task;
-			if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+			Task<Sprite> task = LoadItemIconInternalAsync(address);
+			LoadingSprites[address] = task;
+			return await task;
+		}
+
+		public async Task PreloadAllItemIconsAsync()
+		{
+			List<Task<Sprite>> tasks = new List<Task<Sprite>>(_itemIcons.Count);
+			foreach (string itemId in _itemIcons.Keys)
+				tasks.Add(LoadItemIconAsync(itemId));
+			await Task.WhenAll(tasks);
+		}
+
+		async Task<Sprite> LoadItemIconInternalAsync(string address)
+		{
+			// Ensure the in-flight task is registered before a cached Addressables
+			// operation is allowed to complete and remove it.
+			await Task.Yield();
+			try
 			{
-				Debug.LogWarning($"Failed to load item icon: {address}");
-				if (handle.IsValid())
-					Addressables.Release(handle);
-				return null;
-			}
+				AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(address);
+				await handle.Task;
+				if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+				{
+					Debug.LogWarning($"Failed to load item icon: {address}");
+					if (handle.IsValid())
+						Addressables.Release(handle);
+					return null;
+				}
 
-			LoadedSprites[address] = handle.Result;
-			LoadedSpriteHandles.Add(handle);
-			return handle.Result;
+				LoadedSprites[address] = handle.Result;
+				LoadedSpriteHandles.Add(handle);
+				return handle.Result;
+			}
+			finally
+			{
+				LoadingSprites.Remove(address);
+			}
 		}
 
 		void ParseItems(string csv)

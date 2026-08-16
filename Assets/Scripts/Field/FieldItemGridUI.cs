@@ -6,7 +6,11 @@ namespace Field
 {
 	internal static class FieldItemGridUI
 	{
-		public static void Configure(RectTransform root, int columns = 4)
+		// BagGrid.png is authored as a 7 x 7 board. Keep runtime slots aligned
+		// to the grid painted into the prefab instead of drawing a second grid.
+		public const int ArtworkColumnCount = 7;
+
+		public static void Configure(RectTransform root, int columns = ArtworkColumnCount)
 		{
 			if (root == null)
 				return;
@@ -14,9 +18,10 @@ namespace Field
 			GridLayoutGroup layout = root.gameObject.GetComponent<GridLayoutGroup>();
 			if (layout == null)
 				layout = root.gameObject.AddComponent<GridLayoutGroup>();
-			layout.padding = new RectOffset(16, 16, 16, 16);
-			layout.cellSize = new Vector2(104, 112);
-			layout.spacing = new Vector2(12, 12);
+			columns = Mathf.Max(1, columns);
+			layout.padding = new RectOffset(0, 0, 0, 0);
+			layout.cellSize = new Vector2(root.rect.width / columns, root.rect.height / ArtworkColumnCount);
+			layout.spacing = Vector2.zero;
 			layout.childAlignment = TextAnchor.UpperLeft;
 			layout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
 			layout.constraintCount = columns;
@@ -28,18 +33,18 @@ namespace Field
 			slot.layer = parent.gameObject.layer;
 			slot.transform.SetParent(parent, false);
 			Image frame = slot.GetComponent<Image>();
-			frame.color = new Color(0.16f, 0.11f, 0.06f, 0.96f);
+			// BagGrid already contains the slot artwork. This is only a click target.
+			frame.color = Color.clear;
 			Button button = slot.GetComponent<Button>();
 			button.targetGraphic = frame;
 			button.interactable = interactable;
 			button.transition = Selectable.Transition.None;
 
-			Image icon = CreateImage("Icon", slot.GetComponent<RectTransform>(), new Vector2(7, 22), new Vector2(-7, -7));
+			Image icon = CreateImage("Icon", slot.GetComponent<RectTransform>(), new Vector2(7, 7), new Vector2(-7, -7));
 			icon.preserveAspect = true;
 			icon.color = Color.white;
-			CreateText("Price", slot.GetComponent<RectTransform>(), topLeftText, TextAnchor.UpperLeft, 13, new Vector2(6, 4), new Vector2(-6, -4));
-			CreateText("Quantity", slot.GetComponent<RectTransform>(), $"x{quantity}", TextAnchor.LowerRight, 15, new Vector2(6, 4), new Vector2(-6, -4));
-			CreateText("Name", slot.GetComponent<RectTransform>(), itemName, TextAnchor.LowerCenter, 13, new Vector2(6, 2), new Vector2(-6, 18));
+			CreateText("Price", slot.GetComponent<RectTransform>(), topLeftText, TextAnchor.UpperLeft, 11, new Vector2(4, 3), new Vector2(-4, -3));
+			CreateText("Quantity", slot.GetComponent<RectTransform>(), $"x{quantity}", TextAnchor.LowerRight, 12, new Vector2(4, 3), new Vector2(-4, -3));
 			return button;
 		}
 

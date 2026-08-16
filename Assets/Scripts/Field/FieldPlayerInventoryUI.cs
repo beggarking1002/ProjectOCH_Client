@@ -11,6 +11,7 @@ namespace Field
 		FieldEconomyRepository _repository;
 		RectTransform _grid;
 		Text _title;
+		Text _capacityText;
 		bool _subscribed;
 
 		async void OnEnable()
@@ -18,6 +19,9 @@ namespace Field
 			BindView();
 			Subscribe();
 			_repository = await FieldEconomyRepository.LoadAsync();
+			if (this == null || isActiveAndEnabled == false)
+				return;
+			await _repository.PreloadAllItemIconsAsync();
 			if (this == null || isActiveAndEnabled == false)
 				return;
 			Render(GameRoot.Instance?.Network.LastExpeditionState);
@@ -37,7 +41,8 @@ namespace Field
 		{
 			_grid = transform.Find("Window/BagGrid") as RectTransform;
 			_title = transform.Find("Window/TitleFrame/TitleText")?.GetComponent<Text>();
-			FieldItemGridUI.Configure(_grid, 5);
+			_capacityText = transform.Find("Window/CapacityText")?.GetComponent<Text>();
+			FieldItemGridUI.Configure(_grid, FieldItemGridUI.ArtworkColumnCount);
 		}
 
 		void Subscribe()
@@ -64,6 +69,12 @@ namespace Field
 			{
 				int gold = state?.Gold ?? 0;
 				_title.text = $"인벤토리  ·  보유금 {gold}G";
+			}
+			if (_capacityText != null)
+			{
+				int occupiedSlots = state?.Inventory.Count ?? 0;
+				int maxSlots = FieldItemGridUI.ArtworkColumnCount * FieldItemGridUI.ArtworkColumnCount;
+				_capacityText.text = $"{occupiedSlots} / {maxSlots}";
 			}
 
 			FieldItemGridUI.Clear(_grid);
