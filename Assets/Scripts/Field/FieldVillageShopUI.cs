@@ -120,17 +120,29 @@ namespace Field
 			foreach (Protocol.VillageTradeBuyOfferInfo offer in packet.TradeBuyOffers)
 				sellPrices[offer.StackId] = offer.UnitBuyPrice;
 
-			foreach (Protocol.ExpeditionItemStackInfo stack in packet.Expedition.Inventory)
+			foreach (FieldInventoryItemGroup group in FieldInventoryGrouping.Build(packet.Expedition.Inventory))
 			{
-				bool canSell = sellPrices.TryGetValue(stack.StackId, out int unitBuyPrice);
-				ulong stackId = stack.StackId;
+				bool canSell = false;
+				int unitBuyPrice = 0;
+				ulong stackId = 0;
+				foreach (Protocol.ExpeditionItemStackInfo batch in group.Batches)
+				{
+					if (sellPrices.TryGetValue(batch.StackId, out unitBuyPrice))
+					{
+						canSell = true;
+						stackId = batch.StackId;
+						break;
+					}
+				}
+				string itemName = ItemName(group.ItemId);
 				Button button = FieldItemGridUI.CreateSlot(
 					_inventoryRoot,
-					ItemName(stack.ItemId),
-					stack.Quantity,
+					itemName,
+					group.TotalQuantity,
 					canSell ? $"판매 {unitBuyPrice}G" : "판매 불가",
 					canSell);
-				FieldItemGridUI.SetIconAsync(button, _repository, stack.ItemId);
+				FieldItemGridUI.SetIconAsync(button, _repository, group.ItemId);
+				FieldItemGridUI.BindTooltip(button, FieldInventoryGrouping.BuildExpiryTooltip(group, itemName));
 				if (canSell)
 					button.onClick.AddListener(() => Sell(stackId));
 			}
