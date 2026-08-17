@@ -18,6 +18,8 @@ namespace Battle
 		const float MinimumFlightSeconds = 0.14f;
 		const float MaximumFlightSeconds = 0.56f;
 		const float TargetVerticalOffset = 0.14f;
+		const float HailSpawnHeight = 3.2f;
+		const float HailFallSeconds = 0.42f;
 
 		readonly struct ProjectileStyle
 		{
@@ -39,6 +41,7 @@ namespace Battle
 			{ "dark_arrow", new ProjectileStyle(7.0f, 0.55f) },
 			{ "fireball", new ProjectileStyle(6.5f, 0.58f) },
 			{ "iceball", new ProjectileStyle(6.2f, 0.56f) },
+			{ "hailstone", new ProjectileStyle(0f, 0.78f) },
 			{ "throwing_axe", new ProjectileStyle(5.8f, 0.52f, 900f) },
 		};
 
@@ -58,6 +61,12 @@ namespace Battle
 				yield break;
 
 			ProjectileStyle style = GetStyle(projectileKey);
+			if (string.Equals(projectileKey, "hailstone", StringComparison.OrdinalIgnoreCase))
+			{
+				yield return PlayHailStone(sprite, style, targetWorldPosition);
+				yield break;
+			}
+
 			Vector3 source = sourceWorldPosition;
 			Vector3 target = targetWorldPosition + Vector3.up * TargetVerticalOffset;
 			source.z = -0.1f;
@@ -84,6 +93,34 @@ namespace Battle
 				renderer.transform.position = Vector3.Lerp(source, target, progress);
 				float spin = style.SpinDegrees == 0f ? 0f : -style.SpinDegrees * progress;
 				renderer.transform.rotation = Quaternion.Euler(0f, 0f, travelAngle + spin);
+				yield return null;
+			}
+
+			ReturnRenderer(renderer);
+		}
+
+		// Hail is an area spell: it falls vertically onto the chosen tile instead of
+		// travelling from the caster. The renderer is returned precisely at ground
+		// contact, so it never remains embedded in the map.
+		IEnumerator PlayHailStone(Sprite sprite, ProjectileStyle style, Vector3 targetWorldPosition)
+		{
+			Vector3 impact = targetWorldPosition + Vector3.up * TargetVerticalOffset;
+			impact.z = -0.1f;
+			Vector3 spawn = impact + Vector3.up * HailSpawnHeight;
+			SpriteRenderer renderer = RentRenderer();
+			renderer.sprite = sprite;
+			renderer.transform.position = spawn;
+			renderer.transform.rotation = Quaternion.identity;
+			renderer.transform.localScale = Vector3.one * style.Scale;
+			renderer.gameObject.SetActive(true);
+
+			float elapsed = 0f;
+			while (elapsed < HailFallSeconds)
+			{
+				elapsed += Time.unscaledDeltaTime;
+				float progress = Mathf.Clamp01(elapsed / HailFallSeconds);
+				// Quadratic easing gives the impact a clear falling acceleration.
+				renderer.transform.position = Vector3.LerpUnclamped(spawn, impact, progress * progress);
 				yield return null;
 			}
 

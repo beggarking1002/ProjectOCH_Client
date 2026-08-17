@@ -3,7 +3,7 @@ string,string,string,string,string,string
 BEIGE_ICE_COLD_ACCUMULATION,,,,icon_beige_ice_passive
 BEIGE_ICE_ICE_BOLT,Skill1,,,icon_beige_ice_skill1,iceball
 BEIGE_ICE_ICE_SHIELD,Skill1,,,icon_beige_ice_skill2
-BEIGE_ICE_HAIL,Skill1,,,icon_beige_ice_skill3
+BEIGE_ICE_HAIL,Skill1,,,icon_beige_ice_skill3,hailstone
 BEIGE_ICE_STORM_CENTER,Skill1,,,icon_beige_ice_skill4
 BEIGE_ICE_COLD_HARD_WORKER,Skill1,,,icon_beige_ice_ulti
 BEIGE_ICE_THAWING_POTION,,,,icon_beige_ice_sub

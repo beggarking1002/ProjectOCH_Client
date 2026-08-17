@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a751547c7f1c6774bb80e34c32f639fc
+    m_Address: projectile_hailstone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 194451487dcafd7408dc79e8f0b14ed4
     m_Address: icon_beige_ice_skill3
     m_ReadOnly: 0
