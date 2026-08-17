@@ -14,7 +14,7 @@ namespace Scenes
 		const string FieldLogicRootName = "@FieldLogic";
 		const string WorldMapAddress = "WorldMapRoot";
 		const string FieldSceneUiAddress = "FieldSceneHUD";
-		const string FieldPawnAddress = "Pawn_Beige_Fire";
+		const string FieldPawnAddress = "Pawn_Beige_Ice";
 		const int WorldMapSortingOrderOffset = 1;
 		const float FieldReadyTimeoutSeconds = 5f;
 

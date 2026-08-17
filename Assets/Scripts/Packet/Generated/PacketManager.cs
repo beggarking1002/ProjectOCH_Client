@@ -54,6 +54,8 @@ public enum MsgId : ushort
     C_QUEST_TRACKER_OPEN = 1045,
     S_QUEST_TRACKER_STATE = 1046,
     C_QUEST_ABANDON = 1047,
+    C_FIELD_PAWN_SELECT = 1048,
+    S_FIELD_PAWN_SELECT = 1049,
 }
 
 class PacketManager
@@ -127,6 +129,8 @@ class PacketManager
         _handler.Add((ushort)MsgId.S_VILLAGE_QUEST_STATE, PacketHandler.S_VILLAGE_QUEST_STATEHandler);
         _onRecv.Add((ushort)MsgId.S_QUEST_TRACKER_STATE, MakePacket<S_QUEST_TRACKER_STATE>);
         _handler.Add((ushort)MsgId.S_QUEST_TRACKER_STATE, PacketHandler.S_QUEST_TRACKER_STATEHandler);
+        _onRecv.Add((ushort)MsgId.S_FIELD_PAWN_SELECT, MakePacket<S_FIELD_PAWN_SELECT>);
+        _handler.Add((ushort)MsgId.S_FIELD_PAWN_SELECT, PacketHandler.S_FIELD_PAWN_SELECTHandler);
     }
 
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using App;
 using Protocol;
@@ -13,6 +14,7 @@ namespace Field
 	public sealed class FieldBattleClassSelectionUI : MonoBehaviour
 	{
 		enum ClassGroup { Suen, Beige, Alen, Zillian }
+		enum SelectionMode { Battle, FieldPawn }
 
 		sealed class OptionButton
 		{
@@ -28,12 +30,14 @@ namespace Field
 		static readonly Color SelectedColor = new Color(0.42f, 0.29f, 0.10f, 0.98f);
 		static readonly Color DisabledColor = new Color(0.08f, 0.06f, 0.03f, 0.84f);
 		static FieldBattleClassSelectionUI _instance;
+		public static event Action VisualCatalogReady;
 
 		readonly Dictionary<ClassGroup, PawnClass> _selected = new Dictionary<ClassGroup, PawnClass>();
 		readonly List<OptionButton> _buttons = new List<OptionButton>();
 		GameObject _overlayRoot;
 		Transform _options;
 		Text _status;
+		Text _title;
 		Button _submit;
 		Text _submitText;
 		AsyncOperationHandle<GameObject> _uiHandle;
@@ -44,9 +48,44 @@ namespace Field
 		bool _waiting;
 		bool _locked;
 		bool _isDebugBattleSelection;
+		bool _openFieldSelectionWhenBound;
+		bool _fieldSelectionRequestPending;
+		SelectionMode _mode;
+		PawnClass _selectedFieldPawn = PawnClass.BeigeIce;
 		S_BATTLE_CLASS_SELECTION_START _pendingStart;
 
 		public static bool IsBlockingInput => _instance != null && _instance._overlayRoot != null && _instance._overlayRoot.activeSelf;
+
+		public static bool OpenFieldPawnSelection()
+		{
+			if (_instance == null)
+				return false;
+			if (_instance._bound)
+				_instance.ShowFieldPawnSelection();
+			else
+				_instance._openFieldSelectionWhenBound = true;
+			return true;
+		}
+
+		public static bool TryGetPawnClassIcon(PawnClass pawnClass, out Sprite sprite)
+		{
+			sprite = null;
+			if (_instance == null || _instance._options == null || TryGetClassGroup(pawnClass, out ClassGroup group) == false)
+				return false;
+			Transform buttonTransform = _instance._options.Find(group + "Column/" + pawnClass);
+			if (buttonTransform == null)
+				return false;
+			Image[] images = buttonTransform.GetComponentsInChildren<Image>(true);
+			for (int index = images.Length - 1; index >= 0; index--)
+			{
+				if (images[index].gameObject != buttonTransform.gameObject && images[index].sprite != null)
+				{
+					sprite = images[index].sprite;
+					return true;
+				}
+			}
+			return false;
+		}
 
 		void Awake()
 		{
@@ -77,6 +116,7 @@ namespace Field
 
 			GameRoot.Instance.Network.BattleClassSelectionStartReceived += OnStart;
 			GameRoot.Instance.Network.BattleClassSelectionResultReceived += OnResult;
+			GameRoot.Instance.Network.FieldPawnSelectionReceived += OnFieldPawnSelectionResult;
 			GameRoot.Instance.Network.DespawnReceived += OnDespawn;
 			GameRoot.Instance.Network.EnterBattleReceived += OnEnterBattle;
 			_subscribed = true;
@@ -88,6 +128,7 @@ namespace Field
 			{
 				GameRoot.Instance.Network.BattleClassSelectionStartReceived -= OnStart;
 				GameRoot.Instance.Network.BattleClassSelectionResultReceived -= OnResult;
+				GameRoot.Instance.Network.FieldPawnSelectionReceived -= OnFieldPawnSelectionResult;
 				GameRoot.Instance.Network.DespawnReceived -= OnDespawn;
 				GameRoot.Instance.Network.EnterBattleReceived -= OnEnterBattle;
 			}
@@ -106,18 +147,45 @@ namespace Field
 
 		void ShowStart(S_BATTLE_CLASS_SELECTION_START packet)
 		{
+			_mode = SelectionMode.Battle;
 			_selected.Clear();
 			_buttons.Clear();
 			_waiting = false;
 			_locked = false;
 			_isDebugBattleSelection = packet.TargetPlayerId == 0;
+			_fieldSelectionRequestPending = false;
 			ClearOptions();
 			CreateOptions(ClassGroup.Suen, "\uC2A4\uC5D4", packet.SuenOptions);
 			CreateOptions(ClassGroup.Beige, "\uBCA0\uC774\uC9C0", packet.BeigeOptions);
 			CreateOptions(ClassGroup.Alen, "\uC54C\uB80C", packet.AlenOptions);
 			CreateOptions(ClassGroup.Zillian, "\uC9C8\uB9AC\uC5B8", packet.ZillianOptions);
 			_overlayRoot.SetActive(true);
+			if (_title != null)
+				_title.text = "전투 클래스 선택";
 			_status.text = "\uAC01 \uC601\uC6C5\uC758 \uD074\uB798\uC2A4\uB97C \uD558\uB098\uC529 \uC120\uD0DD\uD558\uC138\uC694.";
+			Refresh();
+		}
+
+		void ShowFieldPawnSelection()
+		{
+			_mode = SelectionMode.FieldPawn;
+			_selected.Clear();
+			_buttons.Clear();
+			_waiting = false;
+			_locked = false;
+			_fieldSelectionRequestPending = false;
+			_openFieldSelectionWhenBound = false;
+			PawnClass currentClass = GameRoot.Instance?.Network.LastEnterGame?.Player?.FieldPawnClass ?? PawnClass.BeigeIce;
+			_selectedFieldPawn = IsSupportedFieldPawn(currentClass) ? currentClass : PawnClass.BeigeIce;
+			ClearOptions();
+			CreateOptions(ClassGroup.Suen, "스엔", new[] { PawnClass.SuenAxeSword, PawnClass.SuenParvis });
+			CreateOptions(ClassGroup.Beige, "베이지", new[] { PawnClass.BeigeFire, PawnClass.BeigeIce });
+			CreateOptions(ClassGroup.Alen, "알렌", new[] { PawnClass.AlenSpear, PawnClass.AlenSwordShield });
+			CreateOptions(ClassGroup.Zillian, "질리언", new[] { PawnClass.ZillianLongbow, PawnClass.ZillianMace });
+			_overlayRoot.SetActive(true);
+			if (_title != null)
+				_title.text = "필드 캐릭터 선택";
+			_status.text = "필드에서 사용할 캐릭터 엠블렘을 하나 선택하세요.";
 			Refresh();
 		}
 
@@ -146,6 +214,26 @@ namespace Field
 			Refresh();
 		}
 
+		void OnFieldPawnSelectionResult(S_FIELD_PAWN_SELECT packet)
+		{
+			if (packet == null || _bound == false || _mode != SelectionMode.FieldPawn || _fieldSelectionRequestPending == false)
+				return;
+			ulong myObjectId = GameRoot.Instance?.Network.LastEnterGame?.Player?.ObjectId ?? 0;
+			if (packet.ObjectId != myObjectId)
+				return;
+
+			_fieldSelectionRequestPending = false;
+			if (packet.Success)
+			{
+				_selectedFieldPawn = packet.PawnClass;
+				Hide();
+				return;
+			}
+
+			_status.text = string.IsNullOrWhiteSpace(packet.Reason) ? "필드 캐릭터 선택이 거부되었습니다." : packet.Reason;
+			Refresh();
+		}
+
 		void OnDespawn(S_DESPAWN packet)
 		{
 			if (_locked)
@@ -162,6 +250,13 @@ namespace Field
 		{
 			if (_waiting || _locked)
 				return;
+			if (_mode == SelectionMode.FieldPawn)
+			{
+				_selectedFieldPawn = pawnClass;
+				_status.text = "선택 적용을 누르면 같은 필드의 모든 플레이어에게 반영됩니다.";
+				Refresh();
+				return;
+			}
 
 			_selected[group] = pawnClass;
 			_status.text = "\uAC01 \uC601\uC6C5\uC758 \uD074\uB798\uC2A4\uB97C \uD558\uB098\uC529 \uC120\uD0DD\uD558\uC138\uC694.";
@@ -170,6 +265,22 @@ namespace Field
 
 		void Submit()
 		{
+			if (_mode == SelectionMode.FieldPawn)
+			{
+				if (_fieldSelectionRequestPending || IsSupportedFieldPawn(_selectedFieldPawn) == false || GameRoot.Instance == null)
+					return;
+				if (GameRoot.Instance.Network.SelectFieldPawn(_selectedFieldPawn) == false)
+				{
+					_status.text = string.IsNullOrWhiteSpace(GameRoot.Instance.Network.LastError) ? "필드 캐릭터 선택 전송에 실패했습니다." : GameRoot.Instance.Network.LastError;
+					Refresh();
+					return;
+				}
+				_fieldSelectionRequestPending = true;
+				_status.text = "선택을 저장하는 중입니다...";
+				Refresh();
+				return;
+			}
+
 			if (HasAllSelections() == false || GameRoot.Instance == null)
 				return;
 
@@ -197,21 +308,24 @@ namespace Field
 
 		void Refresh()
 		{
-			bool disabled = _waiting || _locked;
+			bool disabled = _waiting || _locked || _fieldSelectionRequestPending;
 			for (int index = 0; index < _buttons.Count; index++)
 			{
 				OptionButton option = _buttons[index];
-				bool selected = _selected.TryGetValue(option.Group, out PawnClass selectedClass) && selectedClass == option.PawnClass;
+				bool selected = _mode == SelectionMode.FieldPawn
+					? _selectedFieldPawn == option.PawnClass
+					: _selected.TryGetValue(option.Group, out PawnClass selectedClass) && selectedClass == option.PawnClass;
 				option.Background.color = disabled ? DisabledColor : selected ? SelectedColor : NormalColor;
 				option.Button.interactable = disabled == false;
 			}
-			_submit.interactable = disabled == false && HasAllSelections();
-			_submitText.text = disabled ? "\uC120\uD0DD \uC644\uB8CC" : "\uC120\uD0DD \uD655\uC815";
+			_submit.interactable = disabled == false && (_mode == SelectionMode.FieldPawn ? IsSupportedFieldPawn(_selectedFieldPawn) : HasAllSelections());
+			_submitText.text = _fieldSelectionRequestPending ? "저장 중..." : _mode == SelectionMode.FieldPawn ? "선택 적용" : disabled ? "\uC120\uD0DD \uC644\uB8CC" : "\uC120\uD0DD \uD655\uC815";
 		}
 
 		void Hide()
 		{
 			_isDebugBattleSelection = false;
+			_fieldSelectionRequestPending = false;
 			if (_overlayRoot != null)
 				_overlayRoot.SetActive(false);
 		}
@@ -261,6 +375,7 @@ namespace Field
 			view.Canvas.sortingOrder = CanvasSortingOrder;
 			_options = view.Options;
 			_status = view.Status;
+			_title = view.Panel.transform.Find("Title")?.GetComponent<Text>();
 			_submit = view.Submit;
 			_submitText = view.SubmitText;
 			_submit.onClick.RemoveAllListeners();
@@ -268,8 +383,11 @@ namespace Field
 			GameRoot.ApplyUiFont(_overlayRoot);
 			_bound = true;
 			Hide();
+			VisualCatalogReady?.Invoke();
 			if (_pendingStart != null)
 				ShowStart(_pendingStart);
+			else if (_openFieldSelectionWhenBound)
+				ShowFieldPawnSelection();
 		}
 
 		void ClearOptions()
@@ -313,5 +431,23 @@ namespace Field
 				_buttons.Add(new OptionButton { Group = group, PawnClass = pawnClass, Background = button.GetComponent<Image>(), Button = button });
 			}
 		}
+
+		static bool TryGetClassGroup(PawnClass pawnClass, out ClassGroup group)
+		{
+			switch (pawnClass)
+			{
+				case PawnClass.SuenAxeSword:
+				case PawnClass.SuenParvis: group = ClassGroup.Suen; return true;
+				case PawnClass.BeigeFire:
+				case PawnClass.BeigeIce: group = ClassGroup.Beige; return true;
+				case PawnClass.AlenSpear:
+				case PawnClass.AlenSwordShield: group = ClassGroup.Alen; return true;
+				case PawnClass.ZillianLongbow:
+				case PawnClass.ZillianMace: group = ClassGroup.Zillian; return true;
+				default: group = default; return false;
+			}
+		}
+
+		static bool IsSupportedFieldPawn(PawnClass pawnClass) => TryGetClassGroup(pawnClass, out _);
 	}
 }

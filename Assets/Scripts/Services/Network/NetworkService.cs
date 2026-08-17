@@ -32,6 +32,7 @@ namespace Networking
 		public Protocol.S_RESET_PLAYER_DATA LastPlayerDataReset { get; private set; }
 		public Protocol.S_VILLAGE_QUEST_STATE LastVillageQuestState { get; private set; }
 		public Protocol.S_QUEST_TRACKER_STATE LastQuestTrackerState { get; private set; }
+		public Protocol.S_FIELD_PAWN_SELECT LastFieldPawnSelection { get; private set; }
 		public Protocol.S_BATTLE_INVITE_REQUEST LastBattleInviteRequest { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RECEIVED LastBattleInviteReceived { get; private set; }
 		public Protocol.S_BATTLE_INVITE_RESULT LastBattleInviteResult { get; private set; }
@@ -64,6 +65,7 @@ namespace Networking
 		public event Action<Protocol.S_RESET_PLAYER_DATA> PlayerDataResetReceived;
 		public event Action<Protocol.S_VILLAGE_QUEST_STATE> VillageQuestStateReceived;
 		public event Action<Protocol.S_QUEST_TRACKER_STATE> QuestTrackerStateReceived;
+		public event Action<Protocol.S_FIELD_PAWN_SELECT> FieldPawnSelectionReceived;
 		public event Action<Protocol.S_BATTLE_MOVE> BattleMoveReceived;
 		public event Action<Protocol.S_BATTLE_SKILL> BattleSkillReceived;
 		public event Action<Protocol.S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -95,6 +97,7 @@ namespace Networking
 			PacketHandler.Instance.PlayerDataResetReceived += OnPlayerDataResetReceived;
 			PacketHandler.Instance.VillageQuestStateReceived += OnVillageQuestStateReceived;
 			PacketHandler.Instance.QuestTrackerStateReceived += OnQuestTrackerStateReceived;
+			PacketHandler.Instance.FieldPawnSelectionReceived += OnFieldPawnSelectionReceived;
 			PacketHandler.Instance.BattleMoveReceived += OnBattleMoveReceived;
 			PacketHandler.Instance.BattleSkillReceived += OnBattleSkillReceived;
 			PacketHandler.Instance.BattleEndTurnReceived += OnBattleEndTurnReceived;
@@ -138,6 +141,7 @@ namespace Networking
 				PacketHandler.Instance.PlayerDataResetReceived -= OnPlayerDataResetReceived;
 				PacketHandler.Instance.VillageQuestStateReceived -= OnVillageQuestStateReceived;
 				PacketHandler.Instance.QuestTrackerStateReceived -= OnQuestTrackerStateReceived;
+				PacketHandler.Instance.FieldPawnSelectionReceived -= OnFieldPawnSelectionReceived;
 				PacketHandler.Instance.BattleMoveReceived -= OnBattleMoveReceived;
 				PacketHandler.Instance.BattleSkillReceived -= OnBattleSkillReceived;
 				PacketHandler.Instance.BattleEndTurnReceived -= OnBattleEndTurnReceived;
@@ -173,6 +177,7 @@ namespace Networking
 			LastPlayerDataReset = null;
 			LastVillageQuestState = null;
 			LastQuestTrackerState = null;
+			LastFieldPawnSelection = null;
 			LastBattleInviteRequest = null;
 			LastBattleInviteReceived = null;
 			LastBattleInviteResult = null;
@@ -302,6 +307,11 @@ namespace Networking
 		public bool AbandonQuest(string questId)
 		{
 			return Send(new Protocol.C_QUEST_ABANDON { QuestId = questId ?? string.Empty });
+		}
+
+		public bool SelectFieldPawn(Protocol.PawnClass pawnClass)
+		{
+			return Send(new Protocol.C_FIELD_PAWN_SELECT { PawnClass = pawnClass });
 		}
 
 		public bool AcceptQuest(string questId)
@@ -457,6 +467,9 @@ namespace Networking
 					break;
 				case Protocol.C_QUEST_ABANDON pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_ABANDON);
+					break;
+				case Protocol.C_FIELD_PAWN_SELECT pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_FIELD_PAWN_SELECT);
 					break;
 				case Protocol.C_QUEST_ACCEPT pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_QUEST_ACCEPT);
@@ -622,6 +635,34 @@ namespace Networking
 			}
 
 			EnterBattleReceived?.Invoke(pkt);
+		}
+
+		void OnFieldPawnSelectionReceived(Protocol.S_FIELD_PAWN_SELECT pkt)
+		{
+			LastFieldPawnSelection = pkt?.Clone();
+			if (pkt == null)
+				return;
+
+			if (pkt.Success && pkt.ObjectId != 0)
+			{
+				if (_knownPlayers.TryGetValue(pkt.ObjectId, out Protocol.ObjectInfo player) == false)
+				{
+					player = new Protocol.ObjectInfo { ObjectId = pkt.ObjectId };
+					_knownPlayers[pkt.ObjectId] = player;
+				}
+				player.FieldPawnClass = pkt.PawnClass;
+				if (LastEnterGame?.Player?.ObjectId == pkt.ObjectId)
+					LastEnterGame.Player.FieldPawnClass = pkt.PawnClass;
+				LastError = null;
+				Debug.Log($"S_FIELD_PAWN_SELECT success. objectId={pkt.ObjectId}, pawnClass={pkt.PawnClass}");
+			}
+			else
+			{
+				LastError = string.IsNullOrWhiteSpace(pkt.Reason) ? "Field pawn selection was rejected." : pkt.Reason;
+				Debug.LogWarning($"S_FIELD_PAWN_SELECT failed. reason={LastError}");
+			}
+
+			FieldPawnSelectionReceived?.Invoke(pkt);
 		}
 
 		void OnEnterVillageReceived(Protocol.S_ENTER_VILLAGE pkt)

@@ -15,11 +15,14 @@ namespace Field
 		[SerializeField] Text resourceText;
 		[SerializeField] Button inventoryButton;
 		[SerializeField] Button questTrackerButton;
+		Image _playerEmblem;
+		Button _playerEmblemButton;
 		bool _subscribed;
 		bool _isQuestTrackerOpening;
 
 		void Awake()
 		{
+			BindPlayerEmblemButton();
 			inventoryButton?.onClick.AddListener(OpenInventory);
 			questTrackerButton?.onClick.AddListener(OpenQuestTracker);
 		}
@@ -28,6 +31,7 @@ namespace Field
 		{
 			Subscribe();
 			Render(GameRoot.Instance?.Network.LastExpeditionState);
+			RefreshPlayerEmblem();
 		}
 
 		void OnDisable()
@@ -39,6 +43,7 @@ namespace Field
 		{
 			inventoryButton?.onClick.RemoveListener(OpenInventory);
 			questTrackerButton?.onClick.RemoveListener(OpenQuestTracker);
+			_playerEmblemButton?.onClick.RemoveListener(OpenFieldPawnSelection);
 			Unsubscribe();
 		}
 
@@ -47,14 +52,18 @@ namespace Field
 			if (_subscribed || GameRoot.Instance == null)
 				return;
 			GameRoot.Instance.Network.ExpeditionStateReceived += Render;
+			GameRoot.Instance.Network.FieldPawnSelectionReceived += OnFieldPawnSelection;
+			FieldBattleClassSelectionUI.VisualCatalogReady += RefreshPlayerEmblem;
 			_subscribed = true;
 		}
 
 		void Unsubscribe()
 		{
+			FieldBattleClassSelectionUI.VisualCatalogReady -= RefreshPlayerEmblem;
 			if (_subscribed == false || GameRoot.Instance == null)
 				return;
 			GameRoot.Instance.Network.ExpeditionStateReceived -= Render;
+			GameRoot.Instance.Network.FieldPawnSelectionReceived -= OnFieldPawnSelection;
 			_subscribed = false;
 		}
 
@@ -96,6 +105,63 @@ namespace Field
 		void OpenInventory()
 		{
 			FindFirstObjectByType<FieldObjectManager>()?.TogglePlayerInventoryUi();
+		}
+
+		void BindPlayerEmblemButton()
+		{
+			Transform emblemTransform = FindDeepChild(transform, "PlayerEmblem");
+			if (emblemTransform == null)
+				return;
+			_playerEmblem = emblemTransform.GetComponent<Image>();
+			if (_playerEmblem == null)
+				return;
+			_playerEmblem.raycastTarget = true;
+			_playerEmblemButton = emblemTransform.GetComponent<Button>();
+			if (_playerEmblemButton == null)
+				_playerEmblemButton = emblemTransform.gameObject.AddComponent<Button>();
+			_playerEmblemButton.targetGraphic = _playerEmblem;
+			_playerEmblemButton.onClick.RemoveListener(OpenFieldPawnSelection);
+			_playerEmblemButton.onClick.AddListener(OpenFieldPawnSelection);
+		}
+
+		void OpenFieldPawnSelection()
+		{
+			if (FieldBattleClassSelectionUI.OpenFieldPawnSelection() == false)
+				Debug.LogWarning("Field pawn selection UI is not ready yet.");
+		}
+
+		void OnFieldPawnSelection(Protocol.S_FIELD_PAWN_SELECT packet)
+		{
+			ulong myObjectId = GameRoot.Instance?.Network.LastEnterGame?.Player?.ObjectId ?? 0;
+			if (packet != null && packet.Success && packet.ObjectId == myObjectId)
+				ApplyPlayerEmblem(packet.PawnClass);
+		}
+
+		void RefreshPlayerEmblem()
+		{
+			Protocol.PawnClass pawnClass = GameRoot.Instance?.Network.LastEnterGame?.Player?.FieldPawnClass ?? Protocol.PawnClass.BeigeIce;
+			ApplyPlayerEmblem(pawnClass);
+		}
+
+		void ApplyPlayerEmblem(Protocol.PawnClass pawnClass)
+		{
+			if (_playerEmblem != null && FieldBattleClassSelectionUI.TryGetPawnClassIcon(pawnClass, out Sprite sprite))
+				_playerEmblem.sprite = sprite;
+		}
+
+		static Transform FindDeepChild(Transform root, string targetName)
+		{
+			if (root == null)
+				return null;
+			if (root.name == targetName)
+				return root;
+			for (int index = 0; index < root.childCount; index++)
+			{
+				Transform found = FindDeepChild(root.GetChild(index), targetName);
+				if (found != null)
+					return found;
+			}
+			return null;
 		}
 
 		async void OpenQuestTracker()

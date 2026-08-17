@@ -26,6 +26,7 @@ public sealed class PacketHandler
 	public event Action<S_RESET_PLAYER_DATA> PlayerDataResetReceived;
 	public event Action<S_VILLAGE_QUEST_STATE> VillageQuestStateReceived;
 	public event Action<S_QUEST_TRACKER_STATE> QuestTrackerStateReceived;
+	public event Action<S_FIELD_PAWN_SELECT> FieldPawnSelectionReceived;
 	public event Action<S_BATTLE_MOVE> BattleMoveReceived;
 	public event Action<S_BATTLE_SKILL> BattleSkillReceived;
 	public event Action<S_BATTLE_END_TURN> BattleEndTurnReceived;
@@ -120,6 +121,12 @@ public sealed class PacketHandler
 	{
 		Debug.Log("S_QUEST_TRACKER_STATEHandler");
 		Instance.EnqueuePacket(packet as S_QUEST_TRACKER_STATE, Instance.QuestTrackerStateReceived);
+	}
+
+	public static void S_FIELD_PAWN_SELECTHandler(PacketSession session, IMessage packet)
+	{
+		Debug.Log("S_FIELD_PAWN_SELECTHandler");
+		Instance.EnqueuePacket(packet as S_FIELD_PAWN_SELECT, Instance.FieldPawnSelectionReceived);
 	}
 
 	public static void S_BATTLE_MOVEHandler(PacketSession session, IMessage packet)

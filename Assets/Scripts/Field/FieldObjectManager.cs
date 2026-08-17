@@ -22,6 +22,9 @@ namespace Field
 
 		readonly Dictionary<ulong, FieldPawnController> _pawns = new Dictionary<ulong, FieldPawnController>();
 		readonly Dictionary<ulong, AsyncOperationHandle<GameObject>> _pawnHandles = new Dictionary<ulong, AsyncOperationHandle<GameObject>>();
+		readonly Dictionary<ulong, PawnClass> _pawnClasses = new Dictionary<ulong, PawnClass>();
+		readonly Dictionary<ulong, PawnClass> _pendingPawnClasses = new Dictionary<ulong, PawnClass>();
+		readonly HashSet<ulong> _pawnVisualChangesInProgress = new HashSet<ulong>();
 
 		FieldMapWalkArea _walkArea;
 		string _pawnAddress;
@@ -84,6 +87,7 @@ namespace Field
 
 		void Update()
 		{
+			ApplyPendingPawnVisualChanges();
 			HandleVillageClickInput();
 			UpdatePendingVillageEntry();
 			HandleBattleInviteClickInput();
@@ -483,6 +487,7 @@ namespace Field
 			GameRoot.Instance.Network.DespawnReceived += HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived += HandleMove;
 			GameRoot.Instance.Network.EnterVillageReceived += HandleEnterVillage;
+			GameRoot.Instance.Network.FieldPawnSelectionReceived += HandleFieldPawnSelection;
 		}
 
 		void UnsubscribeNetwork()
@@ -495,6 +500,14 @@ namespace Field
 			GameRoot.Instance.Network.DespawnReceived -= HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived -= HandleMove;
 			GameRoot.Instance.Network.EnterVillageReceived -= HandleEnterVillage;
+			GameRoot.Instance.Network.FieldPawnSelectionReceived -= HandleFieldPawnSelection;
+		}
+
+		void HandleFieldPawnSelection(S_FIELD_PAWN_SELECT packet)
+		{
+			if (packet == null || packet.Success == false || packet.ObjectId == 0)
+				return;
+			QueuePawnVisualChange(packet.ObjectId, NormalizeFieldPawnClass(packet.PawnClass));
 		}
 
 		void HandleEnterVillage(Protocol.S_ENTER_VILLAGE packet)
@@ -767,15 +780,22 @@ namespace Field
 			else if (objectId == 0)
 				return;
 
+			PawnClass desiredClass = NormalizeFieldPawnClass(info.FieldPawnClass);
 			if (_pawns.TryGetValue(objectId, out FieldPawnController existing))
 			{
+				if (_pawnClasses.TryGetValue(objectId, out PawnClass currentClass) == false || currentClass != desiredClass)
+				{
+					QueuePawnVisualChange(objectId, desiredClass);
+					return;
+				}
 				existing.Initialize(_walkArea, GetPosition(info, existing.transform.position.z), objectId, isMine);
 				if (isMine)
 					NotifyLocalPawnReady(existing.transform);
 				return;
 			}
 
-			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(_pawnAddress);
+			string pawnAddress = GetFieldPawnAddress(desiredClass);
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(pawnAddress);
 			await handle.Task;
 
 			if (_destroyed)
@@ -787,7 +807,7 @@ namespace Field
 
 			if (handle.Status != AsyncOperationStatus.Succeeded)
 			{
-				Debug.LogError($"Failed to load addressable pawn: {_pawnAddress}");
+				Debug.LogError($"Failed to load addressable pawn: {pawnAddress}");
 				if (handle.IsValid())
 					Addressables.ReleaseInstance(handle);
 				return;
@@ -806,6 +826,7 @@ namespace Field
 
 			_pawns[objectId] = pawn;
 			_pawnHandles[objectId] = handle;
+			_pawnClasses[objectId] = desiredClass;
 
 			if (isMine)
 			{
@@ -821,6 +842,7 @@ namespace Field
 			{
 				ObjectId = packet.ObjectId,
 				Position = packet.Start ?? packet.Target,
+				FieldPawnClass = _pawnClasses.TryGetValue(packet.ObjectId, out PawnClass knownClass) ? knownClass : PawnClass.BeigeIce,
 			};
 
 			await SpawnOrUpdatePawnAsync(info, isMine);
@@ -842,15 +864,22 @@ namespace Field
 			else if (objectId == 0)
 				return;
 
+			PawnClass desiredClass = NormalizeFieldPawnClass(info.FieldPawnClass);
 			if (_pawns.TryGetValue(objectId, out FieldPawnController existing))
 			{
+				if (_pawnClasses.TryGetValue(objectId, out PawnClass currentClass) == false || currentClass != desiredClass)
+				{
+					QueuePawnVisualChange(objectId, desiredClass);
+					return;
+				}
 				existing.Initialize(_walkArea, GetPosition(info, existing.transform.position.z), objectId, isMine);
 				if (isMine)
 					NotifyLocalPawnReady(existing.transform);
 				return;
 			}
 
-			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(_pawnAddress);
+			string pawnAddress = GetFieldPawnAddress(desiredClass);
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(pawnAddress);
 			await handle.Task;
 
 			if (_destroyed)
@@ -862,7 +891,7 @@ namespace Field
 
 			if (handle.Status != AsyncOperationStatus.Succeeded)
 			{
-				Debug.LogError($"Failed to load addressable pawn: {_pawnAddress}");
+				Debug.LogError($"Failed to load addressable pawn: {pawnAddress}");
 				if (handle.IsValid())
 					Addressables.ReleaseInstance(handle);
 				return;
@@ -881,6 +910,7 @@ namespace Field
 
 			_pawns[objectId] = pawn;
 			_pawnHandles[objectId] = handle;
+			_pawnClasses[objectId] = desiredClass;
 
 			if (isMine)
 			{
@@ -899,6 +929,7 @@ namespace Field
 			{
 				ObjectId = _myObjectId,
 				Position = FieldPositionCodec.ToFixed(_walkArea.GetDefaultSpawnPosition(0f)),
+				FieldPawnClass = PawnClass.BeigeIce,
 			};
 			SpawnOrUpdatePawn(fallback, true);
 		}
@@ -909,6 +940,9 @@ namespace Field
 				return;
 
 			_pawns.Remove(objectId);
+			_pawnClasses.Remove(objectId);
+			_pendingPawnClasses.Remove(objectId);
+			_pawnVisualChangesInProgress.Remove(objectId);
 
 			if (_pawnHandles.TryGetValue(objectId, out AsyncOperationHandle<GameObject> handle))
 			{
@@ -932,7 +966,127 @@ namespace Field
 
 			_pawns.Clear();
 			_pawnHandles.Clear();
+			_pawnClasses.Clear();
+			_pendingPawnClasses.Clear();
+			_pawnVisualChangesInProgress.Clear();
 			_myObjectId = 0;
+		}
+
+		void QueuePawnVisualChange(ulong objectId, PawnClass pawnClass)
+		{
+			if (objectId == 0)
+				return;
+			_pendingPawnClasses[objectId] = NormalizeFieldPawnClass(pawnClass);
+		}
+
+		void ApplyPendingPawnVisualChanges()
+		{
+			if (_pendingPawnClasses.Count == 0)
+				return;
+
+			List<ulong> ready = null;
+			foreach (KeyValuePair<ulong, PawnClass> pair in _pendingPawnClasses)
+			{
+				if (_pawnVisualChangesInProgress.Contains(pair.Key) ||
+					_pawns.TryGetValue(pair.Key, out FieldPawnController pawn) == false || pawn.IsMoving)
+					continue;
+				ready ??= new List<ulong>();
+				ready.Add(pair.Key);
+			}
+
+			if (ready == null)
+				return;
+			foreach (ulong objectId in ready)
+			{
+				PawnClass pawnClass = _pendingPawnClasses[objectId];
+				_pendingPawnClasses.Remove(objectId);
+				ReplacePawnVisualAsync(objectId, pawnClass);
+			}
+		}
+
+		async void ReplacePawnVisualAsync(ulong objectId, PawnClass desiredClass)
+		{
+			if (_pawnVisualChangesInProgress.Add(objectId) == false)
+				return;
+
+			desiredClass = NormalizeFieldPawnClass(desiredClass);
+			if (_pawnClasses.TryGetValue(objectId, out PawnClass currentClass) && currentClass == desiredClass)
+			{
+				_pawnVisualChangesInProgress.Remove(objectId);
+				return;
+			}
+
+			string pawnAddress = GetFieldPawnAddress(desiredClass);
+			AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(pawnAddress);
+			await handle.Task;
+			if (_destroyed || _pawns.TryGetValue(objectId, out FieldPawnController previousPawn) == false)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				_pawnVisualChangesInProgress.Remove(objectId);
+				return;
+			}
+			if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+			{
+				if (handle.IsValid())
+					Addressables.ReleaseInstance(handle);
+				_pawnVisualChangesInProgress.Remove(objectId);
+				Debug.LogError($"Failed to replace field pawn with addressable: {pawnAddress}");
+				return;
+			}
+
+			Vector3 position = previousPawn.transform.position;
+			bool isMine = previousPawn.IsMine;
+			AsyncOperationHandle<GameObject> previousHandle = _pawnHandles[objectId];
+			GameObject pawnObject = handle.Result;
+			pawnObject.name = isMine ? "Field_Pawn_My" : $"Field_Pawn_{objectId}";
+			SceneManager.MoveGameObjectToScene(pawnObject, gameObject.scene);
+			FieldPawnController pawn = pawnObject.GetComponent<FieldPawnController>();
+			if (pawn == null)
+				pawn = pawnObject.AddComponent<FieldPawnController>();
+			pawn.Initialize(_walkArea, position, objectId, isMine);
+
+			_pawns[objectId] = pawn;
+			_pawnHandles[objectId] = handle;
+			_pawnClasses[objectId] = desiredClass;
+			if (previousHandle.IsValid())
+				Addressables.ReleaseInstance(previousHandle);
+			_pawnVisualChangesInProgress.Remove(objectId);
+			if (isMine)
+				NotifyLocalPawnReady(pawn.transform);
+		}
+
+		static PawnClass NormalizeFieldPawnClass(PawnClass pawnClass)
+		{
+			switch (pawnClass)
+			{
+				case PawnClass.SuenAxeSword:
+				case PawnClass.SuenParvis:
+				case PawnClass.BeigeFire:
+				case PawnClass.BeigeIce:
+				case PawnClass.ZillianLongbow:
+				case PawnClass.ZillianMace:
+				case PawnClass.AlenSpear:
+				case PawnClass.AlenSwordShield:
+					return pawnClass;
+				default:
+					return PawnClass.BeigeIce;
+			}
+		}
+
+		static string GetFieldPawnAddress(PawnClass pawnClass)
+		{
+			switch (NormalizeFieldPawnClass(pawnClass))
+			{
+				case PawnClass.SuenAxeSword: return "Pawn_Suen_AxeSword";
+				case PawnClass.SuenParvis: return "Pawn_Suen_Parvis";
+				case PawnClass.BeigeFire: return "Pawn_Beige_Fire";
+				case PawnClass.ZillianLongbow: return "Pawn_Zillian_Longbow";
+				case PawnClass.ZillianMace: return "Pawn_Zillian_Mace";
+				case PawnClass.AlenSpear: return "Pawn_Alen_Spear";
+				case PawnClass.AlenSwordShield: return "Pawn_Alen_SwordShield";
+				default: return "Pawn_Beige_Ice";
+			}
 		}
 
 		Vector3 GetPosition(ObjectInfo info, float z)
