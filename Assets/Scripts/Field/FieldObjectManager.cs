@@ -46,6 +46,8 @@ namespace Field
 		bool _isVillageDataLoading;
 		bool _villageEnterRequested;
 		Vector2Int? _pendingVillageCell;
+		bool _waterRefillRequested;
+		Vector2Int? _pendingWaterCell;
 
 		public ulong MyObjectId => _myObjectId;
 		public FieldPawnController MyPawn => _myObjectId != 0 && _pawns.TryGetValue(_myObjectId, out FieldPawnController pawn) ? pawn : null;
@@ -89,7 +91,9 @@ namespace Field
 		{
 			ApplyPendingPawnVisualChanges();
 			HandleVillageClickInput();
+			HandleWaterClickInput();
 			UpdatePendingVillageEntry();
+			UpdatePendingWaterRefill();
 			HandleBattleInviteClickInput();
 			HandleBattleEnterDebugInput();
 			HandleFieldVillageUiDebugInput();
@@ -140,6 +144,7 @@ namespace Field
 
 		void ApproachOrEnterVillage(Vector2Int villageCell)
 		{
+			_pendingWaterCell = null;
 			FieldPawnController pawn = MyPawn;
 			if (pawn == null || _walkArea.TryGetCell(pawn.transform.position, out Vector2Int pawnCell) == false)
 			{
@@ -181,6 +186,66 @@ namespace Field
 			}
 
 			Debug.Log($"Moving toward village interaction range. villageCell=({villageCell.x}, {villageCell.y}) approachCell=({approachCell.x}, {approachCell.y})");
+		}
+
+		void HandleWaterClickInput()
+		{
+			if (_walkArea == null || _waterRefillRequested || TryGetPointerDown(out Vector2 screenPosition) == false)
+				return;
+			if (FieldPointerInputBlocker.IsConsumedThisFrame || FieldBattleInviteUI.IsBlockingInput || FieldBattleClassSelectionUI.IsBlockingInput || IsPointerOverUi())
+				return;
+			Camera camera = Camera.main;
+			if (camera == null || IsValidScreenPosition(camera, screenPosition) == false)
+				return;
+			Ray ray = camera.ScreenPointToRay(screenPosition);
+			Plane mapPlane = new Plane(Vector3.forward, _walkArea.PlaneTransform.position);
+			if (mapPlane.Raycast(ray, out float enter) == false ||
+				_walkArea.TryGetWaterAt(ray.GetPoint(enter), out Vector2Int cell) == false)
+				return;
+			FieldPointerInputBlocker.ConsumeCurrentFrame();
+			ApproachOrRefillWater(cell);
+		}
+
+		void ApproachOrRefillWater(Vector2Int waterCell)
+		{
+			_pendingVillageCell = null;
+			FieldPawnController pawn = MyPawn;
+			if (pawn == null || _walkArea.TryGetCell(pawn.transform.position, out Vector2Int pawnCell) == false)
+				return;
+			_pendingWaterCell = waterCell;
+			if (FieldMapWalkArea.GetHexDistance(pawnCell, waterCell) <= 2)
+			{
+				UpdatePendingWaterRefill();
+				return;
+			}
+			if (GameRoot.Instance == null ||
+				_walkArea.TryGetWaterApproachCell(pawn.transform.position, waterCell, out Vector2Int approachCell) == false)
+			{
+				_pendingWaterCell = null;
+				Debug.LogWarning($"Cannot find a reachable approach tile for water cell ({waterCell.x}, {waterCell.y}).");
+				return;
+			}
+			Vector3 target = _walkArea.GetCellCenterWorld(approachCell, pawn.transform.position.z);
+			if (GameRoot.Instance.Network.Send(new Protocol.C_MOVE { Target = FieldPositionCodec.ToFixed(target) }) == false)
+			{
+				_pendingWaterCell = null;
+				Debug.LogWarning($"Failed to move toward water. {GameRoot.Instance.Network.LastError}");
+			}
+		}
+
+		void UpdatePendingWaterRefill()
+		{
+			if (_pendingWaterCell.HasValue == false || _waterRefillRequested)
+				return;
+			FieldPawnController pawn = MyPawn;
+			if (pawn == null || _walkArea.TryGetCell(pawn.transform.position, out Vector2Int pawnCell) == false)
+				return;
+			Vector2Int waterCell = _pendingWaterCell.Value;
+			if (FieldMapWalkArea.GetHexDistance(pawnCell, waterCell) > 2)
+				return;
+			_pendingWaterCell = null;
+			_waterRefillRequested = GameRoot.Instance != null &&
+				GameRoot.Instance.Network.RefillWater(_walkArea.MapId, waterCell.x, waterCell.y);
 		}
 
 		void UpdatePendingVillageEntry()
@@ -442,7 +507,8 @@ namespace Field
 			if (mapPlane.Raycast(ray, out float enter) == false)
 				return false;
 
-			return _walkArea.TryGetVillageAt(ray.GetPoint(enter), out _, out _);
+			Vector3 worldPosition = ray.GetPoint(enter);
+			return _walkArea.TryGetVillageAt(worldPosition, out _, out _) || _walkArea.TryGetWaterAt(worldPosition, out _);
 		}
 
 		public bool TryGetMoveCursorWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)
@@ -487,6 +553,7 @@ namespace Field
 			GameRoot.Instance.Network.DespawnReceived += HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived += HandleMove;
 			GameRoot.Instance.Network.EnterVillageReceived += HandleEnterVillage;
+			GameRoot.Instance.Network.RefillWaterReceived += HandleRefillWater;
 			GameRoot.Instance.Network.FieldPawnSelectionReceived += HandleFieldPawnSelection;
 		}
 
@@ -500,6 +567,7 @@ namespace Field
 			GameRoot.Instance.Network.DespawnReceived -= HandleDespawn;
 			GameRoot.Instance.Network.MoveReceived -= HandleMove;
 			GameRoot.Instance.Network.EnterVillageReceived -= HandleEnterVillage;
+			GameRoot.Instance.Network.RefillWaterReceived -= HandleRefillWater;
 			GameRoot.Instance.Network.FieldPawnSelectionReceived -= HandleFieldPawnSelection;
 		}
 
@@ -536,6 +604,17 @@ namespace Field
 				packet.VillageDescription,
 				artworkAddress);
 			ShowFieldVillageUi(village);
+		}
+
+		void HandleRefillWater(Protocol.S_REFILL_WATER packet)
+		{
+			_waterRefillRequested = false;
+			if (packet == null || packet.Success == false)
+			{
+				Debug.LogWarning($"Water refill failed: {packet?.Reason}");
+				return;
+			}
+			Debug.Log($"Water refilled. bottles={packet.RefilledBottleCount}, waterAdded={packet.WaterAdded}");
 		}
 
 		void HandleBattleEnterDebugInput()

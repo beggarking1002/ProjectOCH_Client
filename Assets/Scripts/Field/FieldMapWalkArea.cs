@@ -7,6 +7,7 @@ namespace Field
 	public sealed class FieldMapWalkArea : MonoBehaviour
 	{
 		readonly HashSet<Vector2Int> _walkableCells = new HashSet<Vector2Int>();
+		readonly HashSet<Vector2Int> _waterCells = new HashSet<Vector2Int>();
 
 		FieldWalkMapData _data;
 
@@ -29,6 +30,7 @@ namespace Field
 		public bool Initialize(FieldWalkMapData data)
 		{
 			_walkableCells.Clear();
+			_waterCells.Clear();
 			_data = null;
 
 			if (data == null || data.fixed_point_scale <= 0 || data.cell_size.x <= 0f || data.cell_size.y <= 0f)
@@ -66,6 +68,20 @@ namespace Field
 						FieldWalkMapRange range = area.tile_ranges[rangeIndex];
 						for (int x = range.x_min; x <= range.x_max; x++)
 							_walkableCells.Remove(new Vector2Int(x, range.y));
+					}
+				}
+			}
+
+			if (data.water_ranges != null)
+			{
+				for (int rangeIndex = 0; rangeIndex < data.water_ranges.Count; rangeIndex++)
+				{
+					FieldWalkMapRange range = data.water_ranges[rangeIndex];
+					for (int x = range.x_min; x <= range.x_max; x++)
+					{
+						Vector2Int cell = new Vector2Int(x, range.y);
+						_waterCells.Add(cell);
+						_walkableCells.Remove(cell);
 					}
 				}
 			}
@@ -136,6 +152,15 @@ namespace Field
 			return TryGetVillageAtCell(cell, out villageId);
 		}
 
+		public bool TryGetWaterAt(Vector3 worldPosition, out Vector2Int cell)
+		{
+			cell = default;
+			if (IsInitialized == false)
+				return false;
+			cell = WorldToNearestCell(worldPosition);
+			return _waterCells.Contains(cell);
+		}
+
 		bool TryGetVillageAtCell(Vector2Int cell, out string villageId)
 		{
 			villageId = null;
@@ -166,6 +191,16 @@ namespace Field
 		// the selected village cell (within its two-hex interaction range).
 		public bool TryGetVillageApproachCell(Vector3 startWorldPosition, Vector2Int villageCell, out Vector2Int approachCell)
 		{
+			return TryGetInteractionApproachCell(startWorldPosition, villageCell, 2, out approachCell);
+		}
+
+		public bool TryGetWaterApproachCell(Vector3 startWorldPosition, Vector2Int waterCell, out Vector2Int approachCell)
+		{
+			return TryGetInteractionApproachCell(startWorldPosition, waterCell, 2, out approachCell);
+		}
+
+		bool TryGetInteractionApproachCell(Vector3 startWorldPosition, Vector2Int targetCell, int interactionRange, out Vector2Int approachCell)
+		{
 			approachCell = default;
 			if (IsInitialized == false)
 				return false;
@@ -175,7 +210,7 @@ namespace Field
 			List<Vector3> candidatePath = new List<Vector3>();
 			foreach (Vector2Int candidateCell in _walkableCells)
 			{
-				if (GetHexDistance(candidateCell, villageCell) > 2)
+				if (GetHexDistance(candidateCell, targetCell) > interactionRange)
 					continue;
 
 				candidatePath.Clear();

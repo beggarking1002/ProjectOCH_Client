@@ -95,11 +95,11 @@ namespace Field
 
 			if (state == null)
 			{
-				statusText.text = $"{identityText}\n포만도  - / -\n갈증  - / -";
+				statusText.text = $"{identityText}\n포만도  - / -\n행복도  - / -\n갈증  - / -";
 				return;
 			}
 
-			statusText.text = $"{identityText}\n포만도  {state.Satiety} / {state.MaxSatiety}\n갈증  {state.Thirst} / {state.MaxThirst}";
+			statusText.text = $"{identityText}\n포만도  {state.Satiety} / {state.MaxSatiety}\n행복도  {state.Happiness} / {state.MaxHappiness}\n갈증  {state.Thirst} / {state.MaxThirst}";
 		}
 
 		void OpenInventory()

@@ -122,63 +122,70 @@ namespace Protocol {
             "RRIOCgZtYXBfaWQYASABKAkSDgoGY2VsbF94GAIgASgREg4KBmNlbGxfeRgD",
             "IAEoESJ5Cg9TX0VOVEVSX1ZJTExBR0USDwoHc3VjY2VzcxgBIAEoCBIOCgZy",
             "ZWFzb24YAiABKAkSEgoKdmlsbGFnZV9pZBgDIAEoCRIUCgx2aWxsYWdlX25h",
-            "bWUYBCABKAkSGwoTdmlsbGFnZV9kZXNjcmlwdGlvbhgFIAEoCSJ0ChdFeHBl",
-            "ZGl0aW9uSXRlbVN0YWNrSW5mbxIQCghzdGFja19pZBgBIAEoBBIPCgdpdGVt",
-            "X2lkGAIgASgJEhAKCHF1YW50aXR5GAMgASgFEiQKHHJlbWFpbmluZ19zaGVs",
-            "Zl9saWZlX3NlY29uZHMYBCABKAMiZAoWVmlsbGFnZVNob3BMaXN0aW5nSW5m",
-            "bxIPCgdpdGVtX2lkGAEgASgJEg0KBXN0b2NrGAIgASgFEhEKCW1heF9zdG9j",
-            "axgDIAEoBRIXCg91bml0X3NlbGxfcHJpY2UYBCABKAUiVQoYVmlsbGFnZVRy",
-            "YWRlQnV5T2ZmZXJJbmZvEhAKCHN0YWNrX2lkGAEgASgEEg8KB2l0ZW1faWQY",
-            "AiABKAkSFgoOdW5pdF9idXlfcHJpY2UYAyABKAUi6gEKElNfRVhQRURJVElP",
-            "Tl9TVEFURRIMCgRnb2xkGAEgASgFEg8KB3NhdGlldHkYAiABKAUSEwoLbWF4",
-            "X3NhdGlldHkYAyABKAUSNAoJaW52ZW50b3J5GAQgAygLMiEuUHJvdG9jb2wu",
-            "RXhwZWRpdGlvbkl0ZW1TdGFja0luZm8SHgoWYXV0b19jb25zdW1lZF9pdGVt",
-            "X2lkcxgFIAMoCRIYChBleHBpcmVkX2l0ZW1faWRzGAYgAygJEg4KBnRoaXJz",
-            "dBgHIAEoBRISCgptYXhfdGhpcnN0GAggASgFEgwKBGZhbWUYCSABKAUiKQoT",
-            "Q19WSUxMQUdFX1NIT1BfT1BFThISCgp2aWxsYWdlX2lkGAEgASgJIksKEkNf",
-            "VklMTEFHRV9TSE9QX0JVWRISCgp2aWxsYWdlX2lkGAEgASgJEg8KB2l0ZW1f",
-            "aWQYAiABKAkSEAoIcXVhbnRpdHkYAyABKAUiTQoTQ19WSUxMQUdFX1NIT1Bf",
-            "U0VMTBISCgp2aWxsYWdlX2lkGAEgASgJEhAKCHN0YWNrX2lkGAIgASgEEhAK",
-            "CHF1YW50aXR5GAMgASgFIqYCChRTX1ZJTExBR0VfU0hPUF9TVEFURRIPCgdz",
-            "dWNjZXNzGAEgASgIEg4KBnJlYXNvbhgCIAEoCRIOCgZhY3Rpb24YAyABKAkS",
-            "EgoKdmlsbGFnZV9pZBgEIAEoCRIyCghsaXN0aW5ncxgFIAMoCzIgLlByb3Rv",
-            "Y29sLlZpbGxhZ2VTaG9wTGlzdGluZ0luZm8SMAoKZXhwZWRpdGlvbhgGIAEo",
-            "CzIcLlByb3RvY29sLlNfRVhQRURJVElPTl9TVEFURRIlCh1zdG9ja19yZXNl",
-            "dF9yZW1haW5pbmdfc2Vjb25kcxgHIAEoDRI8ChB0cmFkZV9idXlfb2ZmZXJz",
-            "GAggAygLMiIuUHJvdG9jb2wuVmlsbGFnZVRyYWRlQnV5T2ZmZXJJbmZvIisK",
-            "E0NfUkVTRVRfUExBWUVSX0RBVEESFAoMY29uZmlybWF0aW9uGAEgASgJIjYK",
-            "E1NfUkVTRVRfUExBWUVSX0RBVEESDwoHc3VjY2VzcxgBIAEoCBIOCgZyZWFz",
-            "b24YAiABKAki1gEKGlF1ZXN0T2JqZWN0aXZlUHJvZ3Jlc3NJbmZvEhcKD29i",
-            "amVjdGl2ZV9pbmRleBgBIAEoDRITCgtkZXNjcmlwdGlvbhgCIAEoCRIQCghw",
-            "cm9ncmVzcxgDIAEoBRIWCg5yZXF1aXJlZF9jb3VudBgEIAEoBRIRCgljb21w",
-            "bGV0ZWQYBSABKAgSFgoOb2JqZWN0aXZlX3R5cGUYBiABKAkSGwoTdGFyZ2V0",
-            "X3ZpbGxhZ2VfbmFtZRgHIAEoCRIYChB0YXJnZXRfaXRlbV9uYW1lGAggASgJ",
-            "IvMCChBWaWxsYWdlUXVlc3RJbmZvEhAKCHF1ZXN0X2lkGAEgASgJEhQKDGRp",
-            "c3BsYXlfbmFtZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIOCgZzdGF0",
-            "dXMYBCABKAkSGAoQc3RhcnRfdmlsbGFnZV9pZBgFIAEoCRIdChVjb21wbGV0",
-            "aW9uX3ZpbGxhZ2VfaWQYBiABKAkSHwoXY29tcGxldGlvbl92aWxsYWdlX25h",
-            "bWUYByABKAkSOAoKb2JqZWN0aXZlcxgIIAMoCzIkLlByb3RvY29sLlF1ZXN0",
-            "T2JqZWN0aXZlUHJvZ3Jlc3NJbmZvEhsKE3Jld2FyZF9kZXNjcmlwdGlvbnMY",
-            "CSADKAkSEgoKY2FuX2FjY2VwdBgKIAEoCBIRCgljYW5fY2xhaW0YCyABKAgS",
-            "HAoUYWJhbmRvbl9nb2xkX3BlbmFsdHkYDCABKAUSHAoUYWJhbmRvbl9mYW1l",
-            "X3BlbmFsdHkYDSABKAUiMAoaQ19WSUxMQUdFX1FVRVNUX0JPQVJEX09QRU4S",
-            "EgoKdmlsbGFnZV9pZBgBIAEoCSIiCg5DX1FVRVNUX0FDQ0VQVBIQCghxdWVz",
-            "dF9pZBgBIAEoCSIoChRDX1FVRVNUX0NMQUlNX1JFV0FSRBIQCghxdWVzdF9p",
-            "ZBgBIAEoCSK6AQoVU19WSUxMQUdFX1FVRVNUX1NUQVRFEg8KB3N1Y2Nlc3MY",
-            "ASABKAgSDgoGcmVhc29uGAIgASgJEg4KBmFjdGlvbhgDIAEoCRISCgp2aWxs",
-            "YWdlX2lkGAQgASgJEioKBnF1ZXN0cxgFIAMoCzIaLlByb3RvY29sLlZpbGxh",
-            "Z2VRdWVzdEluZm8SMAoKZXhwZWRpdGlvbhgGIAEoCzIcLlByb3RvY29sLlNf",
-            "RVhQRURJVElPTl9TVEFURSIWChRDX1FVRVNUX1RSQUNLRVJfT1BFTiLSAQoV",
-            "U19RVUVTVF9UUkFDS0VSX1NUQVRFEg8KB3N1Y2Nlc3MYASABKAgSDgoGcmVh",
-            "c29uGAIgASgJEioKBnF1ZXN0cxgDIAMoCzIaLlByb3RvY29sLlZpbGxhZ2VR",
-            "dWVzdEluZm8SMAoKZXhwZWRpdGlvbhgEIAEoCzIcLlByb3RvY29sLlNfRVhQ",
-            "RURJVElPTl9TVEFURRIOCgZhY3Rpb24YBSABKAkSFAoMZ29sZF9wZW5hbHR5",
-            "GAYgASgFEhQKDGZhbWVfcGVuYWx0eRgHIAEoBSIjCg9DX1FVRVNUX0FCQU5E",
-            "T04SEAoIcXVlc3RfaWQYASABKAkiPgoTQ19GSUVMRF9QQVdOX1NFTEVDVBIn",
-            "CgpwYXduX2NsYXNzGAEgASgOMhMuUHJvdG9jb2wuUGF3bkNsYXNzInIKE1Nf",
-            "RklFTERfUEFXTl9TRUxFQ1QSDwoHc3VjY2VzcxgBIAEoCBIOCgZyZWFzb24Y",
-            "AiABKAkSEQoJb2JqZWN0X2lkGAMgASgEEicKCnBhd25fY2xhc3MYBCABKA4y",
-            "Ey5Qcm90b2NvbC5QYXduQ2xhc3NiBnByb3RvMw=="));
+            "bWUYBCABKAkSGwoTdmlsbGFnZV9kZXNjcmlwdGlvbhgFIAEoCSKiAQoXRXhw",
+            "ZWRpdGlvbkl0ZW1TdGFja0luZm8SEAoIc3RhY2tfaWQYASABKAQSDwoHaXRl",
+            "bV9pZBgCIAEoCRIQCghxdWFudGl0eRgDIAEoBRIkChxyZW1haW5pbmdfc2hl",
+            "bGZfbGlmZV9zZWNvbmRzGAQgASgDEhQKDHdhdGVyX2NoYXJnZRgFIAEoBRIW",
+            "Cg53YXRlcl9jYXBhY2l0eRgGIAEoBSJkChZWaWxsYWdlU2hvcExpc3RpbmdJ",
+            "bmZvEg8KB2l0ZW1faWQYASABKAkSDQoFc3RvY2sYAiABKAUSEQoJbWF4X3N0",
+            "b2NrGAMgASgFEhcKD3VuaXRfc2VsbF9wcmljZRgEIAEoBSJVChhWaWxsYWdl",
+            "VHJhZGVCdXlPZmZlckluZm8SEAoIc3RhY2tfaWQYASABKAQSDwoHaXRlbV9p",
+            "ZBgCIAEoCRIWCg51bml0X2J1eV9wcmljZRgDIAEoBSKUAgoSU19FWFBFRElU",
+            "SU9OX1NUQVRFEgwKBGdvbGQYASABKAUSDwoHc2F0aWV0eRgCIAEoBRITCgtt",
+            "YXhfc2F0aWV0eRgDIAEoBRI0CglpbnZlbnRvcnkYBCADKAsyIS5Qcm90b2Nv",
+            "bC5FeHBlZGl0aW9uSXRlbVN0YWNrSW5mbxIeChZhdXRvX2NvbnN1bWVkX2l0",
+            "ZW1faWRzGAUgAygJEhgKEGV4cGlyZWRfaXRlbV9pZHMYBiADKAkSDgoGdGhp",
+            "cnN0GAcgASgFEhIKCm1heF90aGlyc3QYCCABKAUSDAoEZmFtZRgJIAEoBRIR",
+            "CgloYXBwaW5lc3MYCiABKAUSFQoNbWF4X2hhcHBpbmVzcxgLIAEoBSIpChND",
+            "X1ZJTExBR0VfU0hPUF9PUEVOEhIKCnZpbGxhZ2VfaWQYASABKAkiSwoSQ19W",
+            "SUxMQUdFX1NIT1BfQlVZEhIKCnZpbGxhZ2VfaWQYASABKAkSDwoHaXRlbV9p",
+            "ZBgCIAEoCRIQCghxdWFudGl0eRgDIAEoBSJNChNDX1ZJTExBR0VfU0hPUF9T",
+            "RUxMEhIKCnZpbGxhZ2VfaWQYASABKAkSEAoIc3RhY2tfaWQYAiABKAQSEAoI",
+            "cXVhbnRpdHkYAyABKAUipgIKFFNfVklMTEFHRV9TSE9QX1NUQVRFEg8KB3N1",
+            "Y2Nlc3MYASABKAgSDgoGcmVhc29uGAIgASgJEg4KBmFjdGlvbhgDIAEoCRIS",
+            "Cgp2aWxsYWdlX2lkGAQgASgJEjIKCGxpc3RpbmdzGAUgAygLMiAuUHJvdG9j",
+            "b2wuVmlsbGFnZVNob3BMaXN0aW5nSW5mbxIwCgpleHBlZGl0aW9uGAYgASgL",
+            "MhwuUHJvdG9jb2wuU19FWFBFRElUSU9OX1NUQVRFEiUKHXN0b2NrX3Jlc2V0",
+            "X3JlbWFpbmluZ19zZWNvbmRzGAcgASgNEjwKEHRyYWRlX2J1eV9vZmZlcnMY",
+            "CCADKAsyIi5Qcm90b2NvbC5WaWxsYWdlVHJhZGVCdXlPZmZlckluZm8iKwoT",
+            "Q19SRVNFVF9QTEFZRVJfREFUQRIUCgxjb25maXJtYXRpb24YASABKAkiNgoT",
+            "U19SRVNFVF9QTEFZRVJfREFUQRIPCgdzdWNjZXNzGAEgASgIEg4KBnJlYXNv",
+            "bhgCIAEoCSLWAQoaUXVlc3RPYmplY3RpdmVQcm9ncmVzc0luZm8SFwoPb2Jq",
+            "ZWN0aXZlX2luZGV4GAEgASgNEhMKC2Rlc2NyaXB0aW9uGAIgASgJEhAKCHBy",
+            "b2dyZXNzGAMgASgFEhYKDnJlcXVpcmVkX2NvdW50GAQgASgFEhEKCWNvbXBs",
+            "ZXRlZBgFIAEoCBIWCg5vYmplY3RpdmVfdHlwZRgGIAEoCRIbChN0YXJnZXRf",
+            "dmlsbGFnZV9uYW1lGAcgASgJEhgKEHRhcmdldF9pdGVtX25hbWUYCCABKAki",
+            "8wIKEFZpbGxhZ2VRdWVzdEluZm8SEAoIcXVlc3RfaWQYASABKAkSFAoMZGlz",
+            "cGxheV9uYW1lGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEg4KBnN0YXR1",
+            "cxgEIAEoCRIYChBzdGFydF92aWxsYWdlX2lkGAUgASgJEh0KFWNvbXBsZXRp",
+            "b25fdmlsbGFnZV9pZBgGIAEoCRIfChdjb21wbGV0aW9uX3ZpbGxhZ2VfbmFt",
+            "ZRgHIAEoCRI4CgpvYmplY3RpdmVzGAggAygLMiQuUHJvdG9jb2wuUXVlc3RP",
+            "YmplY3RpdmVQcm9ncmVzc0luZm8SGwoTcmV3YXJkX2Rlc2NyaXB0aW9ucxgJ",
+            "IAMoCRISCgpjYW5fYWNjZXB0GAogASgIEhEKCWNhbl9jbGFpbRgLIAEoCBIc",
+            "ChRhYmFuZG9uX2dvbGRfcGVuYWx0eRgMIAEoBRIcChRhYmFuZG9uX2ZhbWVf",
+            "cGVuYWx0eRgNIAEoBSIwChpDX1ZJTExBR0VfUVVFU1RfQk9BUkRfT1BFThIS",
+            "Cgp2aWxsYWdlX2lkGAEgASgJIiIKDkNfUVVFU1RfQUNDRVBUEhAKCHF1ZXN0",
+            "X2lkGAEgASgJIigKFENfUVVFU1RfQ0xBSU1fUkVXQVJEEhAKCHF1ZXN0X2lk",
+            "GAEgASgJIroBChVTX1ZJTExBR0VfUVVFU1RfU1RBVEUSDwoHc3VjY2VzcxgB",
+            "IAEoCBIOCgZyZWFzb24YAiABKAkSDgoGYWN0aW9uGAMgASgJEhIKCnZpbGxh",
+            "Z2VfaWQYBCABKAkSKgoGcXVlc3RzGAUgAygLMhouUHJvdG9jb2wuVmlsbGFn",
+            "ZVF1ZXN0SW5mbxIwCgpleHBlZGl0aW9uGAYgASgLMhwuUHJvdG9jb2wuU19F",
+            "WFBFRElUSU9OX1NUQVRFIhYKFENfUVVFU1RfVFJBQ0tFUl9PUEVOItIBChVT",
+            "X1FVRVNUX1RSQUNLRVJfU1RBVEUSDwoHc3VjY2VzcxgBIAEoCBIOCgZyZWFz",
+            "b24YAiABKAkSKgoGcXVlc3RzGAMgAygLMhouUHJvdG9jb2wuVmlsbGFnZVF1",
+            "ZXN0SW5mbxIwCgpleHBlZGl0aW9uGAQgASgLMhwuUHJvdG9jb2wuU19FWFBF",
+            "RElUSU9OX1NUQVRFEg4KBmFjdGlvbhgFIAEoCRIUCgxnb2xkX3BlbmFsdHkY",
+            "BiABKAUSFAoMZmFtZV9wZW5hbHR5GAcgASgFIiMKD0NfUVVFU1RfQUJBTkRP",
+            "ThIQCghxdWVzdF9pZBgBIAEoCSI+ChNDX0ZJRUxEX1BBV05fU0VMRUNUEicK",
+            "CnBhd25fY2xhc3MYASABKA4yEy5Qcm90b2NvbC5QYXduQ2xhc3MicgoTU19G",
+            "SUVMRF9QQVdOX1NFTEVDVBIPCgdzdWNjZXNzGAEgASgIEg4KBnJlYXNvbhgC",
+            "IAEoCRIRCglvYmplY3RfaWQYAyABKAQSJwoKcGF3bl9jbGFzcxgEIAEoDjIT",
+            "LlByb3RvY29sLlBhd25DbGFzcyJACg5DX1JFRklMTF9XQVRFUhIOCgZtYXBf",
+            "aWQYASABKAkSDgoGY2VsbF94GAIgASgREg4KBmNlbGxfeRgDIAEoESKXAQoO",
+            "U19SRUZJTExfV0FURVISDwoHc3VjY2VzcxgBIAEoCBIOCgZyZWFzb24YAiAB",
+            "KAkSHQoVcmVmaWxsZWRfYm90dGxlX2NvdW50GAMgASgFEhMKC3dhdGVyX2Fk",
+            "ZGVkGAQgASgFEjAKCmV4cGVkaXRpb24YBSABKAsyHC5Qcm90b2NvbC5TX0VY",
+            "UEVESVRJT05fU1RBVEViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -217,10 +224,10 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_BATTLE_CLASS_SELECTION_RESULT), global::Protocol.S_BATTLE_CLASS_SELECTION_RESULT.Parser, new[]{ "Success", "WaitingForOpponent", "RequesterPlayerId", "TargetPlayerId", "Reason" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_ENTER_VILLAGE), global::Protocol.C_ENTER_VILLAGE.Parser, new[]{ "MapId", "CellX", "CellY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ENTER_VILLAGE), global::Protocol.S_ENTER_VILLAGE.Parser, new[]{ "Success", "Reason", "VillageId", "VillageName", "VillageDescription" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ExpeditionItemStackInfo), global::Protocol.ExpeditionItemStackInfo.Parser, new[]{ "StackId", "ItemId", "Quantity", "RemainingShelfLifeSeconds" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ExpeditionItemStackInfo), global::Protocol.ExpeditionItemStackInfo.Parser, new[]{ "StackId", "ItemId", "Quantity", "RemainingShelfLifeSeconds", "WaterCharge", "WaterCapacity" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.VillageShopListingInfo), global::Protocol.VillageShopListingInfo.Parser, new[]{ "ItemId", "Stock", "MaxStock", "UnitSellPrice" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.VillageTradeBuyOfferInfo), global::Protocol.VillageTradeBuyOfferInfo.Parser, new[]{ "StackId", "ItemId", "UnitBuyPrice" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_EXPEDITION_STATE), global::Protocol.S_EXPEDITION_STATE.Parser, new[]{ "Gold", "Satiety", "MaxSatiety", "Inventory", "AutoConsumedItemIds", "ExpiredItemIds", "Thirst", "MaxThirst", "Fame" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_EXPEDITION_STATE), global::Protocol.S_EXPEDITION_STATE.Parser, new[]{ "Gold", "Satiety", "MaxSatiety", "Inventory", "AutoConsumedItemIds", "ExpiredItemIds", "Thirst", "MaxThirst", "Fame", "Happiness", "MaxHappiness" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_SHOP_OPEN), global::Protocol.C_VILLAGE_SHOP_OPEN.Parser, new[]{ "VillageId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_SHOP_BUY), global::Protocol.C_VILLAGE_SHOP_BUY.Parser, new[]{ "VillageId", "ItemId", "Quantity" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_VILLAGE_SHOP_SELL), global::Protocol.C_VILLAGE_SHOP_SELL.Parser, new[]{ "VillageId", "StackId", "Quantity" }, null, null, null, null),
@@ -237,7 +244,9 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_QUEST_TRACKER_STATE), global::Protocol.S_QUEST_TRACKER_STATE.Parser, new[]{ "Success", "Reason", "Quests", "Expedition", "Action", "GoldPenalty", "FamePenalty" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_QUEST_ABANDON), global::Protocol.C_QUEST_ABANDON.Parser, new[]{ "QuestId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_FIELD_PAWN_SELECT), global::Protocol.C_FIELD_PAWN_SELECT.Parser, new[]{ "PawnClass" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_FIELD_PAWN_SELECT), global::Protocol.S_FIELD_PAWN_SELECT.Parser, new[]{ "Success", "Reason", "ObjectId", "PawnClass" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_FIELD_PAWN_SELECT), global::Protocol.S_FIELD_PAWN_SELECT.Parser, new[]{ "Success", "Reason", "ObjectId", "PawnClass" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_REFILL_WATER), global::Protocol.C_REFILL_WATER.Parser, new[]{ "MapId", "CellX", "CellY" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_REFILL_WATER), global::Protocol.S_REFILL_WATER.Parser, new[]{ "Success", "Reason", "RefilledBottleCount", "WaterAdded", "Expedition" }, null, null, null, null)
           }));
     }
     #endregion
@@ -10586,6 +10595,8 @@ namespace Protocol {
       itemId_ = other.itemId_;
       quantity_ = other.quantity_;
       remainingShelfLifeSeconds_ = other.remainingShelfLifeSeconds_;
+      waterCharge_ = other.waterCharge_;
+      waterCapacity_ = other.waterCapacity_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -10643,6 +10654,30 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "water_charge" field.</summary>
+    public const int WaterChargeFieldNumber = 5;
+    private int waterCharge_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WaterCharge {
+      get { return waterCharge_; }
+      set {
+        waterCharge_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "water_capacity" field.</summary>
+    public const int WaterCapacityFieldNumber = 6;
+    private int waterCapacity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WaterCapacity {
+      get { return waterCapacity_; }
+      set {
+        waterCapacity_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -10662,6 +10697,8 @@ namespace Protocol {
       if (ItemId != other.ItemId) return false;
       if (Quantity != other.Quantity) return false;
       if (RemainingShelfLifeSeconds != other.RemainingShelfLifeSeconds) return false;
+      if (WaterCharge != other.WaterCharge) return false;
+      if (WaterCapacity != other.WaterCapacity) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -10673,6 +10710,8 @@ namespace Protocol {
       if (ItemId.Length != 0) hash ^= ItemId.GetHashCode();
       if (Quantity != 0) hash ^= Quantity.GetHashCode();
       if (RemainingShelfLifeSeconds != 0L) hash ^= RemainingShelfLifeSeconds.GetHashCode();
+      if (WaterCharge != 0) hash ^= WaterCharge.GetHashCode();
+      if (WaterCapacity != 0) hash ^= WaterCapacity.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10707,6 +10746,14 @@ namespace Protocol {
         output.WriteRawTag(32);
         output.WriteInt64(RemainingShelfLifeSeconds);
       }
+      if (WaterCharge != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(WaterCharge);
+      }
+      if (WaterCapacity != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(WaterCapacity);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -10733,6 +10780,14 @@ namespace Protocol {
         output.WriteRawTag(32);
         output.WriteInt64(RemainingShelfLifeSeconds);
       }
+      if (WaterCharge != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(WaterCharge);
+      }
+      if (WaterCapacity != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(WaterCapacity);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -10754,6 +10809,12 @@ namespace Protocol {
       }
       if (RemainingShelfLifeSeconds != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(RemainingShelfLifeSeconds);
+      }
+      if (WaterCharge != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WaterCharge);
+      }
+      if (WaterCapacity != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WaterCapacity);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -10778,6 +10839,12 @@ namespace Protocol {
       }
       if (other.RemainingShelfLifeSeconds != 0L) {
         RemainingShelfLifeSeconds = other.RemainingShelfLifeSeconds;
+      }
+      if (other.WaterCharge != 0) {
+        WaterCharge = other.WaterCharge;
+      }
+      if (other.WaterCapacity != 0) {
+        WaterCapacity = other.WaterCapacity;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -10810,6 +10877,14 @@ namespace Protocol {
             RemainingShelfLifeSeconds = input.ReadInt64();
             break;
           }
+          case 40: {
+            WaterCharge = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            WaterCapacity = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -10839,6 +10914,14 @@ namespace Protocol {
           }
           case 32: {
             RemainingShelfLifeSeconds = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            WaterCharge = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            WaterCapacity = input.ReadInt32();
             break;
           }
         }
@@ -11454,6 +11537,8 @@ namespace Protocol {
       thirst_ = other.thirst_;
       maxThirst_ = other.maxThirst_;
       fame_ = other.fame_;
+      happiness_ = other.happiness_;
+      maxHappiness_ = other.maxHappiness_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -11568,6 +11653,30 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "happiness" field.</summary>
+    public const int HappinessFieldNumber = 10;
+    private int happiness_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Happiness {
+      get { return happiness_; }
+      set {
+        happiness_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_happiness" field.</summary>
+    public const int MaxHappinessFieldNumber = 11;
+    private int maxHappiness_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MaxHappiness {
+      get { return maxHappiness_; }
+      set {
+        maxHappiness_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -11592,6 +11701,8 @@ namespace Protocol {
       if (Thirst != other.Thirst) return false;
       if (MaxThirst != other.MaxThirst) return false;
       if (Fame != other.Fame) return false;
+      if (Happiness != other.Happiness) return false;
+      if (MaxHappiness != other.MaxHappiness) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -11608,6 +11719,8 @@ namespace Protocol {
       if (Thirst != 0) hash ^= Thirst.GetHashCode();
       if (MaxThirst != 0) hash ^= MaxThirst.GetHashCode();
       if (Fame != 0) hash ^= Fame.GetHashCode();
+      if (Happiness != 0) hash ^= Happiness.GetHashCode();
+      if (MaxHappiness != 0) hash ^= MaxHappiness.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -11653,6 +11766,14 @@ namespace Protocol {
         output.WriteRawTag(72);
         output.WriteInt32(Fame);
       }
+      if (Happiness != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(Happiness);
+      }
+      if (MaxHappiness != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(MaxHappiness);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11690,6 +11811,14 @@ namespace Protocol {
         output.WriteRawTag(72);
         output.WriteInt32(Fame);
       }
+      if (Happiness != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(Happiness);
+      }
+      if (MaxHappiness != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(MaxHappiness);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -11720,6 +11849,12 @@ namespace Protocol {
       }
       if (Fame != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Fame);
+      }
+      if (Happiness != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Happiness);
+      }
+      if (MaxHappiness != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxHappiness);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -11753,6 +11888,12 @@ namespace Protocol {
       }
       if (other.Fame != 0) {
         Fame = other.Fame;
+      }
+      if (other.Happiness != 0) {
+        Happiness = other.Happiness;
+      }
+      if (other.MaxHappiness != 0) {
+        MaxHappiness = other.MaxHappiness;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -11805,6 +11946,14 @@ namespace Protocol {
             Fame = input.ReadInt32();
             break;
           }
+          case 80: {
+            Happiness = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            MaxHappiness = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -11854,6 +12003,14 @@ namespace Protocol {
           }
           case 72: {
             Fame = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            Happiness = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            MaxHappiness = input.ReadInt32();
             break;
           }
         }
@@ -16669,6 +16826,620 @@ namespace Protocol {
           }
           case 32: {
             PawnClass = (global::Protocol.PawnClass) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// Water cells are interaction targets just like villages. The server validates
+  /// map membership and range, restores current thirst, and fills every reusable
+  /// water container in the authenticated player's inventory.
+  /// </summary>
+  public sealed partial class C_REFILL_WATER : pb::IMessage<C_REFILL_WATER>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<C_REFILL_WATER> _parser = new pb::MessageParser<C_REFILL_WATER>(() => new C_REFILL_WATER());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<C_REFILL_WATER> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ProtocolReflection.Descriptor.MessageTypes[56]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_REFILL_WATER() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_REFILL_WATER(C_REFILL_WATER other) : this() {
+      mapId_ = other.mapId_;
+      cellX_ = other.cellX_;
+      cellY_ = other.cellY_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_REFILL_WATER Clone() {
+      return new C_REFILL_WATER(this);
+    }
+
+    /// <summary>Field number for the "map_id" field.</summary>
+    public const int MapIdFieldNumber = 1;
+    private string mapId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string MapId {
+      get { return mapId_; }
+      set {
+        mapId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "cell_x" field.</summary>
+    public const int CellXFieldNumber = 2;
+    private int cellX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CellX {
+      get { return cellX_; }
+      set {
+        cellX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cell_y" field.</summary>
+    public const int CellYFieldNumber = 3;
+    private int cellY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CellY {
+      get { return cellY_; }
+      set {
+        cellY_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as C_REFILL_WATER);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(C_REFILL_WATER other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MapId != other.MapId) return false;
+      if (CellX != other.CellX) return false;
+      if (CellY != other.CellY) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MapId.Length != 0) hash ^= MapId.GetHashCode();
+      if (CellX != 0) hash ^= CellX.GetHashCode();
+      if (CellY != 0) hash ^= CellY.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (MapId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MapId);
+      }
+      if (CellX != 0) {
+        output.WriteRawTag(16);
+        output.WriteSInt32(CellX);
+      }
+      if (CellY != 0) {
+        output.WriteRawTag(24);
+        output.WriteSInt32(CellY);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (MapId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(MapId);
+      }
+      if (CellX != 0) {
+        output.WriteRawTag(16);
+        output.WriteSInt32(CellX);
+      }
+      if (CellY != 0) {
+        output.WriteRawTag(24);
+        output.WriteSInt32(CellY);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (MapId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(MapId);
+      }
+      if (CellX != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt32Size(CellX);
+      }
+      if (CellY != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeSInt32Size(CellY);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(C_REFILL_WATER other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MapId.Length != 0) {
+        MapId = other.MapId;
+      }
+      if (other.CellX != 0) {
+        CellX = other.CellX;
+      }
+      if (other.CellY != 0) {
+        CellY = other.CellY;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            MapId = input.ReadString();
+            break;
+          }
+          case 16: {
+            CellX = input.ReadSInt32();
+            break;
+          }
+          case 24: {
+            CellY = input.ReadSInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            MapId = input.ReadString();
+            break;
+          }
+          case 16: {
+            CellX = input.ReadSInt32();
+            break;
+          }
+          case 24: {
+            CellY = input.ReadSInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class S_REFILL_WATER : pb::IMessage<S_REFILL_WATER>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_REFILL_WATER> _parser = new pb::MessageParser<S_REFILL_WATER>(() => new S_REFILL_WATER());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_REFILL_WATER> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Protocol.ProtocolReflection.Descriptor.MessageTypes[57]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_REFILL_WATER() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_REFILL_WATER(S_REFILL_WATER other) : this() {
+      success_ = other.success_;
+      reason_ = other.reason_;
+      refilledBottleCount_ = other.refilledBottleCount_;
+      waterAdded_ = other.waterAdded_;
+      expedition_ = other.expedition_ != null ? other.expedition_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_REFILL_WATER Clone() {
+      return new S_REFILL_WATER(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "reason" field.</summary>
+    public const int ReasonFieldNumber = 2;
+    private string reason_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Reason {
+      get { return reason_; }
+      set {
+        reason_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "refilled_bottle_count" field.</summary>
+    public const int RefilledBottleCountFieldNumber = 3;
+    private int refilledBottleCount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RefilledBottleCount {
+      get { return refilledBottleCount_; }
+      set {
+        refilledBottleCount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "water_added" field.</summary>
+    public const int WaterAddedFieldNumber = 4;
+    private int waterAdded_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int WaterAdded {
+      get { return waterAdded_; }
+      set {
+        waterAdded_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "expedition" field.</summary>
+    public const int ExpeditionFieldNumber = 5;
+    private global::Protocol.S_EXPEDITION_STATE expedition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.S_EXPEDITION_STATE Expedition {
+      get { return expedition_; }
+      set {
+        expedition_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_REFILL_WATER);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_REFILL_WATER other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      if (Reason != other.Reason) return false;
+      if (RefilledBottleCount != other.RefilledBottleCount) return false;
+      if (WaterAdded != other.WaterAdded) return false;
+      if (!object.Equals(Expedition, other.Expedition)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (Reason.Length != 0) hash ^= Reason.GetHashCode();
+      if (RefilledBottleCount != 0) hash ^= RefilledBottleCount.GetHashCode();
+      if (WaterAdded != 0) hash ^= WaterAdded.GetHashCode();
+      if (expedition_ != null) hash ^= Expedition.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Reason);
+      }
+      if (RefilledBottleCount != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(RefilledBottleCount);
+      }
+      if (WaterAdded != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WaterAdded);
+      }
+      if (expedition_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Expedition);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (Reason.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Reason);
+      }
+      if (RefilledBottleCount != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(RefilledBottleCount);
+      }
+      if (WaterAdded != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(WaterAdded);
+      }
+      if (expedition_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(Expedition);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (Reason.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Reason);
+      }
+      if (RefilledBottleCount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RefilledBottleCount);
+      }
+      if (WaterAdded != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(WaterAdded);
+      }
+      if (expedition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Expedition);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_REFILL_WATER other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.Reason.Length != 0) {
+        Reason = other.Reason;
+      }
+      if (other.RefilledBottleCount != 0) {
+        RefilledBottleCount = other.RefilledBottleCount;
+      }
+      if (other.WaterAdded != 0) {
+        WaterAdded = other.WaterAdded;
+      }
+      if (other.expedition_ != null) {
+        if (expedition_ == null) {
+          Expedition = new global::Protocol.S_EXPEDITION_STATE();
+        }
+        Expedition.MergeFrom(other.Expedition);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 18: {
+            Reason = input.ReadString();
+            break;
+          }
+          case 24: {
+            RefilledBottleCount = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            WaterAdded = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            if (expedition_ == null) {
+              Expedition = new global::Protocol.S_EXPEDITION_STATE();
+            }
+            input.ReadMessage(Expedition);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 18: {
+            Reason = input.ReadString();
+            break;
+          }
+          case 24: {
+            RefilledBottleCount = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            WaterAdded = input.ReadInt32();
+            break;
+          }
+          case 42: {
+            if (expedition_ == null) {
+              Expedition = new global::Protocol.S_EXPEDITION_STATE();
+            }
+            input.ReadMessage(Expedition);
             break;
           }
         }

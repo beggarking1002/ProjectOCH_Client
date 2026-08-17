@@ -173,8 +173,29 @@ namespace Field
 			return earliestSeconds == long.MaxValue ? "무제한" : FormatRemainingMinutes(ToMinuteBucket(earliestSeconds));
 		}
 
+		public static string InventoryLabel(FieldInventoryItemGroup group)
+		{
+			int charge = 0;
+			int capacity = 0;
+			foreach (Protocol.ExpeditionItemStackInfo batch in group.Batches)
+			{
+				charge += batch.WaterCharge;
+				capacity += batch.WaterCapacity;
+			}
+			return capacity > 0 ? $"물 {charge}/{capacity}" : EarliestExpiryLabel(group);
+		}
+
 		public static string BuildExpiryTooltip(FieldInventoryItemGroup group, string itemName)
 		{
+			int waterCharge = 0;
+			int waterCapacity = 0;
+			foreach (Protocol.ExpeditionItemStackInfo batch in group.Batches)
+			{
+				waterCharge += batch.WaterCharge;
+				waterCapacity += batch.WaterCapacity;
+			}
+			if (waterCapacity > 0)
+				return $"{itemName}  x{group.TotalQuantity}\n저장된 물: {waterCharge} / {waterCapacity}";
 			SortedDictionary<long, int> expiringBuckets = new SortedDictionary<long, int>();
 			int unlimitedQuantity = 0;
 			foreach (Protocol.ExpeditionItemStackInfo batch in group.Batches)

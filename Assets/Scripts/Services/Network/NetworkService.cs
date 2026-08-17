@@ -27,6 +27,7 @@ namespace Networking
 		public Protocol.S_ENTER_GAME LastEnterGame { get; private set; }
 		public Protocol.S_ENTER_BATTLE LastEnterBattle { get; private set; }
 		public Protocol.S_ENTER_VILLAGE LastEnterVillage { get; private set; }
+		public Protocol.S_REFILL_WATER LastRefillWater { get; private set; }
 		public Protocol.S_EXPEDITION_STATE LastExpeditionState { get; private set; }
 		public Protocol.S_VILLAGE_SHOP_STATE LastVillageShopState { get; private set; }
 		public Protocol.S_RESET_PLAYER_DATA LastPlayerDataReset { get; private set; }
@@ -60,6 +61,7 @@ namespace Networking
 		public event Action<Protocol.S_MOVE> MoveReceived;
 		public event Action<Protocol.S_ENTER_BATTLE> EnterBattleReceived;
 		public event Action<Protocol.S_ENTER_VILLAGE> EnterVillageReceived;
+		public event Action<Protocol.S_REFILL_WATER> RefillWaterReceived;
 		public event Action<Protocol.S_EXPEDITION_STATE> ExpeditionStateReceived;
 		public event Action<Protocol.S_VILLAGE_SHOP_STATE> VillageShopStateReceived;
 		public event Action<Protocol.S_RESET_PLAYER_DATA> PlayerDataResetReceived;
@@ -92,6 +94,7 @@ namespace Networking
 			PacketHandler.Instance.MoveReceived += OnMoveReceived;
 			PacketHandler.Instance.EnterBattleReceived += OnEnterBattleReceived;
 			PacketHandler.Instance.EnterVillageReceived += OnEnterVillageReceived;
+			PacketHandler.Instance.RefillWaterReceived += OnRefillWaterReceived;
 			PacketHandler.Instance.ExpeditionStateReceived += OnExpeditionStateReceived;
 			PacketHandler.Instance.VillageShopStateReceived += OnVillageShopStateReceived;
 			PacketHandler.Instance.PlayerDataResetReceived += OnPlayerDataResetReceived;
@@ -136,6 +139,7 @@ namespace Networking
 				PacketHandler.Instance.MoveReceived -= OnMoveReceived;
 				PacketHandler.Instance.EnterBattleReceived -= OnEnterBattleReceived;
 				PacketHandler.Instance.EnterVillageReceived -= OnEnterVillageReceived;
+				PacketHandler.Instance.RefillWaterReceived -= OnRefillWaterReceived;
 				PacketHandler.Instance.ExpeditionStateReceived -= OnExpeditionStateReceived;
 				PacketHandler.Instance.VillageShopStateReceived -= OnVillageShopStateReceived;
 				PacketHandler.Instance.PlayerDataResetReceived -= OnPlayerDataResetReceived;
@@ -172,6 +176,7 @@ namespace Networking
 			LastEnterGame = null;
 			LastEnterBattle = null;
 			LastEnterVillage = null;
+			LastRefillWater = null;
 			LastExpeditionState = null;
 			LastVillageShopState = null;
 			LastPlayerDataReset = null;
@@ -262,6 +267,16 @@ namespace Networking
 				CellX = cellX,
 				CellY = cellY,
 			});
+		}
+
+		public bool RefillWater(string mapId, int cellX, int cellY)
+		{
+			if (string.IsNullOrWhiteSpace(mapId))
+			{
+				LastError = "Map id is required to refill water.";
+				return false;
+			}
+			return Send(new Protocol.C_REFILL_WATER { MapId = mapId, CellX = cellX, CellY = cellY });
 		}
 
 		public bool OpenVillageShop(string villageId)
@@ -446,6 +461,9 @@ namespace Networking
 					break;
 				case Protocol.C_ENTER_VILLAGE pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_ENTER_VILLAGE);
+					break;
+				case Protocol.C_REFILL_WATER pkt:
+					sendBuffer = MakeSendBuffer(pkt, MsgId.C_REFILL_WATER);
 					break;
 				case Protocol.C_VILLAGE_SHOP_OPEN pkt:
 					sendBuffer = MakeSendBuffer(pkt, MsgId.C_VILLAGE_SHOP_OPEN);
@@ -682,6 +700,20 @@ namespace Networking
 			}
 
 			EnterVillageReceived?.Invoke(pkt);
+		}
+
+		void OnRefillWaterReceived(Protocol.S_REFILL_WATER pkt)
+		{
+			LastRefillWater = pkt?.Clone();
+			if (pkt == null)
+				return;
+			if (pkt.Expedition != null)
+			{
+				LastExpeditionState = pkt.Expedition.Clone();
+				ExpeditionStateReceived?.Invoke(pkt.Expedition);
+			}
+			LastError = pkt.Success ? null : (string.IsNullOrWhiteSpace(pkt.Reason) ? "Water refill failed." : pkt.Reason);
+			RefillWaterReceived?.Invoke(pkt);
 		}
 
 		void OnExpeditionStateReceived(Protocol.S_EXPEDITION_STATE pkt)

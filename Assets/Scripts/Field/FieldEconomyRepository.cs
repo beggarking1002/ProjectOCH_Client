@@ -15,12 +15,13 @@ namespace Field
 		public readonly int SatietyDelta;
 		public readonly int HappinessDelta;
 		public readonly int ThirstDelta;
+		public readonly int WaterCapacity;
 		public readonly int ShelfLifeDays;
 
 		public bool IsFood => string.Equals(Type, "FOOD", StringComparison.OrdinalIgnoreCase);
 		public bool IsDrink => string.Equals(Type, "DRINK", StringComparison.OrdinalIgnoreCase);
 
-		public FieldItemDefinition(string id, string type, string name, int satietyDelta, int happinessDelta, int thirstDelta, int shelfLifeDays)
+		public FieldItemDefinition(string id, string type, string name, int satietyDelta, int happinessDelta, int thirstDelta, int waterCapacity, int shelfLifeDays)
 		{
 			Id = id;
 			Type = type;
@@ -28,6 +29,7 @@ namespace Field
 			SatietyDelta = satietyDelta;
 			HappinessDelta = happinessDelta;
 			ThirstDelta = thirstDelta;
+			WaterCapacity = waterCapacity;
 			ShelfLifeDays = shelfLifeDays;
 		}
 	}
@@ -141,6 +143,7 @@ namespace Field
 					ParseInt(row, "SatietyDelta"),
 					ParseInt(row, "HappinessDelta"),
 					ParseInt(row, "ThirstDelta"),
+					ParseInt(row, "WaterCapacity"),
 					ParseInt(row, "ShelfLifeDays", -1));
 			}
 		}

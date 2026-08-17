@@ -80,7 +80,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		}
 
 		EditorGUILayout.HelpBox(
-			"Export rule: Ground Tilemap cells are walkable. Village_Tilemap marker tiles are exported as server-authoritative village_areas, compressed by row ranges.",
+			"Export rule: Ground Tilemap cells are walkable. Cells inside the exported bounds that are absent from walkable_ranges are water. Village_Tilemap marker tiles are exported as server-authoritative village_areas.",
 			MessageType.Info);
 	}
 
@@ -159,7 +159,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		if (copyToServerDataDirectory)
 			WriteJson(serverOutputDirectory, fileName, json);
 
-		Debug.Log($"Exported walk map: {clientPath} ({data.walkable_ranges.Count} walk ranges, {data.village_areas.Count} village areas)");
+		Debug.Log($"Exported walk map: {clientPath} ({data.walkable_ranges.Count} walk ranges, {data.water_ranges.Count} water ranges, {data.village_areas.Count} village areas)");
 	}
 
 	ExportWalkMapData BuildDataFromCurrentSource()
@@ -250,8 +250,53 @@ internal sealed class WalkMapExporter : EditorWindow
 			data.bounds = default;
 
 		BuildVillageAreas(data, sourceVillageTilemap);
+		BuildWaterRanges(data);
 
 		return data;
+	}
+
+	static void BuildWaterRanges(ExportWalkMapData data)
+	{
+		if (data == null || data.walkable_ranges == null || data.walkable_ranges.Count == 0)
+			return;
+
+		HashSet<Vector2Int> walkableCells = new HashSet<Vector2Int>();
+		for (int rangeIndex = 0; rangeIndex < data.walkable_ranges.Count; rangeIndex++)
+		{
+			ExportRange range = data.walkable_ranges[rangeIndex];
+			for (int x = range.x_min; x <= range.x_max; x++)
+				walkableCells.Add(new Vector2Int(x, range.y));
+		}
+
+		// walkable_ranges is the canonical movement definition shared by client and
+		// server. Water is precisely its complement inside the exported map bounds;
+		// the visual Block_Tilemap is not a reliable gameplay mask.
+		for (int y = data.bounds.min_cell_y; y <= data.bounds.max_cell_y; y++)
+		{
+			int rangeStart = int.MinValue;
+			int rangeEnd = int.MinValue;
+			for (int x = data.bounds.min_cell_x; x <= data.bounds.max_cell_x; x++)
+			{
+				if (walkableCells.Contains(new Vector2Int(x, y)) == false)
+				{
+					if (rangeStart == int.MinValue)
+						rangeStart = x;
+					rangeEnd = x;
+					continue;
+				}
+				FlushWaterRange(data, y, ref rangeStart, ref rangeEnd);
+			}
+			FlushWaterRange(data, y, ref rangeStart, ref rangeEnd);
+		}
+	}
+
+	static void FlushWaterRange(ExportWalkMapData data, int y, ref int rangeStart, ref int rangeEnd)
+	{
+		if (rangeStart == int.MinValue)
+			return;
+		data.water_ranges.Add(new ExportRange { y = y, x_min = rangeStart, x_max = rangeEnd });
+		rangeStart = int.MinValue;
+		rangeEnd = int.MinValue;
 	}
 
 	static void BuildVillageAreas(ExportWalkMapData data, Tilemap sourceVillageTilemap)
@@ -413,6 +458,7 @@ internal sealed class WalkMapExporter : EditorWindow
 		public ExportVector2 origin_world;
 		public ExportBounds bounds;
 		public System.Collections.Generic.List<ExportRange> walkable_ranges = new System.Collections.Generic.List<ExportRange>();
+		public System.Collections.Generic.List<ExportRange> water_ranges = new System.Collections.Generic.List<ExportRange>();
 		public System.Collections.Generic.List<ExportVillageArea> village_areas = new System.Collections.Generic.List<ExportVillageArea>();
 		public System.Collections.Generic.List<ExportCell> debug_walkable_cells = new System.Collections.Generic.List<ExportCell>();
 	}

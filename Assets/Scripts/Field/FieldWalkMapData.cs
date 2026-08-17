@@ -12,6 +12,7 @@ namespace Field
 		public FieldWalkMapVector2 origin_world;
 		public FieldWalkMapBounds bounds;
 		public List<FieldWalkMapRange> walkable_ranges = new List<FieldWalkMapRange>();
+		public List<FieldWalkMapRange> water_ranges = new List<FieldWalkMapRange>();
 		public List<FieldVillageArea> village_areas = new List<FieldVillageArea>();
 		public List<FieldWalkMapCell> debug_walkable_cells = new List<FieldWalkMapCell>();
 	}

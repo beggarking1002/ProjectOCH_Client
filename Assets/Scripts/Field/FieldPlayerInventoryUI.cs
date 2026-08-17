@@ -113,7 +113,7 @@ namespace Field
 			{
 				string itemName = ItemName(group.ItemId);
 				Button slot = FieldItemGridUI.CreateSlot(_grid, itemName, group.TotalQuantity,
-					FieldInventoryGrouping.EarliestExpiryLabel(group), true);
+					FieldInventoryGrouping.InventoryLabel(group), true);
 				FieldItemGridUI.SetIconAsync(slot, _repository, group.ItemId);
 				FieldItemGridUI.BindTooltip(slot, FieldInventoryGrouping.BuildExpiryTooltip(group, itemName));
 			}
