@@ -724,7 +724,7 @@ namespace Battle
 			if (_resultCoroutine != null)
 				StopCoroutine(_resultCoroutine);
 
-			_resultCoroutine = StartCoroutine(ShowBattleResultAfterDelay(packet.Victory));
+			_resultCoroutine = StartCoroutine(ShowBattleResultAfterDelay(packet.Clone()));
 			Refresh();
 		}
 
@@ -868,7 +868,7 @@ namespace Battle
 				Destroy(rect.gameObject);
 		}
 
-		IEnumerator ShowBattleResultAfterDelay(bool victory)
+		IEnumerator ShowBattleResultAfterDelay(S_BATTLE_RESULT result)
 		{
 			yield return new WaitForSeconds(BattleResultDelaySeconds);
 
@@ -886,7 +886,26 @@ namespace Battle
 			}
 
 			if (_resultTitleText != null)
-				_resultTitleText.text = victory ? "You Win!" : "You Lose!";
+			{
+				System.Text.StringBuilder text = new System.Text.StringBuilder(result.Victory ? "You Win!" : "You Lose!");
+				if (result.Victory && result.FameReward > 0)
+					text.Append("\n명성 +").Append(result.FameReward);
+				if (result.LootItems.Count > 0)
+				{
+					text.Append(result.Victory ? "\n약탈: " : "\n약탈당함: ");
+					for (int index = 0; index < result.LootItems.Count; index++)
+					{
+						if (index > 0) text.Append(", ");
+						BattleLootItemInfo item = result.LootItems[index];
+						text.Append(item.DisplayName).Append(" x").Append(item.Quantity);
+					}
+				}
+				else if (result.Victory)
+				{
+					text.Append("\n약탈할 교역품 없음");
+				}
+				_resultTitleText.text = text.ToString();
+			}
 
 			if (_resultOkButton != null)
 				_resultOkButton.interactable = true;
