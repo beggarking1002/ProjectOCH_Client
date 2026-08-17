@@ -24,7 +24,11 @@ namespace Field
 		[SerializeField] Button questTabButton;
 		[SerializeField] Text villageNameText;
 		[SerializeField] Text villageDescriptionText;
+		[SerializeField] Text goldText;
 		[SerializeField] Text fameText;
+		[SerializeField] Text satietyText;
+		[SerializeField] Text happinessText;
+		[SerializeField] Text thirstText;
 
 		Canvas _canvas;
 		AsyncOperationHandle<Sprite> _artworkHandle;
@@ -64,8 +68,8 @@ namespace Field
 			questTabButton?.onClick.AddListener(OpenQuest);
 			if (GameRoot.Instance != null)
 			{
-				GameRoot.Instance.Network.ExpeditionStateReceived += RenderFame;
-				RenderFame(GameRoot.Instance.Network.LastExpeditionState);
+				GameRoot.Instance.Network.ExpeditionStateReceived += RenderResources;
+				RenderResources(GameRoot.Instance.Network.LastExpeditionState);
 			}
 		}
 
@@ -74,15 +78,23 @@ namespace Field
 			shopTabButton?.onClick.RemoveListener(OpenShop);
 			questTabButton?.onClick.RemoveListener(OpenQuest);
 			if (GameRoot.Instance != null)
-				GameRoot.Instance.Network.ExpeditionStateReceived -= RenderFame;
+				GameRoot.Instance.Network.ExpeditionStateReceived -= RenderResources;
 			SetCanvasVisible(false);
 			ReleaseArtwork();
 		}
 
-		void RenderFame(Protocol.S_EXPEDITION_STATE state)
+		void RenderResources(Protocol.S_EXPEDITION_STATE state)
 		{
+			if (goldText != null)
+				goldText.text = $"금화  {state?.Gold ?? 0}";
 			if (fameText != null)
 				fameText.text = $"명성  {state?.Fame ?? 0}";
+			if (satietyText != null)
+				satietyText.text = $"포만도  {state?.Satiety ?? 0}/{state?.MaxSatiety ?? 0}";
+			if (happinessText != null)
+				happinessText.text = $"행복도  {state?.Happiness ?? 0}/{state?.MaxHappiness ?? 0}";
+			if (thirstText != null)
+				thirstText.text = $"갈증  {state?.Thirst ?? 0}/{state?.MaxThirst ?? 0}";
 		}
 
 		async void OpenShop()

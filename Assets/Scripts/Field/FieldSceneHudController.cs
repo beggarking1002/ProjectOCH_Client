@@ -73,7 +73,13 @@ namespace Field
 			{
 				int gold = state?.Gold ?? 0;
 				int fame = state?.Fame ?? 0;
-				resourceText.text = $"금화  {gold}                         보급품  0                         명성  {fame}";
+				int satiety = state?.Satiety ?? 0;
+				int maxSatiety = state?.MaxSatiety ?? 0;
+				int happiness = state?.Happiness ?? 0;
+				int maxHappiness = state?.MaxHappiness ?? 0;
+				int thirst = state?.Thirst ?? 0;
+				int maxThirst = state?.MaxThirst ?? 0;
+				resourceText.text = $"금화  {gold}     명성  {fame}     포만도  {satiety}/{maxSatiety}     행복도  {happiness}/{maxHappiness}     갈증  {thirst}/{maxThirst}";
 			}
 
 			if (statusText == null)
@@ -95,11 +101,11 @@ namespace Field
 
 			if (state == null)
 			{
-				statusText.text = $"{identityText}\n포만도  - / -\n행복도  - / -\n갈증  - / -";
+				statusText.text = $"{identityText}\n전투 승리  -\n전투 패배  -";
 				return;
 			}
 
-			statusText.text = $"{identityText}\n포만도  {state.Satiety} / {state.MaxSatiety}\n행복도  {state.Happiness} / {state.MaxHappiness}\n갈증  {state.Thirst} / {state.MaxThirst}";
+			statusText.text = $"{identityText}\n전투 승리  {state.BattleWins}\n전투 패배  {state.BattleLosses}";
 		}
 
 		void OpenInventory()
