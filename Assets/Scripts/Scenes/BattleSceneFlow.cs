@@ -12,6 +12,8 @@ namespace Scenes
 
 		static BattleSceneFlow _instance;
 		bool _subscribed;
+		bool _battleSceneLoadRequested;
+		bool _fieldSceneLoadRequested;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		static void Bootstrap()
@@ -61,9 +63,11 @@ namespace Scenes
 			if (packet == null || packet.Success == false)
 				return;
 
-			if (SceneManager.GetActiveScene().name == BattleSceneName)
+			if (_battleSceneLoadRequested || SceneManager.GetActiveScene().name == BattleSceneName)
 				return;
 
+			_battleSceneLoadRequested = true;
+			_fieldSceneLoadRequested = false;
 			Debug.Log($"Loading {BattleSceneName}. battleId={packet.BattleId}, mapId={packet.MapId}");
 			await SceneTransitionOverlay.ShowAsync();
 			SceneManager.LoadScene(BattleSceneName);
@@ -80,9 +84,11 @@ namespace Scenes
 				return;
 			}
 
-			if (SceneManager.GetActiveScene().name == FieldSceneName)
+			if (_fieldSceneLoadRequested || SceneManager.GetActiveScene().name == FieldSceneName)
 				return;
 
+			_fieldSceneLoadRequested = true;
+			_battleSceneLoadRequested = false;
 			Debug.Log($"Loading {FieldSceneName} after battle result ack. battleId={packet.BattleId}");
 			await SceneTransitionOverlay.ShowAsync();
 			SceneManager.LoadScene(FieldSceneName);

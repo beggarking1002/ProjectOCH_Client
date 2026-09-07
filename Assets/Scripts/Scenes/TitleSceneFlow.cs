@@ -187,6 +187,13 @@ namespace Scenes
 
 		async void OnEnterGameReceived(S_ENTER_GAME packet)
 		{
+			// TitleSceneFlow persists across scenes, but S_ENTER_GAME is also sent when
+			// a player returns to the field after battle. BattleSceneFlow owns that
+			// transition; handling it here as well would issue two concurrent
+			// FieldScene loads.
+			if (SceneManager.GetActiveScene().name != TitleSceneName)
+				return;
+
 			if (packet.Success == false)
 			{
 				if (_gameStartButton != null)
